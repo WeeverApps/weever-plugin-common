@@ -1,0 +1,8 @@
+<script type="text/template" id="form-builder-select-option">
+	<input class="wx-form-builder-select-option-text" type="text" placeholder="text to display" value="<%- innerText %>"/>
+	<input class="wx-form-builder-select-option-value" type="text" placeholder="value (optional)" value="<%- attributes.attributes.value %>"/>
+	<label>
+		Selected: <input type="radio" class="wx-form-builder-control-selected" name="wx-form-builder-option-selected-<%- collectionId %>" <%- attributes.attributes.selected %> />
+	</label>
+	<a class="wx-form-builder-add-select-option wxui-btn">+</a>
+</script>

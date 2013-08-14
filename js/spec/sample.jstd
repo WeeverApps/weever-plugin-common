@@ -1,0 +1,21 @@
+load:
+  - spec/jasmine/jasmine.js
+  - spec/jasmine/JasmineAdapter.js
+  - jquery-1.8.3.js
+  - ../../../../../../wp-includes/js/jquery/ui/jquery.ui.core.min.js
+  - spec/jasmine/jasmine-jquery.js
+  - ../../../../../../wp-includes/js/underscore.min.js
+  - ../../../../../../wp-includes/js/backbone.min.js
+  - config.js
+  - ../models/tab.js
+  - ../models/subtab.js
+  - ../models/subtab.*
+  - ../collections/*
+  - ../views/subtab.edit.js
+  - ../views/*
+
+serve:
+  - spec/fixtures/*.html
+
+test:
+  - sample.test.js

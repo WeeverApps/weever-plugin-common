@@ -1,0 +1,25 @@
+
+<script type="text/template" id="subtab-template">
+    <div>
+        <span class="wx-subtab-link-text">
+            <%- title %>
+        </span>
+
+        <span class="wx-subtab-type-text"><%- typeDescription %></span>
+
+        <span class="wx-subtab-movehandle">&#8597; Drag</span>
+
+        <!-- TODO: Add template if feed ul should be shown, based on the model not php (and load the preview using the view?) -->
+        <!-- <ul class="wx-edit-content-item-feed"></ul> -->
+
+        <span class="wx-edit-subtab-rowactions">
+            <!-- TODO: Edit page link?  Handled by model -->
+            <span class="edit_item"><a class="wx-edit-link" href="#">Edit</a></span>
+            <span class="edit_icon"><a class="wx-edit-subtab-icon" href="#">Change Icon</a></span>
+            <span class="delete"><a href="#" class="wx-subtab-delete">Delete</a></span>
+        </span>
+    </div>
+    <div class="wx-edit-area">
+        &nbsp;
+    </div>
+</script>

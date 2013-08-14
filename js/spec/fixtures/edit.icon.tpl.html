@@ -1,0 +1,15 @@
+<script type="text/template" id="icon-edit-template">
+    <div class="wx-icon-edit-header">
+        <?php for ( $i = 1; $i <= 46; $i++ ): ?>
+            <?php if ( in_array( $i, array( 14, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
+            <div class="wx-icon-item">
+                <label for="wx-icon-<?php echo $i; ?>"><span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span></label>
+                <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />
+            </div>
+        <?php endfor; ?>
+    </div>
+    <div class="wx-icon-edit-footer">
+        <button class="wx-icon-finish-button wx-btn">Finish</button>
+        <button class="wx-icon-cancel-button wx-btn">Cancel</button>
+    </div>
+</script>

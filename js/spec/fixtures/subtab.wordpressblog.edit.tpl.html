@@ -1,0 +1,19 @@
+<script type="text/template" id="wordpressblog-subtab-edit-template">
+    <select class='wx-add-wordpress-blog-select' class='wx-cms-feed-select'>
+        <option><?php echo __('Choose an option...', 'weever'); ?></option>
+        <option value="<?php echo site_url('index.php?feed=r3s'); ?>">All published posts</option>
+        <?php
+            $args = array(
+                        'public'   => true,
+                        '_builtin' => false,
+                        'publicly_queryable' => true,
+                    );
+            $output = 'objects'; // names or objects, note names is the default
+            $operator = 'and'; // 'and' or 'or'
+            $post_types = get_post_types( $args, $output, $operator );
+        ?>
+        <?php foreach ($post_types as $post_type ): ?>
+            <option value="index.php?feed=r3s&post_type=<?php echo $post_type->name; ?>"><?php echo sprintf( __( 'All %s', 'weever'), $post_type->labels->name ); ?></option>
+        <?php endforeach; ?>
+    </select>
+</script>

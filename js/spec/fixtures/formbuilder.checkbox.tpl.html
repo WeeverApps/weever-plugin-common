@@ -1,0 +1,9 @@
+<script type="text/template" id="form-builder-checkbox">
+	<input type="text" class="wx-form-builder-label-input wx-hide" value="<%- label %>" />
+	<label class="wx-form-builder-edit-label"><%- label %></label>
+	<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" />
+	<label>
+		Checked: <input type="radio" class="wx-form-builder-control-checked" name="wx-form-builder-checkbox-checked-<%- collectionId %>" <%- attributes.attributes.checked %> />
+	</label>
+	<a class="wx-form-builder-add-checkbox wxui-btn">+</a>
+</script>

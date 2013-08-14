@@ -1,0 +1,7 @@
+<script type="text/template" id="form-builder-textarea">
+	<input type="text" class="wx-form-builder-label-input wx-hide" value="<%- label %>" />
+	<label class="wx-form-builder-edit-label"><%- label %></label>
+	<textarea class="wx-form-builder-textarea"></textarea>
+	<input class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" type="text" placeholder="placeholder" value="<%- attributes.attributes.placeholder %>"/>
+	<label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> />Required</label>
+</script>

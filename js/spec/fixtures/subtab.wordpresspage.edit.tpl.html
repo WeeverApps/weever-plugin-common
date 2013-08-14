@@ -1,0 +1,8 @@
+<script type="text/template" id="wordpresspage-subtab-edit-template">
+    <select class='wx-add-wordpress-page-select'>
+        <option value=""><?php echo __( 'Choose a Page...', 'weever' ); ?></option>
+        <?php foreach ( get_pages() as $page ): ?>
+            <option value="<?php echo site_url( WeeverHelper::get_page_link_relative( $page ) ); ?>"><?php echo $page->post_title; ?></option>
+        <?php endforeach; ?>
+    </select>
+</script>

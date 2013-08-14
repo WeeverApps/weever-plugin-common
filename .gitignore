@@ -1,0 +1,7 @@
+*_dev.php
+*.backup.php
+.svn
+.buildpath
+.project
+.settings
+.DS_Store

@@ -1,0 +1,18 @@
+<script type="text/template" id="form-builder-input">
+	<input type="text" class="wx-form-builder-label-input wx-hide" value="<%- label %>" />
+	<label class="wx-form-builder-edit-label"><%- label %></label>
+	<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" />
+	<input class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" type="text" placeholder="placeholder" value="<%- attributes.attributes.placeholder %>" />
+	<input type="number" class="wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.attributes.min %>"/>
+	<input type="number" class="wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.attributes.max %>"/>
+	<input type="<%- valueType %>" class="wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.attributes.value %>"/>
+	<input type="number" class="wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.attributes.step %>"/>
+	<label class="<%- multiClass %>"><input type="checkbox" class="wx-form-builder-allow-multiple" <%- attributes.attributes.multiple %> />Allow multiple</label>
+	<label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> />Required</label>
+	<label class="<%- allowAdditionalClass %>"><input type="checkbox" class="wx-form-builder-allow-additional" <%- allowAdditional %> />Allow Additional</label>
+	<fieldset class="<%- autocompleteClass %>">
+		<p>autocomplete</p>
+		<label><input type="radio" value="on" class="wx-form-builder-autocomplete" name="wx-form-builder-autocomplete" />On</label>
+		<label><input type="radio" value="off" class="wx-form-builder-autocomplete" name="wx-form-builder-autocomplete" />Off</label>
+	</fieldset>
+</script>

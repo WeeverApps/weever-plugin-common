@@ -1,0 +1,9 @@
+<script type="text/template" id="twitter-subtab-edit-template">
+    <div>
+        <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitterUser" <% if ( content == 'twitterUser' ) { %>checked<% } %>  /> Twitter User</label>
+        <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitter" /> Twitter Hashtag</label>
+        <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitter" <% if ( content == 'twitter' ) { %>checked<% } %> /> Twitter Search Term</label>
+    </div>
+    <label for='wx-twitter-input' id='wx-picasa-url' class='wx-social-label wx-jqui-label'></label>
+    <input type='text' value='<% if ( config.screen_name ) { %><%- config.screen_name %><% } else { %><%- config.q %><% } %>' id="wx-twitter-input" class='wx-dialog-input wx-edit-input required' name='component_behaviour' placeholder='' />
+</script>

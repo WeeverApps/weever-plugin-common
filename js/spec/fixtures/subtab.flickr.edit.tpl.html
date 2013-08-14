@@ -1,0 +1,20 @@
+<script type="text/template" id="flickr-subtab-edit-template">
+    <div>
+        <input type="radio" class="wx-content-radio" name="flickr-content" id="wx-flickr-photostream" value="flickrPhotostream" <% if ( 'flickrPhotostream' == content ) { %>checked<% } %> /> <label for="wx-flickr-photostream">Flickr Photostream</label>
+        <input type="radio" class="wx-content-radio" name="flickr-content" id="wx-flickr-photosets" value="flickrPhotosets" <% if ( 'flickrPhotosets' == content ) { %>checked<% } %> /> <label for="wx-flickr-photosets">Flickr Photosets</label>
+    </div>
+    <label for='wx-flickr-input' id='wx-flickr-input-label' class='wx-social-label wx-jqui-label'></label>
+    <input type='text' value='<%- config.url %>' id="wx-flickr-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
+    <div class="wx-service-description">
+        <h3 class="wxui-helptip-h3"><img src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/icons/icons_library/help_48.png" class="wxui-helptip-icon" /> Help Tips:</h3>
+        <p>Add a Flickr Photostream (stream all photos) for one <a href="http://flickr.com" target="_blank">Flickr</a> user account, or list all your Flickr Photo Sets (galleries).</p>
+
+        <h3 class="wxui-helptip-h3">Flickr Compatibility</h3>
+
+        <p>Only <em>publicly available</em> photos on Flickr will display. Photos uploaded prior to April 2011 may not display as gallery thumbnails – simply rotate and resave these photos to fix.</p>
+
+        <h3 class="wxui-helptip-h3">Coming Soon</h3>
+
+        <p>Support for Flickr Group Pools (community galeries) and adding just one photo set at a time.</p>
+    </div>
+</script>

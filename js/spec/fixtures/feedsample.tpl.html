@@ -1,0 +1,15 @@
+<script type="text/template" id="feedsample-template">
+    <li>
+        <div class="wx-left-col">
+            <img class="wx-feed-sample-image" src="<%- image %>" />
+        </div>
+        <div class="wx-right-col">
+            <% if ( title ) { %>
+                <h2><a href="<%- url %>"><%- title %></a></h2>
+            <% } %>
+            <div class="wx-content">
+                <%- content %>
+            </div>
+        </div>
+    </li>
+</script>
