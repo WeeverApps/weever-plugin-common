@@ -6,6 +6,8 @@
  * http://www.opensource.org/licenses/mit-license.php
 */
 
+(function($) {
+
 /*jslint unparam: true, browser: true, indent: 2 */
 
 // Accommodate running jQuery or Zepto in noConflict() mode by
@@ -438,3 +440,5 @@ if (typeof jQuery === "undefined" &&
   };
 
 }(libFuncName, this, this.document));
+
+}(jQuery));
