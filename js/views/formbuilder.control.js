@@ -18,7 +18,14 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-control-selected': 'setSelected',
 			'click .wx-form-builder-allow-multiple': 'setMultiple',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
-			'click .wx-form-builder-required': 'setRequired'
+			'click .wx-form-builder-required': 'setRequired',
+			'click .wx-form-builder-delete': 'deleteControl'
+		},
+
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.remove();
+			this.model.destroy();
 		},
 
 		editLabel: function( ev ) {

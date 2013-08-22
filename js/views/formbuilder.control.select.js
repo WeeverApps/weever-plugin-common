@@ -10,7 +10,8 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-edit-title': 'editTitle',
 			'blur .wx-form-builder-title-input': 'updateTitle',
 			'click .wx-form-builder-select-allow-multiple': 'toggleMultipleSelections',
-			'click .wx-form-builder-allow-additional': 'setAllowAdditional'
+			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
+			'click .wx-form-builder-delete': 'deleteControl'
 		},
 
 		initialize: function() {
@@ -25,6 +26,12 @@ wxApp = wxApp || {};
 			console.log('select group view render');
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
+		},
+
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.remove();
+			this.model.destroy();
 		},
 
 		setAllowAdditional: function( ev ) {

@@ -9,7 +9,8 @@ wxApp = wxApp || {};
 		events: {
 			'click .wx-form-builder-edit-title': 'editTitle',
 			'blur .wx-form-builder-title-input': 'updateTitle',
-			'click .wx-form-builder-allow-additional': 'setAllowAdditional'
+			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
+			'click .wx-form-builder-delete': 'deleteControl'
 		},
 
 		initialize: function() {
@@ -22,6 +23,12 @@ wxApp = wxApp || {};
 			console.log('Radio fieldset view render');
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
+		},
+
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.remove();
+			this.model.destroy();
 		},
 
 		setAllowAdditional: function( ev ) {
