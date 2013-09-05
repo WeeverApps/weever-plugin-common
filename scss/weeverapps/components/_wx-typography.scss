@@ -1,0 +1,47 @@
+// titles for minor UI headings
+
+.content > .wx-ui-title:first-child {
+  border-top-color: transparent;
+}
+
+.wx-ui-title {
+  text-transform: capitalize;
+  font-weight: bold;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  line-height:  3.375em;
+}
+
+// icon fonts
+
+.wx-icon {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+// alert boxes
+
+
+.alert-box {
+  line-height: 24px;
+
+  &.alert a {
+    color: #fff;
+    text-decoration: underline;
+
+    &.close {
+      text-decoration: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .alert-box {
+    line-height: 1;
+  }
+}

@@ -1,0 +1,38 @@
+// creates link-style sub-navigation lists within "sections" (aka "tabs") in Foundation 4+
+
+// active sub-nav for tablet view and above
+
+@media only screen and (min-width: 768px) {
+
+  .section-container.section-subnav {
+
+    // section:first-child > .title a {
+    //   padding-left: 0;
+    //  }
+
+    // active
+    section.active > .title a {
+      background-color: #2ba6cb;
+      color: #fff;
+    }
+
+    // default
+    > section > .title a {
+      color: #666;
+      padding: 0.1875em 0.625em 0.25em
+    }
+
+    > section > .title {
+      border: none;
+      background: none;
+      text-transform: lowercase;
+    }
+
+    >  section > .content,
+    > .section > .content {
+      padding: 0.9375em 0;
+      border: none;
+   }
+
+  }
+}
