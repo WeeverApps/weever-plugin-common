@@ -20,7 +20,15 @@
 
 // Navigation tabs
 jQuery(document).ready(function() {
-	jQuery( "#tabs" ).tabs();
+	jQuery('input[name="switch-x"]').click(function() {
+        if (this.id == 'on') {
+            alert('TODO - Turn App Online');
+        } else {
+            alert('TODO - Turn App Offline')
+        }
+    });
+
+    jQuery( "#tabs" ).tabs();
 	jQuery( "#toptabs li" ).hover(function(){jQuery(this).addClass('ui-state-hover');}, function(){jQuery(this).removeClass('ui-state-hover');});
 
 	// Dialogs
