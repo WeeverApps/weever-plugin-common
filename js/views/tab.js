@@ -3,8 +3,8 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.TabView = Backbone.View.extend({
-        tagName: 'li',
-        className: 'wx-nav-tabs',
+        tagName: 'div',
+        className: 'wx-tab',
         subTabsContainerView: false,
 
         initialize: function() {
