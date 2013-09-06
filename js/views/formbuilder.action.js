@@ -5,6 +5,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderActionView = Backbone.View.extend({
 		className: 'wx-form-builder-row',
 		tplSelector: '#form-builder-action',
+		tplEmailSelector: '#form-builder-action-email',
 
 		events: {
 			'blur .wx-form-builder-action': 'updateAction',
@@ -12,7 +13,11 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
-			var $template = $( this.tplSelector );
+			var tpl = this.tplSelector;
+			if ( this.model.get( 'method' ) == 'email' ) {
+				tpl = this.tplEmailSelector;
+			}
+			var $template = $( tpl );
 			this.tpl = _.template( $template.html() );
 			this.model.bind('change', this.render, this);
 		},

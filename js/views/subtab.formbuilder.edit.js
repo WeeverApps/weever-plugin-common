@@ -56,9 +56,24 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
 			'click .wx-form-builder-add-signature': 'addSignature',
-			'click .wx-form-builder-add-custom-action': 'addCustomAction'
+			'click .wx-form-builder-add-custom-action': 'addCustomAction',
+			'click .wx-form-builder-add-email-action': 'addEmailAction'
 //			,
 //			'click .wx-finish-button': 'save'
+		},
+
+		addEmailAction: function() {
+			console.log( 'addEmailAction' );
+			var action = new wxApp.FormBuilderAction();
+			action.set( 'method', 'email' );
+			var actionView = new wxApp.FormBuilderActionView({
+				model: action
+			});
+			this.$( this.previewPaneSelector ).append( actionView.render().el );
+
+			this.model.get( 'config' ).formElements.push( action );
+			return action;
+
 		},
 
 		addCustomAction: function() {
