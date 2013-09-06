@@ -7,6 +7,7 @@ wxApp = wxApp || {};
         className: '',
 
         initialize: function() {
+        	console.log('initialize feature view');
             this.featureTpl = _.template( $('#feature-template').html() );
             this.model.bind( 'change', this.render, this );
             //this.model.bind( 'destroy', this.destroyView, this );
@@ -19,6 +20,7 @@ wxApp = wxApp || {};
         //},
 
         render: function() {
+            console.log('render feature view');
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
             // TODO - CSS Class, filtering

@@ -7,7 +7,7 @@ var wxApp = wxApp || {};
 		model: wxApp.Feature,
 
 		initialize: function() {
-			console.log(this.toJSONrecursive());
+			console.log('loading feature collection.');
 		}
 	});
 })(jQuery);
