@@ -2,23 +2,12 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.TitleEditView = Backbone.View.extend({
+    wxApp.TitleEditView = wxApp.EditView.extend({
         //iconProperty: 'icon_id',
 
         initialize: function() {
             //console.log('IconEditView init');
-            this.titleEditTpl = _.template( $('#title-edit-template').html() );
-        },
-
-        events: {
-            'click button.finish': 'finish',
-            'click .close-reveal-modal': 'cancel'
-        },
-
-        render: function() {
-            console.log('TitleEditView render');
-            this.$el.html( this.titleEditTpl( this.model.toJSON() ) );
-            return this;
+            this.editTpl = _.template( $('#title-edit-template').html() );
         },
 
         finish: function() {
@@ -36,14 +25,6 @@ wxApp = wxApp || {};
 
                 }
             });
-        },
-
-        cancel: function() {
-            try {
-                this.remove();
-            } catch ( e ) {
-
-            }
         }
     });
 })(jQuery);
