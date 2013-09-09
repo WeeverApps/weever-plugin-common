@@ -6,15 +6,18 @@ wxApp = wxApp || {};
         iconProperty: 'icon_id',
 
         initialize: function() {
+            console.log('IconEditView init');
             this.iconEditTpl = _.template( $('#icon-edit-template').html() );
         },
 
         events: {
             'click .wx-icon-finish-button': 'finish',
-            'click .wx-icon-cancel-button': 'cancel'
+            'click button.finish': 'finish',
+            'click .close-reveal-modal': 'cancel'
         },
 
         render: function() {
+            console.log('IconEditView render');
             this.$el.html( this.iconEditTpl( this.model.toJSON() ) );
             return this;
         },
@@ -26,8 +29,8 @@ wxApp = wxApp || {};
             var tabId = this.model.get('id');
             wx.makeApiCall( 'tabs/set_icon_id', { tab_id: tabId, icon_id: iconId }, function() {
                 try {
+                    $('#ChangeIconModal').foundation('reveal', 'close');
                     me.model.set( 'icon_id', iconId );
-                    me.$el.dialog( 'close' );
                     me.remove();
                 } catch ( e ) {
 
@@ -37,7 +40,6 @@ wxApp = wxApp || {};
 
         cancel: function() {
             try {
-                this.$el.dialog( 'close' );
                 this.remove();
             } catch ( e ) {
 

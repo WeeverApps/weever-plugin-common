@@ -9,6 +9,7 @@ wxApp = wxApp || {};
 
         initialize: function() {
             this.tabTpl = _.template( $('#tab-template').html() );
+            this.iconTpl = _.template( $('#icon-edit-template').html() );
             this.model.bind( 'change', this.render, this );
             this.model.bind( 'destroy', this.destroyView, this );
             Backbone.Events.on( 'tab:id-update', this.updateTabId, this );
@@ -57,7 +58,7 @@ wxApp = wxApp || {};
 
         editIcon: function() {
             wx.log('editIcon');
-            var view = new wxApp.IconEditView({ model: this.model });
+            /*var view = new wxApp.IconEditView({ model: this.model });
             view.render();
             if ( undefined !== view.$el.dialog ) {
                 view.$el.dialog({
@@ -70,7 +71,11 @@ wxApp = wxApp || {};
                     hide:		'drop',
                     buttons: 	{}
                 });
-            }
+            }*/
+
+            alert($('#ChangeIconModal').html());
+            $('#ChangeIconModal').html( this.iconTpl( this.model.toJSON() ) );
+            alert($('#ChangeIconModal').html());
         },
 
         editTitle: function() {
@@ -82,7 +87,7 @@ wxApp = wxApp || {};
         },
 
         editAll: function() {
-            alert('This is where the edit code will go.');
+            //alert('This is where the edit code will go.');
             //wx.updateTitleDialog( this.$el.find('.wx-nav-label') );
             this.subTabsContainerView = new wxApp.SubTabsContainerView({ model: this.model });
             this.subTabsContainerView.tabView = this;

@@ -15,6 +15,9 @@ wxApp = wxApp || {};
                 me.model.destroy();
                 me.remove();
             });
+
+            this.editIconView = new wxApp.IconEditView({ model: this.model });
+
             this.model.on('change', this.render, this);
             console.log('done initializing subtabscontainerview');
         },
@@ -34,7 +37,8 @@ wxApp = wxApp || {};
         },
 
         iconEdit: function() {
-            this.tabView.editIcon();
+            console.log('editing icon...');
+            this.$('#ChangeIconModal').html( this.editIconView.render().el );
         },
 
         titleEdit: function() {
@@ -45,4 +49,4 @@ wxApp = wxApp || {};
             this.tabView.editLayout();
         }
     });
-})(jQuery);
+})(jQuery); 

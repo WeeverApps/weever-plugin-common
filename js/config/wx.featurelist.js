@@ -26,8 +26,8 @@
     { "featureName": "RSS", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/r3s.png", "name": "RSS Code" },
     { "featureName": "r3s", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/r3s.png", "name": "R3S Code", "filterBy": "weever_list_r3s_dialog" },
     { "featureName": "Blogger", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/blogger.png", "name": "Blogger" },
-    { "featureName": "google_plus", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/google_plus.png", "name": "Google+" },
-    { "featureName": "tumblr", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/tumblr.png", "name": "Tumblr" },
-    { "featureName": "soundcloud", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/soundcloud.png", "name": "SoundCloud" },
-    { "featureName": "bandcamp", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/bandcamp.png", "name": "BandCamp" }
+    { "featureName": "google_plus", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/google_plus.png", "name": "Google+", "includeClass": "wx-unavailable disabled" },
+    { "featureName": "tumblr", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/tumblr.png", "name": "Tumblr", "includeClass": "wx-unavailable disabled" },
+    { "featureName": "soundcloud", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/soundcloud.png", "name": "SoundCloud", "includeClass": "wx-unavailable disabled" },
+    { "featureName": "bandcamp", "imgUri": "http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/bandcamp.png", "name": "BandCamp", "includeClass": "wx-unavailable disabled" }
 ]
