@@ -9,6 +9,7 @@ wxApp = wxApp || {};
         subTabEditFooterTplSelector: '#subtab-edit-footer-template',
 		feedSampleTplSelector: '#feedsample-template',
         parentContainerId: false,
+        el: '#wx-edit-area',
 
         initialize: function() {
             this.initializeEvents();
@@ -33,22 +34,44 @@ wxApp = wxApp || {};
         genericEvents: {
 			'change .wx-dialog-input': 'hideValidateFeed',
 			'keydown .wx-dialog-input': 'hideValidateFeed',
-            'click .wx-cancel-button': 'destroyView',
+            'click a.close-reveal-modal': 'destroyView',
 			'click .wx-finish-button': 'finish',
 			'click .wx-next-button': 'next',
             'change .wx-content-radio' : 'contentChange'
         },
 
         render: function() {
+            alert('Testing...');
+            alert(this.$el.html());
+            //alert(this.html());
+            alert('Testing 2...');
+
+            /*this.$('#wx-edit-area').html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
+
+            //alert( $('#wx-edit-area').html() );
+            this.$('#wx-edit-area').prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
+            this.$('#wx-edit-area').append( this.subTabEditFooterTpl( this.model.toJSON() ) );
+            this.startValidation();
+			if ( this.model.validateFeed ) {
+				this.$('#wx-edit-area').find('.wx-finish-button').hide();
+                this.$('#wx-edit-area').find('.wx-edit-title-div').hide();
+            } else {
+				this.$('#wx-edit-area').find('.wx-next-button').hide();
+                if ( ! this.model.allowTitleEdit )
+                    this.$('#wx-edit-area').find('.wx-edit-title-div').hide();
+            }*/
+
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
+
+            //alert( $('#wx-edit-area').html() );
             this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
             this.$el.append( this.subTabEditFooterTpl( this.model.toJSON() ) );
             this.startValidation();
-			if ( this.model.validateFeed ) {
-				this.$el.find('.wx-finish-button').hide();
+            if ( this.model.validateFeed ) {
+                this.$el.find('.wx-finish-button').hide();
                 this.$el.find('.wx-edit-title-div').hide();
             } else {
-				this.$el.find('.wx-next-button').hide();
+                this.$el.find('.wx-next-button').hide();
                 if ( ! this.model.allowTitleEdit )
                     this.$el.find('.wx-edit-title-div').hide();
             }
@@ -78,8 +101,9 @@ wxApp = wxApp || {};
         show: function() {
             var me = this;
             wx.log('adding html');
-            if ( undefined != this.$el.dialog ) {
-                this.$el.dialog({
+
+            /*if ( undefined != this.$('#wx-edit-area').dialog ) {
+                this.$('#wx-edit-area').dialog({
                     modal: 		true,
                     resizable: 	false,
                     width: 		'80%',
@@ -88,10 +112,11 @@ wxApp = wxApp || {};
                     hide:		'drop',
 					dialogClass: 'wp-dialog'
                 });
-            }
+            }*/
         },
 
 		finish: function() {
+            console.log('Finish clicked.');
             this.setModelFromView(this.model);
             this.setTitleFromView(this.model);
 			this.saveModel();
@@ -184,12 +209,12 @@ wxApp = wxApp || {};
 
         destroyView: function() {
             try {
-                this.$el.dialog('close');
+                this.$('#wx-edit-area').dialog('close');
             } catch ( e ) {
 
             }
             this.undelegateEvents();
-            this.$el.removeData().unbind();
+            this.$('#wx-edit-area').removeData().unbind();
             this.remove();
             Backbone.View.prototype.remove.call( this );
         }

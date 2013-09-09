@@ -1,5 +1,5 @@
 <script type="text/template" id="subtab-edit-footer-template">
-    <div class="wx-feed-error wx-hide">
+    <div class="wx-feed-error hide">
         There was an error validating, please verify the information and try again
     </div>
     <% if ( validateFeed === true ) { %>
@@ -12,8 +12,8 @@
         <input type="text" value="<%- title %>" class="wx-edit-title" />
     </div>
     <div class="wx-subtab-edit-footer">
-        <button class="wx-next-button wx-btn wxui-btn green radiuspoint25" style="width:120px;">Next</button>
-        <button class="wx-finish-button wx-btn wxui-btn green radiuspoint25" style="width:120px;">Finish</button>
-        <button class="wx-cancel-button wx-btn wxui-btn white radiuspoint25" style="width:120px;">Cancel</button>
+        <button class="wx-next-button">Next</button>
+        <button class="wx-finish-button">Finish</button>
+        <a class="close-reveal-modal">&#215;</a>
     </div>
 </script>
