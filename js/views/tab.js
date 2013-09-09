@@ -16,7 +16,8 @@ wxApp = wxApp || {};
 
         events: {
             'dblclick .wx-nav-icon': 'editIcon',
-            'dblclick .wx-nav-label': 'editTitle'
+            'dblclick .wx-nav-label': 'editTitle',
+            'click p': 'editAll'
         },
 
         render: function() {
@@ -80,6 +81,11 @@ wxApp = wxApp || {};
             
         },
 
+        editAll: function() {
+            alert('This is where the edit code will go.');
+            wx.updateTitleDialog( this.$el.find('.wx-nav-label') );
+        },
+
         updateTabId: function( currentTabId, newTabId ) {
             if ( currentTabId == this.model.get('id') ) {
                 this.model.getSubTabs().forEach(function(subTab) {
@@ -91,6 +97,7 @@ wxApp = wxApp || {};
 
         loadIcon: function() {
             var me = this;
+            
             $.get( wx.apiUrl + 'icons/get_icon_base64', { site_key: wx.siteKey, icon_id: parseInt( me.model.get('icon_id') ) }, function(iconData) {
                 me.$el.find('.wx-nav-icon-img').attr('src', 'data:image/png;base64,' + iconData);
             });

@@ -979,10 +979,12 @@ jQuery(document).ready(function(){
 	});
 
     wx.updateTitleDialog = function(clickedElem) {
-        var tabId = clickedElem.attr('title');
+        //var tabId = clickedElem.attr('title');
+        var tabId = clickedElem.attr('data-tab-id');
         tabId = tabId.substring(4);
         var siteKey = jQuery("input#wx-site-key").val();
         var htmlName = clickedElem.html();
+        htmlName = jQuery.trim(htmlName);
         var nonce = jQuery("input#nonce").val();
         var txt = 	'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_ENTER_NEW_APP_ICON_NAME+'</h3>'+
             '<input type="text" id="alertName" name="alertName" value="'+htmlName+'" />';
@@ -993,7 +995,7 @@ jQuery(document).ready(function(){
             {
 
                 tabName = f["alertName"];
-
+                alert(ajaxurl);
                 jQuery.ajax({
                     type: "POST",
                     url: ajaxurl,

@@ -3,7 +3,7 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.TabsView = Backbone.View.extend({
-        el: '#listTabsSortable',
+        el: '.listTabsSortableNew',
 
         initialize: function() {
             this.collection.bind('add', this.addOne, this);
