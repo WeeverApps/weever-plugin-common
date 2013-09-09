@@ -64,21 +64,18 @@ wxApp = wxApp || {};
 
 		addEmailAction: function() {
 			console.log( 'addEmailAction' );
-			var action = new wxApp.FormBuilderAction();
-			action.set( 'method', 'email' );
-			var actionView = new wxApp.FormBuilderActionView({
-				model: action
-			});
-			this.$( this.previewPaneSelector ).append( actionView.render().el );
 
-			this.model.get( 'config' ).formElements.push( action );
+			var action = this.addCustomAction( { method : 'email' } );
+
 			return action;
-
 		},
 
-		addCustomAction: function() {
+		addCustomAction: function( customAction ) {
 			console.log( 'addCustomAction' );
 			var action = new wxApp.FormBuilderAction();
+			if ( typeof customAction == 'object' ) {
+				action.set( customAction );
+			}
 
 			var actionView = new wxApp.FormBuilderActionView({
 				model: action
@@ -87,7 +84,6 @@ wxApp = wxApp || {};
 
 			this.model.get( 'config' ).formElements.push( action );
 			return action;
-
 		},
 
 		addInput: function( properties ) {

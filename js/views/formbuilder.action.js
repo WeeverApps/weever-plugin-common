@@ -9,7 +9,11 @@ wxApp = wxApp || {};
 
 		events: {
 			'blur .wx-form-builder-action': 'updateAction',
-			'click .wx-form-builder-delete': 'deleteControl'
+			'click .wx-form-builder-delete': 'deleteControl',
+			'blur .wx-form-builder-pdfheader-title': 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line1': 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line2': 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line3': 'updatePdfHeader'
 		},
 
 		initialize: function() {
@@ -25,6 +29,22 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
+		},
+
+		updatePdfHeader: function( ev ) {
+			console.log( 'updatePdfHeader' );
+			var $me = $( ev.currentTarget );
+
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) )
+				this.model.get( 'pdfHeader' ).title = $me.val();
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) )
+				this.model.get( 'pdfHeader' ).line1 = $me.val();
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) )
+				this.model.get( 'pdfHeader' ).line2 = $me.val();
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) )
+				this.model.get( 'pdfHeader' ).line3 = $me.val();
+
+			console.log( this.model );
 		},
 
 		updateAction: function( ev ) {

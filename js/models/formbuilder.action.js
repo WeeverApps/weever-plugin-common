@@ -10,7 +10,13 @@ wxApp = wxApp || {};
 			return {
 				control: 'action',
 				method: 'post',
-				value: ''
+				value: '',
+				pdfHeader: {
+					title: '',
+					line1: '',
+					line2: '',
+					line3: ''
+				}
 			};
 		},
 
