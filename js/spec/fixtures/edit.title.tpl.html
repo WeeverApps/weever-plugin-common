@@ -1,5 +1,10 @@
 <script type="text/template" id="title-edit-template">
     <div class="wx-title-edit-header">
-
+		<h3 class="wx-imp-h3"><?php echo WeeverHelper::get_js_strings()['WEEVER_JS_ENTER_NEW_APP_ICON_NAME'] ?></h3>
+        <input type="text" id="alertName" name="alertName" value="<%- ( typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title ) %>" />
+    </div>
+    <div>
+        <button class="finish">Finish</button>
+        <a class="close-reveal-modal">&#215;</a>
     </div>
 </script>

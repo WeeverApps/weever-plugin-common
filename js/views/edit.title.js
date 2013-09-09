@@ -2,12 +2,12 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.IconEditView = Backbone.View.extend({
-        iconProperty: 'icon_id',
+    wxApp.TitleEditView = Backbone.View.extend({
+        //iconProperty: 'icon_id',
 
         initialize: function() {
-            console.log('IconEditView init');
-            this.iconEditTpl = _.template( $('#icon-edit-template').html() );
+            //console.log('IconEditView init');
+            this.titleEditTpl = _.template( $('#title-edit-template').html() );
         },
 
         events: {
@@ -16,20 +16,21 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            console.log('IconEditView render');
-            this.$el.html( this.iconEditTpl( this.model.toJSON() ) );
+            console.log('TitleEditView render');
+            this.$el.html( this.titleEditTpl( this.model.toJSON() ) );
             return this;
         },
 
         finish: function() {
             var me = this;
-            wx.log( this.$('input:radio[name="wx-icon"]').val() );
-            var iconId = this.$('input:radio[name="wx-icon"]:checked').val();
+            var title = this.$('#alertName').val();
             var tabId = this.model.get('id');
-            wx.makeApiCall( 'tabs/set_icon_id', { tab_id: tabId, icon_id: iconId }, function() {
+
+            // TODO - Compare: set_tabTitle vs set_title
+            wx.makeApiCall( 'tabs/set_tabTitle', { tab_id: tabId, tabTitle: title }, function() {
                 try {
                     $('#SubtabEditModal').foundation('reveal', 'close');
-                    me.model.set( 'icon_id', iconId );
+                    me.model.set( 'tabTitle', title );
                     me.remove();
                 } catch ( e ) {
 

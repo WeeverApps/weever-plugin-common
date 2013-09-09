@@ -73,9 +73,7 @@ wxApp = wxApp || {};
                 });
             }*/
 
-            alert($('#ChangeIconModal').html());
-            $('#ChangeIconModal').html( this.iconTpl( this.model.toJSON() ) );
-            alert($('#ChangeIconModal').html());
+            //$('#ChangeIconModal').html( this.iconTpl( this.model.toJSON() ) );
         },
 
         editTitle: function() {
