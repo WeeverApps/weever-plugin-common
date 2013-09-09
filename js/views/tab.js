@@ -83,7 +83,10 @@ wxApp = wxApp || {};
 
         editAll: function() {
             alert('This is where the edit code will go.');
-            wx.updateTitleDialog( this.$el.find('.wx-nav-label') );
+            //wx.updateTitleDialog( this.$el.find('.wx-nav-label') );
+            this.subTabsContainerView = new wxApp.SubTabsContainerView({ model: this.model });
+            this.subTabsContainerView.tabView = this;
+            $('#editSpace').html( this.subTabsContainerView.render().el );
         },
 
         updateTabId: function( currentTabId, newTabId ) {
