@@ -56,14 +56,26 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
 			'click .wx-form-builder-add-signature': 'addSignature',
-			'click .wx-form-builder-add-custom-action': 'addCustomAction'
+			'click .wx-form-builder-add-custom-action': 'addCustomAction',
+			'click .wx-form-builder-add-email-action': 'addEmailAction'
 //			,
 //			'click .wx-finish-button': 'save'
 		},
 
-		addCustomAction: function() {
+		addEmailAction: function() {
+			console.log( 'addEmailAction' );
+
+			var action = this.addCustomAction( { method : 'email' } );
+
+			return action;
+		},
+
+		addCustomAction: function( customAction ) {
 			console.log( 'addCustomAction' );
 			var action = new wxApp.FormBuilderAction();
+			if ( typeof customAction == 'object' ) {
+				action.set( customAction );
+			}
 
 			var actionView = new wxApp.FormBuilderActionView({
 				model: action
@@ -72,7 +84,6 @@ wxApp = wxApp || {};
 
 			this.model.get( 'config' ).formElements.push( action );
 			return action;
-
 		},
 
 		addInput: function( properties ) {
