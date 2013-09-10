@@ -41,6 +41,9 @@ wxApp = wxApp || {};
         },
 
         render: function() {
+            wx.log('render');
+            alert(this.$el.html());
+
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
 
             this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
@@ -99,6 +102,8 @@ wxApp = wxApp || {};
             this.setModelFromView(this.model);
             this.setTitleFromView(this.model);
 			this.saveModel();
+
+            $('#wx-edit-area').foundation('reveal', 'close');
 		},
 
 		next: function() {
@@ -125,7 +130,7 @@ wxApp = wxApp || {};
         },
 
 		validateFeed: function() {
-			var me = this;
+            var me = this;
 			// copy the model to validate with the server, without updating the existing model
             var modelCopy = this.getModelCopy();
             this.setModelFromView(modelCopy);
@@ -176,7 +181,7 @@ wxApp = wxApp || {};
 			var data = model.getAPIData();
 			data.api_check = 1;
 			data.confirm_feed = 1;
-			$.ajax({
+            $.ajax({
 				url: wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey,
 				datatype: 'JSON',
 				data: data,
@@ -188,7 +193,8 @@ wxApp = wxApp || {};
 
         destroyView: function() {
             try {
-                this.$('#wx-edit-area').dialog('close');
+                //this.$('#wx-edit-area').dialog('close');
+                $('#wx-edit-area').foundation('reveal', 'close');
             } catch ( e ) {
 
             }
