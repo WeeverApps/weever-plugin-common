@@ -73,7 +73,9 @@ wxApp = wxApp || {};
                 });
             }*/
 
-            //$('#ChangeIconModal').html( this.iconTpl( this.model.toJSON() ) );
+            var view = new wxApp.IconEditView({ model: this.model });
+            view.render();
+            $('#wx-edit-area').html( view.$el );
         },
 
         editTitle: function() {
