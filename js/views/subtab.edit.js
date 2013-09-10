@@ -42,7 +42,6 @@ wxApp = wxApp || {};
 
         render: function() {
             wx.log('render');
-            alert(this.$el.html());
 
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
 
