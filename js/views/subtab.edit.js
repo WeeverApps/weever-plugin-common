@@ -41,29 +41,8 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            alert('Testing...');
-            alert(this.$el.html());
-            //alert(this.html());
-            alert('Testing 2...');
-
-            /*this.$('#wx-edit-area').html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
-
-            //alert( $('#wx-edit-area').html() );
-            this.$('#wx-edit-area').prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
-            this.$('#wx-edit-area').append( this.subTabEditFooterTpl( this.model.toJSON() ) );
-            this.startValidation();
-			if ( this.model.validateFeed ) {
-				this.$('#wx-edit-area').find('.wx-finish-button').hide();
-                this.$('#wx-edit-area').find('.wx-edit-title-div').hide();
-            } else {
-				this.$('#wx-edit-area').find('.wx-next-button').hide();
-                if ( ! this.model.allowTitleEdit )
-                    this.$('#wx-edit-area').find('.wx-edit-title-div').hide();
-            }*/
-
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
 
-            //alert( $('#wx-edit-area').html() );
             this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
             this.$el.append( this.subTabEditFooterTpl( this.model.toJSON() ) );
             this.startValidation();
