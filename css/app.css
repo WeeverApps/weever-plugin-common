@@ -7421,3 +7421,10 @@ p.copyright {
   color: #444;
   padding-bottom: 8px;
 }
+
+/* Added by Grande */
+input.hexacolorinput {
+    display:block;
+    margin:1em auto;
+    border-color:#c1c1c1;
+}
