@@ -38,7 +38,7 @@ function cropper_show(image_width, image_height) {
     			parent: '#wx-jcrop-dialog',
     			onSelectChange: function(img, selection) {
     				coords = selection;
-    				//console.debug(coords);
+    				console.debug(coords);
     			}
     		});
     	} else {
@@ -144,7 +144,36 @@ jQuery(document).ready(function(){
 	        	
 	        	coords = false;
 	        	
-	        	jQuery('#wx-jcrop-dialog').dialog({
+	        	jQuery('#wx-jcrop-dialog').foundation('reveal', 'open');
+	        	setTimeout(function() { cropper_show(image_width, image_height); }, 500);
+	        	jQuery('#finish-crop').one('click', function() {
+	        		console.log('Saving cropped image...');
+	        		console.log(coords);
+
+	        		jQuery.ajax({
+    					url: ajaxurl,
+    					type: 'POST',
+    					data: {
+    						action: 'ajaxCropImage',
+    						selection: coords,
+    						image_width: image_width,
+    						image_height: image_height
+    					},
+    					success: function(msg) {
+    						jQuery("#" + image_id).attr("src", msg);
+	        	        	jQuery('input[name=' + input_name + ']').attr('value', msg);
+	        	        	//jQuery('#wx-jcrop-dialog').dialog('close');
+    					},
+    					error: function(v,msg) {
+    						alert('There was an error saving the image, please try again');
+    					}
+    				});
+
+    				jQuery('#wx-jcrop-dialog').foundation('reveal', 'close');
+	        	})
+
+
+	        	/*jQuery('#wx-jcrop-dialog').dialog({
 	        		modal: true,
 	        		resizable: false,
 	        		width: 'auto',
@@ -186,7 +215,7 @@ jQuery(document).ready(function(){
 	        				jQuery(this).dialog('close');
 	        			}
 	        		}
-	        	});
+	        	});*/
 	        	
 	        	//jQuery("#wx-theme-tablet-load-link").attr("href", url);
 	        	return false;
