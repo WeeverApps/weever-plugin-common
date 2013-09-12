@@ -12,22 +12,9 @@ wxApp = wxApp || {};
         },
 
         addOne: function(feature) {
-            //wx.log('feature list addOne called');
             var me = this;
-            //console.log('get feature view');
-            //alert('FeatureView needed');
             var view = new wxApp.FeatureView({ model: feature });
-            //console.log('attempting to render feature view');
             this.$el.append( view.render().el );
-            //view.subTabsContainerView = new wxApp.SubTabsContainerView({ model: tab });
-            //view.subTabsContainerView.tabView = view;
-            //tab.on('destroy', function(tab) {
-            //    wx.log('removing tab from collection');
-            //    me.removeTabFromCollection(tab);
-            //});
-            //tab.on('change', this.refreshUiTabs, this);
-            //$('#listTabs').append( view.subTabsContainerView.render().el );
-            //this.refreshUiTabs();
         }
     });
 

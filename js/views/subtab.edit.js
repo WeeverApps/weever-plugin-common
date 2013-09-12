@@ -9,7 +9,8 @@ wxApp = wxApp || {};
         subTabEditFooterTplSelector: '#subtab-edit-footer-template',
 		feedSampleTplSelector: '#feedsample-template',
         parentContainerId: false,
-        el: '#wx-edit-area',
+        //el: '#wx-edit-area',
+        el: '.reveal-modal',
 
         initialize: function() {
             this.initializeEvents();
@@ -42,6 +43,8 @@ wxApp = wxApp || {};
 
         render: function() {
             wx.log('render');
+            
+            wx.log(this.$el.html());
 
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
 
@@ -56,6 +59,9 @@ wxApp = wxApp || {};
                 if ( ! this.model.allowTitleEdit )
                     this.$el.find('.wx-edit-title-div').hide();
             }
+
+            wx.log(this.$el.html());
+
             return this;
         },
 
@@ -80,8 +86,11 @@ wxApp = wxApp || {};
         },
 
         show: function() {
+            //alert('show')
             var me = this;
             wx.log('adding html');
+
+            //alert(this.$('#wx-edit-area').html());
 
             /*if ( undefined != this.$('#wx-edit-area').dialog ) {
                 this.$('#wx-edit-area').dialog({
@@ -102,7 +111,7 @@ wxApp = wxApp || {};
             this.setTitleFromView(this.model);
 			this.saveModel();
 
-            $('#wx-edit-area').foundation('reveal', 'close');
+            $('.reveal-modal').foundation('reveal', 'close');
 		},
 
 		next: function() {
@@ -193,12 +202,13 @@ wxApp = wxApp || {};
         destroyView: function() {
             try {
                 //this.$('#wx-edit-area').dialog('close');
-                $('#wx-edit-area').foundation('reveal', 'close');
+                //$('#wx-edit-area').foundation('reveal', 'close');
+                $('.reveal-modal').foundation('reveal', 'close');
             } catch ( e ) {
 
             }
             this.undelegateEvents();
-            this.$('#wx-edit-area').removeData().unbind();
+            this.$el.removeData().unbind();
             this.remove();
             Backbone.View.prototype.remove.call( this );
         }

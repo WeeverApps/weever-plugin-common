@@ -129,15 +129,15 @@ jQuery( document ).ready( function() {
         wx.localizedConditionalDialog( ["Cancel"], dialogId, backAction );
     }
     
-	jQuery('.wx-add-source-icon').click(function(e) {
-        // Don't use this for content editing
-        if ( jQuery(this).hasClass('wx-add-new-content-button') )
-            return;
+	// jQuery('.wx-add-source-icon').click(function(e) {
+ //        // Don't use this for content editing
+ //        if ( jQuery(this).hasClass('wx-add-new-content-button') )
+ //            return;
         
-        e.preventDefault();
+ //        e.preventDefault();
 
-        wx.add_edit_dialog_start(jQuery(this), false);
-	});	
+ //        wx.add_edit_dialog_start(jQuery(this), false);
+	// });	
 	
 	
 	jQuery('div.wx-add-item-icon').click(function() {
