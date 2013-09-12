@@ -87,8 +87,9 @@ wxApp = wxApp || {};
         },
 
         editAll: function() {
-            //alert('This is where the edit code will go.');
-            //wx.updateTitleDialog( this.$el.find('.wx-nav-label') );
+            // Make sure we're on the right tab first
+            $('a[href="#panel2"]').click();
+
             this.subTabsContainerView = new wxApp.SubTabsContainerView({ model: this.model });
             this.subTabsContainerView.tabView = this;
             $('#editSpace').html( this.subTabsContainerView.render().el );

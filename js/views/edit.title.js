@@ -20,6 +20,11 @@ wxApp = wxApp || {};
                 try {
                     $('#SubtabEditModal').foundation('reveal', 'close');
                     me.model.set( 'tabTitle', title );
+
+                    // Wait half a second, then refresh the preview
+                    // (The half-second helps ensure the server is synced)
+                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+
                     me.remove();
                 } catch ( e ) {
 

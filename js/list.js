@@ -57,6 +57,7 @@ var wxApp = wxApp || {};
     };
 
     wx.refreshAppPreview = function() {
+        console.log('Refreshing Preview');
         if ( $.browser.webkit ) {
             $('#preview-app-dialog-no-webkit').hide();
             $('#preview-app-dialog-frame').attr( 'src', $('#preview-app-dialog-frame').attr('rel') );
