@@ -42,12 +42,13 @@ jQuery(document).ready(function() {
                 var status = app_enabled ? 'online' : 'offline';
                 jQuery('#appStatus').html( status );
             },
-            error: function(v, msg) {
-                //alert(v);
-                alert(msg);
-            }
+            error: function(v, msg) { alert(msg); }
         });
     });
+
+    jQuery('#refresh_preview').click(function() {
+        wx.refreshAppPreview();
+    })
 
     jQuery( "#tabs" ).tabs();
 	jQuery( "#toptabs li" ).hover(function(){jQuery(this).addClass('ui-state-hover');}, function(){jQuery(this).removeClass('ui-state-hover');});
