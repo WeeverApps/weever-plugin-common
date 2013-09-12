@@ -995,7 +995,6 @@ jQuery(document).ready(function(){
             {
 
                 tabName = f["alertName"];
-                alert(ajaxurl);
                 jQuery.ajax({
                     type: "POST",
                     url: ajaxurl,
