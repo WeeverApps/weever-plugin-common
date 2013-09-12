@@ -47,6 +47,8 @@ wxApp = wxApp || {};
             wx.log(this.model.getModelName());
             wx.log(this.model);
 
+            //this.model.set('feature_name', this.model.getModelName().replace('SubTab', '') );
+
             var editViewName = this.model.getModelName() + 'EditView';
             if ( 'SubTabEditView' != editViewName && undefined !== wxApp[editViewName] )
                 var view = new wxApp[editViewName]( { model: this.model } );

@@ -45,15 +45,17 @@ wxApp = wxApp || {};
         render: function() {
             
             console.log(this.model.toJSON());
-            this.$el = $( '#wx-edit-area-' + this.model.get('feature_name') );
-            console.log( '#wx-edit-area-' + this.model.feature_name );
-            console.log( '#wx-edit-area-' + this.model.get('feature_name') );
-            //console.log( '#wx-edit-area-' + featureName );
 
+            if ( this.model.get('feature_name') !== undefined && this.model.get('feature_name') !== '' ) {
+                // Add new feature
+                this.$el = $( '#wx-edit-area-' + this.model.get('feature_name') );
+            } else {
+                // Edit feature
+                this.$el = $('#wx-edit-area');
+            }
+            
             wx.log('render');
             
-            //wx.log(this.$el.html());
-
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
 
             this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
