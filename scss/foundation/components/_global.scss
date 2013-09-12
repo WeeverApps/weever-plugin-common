@@ -270,7 +270,7 @@ $cursor-text-value: text !default;
 
   // Default body styles
   body {
-    background: $body-bg;
+    //background: $body-bg;   Commented out because this messes up the Wordpress Sidebar
     color: $body-font-color;
     padding: 0;
     margin: 0;

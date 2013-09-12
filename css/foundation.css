@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* line 264, ../scss/foundation/components/_global.scss */
 *,
 *:before,
@@ -15,7 +16,6 @@ body {
 
 /* line 272, ../scss/foundation/components/_global.scss */
 body {
-  background: white;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -1891,7 +1891,7 @@ blockquote p {
   /* line 383, ../scss/foundation/components/_type.scss */
   * {
     background: transparent !important;
-    color: #000 !important;
+    color: black !important;
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important;
@@ -1923,7 +1923,7 @@ blockquote p {
   /* line 402, ../scss/foundation/components/_type.scss */
   pre,
   blockquote {
-    border: 1px solid #999;
+    border: 1px solid #999999;
     page-break-inside: avoid;
   }
 
@@ -4698,7 +4698,7 @@ label.error {
   margin-top: -20px;
   margin-left: -20px;
   border: solid 3px;
-  border-color: #555 #fff;
+  border-color: #555555 white;
   -webkit-border-radius: 1000px;
   border-radius: 1000px;
   -webkit-animation-name: rotate;
@@ -4800,7 +4800,7 @@ label.error {
   right: 0px;
   width: 11px;
   height: 14px;
-  border: solid 4px #000;
+  border: solid 4px black;
   border-top: none;
   border-bottom: none;
 }
@@ -4812,7 +4812,7 @@ label.error {
   height: 14px;
   border: inset 8px;
   border-right-style: solid;
-  border-color: transparent transparent transparent #000;
+  border-color: transparent transparent transparent black;
 }
 /* line 213, ../scss/foundation/components/_orbit.scss */
 .orbit-container:hover .orbit-timer > span {
@@ -5032,7 +5032,7 @@ label.error {
 @media print {
   /* line 134, ../scss/foundation/components/_reveal.scss */
   .reveal-modal {
-    background: #fff !important;
+    background: white !important;
   }
 }
 /* Foundation Joyride */
@@ -5158,11 +5158,11 @@ label.error {
   text-decoration: none;
   font-size: 30px;
   font-weight: normal;
-  line-height: .5 !important;
+  line-height: 0.5 !important;
 }
 /* line 147, ../scss/foundation/components/_joyride.scss */
 .joyride-close-tip:hover, .joyride-close-tip:focus {
-  color: #eee !important;
+  color: #eeeeee !important;
 }
 
 /* line 150, ../scss/foundation/components/_joyride.scss */
@@ -5185,9 +5185,9 @@ label.error {
   position: absolute;
   border-radius: 3px;
   z-index: 102;
-  -moz-box-shadow: 0px 0px 30px #ffffff;
-  -webkit-box-shadow: 0px 0px 15px #ffffff;
-  box-shadow: 0px 0px 15px #ffffff;
+  -moz-box-shadow: 0px 0px 30px white;
+  -webkit-box-shadow: 0px 0px 15px white;
+  box-shadow: 0px 0px 15px white;
 }
 
 /* line 175, ../scss/foundation/components/_joyride.scss */
