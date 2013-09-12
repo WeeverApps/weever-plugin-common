@@ -12,7 +12,8 @@ wxApp = wxApp || {};
             layout: null,
             typeDescription: '',
             published: 1,
-            config: {}
+            config: {},
+            featureName: ''
         },
 
         typeDescription: '',

@@ -10,9 +10,10 @@ wxApp = wxApp || {};
 		feedSampleTplSelector: '#feedsample-template',
         parentContainerId: false,
         //el: '#wx-edit-area',
-        el: '.reveal-modal',
+        //el: '.reveal-modal',
 
         initialize: function() {
+
             this.initializeEvents();
             // TODO: Listen to changes to the subTab model and re-render the view automatically?
             this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
@@ -42,9 +43,16 @@ wxApp = wxApp || {};
         },
 
         render: function() {
+            
+            console.log(this.model.toJSON());
+            this.$el = $( '#wx-edit-area-' + this.model.get('feature_name') );
+            console.log( '#wx-edit-area-' + this.model.feature_name );
+            console.log( '#wx-edit-area-' + this.model.get('feature_name') );
+            //console.log( '#wx-edit-area-' + featureName );
+
             wx.log('render');
             
-            wx.log(this.$el.html());
+            //wx.log(this.$el.html());
 
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
 
@@ -115,9 +123,19 @@ wxApp = wxApp || {};
 		},
 
 		next: function() {
+            console.log('next');
+            console.log(this.$('#wx-twitter-input').val())
+            console.log($('#wx-twitter-input').val())
+            console.log(this.$('.wx-edit-input').val());
+
             if ( undefined !== this.$('form') && undefined != this.$('form').validate ) {
-                if ( this.$('form').valid() )
+                validator = this.$('form').validate();
+
+                if ( this.$('form').valid() ) {
                     this.validateFeed();
+                } else {
+                    alert( 'Error count: ' + validator.errorList.length );
+                }
             } else {
 			    this.validateFeed();
             }
@@ -138,6 +156,7 @@ wxApp = wxApp || {};
         },
 
 		validateFeed: function() {
+            console.log('validate feed');
             var me = this;
 			// copy the model to validate with the server, without updating the existing model
             var modelCopy = this.getModelCopy();
@@ -146,6 +165,7 @@ wxApp = wxApp || {};
 		},
 
         getModelCopy: function() {
+            console.log('get model copy');
             var modelCopy = $.extend( true, {}, this.model );
             return modelCopy;
         },
@@ -186,6 +206,7 @@ wxApp = wxApp || {};
 		},
 
 		getFeedSample: function(model, callback) {
+            console.log('get feed sample');
 			var data = model.getAPIData();
 			data.api_check = 1;
 			data.confirm_feed = 1;

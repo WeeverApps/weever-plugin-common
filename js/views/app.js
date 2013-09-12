@@ -84,6 +84,8 @@ wxApp = wxApp || {};
                 var tab = new wxApp[id + 'SubTab']();
                 if ( undefined != parentId && parentId )
                     tab.set( 'parent_id', parseInt( parentId ) );
+                
+                tab.set( 'feature_name', id );
                 var view = new wxApp[id + 'SubTabEditView']({ model: tab });
             } else {
                 throw new Error('Invalid type ' + id);
