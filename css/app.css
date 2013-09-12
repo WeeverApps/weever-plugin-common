@@ -7428,3 +7428,20 @@ input.hexacolorinput {
     margin:1em auto;
     border-color:#c1c1c1;
 }
+
+#preview-bg {
+    background: url("../images/mobile-bg.png") no-repeat scroll 0 0 transparent;
+    min-height: 600px;
+    overflow: visible;
+    width: 380px;
+}
+
+#preview-app {
+    color: #FFFFFF;
+    height: 480px;
+    left: 30px;
+    overflow: hidden;
+    position: relative;
+    top: 62px;
+    width: 320px;
+}

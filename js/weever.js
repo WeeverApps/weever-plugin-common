@@ -22,10 +22,31 @@
 jQuery(document).ready(function() {
 	jQuery('input[name="switch-x"]').click(function() {
         if (this.id == 'on') {
-            alert('TODO - Turn App Online');
+            app_enabled = 1;
         } else {
-            alert('TODO - Turn App Offline')
+            app_enabled = 0;
         }
+
+        jQuery('#appStatus').html( 'in transition' );
+
+        jQuery.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: { 
+                action: 'ajaxSaveTheme',
+                nonce: jQuery('input#nonce').val(),
+                app_enabled: app_enabled
+            },
+            success: function(msg) {
+                console.log('OK');
+                var status = app_enabled ? 'online' : 'offline';
+                jQuery('#appStatus').html( status );
+            },
+            error: function(v, msg) {
+                //alert(v);
+                alert(msg);
+            }
+        });
     });
 
     jQuery( "#tabs" ).tabs();
