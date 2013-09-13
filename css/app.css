@@ -6439,6 +6439,14 @@ ul.pagination li {
 .panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p {
   color: #333333;
 }
+.panel p {
+  width: 100px;
+  margin: 0.625em 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* line 54, ../scss/foundation/components/_panels.scss */
 .panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
   line-height: 1;

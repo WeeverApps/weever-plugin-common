@@ -15,7 +15,7 @@ wxApp = wxApp || {};
         save: function() {
             console.log('launch screen: save clicked');
 
-            console.log( $('#phone_load_live').val() );
+            $('#save_launch_screen').html('Saving...');
 
             $.ajax({
                 type: "POST",
@@ -28,7 +28,11 @@ wxApp = wxApp || {};
                     tablet_landscape_load_live: $('#tablet_landscape_load_live').val(),
                 },
                 success: function(msg) {
-                    console.log('OK')
+                    console.log('OK');
+                    $('#save_launch_screen').html('Saved!');
+                    // Wait half a second, then refresh the preview
+                    // (The half-second helps ensure the server is synced)
+                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
                 },
                 error: function(v, msg) {
                     //alert(v);

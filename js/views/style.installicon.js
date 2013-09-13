@@ -13,20 +13,26 @@ wxApp = wxApp || {};
         // },
 
         save: function() {
-            console.log('logo design: save clicked');
+            console.log('install icon: save clicked');
+
+            $('#save_install_icon').html('Saving...');
 
             $.ajax({
                 type: "POST",
                 url: ajaxurl,
                 data: { 
-                    action: 'ajaxSaveTheme',
+                    action: 'ajaxSaveInstallIcon',
                     nonce: $('input#nonce').val(),
                     title: $('#title').val(),
                     icon_live: $('#icon_live').val(),
                     install_prompt: $('#install_prompt').val()
                 },
                 success: function(msg) {
-                    console.log('OK')
+                    console.log('OK');
+                    $('#save_install_icon').html('Saved!');
+                    // Wait half a second, then refresh the preview
+                    // (The half-second helps ensure the server is synced)
+                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
                 },
                 error: function(v, msg) {
                     //alert(v);
