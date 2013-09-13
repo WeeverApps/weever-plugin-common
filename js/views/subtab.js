@@ -52,9 +52,6 @@ wxApp = wxApp || {};
                 var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area' } );
             else
                 throw new Error( 'Invalid edit type ' + this.model.get('content') + '--' + editViewName );
-
-            if ( false !== view )
-                view.show();
         },
 
         confirmDeleteSubTab: function(event) {

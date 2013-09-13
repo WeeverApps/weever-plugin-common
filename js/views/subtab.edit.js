@@ -9,9 +9,7 @@ wxApp = wxApp || {};
         subTabEditFooterTplSelector: '#subtab-edit-footer-template',
 		feedSampleTplSelector: '#feedsample-template',
         parentContainerId: false,
-        //el: '#wx-edit-area',
-        //el: '.reveal-modal',
-
+        
         initialize: function(options) {
 
             this.initializeEvents();
@@ -82,26 +80,6 @@ wxApp = wxApp || {};
 
         setParentViewContainerId: function(containerId) {
             this.parentContainerId = containerId;
-        },
-
-        show: function() {
-            //alert('show')
-            var me = this;
-            wx.log('adding html');
-
-            //alert(this.$('#wx-edit-area').html());
-
-            /*if ( undefined != this.$('#wx-edit-area').dialog ) {
-                this.$('#wx-edit-area').dialog({
-                    modal: 		true,
-                    resizable: 	false,
-                    width: 		'80%',
-                    height: 	'auto',
-                    show:		'fade',
-                    hide:		'drop',
-					dialogClass: 'wp-dialog'
-                });
-            }*/
         },
 
 		finish: function() {

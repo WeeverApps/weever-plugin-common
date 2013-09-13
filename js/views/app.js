@@ -85,20 +85,11 @@ wxApp = wxApp || {};
                 if ( undefined != parentId && parentId )
                     tab.set( 'parent_id', parseInt( parentId ) );
                 
-                tab.set( 'feature_name', id );
+                //tab.set( 'feature_name', id );
                 var view = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
             } else {
                 throw new Error('Invalid type ' + id);
             }
-
-            this.showEditView(view);
-        },
-
-        showEditView: function(view) {
-            if ( typeof view !== 'undefined' )
-                view.show();
-            else
-                wx.log('invalid view');
         },
 
         highlightAppPreviewRefresh: function() {
