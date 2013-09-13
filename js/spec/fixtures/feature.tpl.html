@@ -1,12 +1,9 @@
 <script type="text/template" id="feature-template">
-	<?php $filter = '<%- filterBy %>'; ?>
-	<?php if ( $filter == '' or apply_filters( $filter, true ) ) { ?>
-		<button class="button secondary expand wx-add-source-icon <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%- featureName %>">
-			<div class="wx-icon"><img src="<%- imgUri %>"></div>
-			<div><%- name %></div>
-		</button>
-	    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
-	        Please wait...
-	    </div>
-    <?php } ?>
+	<button class="button secondary expand wx-add-source-icon <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%- featureName %>">
+		<div class="wx-icon"><img src="<%- imgUri %>"></div>
+		<div><%- name %></div>
+	</button>
+    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
+        Please wait...
+    </div>
 </script>

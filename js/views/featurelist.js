@@ -12,14 +12,22 @@ wxApp = wxApp || {};
         },
 
         addOne: function(feature) {
-            var me = this;
-            var view = new wxApp.FeatureView({ model: feature });
-            this.$el.append( view.render().el );
+            // We currently don't handle the 'rel' features (Coupons, Pages, and Map Locations).
+            if (feature.get('rel') === '') {
+                console.log('addONE');
+                var me = this;
+                var view = new wxApp.FeatureView({ model: feature });
+                this.$el.append( view.render().el );
+            }
         }
     });
 
     wxApp.featureList = new wxApp.FeatureList();
 
     // Grab the data and kick things off
-    wxApp.featureList.collection.fetch({ url: '/wp-content/plugins/wp_weeverapps/static/js/config/wx.featurelist.js', success: function() { console.log('features fetched'); }, error: function() { console.log('Could not load feature list.') } });
+    wxApp.featureList.collection.fetch({ 
+        url: '/wp-content/plugins/wp_weeverapps/static/js/config/wx.featurelist.js', 
+        success: function(result) { console.log('features fetched'); }, 
+        error: function() { console.log('Could not load feature list.') } 
+    });
 })(jQuery);
