@@ -44,14 +44,12 @@ wxApp = wxApp || {};
         editSubTab: function(event) {
             event.preventDefault();
             wx.log('editSubTab FIRED');
-            wx.log(this.model.getModelName());
-            wx.log(this.model);
 
             //this.model.set('feature_name', this.model.getModelName().replace('SubTab', '') );
 
             var editViewName = this.model.getModelName() + 'EditView';
             if ( 'SubTabEditView' != editViewName && undefined !== wxApp[editViewName] )
-                var view = new wxApp[editViewName]( { model: this.model } );
+                var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area' } );
             else
                 throw new Error( 'Invalid edit type ' + this.model.get('content') + '--' + editViewName );
 

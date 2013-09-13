@@ -86,7 +86,7 @@ wxApp = wxApp || {};
                     tab.set( 'parent_id', parseInt( parentId ) );
                 
                 tab.set( 'feature_name', id );
-                var view = new wxApp[id + 'SubTabEditView']({ model: tab });
+                var view = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
             } else {
                 throw new Error('Invalid type ' + id);
             }

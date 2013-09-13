@@ -12,7 +12,7 @@ wxApp = wxApp || {};
         //el: '#wx-edit-area',
         //el: '.reveal-modal',
 
-        initialize: function() {
+        initialize: function(options) {
 
             this.initializeEvents();
             // TODO: Listen to changes to the subTab model and re-render the view automatically?
@@ -43,17 +43,6 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            
-            console.log(this.model.toJSON());
-
-            if ( this.model.get('feature_name') !== undefined && this.model.get('feature_name') !== '' ) {
-                // Add new feature
-                this.$el = $( '#wx-edit-area-' + this.model.get('feature_name') );
-            } else {
-                // Edit feature
-                this.$el = $('#wx-edit-area');
-            }
-            
             wx.log('render');
             
             this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
@@ -70,7 +59,7 @@ wxApp = wxApp || {};
                     this.$el.find('.wx-edit-title-div').hide();
             }
 
-            wx.log(this.$el.html());
+            //wx.log(this.$el.html());
 
             return this;
         },
