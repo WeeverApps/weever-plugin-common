@@ -97,10 +97,7 @@ wxApp = wxApp || {};
 
 		next: function() {
             console.log('next');
-            console.log(this.$('#wx-twitter-input').val())
-            console.log($('#wx-twitter-input').val())
-            console.log(this.$('.wx-edit-input').val());
-
+            
             if ( undefined !== this.$('form') && undefined != this.$('form').validate ) {
                 validator = this.$('form').validate();
 
