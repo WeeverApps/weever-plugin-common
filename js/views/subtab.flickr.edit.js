@@ -7,7 +7,11 @@ wxApp = wxApp || {};
 
         setModelFromView: function(model) {
             model.set( 'content', this.$('.wx-content-radio:checked').val() );
-            model.setConfig( 'url', this.$('.wx-edit-input').val() );
+            var url = this.$('.wx-edit-input').val();
+            // Remove any trailing forward slashes
+            // (eg, turn 'flickr.com/user/' into 'flickr.com/user')
+            url = url.replace(/\/$/, '');
+            model.setConfig( 'user_id', url );
             return model;
         },
 
