@@ -4,5 +4,11 @@
         <input type="radio" class="wx-content-radio" name="youtube-content" id="wx-youtube-playlist" value="youtubePlaylist" <% if ( content == 'youtubePlaylist' ) { %>checked<% } %> /> <label for="wx-youtube-playlist">Youtube Playlist</label>
     </div>
     <label for='wx-youtube-input' id='wx-youtube-url' class='wx-social-label wx-jqui-label'></label>
-    <input type='text' value='<%- config.url %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
+    <% if ( typeof(config.url) != 'undefined' ) { %>
+    	<input type='text' value='<%- config.url %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
+    <% } else if ( content == 'youtubePlaylist' ) { %>
+    	<input type='text' value='http://www.youtube.com/playlist?list=<%- config.playlist_id %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
+    <% } else { %>
+    	<input type='text' value='http://youtube.com/<%- config.user_id %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
+    <% } %> 
 </script>
