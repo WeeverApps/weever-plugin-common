@@ -16,6 +16,7 @@ wxApp = wxApp || {};
 
         addOne: function(tab) {
             wx.log('addOne called');
+            
             var me = this;
             var view = new wxApp.TabView({ model: tab });
             this.$el.append( view.render().el );

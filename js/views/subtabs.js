@@ -27,6 +27,7 @@ wxApp = wxApp || {};
             console.log('starting subtabs view render');
             this.$el.html('');
             this.startSortable();
+
             if ( this.model.getSubTabs().length ) {
                 var me = this;
                 this.model.getSubTabs().forEach(function(subTab) {

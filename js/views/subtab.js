@@ -32,7 +32,7 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            console.log('starting subtab view')
+            console.log('starting subtab view');
             this.$el.html( this.subTabTpl( this.model.toJSON() ) );
             // Add a reference to the view, not seeing another way to grab it from within the drop event.
             // Doing _.bind( this.onDrop, this ) would give access to the view it was dropped on, but not the element
