@@ -52,6 +52,10 @@ wxApp = wxApp || {};
 
 						this.addCheckboxGroupWithProperties( elementsJson[i] );
 
+					} else if ( elementsJson[i].control === 'select' ) {
+
+						this.addSelectWithProperties( elementsJson[i] );
+
 					} else {
 
 						this.addInput( elementsJson[i] );
@@ -310,7 +314,7 @@ wxApp = wxApp || {};
 		},
 
 		addTextarea: function() {
-			addTextareaWithProperties( {} );
+			this.addTextareaWithProperties( {} );
 		},
 
 		addTextareaWithProperties: function( properties ) {
@@ -325,7 +329,7 @@ wxApp = wxApp || {};
 		},
 
 		addRadioGroup: function() {
-			addRadioGroupWithProperties( {} );
+			this.addRadioGroupWithProperties( {} );
 		},
 
 		addRadioGroupWithProperties: function( properties ) {
@@ -355,7 +359,7 @@ wxApp = wxApp || {};
 		},
 
 		addCheckboxGroup: function() {
-			addCheckboxGroupWithProperties( {} );
+			this.addCheckboxGroupWithProperties( {} );
 		},
 
 		addCheckboxGroupWithProperties: function( properties ) {
@@ -395,6 +399,10 @@ wxApp = wxApp || {};
 		 *             (current Select Model)
 		 */
 		addSelect: function() {
+			this.addSelectWithProperties( {} );
+		},
+
+		addSelectWithProperties: function( properties ) {
 			var select = new wxApp.FormBuilderControlSelect();
 			var selectView = new wxApp.FormBuilderControlSelectView({
 				model: select
@@ -411,10 +419,17 @@ wxApp = wxApp || {};
 			selectView.$( '.wx-form-builder-select' ).append( optionGroupView.render().el );
 
 			// Add an Option to the Option Group
-			select.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
+			console.log( properties );
+			if ( properties.optionGroup == undefined || properties.optionGroup.length == 0 ) {
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
+			} else {
+				for (var i = properties.optionGroup.length - 1; i >= 0; i--) {
+					var option = new wxApp.FormBuilderControlOption( properties.optionGroup[i] );
+					select.get('optionGroup').add( option );
+				};
+			}
 
 			// Add Select to control collection
-//			this.model.get( 'controls' ).push( select );
 			this.model.get( 'config' ).formElements.push( select );
 		}
 //		,
