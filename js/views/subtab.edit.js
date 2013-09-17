@@ -34,7 +34,7 @@ wxApp = wxApp || {};
         genericEvents: {
 			'change .wx-dialog-input': 'hideValidateFeed',
 			'keydown .wx-dialog-input': 'hideValidateFeed',
-            'click a.close-reveal-modal': 'destroyView',
+            //'click a.close-reveal-modal': 'destroyView',
 			'click .wx-finish-button': 'finish',
 			'click .wx-next-button': 'next',
             'change .wx-content-radio' : 'contentChange'
