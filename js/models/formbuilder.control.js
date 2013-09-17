@@ -21,13 +21,13 @@ wxApp = wxApp || {};
 				allowAdditional: '',
 				allowAdditionalClass: '',
 				valueType: 'number',
-				valueClass: 'wx-hide',
-				minClass: 'wx-hide',
-				maxClass: 'wx-hide',
-				stepClass: 'wx-hide',
-				multiClass: 'wx-hide',
+				valueClass: 'hide',
+				minClass: 'hide',
+				maxClass: 'hide',
+				stepClass: 'hide',
+				multiClass: 'hide',
 				requiredClass: '',
-				autocompleteClass: 'wx-hide'
+				autocompleteClass: 'hide'
 			};
 		},
 
@@ -43,7 +43,7 @@ wxApp = wxApp || {};
 
 		togglePlaceholder: function() {
 			if ( this.get( 'showPlaceholder' ) === false ) {
-				this.set( 'hidePlaceholderClass', 'wx-hide' );
+				this.set( 'hidePlaceholderClass', 'hide' );
 			}
 		}
 

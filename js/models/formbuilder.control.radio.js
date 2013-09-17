@@ -10,7 +10,7 @@ wxApp = wxApp || {};
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				label: 'Radio Button',
-				autocompleteClass: 'wx-hide'
+				autocompleteClass: 'hide'
 			} );
 			return newDefaults;
 		},

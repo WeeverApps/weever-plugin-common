@@ -159,7 +159,7 @@ wxApp = wxApp || {};
 			this.addInput({
 				label: 'File',
 				multiClass: '',
-				autocompleteClass: 'wx-hide',
+				autocompleteClass: 'hide',
 				attributes: {
 					type: 'file',
 					accept: 'image/*'

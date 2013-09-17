@@ -7453,3 +7453,7 @@ input.hexacolorinput {
     top: 62px;
     width: 320px;
 }
+
+.wx-form-builder-row input.hide {
+  display: none;
+}

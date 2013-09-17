@@ -9,7 +9,7 @@ wxApp = wxApp || {};
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				label: 'Checkbox',
-				autocompleteClass: 'wx-hide'
+				autocompleteClass: 'hide'
 			} );
 			return newDefaults;
 		},
