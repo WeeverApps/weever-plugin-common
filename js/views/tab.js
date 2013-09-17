@@ -18,7 +18,7 @@ wxApp = wxApp || {};
         events: {
             'dblclick .wx-nav-icon': 'editIcon',
             'dblclick .wx-nav-label': 'editTitle',
-            'click p': 'editAll'
+            'click': 'editAll'
         },
 
         render: function() {
