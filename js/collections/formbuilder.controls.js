@@ -16,7 +16,7 @@ var wxApp = wxApp || {};
 		},
 
 		onAdd: function() {
-			console.log(this.toJSONrecursive());
+			//console.log(this.toJSONrecursive());
 		}
 	});
 

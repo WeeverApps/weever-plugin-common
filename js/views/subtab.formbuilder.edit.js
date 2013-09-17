@@ -21,7 +21,7 @@ wxApp = wxApp || {};
 				
 				// New form; set the collection
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
-			
+
 			} else {
 
 				// Load currently existing form elements.
@@ -32,16 +32,31 @@ wxApp = wxApp || {};
 
 				for (var i = elementsJson.length - 1; i >= 0; i--) {
 
-					var input = new wxApp.FormBuilderControlInput( elementsJson[i] );
-					input.get( 'attributes' ).set( elementsJson[i].attributes );
+					if ( elementsJson[i].control === 'div' ) {
 
-					var inputView = new wxApp.FormBuilderControlInputView({
-						model: input
-					});
-					this.$( this.previewPaneSelector ).append( inputView.render().el );
+						this.addInfoWithProperties( elementsJson[i] );
 
-					this.model.get( 'config' ).formElements.push( input );
+					} else if ( elementsJson[i].control === 'signature' ) {
 
+						this.addSignature();
+
+					} else if ( elementsJson[i].control === 'textarea' ) {
+
+						this.addTextareaWithProperties( elementsJson[i] );
+
+					} else if ( elementsJson[i].control === 'radiofieldset' ) {
+
+						this.addRadioGroupWithProperties( elementsJson[i] );
+
+					} else if ( elementsJson[i].control === 'checkboxfieldset' ) {
+
+						this.addCheckboxGroupWithProperties( elementsJson[i] );
+
+					} else {
+
+						this.addInput( elementsJson[i] );
+
+					}
 				};
 			}
 		},
@@ -270,13 +285,18 @@ wxApp = wxApp || {};
 		},
 
 		addInfo: function( event ) {
-			var info = new wxApp.FormBuilderControlInfo();
+			this.addInfoWithProperties( {} );
+		},
+
+		addInfoWithProperties: function( properties ) {
+
+			var info = new wxApp.FormBuilderControlInfo( properties );
 			var infoView = new wxApp.FormBuilderControlInfoView({
 				model: info
 			});
 			this.$( this.previewPaneSelector ).append( infoView.render().el );
-//			this.model.get( 'controls' ).push( info );
 			this.model.get( 'config' ).formElements.push( info );
+
 		},
 
 		addSignature: function() {
@@ -290,7 +310,12 @@ wxApp = wxApp || {};
 		},
 
 		addTextarea: function() {
-			var textArea = new wxApp.FormBuilderControlTextarea();
+			addTextareaWithProperties( {} );
+		},
+
+		addTextareaWithProperties: function( properties ) {
+
+			var textArea = new wxApp.FormBuilderControlTextarea( properties );
 			var textAreaView = new wxApp.FormBuilderControlTextareaView({
 				model: textArea
 			});
@@ -300,10 +325,15 @@ wxApp = wxApp || {};
 		},
 
 		addRadioGroup: function() {
-			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset();
+			addRadioGroupWithProperties( {} );
+		},
+
+		addRadioGroupWithProperties: function( properties ) {
+			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
 			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
 				model: radioFieldset
 			});
+
 			this.$( this.previewPaneSelector ).append( radioFieldsetView.render().el );
 
 			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
@@ -311,16 +341,29 @@ wxApp = wxApp || {};
 			});
 
 			radioFieldsetView.$( '.wx-form-builder-radio-fieldset' ).append( radioGroupView.render().el );
-			radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
-//			this.model.get( 'controls' ).push( radioFieldset );
+
+			if ( properties.radioGroup == undefined || properties.radioGroup.length == 0 ) {
+				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
+			} else {
+				for (var i = properties.radioGroup.length - 1; i >= 0; i--) {
+					var option = new wxApp.FormBuilderControlRadio( properties.radioGroup[i] );
+					radioFieldset.get( 'radioGroup' ).add( option );
+				};
+			}
+
 			this.model.get( 'config' ).formElements.push( radioFieldset );
 		},
 
 		addCheckboxGroup: function() {
+			addCheckboxGroupWithProperties( {} );
+		},
+
+		addCheckboxGroupWithProperties: function( properties ) {
 			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset();
 			var checkboxFieldsetView = new wxApp.FormBuilderControlCheckboxFieldsetView({
 				model: checkboxFieldset
 			});
+
 			this.$( this.previewPaneSelector ).append( checkboxFieldsetView.render().el );
 
 			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({
@@ -329,9 +372,15 @@ wxApp = wxApp || {};
 
 			checkboxFieldsetView.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );
 
-			checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox() );
+			if ( properties.checkboxGroup == undefined || properties.checkboxGroup.length == 0 ) {
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox() );
+			} else {
+				for (var i = properties.checkboxGroup.length - 1; i >= 0; i--) {
+					var option = new wxApp.FormBuilderControlCheckbox( properties.checkboxGroup[i] );
+					checkboxFieldset.get( 'checkboxGroup' ).add( option );
+				};
+			}
 
-//			this.model.get( 'controls' ).push( checkboxFieldset );
 			this.model.get( 'config' ).formElements.push( checkboxFieldset );
 		},
 

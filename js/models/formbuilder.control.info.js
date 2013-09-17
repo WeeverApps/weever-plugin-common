@@ -12,6 +12,7 @@ wxApp = wxApp || {};
 				label: '',
 				innerHTML: ''
 			} );
+
 			return newDefaults;
 		},
 

@@ -16,7 +16,7 @@ wxApp = wxApp || {};
 		initialize: function() {
 			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
 			this.set( 'radioGroup', new wxApp.FormBuilderControlRadioGroup() );
-			console.log(this);
+			//console.log(this);
 			return this;
 		}
 
