@@ -5,7 +5,8 @@ wxApp = wxApp || {};
     wxApp.LogoDesign = Backbone.View.extend({
         el: '#logo_design',
         events: {
-            'click #save_logo_design': 'save'
+            'click #save_logo_design': 'save',
+            'change #titlebarSource': 'dropDownChange'
         },
 
         // initialize: function() {
@@ -29,7 +30,8 @@ wxApp = wxApp || {};
                     subtab_text_color: $('#subtab_text_color').val(),
                     titlebarSource: $('#titlebarSource').val(),
                     titlebar_title: $('#titlebar_title').val(),
-                    titlebar_logo_live: $('#titlebar_logo_live').val()
+                    titlebar_logo_live: jQuery('#wx-titlebar_logo_live').attr('src'),
+                    titlebar_html: $('#titlebar_html').val()
                 },
                 success: function(msg) {
                     console.log('OK');
@@ -43,6 +45,28 @@ wxApp = wxApp || {};
                     alert(msg);
                 }
             });
+        },
+
+        dropDownChange: function() {
+            console.log('logo design: drop down changed');
+
+            switch($('#titlebarSource').val()) {
+                case 'text':
+                    $('#logoText').show();
+                    $('#logoHtml').hide();
+                    $('#logoImage').hide();
+                    break;
+                case 'image':
+                    $('#logoText').hide();
+                    $('#logoHtml').hide();
+                    $('#logoImage').show();
+                    break;
+                case 'html':
+                    $('#logoText').hide();
+                    $('#logoHtml').show();
+                    $('#logoImage').hide();
+                    break;
+            }
         }
     });
 
