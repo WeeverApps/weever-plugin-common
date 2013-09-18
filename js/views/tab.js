@@ -106,8 +106,8 @@ wxApp = wxApp || {};
 
         loadIcon: function() {
             var me = this;
-            
             $.get( wx.apiUrl + 'icons/get_icon_base64', { site_key: wx.siteKey, icon_id: parseInt( me.model.get('icon_id') ) }, function(iconData) {
+                // alert( me.$('.wx-nav-icon-img').length );
                 me.$el.find('.wx-nav-icon-img').attr('src', 'data:image/png;base64,' + iconData);
             });
         },

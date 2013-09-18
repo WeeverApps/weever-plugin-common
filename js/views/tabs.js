@@ -3,7 +3,6 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.TabsView = Backbone.View.extend({
-        el: '.listTabsSortableNew',
 
         initialize: function() {
             this.collection.bind('add', this.addOne, this);
@@ -124,7 +123,19 @@ wxApp = wxApp || {};
         }
     });
 
-    wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
+
+    wxApp.BuildTabsView = wxApp.TabsView.extend({
+        el: '#buildListTabsSortable'
+
+    });
+
+    wxApp.EditTabsView = wxApp.TabsView.extend({
+        el: '#editListTabsSortable'
+    });
+
+    //wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
+    wxApp.buildTabsView = new wxApp.BuildTabsView({ collection: wxApp.Tabs });
+    wxApp.editTabsView = new wxApp.EditTabsView({ collection: wxApp.Tabs });
 
     // Grab the data and kick things off
     wxApp.Tabs.fetch();
