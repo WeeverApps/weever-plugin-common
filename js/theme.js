@@ -160,7 +160,6 @@ jQuery(document).ready(function(){
     						image_height: image_height
     					},
     					success: function(msg) {
-    						alert( image_id );
     						jQuery("#" + image_id).attr("src", msg);
 	        	        	jQuery('input[name=' + input_name + ']').attr('value', msg);
 	        	        	//jQuery('#wx-jcrop-dialog').dialog('close');

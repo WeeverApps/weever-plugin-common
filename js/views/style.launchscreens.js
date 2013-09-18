@@ -23,9 +23,9 @@ wxApp = wxApp || {};
                 data: { 
                     action: 'ajaxSaveLaunchScreens',
                     nonce: $('input#nonce').val(),
-                    phone_load_live: $('#phone_load_live').val(),
-                    tablet_load_live: $('#tablet_load_live').val(),
-                    tablet_landscape_load_live: $('#tablet_landscape_load_live').val(),
+                    phone_load_live: $('#wx-phone_load_live').attr('src'),
+                    tablet_load_live: $('#wx-tablet_load_live').attr('src'),
+                    tablet_landscape_load_live: $('#wx-tablet_landscape_load_live').attr('src')
                 },
                 success: function(msg) {
                     console.log('OK');
