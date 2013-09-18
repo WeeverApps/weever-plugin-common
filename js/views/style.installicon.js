@@ -24,7 +24,7 @@ wxApp = wxApp || {};
                     action: 'ajaxSaveInstallIcon',
                     nonce: $('input#nonce').val(),
                     title: $('#title').val(),
-                    icon_live: $('#icon_live').val(),
+                    icon_live: $('#wx-icon_live').attr('src'),
                     install_prompt: $('#install_prompt').val()
                 },
                 success: function(msg) {
