@@ -97,6 +97,8 @@ wxApp = wxApp || {};
 
 		next: function() {
             console.log('next');
+
+            this.$el.find('#dialog-loader').show();
             
             if ( undefined !== this.$('form') && undefined != this.$('form').validate ) {
                 validator = this.$('form').validate();
@@ -142,7 +144,8 @@ wxApp = wxApp || {};
 
 		checkFeedSample: function(feedSample) {
 			if ( typeof feedSample != 'undefined' && feedSample.success && typeof feedSample.feed != 'undefined' ) {
-				this.$('.wx-feed-error').hide();
+				this.$('#dialog-loader').hide();
+                this.$('.wx-feed-error').hide();
 				this.displayFeedSample( feedSample );
 				this.$('.wx-next-button').hide();
 				this.$('.wx-finish-button').show();
@@ -185,7 +188,7 @@ wxApp = wxApp || {};
 				datatype: 'JSON',
 				data: data,
 				success: function(response) {
-					callback(response);
+                    callback(response);
 				}
 			});
 		},

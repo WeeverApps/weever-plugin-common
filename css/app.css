@@ -7457,3 +7457,8 @@ input.hexacolorinput {
 .wx-form-builder-row input.hide {
   display: none;
 }
+
+img#dialog-loader {
+  margin-left: 7px;
+  display: none;
+}

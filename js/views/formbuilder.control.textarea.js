@@ -7,7 +7,6 @@ wxApp = wxApp || {};
 		initialize: function() {
 			this.inputTpl = _.template( $('#form-builder-textarea').html() );
 			this.model.bind('change', this.render, this);
-			//console.log(this.model);
 		},
 
 		render: function() {
