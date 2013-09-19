@@ -8,52 +8,52 @@
 
 }
 .wxFont-1:before { font-family: 'wxFont-1'; font-size: 32px; }
-.wxIcon-1:before { content:'\e001'; }
-.wxIcon-2:before { content:'\e002'; }
-.wxIcon-3:before { content:'\e003'; }
-.wxIcon-4:before { content:'\e004'; }
-.wxIcon-5:before { content:'\e005'; }
-.wxIcon-6:before { content:'\e006'; }
-.wxIcon-7:before { content:'\e007'; }
-.wxIcon-8:before { content:'\e008'; }
-.wxIcon-9:before { content:'\e009'; }
-.wxIcon-10:before { content:'\e010'; }
-.wxIcon-11:before { content:'\e011'; }
-.wxIcon-12:before { content:'\e012'; }
-.wxIcon-13:before { content:'\e013'; }
+.wxIcon-1:before { content:'\e001'; }	/* Gear */
+.wxIcon-2:before { content:'\e002'; }	/* Eighth Note */
+.wxIcon-3:before { content:'\e003'; }	/* Person (MySpace Logo?) */
+.wxIcon-4:before { content:'\e004'; }	/* BandCamp Logo */
+.wxIcon-5:before { content:'\e005'; }	/* b */
+.wxIcon-6:before { content:'\e006'; }	/* Blogger Logo */
+.wxIcon-7:before { content:'\e007'; }	/* Calendar */
+.wxIcon-8:before { content:'\e008'; }	/* Info */
+.wxIcon-9:before { content:'\e009'; }	/* Open Book */
+.wxIcon-10:before { content:'\e010'; }	/* b */
+.wxIcon-11:before { content:'\e011'; }	/* Folder */
+.wxIcon-12:before { content:'\e012'; }	/* Paper */
+.wxIcon-13:before { content:'\e013'; }	/* Tag */
 .wxIcon-14:before { content:'\e014'; }
-.wxIcon-15:before { content:'\e015'; }
-.wxIcon-16:before { content:'\e016'; }
-.wxIcon-17:before { content:'\e017'; }
-.wxIcon-18:before { content:'\e018'; }
-.wxIcon-19:before { content:'\e019'; }
-.wxIcon-20:before { content:'\e020'; }
-.wxIcon-21:before { content:'\e021'; }
-.wxIcon-22:before { content:'\e022'; }
-.wxIcon-23:before { content:'\e023'; }
-.wxIcon-24:before { content:'\e024'; }
-.wxIcon-25:before { content:'\e025'; }
-.wxIcon-26:before { content:'\e026'; }
-.wxIcon-27:before { content:'\e027'; }
-.wxIcon-28:before { content:'\e028'; }
-.wxIcon-29:before { content:'\e029'; }
-.wxIcon-30:before { content:'\e030'; }
-.wxIcon-31:before { content:'\e031'; }
-.wxIcon-32:before { content:'\e032'; }
+.wxIcon-15:before { content:'\e015'; }	/* Pictures */
+.wxIcon-16:before { content:'\e016'; }	/* Facebook Logo */
+.wxIcon-17:before { content:'\e017'; }	/* Picasa Logo */
+.wxIcon-18:before { content:'\e018'; }	/* YouTube Logo */
+.wxIcon-19:before { content:'\e019'; }	/* Flickr Logo */
+.wxIcon-20:before { content:'\e020'; }	/* Google Map Logo */
+.wxIcon-21:before { content:'\e021'; }	/* Twitter */
+.wxIcon-22:before { content:'\e022'; }	/* Twitter (old) */
+.wxIcon-23:before { content:'\e023'; }	/* Home */
+.wxIcon-24:before { content:'\e024'; }	/* Lowercase t (Tumblr Logo?) */
+.wxIcon-25:before { content:'\e025'; }	/* FourSquare Logo */
+.wxIcon-26:before { content:'\e026'; }	/* Pictures */
+.wxIcon-27:before { content:'\e027'; }	/* Compass */
+.wxIcon-28:before { content:'\e028'; }	/* Pages */
+.wxIcon-29:before { content:'\e029'; }	/* Calendar */
+.wxIcon-30:before { content:'\e030'; }	/* Pencil & Paper */
+.wxIcon-31:before { content:'\e031'; }	/* Google Talk Logo */
+.wxIcon-32:before { content:'\e032'; }	/* For Sale Sign */
 .wxIcon-33:before { content:'\e033'; }
-.wxIcon-34:before { content:'\e034'; }
-.wxIcon-35:before { content:'\e035'; }
-.wxIcon-36:before { content:'\e036'; }
+.wxIcon-34:before { content:'\e034'; }	/* Phone/Email */
+.wxIcon-35:before { content:'\e035'; }	/* Video */
+.wxIcon-36:before { content:'\e036'; }	/* Calculator */
 .wxIcon-37:before { content:'\e037'; }
 .wxIcon-38:before { content:'\e038'; }
 .wxIcon-39:before { content:'\e039'; }
 .wxIcon-40:before { content:'\e040'; }
 .wxIcon-41:before { content:'\e041'; }
 .wxIcon-42:before { content:'\e042'; }
-.wxIcon-43:before { content:'\e043'; }
+.wxIcon-43:before { content:'\e043'; }	/* Star */
 .wxIcon-44:before { content:'\e044'; }
 .wxIcon-45:before { content:'\e045'; }
-.wxIcon-46:before { content:'\e046'; }
+.wxIcon-46:before { content:'\e046'; }	/* Upload Photos */
 .wxIcon-47:before { content:'\e047'; }
 .wxIcon-48:before { content:'\e048'; }
 .wxIcon-49:before { content:'\e049'; }
