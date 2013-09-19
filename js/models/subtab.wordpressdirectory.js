@@ -13,9 +13,9 @@ wxApp = wxApp || {};
                 title: 'Directory',
                 icon_id: 11,
                 type: 'WordpressDirectory',
-                content: 'WordpressDirectory',
+                content: 'html',
                 layout: 'list',
-                config: {}
+                config: { subtab_name: 'WordpressDirectorySubTab' }
             }
         )
     });

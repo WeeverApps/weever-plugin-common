@@ -13,10 +13,10 @@ wxApp = wxApp || {};
                 title: 'Map',
                 icon_id: 20,
                 type: 'WordpressMap',
-                content: 'WordpressMap',
+                content: 'html',
                 layout: 'list',
                 tabLayout: 'map',
-                config: { url: '', gps: '1' }
+                config: { url: '', gps: '1', subtab_name: 'WordpressMapSubTab' }
             }
         )
     });

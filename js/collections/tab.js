@@ -21,11 +21,24 @@ wxApp = wxApp || {};
                     break;
                 default:
                     // Check against type first (more specific but only newer tabs), then content (more generic)
-                    for ( var obj in wxApp ) {
-                        if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.type ) {
-                            if ( wxApp[obj].prototype.defaults.type == tabData.type ) {
-                                retVal = obj;
-                                break;
+                    console.log( tabData );
+                    //hello_there = tabData;
+                    //alert( tabData.config );
+                    console.log( tabData.config );
+
+                    if ( tabData.config != undefined && tabData.config.subtab_name != undefined ) {
+                        if ( tabData.config.subtab_name in wxApp ) {
+                            retVal = tabData.config.subtab_name;
+                        }
+                    }
+
+                    if ( 'SubTab' == retVal ) {
+                        for ( var obj in wxApp ) {
+                            if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.type ) {
+                                if ( wxApp[obj].prototype.defaults.type == tabData.type ) {
+                                    retVal = obj;
+                                    break;
+                                }
                             }
                         }
                     }

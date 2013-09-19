@@ -1,7 +1,7 @@
 <script type="text/template" id="icon-edit-template">
     <ul class="large-block-grid-6">
         <?php for ( $i = 1; $i <= 46; $i++ ): ?>
-            <?php if ( in_array( $i, array( 14, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
+            <?php if ( in_array( $i, array( 14, 33, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
             <li>
                 <label for="wx-icon-<?php echo $i; ?>"><span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span></label>
                 <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />

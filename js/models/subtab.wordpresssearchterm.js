@@ -13,9 +13,9 @@ wxApp = wxApp || {};
                 title: 'Search',
                 icon_id: 8,
                 type: 'WordpressSearchterm',
-                content: 'WordpressSearchterm',
+                content: 'html',
                 layout: 'list',
-                config: { url: '' }
+                config: { url: '', subtab_name: 'WordpressSearchtermSubTab' }
             }
         )
     });

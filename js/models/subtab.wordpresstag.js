@@ -13,9 +13,9 @@ wxApp = wxApp || {};
                 title: 'Blog',
                 icon_id: 5,
                 type: 'WordpressTag',
-                content: 'WordpressTag',
+                content: 'html',
                 layout: 'list',
-                config: { url: '' }
+                config: { url: '', subtab_name: 'WordpressTagSubTab' }
             }
         )
     });

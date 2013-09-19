@@ -13,9 +13,9 @@ wxApp = wxApp || {};
                 title: 'Nearby',
                 icon_id: 27,
                 type: 'WordpressProximity',
-                content: 'WordpressProximity',
+                content: 'html',
                 layout: 'list',
-                config: { url: '', gps: '1', geotag: '1' }
+                config: { url: '', gps: '1', geotag: '1', subtab_name: 'WordpressProximitySubTab' }
             }
         )
     });
