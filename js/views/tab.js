@@ -90,6 +90,7 @@ wxApp = wxApp || {};
             // Make sure we're on the right tab first
             $('a[href="#panel2"]').click();
 
+            // Now get the edit view.
             this.subTabsContainerView = new wxApp.SubTabsContainerView({ model: this.model });
             this.subTabsContainerView.tabView = this;
             $('#editSpace').html( this.subTabsContainerView.render().el );

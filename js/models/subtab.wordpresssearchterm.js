@@ -13,7 +13,7 @@ wxApp = wxApp || {};
                 title: 'Search',
                 icon_id: 8,
                 type: 'WordpressSearchterm',
-                content: 'html',
+                content: 'WordpressSearchterm',
                 layout: 'list',
                 config: { url: '' }
             }

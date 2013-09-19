@@ -13,7 +13,7 @@ wxApp = wxApp || {};
                 title: 'Blog',
                 icon_id: 5,
                 type: 'WordpressCategory',
-                content: 'html',
+                content: 'WordpressCategory',
                 layout: 'list',
                 config: {}
             }

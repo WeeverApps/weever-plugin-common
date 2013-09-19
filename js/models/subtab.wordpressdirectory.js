@@ -13,7 +13,7 @@ wxApp = wxApp || {};
                 title: 'Directory',
                 icon_id: 11,
                 type: 'WordpressDirectory',
-                content: 'html',
+                content: 'WordpressDirectory',
                 layout: 'list',
                 config: {}
             }

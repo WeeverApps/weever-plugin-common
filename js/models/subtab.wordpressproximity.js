@@ -13,7 +13,7 @@ wxApp = wxApp || {};
                 title: 'Nearby',
                 icon_id: 27,
                 type: 'WordpressProximity',
-                content: 'html',
+                content: 'WordpressProximity',
                 layout: 'list',
                 config: { url: '', gps: '1', geotag: '1' }
             }

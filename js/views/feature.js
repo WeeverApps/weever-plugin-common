@@ -21,7 +21,6 @@ wxApp = wxApp || {};
         render: function() {
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
-            // TODO - CSS Class, filtering
             if (this.model.get('rel') !== '') {
             	this.$('button').attr('rel', this.model.get('rel'));
         	}

@@ -13,7 +13,7 @@ wxApp = wxApp || {};
                 title: 'Map',
                 icon_id: 20,
                 type: 'WordpressMap',
-                content: 'html',
+                content: 'WordpressMap',
                 layout: 'list',
                 tabLayout: 'map',
                 config: { url: '', gps: '1' }
