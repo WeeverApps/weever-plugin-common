@@ -8,36 +8,30 @@ wxApp = wxApp || {};
             'click #save_install_icon': 'save'
         },
 
-        // initialize: function() {
-        //     console.log('init');
-        // },
-
         save: function() {
             console.log('install icon: save clicked');
 
             $('#save_install_icon').html('Saving...');
 
-            $.ajax({
-                type: "POST",
-                url: ajaxurl,
-                data: { 
-                    action: 'ajaxSaveInstallIcon',
-                    nonce: $('input#nonce').val(),
-                    title: $('#title').val(),
-                    icon_live: $('#wx-icon_live').attr('src'),
-                    install_prompt: $('#install_prompt').val()
-                },
-                success: function(msg) {
-                    console.log('OK');
-                    $('#save_install_icon').html('Saved!');
-                    // Wait half a second, then refresh the preview
-                    // (The half-second helps ensure the server is synced)
-                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
-                },
-                error: function(v, msg) {
-                    //alert(v);
-                    alert(msg);
-                }
+            // The 'design' methods of Open API is kinda strange... It 
+            // expects top-level params to be JSON objects, and items within 
+            // the top-level params to be string representations of JSON 
+            // objects... Therefore, we have to 'stringify' the inner params.
+            var innerParams = JSON.stringify( {
+                prompt: $('#install_prompt').val(),
+                name:   $('#title').val(),
+                icon:   wx.cleanUrl( $('#wx-icon_live').attr('src') )
+            } );
+            var params = {
+                install: innerParams
+            };
+
+            // set_launchscreen
+            wx.makeApiCall('design/set_install', params, function(data) {
+                $('#save_install_icon').html('Saved!');
+                // Wait half a second, then refresh the preview
+                // (The half-second helps ensure the server is synced)
+                setTimeout( function() { wx.refreshAppPreview(); }, 500);
             });
         }
     });

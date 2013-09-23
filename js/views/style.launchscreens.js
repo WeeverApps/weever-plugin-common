@@ -9,10 +9,6 @@ wxApp = wxApp || {};
             'click #save_launch_screen': 'save'
         },
 
-        // initialize: function() {
-        //     console.log('init');
-        // },
-
         save: function() {
             console.log('launch screen: save clicked');
 
@@ -23,9 +19,9 @@ wxApp = wxApp || {};
             // the top-level params to be string representations of JSON 
             // objects... Therefore, we have to 'stringify' the inner params.
             var innerParams = JSON.stringify( {
-                phone: this.cleanUrl( $('#wx-phone_load_live').attr('src') ),
-                tablet: this.cleanUrl( $('#wx-tablet_load_live').attr('src') ),
-                tablet_landscape: this.cleanUrl( $('#wx-tablet_landscape_load_live').attr('src') )
+                phone:            wx.cleanUrl( $('#wx-phone_load_live').attr('src') ),
+                tablet:           wx.cleanUrl( $('#wx-tablet_load_live').attr('src') ),
+                tablet_landscape: wx.cleanUrl( $('#wx-tablet_landscape_load_live').attr('src') )
             } );
             var params = {
                 launchscreen: innerParams
@@ -39,19 +35,8 @@ wxApp = wxApp || {};
                 setTimeout( function() { wx.refreshAppPreview(); }, 500);
             });
 
-        },
-
-        // Gets rid of params from an image URL.
-        // Input:  http://example.com/images/logo.png?nocache=0.23158600 1379945989
-        // Output: http://example.com/images/logo.png
-        cleanUrl: function( url ) {
-            var i = url.indexOf('?');
-            if ( i > -1 ) {
-                url = url.substring(0, i);
-            }
-            return url;
-
         }
+
     });
 
     wxApp.launchSreen = new wxApp.LaunchScreen();

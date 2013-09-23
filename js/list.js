@@ -85,6 +85,17 @@ var wxApp = wxApp || {};
         } else if ( $.browser.webkit == undefined || $.browser.webkit == false ) {
             $('#preview-app-dialog-no-webkit').show();
         }
+    };
+
+    // Gets rid of params from an image URL.
+    // Input:  http://example.com/images/logo.png?nocache=0.23158600 1379945989
+    // Output: http://example.com/images/logo.png
+    wx.cleanUrl = function( url ) {
+        var i = url.indexOf('?');
+        if ( i > -1 ) {
+            url = url.substring(0, i);
+        }
+        return url;
     }
 })(jQuery);
 

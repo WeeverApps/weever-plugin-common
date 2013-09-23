@@ -9,10 +9,6 @@ wxApp = wxApp || {};
             'change #titlebarSource': 'dropDownChange'
         },
 
-        // initialize: function() {
-        //     console.log('init');
-        // },
-
         save: function() {
             console.log('logo design: save clicked');
 
