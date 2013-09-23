@@ -33,8 +33,12 @@ wxApp = wxApp || {};
                 design: innerParams
             };
 
+            // set_launchscreen
             wx.makeApiCall('design/set_design', params, function(data) {
-                wx.refreshAppPreview();
+                $('#save_logo_design').html('Saved!');
+                // Wait half a second, then refresh the preview
+                // (The half-second helps ensure the server is synced)
+                setTimeout( function() { wx.refreshAppPreview(); }, 500);
             });
 
         },
