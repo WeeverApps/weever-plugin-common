@@ -20,6 +20,15 @@
 
 // Navigation tabs
 jQuery(document).ready(function() {
+    // var $ = jQuery;
+    // $('#myFile').showoff({
+    //     destination: $('.js-image'),
+    //     onDestinationUpdate: function() {
+    //         $('#jsimage').imgAreaSelect({ handles: true });
+    //     }
+    // });
+    // $('#wx-icon_live').imgAreaSelect({ handles: true, parent: '#install_icon' });
+
 	jQuery('input[name="switch-x"]').click(function() {
         if (this.id == 'on') {
             app_enabled = 1;
