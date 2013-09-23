@@ -8,6 +8,7 @@
 
 }
 .wxFont-1:before { font-family: 'wxFont-1'; font-size: 32px; }
+button .wxFont-1:before { font-family: 'wxFont-1'; font-size: 64px; }
 .wxIcon-1:before { content:'\e001'; }	/* Gear */
 .wxIcon-2:before { content:'\e002'; }	/* Eighth Note */
 .wxIcon-3:before { content:'\e003'; }	/* Person (MySpace Logo?) */
@@ -31,7 +32,7 @@
 .wxIcon-21:before { content:'\e021'; }	/* Twitter */
 .wxIcon-22:before { content:'\e022'; }	/* Twitter (old) */
 .wxIcon-23:before { content:'\e023'; }	/* Home */
-.wxIcon-24:before { content:'\e024'; }	/* Lowercase t (Tumblr Logo?) */
+.wxIcon-24:before { content:'\e024'; }	/* Tumblr Logo */
 .wxIcon-25:before { content:'\e025'; }	/* FourSquare Logo */
 .wxIcon-26:before { content:'\e026'; }	/* Pictures */
 .wxIcon-27:before { content:'\e027'; }	/* Compass */

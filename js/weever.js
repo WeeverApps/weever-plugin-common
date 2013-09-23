@@ -134,18 +134,6 @@ jQuery(document).ready(function() {
     });
 
 
-    // jQuery('#refresh_preview').on('click', function() {
-    //     alert('T1');
-    //     console.log('Refresh Clicked.');
-    //     wx.refreshAppPreview();
-    // });
-
-    // jQuery('#refresh_preview').click( function() {
-    //     alert('T2');
-    //     console.log('Refresh Clicked.');
-    //     wx.refreshAppPreview();
-    // });
-    
 
 /*
 
@@ -231,7 +219,20 @@ jQuery(document).ready(function() {
     });			
      
      */
-    });			
+
+
+    jQuery('#refresh_preview').on('click', function() {
+        console.log('Refresh Clicked.');
+        wx.refreshAppPreview();
+    });
+
+    jQuery('#refresh_preview').click( function() {
+        console.log('Refresh Clicked.');
+        wx.refreshAppPreview();
+    });
+    
+
+});			
 
 // TODO: Remove the below
 // TODO: Hook in more complete uploader js

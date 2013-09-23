@@ -4,6 +4,7 @@ wxApp = wxApp || {};
 (function($){
     wxApp.LaunchScreen = Backbone.View.extend({
         el: '#launch_screen',
+
         events: {
             'click #save_launch_screen': 'save'
         },
@@ -17,28 +18,37 @@ wxApp = wxApp || {};
 
             $('#save_launch_screen').html('Saving...');
 
-            $.ajax({
-                type: "POST",
-                url: ajaxurl,
-                data: { 
-                    action: 'ajaxSaveLaunchScreens',
-                    nonce: $('input#nonce').val(),
-                    phone_load_live: $('#wx-phone_load_live').attr('src'),
-                    tablet_load_live: $('#wx-tablet_load_live').attr('src'),
-                    tablet_landscape_load_live: $('#wx-tablet_landscape_load_live').attr('src')
-                },
-                success: function(msg) {
-                    console.log('OK');
-                    $('#save_launch_screen').html('Saved!');
-                    // Wait half a second, then refresh the preview
-                    // (The half-second helps ensure the server is synced)
-                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
-                },
-                error: function(v, msg) {
-                    //alert(v);
-                    alert(msg);
+            // The 'set_design' method of Open API is kinda strange... It 
+            // expects top-level params to be JSON objects, and items within 
+            // the top-level params to be string representations of JSON 
+            // objects... Therefore, we have to 'stringify' the inner params.
+            var innerParams = JSON.stringify( {
+                launchscreen: {
+                    phone: this.cleanUrl( $('#wx-phone_load_live').attr('src') ),
+                    tablet: this.cleanUrl( $('#wx-tablet_load_live').attr('src') ),
+                    tablet_landscape: this.cleanUrl( $('#wx-tablet_landscape_load_live').attr('src') )
                 }
+            } );
+            var params = {
+                design: innerParams
+            };
+
+            wx.makeApiCall('design/set_design', params, function(data) {
+                wx.refreshAppPreview();
             });
+
+        },
+
+        // Gets rid of params from an image URL.
+        // Input:  http://example.com/images/logo.png?nocache=0.23158600 1379945989
+        // Output: http://example.com/images/logo.png
+        cleanUrl: function( url ) {
+            var i = url.indexOf('?');
+            if ( i > -1 ) {
+                url = url.substring(0, i);
+            }
+            return url;
+
         }
     });
 

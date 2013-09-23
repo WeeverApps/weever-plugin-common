@@ -10,7 +10,8 @@ wxApp = wxApp || {};
 			filterBy: '', 
 			rel: '', 
 			includeClass: '',
-			visible: true
+			visible: true,
+			iconId: 0
 		}
 	});
 })(jQuery);

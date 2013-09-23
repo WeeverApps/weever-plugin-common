@@ -26,12 +26,16 @@ var wxApp = wxApp || {};
 		var method = 'POST', data = '';
         var apiUrl = wx.apiUrl + endpoint + '?site_key=' + wx.siteKey;
         var queryStr = [];
-        for ( var p in paramsObj ) {
-            queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );
-        }
-        if ( queryStr.length ) {
-			data = queryStr.join('&');
-		}
+        //if ( typeof(paramsObj) === 'string' ) {
+        //    data = paramsObj;
+        //} else {
+            for ( var p in paramsObj ) {
+                queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );
+            }
+            if ( queryStr.length ) {
+    			data = queryStr.join('&');
+    		}
+        //}
 //		console.log( data );
         $.ajax({
             url: apiUrl,
@@ -39,21 +43,37 @@ var wxApp = wxApp || {};
 			data: data,
             datatype: 'json',
             success: function(v) {
-                if ( ! v.error && v.success )
-                    successCallback(v);
-                else {
-                    jQuery('#wx-modal-loading-text').html(v.message ? v.message : 'Error');
-                    jQuery('#wx-modal-secondary-text').html('');
-                    jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-                }
-                Backbone.Events.trigger( 'api:success' );
+                wx.apiSuccess( v, successCallback );
             },
             error: function(v, message) {
+                // Sometimes the call appears to be an error because we get PHP
+                // warnings prior to the JSON. Let's make sure that didn't happen.
+                if ( v.responseText[0] !== '{' ) {
+                    var i = v.responseText.indexOf('{');
+                    if (i > -1) {
+                        var responseJson = v.responseText.substring( i );
+                        responseJson = JSON.parse( responseJson );
+                        wx.apiSuccess( responseJson, successCallback );
+                        return;
+                    }
+                }
+
                 jQuery('#wx-modal-loading-text').html(message);
                 jQuery('#wx-modal-secondary-text').html('');
                 jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
             }
         });
+    };
+
+    wx.apiSuccess = function( v, successCallback ) {
+        if ( ! v.error && v.success )
+            successCallback(v);
+        else {
+            jQuery('#wx-modal-loading-text').html(v.message ? v.message : 'Error');
+            jQuery('#wx-modal-secondary-text').html('');
+            jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+        }
+        Backbone.Events.trigger( 'api:success' );
     };
 
     wx.refreshAppPreview = function() {

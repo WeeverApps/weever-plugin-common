@@ -1,12 +1,13 @@
 <script type="text/template" id="feature-template">
-	<!-- We currently don''t handle the 'rel' features (Coupons, Pages, and Map Locations). -->
-	<% if (typeof(rel) == 'undefined' || rel === '') { %>
-		<button class="button secondary expand wx-add-source-icon <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%- featureName %>">
-			<div class="wx-icon"><img src="<%- imgUri %>"></div>
-			<div><%- name %></div>
-		</button>
-	    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
-	        Please wait...
-	    </div>
-    <% } %>
+	<button class="button secondary expand wx-add-source-icon <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%- featureName %>">
+		<% if (iconId == 0) { %>
+<p>[icon missing]</p>
+		<% } else { %>
+			<span class="x-button-icon x-shown wxIcon-<%- iconId %> wxFont-1"></span>
+		<% } %>
+		<div><%- name %></div>
+	</button>
+    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
+        Please wait...
+    </div>
 </script>
