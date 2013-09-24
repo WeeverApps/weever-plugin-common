@@ -217,47 +217,47 @@ jQuery( document ).ready( function() {
 	    
 	});
 	
-	jQuery('.wx-table-sort').sortable({
+	// jQuery('.wx-table-sort').sortable({
 	
-	    cursor:     			'move',
-	    axis:       			'y',
-	    revert:  				true,
-	    forcePlaceholderSize: 	true,
-	    placeholder: 			'group_move_placeholder',
-	    items: 					'tr',
-	    update: 				function(e, ui) {
+	//     cursor:     			'move',
+	//     axis:       			'y',
+	//     revert:  				true,
+	//     forcePlaceholderSize: 	true,
+	//     placeholder: 			'group_move_placeholder',
+	//     items: 					'tr',
+	//     update: 				function(e, ui) {
 	    
-			jQuery(this).sortable("refresh");
+	// 		jQuery(this).sortable("refresh");
 			
-			var siteKey 	= jQuery("input#wx-site-key").val();
-			var str 		= String(jQuery(this).sortable('toArray'));
+	// 		var siteKey 	= jQuery("input#wx-site-key").val();
+	// 		var str 		= String(jQuery(this).sortable('toArray'));
+	// 		alert('saving tab order...');
+	// 		jQuery.ajax({
 			
-			jQuery.ajax({
-			
-				type: 		"POST",
-				url: 		"index.php",
-				data: 		"option=com_weever&action=ajaxSaveTabOrder&site_key="+siteKey+"&order="+str,
-				success: 	function(msg) {
+	// 			type: 		"POST",
+	// 			url: 		"index.php",
+	// 			data: 		"option=com_weever&action=ajaxSaveTabOrder&site_key="+siteKey+"&order="+str,
+	// 			success: 	function(msg) {
 				
-					jQuery('#wx-modal-loading-text').html(msg);
+	// 				jQuery('#wx-modal-loading-text').html(msg);
 					
-					if(msg == "Order Updated")
-						jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
+	// 				if(msg == "Order Updated")
+	// 					jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
 					
-					else {
+	// 				else {
 					
-						jQuery('#wx-modal-secondary-text').html('');
-						jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
+	// 					jQuery('#wx-modal-secondary-text').html('');
+	// 					jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
 					
-					}
+	// 				}
 				
-				}
+	// 			}
 			
-			});
+	// 		});
 	      	 
-	    }
+	//     }
 	    
-	});
+	// });
 		
 	jQuery('.wx-table-sort').disableSelection();
 	

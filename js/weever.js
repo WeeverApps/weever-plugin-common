@@ -42,7 +42,7 @@ jQuery(document).ready(function() {
             type: "POST",
             url: ajaxurl,
             data: { 
-                action: 'ajaxSaveTheme',
+                action: 'ajaxToggleAppStatus',
                 nonce: jQuery('input#nonce').val(),
                 app_enabled: app_enabled
             },

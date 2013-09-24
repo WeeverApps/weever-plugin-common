@@ -619,41 +619,41 @@ jQuery(document).ready(function() {
      * Ability to drag a subitem into the main tabs area, and drop onto an existing tab
      */
     //jQuery( ".list-add-content-items" ).sortable();
-    jQuery( ".list-sub-items" ).sortable({
-        start: function(event, ui) {
-            jQuery('#dropTab').show();
-            ui.item.addClass('wx-subtab-drag-active');
-        },
-        stop: function(event, ui) {
-            jQuery('#dropTab').hide();
-            ui.item.removeClass('wx-subtab-drag-active');
-        },
-        update: function(event, ui) {
-            var nonce = jQuery("input#nonce").val();
-            var order = String(jQuery(this).sortable('toArray'));
+    // jQuery( ".list-sub-items" ).sortable({
+    //     start: function(event, ui) {
+    //         jQuery('#dropTab').show();
+    //         ui.item.addClass('wx-subtab-drag-active');
+    //     },
+    //     stop: function(event, ui) {
+    //         jQuery('#dropTab').hide();
+    //         ui.item.removeClass('wx-subtab-drag-active');
+    //     },
+    //     update: function(event, ui) {
+    //         var nonce = jQuery("input#nonce").val();
+    //         var order = String(jQuery(this).sortable('toArray'));
 
-            jQuery.ajax({
-                type: "POST",
-                url: ajaxurl,
-                data: {
-                    action: 'ajaxSaveSubtabOrder',
-                    order: order,
-                    nonce: nonce
-                },
-                success: function(msg){
-                    jQuery('#wx-modal-loading-text').html(msg);
-                    jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-                    //document.location.reload();
-                },
-                error: function(v,msg){
-                    jQuery('#wx-modal-loading-text').html(msg);
+    //         jQuery.ajax({
+    //             type: "POST",
+    //             url: ajaxurl,
+    //             data: {
+    //                 action: 'ajaxSaveSubtabOrder',
+    //                 order: order,
+    //                 nonce: nonce
+    //             },
+    //             success: function(msg){
+    //                 jQuery('#wx-modal-loading-text').html(msg);
+    //                 jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+    //                 //document.location.reload();
+    //             },
+    //             error: function(v,msg){
+    //                 jQuery('#wx-modal-loading-text').html(msg);
 
-                    jQuery('#wx-modal-secondary-text').html('');
-                    jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-                }
-            });
-        }
-    }).disableSelection();
+    //                 jQuery('#wx-modal-secondary-text').html('');
+    //                 jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+    //             }
+    //         });
+    //     }
+    // }).disableSelection();
 
 
     jQuery("#listTabsSortable li a").click(function() {
@@ -1260,54 +1260,54 @@ jQuery(document).ready(function(){
 		});
 	
 	
-	jQuery("a.wx-subtab-up, a.wx-subtab-down").click(function() {
+	// jQuery("a.wx-subtab-up, a.wx-subtab-down").click(function() {
 	
-		var tabId = jQuery(this).attr('title');
-		tabId = tabId.substring(4);
-		var siteKey = jQuery("input#wx-site-key").val();
-		var tabType = jQuery(this).attr('rel');
-		var nonce = jQuery("input#nonce").val();
-		var dir = (jQuery(this).hasClass('wx-subtab-up') ? 'up' : 'down');
-		var row = jQuery(this).parent("td:first").parent("tr:first");
+	// 	var tabId = jQuery(this).attr('title');
+	// 	tabId = tabId.substring(4);
+	// 	var siteKey = jQuery("input#wx-site-key").val();
+	// 	var tabType = jQuery(this).attr('rel');
+	// 	var nonce = jQuery("input#nonce").val();
+	// 	var dir = (jQuery(this).hasClass('wx-subtab-up') ? 'up' : 'down');
+	// 	var row = jQuery(this).parent("td:first").parent("tr:first");
 		
-		jQuery.ajax({
-		   type: "POST",
-		   url: ajaxurl,
-		   data: {
-			   action: 'ajaxSaveSubtabOrder',
-			   type: tabType,
-			   dir: dir,
-			   id: tabId,
-			   nonce: nonce
-		   },
-		   success: function(msg){
-		     jQuery('#wx-modal-loading-text').html(msg);
+	// 	jQuery.ajax({
+	// 	   type: "POST",
+	// 	   url: ajaxurl,
+	// 	   data: {
+	// 		   action: 'ajaxSaveSubtabOrder',
+	// 		   type: tabType,
+	// 		   dir: dir,
+	// 		   id: tabId,
+	// 		   nonce: nonce
+	// 	   },
+	// 	   success: function(msg){
+	// 	     jQuery('#wx-modal-loading-text').html(msg);
 		     
-		     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+	// 	     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
 		     	
-		     	// Swap them without refresh
-		     	if (dir == 'up') {
-		     		row.after(row.prev("tr.wx-ui-row:visible"));
-		     	} else {
-		     		row.next("tr.wx-ui-row:visible").after(row);
-		     	}
+	// 	     	// Swap them without refresh
+	// 	     	if (dir == 'up') {
+	// 	     		row.after(row.prev("tr.wx-ui-row:visible"));
+	// 	     	} else {
+	// 	     		row.next("tr.wx-ui-row:visible").after(row);
+	// 	     	}
 
-		     	// Recolor the rows properly
-		     	rowClass = "row0";
-		     	row.parent().find("tr.wx-ui-row:visible").each(function(){
-		     		jQuery(this).removeClass("row0").removeClass("row1").addClass(rowClass);
-		     		rowClass = rowClass == "row0" ? "row1" : "row0";
-		     	});
+	// 	     	// Recolor the rows properly
+	// 	     	rowClass = "row0";
+	// 	     	row.parent().find("tr.wx-ui-row:visible").each(function(){
+	// 	     		jQuery(this).removeClass("row0").removeClass("row1").addClass(rowClass);
+	// 	     		rowClass = rowClass == "row0" ? "row1" : "row0";
+	// 	     	});
 		     	
-		     	/*document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#"+tabType+"Tab";
-		     	setTimeout("document.location.reload(true);",20);*/
-		     },
-		   error: function(v,msg){
-  		     jQuery('#wx-modal-loading-text').html(msg);
-		     	jQuery('#wx-modal-secondary-text').html('');
-		     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-		   }
-		 });
+	// 	     	/*document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#"+tabType+"Tab";
+	// 	     	setTimeout("document.location.reload(true);",20);*/
+	// 	     },
+	// 	   error: function(v,msg){
+ //  		     jQuery('#wx-modal-loading-text').html(msg);
+	// 	     	jQuery('#wx-modal-secondary-text').html('');
+	// 	     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 	   }
+	// 	 });
 	
-	});
+	// });
 });
