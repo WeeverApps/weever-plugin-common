@@ -357,33 +357,33 @@ jQuery(document).ready(function() {
 		})
 	});
 	
-	jQuery('.wx-edit-content-item-feed').each(function(index,elem){
-		feed = jQuery(this).attr('cmsfeed') + '&limit=300&t=' + Math.random(); 
-		type = jQuery(this).attr('type');
-		jQuery.get(feed, {}, function(results){
-			jQuery.each(results.items, function(key,value){
-				jQuery(elem).append('<li id="' + value.uuid + '" class="wx-feed-edit-item-container"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + value.name + ' - <a id="editpage-' + value.uuid + '" class="wx-edit-content-item" type="' + type + '" rel="' + value.uuid + '" href="#">Edit</a>' + ( type == 'blog' || type == 'map' ? ' | <a id="deletepage-' + value.uuid + '" class="wx-delete-content-item" rel="' + value.uuid + '">Delete</a>' : '' ) + '</li>');
+	// jQuery('.wx-edit-content-item-feed').each(function(index,elem){
+	// 	feed = jQuery(this).attr('cmsfeed') + '&limit=300&t=' + Math.random(); 
+	// 	type = jQuery(this).attr('type');
+	// 	jQuery.get(feed, {}, function(results){
+	// 		jQuery.each(results.items, function(key,value){
+	// 			jQuery(elem).append('<li id="' + value.uuid + '" class="wx-feed-edit-item-container"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + value.name + ' - <a id="editpage-' + value.uuid + '" class="wx-edit-content-item" type="' + type + '" rel="' + value.uuid + '" href="#">Edit</a>' + ( type == 'blog' || type == 'map' ? ' | <a id="deletepage-' + value.uuid + '" class="wx-delete-content-item" rel="' + value.uuid + '">Delete</a>' : '' ) + '</li>');
 				
-			});
+	// 		});
 			
-			jQuery(elem).sortable({
-				update: function(event,ui){
-					var order = jQuery(elem).sortable('toArray');
+	// 		jQuery(elem).sortable({
+	// 			update: function(event,ui){
+	// 				var order = jQuery(elem).sortable('toArray');
 					
-					jQuery.ajax({
-						type: "POST",
-						url: ajaxurl,
-						data: {
-							action: 'ajaxSortPosts',
-							nonce: jQuery("input#nonce").val(),
-							order: order
-						}
-					});
-				}
-			});
-			jQuery(elem).disableSelection();
-		});
-	});
+	// 				jQuery.ajax({
+	// 					type: "POST",
+	// 					url: ajaxurl,
+	// 					data: {
+	// 						action: 'ajaxSortPosts',
+	// 						nonce: jQuery("input#nonce").val(),
+	// 						order: order
+	// 					}
+	// 				});
+	// 			}
+	// 		});
+	// 		jQuery(elem).disableSelection();
+	// 	});
+	// });
 	
 
 
@@ -1027,28 +1027,28 @@ jQuery(document).ready(function(){
             {
 
                 tabName = f["alertName"];
-                jQuery.ajax({
-                    type: "POST",
-                    url: ajaxurl,
-                    data: {
-                        name: tabName,
-                        id: tabId,
-                        nonce: nonce,
-                        action: 'ajaxSaveTabName'
-                    },
-                    success: function(msg){
+                // jQuery.ajax({
+                //     type: "POST",
+                //     url: ajaxurl,
+                //     data: {
+                //         name: tabName,
+                //         id: tabId,
+                //         nonce: nonce,
+                //         action: 'ajaxSaveTabName'
+                //     },
+                //     success: function(msg){
 
-                        jQuery('#wx-modal-loading-text').html(msg);
-                        jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-                        clickedElem.html(tabName);
-                    },
-                    error: function(v,msg){
-                        jQuery('#wx-modal-loading-text').html(msg);
+                //         jQuery('#wx-modal-loading-text').html(msg);
+                //         jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+                //         clickedElem.html(tabName);
+                //     },
+                //     error: function(v,msg){
+                //         jQuery('#wx-modal-loading-text').html(msg);
 
-                        jQuery('#wx-modal-secondary-text').html('');
-                        jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-                    }
-                });
+                //         jQuery('#wx-modal-secondary-text').html('');
+                //         jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+                //     }
+                // });
 
             }
         };
@@ -1105,27 +1105,27 @@ jQuery(document).ready(function(){
 			
 				tabName = f["alertName"];
 				
-				jQuery.ajax({
-				   type: "POST",
-				   url: ajaxurl,
-				   data: {
-					   name: tabName,
-					   id: tabId,
-					   nonce: nonce,
-					   action: 'ajaxSaveTabName'					   
-				   },
-				   success: function(msg){
+				// jQuery.ajax({
+				//    type: "POST",
+				//    url: ajaxurl,
+				//    data: {
+				// 	   name: tabName,
+				// 	   id: tabId,
+				// 	   nonce: nonce,
+				// 	   action: 'ajaxSaveTabName'					   
+				//    },
+				//    success: function(msg){
 
-					    jQuery('#wx-modal-loading-text').html(msg);
-				     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-						document.location.reload();
-				     },
-				   error: function(v,msg){
-					    jQuery('#wx-modal-loading-text').html(msg);
-				     	jQuery('#wx-modal-secondary-text').html('');
-				     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-				     }
-				 });
+				// 	    jQuery('#wx-modal-loading-text').html(msg);
+				//      	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+				// 		document.location.reload();
+				//      },
+				//    error: function(v,msg){
+				// 	    jQuery('#wx-modal-loading-text').html(msg);
+				//      	jQuery('#wx-modal-secondary-text').html('');
+				//      	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+				//      }
+				//  });
 			
 			}
 		}	
