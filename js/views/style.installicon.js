@@ -38,15 +38,4 @@ wxApp = wxApp || {};
 
     wxApp.installIcon = new wxApp.InstallIcon();
 
-    wx.cutter = new Cutter({
-                el: $(".js-my_image"),
-                //aspectRatio: 4/6,
-                geometryFields: {
-                    x: $(".js-my_image input[name$='_crop_x']"),
-                    y: $(".js-my_image input[name$='_crop_y']"),
-                    w: $(".js-my_image input[name$='_crop_w']"),
-                    h: $(".js-my_image input[name$='_crop_h']")
-                }
-            });
-
 })(jQuery);
