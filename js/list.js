@@ -153,35 +153,35 @@ jQuery(document).ready(function() {
     //     });
     // }
 
-    wx.update_icon_preview = function(icon_id) {
-        // Update the icon preview
-        jQuery.ajax({
-            type: 'POST',
-            url: ajaxurl,
-            data: {
-                action: 'ajaxGetIconSrc',
-                icon_id: icon_id,
-                nonce: jQuery('input#nonce').val()
-            },
-            success: function (msg) {
-                try {
-                    icon = JSON.parse(msg).icon_src;
-                    jQuery("img.wx-icon-picker-preview").attr('src', icon);
-                } catch (e) {
+    // wx.update_icon_preview = function(icon_id) {
+    //     // Update the icon preview
+    //     jQuery.ajax({
+    //         type: 'POST',
+    //         url: ajaxurl,
+    //         data: {
+    //             action: 'ajaxGetIconSrc',
+    //             icon_id: icon_id,
+    //             nonce: jQuery('input#nonce').val()
+    //         },
+    //         success: function (msg) {
+    //             try {
+    //                 icon = JSON.parse(msg).icon_src;
+    //                 jQuery("img.wx-icon-picker-preview").attr('src', icon);
+    //             } catch (e) {
 
-                }
-            },
-            error: function (v, msg) {
-                jQuery("img.wx-icon-picker-preview").attr('src', '');
-            }
-        });        
-    }
+    //             }
+    //         },
+    //         error: function (v, msg) {
+    //             jQuery("img.wx-icon-picker-preview").attr('src', '');
+    //         }
+    //     });        
+    // }
     
     // Icon picker
-    jQuery('.wx-icon-picker').change(function(event){
-        event.preventDefault();
-        wx.update_icon_preview(jQuery(this).val());
-    });
+    // jQuery('.wx-icon-picker').change(function(event){
+    //     event.preventDefault();
+    //     wx.update_icon_preview(jQuery(this).val());
+    // });
 
 	// Initial collapse
 	if ( window.location.hash.indexOf('wxnavtip-') > -1 )

@@ -240,6 +240,8 @@ wx.ajaxAddTabItem	= function(a, confirm_feed, current_dialog) {
 /* Confirmation dialog, skipped if we don't ask about a title (wx.features [title] property is undefined) */
 
 wx.confirmAddTabItem	= function(a) {
+	alert('wx.confirmAddTabItem');
+
 	// TODO: Call addAjaxUrl and verify feed, if api check fails show the previous dialog again with an error message injected 
 	// (or a separate error popup?)
 	var dialogId		= '#wx-add-title-tab-dialog',
@@ -262,7 +264,7 @@ wx.confirmAddTabItem	= function(a) {
     jQuery('#wx-add-title-tab-dialog select.wx-icon-picker').val(wx.default_icon_id.toString());
 
     // Load currently selected icon
-    wx.update_icon_preview(jQuery('#wx-add-title-tab-dialog select.wx-icon-picker').val());
+    // wx.update_icon_preview(jQuery('#wx-add-title-tab-dialog select.wx-icon-picker').val());
     
 	if ( 'component_behaviour' == a.featureData.defaultTitle )
 		// Load up the data from the previous dialog
