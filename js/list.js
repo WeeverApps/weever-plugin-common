@@ -859,93 +859,93 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 	});
 
-	jQuery('a.wx-nav-map-options-edit').click(function(event){
-		var tabId = jQuery(this).attr('rel');
-		var nonce = jQuery("input#nonce").val();
+	// jQuery('a.wx-nav-map-options-edit').click(function(event){
+	// 	var tabId = jQuery(this).attr('rel');
+	// 	var nonce = jQuery("input#nonce").val();
 
-		jQuery.ajax({
-			type: "POST",
-			url: ajaxurl,
-			data: {
-				nonce: nonce,
-				action: 'ajaxGetMapOptions',
-				tab_id: tabId
-			},
-			success: function(result) {
-				try {
-					result = JSON.parse(result);
-					jQuery('#map_options_cluster').prop('checked', ( parseInt( result.cluster ) ? true : false ) );
-					jQuery('#map_options_autoGPS').prop('checked', ( parseInt( result.autoGPS ) ? true : false ) );
-					jQuery('#map_options_start_latitude').val(result.start_latitude);
-					jQuery('#map_options_start_longitude').val(result.start_longitude);
-					jQuery('#map_options_start_zoom').val(result.start_zoom);
-					jQuery('#map_options_start_zoom_enabled').prop('checked', ( parseInt( result.start_zoom_enabled ) ? true : false ) );
-					jQuery('#map_options_maxZoom').val(result.maxZoom);
-					jQuery('#map_options_minZoom').val(result.minZoom);
-					jQuery('#map_options_gpsRadius').val(result.gpsRadius);
-					jQuery('#map_options_gpsRadius_colour').val(result.gpsRadius_colour);
-					jQuery('#map_options_marker').val(result.marker);
-                    jQuery('#map_options_distance').val(result.distance);
-                    jQuery('#map_options_display').val(result.display);
+	// 	jQuery.ajax({
+	// 		type: "POST",
+	// 		url: ajaxurl,
+	// 		data: {
+	// 			nonce: nonce,
+	// 			action: 'ajaxGetMapOptions',
+	// 			tab_id: tabId
+	// 		},
+	// 		success: function(result) {
+	// 			try {
+	// 				result = JSON.parse(result);
+	// 				jQuery('#map_options_cluster').prop('checked', ( parseInt( result.cluster ) ? true : false ) );
+	// 				jQuery('#map_options_autoGPS').prop('checked', ( parseInt( result.autoGPS ) ? true : false ) );
+	// 				jQuery('#map_options_start_latitude').val(result.start_latitude);
+	// 				jQuery('#map_options_start_longitude').val(result.start_longitude);
+	// 				jQuery('#map_options_start_zoom').val(result.start_zoom);
+	// 				jQuery('#map_options_start_zoom_enabled').prop('checked', ( parseInt( result.start_zoom_enabled ) ? true : false ) );
+	// 				jQuery('#map_options_maxZoom').val(result.maxZoom);
+	// 				jQuery('#map_options_minZoom').val(result.minZoom);
+	// 				jQuery('#map_options_gpsRadius').val(result.gpsRadius);
+	// 				jQuery('#map_options_gpsRadius_colour').val(result.gpsRadius_colour);
+	// 				jQuery('#map_options_marker').val(result.marker);
+ //                    jQuery('#map_options_distance').val(result.distance);
+ //                    jQuery('#map_options_display').val(result.display);
 
-					jQuery('#wx-change-map-options-dialog').dialog({
-						modal: 		true,
-						resizable: 	false,
-						width: 		'auto',
-						height: 	'auto',
-						title:		'Change Map Options',
-						show:		'fade',
-						hide:		'drop',
-						buttons: 	{
-							'Finish': function() {
-								jQuery.ajax({
-									type: "POST",
-									url: ajaxurl,
-									data: {
-										action: 'ajaxSaveMapOptions',
-										options: {
-											cluster: ( jQuery('#map_options_cluster').prop('checked') ? 1 : 0 ),
-											autoGPS: ( jQuery('#map_options_autoGPS').prop('checked') ? 1 : 0 ),
-											start_latitude: jQuery('#map_options_start_latitude').val(),
-											start_longitude: jQuery('#map_options_start_longitude').val(),
-											start_zoom: jQuery('#map_options_start_zoom').val(),
-											start_zoom_enabled: ( jQuery('#map_options_start_zoom_enabled').prop('checked') ? 1 : 0 ),
-											maxZoom: jQuery('#map_options_maxZoom').val(),
-											minZoom: jQuery('#map_options_minZoom').val(),
-											gpsRadius: jQuery('#map_options_gpsRadius').val(),
-											gpsRadius_colour: jQuery('#map_options_gpsRadius_colour').val(),
-											marker: jQuery('#map_options_marker').val(),
-                                            distance: jQuery('#map_options_distance').val(),
-                                            display: jQuery('#map_options_display').val()
-										},
-										tab_id: tabId,
-										nonce: nonce
-									},
-									success: function(msg){
-										jQuery('#wx-modal-loading-text').html(msg);
-										jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-										jQuery('#wx-change-map-options-dialog').dialog('close');
-									},
-									error: function(v,msg){
-										jQuery('#wx-modal-loading-text').html(msg);
-										jQuery('#wx-modal-secondary-text').html('');
-										jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-									}
-								});
-							},
-							'Cancel': function() {
-								jQuery(this).dialog('close');
-							}
-						}
-					});
-				} catch (e) {
-					jQuery('#wx-modal-loading-text').html('Error getting map options');
-					jQuery('#wx-modal-secondary-text').html('');
-					jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-				}
-			}
-		});
-	});
+	// 				jQuery('#wx-change-map-options-dialog').dialog({
+	// 					modal: 		true,
+	// 					resizable: 	false,
+	// 					width: 		'auto',
+	// 					height: 	'auto',
+	// 					title:		'Change Map Options',
+	// 					show:		'fade',
+	// 					hide:		'drop',
+	// 					buttons: 	{
+	// 						'Finish': function() {
+	// 							jQuery.ajax({
+	// 								type: "POST",
+	// 								url: ajaxurl,
+	// 								data: {
+	// 									action: 'ajaxSaveMapOptions',
+	// 									options: {
+	// 										cluster: ( jQuery('#map_options_cluster').prop('checked') ? 1 : 0 ),
+	// 										autoGPS: ( jQuery('#map_options_autoGPS').prop('checked') ? 1 : 0 ),
+	// 										start_latitude: jQuery('#map_options_start_latitude').val(),
+	// 										start_longitude: jQuery('#map_options_start_longitude').val(),
+	// 										start_zoom: jQuery('#map_options_start_zoom').val(),
+	// 										start_zoom_enabled: ( jQuery('#map_options_start_zoom_enabled').prop('checked') ? 1 : 0 ),
+	// 										maxZoom: jQuery('#map_options_maxZoom').val(),
+	// 										minZoom: jQuery('#map_options_minZoom').val(),
+	// 										gpsRadius: jQuery('#map_options_gpsRadius').val(),
+	// 										gpsRadius_colour: jQuery('#map_options_gpsRadius_colour').val(),
+	// 										marker: jQuery('#map_options_marker').val(),
+ //                                            distance: jQuery('#map_options_distance').val(),
+ //                                            display: jQuery('#map_options_display').val()
+	// 									},
+	// 									tab_id: tabId,
+	// 									nonce: nonce
+	// 								},
+	// 								success: function(msg){
+	// 									jQuery('#wx-modal-loading-text').html(msg);
+	// 									jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+	// 									jQuery('#wx-change-map-options-dialog').dialog('close');
+	// 								},
+	// 								error: function(v,msg){
+	// 									jQuery('#wx-modal-loading-text').html(msg);
+	// 									jQuery('#wx-modal-secondary-text').html('');
+	// 									jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 								}
+	// 							});
+	// 						},
+	// 						'Cancel': function() {
+	// 							jQuery(this).dialog('close');
+	// 						}
+	// 					}
+	// 				});
+	// 			} catch (e) {
+	// 				jQuery('#wx-modal-loading-text').html('Error getting map options');
+	// 				jQuery('#wx-modal-secondary-text').html('');
+	// 				jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 			}
+	// 		}
+	// 	});
+	// });
 
     jQuery('a.wx-nav-layout-edit').click(function(event){
         var layout_item = jQuery(this);
