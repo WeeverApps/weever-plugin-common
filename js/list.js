@@ -26,17 +26,14 @@ var wxApp = wxApp || {};
 		var method = 'POST', data = '';
         var apiUrl = wx.apiUrl + endpoint + '?site_key=' + wx.siteKey;
         var queryStr = [];
-        //if ( typeof(paramsObj) === 'string' ) {
-        //    data = paramsObj;
-        //} else {
-            for ( var p in paramsObj ) {
-                queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );
-            }
-            if ( queryStr.length ) {
-    			data = queryStr.join('&');
-    		}
-        //}
-//		console.log( data );
+
+        for ( var p in paramsObj ) {
+            queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );
+        }
+        if ( queryStr.length ) {
+			data = queryStr.join('&');
+		}
+
         $.ajax({
             url: apiUrl,
             type: method,
@@ -101,87 +98,11 @@ var wxApp = wxApp || {};
 
 wx.log = function(message) {
     if ( !! console.log ) {
-//		console.log('[wx.log.caller] ' + wx.log.caller);
         console.log(message);
 	}
 }
 
 jQuery(document).ready(function() {
-
-    // wx.updateIconDialog = function(tab_id, default_icon_id, update_icon_elem) {
-    //     var nonce = jQuery("input#nonce").val();
-
-    //     wx.update_icon_preview(default_icon_id);
-
-    //     jQuery('#wx-change-icon-dialog').dialog({
-    //         modal: 		true,
-    //         resizable: 	false,
-    //         width: 		'auto',
-    //         height: 	'auto',
-    //         title:		'Change Icon',
-    //         show:		'fade',
-    //         hide:		'drop',
-    //         buttons: 	{
-    //             'Finish': function() {
-    //                 jQuery.ajax({
-    //                     type: "POST",
-    //                     url: ajaxurl,
-    //                     data: {
-    //                         action: 'ajaxSaveTabIcon',
-    //                         icon_id: jQuery('#wx-change-icon-dialog select.wx-icon-picker').val(),
-    //                         tab_id: tab_id,
-    //                         nonce: nonce
-    //                     },
-    //                     success: function(msg){
-    //                         jQuery('#wx-modal-loading-text').html(msg);
-    //                         jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-    //                         if ( typeof update_icon_elem != 'undefined' )
-    //                             update_icon_elem.html('<img class="wx-nav-icon-img" src="' + jQuery('#wx-change-icon-dialog img.wx-icon-picker-preview').attr('src') + '" />');
-    //                         jQuery('#wx-change-icon-dialog').dialog('close');
-    //                     },
-    //                     error: function(v,msg){
-    //                         jQuery('#wx-modal-loading-text').html(msg);
-    //                         jQuery('#wx-modal-secondary-text').html('');
-    //                         jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-    //                     }
-    //                 });
-    //             },
-    //             'Cancel': function() {
-    //                 jQuery(this).dialog('close');
-    //             }
-    //         }
-    //     });
-    // }
-
-    // wx.update_icon_preview = function(icon_id) {
-    //     // Update the icon preview
-    //     jQuery.ajax({
-    //         type: 'POST',
-    //         url: ajaxurl,
-    //         data: {
-    //             action: 'ajaxGetIconSrc',
-    //             icon_id: icon_id,
-    //             nonce: jQuery('input#nonce').val()
-    //         },
-    //         success: function (msg) {
-    //             try {
-    //                 icon = JSON.parse(msg).icon_src;
-    //                 jQuery("img.wx-icon-picker-preview").attr('src', icon);
-    //             } catch (e) {
-
-    //             }
-    //         },
-    //         error: function (v, msg) {
-    //             jQuery("img.wx-icon-picker-preview").attr('src', '');
-    //         }
-    //     });        
-    // }
-    
-    // Icon picker
-    // jQuery('.wx-icon-picker').change(function(event){
-    //     event.preventDefault();
-    //     wx.update_icon_preview(jQuery(this).val());
-    // });
 
 	// Initial collapse
 	if ( window.location.hash.indexOf('wxnavtip-') > -1 )
@@ -226,11 +147,6 @@ jQuery(document).ready(function() {
         var weeverUploader = new qq.FileUploader({
             element: jQuery('#wx-file-uploader')[0],
             action: ajaxurl + '?action=ajaxHandleUpload',
-            /*template: '<div class="qq-uploader">' +
-            '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
-            '<div class="qq-upload-button">Upload a file</div>' +
-            '<ul class="qq-upload-list"></ul>' +
-         '</div>',*/
             fileTemplate: fileUploadTemplate(),
             debug: true,
             onComplete: function(id, fileName, responseJSON){
@@ -357,38 +273,6 @@ jQuery(document).ready(function() {
 		})
 	});
 	
-	// jQuery('.wx-edit-content-item-feed').each(function(index,elem){
-	// 	feed = jQuery(this).attr('cmsfeed') + '&limit=300&t=' + Math.random(); 
-	// 	type = jQuery(this).attr('type');
-	// 	jQuery.get(feed, {}, function(results){
-	// 		jQuery.each(results.items, function(key,value){
-	// 			jQuery(elem).append('<li id="' + value.uuid + '" class="wx-feed-edit-item-container"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + value.name + ' - <a id="editpage-' + value.uuid + '" class="wx-edit-content-item" type="' + type + '" rel="' + value.uuid + '" href="#">Edit</a>' + ( type == 'blog' || type == 'map' ? ' | <a id="deletepage-' + value.uuid + '" class="wx-delete-content-item" rel="' + value.uuid + '">Delete</a>' : '' ) + '</li>');
-				
-	// 		});
-			
-	// 		jQuery(elem).sortable({
-	// 			update: function(event,ui){
-	// 				var order = jQuery(elem).sortable('toArray');
-					
-	// 				jQuery.ajax({
-	// 					type: "POST",
-	// 					url: ajaxurl,
-	// 					data: {
-	// 						action: 'ajaxSortPosts',
-	// 						nonce: jQuery("input#nonce").val(),
-	// 						order: order
-	// 					}
-	// 				});
-	// 			}
-	// 		});
-	// 		jQuery(elem).disableSelection();
-	// 	});
-	// });
-	
-
-
-
-	
 	jQuery('[name="wx-add-source-radio"]').click(function() {
 		if ( 'map' == jQuery(this).val() ) {
 			showMap();
@@ -468,12 +352,6 @@ jQuery(document).ready(function() {
         // Page icon
         wx.default_icon_id = 28;
 
-//        // Select the default icon (if any)
-//        jQuery('#wx-add-title-tab-dialog select.wx-icon-picker').val(wx.default_icon_id.toString());
-//
-//        // Load currently selected icon
-//        wx.update_icon_preview(jQuery('#wx-add-title-tab-dialog select.wx-icon-picker').val());
-
         // show the checkboxes (use the button rel to determine the type now)
 		jQuery('#wx-add-new-content-dialog .wx-add-source-check-container').show();
 		jQuery('.wxui-howtoadd').hide();
@@ -505,12 +383,6 @@ jQuery(document).ready(function() {
             jQuery('#wx-inject-mobile-coupon').show();
         }
 
-		// Select the right default
-//		jQuery('#wx-add-source-check-blog').trigger('click');
-		
-		// Show the edit dropdown (if any)
-//		jQuery('.wx-edit-choices').show();
-		
 		// Clear the content, if any
 		jQuery('#wx-add-content-editor').val('');		
 		
@@ -596,17 +468,6 @@ jQuery(document).ready(function() {
 				staffid : "991234"
 			}
 		});
-
-		
-		    /*jQuery('#wx-add-content-editor').tinyMCE({
-		        //script_url: '/js/tiny_mce_3.2.7_jquery/jscripts/tiny_mce/tiny_mce.js',
-		        width: "550px",
-		        height: "290px",
-		        mode: "none",
-		        // General options
-		        theme : "simple",
-		    });*/
-		//tinyMCE.execCommand('mceAddControl', true, 'wx-add-content-editor');
 	}
 	
     function removeTinyMCE() {
@@ -614,61 +475,9 @@ jQuery(document).ready(function() {
         tinyMCE.execCommand('mceRemoveControl', false, 'wx-add-content-editor');
     }
 
+// });
 
-    /**
-     * Ability to drag a subitem into the main tabs area, and drop onto an existing tab
-     */
-    //jQuery( ".list-add-content-items" ).sortable();
-    // jQuery( ".list-sub-items" ).sortable({
-    //     start: function(event, ui) {
-    //         jQuery('#dropTab').show();
-    //         ui.item.addClass('wx-subtab-drag-active');
-    //     },
-    //     stop: function(event, ui) {
-    //         jQuery('#dropTab').hide();
-    //         ui.item.removeClass('wx-subtab-drag-active');
-    //     },
-    //     update: function(event, ui) {
-    //         var nonce = jQuery("input#nonce").val();
-    //         var order = String(jQuery(this).sortable('toArray'));
-
-    //         jQuery.ajax({
-    //             type: "POST",
-    //             url: ajaxurl,
-    //             data: {
-    //                 action: 'ajaxSaveSubtabOrder',
-    //                 order: order,
-    //                 nonce: nonce
-    //             },
-    //             success: function(msg){
-    //                 jQuery('#wx-modal-loading-text').html(msg);
-    //                 jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-    //                 //document.location.reload();
-    //             },
-    //             error: function(v,msg){
-    //                 jQuery('#wx-modal-loading-text').html(msg);
-
-    //                 jQuery('#wx-modal-secondary-text').html('');
-    //                 jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-    //             }
-    //         });
-    //     }
-    // }).disableSelection();
-
-
-    jQuery("#listTabsSortable li a").click(function() {
-		/*
-		item = jQuery(this).parent('li:first');
-		if (item.attr('rel') != 'unpublished')
-			item.removeAttr('style');
-		else
-			item.attr('style', 'float:right;');
-			*/
-	});
-
-});
-
-jQuery(document).ready(function(){ 
+// jQuery(document).ready(function(){ 
 
 	// Functions with selected list elements
 	jQuery("#wx-delete-selected, #wx-publish-selected, #wx-unpublish-selected").click(function(e) {
@@ -735,72 +544,6 @@ jQuery(document).ready(function(){
 		}
 		
 	});
-	/*
-	jQuery("#wx-app-status-button").click(function(e) {
-	
-		var siteKey = jQuery("input#wx-site-key").val();
-		var nonce = jQuery("input#nonce").val();
-		
-		if( jQuery("#wx-app-status-online").hasClass("wx-app-hide-status") ) {
-			
-			
-			jQuery.ajax({
-			   type: "POST",
-			   url: ajaxurl,
-				   data: {
-					   action: 'ajaxToggleAppStatus',
-					   app_enabled: 1,
-					   nonce: nonce
-				   },
-			   success: function(msg){
-			     jQuery('#wx-modal-loading-text').html(msg);
-
-			     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_ONLINE);
-			     	jQuery("#wx-app-status-online").removeClass("wx-app-hide-status");
-			     	jQuery("#wx-app-status-offline").addClass("wx-app-hide-status");
-			     	jQuery("#wx-app-status-button").removeClass("wx-app-status-button-offline");
-			     	jQuery(".wx-app-admin-link-enabled").show();
-			     	jQuery(".wx-app-admin-link-disabled").hide();
-			   },
-			   error: function(v,msg){
-				     jQuery('#wx-modal-loading-text').html(msg);
-			     	jQuery('#wx-modal-secondary-text').html('');
-			     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-			   }
-			 });
-			
-			
-		}
-		else {
-			jQuery.ajax({
-			   type: "POST",
-			   url: ajaxurl,
-			   data: {
-				   action: 'ajaxToggleAppStatus',
-				   app_enabled: 0,
-				   nonce: nonce
-			   },
-			   success: function(msg){
-			     jQuery('#wx-modal-loading-text').html(msg);
-
-			     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_OFFLINE);
-			     	jQuery("#wx-app-status-online").addClass("wx-app-hide-status");
-			     	jQuery("#wx-app-status-offline").removeClass("wx-app-hide-status");
-			     	jQuery("#wx-app-status-button").addClass("wx-app-status-button-offline");
-			     	jQuery(".wx-app-admin-link-enabled").hide();
-			     	jQuery(".wx-app-admin-link-disabled").show();
-			   },
-			   error: function(v,msg){
-				     jQuery('#wx-modal-loading-text').html(msg);
-			     	jQuery('#wx-modal-secondary-text').html('');
-			     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-			   }
-			 });
-		}
-	
-	});
-	*/
-	
 	
 	jQuery("li.wx-nav-tabs").bind("mouseover", function(){
 	
@@ -859,144 +602,6 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 	});
 
-	// jQuery('a.wx-nav-map-options-edit').click(function(event){
-	// 	var tabId = jQuery(this).attr('rel');
-	// 	var nonce = jQuery("input#nonce").val();
-
-	// 	jQuery.ajax({
-	// 		type: "POST",
-	// 		url: ajaxurl,
-	// 		data: {
-	// 			nonce: nonce,
-	// 			action: 'ajaxGetMapOptions',
-	// 			tab_id: tabId
-	// 		},
-	// 		success: function(result) {
-	// 			try {
-	// 				result = JSON.parse(result);
-	// 				jQuery('#map_options_cluster').prop('checked', ( parseInt( result.cluster ) ? true : false ) );
-	// 				jQuery('#map_options_autoGPS').prop('checked', ( parseInt( result.autoGPS ) ? true : false ) );
-	// 				jQuery('#map_options_start_latitude').val(result.start_latitude);
-	// 				jQuery('#map_options_start_longitude').val(result.start_longitude);
-	// 				jQuery('#map_options_start_zoom').val(result.start_zoom);
-	// 				jQuery('#map_options_start_zoom_enabled').prop('checked', ( parseInt( result.start_zoom_enabled ) ? true : false ) );
-	// 				jQuery('#map_options_maxZoom').val(result.maxZoom);
-	// 				jQuery('#map_options_minZoom').val(result.minZoom);
-	// 				jQuery('#map_options_gpsRadius').val(result.gpsRadius);
-	// 				jQuery('#map_options_gpsRadius_colour').val(result.gpsRadius_colour);
-	// 				jQuery('#map_options_marker').val(result.marker);
- //                    jQuery('#map_options_distance').val(result.distance);
- //                    jQuery('#map_options_display').val(result.display);
-
-	// 				jQuery('#wx-change-map-options-dialog').dialog({
-	// 					modal: 		true,
-	// 					resizable: 	false,
-	// 					width: 		'auto',
-	// 					height: 	'auto',
-	// 					title:		'Change Map Options',
-	// 					show:		'fade',
-	// 					hide:		'drop',
-	// 					buttons: 	{
-	// 						'Finish': function() {
-	// 							jQuery.ajax({
-	// 								type: "POST",
-	// 								url: ajaxurl,
-	// 								data: {
-	// 									action: 'ajaxSaveMapOptions',
-	// 									options: {
-	// 										cluster: ( jQuery('#map_options_cluster').prop('checked') ? 1 : 0 ),
-	// 										autoGPS: ( jQuery('#map_options_autoGPS').prop('checked') ? 1 : 0 ),
-	// 										start_latitude: jQuery('#map_options_start_latitude').val(),
-	// 										start_longitude: jQuery('#map_options_start_longitude').val(),
-	// 										start_zoom: jQuery('#map_options_start_zoom').val(),
-	// 										start_zoom_enabled: ( jQuery('#map_options_start_zoom_enabled').prop('checked') ? 1 : 0 ),
-	// 										maxZoom: jQuery('#map_options_maxZoom').val(),
-	// 										minZoom: jQuery('#map_options_minZoom').val(),
-	// 										gpsRadius: jQuery('#map_options_gpsRadius').val(),
-	// 										gpsRadius_colour: jQuery('#map_options_gpsRadius_colour').val(),
-	// 										marker: jQuery('#map_options_marker').val(),
- //                                            distance: jQuery('#map_options_distance').val(),
- //                                            display: jQuery('#map_options_display').val()
-	// 									},
-	// 									tab_id: tabId,
-	// 									nonce: nonce
-	// 								},
-	// 								success: function(msg){
-	// 									jQuery('#wx-modal-loading-text').html(msg);
-	// 									jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-	// 									jQuery('#wx-change-map-options-dialog').dialog('close');
-	// 								},
-	// 								error: function(v,msg){
-	// 									jQuery('#wx-modal-loading-text').html(msg);
-	// 									jQuery('#wx-modal-secondary-text').html('');
-	// 									jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-	// 								}
-	// 							});
-	// 						},
-	// 						'Cancel': function() {
-	// 							jQuery(this).dialog('close');
-	// 						}
-	// 					}
-	// 				});
-	// 			} catch (e) {
-	// 				jQuery('#wx-modal-loading-text').html('Error getting map options');
-	// 				jQuery('#wx-modal-secondary-text').html('');
-	// 				jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-	// 			}
-	// 		}
-	// 	});
-	// });
-
-    // jQuery('a.wx-nav-layout-edit').click(function(event){
-    //     var layout_item = jQuery(this);
-    //     var tab_id = jQuery(this).attr('rel');
-    //     var current_layout = jQuery(this).attr('layout');
-    //     var nonce = jQuery("input#nonce").val();
-    //     jQuery('#wx-change-layout-dialog #tab_layout_' + current_layout).attr('checked', 'checked');
-
-    //     jQuery('#wx-change-layout-dialog').dialog({
-    //         modal: 		true,
-    //         resizable: 	false,
-    //         width: 		'auto',
-    //         height: 	'auto',
-    //         title:		'Change Layout',
-    //         show:		'fade',
-    //         hide:		'drop',
-    //         buttons: 	{
-    //             'Finish': function() {
-    //                 selected_layout = jQuery('#wx-change-layout-dialog input[name="tab_layout"]:checked').val();
-
-    //                 jQuery.ajax({
-    //                     type: "POST",
-    //                     url: ajaxurl,
-    //                     data: {
-    //                         action: 'ajaxSaveTabLayout',
-    //                         layout: selected_layout,
-    //                         tab_id: tab_id,
-    //                         nonce: nonce
-    //                     },
-    //                     success: function(msg){
-    //                         jQuery('#wx-modal-loading-text').html(msg);
-    //                         jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-    //                         layout_item.attr('layout', selected_layout);
-    //                         jQuery('#wx-change-layout-dialog').dialog('close');
-    //                     },
-    //                     error: function(v,msg){
-    //                         jQuery('#wx-modal-loading-text').html(msg);
-    //                         jQuery('#wx-modal-secondary-text').html('');
-    //                         jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-    //                     }
-    //                 });
-    //             },
-    //             'Cancel': function() {
-    //                 jQuery(this).dialog('close');
-    //             }
-    //         }
-    //     })
-
-    //     event.preventDefault();
-    // });
-
 	jQuery('a.wx-nav-label-edit').click(function(event){
 		var tab_id = jQuery(this).attr('rel');
 		jQuery('#'+ tab_id + 'TabID .wx-nav-label').dblclick();
@@ -1018,31 +623,7 @@ jQuery(document).ready(function(){
 
             if(v != undefined && v == true)
             {
-
                 tabName = f["alertName"];
-                // jQuery.ajax({
-                //     type: "POST",
-                //     url: ajaxurl,
-                //     data: {
-                //         name: tabName,
-                //         id: tabId,
-                //         nonce: nonce,
-                //         action: 'ajaxSaveTabName'
-                //     },
-                //     success: function(msg){
-
-                //         jQuery('#wx-modal-loading-text').html(msg);
-                //         jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-                //         clickedElem.html(tabName);
-                //     },
-                //     error: function(v,msg){
-                //         jQuery('#wx-modal-loading-text').html(msg);
-
-                //         jQuery('#wx-modal-secondary-text').html('');
-                //         jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-                //     }
-                // });
-
             }
         };
 
@@ -1094,32 +675,8 @@ jQuery(document).ready(function(){
 		myCallbackForm = function(v,m,f) {
 		
 			if(v != undefined && v == true)
-			{ 
-			
+			{
 				tabName = f["alertName"];
-				
-				// jQuery.ajax({
-				//    type: "POST",
-				//    url: ajaxurl,
-				//    data: {
-				// 	   name: tabName,
-				// 	   id: tabId,
-				// 	   nonce: nonce,
-				// 	   action: 'ajaxSaveTabName'					   
-				//    },
-				//    success: function(msg){
-
-				// 	    jQuery('#wx-modal-loading-text').html(msg);
-				//      	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-				// 		document.location.reload();
-				//      },
-				//    error: function(v,msg){
-				// 	    jQuery('#wx-modal-loading-text').html(msg);
-				//      	jQuery('#wx-modal-secondary-text').html('');
-				//      	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-				//      }
-				//  });
-			
 			}
 		}	
 		
@@ -1156,150 +713,4 @@ jQuery(document).ready(function(){
 		    });
 
 	});
-	
-	// jQuery("a.wx-subtab-publish").click(function(event) {
-	
-	// 	var nonce = jQuery("input#nonce").val();		
-	// 	var tabId = jQuery(this).attr('title');
-	// 	tabId = tabId.substring(4);
-	// 	var clickedElem = jQuery(this);
-	// 	var statustext = jQuery(this).parents("tr:first").find(".wx-subtab-publish-text:first");
-	// 	var pubStatus = jQuery(this).attr('rel');
-	// 	var unpublishedIcon = 'Unpublished'; //'<img src="'+WPText.WEEVER_JS_STATIC_PATH+'images/icons/publish_x.png" border="0" alt="Unpublished">';
-	// 	var publishedIcon = 'Published'; //'<img src="'+WPText.WEEVER_JS_STATIC_PATH+'images/icons/tick.png" border="0" alt="Published">';
-
-	// 	event.preventDefault();
-		
-	// 	jQuery.ajax({
-	// 	   type: "POST",
-	// 	   url: ajaxurl,
-	// 	   data: {
-	// 		   action: 'ajaxTabPublish',
-	// 		   status: pubStatus,
-	// 		   id: tabId,
-	// 		   nonce: nonce
-	// 	   },
-	// 	   success: function(msg){
-	// 	     jQuery('#wx-modal-loading-text').html(msg);
-		     
-	//      	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-	     	
-	//      	if(pubStatus == 1)
-	//      	{
-	//      		//clickedElem.html(unpublishedIcon);
-	//      		clickedElem.attr('rel', 0);
- //     			// Status text
- //     			statustext.html(unpublishedIcon);
-	//      	}
-	//      	else
-	//      	{
-	//      		//clickedElem.html(publishedIcon);
-	//      		clickedElem.attr('rel', 1);
- //     			// Status text
- //     			statustext.html(publishedIcon);
-	//      	}
-	// 	   },
-	// 	   error: function(v,msg){
-	// 		     jQuery('#wx-modal-loading-text').html(msg);
-		   
-	// 	     	jQuery('#wx-modal-secondary-text').html('');
-	// 	     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-	// 	   }
-	// 	 });
-	
-	// });
-	
-		// jQuery("a.wx-subtab-delete").click(function() {
-		// 	var tabId = jQuery(this).attr('title');
-		// 	tabId = tabId.substring(4);
-		// 	var nonce = jQuery("input#nonce").val();
-		// 	var tabName = jQuery(this).attr('alt');
-		// 	var deleteButton = this;
-		// 	var confDelete = confirm(WPText.WEEVER_JS_ARE_YOU_SURE_YOU_WANT_TO+tabName+WPText.WEEVER_JS_QUESTION_MARK);
-			
-		// 	if(!confDelete)
-		// 		return false;
-			
-		// 	// Close any open dialogs
-		// 	jQuery('.ui-dialog-content').dialog('close');
-			
-		// 	jQuery.ajax({
-		// 	   type: "POST",
-		// 	   url: ajaxurl,
-		// 	   data: { 
-		// 		   id: tabId, 
-		// 		   nonce: nonce, 
-		// 		   action: 'ajaxSubtabDelete' 
-		// 	   },
-		// 	   success: function(msg){
-		// 	     jQuery('#wx-modal-loading-text').html(msg);
-			     
-		// 	     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-		// 	     	// Delete the table row this delete image is in
-		// 	     	jQuery(deleteButton).parents("tr:first").remove();
-		// 			document.location.reload();
-		//      		//document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+'#'+tabType+'Tab';
-		//      		//setTimeout("document.location.reload(true);",20);
-		// 	   },
-		// 	   error: function(v,msg){
-		// 	     jQuery('#wx-modal-loading-text').html(msg);
-			     
-		// 	     	jQuery('#wx-modal-secondary-text').html('');
-		// 	     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-		// 	   }
-		// 	 });
-		
-		// });
-	
-	
-	// jQuery("a.wx-subtab-up, a.wx-subtab-down").click(function() {
-	
-	// 	var tabId = jQuery(this).attr('title');
-	// 	tabId = tabId.substring(4);
-	// 	var siteKey = jQuery("input#wx-site-key").val();
-	// 	var tabType = jQuery(this).attr('rel');
-	// 	var nonce = jQuery("input#nonce").val();
-	// 	var dir = (jQuery(this).hasClass('wx-subtab-up') ? 'up' : 'down');
-	// 	var row = jQuery(this).parent("td:first").parent("tr:first");
-		
-	// 	jQuery.ajax({
-	// 	   type: "POST",
-	// 	   url: ajaxurl,
-	// 	   data: {
-	// 		   action: 'ajaxSaveSubtabOrder',
-	// 		   type: tabType,
-	// 		   dir: dir,
-	// 		   id: tabId,
-	// 		   nonce: nonce
-	// 	   },
-	// 	   success: function(msg){
-	// 	     jQuery('#wx-modal-loading-text').html(msg);
-		     
-	// 	     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-		     	
-	// 	     	// Swap them without refresh
-	// 	     	if (dir == 'up') {
-	// 	     		row.after(row.prev("tr.wx-ui-row:visible"));
-	// 	     	} else {
-	// 	     		row.next("tr.wx-ui-row:visible").after(row);
-	// 	     	}
-
-	// 	     	// Recolor the rows properly
-	// 	     	rowClass = "row0";
-	// 	     	row.parent().find("tr.wx-ui-row:visible").each(function(){
-	// 	     		jQuery(this).removeClass("row0").removeClass("row1").addClass(rowClass);
-	// 	     		rowClass = rowClass == "row0" ? "row1" : "row0";
-	// 	     	});
-		     	
-	// 	     	/*document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#"+tabType+"Tab";
-	// 	     	setTimeout("document.location.reload(true);",20);*/
-	// 	     },
-	// 	   error: function(v,msg){
- //  		     jQuery('#wx-modal-loading-text').html(msg);
-	// 	     	jQuery('#wx-modal-secondary-text').html('');
-	// 	     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-	// 	   }
-	// 	 });
-	
-	// });
 });
