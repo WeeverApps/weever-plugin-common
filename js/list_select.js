@@ -528,399 +528,398 @@ jQuery(document).ready(function(){
 		jQuery('.wx-dummy').hide();
 	});
 
-	jQuery('#wx-select-map-settings').click(function(event) {
+	// jQuery('#wx-select-map-settings').click(function(event) {
 		
-		event.preventDefault();
+	// 	event.preventDefault();
 		
-		var startLat = jQuery("input#wx-map-start-latitude").val(),
-		startLong = jQuery("input#wx-map-start-longitude").val(),
-		startZoom = jQuery("input#wx-map-start-zoom").val(),
-		marker = jQuery("input#wx-map-marker").val(),
-		tabId = jQuery("input#wx-map-tab-id").val();
-		var nonce = jQuery("input#nonce").val();		
+	// 	var startLat = jQuery("input#wx-map-start-latitude").val(),
+	// 	startLong = jQuery("input#wx-map-start-longitude").val(),
+	// 	startZoom = jQuery("input#wx-map-start-zoom").val(),
+	// 	marker = jQuery("input#wx-map-marker").val(),
+	// 	tabId = jQuery("input#wx-map-tab-id").val();
+	// 	var nonce = jQuery("input#nonce").val();		
 	
-		var txt = 	'<table class="admintable">'+
-				'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_MAP_SETTINGS+'</h3>'+
-				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_START_LATITUDE_TOOLTIP+
-				'">'+WPText.WEEVER_JS_MAP_START_LATITUDE+'</td>'+
-				'<td><input type="text" name="wx-input-map-start-lat" value="'+startLat+'" />'+
-				'</td></tr>'+
-				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_START_LONGITUDE_TOOLTIP+
-				'">'+WPText.WEEVER_JS_MAP_START_LONGITUDE+'</td>'+
-				'<td><input type="text" name="wx-input-map-start-long" value="'+startLong+'" />'+
-				'</td></tr>'+
-				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_START_ZOOM_TOOLTIP+
-				'">'+WPText.WEEVER_JS_MAP_START_ZOOM+'</td>'+
-				'<td><input type="text" name="wx-input-map-start-zoom" value="'+startZoom+'" />'+
-				'</td></tr>'+
-				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_DEFAULT_MARKER_TOOLTIP+
-				'">'+WPText.WEEVER_JS_MAP_DEFAULT_MARKER+'</td>'+
-				'<td><img src="'+marker+'" /><br /><input type="text" name="wx-input-map-marker" value="'+marker+'" />'+
-				'</td></tr></table><div>NOTE: If markers must be PNG image sprites that are 128 pixels by 74 pixels. '+
-				'The image on the left is the normal state, the one on the right is the selected state; each is 64x74 pixels '+
-				'placed beside each other in the same transparent PNG image file.</div>';
+	// 	var txt = 	'<table class="admintable">'+
+	// 			'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_MAP_SETTINGS+'</h3>'+
+	// 			'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_START_LATITUDE_TOOLTIP+
+	// 			'">'+WPText.WEEVER_JS_MAP_START_LATITUDE+'</td>'+
+	// 			'<td><input type="text" name="wx-input-map-start-lat" value="'+startLat+'" />'+
+	// 			'</td></tr>'+
+	// 			'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_START_LONGITUDE_TOOLTIP+
+	// 			'">'+WPText.WEEVER_JS_MAP_START_LONGITUDE+'</td>'+
+	// 			'<td><input type="text" name="wx-input-map-start-long" value="'+startLong+'" />'+
+	// 			'</td></tr>'+
+	// 			'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_START_ZOOM_TOOLTIP+
+	// 			'">'+WPText.WEEVER_JS_MAP_START_ZOOM+'</td>'+
+	// 			'<td><input type="text" name="wx-input-map-start-zoom" value="'+startZoom+'" />'+
+	// 			'</td></tr>'+
+	// 			'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_MAP_DEFAULT_MARKER_TOOLTIP+
+	// 			'">'+WPText.WEEVER_JS_MAP_DEFAULT_MARKER+'</td>'+
+	// 			'<td><img src="'+marker+'" /><br /><input type="text" name="wx-input-map-marker" value="'+marker+'" />'+
+	// 			'</td></tr></table><div>NOTE: If markers must be PNG image sprites that are 128 pixels by 74 pixels. '+
+	// 			'The image on the left is the normal state, the one on the right is the selected state; each is 64x74 pixels '+
+	// 			'placed beside each other in the same transparent PNG image file.</div>';
 				
-		var clickedElem = jQuery(this);
+	// 	var clickedElem = jQuery(this);
 
-		myCallbackForm = function(v,m,f) {
-		
-			if (v != undefined && v == true)
-			{
-				jQuery.ajax({
-					   type: "POST",
-					   url: ajaxurl,
-					   data: {
-						   action: 'ajaxUpdateTabSettings',
-						   type: 'map',
-						   id: tabId,
-						   'var': f["wx-input-map-start-lat"] + ',' + f["wx-input-map-start-long"] + ',' + f["wx-input-map-start-zoom"] + ',' + f["wx-input-map-marker"],
-						   nonce: nonce
-					   },
-					   success: function(msg){
-						   jQuery('#wx-modal-loading-text').html(msg);
-						   jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-				  	     	document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#mapTab";
-				  	     	document.location.reload(true);
-					   },
-					   error: function(v,msg){
-						   jQuery('#wx-modal-loading-text').html(msg);
+	// 	myCallbackForm = function(v,m,f) {
+	// 		alert('myCallbackForm');
+	// 		if (v != undefined && v == true)
+	// 		{
+	// 			jQuery.ajax({
+	// 				   type: "POST",
+	// 				   url: ajaxurl,
+	// 				   data: {
+	// 					   action: 'ajaxUpdateTabSettings',
+	// 					   type: 'map',
+	// 					   id: tabId,
+	// 					   'var': f["wx-input-map-start-lat"] + ',' + f["wx-input-map-start-long"] + ',' + f["wx-input-map-start-zoom"] + ',' + f["wx-input-map-marker"],
+	// 					   nonce: nonce
+	// 				   },
+	// 				   success: function(msg){
+	// 					   jQuery('#wx-modal-loading-text').html(msg);
+	// 					   jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+	// 			  	     	document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#mapTab";
+	// 			  	     	document.location.reload(true);
+	// 				   },
+	// 				   error: function(v,msg){
+	// 					   jQuery('#wx-modal-loading-text').html(msg);
 					    
-					     	jQuery('#wx-modal-secondary-text').html('');
-					     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-					   }
-					 });			
-			}
-		}
+	// 				     	jQuery('#wx-modal-secondary-text').html('');
+	// 				     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 				   }
+	// 				 });			
+	// 		}
+	// 	}
 		
-		submitCheck = function(v,m,f){
+	// 	submitCheck = function(v,m,f){
 			
-			an = m.children('#alertName');
+	// 		an = m.children('#alertName');
 		
-			if(f.alertName == "" && v == true){
-				an.css("border","solid #ff0000 1px");
-				return false;
-			}
+	// 		if(f.alertName == "" && v == true){
+	// 			an.css("border","solid #ff0000 1px");
+	// 			return false;
+	// 		}
 			
-			return true;
+	// 		return true;
 		
-		}		
+	// 	}		
 		
-		var mapSettings = jQuery.prompt(txt, {
-				callback: myCallbackForm, 
-				submit: submitCheck,
-				overlayspeed: "fast",
-				width: 500,
-				buttons: {  Cancel: false, Submit: true },
-				focus: 1
-				});
+	// 	var mapSettings = jQuery.prompt(txt, {
+	// 			callback: myCallbackForm, 
+	// 			submit: submitCheck,
+	// 			overlayspeed: "fast",
+	// 			width: 500,
+	// 			buttons: {  Cancel: false, Submit: true },
+	// 			focus: 1
+	// 			});
 		
-	});
+	// });
 	
 
-	jQuery('#wx-select-aboutapp-settings').click(function(event) {
+	// jQuery('#wx-select-aboutapp-settings').click(function(event) {
 		
-		event.preventDefault();
+	// 	event.preventDefault();
 		
-		var aboutappAnimate = jQuery("input#wx-aboutapp-animate").val(),
-		aboutappAnimateDuration = jQuery("input#wx-aboutapp-animate-duration").val(),
-		aboutappHeaders = jQuery("input#wx-aboutapp-headers").val(),
-		timeout = jQuery("input#wx-aboutapp-timeout").val(),
-		siteKey = jQuery("input#wx-site-key").val(),
-		tabId = jQuery("input#wx-aboutapp-tab-id").val();
-		var nonce = jQuery("input#nonce").val();		
+	// 	var aboutappAnimate = jQuery("input#wx-aboutapp-animate").val(),
+	// 	aboutappAnimateDuration = jQuery("input#wx-aboutapp-animate-duration").val(),
+	// 	aboutappHeaders = jQuery("input#wx-aboutapp-headers").val(),
+	// 	timeout = jQuery("input#wx-aboutapp-timeout").val(),
+	// 	siteKey = jQuery("input#wx-site-key").val(),
+	// 	tabId = jQuery("input#wx-aboutapp-tab-id").val();
+	// 	var nonce = jQuery("input#nonce").val();		
 	
-		if (aboutappAnimate == "fade") {
-			var selected = 'selected="selected"';
-		} else {
-			var selected = null;	
-		}
+	// 	if (aboutappAnimate == "fade") {
+	// 		var selected = 'selected="selected"';
+	// 	} else {
+	// 		var selected = null;	
+	// 	}
 		
-		if (aboutappHeaders == "true") {
-			var selectedHeader = 'selected="selected"';
-		} else {
-			var selectedHeader = null;	
-		}
+	// 	if (aboutappHeaders == "true") {
+	// 		var selectedHeader = 'selected="selected"';
+	// 	} else {
+	// 		var selectedHeader = null;	
+	// 	}
 		
-		switch (aboutappAnimateDuration) {
+	// 	switch (aboutappAnimateDuration) {
 		
-			case "1450": 
-				var defaultDuration = 'selected="selected"';
-				break;
-			case "1925":
-				var longDuration = 'selected="selected"';
-				break;
-			case "725":
-				var shortDuration = 'selected="selected"';
-				break;
-			default:	
-				var defaultDuration = 'selected="selected"';
-				break;
-		}	
+	// 		case "1450": 
+	// 			var defaultDuration = 'selected="selected"';
+	// 			break;
+	// 		case "1925":
+	// 			var longDuration = 'selected="selected"';
+	// 			break;
+	// 		case "725":
+	// 			var shortDuration = 'selected="selected"';
+	// 			break;
+	// 		default:	
+	// 			var defaultDuration = 'selected="selected"';
+	// 			break;
+	// 	}	
 		
-		switch (timeout) {
+	// 	switch (timeout) {
 		
-			case "4500": 
-				var shortTimeout = 'selected="selected"';
-				break;
-			case "7250":
-				var defaultTimeout = 'selected="selected"';
-				break;
-			case "10000":
-				var longTimeout = 'selected="selected"';
-				break;
-			default:	
-				var defaultTimeout = 'selected="selected"';
-				break;
-		}	
+	// 		case "4500": 
+	// 			var shortTimeout = 'selected="selected"';
+	// 			break;
+	// 		case "7250":
+	// 			var defaultTimeout = 'selected="selected"';
+	// 			break;
+	// 		case "10000":
+	// 			var longTimeout = 'selected="selected"';
+	// 			break;
+	// 		default:	
+	// 			var defaultTimeout = 'selected="selected"';
+	// 			break;
+	// 	}	
 		
-		var txt = 	'<table class="admintable">'+
-					'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_PANEL_TRANSITION_ANIMATIONS+'</h3>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TRANSITION_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_TRANSITION_TOGGLE+'</td>'+
-					'<td><select name="wx-input-aboutapp-animate"><option value="none">'+
-					WPText.WEEVER_CONFIG_DISABLED+'</option>'+
-					'<option value="fade" '+selected+'>'+WPText.WEEVER_CONFIG_ENABLED+'</option></select>'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_aboutapp_TRANSITION_DURATION_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION+'</td>'+
-					'<td><select name="wx-input-aboutapp-animate-duration"><option value="725" '+shortDuration+'>'+
-					WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_SHORT+'</option>'+
-					'<option value="1450" '+defaultDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_DEFAULT+
-					'</option>'+
-					'<option value="1925" '+longDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_LONG+
-					'</option></select>'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_aboutapp_TIMEOUT_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_TIMEOUT+'</td>'+
-					'<td><select name="wx-input-aboutapp-timeout"><option value="4500" '+shortTimeout+'>'+
-					WPText.WEEVER_JS_PANEL_TIMEOUT_SHORT+'</option>'+
-					'<option value="7250" '+defaultTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_DEFAULT+
-					'</option>'+
-					'<option value="10000" '+longTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_LONG+
-					'</option></select>'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_HEADERS_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_HEADERS+'</td>'+
-					'<td><select name="wx-input-aboutapp-headers"><option value="false">'+
-					WPText.WEEVER_CONFIG_DISABLED+'</option>'+
-					'<option value="true" '+selectedHeader+'>'+WPText.WEEVER_CONFIG_ENABLED+
-					'</option></select>'+
-					'</td></tr></table>';
+	// 	var txt = 	'<table class="admintable">'+
+	// 				'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_PANEL_TRANSITION_ANIMATIONS+'</h3>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TRANSITION_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_TRANSITION_TOGGLE+'</td>'+
+	// 				'<td><select name="wx-input-aboutapp-animate"><option value="none">'+
+	// 				WPText.WEEVER_CONFIG_DISABLED+'</option>'+
+	// 				'<option value="fade" '+selected+'>'+WPText.WEEVER_CONFIG_ENABLED+'</option></select>'+
+	// 				'</td></tr>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_aboutapp_TRANSITION_DURATION_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION+'</td>'+
+	// 				'<td><select name="wx-input-aboutapp-animate-duration"><option value="725" '+shortDuration+'>'+
+	// 				WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_SHORT+'</option>'+
+	// 				'<option value="1450" '+defaultDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_DEFAULT+
+	// 				'</option>'+
+	// 				'<option value="1925" '+longDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_LONG+
+	// 				'</option></select>'+
+	// 				'</td></tr>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_aboutapp_TIMEOUT_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_TIMEOUT+'</td>'+
+	// 				'<td><select name="wx-input-aboutapp-timeout"><option value="4500" '+shortTimeout+'>'+
+	// 				WPText.WEEVER_JS_PANEL_TIMEOUT_SHORT+'</option>'+
+	// 				'<option value="7250" '+defaultTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_DEFAULT+
+	// 				'</option>'+
+	// 				'<option value="10000" '+longTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_LONG+
+	// 				'</option></select>'+
+	// 				'</td></tr>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_HEADERS_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_HEADERS+'</td>'+
+	// 				'<td><select name="wx-input-aboutapp-headers"><option value="false">'+
+	// 				WPText.WEEVER_CONFIG_DISABLED+'</option>'+
+	// 				'<option value="true" '+selectedHeader+'>'+WPText.WEEVER_CONFIG_ENABLED+
+	// 				'</option></select>'+
+	// 				'</td></tr></table>';
 					
-		var clickedElem = jQuery(this);
+	// 	var clickedElem = jQuery(this);
 					
-		myCallbackForm = function(v,m,f) {
-		
-			if (v != undefined && v == true)
-			{ 
-				/*var animate = encodeURIComponent(f["wx-input-aboutapp-animate"]),
-					animateDuration = encodeURIComponent(f["wx-input-aboutapp-animate-duration"]),
-					timeout = encodeURIComponent(f["wx-input-aboutapp-timeout"]),
-					headers = encodeURIComponent(f["wx-input-aboutapp-headers"]);*/
+	// 	myCallbackForm = function(v,m,f) {
+	// 		alert('myCallbackForm2');
+	// 		if (v != undefined && v == true)
+	// 		{ 
+	// 			/*var animate = encodeURIComponent(f["wx-input-aboutapp-animate"]),
+	// 				animateDuration = encodeURIComponent(f["wx-input-aboutapp-animate-duration"]),
+	// 				timeout = encodeURIComponent(f["wx-input-aboutapp-timeout"]),
+	// 				headers = encodeURIComponent(f["wx-input-aboutapp-headers"]);*/
 
-					jQuery.ajax({
-					   type: "POST",
-					   url: ajaxurl,
-					   data: {
-						   action: 'ajaxUpdateTabSettings',
-						   type: 'aboutapp',
-						   id: tabId,
-						   'var': f["wx-input-aboutapp-animate"] + ',' + f["wx-input-aboutapp-animate-duration"] + ',' + f["wx-input-aboutapp-timeout"] + ',' + f["wx-input-aboutapp-headers"],
-						   nonce: nonce
-					   },
-					   success: function(msg){
-						   jQuery('#wx-modal-loading-text').html(msg);
-						   jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-				  	     	document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#aboutappTab";
-				  	     	document.location.reload(true);
-					   },
-					   error: function(v,msg){
-						   jQuery('#wx-modal-loading-text').html(msg);
+	// 				jQuery.ajax({
+	// 				   type: "POST",
+	// 				   url: ajaxurl,
+	// 				   data: {
+	// 					   action: 'ajaxUpdateTabSettings',
+	// 					   type: 'aboutapp',
+	// 					   id: tabId,
+	// 					   'var': f["wx-input-aboutapp-animate"] + ',' + f["wx-input-aboutapp-animate-duration"] + ',' + f["wx-input-aboutapp-timeout"] + ',' + f["wx-input-aboutapp-headers"],
+	// 					   nonce: nonce
+	// 				   },
+	// 				   success: function(msg){
+	// 					   jQuery('#wx-modal-loading-text').html(msg);
+	// 					   jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+	// 			  	     	document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#aboutappTab";
+	// 			  	     	document.location.reload(true);
+	// 				   },
+	// 				   error: function(v,msg){
+	// 					   jQuery('#wx-modal-loading-text').html(msg);
 					    
-					     	jQuery('#wx-modal-secondary-text').html('');
-					     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-					   }
-					 });
+	// 				     	jQuery('#wx-modal-secondary-text').html('');
+	// 				     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 				   }
+	// 				 });
 			
-			}
-		}	
+	// 		}
+	// 	}	
 		
-		submitCheck = function(v,m,f){
+	// 	submitCheck = function(v,m,f){
 			
-			an = m.children('#alertName');
+	// 		an = m.children('#alertName');
 		
-			if(f.alertName == "" && v == true){
-				an.css("border","solid #ff0000 1px");
-				return false;
-			}
+	// 		if(f.alertName == "" && v == true){
+	// 			an.css("border","solid #ff0000 1px");
+	// 			return false;
+	// 		}
 			
-			return true;
+	// 		return true;
 		
-		}		
+	// 	}		
 		
-		var aniSettings = jQuery.prompt(txt, {
-				callback: myCallbackForm, 
-				submit: submitCheck,
-				overlayspeed: "fast",
-				buttons: {  Cancel: false, Submit: true },
-				focus: 1
-				});
+	// 	var aniSettings = jQuery.prompt(txt, {
+	// 			callback: myCallbackForm, 
+	// 			submit: submitCheck,
+	// 			overlayspeed: "fast",
+	// 			buttons: {  Cancel: false, Submit: true },
+	// 			focus: 1
+	// 			});
 				
-		jQuery('input#alertName').select();
+	// 	jQuery('input#alertName').select();
 		
-	});	
+	// });	
 	
-	jQuery('#wx-select-panel-settings').click(function(event) {
+	// jQuery('#wx-select-panel-settings').click(function(event) {
 		
-		event.preventDefault();
+	// 	event.preventDefault();
 		
-		var panelAnimate = jQuery("input#wx-panel-animate").val(),
-		panelAnimateDuration = jQuery("input#wx-panel-animate-duration").val(),
-		panelHeaders = jQuery("input#wx-panel-headers").val(),
-		timeout = jQuery("input#wx-panel-timeout").val(),
-		siteKey = jQuery("input#wx-site-key").val(),
-		tabId = jQuery("input#wx-panel-tab-id").val();
-		var nonce = jQuery("input#nonce").val();		
+	// 	var panelAnimate = jQuery("input#wx-panel-animate").val(),
+	// 	panelAnimateDuration = jQuery("input#wx-panel-animate-duration").val(),
+	// 	panelHeaders = jQuery("input#wx-panel-headers").val(),
+	// 	timeout = jQuery("input#wx-panel-timeout").val(),
+	// 	siteKey = jQuery("input#wx-site-key").val(),
+	// 	tabId = jQuery("input#wx-panel-tab-id").val();
+	// 	var nonce = jQuery("input#nonce").val();		
 	
-		if (panelAnimate == "fade") {
-			var selected = 'selected="selected"';
-		} else {
-			var selected = null;	
-		}
+	// 	if (panelAnimate == "fade") {
+	// 		var selected = 'selected="selected"';
+	// 	} else {
+	// 		var selected = null;	
+	// 	}
 		
-		if (panelHeaders == "true") {
-			var selectedHeader = 'selected="selected"';
-		} else {
-			var selectedHeader = null;	
-		}
+	// 	if (panelHeaders == "true") {
+	// 		var selectedHeader = 'selected="selected"';
+	// 	} else {
+	// 		var selectedHeader = null;	
+	// 	}
 		
-		switch (panelAnimateDuration) {
+	// 	switch (panelAnimateDuration) {
 		
-			case "1450": 
-				var defaultDuration = 'selected="selected"';
-				break;
-			case "1925":
-				var longDuration = 'selected="selected"';
-				break;
-			case "725":
-				var shortDuration = 'selected="selected"';
-				break;
-			default:	
-				var defaultDuration = 'selected="selected"';
-				break;
-		}	
+	// 		case "1450": 
+	// 			var defaultDuration = 'selected="selected"';
+	// 			break;
+	// 		case "1925":
+	// 			var longDuration = 'selected="selected"';
+	// 			break;
+	// 		case "725":
+	// 			var shortDuration = 'selected="selected"';
+	// 			break;
+	// 		default:	
+	// 			var defaultDuration = 'selected="selected"';
+	// 			break;
+	// 	}	
 		
-		switch (timeout) {
+	// 	switch (timeout) {
 		
-			case "4500": 
-				var shortTimeout = 'selected="selected"';
-				break;
-			case "7250":
-				var defaultTimeout = 'selected="selected"';
-				break;
-			case "10000":
-				var longTimeout = 'selected="selected"';
-				break;
-			default:	
-				var defaultTimeout = 'selected="selected"';
-				break;
-		}	
+	// 		case "4500": 
+	// 			var shortTimeout = 'selected="selected"';
+	// 			break;
+	// 		case "7250":
+	// 			var defaultTimeout = 'selected="selected"';
+	// 			break;
+	// 		case "10000":
+	// 			var longTimeout = 'selected="selected"';
+	// 			break;
+	// 		default:	
+	// 			var defaultTimeout = 'selected="selected"';
+	// 			break;
+	// 	}	
 		
-		var txt = 	'<table class="admintable">'+
-					'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_PANEL_TRANSITION_ANIMATIONS+'</h3>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TRANSITION_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_TRANSITION_TOGGLE+'</td>'+
-					'<td><select name="wx-input-panel-animate"><option value="none">'+
-					WPText.WEEVER_CONFIG_DISABLED+'</option>'+
-					'<option value="fade" '+selected+'>'+WPText.WEEVER_CONFIG_ENABLED+'</option></select>'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION+'</td>'+
-					'<td><select name="wx-input-panel-animate-duration"><option value="725" '+shortDuration+'>'+
-					WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_SHORT+'</option>'+
-					'<option value="1450" '+defaultDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_DEFAULT+
-					'</option>'+
-					'<option value="1925" '+longDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_LONG+
-					'</option></select>'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TIMEOUT_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_TIMEOUT+'</td>'+
-					'<td><select name="wx-input-panel-timeout"><option value="4500" '+shortTimeout+'>'+
-					WPText.WEEVER_JS_PANEL_TIMEOUT_SHORT+'</option>'+
-					'<option value="7250" '+defaultTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_DEFAULT+
-					'</option>'+
-					'<option value="10000" '+longTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_LONG+
-					'</option></select>'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_HEADERS_TOOLTIP+
-					'">'+WPText.WEEVER_JS_PANEL_HEADERS+'</td>'+
-					'<td><select name="wx-input-panel-headers"><option value="false">'+
-					WPText.WEEVER_CONFIG_DISABLED+'</option>'+
-					'<option value="true" '+selectedHeader+'>'+WPText.WEEVER_CONFIG_ENABLED+
-					'</option></select>'+
-					'</td></tr></table>';
+	// 	var txt = 	'<table class="admintable">'+
+	// 				'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_PANEL_TRANSITION_ANIMATIONS+'</h3>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TRANSITION_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_TRANSITION_TOGGLE+'</td>'+
+	// 				'<td><select name="wx-input-panel-animate"><option value="none">'+
+	// 				WPText.WEEVER_CONFIG_DISABLED+'</option>'+
+	// 				'<option value="fade" '+selected+'>'+WPText.WEEVER_CONFIG_ENABLED+'</option></select>'+
+	// 				'</td></tr>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION+'</td>'+
+	// 				'<td><select name="wx-input-panel-animate-duration"><option value="725" '+shortDuration+'>'+
+	// 				WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_SHORT+'</option>'+
+	// 				'<option value="1450" '+defaultDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_DEFAULT+
+	// 				'</option>'+
+	// 				'<option value="1925" '+longDuration+'>'+WPText.WEEVER_JS_PANEL_TRANSITION_DURATION_LONG+
+	// 				'</option></select>'+
+	// 				'</td></tr>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_TIMEOUT_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_TIMEOUT+'</td>'+
+	// 				'<td><select name="wx-input-panel-timeout"><option value="4500" '+shortTimeout+'>'+
+	// 				WPText.WEEVER_JS_PANEL_TIMEOUT_SHORT+'</option>'+
+	// 				'<option value="7250" '+defaultTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_DEFAULT+
+	// 				'</option>'+
+	// 				'<option value="10000" '+longTimeout+'>'+WPText.WEEVER_JS_PANEL_TIMEOUT_LONG+
+	// 				'</option></select>'+
+	// 				'</td></tr>'+
+	// 				'<tr><td class="key hasTip" title="'+WPText.WEEVER_JS_PANEL_HEADERS_TOOLTIP+
+	// 				'">'+WPText.WEEVER_JS_PANEL_HEADERS+'</td>'+
+	// 				'<td><select name="wx-input-panel-headers"><option value="false">'+
+	// 				WPText.WEEVER_CONFIG_DISABLED+'</option>'+
+	// 				'<option value="true" '+selectedHeader+'>'+WPText.WEEVER_CONFIG_ENABLED+
+	// 				'</option></select>'+
+	// 				'</td></tr></table>';
 					
-		var clickedElem = jQuery(this);
+	// 	var clickedElem = jQuery(this);
 					
-		myCallbackForm = function(v,m,f) {
-		
-			if (v != undefined && v == true)
-			{ 
-				/*var animate = encodeURIComponent(f["wx-input-panel-animate"]),
-					animateDuration = encodeURIComponent(f["wx-input-panel-animate-duration"]),
-					timeout = encodeURIComponent(f["wx-input-panel-timeout"]),
-					headers = encodeURIComponent(f["wx-input-panel-headers"]);*/
+	// 	myCallbackForm = function(v,m,f) {
+	// 		if (v != undefined && v == true)
+	// 		{ 
+	// 			/*var animate = encodeURIComponent(f["wx-input-panel-animate"]),
+	// 				animateDuration = encodeURIComponent(f["wx-input-panel-animate-duration"]),
+	// 				timeout = encodeURIComponent(f["wx-input-panel-timeout"]),
+	// 				headers = encodeURIComponent(f["wx-input-panel-headers"]);*/
 
-					jQuery.ajax({
-					   type: "POST",
-					   url: ajaxurl,
-					   data: {
-						   action: 'ajaxUpdateTabSettings',
-						   type: 'panel',
-						   id: tabId,
-						   'var': f["wx-input-panel-animate"] + ',' + f["wx-input-panel-animate-duration"] + ',' + f["wx-input-panel-timeout"] + ',' + f["wx-input-panel-headers"],
-						   nonce: nonce
-					   },
-					   success: function(msg){
-						   jQuery('#wx-modal-loading-text').html(msg);
-						   jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-				  	     	document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#panelTab";
-				  	     	document.location.reload(true);
-					   },
-					   error: function(v,msg){
-						   jQuery('#wx-modal-loading-text').html(msg);
+	// 				jQuery.ajax({
+	// 				   type: "POST",
+	// 				   url: ajaxurl,
+	// 				   data: {
+	// 					   action: 'ajaxUpdateTabSettings',
+	// 					   type: 'panel',
+	// 					   id: tabId,
+	// 					   'var': f["wx-input-panel-animate"] + ',' + f["wx-input-panel-animate-duration"] + ',' + f["wx-input-panel-timeout"] + ',' + f["wx-input-panel-headers"],
+	// 					   nonce: nonce
+	// 				   },
+	// 				   success: function(msg){
+	// 					   jQuery('#wx-modal-loading-text').html(msg);
+	// 					   jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+	// 			  	     	document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+"#panelTab";
+	// 			  	     	document.location.reload(true);
+	// 				   },
+	// 				   error: function(v,msg){
+	// 					   jQuery('#wx-modal-loading-text').html(msg);
 					    
-					     	jQuery('#wx-modal-secondary-text').html('');
-					     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-					   }
-					 });
+	// 				     	jQuery('#wx-modal-secondary-text').html('');
+	// 				     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 				   }
+	// 				 });
 			
-			}
-		}	
+	// 		}
+	// 	}	
 		
-		submitCheck = function(v,m,f){
+	// 	submitCheck = function(v,m,f){
 			
-			an = m.children('#alertName');
+	// 		an = m.children('#alertName');
 		
-			if(f.alertName == "" && v == true){
-				an.css("border","solid #ff0000 1px");
-				return false;
-			}
+	// 		if(f.alertName == "" && v == true){
+	// 			an.css("border","solid #ff0000 1px");
+	// 			return false;
+	// 		}
 			
-			return true;
+	// 		return true;
 		
-		}		
+	// 	}		
 		
-		var aniSettings = jQuery.prompt(txt, {
-				callback: myCallbackForm, 
-				submit: submitCheck,
-				overlayspeed: "fast",
-				buttons: {  Cancel: false, Submit: true },
-				focus: 1
-				});
+	// 	var aniSettings = jQuery.prompt(txt, {
+	// 			callback: myCallbackForm, 
+	// 			submit: submitCheck,
+	// 			overlayspeed: "fast",
+	// 			buttons: {  Cancel: false, Submit: true },
+	// 			focus: 1
+	// 			});
 				
-		jQuery('input#alertName').select();
+	// 	jQuery('input#alertName').select();
 		
-	});
+	// });
 	
 });

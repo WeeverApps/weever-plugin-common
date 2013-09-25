@@ -100,11 +100,6 @@ wxApp = wxApp || {};
             wx.log('deleting subtab');
             wx.log(subTab);
             this.model.deleteSubTab(subTab);
-        },
-
-        iconEdit: function() {
-            // TODO: Change this to a view/template?
-            wx.updateIconDialog( this.model.get('id'), this.model.get('icon_id'), this.$el.find('.wx-nav-icon') );
         }
     });
 })(jQuery);

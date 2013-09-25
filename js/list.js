@@ -108,50 +108,50 @@ wx.log = function(message) {
 
 jQuery(document).ready(function() {
 
-    wx.updateIconDialog = function(tab_id, default_icon_id, update_icon_elem) {
-        var nonce = jQuery("input#nonce").val();
+    // wx.updateIconDialog = function(tab_id, default_icon_id, update_icon_elem) {
+    //     var nonce = jQuery("input#nonce").val();
 
-        wx.update_icon_preview(default_icon_id);
+    //     wx.update_icon_preview(default_icon_id);
 
-        jQuery('#wx-change-icon-dialog').dialog({
-            modal: 		true,
-            resizable: 	false,
-            width: 		'auto',
-            height: 	'auto',
-            title:		'Change Icon',
-            show:		'fade',
-            hide:		'drop',
-            buttons: 	{
-                'Finish': function() {
-                    jQuery.ajax({
-                        type: "POST",
-                        url: ajaxurl,
-                        data: {
-                            action: 'ajaxSaveTabIcon',
-                            icon_id: jQuery('#wx-change-icon-dialog select.wx-icon-picker').val(),
-                            tab_id: tab_id,
-                            nonce: nonce
-                        },
-                        success: function(msg){
-                            jQuery('#wx-modal-loading-text').html(msg);
-                            jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-                            if ( typeof update_icon_elem != 'undefined' )
-                                update_icon_elem.html('<img class="wx-nav-icon-img" src="' + jQuery('#wx-change-icon-dialog img.wx-icon-picker-preview').attr('src') + '" />');
-                            jQuery('#wx-change-icon-dialog').dialog('close');
-                        },
-                        error: function(v,msg){
-                            jQuery('#wx-modal-loading-text').html(msg);
-                            jQuery('#wx-modal-secondary-text').html('');
-                            jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-                        }
-                    });
-                },
-                'Cancel': function() {
-                    jQuery(this).dialog('close');
-                }
-            }
-        });
-    }
+    //     jQuery('#wx-change-icon-dialog').dialog({
+    //         modal: 		true,
+    //         resizable: 	false,
+    //         width: 		'auto',
+    //         height: 	'auto',
+    //         title:		'Change Icon',
+    //         show:		'fade',
+    //         hide:		'drop',
+    //         buttons: 	{
+    //             'Finish': function() {
+    //                 jQuery.ajax({
+    //                     type: "POST",
+    //                     url: ajaxurl,
+    //                     data: {
+    //                         action: 'ajaxSaveTabIcon',
+    //                         icon_id: jQuery('#wx-change-icon-dialog select.wx-icon-picker').val(),
+    //                         tab_id: tab_id,
+    //                         nonce: nonce
+    //                     },
+    //                     success: function(msg){
+    //                         jQuery('#wx-modal-loading-text').html(msg);
+    //                         jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+    //                         if ( typeof update_icon_elem != 'undefined' )
+    //                             update_icon_elem.html('<img class="wx-nav-icon-img" src="' + jQuery('#wx-change-icon-dialog img.wx-icon-picker-preview').attr('src') + '" />');
+    //                         jQuery('#wx-change-icon-dialog').dialog('close');
+    //                     },
+    //                     error: function(v,msg){
+    //                         jQuery('#wx-modal-loading-text').html(msg);
+    //                         jQuery('#wx-modal-secondary-text').html('');
+    //                         jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+    //                     }
+    //                 });
+    //             },
+    //             'Cancel': function() {
+    //                 jQuery(this).dialog('close');
+    //             }
+    //         }
+    //     });
+    // }
 
     wx.update_icon_preview = function(icon_id) {
         // Update the icon preview
@@ -853,13 +853,6 @@ jQuery(document).ready(function(){
 	jQuery('li.wx-nav-tabs a').click(function() {
     });
 
-    jQuery('a.wx-edit-subtab-icon').click(function(event){
-        var tab_id = jQuery(this).attr('tab_id');
-        var icon_id = jQuery(this).attr('icon_id');
-        event.preventDefault();
-        wx.updateIconDialog(tab_id, icon_id);
-    })
-
 	jQuery('a.wx-nav-icon-edit').click(function(event){
 		var tab_id = jQuery(this).attr('rel');
 		jQuery('#' + tab_id + 'TabID .wx-nav-icon').dblclick();
@@ -1164,100 +1157,99 @@ jQuery(document).ready(function(){
 
 	});
 	
-	jQuery("a.wx-subtab-publish").click(function(event) {
+	// jQuery("a.wx-subtab-publish").click(function(event) {
 	
-		var nonce = jQuery("input#nonce").val();		
-		var tabId = jQuery(this).attr('title');
-		tabId = tabId.substring(4);
-		var clickedElem = jQuery(this);
-		var statustext = jQuery(this).parents("tr:first").find(".wx-subtab-publish-text:first");
-		var pubStatus = jQuery(this).attr('rel');
-		var unpublishedIcon = 'Unpublished'; //'<img src="'+WPText.WEEVER_JS_STATIC_PATH+'images/icons/publish_x.png" border="0" alt="Unpublished">';
-		var publishedIcon = 'Published'; //'<img src="'+WPText.WEEVER_JS_STATIC_PATH+'images/icons/tick.png" border="0" alt="Published">';
+	// 	var nonce = jQuery("input#nonce").val();		
+	// 	var tabId = jQuery(this).attr('title');
+	// 	tabId = tabId.substring(4);
+	// 	var clickedElem = jQuery(this);
+	// 	var statustext = jQuery(this).parents("tr:first").find(".wx-subtab-publish-text:first");
+	// 	var pubStatus = jQuery(this).attr('rel');
+	// 	var unpublishedIcon = 'Unpublished'; //'<img src="'+WPText.WEEVER_JS_STATIC_PATH+'images/icons/publish_x.png" border="0" alt="Unpublished">';
+	// 	var publishedIcon = 'Published'; //'<img src="'+WPText.WEEVER_JS_STATIC_PATH+'images/icons/tick.png" border="0" alt="Published">';
 
-		event.preventDefault();
+	// 	event.preventDefault();
 		
-		jQuery.ajax({
-		   type: "POST",
-		   url: ajaxurl,
-		   data: {
-			   action: 'ajaxTabPublish',
-			   status: pubStatus,
-			   id: tabId,
-			   nonce: nonce
-		   },
-		   success: function(msg){
-		     jQuery('#wx-modal-loading-text').html(msg);
+	// 	jQuery.ajax({
+	// 	   type: "POST",
+	// 	   url: ajaxurl,
+	// 	   data: {
+	// 		   action: 'ajaxTabPublish',
+	// 		   status: pubStatus,
+	// 		   id: tabId,
+	// 		   nonce: nonce
+	// 	   },
+	// 	   success: function(msg){
+	// 	     jQuery('#wx-modal-loading-text').html(msg);
 		     
-	     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+	//      	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
 	     	
-	     	if(pubStatus == 1)
-	     	{
-	     		//clickedElem.html(unpublishedIcon);
-	     		clickedElem.attr('rel', 0);
-     			// Status text
-     			statustext.html(unpublishedIcon);
-	     	}
-	     	else
-	     	{
-	     		//clickedElem.html(publishedIcon);
-	     		clickedElem.attr('rel', 1);
-     			// Status text
-     			statustext.html(publishedIcon);
-	     	}
-		   },
-		   error: function(v,msg){
-			     jQuery('#wx-modal-loading-text').html(msg);
+	//      	if(pubStatus == 1)
+	//      	{
+	//      		//clickedElem.html(unpublishedIcon);
+	//      		clickedElem.attr('rel', 0);
+ //     			// Status text
+ //     			statustext.html(unpublishedIcon);
+	//      	}
+	//      	else
+	//      	{
+	//      		//clickedElem.html(publishedIcon);
+	//      		clickedElem.attr('rel', 1);
+ //     			// Status text
+ //     			statustext.html(publishedIcon);
+	//      	}
+	// 	   },
+	// 	   error: function(v,msg){
+	// 		     jQuery('#wx-modal-loading-text').html(msg);
 		   
-		     	jQuery('#wx-modal-secondary-text').html('');
-		     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-		   }
-		 });
+	// 	     	jQuery('#wx-modal-secondary-text').html('');
+	// 	     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+	// 	   }
+	// 	 });
 	
-	});
+	// });
 	
-		jQuery("a.wx-subtab-delete").click(function() {
-		
-			var tabId = jQuery(this).attr('title');
-			tabId = tabId.substring(4);
-			var nonce = jQuery("input#nonce").val();
-			var tabName = jQuery(this).attr('alt');
-			var deleteButton = this;
-			var confDelete = confirm(WPText.WEEVER_JS_ARE_YOU_SURE_YOU_WANT_TO+tabName+WPText.WEEVER_JS_QUESTION_MARK);
+		// jQuery("a.wx-subtab-delete").click(function() {
+		// 	var tabId = jQuery(this).attr('title');
+		// 	tabId = tabId.substring(4);
+		// 	var nonce = jQuery("input#nonce").val();
+		// 	var tabName = jQuery(this).attr('alt');
+		// 	var deleteButton = this;
+		// 	var confDelete = confirm(WPText.WEEVER_JS_ARE_YOU_SURE_YOU_WANT_TO+tabName+WPText.WEEVER_JS_QUESTION_MARK);
 			
-			if(!confDelete)
-				return false;
+		// 	if(!confDelete)
+		// 		return false;
 			
-			// Close any open dialogs
-			jQuery('.ui-dialog-content').dialog('close');
+		// 	// Close any open dialogs
+		// 	jQuery('.ui-dialog-content').dialog('close');
 			
-			jQuery.ajax({
-			   type: "POST",
-			   url: ajaxurl,
-			   data: { 
-				   id: tabId, 
-				   nonce: nonce, 
-				   action: 'ajaxSubtabDelete' 
-			   },
-			   success: function(msg){
-			     jQuery('#wx-modal-loading-text').html(msg);
+		// 	jQuery.ajax({
+		// 	   type: "POST",
+		// 	   url: ajaxurl,
+		// 	   data: { 
+		// 		   id: tabId, 
+		// 		   nonce: nonce, 
+		// 		   action: 'ajaxSubtabDelete' 
+		// 	   },
+		// 	   success: function(msg){
+		// 	     jQuery('#wx-modal-loading-text').html(msg);
 			     
-			     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-			     	// Delete the table row this delete image is in
-			     	jQuery(deleteButton).parents("tr:first").remove();
-					document.location.reload();
-		     		//document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+'#'+tabType+'Tab';
-		     		//setTimeout("document.location.reload(true);",20);
-			   },
-			   error: function(v,msg){
-			     jQuery('#wx-modal-loading-text').html(msg);
+		// 	     	jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+		// 	     	// Delete the table row this delete image is in
+		// 	     	jQuery(deleteButton).parents("tr:first").remove();
+		// 			document.location.reload();
+		//      		//document.location.href = WPText.WEEVER_JS_ADMIN_LIST_URL+'#'+tabType+'Tab';
+		//      		//setTimeout("document.location.reload(true);",20);
+		// 	   },
+		// 	   error: function(v,msg){
+		// 	     jQuery('#wx-modal-loading-text').html(msg);
 			     
-			     	jQuery('#wx-modal-secondary-text').html('');
-			     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-			   }
-			 });
+		// 	     	jQuery('#wx-modal-secondary-text').html('');
+		// 	     	jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+		// 	   }
+		// 	 });
 		
-		});
+		// });
 	
 	
 	// jQuery("a.wx-subtab-up, a.wx-subtab-down").click(function() {
