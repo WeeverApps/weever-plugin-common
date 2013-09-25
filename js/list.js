@@ -947,55 +947,55 @@ jQuery(document).ready(function(){
 	// 	});
 	// });
 
-    jQuery('a.wx-nav-layout-edit').click(function(event){
-        var layout_item = jQuery(this);
-        var tab_id = jQuery(this).attr('rel');
-        var current_layout = jQuery(this).attr('layout');
-        var nonce = jQuery("input#nonce").val();
-        jQuery('#wx-change-layout-dialog #tab_layout_' + current_layout).attr('checked', 'checked');
+    // jQuery('a.wx-nav-layout-edit').click(function(event){
+    //     var layout_item = jQuery(this);
+    //     var tab_id = jQuery(this).attr('rel');
+    //     var current_layout = jQuery(this).attr('layout');
+    //     var nonce = jQuery("input#nonce").val();
+    //     jQuery('#wx-change-layout-dialog #tab_layout_' + current_layout).attr('checked', 'checked');
 
-        jQuery('#wx-change-layout-dialog').dialog({
-            modal: 		true,
-            resizable: 	false,
-            width: 		'auto',
-            height: 	'auto',
-            title:		'Change Layout',
-            show:		'fade',
-            hide:		'drop',
-            buttons: 	{
-                'Finish': function() {
-                    selected_layout = jQuery('#wx-change-layout-dialog input[name="tab_layout"]:checked').val();
+    //     jQuery('#wx-change-layout-dialog').dialog({
+    //         modal: 		true,
+    //         resizable: 	false,
+    //         width: 		'auto',
+    //         height: 	'auto',
+    //         title:		'Change Layout',
+    //         show:		'fade',
+    //         hide:		'drop',
+    //         buttons: 	{
+    //             'Finish': function() {
+    //                 selected_layout = jQuery('#wx-change-layout-dialog input[name="tab_layout"]:checked').val();
 
-                    jQuery.ajax({
-                        type: "POST",
-                        url: ajaxurl,
-                        data: {
-                            action: 'ajaxSaveTabLayout',
-                            layout: selected_layout,
-                            tab_id: tab_id,
-                            nonce: nonce
-                        },
-                        success: function(msg){
-                            jQuery('#wx-modal-loading-text').html(msg);
-                            jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
-                            layout_item.attr('layout', selected_layout);
-                            jQuery('#wx-change-layout-dialog').dialog('close');
-                        },
-                        error: function(v,msg){
-                            jQuery('#wx-modal-loading-text').html(msg);
-                            jQuery('#wx-modal-secondary-text').html('');
-                            jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
-                        }
-                    });
-                },
-                'Cancel': function() {
-                    jQuery(this).dialog('close');
-                }
-            }
-        })
+    //                 jQuery.ajax({
+    //                     type: "POST",
+    //                     url: ajaxurl,
+    //                     data: {
+    //                         action: 'ajaxSaveTabLayout',
+    //                         layout: selected_layout,
+    //                         tab_id: tab_id,
+    //                         nonce: nonce
+    //                     },
+    //                     success: function(msg){
+    //                         jQuery('#wx-modal-loading-text').html(msg);
+    //                         jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_APP_UPDATED);
+    //                         layout_item.attr('layout', selected_layout);
+    //                         jQuery('#wx-change-layout-dialog').dialog('close');
+    //                     },
+    //                     error: function(v,msg){
+    //                         jQuery('#wx-modal-loading-text').html(msg);
+    //                         jQuery('#wx-modal-secondary-text').html('');
+    //                         jQuery('#wx-modal-error-text').html(WPText.WEEVER_JS_SERVER_ERROR);
+    //                     }
+    //                 });
+    //             },
+    //             'Cancel': function() {
+    //                 jQuery(this).dialog('close');
+    //             }
+    //         }
+    //     })
 
-        event.preventDefault();
-    });
+    //     event.preventDefault();
+    // });
 
 	jQuery('a.wx-nav-label-edit').click(function(event){
 		var tab_id = jQuery(this).attr('rel');
