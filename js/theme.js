@@ -45,15 +45,6 @@ function cropper_show(image_width, image_height) {
     		imgselect.cancelSelection();
     		imgselect.update();
     	}
-    	/*
-    	// Set the selection and refresh the display
-    	imgselect.setSelection(0, 0, 10, 10); //image_width, image_height);
-    	imgselect.setOptions({ 
-    		//aspectRatio: image_width + ':' + image_height,
-    		show: true
-    	});
-    	
-    	imgselect.update();*/
     }
     else
         setTimeout( function() { cropper_show(image_width, image_height); }, 50);
@@ -63,11 +54,6 @@ function cropper_show(image_width, image_height) {
 
 jQuery(document).ready(function(){ 
 
-	// Function to put them on the same tab after they save
-	jQuery('#listTabsSortable a').click(function(){
-		jQuery('#themeAdminForm').attr('action', 'admin.php?page=weever-theme' + jQuery(this).attr('href'));
-	});
-	
 	// Loading for image cropper
 	jQuery('#wx-jcrop-dialog-loading').ajaxStart(function() {
 		jQuery(this).show();
@@ -104,11 +90,8 @@ jQuery(document).ready(function(){
 			jQuery('#preview-app-dialog-no-webkit').hide();
 	        jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
 			jQuery('#preview-app-dialog-webkit').show();
-	       // jQuery('#preview-app-dialog-webkit').dialog('option', 'width', 320);
-	        //jQuery('#preview-app-dialog-webkit').dialog('open');
 	    } else if (jQuery.browser.webkit == undefined || jQuery.browser.webkit == false) {
 			jQuery('#preview-app-dialog-no-webkit').show();
-	        //jQuery('#preview-app-dialog-no-webkit').dialog('open');
 	    }		
 	}, 300);
 
@@ -125,12 +108,6 @@ jQuery(document).ready(function(){
 	    var weeverUploader = new qq.FileUploader({
 	        element: jQuery(this)[0],
 	        action: ajaxurl + '?action=ajaxHandleUpload',
-	        /*template: '<div class="qq-uploader">' + 
-	        '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
-	        '<div class="qq-upload-button">Upload a file</div>' +
-	        '<ul class="qq-upload-list"></ul>' + 
-	     '</div>',*/
-	        /*fileTemplate: fileUploadTemplate(),*/
 	        debug: true,
 	        onComplete: function(id, fileName, responseJSON){
 	        	//console.debug(responseJSON);
