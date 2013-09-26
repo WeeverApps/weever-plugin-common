@@ -103,7 +103,6 @@ wx.log = function(message) {
 }
 
 jQuery(document).ready(function() {
-
 	// Initial collapse
 	if ( window.location.hash.indexOf('wxnavtip-') > -1 )
 		hide_other_boxes(window.location.hash.replace('#wxnavtip-', ''));
@@ -143,28 +142,28 @@ jQuery(document).ready(function() {
 		}
 	});
 
-    if ( typeof qq != 'undefined' ) {
-        var weeverUploader = new qq.FileUploader({
-            element: jQuery('#wx-file-uploader')[0],
-            action: ajaxurl + '?action=ajaxHandleUpload',
-            fileTemplate: fileUploadTemplate(),
-            debug: true,
-            onComplete: function(id, fileName, responseJSON){
-                //console.debug(responseJSON);
-            },
-            callback: function(url) {
-                tinyMCE.execCommand('mceFocus', false, 'wx-add-content-editor');
+    // if ( typeof qq != 'undefined' ) {
+    //     var weeverUploader = new qq.FileUploader({
+    //         element: jQuery('#wx-file-uploader')[0],
+    //         action: ajaxurl + '?action=ajaxHandleUpload',
+    //         fileTemplate: fileUploadTemplate(),
+    //         debug: true,
+    //         onComplete: function(id, fileName, responseJSON){
+    //             //console.debug(responseJSON);
+    //         },
+    //         callback: function(url) {
+    //             tinyMCE.execCommand('mceFocus', false, 'wx-add-content-editor');
 
-                jQuery("#wx-file-load").attr("src", url);
-                jQuery("#wx-upload-info").remove();
-                jQuery('#wx-add-content-editor-tmce').trigger('click');
-                 ed = "wx-add-content-editor";
-                 html = '<img src="' + url + '" />';
-                 tinyMCE.execInstanceCommand( ed, "mceInsertContent", false, html );
-                 return false;
-            }
-        });
-    }
+    //             jQuery("#wx-file-load").attr("src", url);
+    //             jQuery("#wx-upload-info").remove();
+    //             jQuery('#wx-add-content-editor-tmce').trigger('click');
+    //              ed = "wx-add-content-editor";
+    //              html = '<img src="' + url + '" />';
+    //              tinyMCE.execInstanceCommand( ed, "mceInsertContent", false, html );
+    //              return false;
+    //         }
+    //     });
+    // };
 
         function fileUploadTemplate(text) {
 			return '<div class="qq-uploader">' + 
@@ -285,7 +284,6 @@ jQuery(document).ready(function() {
 		jQuery('#' + jQuery(this).attr('id') + '-image').show();
 	});
 
-	
 	jQuery('.wx-add-new-content-button').click(function(event){
 		event.preventDefault();
         wx.add_new_content_dialog_start(jQuery(this));
@@ -473,12 +471,12 @@ jQuery(document).ready(function() {
     function removeTinyMCE() {
         //tinyMCE.execCommand('mceFocus', false, 'wx-add-content-editor');
         tinyMCE.execCommand('mceRemoveControl', false, 'wx-add-content-editor');
-    }
+    }	
 
 // });
 
 // jQuery(document).ready(function(){ 
-
+	
 	// Functions with selected list elements
 	jQuery("#wx-delete-selected, #wx-publish-selected, #wx-unpublish-selected").click(function(e) {
 		var nonce = jQuery("input#nonce").val();
@@ -606,111 +604,5 @@ jQuery(document).ready(function() {
 		var tab_id = jQuery(this).attr('rel');
 		jQuery('#'+ tab_id + 'TabID .wx-nav-label').dblclick();
 		event.preventDefault();
-	});
-
-    wx.updateTitleDialog = function(clickedElem) {
-        //var tabId = clickedElem.attr('title');
-        var tabId = clickedElem.attr('data-tab-id');
-        tabId = tabId.substring(4);
-        var siteKey = jQuery("input#wx-site-key").val();
-        var htmlName = clickedElem.html();
-        htmlName = jQuery.trim(htmlName);
-        var nonce = jQuery("input#nonce").val();
-        var txt = 	'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_ENTER_NEW_APP_ICON_NAME+'</h3>'+
-            '<input type="text" id="alertName" name="alertName" value="'+htmlName+'" />';
-
-        myCallbackForm = function(v,m,f) {
-
-            if(v != undefined && v == true)
-            {
-                tabName = f["alertName"];
-            }
-        };
-
-        submitCheck = function(v,m,f){
-
-            an = m.children('#alertName');
-
-            if(f.alertName == "" && v == true){
-                an.css("border","solid #ff0000 1px");
-                return false;
-            }
-
-            return true;
-
-        };
-
-        var tabName = jQuery.prompt(txt, {
-            callback: myCallbackForm,
-            submit: submitCheck,
-            overlayspeed: "fast",
-            buttons: {  Cancel: false, Submit: true },
-            focus: 1
-        });
-
-        jQuery('input#alertName').select();
-        // hit 'enter/return' to save
-        jQuery("input#alertName").bind("keypress", function (e) {
-            if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-                jQuery('button#jqi_state0_buttonSubmit').click();
-                return false;
-            } else {
-                return true;
-            }
-        });
-    }
-
-	jQuery('a.wx-subtab-link').click(function() {
-	
-		event.preventDefault();
-		
-		var clickedElem = jQuery(this).parents("td:first").find(".wx-subtab-link-text:first");
-		var tabId = jQuery(this).attr('title');
-		tabId = tabId.substring(4);
-		var htmlName = clickedElem.attr('title');
-		var txt = 	'<h3 class="wx-imp-h3">'+WPText.WEEVER_JS_ENTER_NEW_APP_ITEM+'</h3>'+
-					'<input type="text" id="alertName" name="alertName" value="'+htmlName+'" />';
-		var nonce = jQuery("input#nonce").val();		
-					
-		myCallbackForm = function(v,m,f) {
-		
-			if(v != undefined && v == true)
-			{
-				tabName = f["alertName"];
-			}
-		}	
-		
-		submitCheck = function(v,m,f){
-			
-			an = m.children('#alertName');
-		
-			if(f.alertName == "" && v == true){
-				an.css("border","solid #ff0000 1px");
-				return false;
-			}
-			
-			return true;
-		
-		}		
-		
-		var tabName = jQuery.prompt(txt, {
-				callback: myCallbackForm, 
-				submit: submitCheck,
-				overlayspeed: "fast",
-				buttons: {  Cancel: false, Submit: true },
-				focus: 1
-				});
-				
-		jQuery('input#alertName').select();
-		// hit 'enter/return' to save
-		jQuery("input#alertName").bind("keypress", function (e) {
-		        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-		            jQuery('button#jqi_state0_buttonSubmit').click();
-		            return false;
-		        } else {
-		            return true;
-		        }
-		    });
-
 	});
 });

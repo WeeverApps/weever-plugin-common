@@ -84,12 +84,7 @@ wxApp = wxApp || {};
 
         save: function() {
             var me = this;
-            wx.log(me.getAPIData());
-			// console.log( JSON.parse( me.getAPIData().config ) );
-			// console.log( wx.apiUrl );
-			// console.log( wx.siteKey );
-//			return; // GG
-
+           
             wx.makeApiCall( 'tabs/add_tab', me.getAPIData(), function(data) {
                 if ( ! me.get('id') ) {
                     me.set('id', data.tab_id);

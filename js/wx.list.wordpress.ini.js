@@ -18,18 +18,6 @@
 *
 */
 
-jQuery(function() {
-
-	jQuery('div#wx-list-workspace').css({ 'opacity': 1 });
-	
-	// Add link for theme tab
-	jQuery('#wx-weever-theme-link').click(function(event){
-		event.preventDefault();
-		window.location = jQuery('#wx-logo-images-theme-tab').attr('href');
-	});
-});
-
-
 /* Assembles the URL params */
 
 wx.ajaxUrl			= function(a) {

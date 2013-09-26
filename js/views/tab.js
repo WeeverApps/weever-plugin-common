@@ -16,8 +16,6 @@ wxApp = wxApp || {};
         },
 
         events: {
-            'dblclick .wx-nav-icon': 'editIcon',
-            'dblclick .wx-nav-label': 'editTitle',
             'click': 'editAll'
         },
 
@@ -54,36 +52,6 @@ wxApp = wxApp || {};
                     });
                 }
             }
-        },
-
-        editIcon: function() {
-            wx.log('editIcon');
-            /*var view = new wxApp.IconEditView({ model: this.model });
-            view.render();
-            if ( undefined !== view.$el.dialog ) {
-                view.$el.dialog({
-                    modal: 		true,
-                    resizable: 	false,
-                    width: 		'540px',
-                    height: 	'auto',
-                    title:		'Change Icon',
-                    show:		'fade',
-                    hide:		'drop',
-                    buttons: 	{}
-                });
-            }*/
-
-            var view = new wxApp.IconEditView({ model: this.model });
-            view.render();
-            $('#wx-edit-area').html( view.$el );
-        },
-
-        editTitle: function() {
-            wx.updateTitleDialog( this.$el.find('.wx-nav-label') );
-        },
-
-        editLayout: function() {
-            
         },
 
         editAll: function() {

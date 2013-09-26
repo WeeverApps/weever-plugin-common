@@ -24,7 +24,6 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            console.log('starting subtabs view render');
             this.$el.html('');
             this.startSortable();
 
@@ -34,7 +33,6 @@ wxApp = wxApp || {};
                     me.addSubTab(subTab);
                 });
             }
-            console.log('finished subtabs view render');
             return this;
         },
 
@@ -97,8 +95,6 @@ wxApp = wxApp || {};
         },
 
         deleteSubTab: function(subTab) {
-            wx.log('deleting subtab');
-            wx.log(subTab);
             this.model.deleteSubTab(subTab);
         }
     });
