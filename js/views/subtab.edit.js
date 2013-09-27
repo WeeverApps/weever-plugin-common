@@ -49,12 +49,12 @@ wxApp = wxApp || {};
             this.$el.append( this.subTabEditFooterTpl( this.model.toJSON() ) );
             this.startValidation();
             if ( this.model.validateFeed ) {
-                this.$el.find('.wx-finish-button').hide();
-                this.$el.find('.wx-edit-title-div').hide();
+                this.$('.wx-finish-button').hide();
+                this.$('.wx-edit-title-div').hide();
             } else {
-                this.$el.find('.wx-next-button').hide();
+                this.$('.wx-next-button').hide();
                 if ( ! this.model.allowTitleEdit )
-                    this.$el.find('.wx-edit-title-div').hide();
+                    this.$('.wx-edit-title-div').hide();
             }
 
             //wx.log(this.$el.html());
@@ -98,7 +98,7 @@ wxApp = wxApp || {};
 		next: function() {
             console.log('next');
 
-            this.$el.find('#dialog-loader').show();
+            this.$('#dialog-loader').show();
             
             if ( undefined !== this.$('form') && undefined != this.$('form').validate ) {
                 validator = this.$('form').validate();

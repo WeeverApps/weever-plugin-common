@@ -29,7 +29,7 @@ wxApp = wxApp || {};
         render: function() {
             wx.log('RENDERING subtabs container');
             this.$el.html( this.subTabContainerTpl( this.model ) );
-            this.$el.find('.adminlist').html( this.subTabsView.render().el );
+            this.$('.adminlist').html( this.subTabsView.render().el );
             this.$el.attr('id', this.model.get('id') + 'Tab');
             return this;
         },
