@@ -7531,7 +7531,9 @@ input.hexacolorinput {
     width: 320px;
 }
 
-.wx-form-builder-row input.hide {
+.wx-form-builder-row input.hide,
+.wx-form-builder-label-input.hide,
+.wx-form-builder-title-input.hide {
   display: none;
 }
 
@@ -7561,4 +7563,8 @@ button.button.secondary.expand.wx-add-source-icon {
 
 #wpbody {
   background: white!important;
+}
+
+label.wx-form-builder-edit-label {
+  display: inline;;
 }

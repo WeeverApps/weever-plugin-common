@@ -1,7 +1,10 @@
 <script type="text/template" id="form-builder-radio">
-	<input type="text" class="wx-form-builder-label-input hide" value="<%- label %>" />
-	<label class="wx-form-builder-edit-label"><%- label %></label>
-	<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" />
+	<fieldset>
+		<legend>Preview</legend>
+		<input type="text" class="wx-form-builder-label-input hide" value="<%- label %>" />
+		<label class="wx-form-builder-edit-label" title="Click here to edit the title!"><%- label %></label>
+		<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" />
+	</fieldset>
 	<label>
 		Checked: <input type="radio" class="wx-form-builder-control-checked" name="wx-form-builder-radio-checked-<%- collectionId %>" <%- attributes.attributes.checked %> />
 	</label>

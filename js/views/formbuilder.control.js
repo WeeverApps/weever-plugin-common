@@ -50,22 +50,28 @@ wxApp = wxApp || {};
 			var $me = $( ev.currentTarget );
 			if ( $me.val() !== '' )
 				this.model.get( 'attributes' ).set( 'placeholder', $me.val() );
+			
+			this.getInput().attr( 'placeholder', $me.val() );
 		},
 
 		setMin: function( ev ) {
 			this.model.get( 'attributes' ).set( 'min', $( ev.currentTarget ).val() );
+			this.getInput().attr( 'min', $( ev.currentTarget ).val() );
 		},
 
 		setMax: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'max', $( ev.currentTarget ).val() );
+			this.getInput().attr( 'max', $( ev.currentTarget ).val() );
 		},
 
 		setValue: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'value', $( ev.currentTarget ).val() );
+			this.getInput().val( $( ev.currentTarget ).val() );
 		},
 
 		setStep: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'step', $( ev.currentTarget ).val() );
+			this.getInput().attr( 'step', $( ev.currentTarget ).val() );
 		},
 
 		setAutocomplete: function( ev ) {
@@ -116,10 +122,21 @@ wxApp = wxApp || {};
 			var $me = $( ev.currentTarget );
 			if ( $me.is( ':checked' ) ) {
 				this.model.get( 'attributes' ).set( 'required', 'checked' );
+				$('span.required').show();
 			}
 			else {
 				this.model.get( 'attributes' ).unset( 'required' );
+				$('span.required').hide();
 			}
+		},
+
+		getInput: function() {
+			$input = this.$('.wx-form-builder-' + this.model.get('attributes').get('type') + '-input');
+			if ( $input.length == 0 ) {
+				// Must be a text area.
+				$input = this.$('.wx-form-builder-textarea');
+			}
+			return $input;
 		}
 
 	});
