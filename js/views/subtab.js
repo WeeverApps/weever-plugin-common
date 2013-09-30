@@ -44,7 +44,7 @@ wxApp = wxApp || {};
 
             var editViewName = this.model.getModelName() + 'EditView';
             if ( 'SubTabEditView' != editViewName && undefined !== wxApp[editViewName] )
-                var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area' } );
+                var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area-' + this.model.get('id') } );
             else
                 throw new Error( 'Invalid edit type ' + this.model.get('content') + '--' + editViewName );
         },
@@ -61,6 +61,13 @@ wxApp = wxApp || {};
             // Wait half a second, then refresh the preview
             // (The half-second helps ensure the server is synced)
             setTimeout( function() { wx.refreshAppPreview(); }, 500);
+        },
+
+        editIcon: function() {
+            console.log('editing icon...');
+            this.editIconView = new wxApp.IconEditView({ model: this.model });
+            this.$('#wx-edit-area-' + this.model.get('id')).html( this.editIconView.render().el );
         }
+
     });
 })(jQuery);

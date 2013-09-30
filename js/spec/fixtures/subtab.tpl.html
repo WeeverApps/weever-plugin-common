@@ -11,12 +11,12 @@
 
         <span class="wx-edit-subtab-rowactions">
             <!-- TODO: Edit page link?  Handled by model -->
-            <span class="edit_item"><a class="wx-edit-link" data-reveal-id="wx-edit-area" href="#">Edit</a></span> |
-            <span class="edit_icon"><a class="wx-edit-subtab-icon" data-reveal-id="wx-edit-area" href="#">Change Icon</a></span> |
+            <span class="edit_item"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#">Edit</a></span> |
+            <span class="edit_icon"><a class="wx-edit-subtab-icon" data-reveal-id="wx-edit-area-<%- id %>" href="#">Change Icon</a></span> |
             <span class="delete"><a href="#" class="wx-subtab-delete">Delete</a></span>
         </span>
     </div>
-    <div id="wx-edit-area" class="reveal-modal">
+    <div id="wx-edit-area-<%- id %>" class="reveal-modal">
         Please wait...
     </div>
 </script>
