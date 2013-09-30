@@ -12,7 +12,7 @@ wxApp = wxApp || {};
                 title: 'RSS Feed',
                 icon_id: 6,
                 type: 'rss',
-                content: 'html',
+                content: 'htmlRss',
                 layout: 'list',
                 config: { url: 'http://yourwebsite.com/' }
             }

@@ -12,7 +12,7 @@ wxApp = wxApp || {};
                 title: 'R3S Feed',
                 icon_id: 6,
                 type: 'r3s',
-                content: 'html',
+                content: 'htmlR3s',
                 layout: 'list',
                 config: { url: 'http://yourwebsite.com/?feed=r3s' }
             }
