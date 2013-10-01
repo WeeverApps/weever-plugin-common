@@ -1,0 +1,58 @@
+<script type="text/template" id="logo-design">
+	<p class="wx-ui-title"><?php echo __( 'logo area', 'weever' ); ?></p>
+	<p><?php echo __( 'Use <strong>image or text</strong> for the App Logo?', 'weever' ); ?></p>
+	<select id="titlebarSource" class="required" style="width: 270px">
+		<option value="text"  <%- titlebar.type == 'text'  ? "selected='selected'":"" %>><?php echo __( 'Use a Text Title', 'weever' ); ?> ("<%- titlebar.text %>")</option>
+		<option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use An Image (Upload Below)', 'weever' ); ?></option>
+		<option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use Custom CSS and HTML', 'weever' ); ?></option>
+	</select>
+
+	<div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
+		<p><?php echo __( 'If using text, please specify the logo text:' ); ?></p>
+		<input type="text" id="titlebar_title" maxlength="35" style="width: 	270px;" value="<%- titlebar.text %>" class="required" />
+	</div>
+
+	<div id="logoHtml" style="display: <%- titlebar.type == 'html' ? "block":"none" %>">
+		<p><?php echo __( 'If using HTML, please specify the logo HTML:' ); ?></p>
+		<textarea id="titlebar_html" style="width: 	270px;" rows="3"><%- titlebar.html %></textarea>
+	</div>
+
+	<div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
+		<p><?php echo __( 'If using an image, please upload an image file<span style="display: block; clear:both; color: #bbb;">Optimal size is 600 x 88px</span>', 'weever' ); ?></p>
+		<div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" img_width="600" img_height="88" class="wx-theme-file-uploader">
+			<noscript>
+				<p>Please enable JavaScript to use file uploader.</p>
+				<!-- or put a simple form for upload here -->
+				<img src="" id="wx-file-load" />
+			</noscript>
+			<input type="hidden" style="float:left;" class="wx-theme-input" id="titlebar_logo_live" size="22" />
+		</div>
+		<img id="wx-titlebar_logo_live" src="<%- titlebar.image %>" />
+	</div>
+
+	<p class="wx-ui-title"><?php echo __( 'Logo Area Colors', 'weever' ); ?></p>
+
+	<p><?php echo __( 'Logo Area Background Color', 'weever' ); ?></p>
+	<input type="text" class="hexacolorinput" id="main_titlebar_color" name="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+	<div id="main_titlebar_colorpicker"></div>
+
+	<p><?php echo __( 'Logo Area &ndash; Text Color (if using a text-based logo)', 'weever'); ?></p>
+	<input type="text" class="hexacolorinput" id="main_titlebar_text_color" name="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#000000'); ?>" />
+	<div id="main_titlebar_text_colorpicker"></div>
+
+	<p class="wx-ui-title"><?php echo __('Sub Tab Bar Colors', 'weever'); ?></p>
+
+	<p>
+		<?php echo __('Set colors for the Sub tab bar just below the logo area. Displays when additional \'sub\' tabs are assigned to a primary tab.', 'weever'); ?>
+	</p>
+
+	<p><?php echo __('Sub Tab Bar &ndash; Background Color', 'weever'); ?></p>
+	<input type="text" class="hexacolorinput" id="subtab_color" name="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#bfbfbf'); ?>" />
+	<div id="subtab_colorpicker"></div>
+
+	<p><?php echo __('Sub Tab Bar &ndash; Text Color', 'weever'); ?></p>
+	<input type="text" class="hexacolorinput" id="subtab_text_color" name="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+	<div id="subtab_text_colorpicker"></div>
+
+	<button class="button secondary" id="save_logo_design">Save</button>
+</script>

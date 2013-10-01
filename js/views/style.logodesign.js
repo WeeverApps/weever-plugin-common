@@ -9,6 +9,12 @@ wxApp = wxApp || {};
             'change #titlebarSource': 'dropDownChange'
         },
 
+        initialize: function() {
+            console.log('Design view init');
+            this.tpl = _.template( $('#logo-design').html() );
+            this.$('.content').html( this.tpl( this.model.toJSON() ) );
+        },
+
         save: function() {
             console.log('logo design: save clicked');
 
@@ -52,15 +58,13 @@ wxApp = wxApp || {};
             // expects top-level params to be JSON objects, and items within 
             // the top-level params to be string representations of JSON 
             // objects... Therefore, we have to 'stringify' the inner params.
-            var innerParams = JSON.stringify( {
-                html:  $('#titlebar_html').val(),
-                text:  $('#titlebar_title').val(),
-                type:  $('#titlebarSource').val(),
-                image: $('#wx-titlebar_logo_live').attr('src')
-            } );
-            var params = {
-                titlebar: innerParams
-            };
+            wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
+            wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
+            wxApp.design.get('titlebar').type  = $('#titlebarSource').val();
+            wxApp.design.get('titlebar').image = $('#titlebar_logo_live').attr('src');
+
+            var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
+            var params = { titlebar: innerParams };
 
             wx.makeApiCall('design/set_titlebar', params, function(data) {
                 requestTwoSuccess = true;
@@ -97,6 +101,9 @@ wxApp = wxApp || {};
         }
     });
 
-    wxApp.logoDesign = new wxApp.LogoDesign();
+    wxApp.design = new wxApp.Design();
+    wxApp.design.fetch( function() {
+        wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
+    } );
 
 })(jQuery);

@@ -3,6 +3,6 @@
 var wx = wx || {};
 var wxApp = wxApp || {};
 wx.siteKey = '12325098432234';
-wx.apiUrl = 'http://weeverapp.com/api/v2/';
+wx.apiUrl = 'http://enceladus.weeverdev.com/api/v2/';
 wx.makeApiCall = function() {};
 wx.log = function(message) { console.log(message) };
