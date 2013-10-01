@@ -36,6 +36,4 @@ wxApp = wxApp || {};
         }
     });
 
-    wxApp.installIcon = new wxApp.InstallIcon();
-
 })(jQuery);

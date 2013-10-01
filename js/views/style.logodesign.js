@@ -52,17 +52,17 @@ wxApp = wxApp || {};
                 }
             });
 
+            wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
+            wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
+            wxApp.design.get('titlebar').type  = $('#titlebarSource').val();
+            wxApp.design.get('titlebar').image = $('#titlebar_logo_live').attr('src');
+
             // Request 2: Update Weever options (the titlebar)
             //
             // The 'design' methods of Open API is kinda strange... It 
             // expects top-level params to be JSON objects, and items within 
             // the top-level params to be string representations of JSON 
             // objects... Therefore, we have to 'stringify' the inner params.
-            wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
-            wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
-            wxApp.design.get('titlebar').type  = $('#titlebarSource').val();
-            wxApp.design.get('titlebar').image = $('#titlebar_logo_live').attr('src');
-
             var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
             var params = { titlebar: innerParams };
 
@@ -104,6 +104,8 @@ wxApp = wxApp || {};
     wxApp.design = new wxApp.Design();
     wxApp.design.fetch( function() {
         wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
+        wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
+        wxApp.launchSreen = new wxApp.InstallIcon( {model: wxApp.design} );
     } );
 
 })(jQuery);
