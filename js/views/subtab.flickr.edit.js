@@ -11,7 +11,7 @@ wxApp = wxApp || {};
             // Remove any trailing forward slashes
             // (eg, turn 'flickr.com/user/' into 'flickr.com/user')
             url = url.replace(/\/$/, '');
-            model.setConfig( 'user_id', url );
+            model.setConfig( 'url', url );
             return model;
         },
 
