@@ -54,6 +54,11 @@ wxApp = wxApp || {};
                     });
                 }
             }
+
+            // Manually reset the cursor.
+            var lastStyleTag = $('style')[ $('style').length-1 ];
+            if ( lastStyleTag.innerHTML.indexOf('*{ cursor') == 0 )
+                lastStyleTag.remove();
         },
 
         editAll: function() {
@@ -78,7 +83,6 @@ wxApp = wxApp || {};
         loadIcon: function() {
             var me = this;
             $.get( wx.apiUrl + 'icons/get_icon_base64', { site_key: wx.siteKey, icon_id: parseInt( me.model.get('icon_id') ) }, function(iconData) {
-                // alert( me.$('.wx-nav-icon-img').length );
                 me.$('.wx-nav-icon-img').attr('src', 'data:image/png;base64,' + iconData);
             });
         },
