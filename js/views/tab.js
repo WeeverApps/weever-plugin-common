@@ -49,6 +49,8 @@ wxApp = wxApp || {};
                     wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: me.model.get('id') }, function() {
                         draggedItemView.model.trigger('tab:move');
                         me.model.addSubTab( draggedItemView.model );
+                        // Select the parent tab.
+                        $('#' + me.model.get('id') + 'TabID').click();
                     });
                 }
             }
