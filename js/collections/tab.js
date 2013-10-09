@@ -1,5 +1,5 @@
 
-wxApp = wxApp || {};
+var wxApp = wxApp || {};
 
 (function($){
     wxApp.TabsCollection = Backbone.Collection.extend({
