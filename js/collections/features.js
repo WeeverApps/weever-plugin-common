@@ -1,7 +1,7 @@
 
 var wxApp = wxApp || {};
 
-(function($){
+(function(){
 
 	wxApp.FeatureCollection = Backbone.Collection.extend({
 		model: wxApp.Feature,
@@ -10,4 +10,4 @@ var wxApp = wxApp || {};
 			console.log('loading feature collection.');
 		}
 	});
-})(jQuery);
+})();

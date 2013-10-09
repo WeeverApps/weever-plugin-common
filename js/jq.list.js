@@ -21,7 +21,7 @@
 jQuery( document ).ready( function() {
 
 	jQuery('select.wx-cms-feed-select').change( function() {
-	
+
 		var actionButton = 'div.ui-dialog-buttonset button#wxui-action';
 
 		// if no value='', some browsers take the text inside the option
