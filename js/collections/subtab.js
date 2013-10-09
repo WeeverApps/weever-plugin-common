@@ -1,8 +1,8 @@
 
 var wxApp = wxApp || {};
 
-(function($){
+(function(){
     wxApp.SubTabCollection = Backbone.Collection.extend({
         model: wxApp.SubTab
     });
-})(jQuery);
+})();
