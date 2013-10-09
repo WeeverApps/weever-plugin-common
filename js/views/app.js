@@ -4,8 +4,9 @@ wxApp = wxApp || {};
 (function($){
 
 	var escapeJSON = function( key, val ) {
-		if ( typeof val != 'string' )
-			return val;
+		if ( typeof val !== 'string' ) {
+            return val;
+        }
 
 		var replaced = encodeURIComponent( val );
 		return replaced;
