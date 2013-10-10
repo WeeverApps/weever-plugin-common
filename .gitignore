@@ -6,3 +6,5 @@
 .settings
 .DS_Store
 .sass-cache
+combined.css
+combined.js
