@@ -5,8 +5,9 @@ wxApp = wxApp || {};
     wxApp.SubTabEditView = Backbone.View.extend({
         className: 'wx-subtab-edit',
         subTabEditTplSelector: '#subtab-edit-template',
-        subTabEditHeaderTplSelector: '#subtab-edit-header-template',
-        subTabEditFooterTplSelector: '#subtab-edit-footer-template',
+        baseEditTplSelector: '#subtab-edit-template',
+        // subTabEditHeaderTplSelector: '#subtab-edit-header-template',
+        // subTabEditFooterTplSelector: '#subtab-edit-footer-template',
 		feedSampleTplSelector: '#feedsample-template',
         parentContainerId: false,
         
@@ -15,8 +16,9 @@ wxApp = wxApp || {};
             this.initializeEvents();
             // TODO: Listen to changes to the subTab model and re-render the view automatically?
             this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
-            this.subTabEditHeaderTpl = _.template( $(this.subTabEditHeaderTplSelector).html() );
-            this.subTabEditFooterTpl = _.template( $(this.subTabEditFooterTplSelector).html() );
+            this.baseEditTpl = _.template( $(this.baseEditTplSelector).html() );
+            // this.subTabEditHeaderTpl = _.template( $(this.subTabEditHeaderTplSelector).html() );
+            // this.subTabEditFooterTpl = _.template( $(this.subTabEditFooterTplSelector).html() );
 			this.feedSampleTpl = _.template( $(this.feedSampleTplSelector).html() );
             this.render();
 
@@ -32,7 +34,8 @@ wxApp = wxApp || {};
         },
 
         genericEvents: {
-			'change .wx-dialog-input': 'hideValidateFeed',
+            'change .wx-dialog-input': 'next',
+			'change .wx-social-input': 'next',
 			'keydown .wx-dialog-input': 'hideValidateFeed',
             //'click a.close-reveal-modal': 'destroyView',
 			'click .wx-finish-button': 'finish',
@@ -43,10 +46,16 @@ wxApp = wxApp || {};
         render: function() {
             wx.log('render');
             
-            this.$el.html( '<form>' + this.subTabEditTpl( this.model.toJSON() ) + '</form>' );
+            // this.$el.html( this.subTabEditTpl( this.model.toJSON() ) );
+            // this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
+            // this.$el.append( this.subTabEditFooterTpl( this.model.toJSON() ) );
 
-            this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
-            this.$el.append( this.subTabEditFooterTpl( this.model.toJSON() ) );
+            this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
+            this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
+
+            this.$el.prepend('<form>');
+            this.$el.append('</form>');
+
             this.startValidation();
             if ( this.model.validateFeed ) {
                 this.$('.wx-finish-button').hide();
@@ -96,6 +105,8 @@ wxApp = wxApp || {};
 		},
 
 		next: function() {
+            if ( !this.model.validateFeed ) { return; }
+
             console.log('next');
 
             this.$('#dialog-loader').show();
@@ -172,7 +183,7 @@ wxApp = wxApp || {};
 
 		hideValidateFeed: function() {
 			this.$('.wx-feed-error').hide();
-			this.$('.wx-validate-feed').hide().html('');
+			this.$('.wx-validate-feed').html('<img src="http://placehold.it/515x200&text=Preview">');
 			this.$('.wx-next-button').show();
 			this.$('.wx-finish-button').hide();
             this.$('.wx-edit-title-div').hide();

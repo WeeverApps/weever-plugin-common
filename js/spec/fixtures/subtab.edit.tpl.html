@@ -1,4 +1,37 @@
-
 <script type="text/template" id="subtab-edit-template">
-    Test editing of <%- typeDescription %>!
+    <% if ( validateFeed === true ) { %>
+    	<div class="large-6 small-6 columns">
+	<% } else { %>
+		<div class="large-12 small-12 columns">
+	<% } %>
+
+	    <div>
+	        <h2><%- typeDescription %></h2>
+	    </div>
+
+	    <div class="subtab"></div>
+
+	    <div class="wx-feed-error hide">
+	        There was an error validating, please verify the information and try again
+	    </div>
+	    <div>
+	        <p class="lead">Please Enter a Form Title:</p>
+	        <input type="text" value="<%- title %>" class="wx-edit-title" />
+	    </div>
+    </div>
+
+    <% if ( validateFeed === true ) { %>
+        <div class="large-6 small-6 columns">
+            <div class="wx-validate-feed" style="height: 315px; overflow: scroll;">
+                <img src="http://placehold.it/515x315&text=Preview">
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    <% } %>
+    <div>
+        <button class="wx-next-button">Preview</button>
+        <img id="dialog-loader" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+        <button class="wx-finish-button">Finish</button>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
 </script>
