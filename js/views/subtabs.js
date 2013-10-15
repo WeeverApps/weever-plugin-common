@@ -51,13 +51,16 @@ wxApp = wxApp || {};
             if ( undefined != this.$el.sortable ) {
                 this.$el.sortable({
                     start: function(event, ui) {
+                        console.log('trigger dragstart');
                         Backbone.Events.trigger( 'subtab:dragstart' );
                     },
                     stop: function(event, ui) {
+                        console.log('trigger dragstop');
                         Backbone.Events.trigger( 'subtab:dragstop' );
                     },
                     update: function(event, ui) {
-                        var order = String( jQuery(this).sortable('toArray').map( function(element) {
+                        console.log('update');
+                        var order = String( $(this).sortable('toArray').map( function(element) {
                             return element.replace('SubtabID', '');
                         }) );
                         wx.makeApiCall( 'tabs/sort_tabs', { order: order }, function() {
@@ -70,7 +73,8 @@ wxApp = wxApp || {};
                     },
                     helper: 'clone',
                     cursor: 'move',
-                    cursorAt: { top: 31, left: 292 }
+                    handle: '.wx-subtab-movehandle',
+                    cursorAt: { top: 0, left: 0 }
                 });
             }
         },

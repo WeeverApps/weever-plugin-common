@@ -25,8 +25,9 @@ wxApp = wxApp || {};
             if ( undefined !== this.$el.droppable ) {
                 this.$el.droppable( {
                     accept: ".list-sub-items li, .list-add-content-items li",
-                    hoverClass: "ui-state-hover",
-                    drop: this.onDrop
+                    hoverClass: "hover",
+                    drop: this.onDrop,
+                    tolerance: 'pointer',
                 } );
             }
             this.$el.data( 'backbone-view', this );
@@ -35,8 +36,14 @@ wxApp = wxApp || {};
         },
 
         onDrop: function( event, ui ) {
+            console.log('onDrop');
+            console.log(ui.draggable.hasClass('wx-add-source-icon'));
+
+
             var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');
+            console.log( draggedItemView.model.get('parent_id') )
+
             if ( ui.draggable.hasClass('wx-add-source-icon') ) {
                 // If we're dragging a new feature icon up
                 var featureName = ui.draggable.attr('id').replace('add-', '');
@@ -54,6 +61,8 @@ wxApp = wxApp || {};
                     });
                 }
             }
+
+            Backbone.Events.trigger( 'subtab:dragstop' );
 
             // Manually reset the cursor.
             var lastStyleTag = $('style')[ $('style').length-1 ];

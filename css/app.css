@@ -7575,3 +7575,11 @@ label.wx-form-builder-edit-label {
 .icon-selector input { margin-left: 19px; }
 
 .wx-subtab-movehandle { cursor: move; }
+
+.wx-layout-tablist .wx-tab.dragging {
+  background: #ffffc0;
+}
+
+.wx-layout-tablist .wx-tab.dragging.hover {
+  background: #ffff60;
+}

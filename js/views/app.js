@@ -103,10 +103,12 @@ wxApp = wxApp || {};
 
         showDropTab: function() {
             $('#dropTab').show();
+            $('.wx-layout-tablist .wx-tab').addClass('dragging');
         },
 
         hideDropTab: function() {
             $('#dropTab').hide();
+            $('.wx-layout-tablist .wx-tab.dragging').removeClass('dragging');
         },
 
         clearBodyStyles: function() {
