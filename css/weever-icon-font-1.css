@@ -8,6 +8,7 @@
 
 }
 .wxFont-1:before { font-family: 'wxFont-1'; font-size: 32px; }
+.wxFont-1.small:before { font-size: 16px; }
 button .wxFont-1:before { font-family: 'wxFont-1'; font-size: 64px; }
 .wxIcon-1:before { content:'\e001'; }	/* Gear */
 .wxIcon-2:before { content:'\e002'; }	/* Eighth Note */

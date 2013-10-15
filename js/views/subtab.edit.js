@@ -56,6 +56,8 @@ wxApp = wxApp || {};
             this.$el.prepend('<form>');
             this.$el.append('</form>');
 
+            this.$el.foundation('section', 'reflow');
+
             this.startValidation();
             if ( this.model.validateFeed ) {
                 this.$('.wx-finish-button').hide();
@@ -183,7 +185,7 @@ wxApp = wxApp || {};
 
 		hideValidateFeed: function() {
 			this.$('.wx-feed-error').hide();
-			this.$('.wx-validate-feed').html('<img src="http://placehold.it/515x200&text=Preview">');
+			this.$('.wx-validate-feed').html('<img src="http://placehold.it/515x315&text=Preview">');
 			this.$('.wx-next-button').show();
 			this.$('.wx-finish-button').hide();
             this.$('.wx-edit-title-div').hide();

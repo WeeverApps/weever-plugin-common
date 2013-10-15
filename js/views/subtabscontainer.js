@@ -28,6 +28,7 @@ wxApp = wxApp || {};
 
         render: function() {
             wx.log('RENDERING subtabs container');
+            wx.log( this.model );
             this.$el.html( this.subTabContainerTpl( this.model ) );
             this.$('.adminlist').html( this.subTabsView.render().el );
             this.$el.attr('id', this.model.get('id') + 'Tab');

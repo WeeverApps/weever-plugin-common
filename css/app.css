@@ -7570,3 +7570,6 @@ label.wx-form-builder-edit-label {
 }
 
 .admintable { width: 100%; }
+
+.icon-selector label { text-align: center; }
+.icon-selector input { margin-left: 19px; }

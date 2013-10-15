@@ -1,10 +1,5 @@
 <script type="text/template" id="subtab-edit-template">
-    <% if ( validateFeed === true ) { %>
-    	<div class="large-6 small-6 columns">
-	<% } else { %>
-		<div class="large-12 small-12 columns">
-	<% } %>
-
+	<div class="large-6 small-6 columns">
 	    <div>
 	        <h2><%- typeDescription %></h2>
 	    </div>
@@ -18,20 +13,48 @@
 	        <p class="lead">Please Enter a Form Title:</p>
 	        <input type="text" value="<%- title %>" class="wx-edit-title" />
 	    </div>
+
+        <div>
+            <button class="wx-next-button">Preview</button>
+            <img id="dialog-loader" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+            <button class="wx-finish-button">Finish</button>
+        </div>
     </div>
 
-    <% if ( validateFeed === true ) { %>
-        <div class="large-6 small-6 columns">
-            <div class="wx-validate-feed" style="height: 315px; overflow: scroll;">
-                <img src="http://placehold.it/515x315&text=Preview">
-            </div>
+    <div class="large-6 small-6 columns">
+        <div class="section-container auto" data-section>
+            <% if ( validateFeed === true ) { %>
+                <section class="active">
+                    <p class="title" data-section-title><a href="#panel1">Preview</a></p>
+                    <div class="content" data-section-content style="height: 315px; overflow: scroll;">
+                        <div class="wx-validate-feed">
+                            <img src="http://placehold.it/515x300&text=Preview">
+                        </div>
+                    </div>
+                </section>
+            <% } %>
+            <section <% if (validateFeed === false) { %>class="active"<% } %>>
+                <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
+                <div class="content icon-selector" data-section-content style="height: 315px; overflow: scroll;">
+                    <ul class="large-block-grid-7">
+                        <?php for ( $i = 1; $i <= 46; $i++ ): ?>
+                            <?php if ( in_array( $i, array( 14, 33, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
+                            <li>
+                                <label for="wx-icon-<?php echo $i; ?>"><span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span></label>
+                                <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="#panel3">Help</a></p>
+                <div class="content" data-section-content style="height: 315px; overflow: scroll;">
+                    Help text will go here.
+                </div>
+            </section>
         </div>
-        <div style="clear:both"></div>
-    <% } %>
-    <div>
-        <button class="wx-next-button">Preview</button>
-        <img id="dialog-loader" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
-        <button class="wx-finish-button">Finish</button>
-        <a class="close-reveal-modal">&#215;</a>
     </div>
+
+    <a class="close-reveal-modal">&#215;</a>
 </script>
