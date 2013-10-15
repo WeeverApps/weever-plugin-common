@@ -7573,3 +7573,5 @@ label.wx-form-builder-edit-label {
 
 .icon-selector label { text-align: center; }
 .icon-selector input { margin-left: 19px; }
+
+.wx-subtab-movehandle { cursor: move; }
