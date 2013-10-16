@@ -5,29 +5,13 @@
             <span class="wxIcon-<%- icon_id %> wxFont-1"></span>
             <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %></a>
         </h2>
-        <h3>
-            <!-- TODO - Make a new 'Edit' dialogue. Tab Title on left; Icon on right. -->
-            <span class="wx-inputContainer">
-                <a href="#" class="wx-nav-icon-edit"  style="float: right;" data-reveal-id="SubtabEditModal">Change Icon</a>
-            </span>
-            <span class="wx-inputContainer">
-                <a href="#" id="label-edit-<%- id %>" class="wx-nav-title-edit" style="float: right;" data-reveal-id="SubtabEditModal">Change Label</a>
-            </span>
-            <span class="wx-inputContainer">
-                <a href="#" style="float: right;" class="wxuia-button wx-nav-layout-edit">Change Layout</a>
-            </span>
-        </h3>
+        <!-- In the future, Layout stuff will go here. -->
     </fieldset>
 
     <div class="wxui-stdContainer wxuia-edit-tabsContainer">
         <div class='adminlist'>
 
         </div>
-    </div>
-
-    <!-- Edit Modal -->
-    <div id="SubtabEditModal" class="reveal-modal">
-        
     </div>
 
     <div id="ContainerEditModal" class="reveal-modal">

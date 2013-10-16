@@ -9,7 +9,6 @@ wxApp = wxApp || {};
 
         initialize: function() {
             this.tabTpl = _.template( $('#tab-template').html() );
-            this.iconTpl = _.template( $('#icon-edit-template').html() );
             this.model.bind( 'change', this.render, this );
             this.model.bind( 'destroy', this.destroyView, this );
             Backbone.Events.on( 'tab:id-update', this.updateTabId, this );

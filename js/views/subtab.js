@@ -26,7 +26,6 @@ wxApp = wxApp || {};
 
         events: {
             'click .wx-edit-link': 'editSubTab',
-            'click .wx-edit-subtab-icon': 'editIcon',
             'click .wx-subtab-delete': 'confirmDeleteSubTab'
         },
 
@@ -61,13 +60,6 @@ wxApp = wxApp || {};
             // Wait half a second, then refresh the preview
             // (The half-second helps ensure the server is synced)
             setTimeout( function() { wx.refreshAppPreview(); }, 500);
-        },
-
-        editIcon: function() {
-            console.log('editing icon...');
-            this.editIconView = new wxApp.IconEditView({ model: this.model });
-            this.$('#wx-edit-area-' + this.model.get('id')).html( this.editIconView.render().el );
         }
-
     });
 })(jQuery);
