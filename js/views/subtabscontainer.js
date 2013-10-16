@@ -23,15 +23,20 @@ wxApp = wxApp || {};
         events: {
             'click .wx-nav-icon-edit': 'iconEdit',
             'click .wx-nav-title-edit': 'titleEdit',
-            'click .wx-nav-layout-edit': 'layoutEdit'
+            'click .wx-nav-layout-edit': 'layoutEdit',
+            'click #ContainerEditLink': 'reflowSection'
         },
 
         render: function() {
             wx.log('RENDERING subtabs container');
             wx.log( this.model );
-            this.$el.html( this.subTabContainerTpl( this.model ) );
+            this.$el.html( this.subTabContainerTpl( this.model.toJSON() ) );
             this.$('.adminlist').html( this.subTabsView.render().el );
             this.$el.attr('id', this.model.get('id') + 'Tab');
+
+            // this.$('.section-container').foundation('section');
+            // this.$el.foundation();
+
             return this;
         },
 
@@ -50,6 +55,10 @@ wxApp = wxApp || {};
 
         layoutEdit: function() {
             this.tabView.editLayout();
+        },
+
+        reflowSection: function() {
+            this.$('.section-container').foundation('section', 'reflow');
         }
     });
 })(jQuery); 

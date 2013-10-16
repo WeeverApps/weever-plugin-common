@@ -37,13 +37,7 @@
                 <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
                 <div class="content icon-selector" data-section-content style="height: 315px; overflow: scroll;">
                     <ul class="large-block-grid-7">
-                        <?php for ( $i = 1; $i <= 46; $i++ ): ?>
-                            <?php if ( in_array( $i, array( 14, 33, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
-                            <li>
-                                <label for="wx-icon-<?php echo $i; ?>"><span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span></label>
-                                <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />
-                            </li>
-                        <?php endfor; ?>
+                        <%= _.template( jQuery('#icon-selector').html(), icon_id, {variable: 'icon_id'}) %>
                     </ul>
                 </div>
             </section>
@@ -57,4 +51,15 @@
     </div>
 
     <a class="close-reveal-modal">&#215;</a>
+</script>
+
+
+<script type="text/template" id="icon-selector">
+    <?php for ( $i = 1; $i <= 46; $i++ ): ?>
+        <?php if ( in_array( $i, array( 14, 33, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
+        <li>
+            <label for="wx-icon-<?php echo $i; ?>"><span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span></label>
+            <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />
+        </li>
+    <?php endfor; ?>
 </script>

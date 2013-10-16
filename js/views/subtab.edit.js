@@ -97,6 +97,7 @@ wxApp = wxApp || {};
             console.log('Finish clicked.');
             this.setModelFromView(this.model);
             this.setTitleFromView(this.model);
+            this.setIconFromView(this.model);
 			this.saveModel();
 
             $('.reveal-modal').foundation('reveal', 'close');
@@ -133,6 +134,11 @@ wxApp = wxApp || {};
         setTitleFromView: function( model ) {
             if ( model.allowTitleEdit && this.$('.wx-edit-title') )
                 model.set('title', this.$('.wx-edit-title').val() );
+            return model;
+        },
+
+        setIconFromView: function( model ) {
+            model.set( 'icon_id', this.$('input:radio[name="wx-icon"]:checked').val() );
             return model;
         },
 

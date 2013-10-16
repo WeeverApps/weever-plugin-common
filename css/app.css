@@ -7581,5 +7581,7 @@ label.wx-form-builder-edit-label {
 }
 
 .wx-layout-tablist .wx-tab.dragging.hover {
-  background: #ffff60;
+  background: #ffff30;
 }
+
+#editListTabsSortable.hover { background: #ffddff; }

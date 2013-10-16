@@ -1,9 +1,14 @@
 
 <script type="text/template" id="subtab-container-template">
     <fieldset class="wx-adminContainer">
-        <h2 class="wxuia-fieldTitle" style="border: 1px solid #e5e5e5;" id="wxnavtip-options">On this tab...
+        <h2 class="wxuia-fieldTitle" style="border: 1px solid #e5e5e5;" id="wxnavtip-options">
+            <span class="wxIcon-<%- icon_id %> wxFont-1"></span>
+            <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- tabTitle %></a>
+        </h2>
+        <h3>
+            <!-- TODO - Make a new 'Edit' dialogue. Tab Title on left; Icon on right. -->
             <span class="wx-inputContainer">
-                <a href="#" class="wx-nav-icon-edit" data-reveal-id="SubtabEditModal">Change Icon</a>
+                <a href="#" class="wx-nav-icon-edit"  style="float: right;" data-reveal-id="SubtabEditModal">Change Icon</a>
             </span>
             <span class="wx-inputContainer">
                 <a href="#" id="label-edit-<%- id %>" class="wx-nav-title-edit" style="float: right;" data-reveal-id="SubtabEditModal">Change Label</a>
@@ -11,7 +16,7 @@
             <span class="wx-inputContainer">
                 <a href="#" style="float: right;" class="wxuia-button wx-nav-layout-edit">Change Layout</a>
             </span>
-        </h2>
+        </h3>
     </fieldset>
 
     <div class="wxui-stdContainer wxuia-edit-tabsContainer">
@@ -22,6 +27,48 @@
 
     <!-- Edit Modal -->
     <div id="SubtabEditModal" class="reveal-modal">
-        Loading...
+        <div>
+            <p class="lead">Please Enter a Title:</p>
+            <input type="text" value="<%- tabTitle %>" class="wx-edit-title" />
+        </div>
+
+        <div>
+            <button class="wx-finish-button">Finish</button>
+        </div>
+    </div>
+
+    <div id="ContainerEditModal" class="reveal-modal">
+        <div class="large-6 small-6 columns">
+            Testing.
+        </div>
+
+        <div class="large-6 small-6 columns">
+            <div class="section-container auto" data-section>
+            <section class="active">
+                <p class="title" data-section-title><a href="#panel1">Preview</a></p>
+                <div class="content" data-section-content style="height: 315px; overflow: scroll;">
+                    <div class="wx-validate-feed">
+                        <img src="http://placehold.it/515x300&text=Preview">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
+                <div class="content icon-selector" data-section-content style="height: 315px; overflow: scroll;">
+                    <ul class="large-block-grid-7">
+                        <%= _.template( jQuery('#icon-selector').html(), icon_id, {variable: 'icon_id'}) %>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="#panel3">Help</a></p>
+                <div class="content" data-section-content style="height: 315px; overflow: scroll;">
+                    Help text will go here.
+                </div>
+            </section>
+            </div>
+        </div>
+
+        <a class="close-reveal-modal">&#215;</a>
     </div>
 </script>

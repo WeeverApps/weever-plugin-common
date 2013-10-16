@@ -28,6 +28,7 @@ wxApp = wxApp || {};
                     hoverClass: "hover",
                     drop: this.onDrop,
                     tolerance: 'pointer',
+                    greedy: true
                 } );
             }
             this.$el.data( 'backbone-view', this );
@@ -37,9 +38,7 @@ wxApp = wxApp || {};
 
         onDrop: function( event, ui ) {
             console.log('onDrop');
-            console.log(ui.draggable.hasClass('wx-add-source-icon'));
-
-
+            
             var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');
             console.log( draggedItemView.model.get('parent_id') )

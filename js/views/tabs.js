@@ -10,6 +10,7 @@ wxApp = wxApp || {};
             Backbone.Events.on('tab:new', this.addNewlyCreatedTab, this);
             this.startTabs();
             this.startSortable();
+            this.startDroppable();
             this.refreshUiTabs();
         },
 
@@ -61,6 +62,7 @@ wxApp = wxApp || {};
                 this.$el.sortable({
                     axis: "x",
                     cancel:	'.wx-nosort',
+                    placeholder: 'wx-tab',
                     update: function(event, ui) {
                         var order = $(this).sortable('toArray');
                         order = $.map( order, function(element) {
@@ -94,6 +96,8 @@ wxApp = wxApp || {};
         },
 
         addNewlyCreatedTab: function(model) {
+            console.log('addNewlyCreatedTab');
+            console.log( model.get('parent_id') );
             if ( model.get('parent_id') )
                 this.addNewSubTab(model);
             else
@@ -101,12 +105,15 @@ wxApp = wxApp || {};
         },
 
         addNewMainTab: function(model) {
+            console.log('addNewMainTab');
             var tab = new wxApp.Tab( model.getAPIData() );
             tab.addSubTab( model );
-            this.addTabToCollection( tab );
+            // this.addTabToCollection( tab );
+            wxApp.Tabs.add( tab );
         },
 
         addNewSubTab: function(model) {
+            console.log('addNewSubTab');
             var tab = wxApp.Tabs.get( model.get('parent_id') );
             if ( tab )
                 tab.addSubTab( model );
@@ -125,12 +132,54 @@ wxApp = wxApp || {};
 
 
     wxApp.BuildTabsView = wxApp.TabsView.extend({
-        el: '#buildListTabsSortable'
+        el: '#buildListTabsSortable',
 
+        startDroppable: function() {
+            console.log('You can\'t drop on this one, dummy.')
+        }
     });
 
     wxApp.EditTabsView = wxApp.TabsView.extend({
-        el: '#editListTabsSortable'
+        el: '#editListTabsSortable',
+
+        startDroppable: function() {
+            console.log('Drop it like it\'s hot.');
+            this.$el.droppable( {
+                accept: ".list-sub-items li, .list-add-content-items li",
+                hoverClass: "hover",
+                drop: this.onDrop,
+                tolerance: 'pointer',
+            } );
+        },
+
+        onDrop: function( event, ui ) {
+            console.log('onDrop');
+
+            var me = $(this).data('backbone-view');
+            var draggedItemView = $(ui.draggable).data('backbone-view');
+            console.log( draggedItemView.model.get('parent_id') );
+            console.log( draggedItemView.model.get('id') );
+            // console.log( me.model.get('id') );
+
+            // We're moving a subtab up into another tab, update the db then move the subtab across
+            Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
+            //if ( draggedItemView.model.get('parent_id') != me.model.get('id') ) {
+                wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: 0 }, function() {
+                    draggedItemView.model.trigger('tab:move');
+                    // me.model.addSubTab( draggedItemView.model );
+                    wxApp.EditTabsView.__super__.addNewMainTab.call( this, draggedItemView.model );
+                    // Select the parent tab.
+                    $('#' + draggedItemView.model.get('id') + 'TabID').click();
+                });
+            //}
+
+            Backbone.Events.trigger( 'subtab:dragstop' );
+
+            // Manually reset the cursor.
+            var lastStyleTag = $('style')[ $('style').length-1 ];
+            if ( lastStyleTag.innerHTML.indexOf('*{ cursor') == 0 )
+                lastStyleTag.remove();
+        }
     });
 
     //wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
