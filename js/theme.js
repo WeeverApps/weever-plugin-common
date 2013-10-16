@@ -77,13 +77,21 @@ jQuery(document).ready(function(){
 	    		}, 600 );
 	    });
 	
-	// Add the theme colour pickers
-	jQuery('#main_titlebar_colorpicker').farbtastic('#main_titlebar_color'); 
-	jQuery('#main_titlebar_text_colorpicker').farbtastic('#main_titlebar_text_color'); 
-	
-	jQuery('#subtab_colorpicker').farbtastic('#subtab_color'); 
-	jQuery('#subtab_text_colorpicker').farbtastic('#subtab_text_color'); 
-	
+	// Load JSColor.
+	Modernizr.load([{
+		// Test if Input Color is supported using Modernizr
+		test: Modernizr.inputtypes.color,
+		// If colors are not supported, load the jscolor.js script
+		// TODO - Figure out way to make this URL more generic.
+		nope: '../wp-content/plugins/wp_weeverapps/static/js/jscolor/jscolor.js',
+		// Initialize jscolor once its loaded, 
+		// because the builtin jscolor.install hook is bind to window.load,
+		// which has already happend
+		callback: function(id, testResult) {
+			jscolor.init();
+		}
+	}]);
+
 	// Preview code
 	setTimeout(function(){
 		if (jQuery.browser.webkit) {

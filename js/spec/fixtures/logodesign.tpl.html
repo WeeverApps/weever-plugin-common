@@ -33,12 +33,10 @@
 	<p class="wx-ui-title"><?php echo __( 'Logo Area Colors', 'weever' ); ?></p>
 
 	<p><?php echo __( 'Logo Area Background Color', 'weever' ); ?></p>
-	<input type="text" class="hexacolorinput" id="main_titlebar_color" name="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
-	<div id="main_titlebar_colorpicker"></div>
+	<input type="color" class="color" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
 
 	<p><?php echo __( 'Logo Area &ndash; Text Color (if using a text-based logo)', 'weever'); ?></p>
-	<input type="text" class="hexacolorinput" id="main_titlebar_text_color" name="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#000000'); ?>" />
-	<div id="main_titlebar_text_colorpicker"></div>
+	<input type="color" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
 
 	<p class="wx-ui-title"><?php echo __('Sub Tab Bar Colors', 'weever'); ?></p>
 
@@ -47,12 +45,12 @@
 	</p>
 
 	<p><?php echo __('Sub Tab Bar &ndash; Background Color', 'weever'); ?></p>
-	<input type="text" class="hexacolorinput" id="subtab_color" name="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#bfbfbf'); ?>" />
-	<div id="subtab_colorpicker"></div>
+	<input type="color" class="color" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
 
 	<p><?php echo __('Sub Tab Bar &ndash; Text Color', 'weever'); ?></p>
-	<input type="text" class="hexacolorinput" id="subtab_text_color" name="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
-	<div id="subtab_text_colorpicker"></div>
+	<input type="color" class="color" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
 
-	<button class="button secondary" id="save_logo_design">Save</button>
+	<p>
+		<button class="button secondary" id="save_logo_design">Save</button>
+	</p>
 </script>
