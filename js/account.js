@@ -37,6 +37,26 @@ jQuery(document).ready(function(){
 	    		}, 600 );
 	    });
 	
+	wx.makeApiCall('account/get_expiry', {}, function(data) {
+		// data.expiry = "2013-10-16 20:00:00";
+		if (data.expiry == "0000-00-00 00:00:00") {
+			// Doesn't expire.
+			return;
+		}
 
+		var d = new Date(data.expiry);
+		var millisecondsPerDay = 86400000; //1000 * 60 * 60 * 24;
+		var millisecondsBetween = d.getTime() - (new Date()).getTime();
+		var days = millisecondsBetween / millisecondsPerDay;
+		days = Math.floor( days );
+
+		if (days > 0) {
+			jQuery('#expiry-days').html( 'in ' + days.toString() + ' days.' );
+			jQuery('#account-expiration-warning').show();
+		} else if ( days == 0 ) {
+			jQuery('#expiry-days').html( 'today!' );
+			jQuery('#account-expiration-warning').show();
+		}
+	});
 
 });
