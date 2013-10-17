@@ -1,0 +1,52 @@
+<script type="text/template" id="custom-branding">
+	<p class="lead"><?php echo __( 'How Custom Branding Works', 'weever' ); ?></p>
+	<p><?php echo __( 'Fully remove Weever Apps branding and go \'white label\' by specifying your own branding details.  This feature is only available to \'premium\' and \'reseller\' level apps.', 'weever' ); ?></p>
+
+	<p class="lead"><?php echo __( '\'Powered By\' Message', 'weever' ); ?></p>
+	<p><?php echo __( 'Modify the \'Powered By Weever Apps\' message that visitors see as the app launches.', 'weever' ); ?></p>
+
+	<?php if ( $weeverapp->tier != 4 ): ?>
+		<p>
+			<a href="http://weeverapps.com/new-app/?site_url=<?php echo urlencode($weeverapp->primary_domain); ?>&subscription_type=premium"><?php echo __( 'Upgrade Your App', 'weever' ); ?></a>
+		</p>
+	<?php else: ?>
+		<p>Add custom text or HTML to appear as the app loads.  If the field is left blank, the load spinner will not appear.</p>
+
+		<div>
+			<p>Loading Spinner Text:</p>
+			<textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="<?php echo __( 'Powered By...', 'weever' ); ?>"><%- loadspinner.text %></textarea>
+		</div>
+	<?php endif; ?>
+
+	<p class="lead"><?php echo __( 'Custom Web Address', 'weever' ); ?></p>
+	<p><?php echo __( 'Set a custom web address (domain name) for your app like "myappname.com" or "app.mywebsite.com".', 'weever' ); ?></p>
+	<p><?php echo __( '<b>Important</b> &mdash; To use a custom web address (also known as a domain name) you must own the domain name in question and point it towards your app. Please see our <a target="_blank" href="http://weeverapps.zendesk.com/entries/20394158-how-do-i-use-my-own-domain-name-web-site-address-url-with-weever-apps">technical instructions</a> on using custom domains and allow up to 24 hours for the process to complete.', 'weever' ); ?></p>
+
+	<?php if ( $weeverapp->tier == 1 or $weeverapp->tier == '2.1' ): ?>
+		<p>
+			<a href="http://weeverapps.com/new-app/?site_url=<?php echo urlencode($weeverapp->primary_domain); ?>&subscription_type=pro"><?php echo __( 'Upgrade Your App', 'weever' ); ?></a>
+		</p>
+	<?php else: ?>
+		<p><?php echo __( "Use this to set up app.yourname.com or yourappname.com", 'weever' ); ?></p>
+
+		<div>
+			<?php echo __( 'Domain Mapping', 'weever' ); ?>:
+			<input type="textbox" name="domain" id="wx-domain-map-input" placeholder="app.yourdomain.com" />
+		</div>
+
+		<% if (domain.length) { %>
+			<h6>Current domains:</h6>
+		<% } %>
+
+		<ul class="domains">
+			<% for (var i = domain.length - 1; i >= 0; i--) { %>
+				<li><%- domain[i].domain %> <a href="#" class="domain" data-id="<%- domain[i].domain %>">&times;</a></li>
+			<% }; %>
+		</ul>
+	<?php endif; ?>
+
+	<p class="lead"><?php echo __( 'Kick-Out Web Address', 'weever' ); ?></p>
+	<p><?php echo __( 'Specify a \'kick out\' web address in the event of a incompatible device (e.g, an older cell phone) tries to access your app. We recommend using a Twitter or Facebook Page if no web site is available.', 'weever' ); ?></p>
+	<!-- Todo -->
+	<button class="button secondary big" id="save_custom_branding">Save</button>
+</script>

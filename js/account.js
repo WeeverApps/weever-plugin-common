@@ -21,7 +21,6 @@
 
 jQuery(document).ready(function(){ 
 
-
 	jQuery('#wx-modal-loading')
 	    .hide()  
 	    .ajaxStart(function() {
@@ -38,7 +37,7 @@ jQuery(document).ready(function(){
 	    });
 	
 	wx.makeApiCall('account/get_expiry', {}, function(data) {
-		// data.expiry = "2013-10-16 20:00:00";
+		// data.expiry = "2013-10-17 20:00:00";
 		if (data.expiry == "0000-00-00 00:00:00") {
 			// Doesn't expire.
 			return;
@@ -49,14 +48,21 @@ jQuery(document).ready(function(){
 		var millisecondsBetween = d.getTime() - (new Date()).getTime();
 		var days = millisecondsBetween / millisecondsPerDay;
 		days = Math.floor( days );
+		if (days < 0) { return; }
 
-		if (days > 0) {
-			jQuery('#expiry-days').html( 'in ' + days.toString() + ' days.' );
-			jQuery('#account-expiration-warning').show();
-		} else if ( days == 0 ) {
-			jQuery('#expiry-days').html( 'today!' );
-			jQuery('#account-expiration-warning').show();
+		if (days < 5) {
+			jQuery('#account-expiration-warning .secondary').addClass('alert').removeClass('secondary');
 		}
+
+		if ( days == 0 ) {
+			jQuery('#expiry-days').html( 'today!' );
+		} else if ( days == 1 ) {
+			jQuery('#expiry-days').html( 'in one day.' );
+		} else {
+			jQuery('#expiry-days').html( 'in ' + days.toString() + ' days.' );
+		}
+
+		jQuery('#account-expiration-warning').show();
 	});
 
 });

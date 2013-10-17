@@ -105,7 +105,8 @@ wxApp = wxApp || {};
     wxApp.design.fetch( function() {
         wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
         wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
-        wxApp.launchSreen = new wxApp.InstallIcon( {model: wxApp.design} );
+        wxApp.installIcon = new wxApp.InstallIcon( {model: wxApp.design} );
+        wxApp.customBranding = new wxApp.CustomBranding( {model: wxApp.design} );
     } );
 
 })(jQuery);
