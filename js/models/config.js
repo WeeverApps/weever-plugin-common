@@ -2,16 +2,16 @@
 var wxApp = wxApp || {};
 
 (function($) {
-	wxApp.Design = Backbone.Model.extend({
+	wxApp.Config = Backbone.Model.extend({
 		defaults: {},
 
 		fetch: function( onComplete ) {
 			var me = this;
-			wx.makeApiCall('design/get_design', {}, function(data) {
+			wx.makeApiCall('config/get_config', {}, function(data) {
 
-				me.set( data.design );
+				me.set( data.config );
 				if (typeof onComplete !== 'undefined') {
-					onComplete();2
+					onComplete();
 				}
 				
 			})

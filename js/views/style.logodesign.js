@@ -103,10 +103,17 @@ wxApp = wxApp || {};
 
     wxApp.design = new wxApp.Design();
     wxApp.design.fetch( function() {
+        // Load the Design Views.
         wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
         wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
         wxApp.installIcon = new wxApp.InstallIcon( {model: wxApp.design} );
         wxApp.customBranding = new wxApp.CustomBranding( {model: wxApp.design} );
+    } );
+
+
+    wxApp.config = new wxApp.Config();
+    wxApp.config.fetch( function() {
+        wxApp.advanced = new wxApp.Advanced( { model: wxApp.config } );
     } );
 
 })(jQuery);

@@ -1,0 +1,33 @@
+<script type="text/template" id="advanced-options">
+	<p class="lead"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
+	<p><?php echo __( 'Modify your app by entering valid CSS.  To identify CSS classes use a webkit browser (such as Chrome or Safari), right-click on the app and inspect the HTML elements.', 'weever' ); ?></p>
+	<textarea style="width: 100%; height: 300px;" name="css"><?php echo esc_textarea( $weeverapp->theme->css ); ?></textarea>
+
+	<p class="lead"><?php echo __( 'Graphic Design', 'weever' ); ?>&nbsp;<span class="label success"><?php echo __( 'add on', 'weever' ); ?></span></p>
+	<p><?php echo __( 'Let Weever App’s design professionals create custom app illustrations that elevate your brand! $399 CSS and graphics package.', 'weever' ); ?></p>
+
+	<p class="lead"><?php echo __( 'Language Options', 'weever' ); ?></p>
+	<div>
+		<p><?php echo __( 'Changes the language used for generic user-interface elements in the app such as the \'back\' button.', 'weever' ); ?></p>
+		<%
+// Available_locales is currently an object. Convert it into an array to make it sortable.
+var tuples = [];
+for (var key in available_locales) { 
+	tuples.push([key, available_locales[key]]);
+};
+tuples.sort(function(a,b) {
+	a = a[1];
+	b = b[1];
+	return a < b ? -1 : (a > b ? 1 : 0);
+});
+		%>
+		
+		<select id="localizations">
+			<% for (var i = 0; i < tuples.length; i++) { %>
+				<option value="<%- tuples[i][0] %>" <%- localization === tuples[i][0] ? "selected='selected'" : "" %>><%- tuples[i][1] %></option>
+			<% }; %>
+		</select>
+	</div>
+
+	<button class="button secondary big" id="save_advanced">Save</button>
+</script>

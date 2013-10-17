@@ -16,8 +16,6 @@ wxApp = wxApp || {};
 
         render: function() {
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
-            console.log('ME ME ME');
-            console.log(this.model);
         },
 
         save: function() {
