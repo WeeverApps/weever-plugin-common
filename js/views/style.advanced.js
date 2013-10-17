@@ -15,22 +15,34 @@ wxApp = wxApp || {};
 
 		render: function() {
 			// localization is surrounded by double quotes for some reason? Remove it.
-			var l = this.model.get('localization');
+			var l = wxApp.config.get('localization');
 			l = l.replace(/"/g, '');
-			this.model.set('localization', l);
+			wxApp.config.set('localization', l);
 
-			this.$('.content').html( this.tpl( this.model.toJSON() ) );
+			this.$('.content').html( this.tpl( {config: wxApp.config.toJSON(), design: wxApp.design.toJSON()} ) );
 		},
 
 		save: function() {
 			var me = this;
 			this.$('#save_advanced').html('Saving...');
 
+			// Save CSS.
+			var styles = this.$('#css_styles').val();
+			wxApp.design.get('css').styles = styles;
+
+			var innerParams = JSON.stringify( wxApp.design.get('css') );
+            var params = { css: innerParams };
+
+            wx.makeApiCall('design/set_css', params, function(data) {
+                me.$('#save_advanced').html('Saved!');
+            });
+
+			// Save language.
 			var localization = this.$('#localizations').val();
 			wxApp.config.set('localization', localization);
 
-			var innerParams = JSON.stringify( wxApp.config.get('localization') );
-            var params = { localization: innerParams };
+			innerParams = JSON.stringify( wxApp.config.get('localization') );
+            params = { localization: innerParams };
 
             wx.makeApiCall('config/set_localization', params, function(data) {
                 me.$('#save_advanced').html('Saved!');
