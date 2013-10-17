@@ -88,7 +88,6 @@ jQuery(document).ready(function(){
 		// because the builtin jscolor.install hook is bind to window.load,
 		// which has already happend
 		callback: function(id, testResult) {
-			alert('Callback.');
 			jscolor.init();
 		}
 	}]);

@@ -7,7 +7,8 @@ wxApp = wxApp || {};
         className: '',
 
         initialize: function() {
-            this.featureTpl = _.template( $('#feature-template').html() );
+            // this.featureTpl = _.template( $('#feature-template').html() );
+            this.featureTpl = _.template( "<%- featureName %>" );
             this.model.bind( 'change', this.render, this );
             //this.model.bind( 'destroy', this.destroyView, this );
         },
@@ -19,6 +20,7 @@ wxApp = wxApp || {};
         //},
 
         render: function() {
+            console.log('Rendering feature: ' + this.model.toJSON());
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
             if (this.model.get('rel') !== '') {
