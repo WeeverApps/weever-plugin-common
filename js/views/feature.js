@@ -7,8 +7,7 @@ wxApp = wxApp || {};
         className: '',
 
         initialize: function() {
-            // this.featureTpl = _.template( $('#feature-template').html() );
-            this.featureTpl = _.template( "<%- featureName %>" );
+            this.featureTpl = _.template( $('#feature-template').html() );
             this.model.bind( 'change', this.render, this );
             //this.model.bind( 'destroy', this.destroyView, this );
         },
