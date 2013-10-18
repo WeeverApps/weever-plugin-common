@@ -1,7 +1,7 @@
 <script type="text/template" id="advanced-options">
 	<p class="lead"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
 	<p><?php echo __( 'Modify your app by entering valid CSS.  To identify CSS classes use a webkit browser (such as Chrome or Safari), right-click on the app and inspect the HTML elements.', 'weever' ); ?></p>
-	<textarea style="width: 100%; height: 300px;" name="css" id="css_styles"><%- design.css.styles %></textarea>
+	<textarea style="width: 100%; height: 300px;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
 
 	<p class="lead"><?php echo __( 'Graphic Design', 'weever' ); ?>&nbsp;<span class="label success"><?php echo __( 'add on', 'weever' ); ?></span></p>
 	<p><?php echo __( 'Let Weever App’s design professionals create custom app illustrations that elevate your brand! $399 CSS and graphics package.', 'weever' ); ?></p>
