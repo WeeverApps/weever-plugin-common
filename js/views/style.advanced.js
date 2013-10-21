@@ -41,8 +41,8 @@ wxApp = wxApp || {};
 			var localization = this.$('#localizations').val();
 			wxApp.config.set('localization', localization);
 
-			innerParams = JSON.stringify( wxApp.config.get('localization') );
-            params = { localization: innerParams };
+            params = { localization: localization };
+            alert( params );
 
             wx.makeApiCall('config/set_localization', params, function(data) {
                 me.$('#save_advanced').html('Saved!');
