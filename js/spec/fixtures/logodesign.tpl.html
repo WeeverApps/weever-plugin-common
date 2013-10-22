@@ -6,15 +6,18 @@
 		<option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use An Image (Upload Below)', 'weever' ); ?></option>
 		<option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use Custom CSS and HTML', 'weever' ); ?></option>
 	</select>
+	<img id="titlebarSource_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
 	<div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
 		<p><?php echo __( 'If using text, please specify the logo text:' ); ?></p>
-		<input type="text" id="titlebar_title" maxlength="35" style="width: 	270px;" value="<%- titlebar.text %>" class="required" />
+		<input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="required logo-design" />
+		<img id="titlebar_title_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 	</div>
 
 	<div id="logoHtml" style="display: <%- titlebar.type == 'html' ? "block":"none" %>">
 		<p><?php echo __( 'If using HTML, please specify the logo HTML:' ); ?></p>
-		<textarea id="titlebar_html" style="width: 	270px;" rows="3"><%- titlebar.html %></textarea>
+		<textarea id="titlebar_html" class="logo-design" rows="3"><%- titlebar.html %></textarea>
+		<img id="titlebar_html_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 	</div>
 
 	<div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
@@ -33,10 +36,12 @@
 	<p class="wx-ui-title"><?php echo __( 'Logo Area Colors', 'weever' ); ?></p>
 
 	<p><?php echo __( 'Logo Area Background Color', 'weever' ); ?></p>
-	<input type="color" class="color" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+	<input type="text" class="color" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+	<img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
 	<p><?php echo __( 'Logo Area &ndash; Text Color (if using a text-based logo)', 'weever'); ?></p>
-	<input type="color" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+	<input type="text" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+	<img id="main_titlebar_text_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
 	<p class="wx-ui-title"><?php echo __('Sub Tab Bar Colors', 'weever'); ?></p>
 
@@ -45,12 +50,11 @@
 	</p>
 
 	<p><?php echo __('Sub Tab Bar &ndash; Background Color', 'weever'); ?></p>
-	<input type="color" class="color" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
+	<input type="text" class="color" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
+	<img id="subtab_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
 	<p><?php echo __('Sub Tab Bar &ndash; Text Color', 'weever'); ?></p>
-	<input type="color" class="color" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+	<input type="text" class="color" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+	<img id="subtab_text_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
-	<p>
-		<button class="button secondary" id="save_logo_design">Save</button>
-	</p>
 </script>
