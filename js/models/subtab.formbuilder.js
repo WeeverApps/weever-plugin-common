@@ -11,7 +11,7 @@ wxApp = wxApp || {};
 			{
 				title: 'Formbuilder Title',
 				tabTitle: 'Form',
-				icon_id: this.default_icon_id,
+				icon_id: 30,
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
