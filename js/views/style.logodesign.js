@@ -7,7 +7,7 @@ wxApp = wxApp || {};
         events: {
             'change #titlebarSource': 'dropDownChange',
             'change .color': 'colorChange',
-            'change .logo-design': 'logoChange'
+            'change .logo-design': 'logoChange' 
         },
 
         initialize: function() {

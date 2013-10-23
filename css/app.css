@@ -7593,7 +7593,13 @@ input.color {
   display: inline;
 }
 
-input.logo-design {
-  width: 270px;
-  display: inline;
+.button.prefix.secondary {
+  height: 2.7em;
+  line-height: 2.7em;
+  border-radius: 0;
+}
+
+div.loading.columns {
+  line-height: 2.0em;
+  padding-left: 0.5em !important;
 }

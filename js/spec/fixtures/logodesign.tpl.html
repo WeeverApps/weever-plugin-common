@@ -10,8 +10,17 @@
 
 	<div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
 		<p><?php echo __( 'If using text, please specify the logo text:' ); ?></p>
-		<input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="required logo-design" />
-		<img id="titlebar_title_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+		<div class="row collapse">
+			<div class="small-8 columns">
+				<input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="logo-design" />
+			</div>
+			<div class="small-2 columns">
+				<a href="#" onclick="return false;" class="button prefix secondary">Save</a>
+			</div>
+			<div class="small-2 columns loading">
+				<img id="titlebar_title_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+			</div>
+		</div>
 	</div>
 
 	<div id="logoHtml" style="display: <%- titlebar.type == 'html' ? "block":"none" %>">
