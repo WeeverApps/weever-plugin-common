@@ -2,10 +2,33 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.InstallIcon = Backbone.View.extend({
+
+    wxApp.StyleBase = Backbone.View.extend({
+
+        showLoadingGif: function( id ) {
+            var loading_id = '#' + id + '_loading';
+            $(loading_id).show();
+            return loading_id;
+        },
+
+        hideLoadGif: function(id, loading_id) {
+            // Create a span that tells you the element was saved.
+            // Add it to the page for two seconds, then fade it out, then remove it from the page.
+            // Hide the loading gif
+            var post_load = id + "_done";
+            var span = "<span id=\"" + post_load + "\">Saved.</span>";
+            $(loading_id).before( span );
+            $( '#' + post_load ).delay( 2000 ).fadeOut( 1000 ).queue( function() { $(this).remove();} );
+            $(loading_id).hide();
+        }
+        
+    });
+
+    wxApp.InstallIcon = wxApp.StyleBase.extend({
         el: '#install_icon',
         events: {
-            'click #save_install_icon': 'save'
+            'click #save_install_icon': 'clickSave',
+            'change #install_prompt': 'changeSave'
         },
 
         initialize: function() {
@@ -13,11 +36,25 @@ wxApp = wxApp || {};
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
         },
 
-        save: function() {
-            console.log('install icon: save clicked');
-
+        clickSave: function() {
             $('#save_install_icon').html('Saving...');
+            this.performSave( function(data) {
+                $('#save_install_icon').html('Saved!').delay(2000).queue( function() { $(this).html('Save'); } );
+            } );
+        },
 
+        changeSave: function(e) {
+            var me = this;
+            var txt = $(e.currentTarget);
+            var id = txt.attr('id');
+            var loading_id = this.showLoadingGif( id );
+
+            this.performSave( function(data) {
+                me.hideLoadGif( id, loading_id );
+            } );
+        },
+
+        performSave: function(c) {
             wxApp.design.get('install').prompt = $('#install_prompt').val();
             wxApp.design.get('install').name   = $('#title').val();
             wxApp.design.get('install').icon   = wx.cleanUrl( $('#wx-icon_live').attr('src') );
@@ -29,10 +66,7 @@ wxApp = wxApp || {};
             var innerParams = JSON.stringify( wxApp.design.get('install') );
             var params = { install: innerParams };
 
-            // set_launchscreen
-            wx.makeApiCall('design/set_install', params, function(data) {
-                $('#save_install_icon').html('Saved!');
-            });
+            wx.makeApiCall('design/set_install', params, c);
         }
     });
 

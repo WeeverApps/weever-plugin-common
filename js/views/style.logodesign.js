@@ -2,7 +2,7 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.LogoDesign = Backbone.View.extend({
+    wxApp.LogoDesign = wxApp.StyleBase.extend({
         el: '#logo_design',
         events: {
             'change #titlebarSource': 'dropDownChange',
@@ -47,8 +47,7 @@ wxApp = wxApp || {};
                 val = '#' + val;
 
             // Show loading gif
-            var loading_id = '#' + id + '_loading';
-            $(loading_id).show();
+            var loading_id = this.showLoadingGif( id );
             
             var data = { 
                     action: 'ajaxSaveTheme',
@@ -80,8 +79,7 @@ wxApp = wxApp || {};
             var id = txt.attr('id');
 
             // Show loading gif
-            var loading_id = '#' + id + '_loading';
-            $(loading_id).show();
+            var loading_id = this.showLoadingGif( id );
             
             wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
             wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
@@ -99,17 +97,6 @@ wxApp = wxApp || {};
                 me.hideLoadGif( id, loading_id );
                 setTimeout( function() { wx.refreshAppPreview(); }, 500);
             });
-        },
-
-        hideLoadGif: function(id, loading_id) {
-            // Create a span that tells you the element was saved.
-            // Add it to the page for two seconds, then fade it out, then remove it from the page.
-            // Hide the loading gif
-            var post_load = id + "_done";
-            var span = "<span id=\"" + post_load + "\">Saved.</span>";
-            $(loading_id).before( span );
-            $( '#' + post_load ).delay( 2000 ).fadeOut( 1000 ).queue( function() { $(this).remove();} );
-            $(loading_id).hide();
         }
     });
 
