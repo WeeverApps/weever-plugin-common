@@ -40,7 +40,7 @@ final=("${modelsToBeMovedForwards[@]}" "${allModels[@]}" collections/*.js)
 
 # 5. Repeat the above for views
 allViews=(views/*.js)
-viewsToBeMovedForward=(views/formbuilder.control.js views/tab.js views/subtab.edit.js)
+viewsToBeMovedForward=(views/formbuilder.control.js views/tab.js views/subtab.edit.js views/style.js)
 
 length=${#allViews[@]}
 for ((i=1; i<$length; i++))
