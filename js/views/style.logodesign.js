@@ -67,7 +67,6 @@ wxApp = wxApp || {};
                     setTimeout( function() { wx.refreshAppPreview(); }, 500);
                 },
                 error: function(v, msg) {
-                    //alert(v);
                     alert(msg);
                 }
             });
@@ -100,6 +99,10 @@ wxApp = wxApp || {};
         }
     });
 
+    // Style/Advanced needs both Design and Config, so we
+    // need to ensure both are loaded before creating it.
+    var designFetched=false, configFetched=false;
+
     wxApp.design = new wxApp.Design();
     wxApp.design.fetch( function() {
         // Load the Design Views.
@@ -107,12 +110,19 @@ wxApp = wxApp || {};
         wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
         wxApp.installIcon = new wxApp.InstallIcon( {model: wxApp.design} );
         wxApp.customBranding = new wxApp.CustomBranding( {model: wxApp.design} );
+        designFetched = true;
+        if (configFetched) {
+            wxApp.advanced = new wxApp.Advanced();
+        }
     } );
 
 
     wxApp.config = new wxApp.Config();
     wxApp.config.fetch( function() {
-        wxApp.advanced = new wxApp.Advanced( { model: wxApp.config } );
+        configFetched = true;
+        if (designFetched) {
+            wxApp.advanced = new wxApp.Advanced();
+        }
     } );
 
 })(jQuery);
