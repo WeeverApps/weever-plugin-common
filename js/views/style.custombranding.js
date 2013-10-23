@@ -2,10 +2,11 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.CustomBranding = Backbone.View.extend({
+    wxApp.CustomBranding = wxApp.StyleBase.extend({
         el: '#custom_branding',
         events: {
-            'click #save_custom_branding': 'save',
+            'click #save_load_spinner': 'saveLoadSpinner',
+            'click #save_domain': 'saveDomain',
             'click a.domain': 'deleteDomain'
         },
 
@@ -18,17 +19,7 @@ wxApp = wxApp || {};
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
         },
 
-        save: function() {
-            console.log('custom branding: save clicked');
-
-            $('#save_custom_branding').html('Saving...');
-
-            // The 'design' methods of Open API is kinda strange... It 
-            // expects top-level params to be JSON objects, and items within 
-            // the top-level params to be string representations of JSON 
-            // objects... Therefore, we have to 'stringify' the inner params.
-            
-            // Load Spinner (Powered By)
+        saveLoadSpinner: function() {
             if ( this.$('#wx-load-spinner').length ) {
                 wxApp.design.get('loadspinner').text = this.$('#wx-load-spinner').val();
 
@@ -39,28 +30,33 @@ wxApp = wxApp || {};
                     $('#save_custom_branding').html('Saved!');
                 });
             }
+        },
 
-            // Domain(s)
-            if ( this.$('#wx-domain-map-input').length ) {
-                var newDomain = this.$('#wx-domain-map-input').val();
-                wxApp.design.get('domain').push( {domain: newDomain} );
+        saveDomain: function() {
+            if ( !this.$('#wx-domain-map-input').length )
+                return;
 
-                this.updateDomains( wxApp.design.get('domain'), function(data) {
-                    $('#save_custom_branding').html('Saved!');
+            var me = this;
+            var id = 'wx-domain-map-input'
+            var txt = $('#' + id);
 
-                    // Re-render the view.
-                    wxApp.customBranding.render();
-                });
-            }
-
+            // Show loading gif
+            var loading_id = this.showLoadingGif( id );
+            
+            var newDomain = txt.val();
+            wxApp.design.get('domain').push( {domain: newDomain} );
+            
+            this.updateDomains( wxApp.design.get('domain'), function(data) {
+                // Re-render the view.
+                wxApp.customBranding.render();
+                me.hideLoadGif( id, loading_id );
+            });
         },
 
         deleteDomain: function(e) {
             e.preventDefault();
-            alert( $( e.currentTarget ).data('id') );
             var domainName = $( e.currentTarget ).data('id');
             var index = this.inArray( domainName, wxApp.design.get('domain') );
-            alert( index );
             if (index > -1) {
                 wxApp.design.get('domain').splice(index, 1);
 
