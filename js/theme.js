@@ -94,7 +94,8 @@ jQuery(document).ready(function(){
 
 	// Preview code
 	setTimeout(function(){
-		if (jQuery.browser.webkit) {
+		// if (jQuery.browser.webkit) {
+		if (true) {
 			jQuery('#preview-app-dialog-no-webkit').hide();
 	        jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
 			jQuery('#preview-app-dialog-webkit').show();

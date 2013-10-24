@@ -36,7 +36,7 @@ wxApp = wxApp || {};
         initialize: function() {
             this.allowAddContentButtonsToBeDragged();
             this.allowDroppingOnAddArea();
-            Backbone.Events.on( 'api:success', this.highlightAppPreviewRefresh, this );
+            // Backbone.Events.on( 'api:success', this.highlightAppPreviewRefresh, this );
             Backbone.Events.on( 'subtab:dragstart', this.showDropTab, this );
             Backbone.Events.on( 'subtab:dragstop', this.hideDropTab, this );
             Backbone.Events.on( 'tab:dropped', this.clearBodyStyles, this );
@@ -91,10 +91,6 @@ wxApp = wxApp || {};
             } else {
                 throw new Error('Invalid type ' + id);
             }
-        },
-
-        highlightAppPreviewRefresh: function() {
-            $('#preview-refresh').effect('pulsate', { times: 5 }, 6000);
         },
 
         refreshAppPreview: function() {

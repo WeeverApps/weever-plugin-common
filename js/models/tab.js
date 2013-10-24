@@ -56,7 +56,10 @@ var wxApp = wxApp || {};
         },
 
         destroy: function() {
-            this.trigger('destroy', this);
+            var me = this;
+            wx.makeApiCall('tabs/delete', { tab_id: this.get('id') }, function() {
+                me.trigger('destroy');
+            });
         }
     });
 })(jQuery);

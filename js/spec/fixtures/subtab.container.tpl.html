@@ -1,9 +1,10 @@
 
 <script type="text/template" id="subtab-container-template">
     <fieldset class="wx-adminContainer">
-        <h2 class="wxuia-fieldTitle" style="border: 1px solid #e5e5e5;" id="wxnavtip-options">
+        <h2 class="wxuia-fieldTitle" id="wxnavtip-options">
             <span class="wxIcon-<%- icon_id %> wxFont-1"></span>
             <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %></a>
+            <span class="delete"><a href="#" class="wx-delete-container">&times;</a></span>
         </h2>
         <!-- In the future, Layout stuff will go here. -->
     </fieldset>

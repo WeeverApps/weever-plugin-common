@@ -94,13 +94,6 @@ wxApp = wxApp || {};
                     me.trigger('save', me);
                 }
             });
-        },
-
-        destroy: function() {
-            var me = this;
-            wx.makeApiCall('tabs/delete', { tab_id: this.get('id') }, function() {
-                me.trigger('destroy');
-            });
         }
     });
 })(jQuery);
