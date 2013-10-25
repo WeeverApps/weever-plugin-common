@@ -131,7 +131,7 @@ wxApp = wxApp || {};
 		},
 
 		getInput: function() {
-			$input = this.$('.wx-form-builder-' + this.model.get('attributes').get('type') + '-input');
+			var $input = this.$('.wx-form-builder-' + this.model.get('attributes').get('type') + '-input');
 			if ( $input.length == 0 ) {
 				// Must be a text area.
 				$input = this.$('.wx-form-builder-textarea');

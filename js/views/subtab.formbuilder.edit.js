@@ -4,8 +4,8 @@ wxApp = wxApp || {};
 (function($){
     wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneSelector: '.wx-form-builder-preview',
-
         subTabEditTplSelector: '#form-builder-subtab-edit-template',
+	    hasCalledFinish: false,
 
         initializeEvents: function() {
             this.events = _.extend({}, this.genericEvents, this.events);
@@ -332,7 +332,32 @@ wxApp = wxApp || {};
 			this.addRadioGroupWithProperties( {} );
 		},
 
-		addRadioGroupWithProperties: function( properties ) {
+	    /**
+	     * Override __super__.finish()
+	     */
+	    finish: function() {
+		    console.log( 'subtab.formbuilder.edit.finish()' );
+		    console.log( this );
+
+		    if ( typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
+			    this.constructor.__super__.finish.apply( this );
+			    return;
+		    }
+
+		    if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
+			    var finishView = new wxApp.FormBuilderFinishView({
+				    model: this.model
+			    });
+			    this.$( this.previewPaneSelector ).append( finishView.render().el );
+//			    $( 'body' ).append( finishView.render().el );
+
+			    this.hasCalledFinish = true;
+			    return;
+		    }
+
+	    },
+
+	    addRadioGroupWithProperties: function( properties ) {
 			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
 			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
 				model: radioFieldset
