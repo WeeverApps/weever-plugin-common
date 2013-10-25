@@ -100,7 +100,7 @@ wxApp = wxApp || {};
             this.setIconFromView(this.model);
 			this.saveModel();
 
-            $('.reveal-modal').foundation('reveal', 'close');
+            this.$el.foundation('reveal', 'close');
 
             // Wait half a second, then refresh the preview
             // (The half-second helps ensure the server is synced)
@@ -213,17 +213,10 @@ wxApp = wxApp || {};
 		},
 
         destroyView: function() {
-            try {
-                //this.$('#wx-edit-area').dialog('close');
-                //$('#wx-edit-area').foundation('reveal', 'close');
-                $('.reveal-modal').foundation('reveal', 'close');
-            } catch ( e ) {
-
-            }
             this.undelegateEvents();
             this.$el.removeData().unbind();
-            this.remove();
-            Backbone.View.prototype.remove.call( this );
+            // this.remove();
+            // Backbone.View.prototype.remove.call( this );
         }
     });
 })(jQuery);
