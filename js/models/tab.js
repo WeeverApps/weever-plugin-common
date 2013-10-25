@@ -23,9 +23,9 @@ var wxApp = wxApp || {};
                 console.log(error);
             });
             this.get('subTabs').on('remove', function(subTab) {
-                wx.log('detected subTabs remove event');
+                console.log('detected subTabs remove event');
                 if ( ! me.getSubTabs().length )
-                    me.destroy();
+                    me.trigger('destroy');
             });
             // @TODO: See if better to bind than to use addSubTab function?
             //this.subTabs.bind('add', this.addSubTab, this);
@@ -40,7 +40,7 @@ var wxApp = wxApp || {};
             subTab.set( 'parent_id', this.get('id') );
             this.get('subTabs').add( subTab );
             subTab.on('tab:move', function() {
-                wx.log('detected tab:move for subtab in Tab model');
+                console.log('detected tab:move for subtab in Tab model');
                 me.getSubTabs().remove(this);
             } );
         },
