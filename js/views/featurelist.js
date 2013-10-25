@@ -14,7 +14,6 @@ wxApp = wxApp || {};
         addOne: function(feature) {
             // We currently don't handle the 'rel' features (Coupons, Pages, and Map Locations).
             if (feature.get('rel') === '') {
-                console.log('Adding feature ' + feature.get('featureName'));
                 var me = this;
                 var view = new wxApp.FeatureView({ model: feature });
                 this.$el.append( view.render().el );

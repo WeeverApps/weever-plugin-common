@@ -42,15 +42,17 @@
 			</div>
 		</div>
 
-		<% if (domain.length) { %>
-			<h6>Current domains:</h6>
-		<% } %>
+		<% if (domain) { %>
+			<% if (domain.length) { %>
+				<h6>Current domains:</h6>
+			<% } %>
 
-		<ul class="domains">
-			<% for (var i = domain.length - 1; i >= 0; i--) { %>
-				<li><%- domain[i].domain %> <a href="#" class="domain" data-id="<%- domain[i].domain %>">&times;</a></li>
-			<% }; %>
-		</ul>
+			<ul class="domains">
+				<% for (var i = domain.length - 1; i >= 0; i--) { %>
+					<li><%- domain[i].domain %> <a href="#" class="domain" data-id="<%- domain[i].domain %>">&times;</a></li>
+				<% }; %>
+			</ul>
+		<% }; %>
 	<?php endif; ?>
 
 	<p class="lead"><?php echo __( 'Kick-Out Web Address', 'weever' ); ?></p>
