@@ -93,11 +93,34 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-signature': 'addSignature',
 			'click .wx-form-builder-add-custom-action': 'addCustomAction',
 			'click .wx-form-builder-add-email-action': 'addEmailAction'
-//			,
-//			'click .wx-finish-button': 'save'
 		},
 
-		addEmailAction: function() {
+	    /**
+	     * Override __super__.finish()
+	     */
+	    finish: function() {
+		    console.log( 'subtab.formbuilder.edit.finish()' );
+		    console.log( this );
+
+		    if ( typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
+			    this.constructor.__super__.finish.apply( this );
+			    return;
+		    }
+
+		    if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
+			    var finishView = new wxApp.FormBuilderFinishView({
+				    model: this.model
+			    });
+			    this.$( this.previewPaneSelector ).append( finishView.render().el );
+//			    $( 'body' ).append( finishView.render().el );
+
+			    this.hasCalledFinish = true;
+			    return;
+		    }
+
+	    },
+
+	    addEmailAction: function() {
 			console.log( 'addEmailAction' );
 
 			var action = this.addCustomAction( { method : 'email' } );
@@ -332,31 +355,6 @@ wxApp = wxApp || {};
 			this.addRadioGroupWithProperties( {} );
 		},
 
-	    /**
-	     * Override __super__.finish()
-	     */
-	    finish: function() {
-		    console.log( 'subtab.formbuilder.edit.finish()' );
-		    console.log( this );
-
-		    if ( typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
-			    this.constructor.__super__.finish.apply( this );
-			    return;
-		    }
-
-		    if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
-			    var finishView = new wxApp.FormBuilderFinishView({
-				    model: this.model
-			    });
-			    this.$( this.previewPaneSelector ).append( finishView.render().el );
-//			    $( 'body' ).append( finishView.render().el );
-
-			    this.hasCalledFinish = true;
-			    return;
-		    }
-
-	    },
-
 	    addRadioGroupWithProperties: function( properties ) {
 			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
 			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
@@ -457,15 +455,6 @@ wxApp = wxApp || {};
 			// Add Select to control collection
 			this.model.get( 'config' ).formElements.push( select );
 		}
-//		,
-//
-//		save: function() {
-//			wx.log( 'formbuilder save' );
-//			wx.log( this.controls.toJSONrecursive() );
-//			wx.log( JSON.stringify( this.controls.toJSONrecursive() ) );
-//			wx.log( 'Form Objects: ' + this.controls.length );
-//			alert( JSON.stringify( this.controls.toJSONrecursive() ) );
-//		}
 
 	});
 })(jQuery);
