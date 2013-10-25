@@ -15,6 +15,7 @@
 		<div>
 			<p>Loading Spinner Text:</p>
 			<textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="<?php echo __( 'Powered By...', 'weever' ); ?>"><%- loadspinner.text %></textarea>
+			<button class="button secondary big" id="save_load_spinner">Save</button>
 		</div>
 	<?php endif; ?>
 
@@ -29,9 +30,16 @@
 	<?php else: ?>
 		<p><?php echo __( "Use this to set up app.yourname.com or yourappname.com", 'weever' ); ?></p>
 
-		<div>
-			<?php echo __( 'Domain Mapping', 'weever' ); ?>:
-			<input type="textbox" name="domain" id="wx-domain-map-input" placeholder="app.yourdomain.com" />
+		<div class="row collapse">
+			<div class="small-8 columns">
+				<input type="text" name="domain" id="wx-domain-map-input" placeholder="app.yourdomain.com" />
+			</div>
+			<div class="small-2 columns">
+				<a href="#" onclick="return false;" id="save_domain" class="button prefix secondary">Save</a>
+			</div>
+			<div class="small-2 columns loading">
+				<img id="wx-domain-map-input_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+			</div>
 		</div>
 
 		<% if (domain.length) { %>
@@ -47,6 +55,4 @@
 
 	<p class="lead"><?php echo __( 'Kick-Out Web Address', 'weever' ); ?></p>
 	<p><?php echo __( 'Specify a \'kick out\' web address in the event of a incompatible device (e.g, an older cell phone) tries to access your app. We recommend using a Twitter or Facebook Page if no web site is available.', 'weever' ); ?></p>
-	<!-- Todo -->
-	<button class="button secondary big" id="save_custom_branding">Save</button>
 </script>

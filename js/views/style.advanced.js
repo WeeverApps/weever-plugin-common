@@ -2,10 +2,11 @@
 wxApp = wxApp || {};
 
 (function($) {
-	wxApp.Advanced = Backbone.View.extend({
+	wxApp.Advanced = wxApp.StyleBase.extend({
 		el: '#advanced',
 		events: {
-			'click #save_advanced': 'save'
+			'click #save_advanced': 'saveCss',
+			'change #localizations': 'saveLanguage'
 		},
 
 		initialize: function() {
@@ -22,7 +23,7 @@ wxApp = wxApp || {};
 			this.$('.content').html( this.tpl( {config: wxApp.config.toJSON(), design: wxApp.design.toJSON()} ) );
 		},
 
-		save: function() {
+		saveCss: function() {
 			var me = this;
 			this.$('#save_advanced').html('Saving...');
 
@@ -35,17 +36,23 @@ wxApp = wxApp || {};
 
             wx.makeApiCall('design/set_css', params, function(data) {
                 me.$('#save_advanced').html('Saved!');
+                setTimeout( function() { wx.refreshAppPreview(); }, 500);
             });
+        },
+
+		saveLanguage: function() {
+			var me = this;
+			var id = 'localizations';
+			var loading_id = this.showLoadingGif( id );
 
 			// Save language.
-			var localization = this.$('#localizations').val();
+			var localization = this.$('#' + id).val();
 			wxApp.config.set('localization', localization);
 
-			innerParams = JSON.stringify( wxApp.config.get('localization') );
-            params = { localization: innerParams };
-
+            var params = { localization: localization };
+            
             wx.makeApiCall('config/set_localization', params, function(data) {
-                me.$('#save_advanced').html('Saved!');
+                me.hideLoadingGif( id, loading_id );
             });
 		}
 	});

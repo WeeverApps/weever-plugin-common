@@ -1,7 +1,8 @@
 <script type="text/template" id="advanced-options">
 	<p class="lead"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
 	<p><?php echo __( 'Modify your app by entering valid CSS.  To identify CSS classes use a webkit browser (such as Chrome or Safari), right-click on the app and inspect the HTML elements.', 'weever' ); ?></p>
-	<textarea style="width: 100%; height: 300px;" name="css" id="css_styles"><%- design.css.styles %></textarea>
+	<textarea style="width: 100%; height: 300px;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
+	<button class="button secondary big" id="save_advanced">Save</button>
 
 	<p class="lead"><?php echo __( 'Graphic Design', 'weever' ); ?>&nbsp;<span class="label success"><?php echo __( 'add on', 'weever' ); ?></span></p>
 	<p><?php echo __( 'Let Weever App’s design professionals create custom app illustrations that elevate your brand! $399 CSS and graphics package.', 'weever' ); ?></p>
@@ -22,12 +23,17 @@ tuples.sort(function(a,b) {
 });
 		%>
 		
-		<select id="localizations">
-			<% for (var i = 0; i < tuples.length; i++) { %>
-				<option value="<%- tuples[i][0] %>" <%- config.localization === tuples[i][0] ? "selected='selected'" : "" %>><%- tuples[i][1] %></option>
-			<% }; %>
-		</select>
+		<div class="row collapse">
+			<div class="small-10 columns">
+				<select id="localizations">
+					<% for (var i = 0; i < tuples.length; i++) { %>
+						<option value="<%- tuples[i][0] %>" <%- config.localization === tuples[i][0] ? "selected='selected'" : "" %>><%- tuples[i][1] %></option>
+					<% }; %>
+				</select>
+			</div>
+			<div class="small-2 columns">
+				<img id="localizations_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+			</div>
+		</div>
 	</div>
-
-	<button class="button secondary big" id="save_advanced">Save</button>
 </script>
