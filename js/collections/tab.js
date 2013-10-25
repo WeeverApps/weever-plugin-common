@@ -61,7 +61,7 @@ var wxApp = wxApp || {};
                     var tabs = [];
                     for ( var tabIndex = 0; tabIndex < data.tabs.length; tabIndex++ ) {
                         var tabData = data.tabs[tabIndex];
-                        if ( null === tabData.parent_id ) {
+                        if ( !tabData.parent_id ) {
                             var tab = new wxApp.Tab( tabData );
                             // This 'main' tab is also a 'sub' tab
                             var modelName = me.getModelNameByTabData( tabData );

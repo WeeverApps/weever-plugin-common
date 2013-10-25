@@ -21,7 +21,6 @@ wxApp = wxApp || {};
             this.containerEditView = new wxApp.ContainerEditView({ model: this.model });
 
             this.model.on('change', this.render, this);
-            console.log('done initializing subtabscontainerview');
         },
 
         events: {
@@ -31,8 +30,6 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            wx.log('RENDERING subtabs container');
-            wx.log( this.model );
             this.$el.html( this.subTabContainerTpl( this.model.toJSON() ) );
             this.$('#ContainerEditModal').html( this.containerEditContentTpl( this.model.toJSON() ) );
             this.$('.adminlist').html( this.subTabsView.render().el );

@@ -135,7 +135,7 @@ wxApp = wxApp || {};
         el: '#buildListTabsSortable',
 
         startDroppable: function() {
-            console.log('You can\'t drop on this one, dummy.')
+            // console.log('You can\'t drop on this one, dummy.')
         }
     });
 
