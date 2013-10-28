@@ -5,7 +5,8 @@ wxApp = wxApp || {};
     wxApp.LogoDesign = wxApp.StyleBase.extend({
         el: '#logo_design',
         events: {
-            'change #titlebarSource': 'dropDownChange',
+            // 'change #titlebarSource': 'dropDownChange',
+            'change input[name=titlebarSource]': 'dropDownChange',
             // 'change .color': 'colorChange',
             'change .logo-design': 'logoChange' 
         },
@@ -18,7 +19,9 @@ wxApp = wxApp || {};
         },
 
         dropDownChange: function() {
-            switch($('#titlebarSource').val()) {
+            alert('ddc');
+            alert( )
+            switch($('input[name=titlebarSource]').val()) {
                 case 'text':
                     $('#logoText').show();
                     $('#logoHtml').hide();
@@ -83,7 +86,7 @@ wxApp = wxApp || {};
             
             wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
             wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
-            wxApp.design.get('titlebar').type  = $('#titlebarSource').val();
+            wxApp.design.get('titlebar').type  = $('input[name=titlebarSource]').val();
             wxApp.design.get('titlebar').image = $('#titlebar_logo_live').attr('src');
             
             // The 'design' methods of Open API is kinda strange... It 

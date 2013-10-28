@@ -5,20 +5,11 @@
     <!-- logo type - text or image? -->
     <!-- -->
     <label>
-        <input type="radio" class="wx-content-radio" name="" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
+        <input type="radio" class="wx-content-radio" name="titlebarSource" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
     </label>
     <label>
-        <input type="radio" class="wx-content-radio" name="" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
+        <input type="radio" class="wx-content-radio" name="titlebarSource" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
     </label>
-    <!-- -->
-
-    <!-- @ mattg - please remove the select list form -->
-    <!-- -->
-    <select id="titlebarSource" class="required" style="width: 270px">
-        <option value="text"  <%- titlebar.type == 'text'  ? "selected='selected'":"" %>><?php echo __( 'Use a line of text', 'weever' ); ?> ("<%- titlebar.text %>")</option>
-        <option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use an image', 'weever' ); ?></option>
-        <option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use custom css and html', 'weever' ); ?></option>
-    </select>
     <!-- -->
 
     <img id="titlebarSource_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
