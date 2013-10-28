@@ -117,7 +117,8 @@ wxApp = wxApp || {};
         wxApp.customBranding = new wxApp.CustomBranding( {model: wxApp.design} );
         designFetched = true;
         if (configFetched) {
-            wxApp.advanced = new wxApp.Advanced();
+            console.log('advanced init');
+            wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
     } );
 
@@ -126,8 +127,11 @@ wxApp = wxApp || {};
     wxApp.config.fetch( function() {
         configFetched = true;
         if (designFetched) {
-            wxApp.advanced = new wxApp.Advanced();
+            console.log('advanced init');
+            wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
     } );
+
+    wxApp.IconFonts.fetch();
 
 })(jQuery);

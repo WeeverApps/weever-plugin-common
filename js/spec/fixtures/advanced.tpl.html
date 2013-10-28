@@ -4,6 +4,21 @@
 	<textarea style="width: 100%; height: 300px;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
 	<button class="button secondary big" id="save_advanced">Save</button>
 
+	<p class="lead">Icons</p>
+	<p>Select an icon style for your application</p>
+	<div>
+		<select id="font-list">
+			<option value="-1">Select One...</option>
+		</select>
+
+		<div id="icon-font-preview" style="display: none;">
+			<h6>Icon Preview</h6>
+			<% for (var i = 1; i <= 64; i++) { %>
+				<span class="wxFont-1 wxIcon-<%- i %> large"></span>
+			<% }; %>
+		</div>
+	</div>
+
 	<p class="lead"><?php echo __( 'Graphic Design', 'weever' ); ?>&nbsp;<span class="label success"><?php echo __( 'add on', 'weever' ); ?></span></p>
 	<p><?php echo __( 'Let Weever App’s design professionals create custom app illustrations that elevate your brand! $399 CSS and graphics package.', 'weever' ); ?></p>
 
