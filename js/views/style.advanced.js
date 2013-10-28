@@ -110,4 +110,7 @@ wxApp = wxApp || {};
 			$('#icon-font-preview').slideDown()
 		}
 	});
+
+	// Grab the data and kick things off
+    wxApp.IconFonts.fetch();
 })(jQuery);

@@ -132,4 +132,6 @@ wxApp = wxApp || {};
         }
     } );
 
+    wxApp.IconFonts.fetch();
+
 })(jQuery);

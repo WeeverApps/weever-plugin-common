@@ -12,15 +12,6 @@
     </label>
     <!-- -->
 
-    <!-- @ mattg - please remove the select list form -->
-    <!--
-    <select id="titlebarSource" class="required" style="width: 270px">
-        <option value="text"  <%- titlebar.type == 'text'  ? "selected='selected'":"" %>><?php echo __( 'Use a line of text', 'weever' ); ?> ("<%- titlebar.text %>")</option>
-        <option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use an image', 'weever' ); ?></option>
-        <option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use custom css and html', 'weever' ); ?></option>
-    </select>
-    -->
-
     <img id="titlebarSource_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
     <div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">

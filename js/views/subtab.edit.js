@@ -59,8 +59,6 @@ wxApp = wxApp || {};
                     this.$('.wx-edit-title-div').hide();
             }
 
-            //wx.log(this.$el.html());
-
             return this;
         },
 
@@ -72,12 +70,6 @@ wxApp = wxApp || {};
 
         contentChange: function(ev) {
             this.hideValidateFeed();
-            this.changeDescriptions();
-        },
-
-        // Override this based on what should hide/show when content radio is changed (ie. help text)
-        changeDescriptions: function() {
-
         },
 
         setParentViewContainerId: function(containerId) {
