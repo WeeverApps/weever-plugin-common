@@ -1,31 +1,42 @@
-// creates link-style sub-navigation lists within "sections" (aka "tabs") in Foundation 4+
+// creates inline list style secondary navigation within "sections" (aka "tabs") in Foundation 4+
 
-// active sub-nav for tablet view and above
+// show active item is selected
 
-@media only screen and (min-width: 768px) {
+$subnav-color: $primary-color;
+
+// subnav height hack - fixes issue with section.js and resizing browser from small to phone (generic) width.
+// $subnav-min-height - should match the default section tab height exactly.
+
+$subnav-min-height: 3.125em;
+
+.section-container.section-subnav > section > .title {
+  min-height: $subnav-min-height;
+}
+
+// sub-nav for tablet view and above
+
+@media #{$small} {
 
   .section-container.section-subnav {
 
-    // section:first-child > .title a {
-    //   padding-left: 0;
-    //  }
-
     // active
     section.active > .title a {
-      background-color: #2ba6cb;
+      background-color: $subnav-color;
       color: #fff;
     }
 
     // default
-    > section > .title a {
-      color: #666;
-      padding: 0.1875em 0.625em 0.25em
-    }
 
     > section > .title {
       border: none;
       background: none;
       text-transform: lowercase;
+      min-height: 0; // disables subnav height hack
+    }
+
+    > section > .title a {
+      color: #666;
+      padding: 0.1875em 0.625em 0.25em
     }
 
     >  section > .content,

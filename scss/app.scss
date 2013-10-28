@@ -7,6 +7,8 @@
 // Comment out this import if you are customizing you imports below
 // @import "foundation";
 
+// wx - platform styles - DO NOT DELETE THIS LINE
+
 // Import specific parts of Foundation by commenting the import "foundation"
 // and uncommenting what you want below. You must uncomment the following if customizing
 
@@ -51,16 +53,13 @@
 @import "foundation/components/magellan";
 @import "foundation/components/tables";
 @import "foundation/components/thumbs";
-@import "foundation/components/tooltips";@import "foundation/components/dropdown";
+@import "foundation/components/tooltips";
+@import "foundation/components/dropdown";
 
-// wx - additional imports
+// wx - generic styles
 
 @import "weeverapps/components/wx-typography";
 @import "weeverapps/components/wx-section-subnav";
 @import "weeverapps/components/wx-layout-phone";
 @import "weeverapps/components/wx-layout-tablist";
 @import "weeverapps/components/wx-layout-footer";
-
-// wx - import used only for pre-production testing
-
-@import "weeverapps/components/wx-css-development";

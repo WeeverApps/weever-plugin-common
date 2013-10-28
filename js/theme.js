@@ -16,6 +16,7 @@
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details <http://www.gnu.org/licenses/>.
 *
+*	NOTE - Most (if not all) of this script can be removed.
 */
 
 /*

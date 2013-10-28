@@ -1,69 +1,109 @@
 <script type="text/template" id="logo-design">
-	<p class="wx-ui-title"><?php echo __( 'logo area', 'weever' ); ?></p>
-	<p><?php echo __( 'Use <strong>image or text</strong> for the App Logo?', 'weever' ); ?></p>
-	<select id="titlebarSource" class="required" style="width: 270px">
-		<option value="text"  <%- titlebar.type == 'text'  ? "selected='selected'":"" %>><?php echo __( 'Use a Text Title', 'weever' ); ?> ("<%- titlebar.text %>")</option>
-		<option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use An Image (Upload Below)', 'weever' ); ?></option>
-		<option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use Custom CSS and HTML', 'weever' ); ?></option>
-	</select>
-	<img id="titlebarSource_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
-	<div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
-		<p><?php echo __( 'If using text, please specify the logo text:' ); ?></p>
-		<div class="row collapse">
-			<div class="small-8 columns">
-				<input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="logo-design" />
-			</div>
-			<div class="small-2 columns">
-				<a href="#" onclick="return false;" class="button prefix secondary">Save</a>
-			</div>
-			<div class="small-2 columns loading">
-				<img id="titlebar_title_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
-			</div>
-		</div>
-	</div>
+    <p class="wx-ui-title"><?php echo __( 'Logo type', 'weever' ); ?></p>
 
-	<div id="logoHtml" style="display: <%- titlebar.type == 'html' ? "block":"none" %>">
-		<p><?php echo __( 'If using HTML, please specify the logo HTML:' ); ?></p>
-		<textarea id="titlebar_html" class="logo-design" rows="3"><%- titlebar.html %></textarea>
-		<img id="titlebar_html_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
-	</div>
+    <!-- logo type - text or image? -->
+    <!-- -->
+    <label>
+        <input type="radio" class="wx-content-radio" name="" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
+    </label>
+    <label>
+        <input type="radio" class="wx-content-radio" name="" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
+    </label>
+    <!-- -->
 
-	<div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
-		<p><?php echo __( 'If using an image, please upload an image file<span style="display: block; clear:both; color: #bbb;">Optimal size is 600 x 88px</span>', 'weever' ); ?></p>
-		<div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" img_width="600" img_height="88" class="wx-theme-file-uploader">
-			<noscript>
-				<p>Please enable JavaScript to use file uploader.</p>
-				<!-- or put a simple form for upload here -->
-				<img src="" id="wx-file-load" />
-			</noscript>
-			<input type="hidden" style="float:left;" class="wx-theme-input" id="titlebar_logo_live" size="22" />
-		</div>
-		<img id="wx-titlebar_logo_live" src="<%- titlebar.image %>" />
-	</div>
+    <!-- @ mattg - please remove the select list form -->
+    <!-- -->
+    <select id="titlebarSource" class="required" style="width: 270px">
+        <option value="text"  <%- titlebar.type == 'text'  ? "selected='selected'":"" %>><?php echo __( 'Use a line of text', 'weever' ); ?> ("<%- titlebar.text %>")</option>
+        <option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use an image', 'weever' ); ?></option>
+        <option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use custom css and html', 'weever' ); ?></option>
+    </select>
+    <!-- -->
 
-	<p class="wx-ui-title"><?php echo __( 'Logo Area Colors', 'weever' ); ?></p>
+    <img id="titlebarSource_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
-	<p><?php echo __( 'Logo Area Background Color', 'weever' ); ?></p>
-	<input type="text" class="color" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
-	<img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+    <div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
+        <div class="row collapse">
+            <div class="small-8 columns">
+                <input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="logo-design" />
+            </div>
+            <div class="small-2 columns">
+                <a href="#" onclick="return false;" class="button secondary prefix">Save</a>
+            </div>
+            <div class="small-2 columns loading">
+                <img id="titlebar_title_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+            </div>
+        </div>
+    </div>
 
-	<p><?php echo __( 'Logo Area &ndash; Text Color (if using a text-based logo)', 'weever'); ?></p>
-	<input type="text" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
-	<img id="main_titlebar_text_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+    <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
+        <div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" class="wx-theme-file-uploader">
+            <noscript>
+                <p>Please enable JavaScript to use the file uploader.</p>
+                <!-- or put a simple form for upload here -->
+                <img src="" id="wx-file-load" />
+            </noscript>
+            <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" />
+        </div>
+        <img id="wx-titlebar_logo_live" src="<%- titlebar.image %>" />
+        <span class="secondary label"><?php echo __( 'Optimal image size is 640 x 88px', 'weever' ); ?></span>
+    </div>
 
-	<p class="wx-ui-title"><?php echo __('Sub Tab Bar Colors', 'weever'); ?></p>
+    <br>
+    <br>
 
-	<p>
-		<?php echo __('Set colors for the Sub tab bar just below the logo area. Displays when additional \'sub\' tabs are assigned to a primary tab.', 'weever'); ?>
-	</p>
+	<p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
 
-	<p><?php echo __('Sub Tab Bar &ndash; Background Color', 'weever'); ?></p>
-	<input type="text" class="color" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
-	<img id="subtab_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+        </div>
+        <div class="small-8 columns">
+            <label class="left inline"><?php echo __( ' &nbsp;Logo area background color', 'weever' ); ?></label>
+        </div>
+        <div class="small-2 columns">
+            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+        </div>
+    </div>
 
-	<p><?php echo __('Sub Tab Bar &ndash; Text Color', 'weever'); ?></p>
-	<input type="text" class="color" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
-	<img id="subtab_text_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+        </div>
+        <div class="small-8 columns">
+            <label class="left inline"><?php echo __( ' &nbsp;Logo area text color (if applicable)', 'weever' ); ?></label>
+        </div>
+        <div class="small-2 columns">
+            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+        </div>
+    </div>
+
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+        </div>
+        <div class="small-8 columns">
+            <label class="left inline">
+                <?php echo __(' &nbsp;Subtab bar background color', 'weever'); ?>
+                <span data-tooltip class="has-tip" title="<?php echo __('A horizontal line of tabs found just below the logo area when using a default layout.', 'weever'); ?>"><?php echo __('what is this?', 'weever'); ?></span>
+            </label>
+        </div>
+        <div class="small-2 columns">
+            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+        </div>
+    </div>
+
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+        </div>
+        <div class="small-8 columns">
+            <label class="left inline"><?php echo __( ' &nbsp;Subtab bar text color', 'weever' ); ?></label>
+        </div>
+        <div class="small-2 columns">
+            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+        </div>
+    </div>
 
 </script>

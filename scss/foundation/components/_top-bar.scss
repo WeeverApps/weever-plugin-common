@@ -9,7 +9,7 @@ $topbar-bg: $topbar-bg-color !default;
 
 // Height and margin
 $topbar-height: 45px !default;
-$topbar-margin-bottom: 0 !default;
+$topbar-margin-bottom: emCalc(30) !default;
 
 // Control Input height for top bar
 $topbar-input-height: 2.45em !default;

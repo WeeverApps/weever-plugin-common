@@ -1,14 +1,58 @@
-#phone-bg {
-  background-color: #666;
+// phone preview includes different layouts per-device
+// syntax: [ os + phone + color (none, white, black) + size (none, large) + extension (svg, png)]
+// min-height of the preview container always matches the background image height.
+
+// Samsung S4 Preview - extra options: white, black
+
+$preview-s4-height:         712px;
+$preview-s4-svgheight:      730px;
+$preview-s4-background:     inline_image("android/s4-white.svg");
+$preview-s4-padding-top:    60px;
+
+// HTC ONE Preview
+
+$preview-htcone-height:      750px;
+$preview-htcone-background:  inline-image("android/htcone.svg");
+$preview-htcone-padding-top: 75px;
+$preview-htcone-borderframe: 15px; // inset
+
+// iPhone 5 Preview
+
+$preview-iphone5-height:      792px;
+$preview-iphone5-background:  inline-image("ios/iphone5.svg");
+$preview-iphone5-padding-top: 114px;
+
+// Device Switcher
+
+$preview-height:      $preview-s4-svgheight;
+$preview-background:  $preview-s4-background;
+$preview-padding-top: $preview-s4-padding-top;
+
+// Styles
+
+#wx-phone-bg {
   width:   auto;
-  height:  auto;
-  padding: 20px;
-  border:  1px solid #c1c1c1;
+  min-height:          $preview-height;
+  background-repeat:   no-repeat;
+  background-size:     380px auto;
+  background-position: center top;
+  background-image:    $preview-background;
+  padding-top:         $preview-padding-top;
 }
 
-#phone-iframe {
-  width:  320px;
-  height: 480px;
+// iframe 16x9 aspect ratio in HTML matches iPhone 5 and Galaxy S4 specifications
+
+$preview-iframe-color: #111 !default;
+
+#wx-phone-bg iframe {
+  display: block; /* allows margins */
   margin: 0 auto;
-  background-color: #ccc;
+  box-sizing: content-box;
+  box-sizing: content-box;
+  background-color: $preview-iframe-color;
+  border: 2px solid $preview-iframe-color;
+}
+
+#preview-refresh {
+  text-align: center;
 }

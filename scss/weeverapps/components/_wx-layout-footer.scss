@@ -1,10 +1,5 @@
 .wx-footer {
 
-  color: #fff;
-
-  h1, h2, h3, h4, h5, h6, .subheader, p, span {
-    color: #fff;
-  }
   p, li, a {
       font-size: 13px;
       line-height: 21px;
@@ -13,56 +8,60 @@
       font-weight: 300;
       margin-bottom: 1.5em;
   }
+  .copyright,
+  .wx-inline-links,
+  .wx-social-links {
+    text-align: center;
+  }
+
+  .wx-social-links {
+    margin-bottom: 25px;
+    a {
+      margin-left: 10px;
+    }
+  }
+  .wx-inline-links {
+    margin:  0;
+    a:first-child {
+      margin-left: 0;
+      padding-left: 0;
+    }
+    a {
+      margin-left: 6px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 3px 6px;
+    }
+  }
 }
 
-.wx-footer.wx-topfooter {
-  padding: 40px 0;
-  background-color: #666;
+#wx-footer-top {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
-.wx-footer.wx-btmfooter {
-  background: #333;
-  padding: 24px 0 10px;
+#wx-footer-bottom {
+  padding-top: 24px;
+  padding-bottom: 10px;
 }
 
 .wx-footer-logo {
   font-weight: bold;
 }
 
-.wx-inline-links {
-  margin:  0;
-  a:first-child {
-    margin-left: 0;
+
+@media #{$small} {
+  .wx-footer {
+    .copyright {
+      text-align: left;
+    }
+    .wx-inline-links {
+      text-align: left;
+    }
+    .wx-social-links {
+      text-align: center;
+    }
   }
-  a {
-    margin-left: 6px;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 13px;
-    color: #666;
-    padding: 3px 6px;
-    }
- }
 
-.wx-social-links {
-  margin-bottom: 25px;
-  text-align: right;
-    a {
-      margin-left: 10px;
-    }
-}
-
-.wx-inline-links,
-.wx-social-links {
-  text-align: center;
-}
-
-/* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
-@media only screen and (min-width: 768px) {
-  .wx-inline-links { text-align: left; }
-  .wx-social-links { text-align: center; }
-}
-
-p.copyright {
-  color: #666;
 }

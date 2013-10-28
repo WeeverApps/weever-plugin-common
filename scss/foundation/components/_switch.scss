@@ -21,7 +21,7 @@ $switch-font-size-tny: 11px !default;
 $switch-font-size-sml: 12px !default;
 $switch-font-size-med: 14px !default;
 $switch-font-size-lrg: 17px !default;
-$switch-label-side-padding: 6px !default;
+$switch-label-side-padding: 8px !default;
 
 // We use these to style the switch-paddle
 $switch-paddle-bg: #fff !default;
@@ -147,7 +147,7 @@ $switch-label-outline: 1px dotted #888 !default;
   height: em-calc($height);
 
   label {
-    padding: em-calc(0, $switch-label-side-padding);
+    padding: em-calc(0 $switch-label-side-padding); // wx - removed comma and submitted typo fix to zurb/github ^andrewh
     line-height: $line-height;
     font-size: em-calc($font-size);
   }

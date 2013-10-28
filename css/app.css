@@ -1,4 +1,4 @@
-/* normalize.css v2.1.2 | MIT License | git.io/normalize */
+/*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 /* ==========================================================================
    HTML5 display definitions
    ========================================================================== */
@@ -263,7 +263,7 @@ figure {
  */
 /* line 267, ../scss/normalize.scss */
 fieldset {
-  border: 1px solid silver;
+  border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
@@ -454,6 +454,7 @@ body {
 
 /* line 300, ../scss/foundation/components/_global.scss */
 body {
+  background: white;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -2333,7 +2334,7 @@ blockquote p {
   /* line 385, ../scss/foundation/components/_type.scss */
   * {
     background: transparent !important;
-    color: black !important;
+    color: #000 !important;
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important;
@@ -2365,7 +2366,7 @@ blockquote p {
   /* line 404, ../scss/foundation/components/_type.scss */
   pre,
   blockquote {
-    border: 1px solid #999999;
+    border: 1px solid #999;
     page-break-inside: avoid;
   }
 
@@ -4847,7 +4848,7 @@ form.custom .custom.disabled {
 }
 /* line 76, ../scss/foundation/components/_top-bar.scss */
 .contain-to-grid .top-bar {
-  margin-bottom: 0;
+  margin-bottom: 1.875em;
 }
 
 /* line 80, ../scss/foundation/components/_top-bar.scss */
@@ -4884,7 +4885,7 @@ form.custom .custom.disabled {
   line-height: 45px;
   position: relative;
   background: #111111;
-  margin-bottom: 0;
+  margin-bottom: 1.875em;
 }
 /* line 115, ../scss/foundation/components/_top-bar.scss */
 .top-bar ul {
@@ -5212,7 +5213,7 @@ form.custom .custom.disabled {
   .contain-to-grid .top-bar {
     max-width: 62.5em;
     margin: 0 auto;
-    margin-bottom: 0;
+    margin-bottom: 1.875em;
   }
 
   /* line 418, ../scss/foundation/components/_top-bar.scss */
@@ -5444,7 +5445,7 @@ form.custom .custom.disabled {
   margin-top: -20px;
   margin-left: -20px;
   border: solid 3px;
-  border-color: #555555 white;
+  border-color: #555 #fff;
   -webkit-border-radius: 1000px;
   border-radius: 1000px;
   -webkit-animation-name: rotate;
@@ -5544,7 +5545,7 @@ form.custom .custom.disabled {
   right: 0;
   width: 11px;
   height: 14px;
-  border: solid 4px black;
+  border: solid 4px #000;
   border-top: none;
   border-bottom: none;
 }
@@ -5556,7 +5557,7 @@ form.custom .custom.disabled {
   height: 14px;
   border: inset 8px;
   border-right-style: solid;
-  border-color: transparent transparent transparent black;
+  border-color: transparent transparent transparent #000;
 }
 /* line 225, ../scss/foundation/components/_orbit.scss */
 .orbit-container:hover .orbit-timer > span {
@@ -5780,7 +5781,7 @@ form.custom .custom.disabled {
 @media print {
   /* line 134, ../scss/foundation/components/_reveal.scss */
   .reveal-modal {
-    background: white !important;
+    background: #fff !important;
   }
 }
 /* Foundation Joyride */
@@ -5906,11 +5907,11 @@ form.custom .custom.disabled {
   text-decoration: none;
   font-size: 30px;
   font-weight: normal;
-  line-height: 0.5 !important;
+  line-height: .5 !important;
 }
 /* line 147, ../scss/foundation/components/_joyride.scss */
 .joyride-close-tip:hover, .joyride-close-tip:focus {
-  color: #eeeeee !important;
+  color: #eee !important;
 }
 
 /* line 150, ../scss/foundation/components/_joyride.scss */
@@ -5933,9 +5934,9 @@ form.custom .custom.disabled {
   position: absolute;
   border-radius: 3px;
   z-index: 102;
-  -moz-box-shadow: 0 0 30px white;
-  -webkit-box-shadow: 0 0 15px white;
-  box-shadow: 0 0 15px white;
+  -moz-box-shadow: 0 0 30px #ffffff;
+  -webkit-box-shadow: 0 0 15px #ffffff;
+  box-shadow: 0 0 15px #ffffff;
 }
 
 /* line 175, ../scss/foundation/components/_joyride.scss */
@@ -6848,7 +6849,7 @@ ul.pagination li {
   }
   /* line 149, ../scss/foundation/components/_switch.scss */
   div.switch label {
-    padding: 0 10px;
+    padding: 0 0.5em;
     line-height: 2.3em;
     font-size: 0.875em;
   }
@@ -6889,7 +6890,7 @@ ul.pagination li {
   }
   /* line 149, ../scss/foundation/components/_switch.scss */
   div.switch.large label {
-    padding: 0;
+    padding: 0 0.5em;
     line-height: 2.3em;
     font-size: 1.0625em;
   }
@@ -6909,7 +6910,7 @@ ul.pagination li {
   }
   /* line 149, ../scss/foundation/components/_switch.scss */
   div.switch.small label {
-    padding: 0;
+    padding: 0 0.5em;
     line-height: 2.1em;
     font-size: 0.75em;
   }
@@ -6929,7 +6930,7 @@ ul.pagination li {
   }
   /* line 149, ../scss/foundation/components/_switch.scss */
   div.switch.tiny label {
-    padding: 0;
+    padding: 0 0.5em;
     line-height: 1.9em;
     font-size: 0.6875em;
   }
@@ -6965,7 +6966,7 @@ ul.pagination li {
   }
   /* line 259, ../scss/foundation/components/_switch.scss */
   div.switch.round label {
-    padding: 0 0.5625em;
+    padding: 0 0.6875em;
   }
 
   @-webkit-keyframes webkitSiblingBugfix {
@@ -7347,45 +7348,61 @@ a.th {
     line-height: 1;
   }
 }
+/* line 12, ../scss/weeverapps/components/_wx-section-subnav.scss */
+.section-container.section-subnav > section > .title {
+  min-height: 3.125em;
+}
+
 @media only screen and (min-width: 768px) {
-  /* line 14, ../scss/weeverapps/components/_wx-section-subnav.scss */
+  /* line 23, ../scss/weeverapps/components/_wx-section-subnav.scss */
   .section-container.section-subnav section.active > .title a {
     background-color: #2ba6cb;
     color: #fff;
   }
-  /* line 20, ../scss/weeverapps/components/_wx-section-subnav.scss */
-  .section-container.section-subnav > section > .title a {
-    color: #666;
-    padding: 0.1875em 0.625em 0.25em;
-  }
-  /* line 25, ../scss/weeverapps/components/_wx-section-subnav.scss */
+  /* line 30, ../scss/weeverapps/components/_wx-section-subnav.scss */
   .section-container.section-subnav > section > .title {
     border: none;
     background: none;
     text-transform: lowercase;
+    min-height: 0;
   }
-  /* line 32, ../scss/weeverapps/components/_wx-section-subnav.scss */
+  /* line 37, ../scss/weeverapps/components/_wx-section-subnav.scss */
+  .section-container.section-subnav > section > .title a {
+    color: #666;
+    padding: 0.1875em 0.625em 0.25em;
+  }
+  /* line 43, ../scss/weeverapps/components/_wx-section-subnav.scss */
   .section-container.section-subnav > section > .content,
   .section-container.section-subnav > .section > .content {
     padding: 0.9375em 0;
     border: none;
   }
 }
-/* line 1, ../scss/weeverapps/components/_wx-layout-phone.scss */
-#phone-bg {
-  background-color: #666;
+/* line 33, ../scss/weeverapps/components/_wx-layout-phone.scss */
+#wx-phone-bg {
   width: auto;
-  height: auto;
-  padding: 20px;
-  border: 1px solid #c1c1c1;
+  min-height: 730px;
+  background-repeat: no-repeat;
+  background-size: 380px auto;
+  background-position: center top;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWluWU1pbiBtZWV0IiB2aWV3Qm94PSIwIDAgMzA2Ni4yMyA1ODc1Ljg4OSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMwNjYuMjMgNTg3NS44ODkiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCQ0KCQkJPHJhZGlhbEdyYWRpZW50IGlkPSJTVkdJRF8xXyIgY3g9Ijg2NjguOTk1MSIgY3k9IjE2MDgzNi4wMzEyIiByPSIzMjA1LjU3OTgiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMC40NjA3IDAgMCAwLjAyMzEgLTI0NjAuNjg5NyAyMDg2LjQ5ODMpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+DQoJCQk8c3RvcCAgb2Zmc2V0PSIwLjAwNjEiIHN0eWxlPSJzdG9wLWNvbG9yOiMyNTMxMzgiLz4NCgkJCTxzdG9wICBvZmZzZXQ9IjEiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkZGRkYiLz4NCgkJPC9yYWRpYWxHcmFkaWVudD4NCgkJPHBhdGggb3BhY2l0eT0iMC41IiBmaWxsPSJ1cmwoI1NWR0lEXzFfKSIgZD0iTTMwMDkuMzQzLDU4MDEuODA5YzAsNDAuOTE2LTU0LjM0Miw3NC4wOC0xNDc2LjIyNSw3NC4wOA0KCQkJYy0xNDYzLjczMiwwLTE0NzYuMjMtMzMuMTY0LTE0NzYuMjMtNzQuMDhjMC00MC45MSwzNi45NTEtNzQuMDc2LDE0NzYuMjMtNzQuMDc2DQoJCQlDMjk0NS4yMjIsNTcyNy43MzIsMzAwOS4zNDMsNTc2MC44OTgsMzAwOS4zNDMsNTgwMS44MDl6Ii8+DQoJPC9nPg0KCTxnPg0KCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzJfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9Ijc3LjcxMjQiIHkxPSIxODQ3LjQzNTUiIHgyPSI3Ny43MTI0IiB5Mj0iODc1Ljk3MTIiPg0KCQkJPHN0b3AgIG9mZnNldD0iMC4wMDYxIiBzdHlsZT0ic3RvcC1jb2xvcjojQTJBQ0I0Ii8+DQoJCQk8c3RvcCAgb2Zmc2V0PSIwLjU1MjEiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkZGRkYiLz4NCgkJCTxzdG9wICBvZmZzZXQ9IjEiIHN0eWxlPSJzdG9wLWNvbG9yOiNBMkFDQjQiLz4NCgkJPC9saW5lYXJHcmFkaWVudD4NCgkJPHBhdGggZmlsbD0idXJsKCNTVkdJRF8yXykiIGQ9Ik0xNTUuNDI1LDE4MTQuMTI5YzAsMTguMzE4LTE0Ljk4MywzMy4zMDYtMzMuMzAxLDMzLjMwNkgzMy4zMDMNCgkJCWMtMTguMzEzLDAtMzMuMzAzLTE0Ljk4OC0zMy4zMDMtMzMuMzA2VjkwOS4yODFjMC0xOC4zMiwxNC45ODktMzMuMzEsMzMuMzAzLTMzLjMxaDg4LjgyMWMxOC4zMTcsMCwzMy4zMDEsMTQuOTg5LDMzLjMwMSwzMy4zMQ0KCQkJVjE4MTQuMTI5eiIvPg0KCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzNfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjMwMDMuNzc4MyIgeTE9IjE4MDUuODAyMiIgeDI9IjMwMDMuNzc4MyIgeTI9IjEzMTEuNzQxMiI+DQoJCQk8c3RvcCAgb2Zmc2V0PSIwLjAwNjEiIHN0eWxlPSJzdG9wLWNvbG9yOiNBMkFDQjQiLz4NCgkJCTxzdG9wICBvZmZzZXQ9IjAuNTUyMSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRkZGRiIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I0EyQUNCNCIvPg0KCQk8L2xpbmVhckdyYWRpZW50Pg0KCQk8cGF0aCBmaWxsPSJ1cmwoI1NWR0lEXzNfKSIgZD0iTTI5NDEuMzI2LDE3NzIuNDk1YzAsMTguMzE3LDE0Ljk5LDMzLjMwOCwzMy4zMDEsMzMuMzA4aDU4LjI5Mw0KCQkJYzE4LjMxMiwwLDMzLjMxMS0xNC45OTEsMzMuMzExLTMzLjMwOHYtNDI3LjQ0NGMwLTE4LjMyMS0xNC45OTgtMzMuMzEtMzMuMzExLTMzLjMxaC01OC4yOTMNCgkJCWMtMTguMzExLDAtMzMuMzAxLDE0Ljk4OS0zMy4zMDEsMzMuMzFWMTc3Mi40OTV6Ii8+DQoJCTxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHSURfNF8iIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iNjEuNjEyMyIgeTE9IjI5MDEuNjYyMSIgeDI9IjMwMTIuODkwNiIgeTI9IjI5MDEuNjYyMSI+DQoJCQk8c3RvcCAgb2Zmc2V0PSIwLjAwNjEiIHN0eWxlPSJzdG9wLWNvbG9yOiNEMkQ2RDkiLz4NCgkJCTxzdG9wICBvZmZzZXQ9IjAuNTAzMSIgc3R5bGU9InN0b3AtY29sb3I6I0VERUVGMCIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I0QyRDZEOSIvPg0KCQk8L2xpbmVhckdyYWRpZW50Pg0KCQk8cGF0aCBmaWxsPSJ1cmwoI1NWR0lEXzRfKSIgZD0iTTMwMTIuODkxLDU4NS43MTJjMC0yMTQuMjczLTYwLjI2OC0zNjEuMjA4LTE4NC4yMjMtNDQ5LjIwMg0KCQkJYy0xMDcuMjgxLTc2LjE3Mi0yNDUuMjQ2LTk1LjgxNi0zNjYuMTU0LTEwOC4yNTdDMjMwOS42ODQsMTIuNTMsMTc4NC43NzcsMCwxNTM3LjI0OCwwbDAsMA0KCQkJQzEyODkuNzA1LDAsNzY0LjgyLDEyLjUzLDYxMS45NzUsMjguMjUzYy0xMjAuODk4LDEyLjQ0LTI1OC44NjUsMzIuMDg0LTM2Ni4xNDYsMTA4LjI1NQ0KCQkJQzEyMS44NjcsMjI0LjUwNCw2MS42MTcsMzcxLjQzOSw2MS42MTcsNTg1LjcxMmwtMC4wMDUsNDYzMS44OTVjMCwyMTQuMjcxLDYwLjI2MSwzNjEuMjA5LDE4NC4yMTcsNDQ5LjIwMw0KCQkJYzEwNy4yOCw3Ni4xNzIsMjQ1LjI0Nyw5NS44MTYsMzY2LjE1MywxMDguMjU5YzE1Mi44MzgsMTUuNzIsNjc3LjczNywyOC4yNTUsOTI1LjI2NiwyOC4yNTVsMCwwDQoJCQljMjQ3LjUzOSwwLDc3Mi40MzYtMTIuNTM1LDkyNS4yNzMtMjguMjU1YzEyMC45LTEyLjQ0MiwyNTguODY1LTMyLjA4NywzNjYuMTQ2LTEwOC4yNTkNCgkJCWMxMjMuOTY3LTg3Ljk5NCwxODQuMjIzLTIzNC45MzIsMTg0LjIyMy00NDkuMjAzVjU4NS43MTJ6Ii8+DQoJCTxwYXRoIGZpbGw9IiNDNUM5Q0IiIGQ9Ik0xNTM3LjI0OCwyNy42NzljLTI1MC40NCwwLTc3NC4yNDQsMTIuODY0LTkyMi40NCwyOC4xMDlDNDk3LjQxMSw2Ny44NjYsMzYzLjY0Miw4Ni44MDksMjYxLjg1NCwxNTkuMDc5DQoJCQlDMTQ1LjczNSwyNDEuNTAxLDg5LjI5NSwzODEuMDU1LDg5LjI5NSw1ODUuNzEybC0wLjAwNCw0NjMxLjg5NWMwLDIwNC42NDgsNTYuNDQ0LDM0NC4xOTksMTcyLjU2Miw0MjYuNjMzDQoJCQljMTAxLjgwMSw3Mi4yNzksMjM1LjU3LDkxLjIxOSwzNTIuOTYxLDEwMy4yOTFjMTQ4LjE4LDE1LjI0Nyw2NzEuOTg0LDI4LjExMyw5MjIuNDM0LDI4LjExMw0KCQkJYzI1MC40NDMsMCw3NzQuMjYtMTIuODY2LDkyMi40NDUtMjguMTEzYzExNy4zODEtMTIuMDcyLDI1MS4xNTItMzEuMDEyLDM1Mi45NDktMTAzLjI4Nw0KCQkJYzExNi4xMTktODIuNDMsMTcyLjU2Ni0yMjEuOTc5LDE3Mi41NjYtNDI2LjYzN1Y1ODUuNzEyYzAtMjA0LjY1LTU2LjQ0Ny0zNDQuMjAyLTE3Mi41NjEtNDI2LjYzMQ0KCQkJYy0xMDEuNzkxLTcyLjI3My0yMzUuNTc0LTkxLjIxNS0zNTIuOTY5LTEwMy4yOTNDMjMxMS41LDQwLjU0MywxNzg3LjY5MSwyNy42NzksMTUzNy4yNDgsMjcuNjc5eiIvPg0KCQk8cGF0aCBmaWxsPSIjRjJGNEY1IiBkPSJNMTUzNy4yNDgsNDYuMTMxYy0yNTAuMDc0LDAtNzcyLjg2NywxMi44MjItOTIwLjU1MywyOC4wMTNjLTExNS4wNTMsMTEuODM4LTI0Ni4wMjEsMzAuMzAxLTM0NC4xNiw5OS45ODINCgkJCUMxNjEuNjUsMjUyLjgzNywxMDcuNzQ5LDM4Ny40NjgsMTA3Ljc0OSw1ODUuNzEybC0wLjAwNCw0NjMxLjg5NWMwLDE5OC4yMzQsNTMuOTAyLDMzMi44NjUsMTY0Ljc5LDQxMS41ODQNCgkJCWM5OC4xNDUsNjkuNjg5LDIyOS4xMSw4OC4xNDgsMzQ0LjE3MSw5OS45ODJjMTQ3LjY0NSwxNS4xOTUsNjcwLjQ1LDI4LjAxOCw5MjAuNTQyLDI4LjAxOA0KCQkJYzI1MC4wOSwwLDc3Mi44OTgtMTIuODIyLDkyMC41NTctMjguMDE4YzExNS4wNDctMTEuODM0LDI0Ni4wMTItMzAuMjkzLDM0NC4xNTItOTkuOTc3DQoJCQljMTEwLjg5NS03OC43MTcsMTY0LjgwMS0yMTMuMzQ4LDE2NC44MDEtNDExLjU5VjU4NS43MTJjMC0xOTguMjM2LTUzLjkwNC0zMzIuODY1LTE2NC43OTEtNDExLjU4NQ0KCQkJYy05OC4xMzktNjkuNjgyLTIyOS4xMTUtODguMTQ2LTM0NC4xNzQtOTkuOTgzQzIzMTAuMTE5LDU4Ljk1NCwxNzg3LjMyOCw0Ni4xMzEsMTUzNy4yNDgsNDYuMTMxeiIvPg0KCQk8Zz4NCgkJCTxwYXRoIGZpbGw9IiNFNkU2RTUiIGQ9Ik0yNTk5LjY3LDIzMi4zNzZjMCwzOC4xMDEtMzAuODg1LDY4Ljk4Ny02OC45OSw2OC45ODdjLTM4LjA5NiwwLTY4Ljk5Ni0zMC44ODYtNjguOTk2LTY4Ljk4Nw0KCQkJCWMwLTM4LjA5OSwzMC45LTY4Ljk4Myw2OC45OTYtNjguOTgzQzI1NjguNzg1LDE2My4zOTMsMjU5OS42NywxOTQuMjc3LDI1OTkuNjcsMjMyLjM3NnoiLz4NCgkJCTxnPg0KCQkJCTxwYXRoIGZpbGw9IiNGMkY0RjUiIGQ9Ik0xOTM0Ljc5Nyw1NTIxLjI2OGMwLDQ1LjgwMi0zNy40NjcsODMuMjczLTgzLjI2OCw4My4yNzNoLTU0NS4yNzcNCgkJCQkJYy00NS43OTgsMC04My4yNzYtMzcuNDcyLTgzLjI3Ni04My4yNzN2LTI2LjYzM2MwLTQ1Ljc5OSwzNy40NzktODMuMjcsODMuMjc2LTgzLjI3aDU0NS4yNzcNCgkJCQkJYzQ1LjgwMSwwLDgzLjI2OCwzNy40NzEsODMuMjY4LDgzLjI3VjU1MjEuMjY4eiIvPg0KCQkJCTxnPg0KCQkJCQk8cGF0aCBmaWxsPSIjQjhDMUM4IiBkPSJNMTg1MS41MjksNTYxMC43ODVoLTU0NS4yNzdjLTQ5LjM3MSwwLTg5LjUyNC00MC4xNi04OS41MjQtODkuNTE4di0yNi42MzMNCgkJCQkJCWMwLTQ5LjM1NCw0MC4xNTMtODkuNTE2LDg5LjUyNC04OS41MTZoNTQ1LjI3N2M0OS4zNTksMCw4OS41MTgsNDAuMTYxLDg5LjUxOCw4OS41MTZ2MjYuNjMzDQoJCQkJCQlDMTk0MS4wNDcsNTU3MC42MjUsMTkwMC44ODksNTYxMC43ODUsMTg1MS41MjksNTYxMC43ODV6IE0xMzA2LjI1Miw1NDE3LjYwN2MtNDIuNDc0LDAtNzcuMDI4LDM0LjU1My03Ny4wMjgsNzcuMDI3djI2LjYzMw0KCQkJCQkJYzAsNDIuNDc3LDM0LjU1NSw3Ny4wMjksNzcuMDI4LDc3LjAyOWg1NDUuMjc3YzQyLjQ3NSwwLDc3LjAyMy0zNC41NTMsNzcuMDIzLTc3LjAyOXYtMjYuNjMzDQoJCQkJCQljMC00Mi40NzUtMzQuNTQ5LTc3LjAyNy03Ny4wMjMtNzcuMDI3SDEzMDYuMjUyeiIvPg0KCQkJCTwvZz4NCgkJCQk8cGF0aCBmaWxsPSIjOEE5Mzk5IiBkPSJNMTg2OC44MjQsMTk5LjM5NmMwLDE4LjMxOC0xNC45ODYsMzMuMzEtMzMuMzA1LDMzLjMxaC01OTYuNTM1Yy0xOC4zMywwLTMzLjMxNi0xNC45OTEtMzMuMzE2LTMzLjMxDQoJCQkJCXYtMC40NTNjMC0xOC4zMTcsMTQuOTg2LTMzLjMwOCwzMy4zMTYtMzMuMzA4aDU5Ni41MzVjMTguMzE4LDAsMzMuMzA1LDE0Ljk5MSwzMy4zMDUsMzMuMzA4VjE5OS4zOTZ6Ii8+DQoJCQk8L2c+DQoJCQk8cGF0aCBmaWxsPSIjOEE5Mzk5IiBkPSJNMjA4MS4wMzEsMTc5LjI1YzAsMjkuNTIxLTIzLjkyNiw1My40NTYtNTMuNDYzLDUzLjQ1NmMtMjkuNTIzLDAtNTMuNDU1LTIzLjkzNC01My40NTUtNTMuNDU2DQoJCQkJYzAtMjkuNTI0LDIzLjkzMi01My40NTgsNTMuNDU1LTUzLjQ1OEMyMDU3LjEwNSwxMjUuNzkyLDIwODEuMDMxLDE0OS43MjcsMjA4MS4wMzEsMTc5LjI1eiIvPg0KCQkJPHBhdGggZmlsbD0iIzhBOTM5OSIgZD0iTTIyMjUuOTQ3LDE3OS4yNWMwLDI5LjUyMS0yMy45Myw1My40NTYtNTMuNDQ5LDUzLjQ1NmMtMjkuNTM1LDAtNTMuNDU3LTIzLjkzNC01My40NTctNTMuNDU2DQoJCQkJYzAtMjkuNTI0LDIzLjkyMi01My40NTgsNTMuNDU3LTUzLjQ1OEMyMjAyLjAxOCwxMjUuNzkyLDIyMjUuOTQ3LDE0OS43MjcsMjIyNS45NDcsMTc5LjI1eiIvPg0KCQkJPHBhdGggZmlsbD0iIzhBOTM5OSIgZD0iTTExNTQuNTU5LDE3OS4yNWMwLDI5LjUyMS0yMy45MjcsNTMuNDU2LTUzLjQ0NCw1My40NTZjLTI5LjUyMSwwLTUzLjQ2Mi0yMy45MzQtNTMuNDYyLTUzLjQ1Ng0KCQkJCWMwLTI5LjUyNCwyMy45NC01My40NTgsNTMuNDYyLTUzLjQ1OEMxMTMwLjYzMiwxMjUuNzkyLDExNTQuNTU5LDE0OS43MjcsMTE1NC41NTksMTc5LjI1eiIvPg0KCQkJPHBhdGggZmlsbD0iIzhBOTM5OSIgZD0iTTI1NTkuODI4LDIzMi4zNzZjMCwxNi4wOTUtMTMuMDQ3LDI5LjE0Ni0yOS4xNDgsMjkuMTQ2Yy0xNi4wOTIsMC0yOS4xNS0xMy4wNTEtMjkuMTUtMjkuMTQ2DQoJCQkJYzAtMTYuMDk0LDEzLjA1OS0yOS4xNDMsMjkuMTUtMjkuMTQzQzI1NDYuNzgxLDIwMy4yMzMsMjU1OS44MjgsMjE2LjI4MiwyNTU5LjgyOCwyMzIuMzc2eiIvPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=');
+  padding-top: 60px;
 }
 
-/* line 9, ../scss/weeverapps/components/_wx-layout-phone.scss */
-#phone-iframe {
-  width: 320px;
-  height: 480px;
+/* line 47, ../scss/weeverapps/components/_wx-layout-phone.scss */
+#wx-phone-bg iframe {
+  display: block;
+  /* allows margins */
   margin: 0 auto;
-  background-color: #ccc;
+  box-sizing: content-box;
+  box-sizing: content-box;
+  background-color: #111111;
+  border: 2px solid #111111;
+}
+
+/* line 56, ../scss/weeverapps/components/_wx-layout-phone.scss */
+#preview-refresh {
+  text-align: center;
 }
 
 /* line 3, ../scss/weeverapps/components/_wx-layout-tablist.scss */
@@ -7401,207 +7418,76 @@ a.th {
   margin-right: 1.25em;
 }
 
-/* line 1, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-footer {
-  color: #fff;
-}
-/* line 5, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-footer h1, .wx-footer h2, .wx-footer h3, .wx-footer h4, .wx-footer h5, .wx-footer h6, .wx-footer .subheader, .wx-footer p, .wx-footer span {
-  color: #fff;
-}
-/* line 8, ../scss/weeverapps/components/_wx-layout-footer.scss */
+/* line 3, ../scss/weeverapps/components/_wx-layout-footer.scss */
 .wx-footer p, .wx-footer li, .wx-footer a {
   font-size: 13px;
   line-height: 21px;
 }
-/* line 12, ../scss/weeverapps/components/_wx-layout-footer.scss */
+/* line 7, ../scss/weeverapps/components/_wx-layout-footer.scss */
 .wx-footer .wx-icon {
   font-weight: 300;
   margin-bottom: 1.5em;
 }
-
-/* line 18, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-footer.wx-topfooter {
-  padding: 40px 0;
-  background-color: #666;
+/* line 13, ../scss/weeverapps/components/_wx-layout-footer.scss */
+.wx-footer .copyright,
+.wx-footer .wx-inline-links,
+.wx-footer .wx-social-links {
+  text-align: center;
 }
-
+/* line 17, ../scss/weeverapps/components/_wx-layout-footer.scss */
+.wx-footer .wx-social-links {
+  margin-bottom: 25px;
+}
+/* line 19, ../scss/weeverapps/components/_wx-layout-footer.scss */
+.wx-footer .wx-social-links a {
+  margin-left: 10px;
+}
 /* line 23, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-footer.wx-btmfooter {
-  background: #333;
-  padding: 24px 0 10px;
-}
-
-/* line 28, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-footer-logo {
-  font-weight: bold;
-}
-
-/* line 32, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-inline-links {
+.wx-footer .wx-inline-links {
   margin: 0;
 }
-/* line 34, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-inline-links a:first-child {
+/* line 25, ../scss/weeverapps/components/_wx-layout-footer.scss */
+.wx-footer .wx-inline-links a:first-child {
   margin-left: 0;
+  padding-left: 0;
 }
-/* line 37, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-inline-links a {
+/* line 29, ../scss/weeverapps/components/_wx-layout-footer.scss */
+.wx-footer .wx-inline-links a {
   margin-left: 6px;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 13px;
-  color: #666;
   padding: 3px 6px;
 }
 
-/* line 47, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-social-links {
-  margin-bottom: 25px;
-  text-align: right;
-}
-/* line 50, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-social-links a {
-  margin-left: 10px;
+/* line 39, ../scss/weeverapps/components/_wx-layout-footer.scss */
+#wx-footer-top {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
-/* line 56, ../scss/weeverapps/components/_wx-layout-footer.scss */
-.wx-inline-links,
-.wx-social-links {
-  text-align: center;
+/* line 44, ../scss/weeverapps/components/_wx-layout-footer.scss */
+#wx-footer-bottom {
+  padding-top: 24px;
+  padding-bottom: 10px;
 }
 
-/* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
+/* line 49, ../scss/weeverapps/components/_wx-layout-footer.scss */
+.wx-footer-logo {
+  font-weight: bold;
+}
+
 @media only screen and (min-width: 768px) {
-  /* line 62, ../scss/weeverapps/components/_wx-layout-footer.scss */
-  .wx-inline-links {
+  /* line 56, ../scss/weeverapps/components/_wx-layout-footer.scss */
+  .wx-footer .copyright {
     text-align: left;
   }
-
-  /* line 63, ../scss/weeverapps/components/_wx-layout-footer.scss */
-  .wx-social-links {
+  /* line 59, ../scss/weeverapps/components/_wx-layout-footer.scss */
+  .wx-footer .wx-inline-links {
+    text-align: left;
+  }
+  /* line 62, ../scss/weeverapps/components/_wx-layout-footer.scss */
+  .wx-footer .wx-social-links {
     text-align: center;
   }
-}
-/* line 66, ../scss/weeverapps/components/_wx-layout-footer.scss */
-p.copyright {
-  color: #666;
-}
-
-/* line 5, ../scss/weeverapps/components/_wx-css-development.scss */
-.row.display {
-  background: #eee;
-  font-size: 11px;
-  margin-bottom: 10px;
-}
-
-/* line 10, ../scss/weeverapps/components/_wx-css-development.scss */
-.row.display .columns, .row.display .column {
-  background: #e7e7e7;
-  border: 1px solid #dddddd;
-  font-size: 13px;
-  font-weight: bold;
-  text-indent: 3px;
-  padding-top: 8px;
-  color: #444;
-  padding-bottom: 8px;
-}
-
-/* Added by Grande */
-/* Added by Grande */
-input.hexacolorinput {
-    display:block;
-    margin:1em auto;
-    border-color:#c1c1c1;
-}
-
-#preview-bg {
-    background: url("../images/mobile-bg.png") no-repeat scroll 0 0 transparent;
-    min-height: 600px;
-    overflow: visible;
-    width: 380px;
-}
-
-#preview-app {
-    color: #FFFFFF;
-    height: 480px;
-    left: 30px;
-    overflow: hidden;
-    position: relative;
-    top: 62px;
-    width: 320px;
-}
-
-.wx-form-builder-row input.hide,
-.wx-form-builder-label-input.hide,
-.wx-form-builder-title-input.hide {
-  display: none;
-}
-
-img.loading,
-img#dialog-loader {
-  margin-left: 7px;
-  display: none;
-}
-
-.wx-tab.ui-droppable {
-  width: 105px;
-  text-align: center;
-}
-
-.wx-tab.ui-droppable p {
-  margin-bottom: 0.5em;
-}
-
-button.button.secondary.expand.wx-add-source-icon {
-  height: 8em;
-  padding-top: 2em;
-}
-
-#refresh_preview {
-  height: 3em;
-  padding: 0.4em;
-}
-
-#wpbody {
-  background: white!important;
-}
-
-label.wx-form-builder-edit-label {
-  display: inline;;
-}
-
-.admintable { width: 100%; }
-
-.icon-selector label { text-align: center; }
-.icon-selector input { margin-left: 19px; }
-
-.wx-subtab-movehandle { cursor: move; }
-
-span.delete a { color: #7f0a0c; }
-
-.wx-layout-tablist .wx-tab.dragging {
-  background: #ffffc0;
-}
-
-.wx-layout-tablist .wx-tab.dragging.hover {
-  background: #ffff30;
-}
-
-#editListTabsSortable.hover { background: #ffddff; }
-
-input.color { 
-  width: 5em; 
-  display: inline;
-}
-
-.button.prefix.secondary {
-  height: 2.7em;
-  line-height: 2.7em;
-  border-radius: 0;
-}
-
-div.loading.columns {
-  line-height: 2.0em;
-  padding-left: 0.5em !important;
 }
