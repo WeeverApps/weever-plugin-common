@@ -336,6 +336,7 @@ var jscolor = {
 		this.valueElement = target; // value holder
 		this.styleElement = target; // where to reflect current color
 		this.onImmediateChange = null; // onchange callback (can be either string or function)
+		this.onClose = null; // onClose callback (can be either string or function)
 		this.hsv = [0, 0, 1]; // read-only  0-6, 0-1, 0-1
 		this.rgb = [1, 1, 1]; // read-only  0-1, 0-1, 0-1
 		this.minH = 0; // read-only  0-6
@@ -574,6 +575,7 @@ var jscolor = {
 		function removePicker() {
 			delete jscolor.picker.owner;
 			document.getElementsByTagName('body')[0].removeChild(jscolor.picker.boxB);
+			dispatchClose();
 		}
 
 
@@ -925,6 +927,18 @@ var jscolor = {
 					callback = new Function (THIS.onImmediateChange);
 				} else {
 					callback = THIS.onImmediateChange;
+				}
+				callback.call(THIS);
+			}
+		}
+
+		function dispatchClose() {
+			if (THIS.onClose) {
+				var callback;
+				if (typeof THIS.onClose === 'string') {
+					callback = new Function (THIS.onClose);
+				} else {
+					callback = THIS.onClose;
 				}
 				callback.call(THIS);
 			}
