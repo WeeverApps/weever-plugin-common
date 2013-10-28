@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
             app_enabled = 0;
         }
 
-        jQuery('#appStatus').html( 'in transition' );
+        jQuery('#status-loading').show();
 
         jQuery.ajax({
             type: "POST",
@@ -41,7 +41,9 @@ jQuery(document).ready(function() {
             success: function(msg) {
                 console.log('OK');
                 var status = app_enabled ? 'online' : 'offline';
+                status = '<b>' + status + '</b>';
                 jQuery('#appStatus').html( status );
+                jQuery('#status-loading').fadeOut();
             },
             error: function(v, msg) { alert(msg); }
         });
