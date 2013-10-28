@@ -6,7 +6,7 @@ wxApp = wxApp || {};
         el: '#logo_design',
         events: {
             'change #titlebarSource': 'dropDownChange',
-            'change .color': 'colorChange',
+            // 'change .color': 'colorChange',
             'change .logo-design': 'logoChange' 
         },
 
@@ -14,6 +14,7 @@ wxApp = wxApp || {};
             console.log('Design view init');
             this.tpl = _.template( $('#logo-design').html() );
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
+            Backbone.Events.on('color:change', this.colorChange, this);
         },
 
         dropDownChange: function() {
@@ -39,7 +40,7 @@ wxApp = wxApp || {};
 
         colorChange: function(e) {
             var me = this;
-            var txt = $(e.currentTarget);
+            var txt = $(e.valueElement);
             var id = txt.attr('id');
             var val = txt.val();
             // Make sure the colour is in the form '#ffffff' rahter than just 'ffffff'
@@ -105,6 +106,7 @@ wxApp = wxApp || {};
 
     wxApp.design = new wxApp.Design();
     wxApp.design.fetch( function() {
+        console.log( 'Design Fetched.' );
         // Load the Design Views.
         wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
         wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
