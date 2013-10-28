@@ -4,21 +4,17 @@ wxApp = wxApp || {};
 (function($){
     wxApp.SubTabEditView = Backbone.View.extend({
         className: 'wx-subtab-edit',
-        subTabEditTplSelector: '#subtab-edit-template',
+        subTabEditTplSelector: '', // This is overridden by child classes.
         baseEditTplSelector: '#subtab-edit-template',
-        // subTabEditHeaderTplSelector: '#subtab-edit-header-template',
-        // subTabEditFooterTplSelector: '#subtab-edit-footer-template',
 		feedSampleTplSelector: '#feedsample-template',
         parentContainerId: false,
         
         initialize: function(options) {
 
             this.initializeEvents();
-            // TODO: Listen to changes to the subTab model and re-render the view automatically?
+
             this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
             this.baseEditTpl = _.template( $(this.baseEditTplSelector).html() );
-            // this.subTabEditHeaderTpl = _.template( $(this.subTabEditHeaderTplSelector).html() );
-            // this.subTabEditFooterTpl = _.template( $(this.subTabEditFooterTplSelector).html() );
 			this.feedSampleTpl = _.template( $(this.feedSampleTplSelector).html() );
             this.render();
 
@@ -37,7 +33,6 @@ wxApp = wxApp || {};
             'change .wx-dialog-input': 'next',
 			'change .wx-social-input': 'next',
 			'keydown .wx-dialog-input': 'hideValidateFeed',
-            //'click a.close-reveal-modal': 'destroyView',
 			'click .wx-finish-button': 'finish',
 			'click .wx-next-button': 'next',
             'change .wx-content-radio' : 'contentChange'
@@ -46,10 +41,6 @@ wxApp = wxApp || {};
         render: function() {
             wx.log('render');
             
-            // this.$el.html( this.subTabEditTpl( this.model.toJSON() ) );
-            // this.$el.prepend( this.subTabEditHeaderTpl( this.model.toJSON() ) );
-            // this.$el.append( this.subTabEditFooterTpl( this.model.toJSON() ) );
-
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
             this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
 

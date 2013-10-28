@@ -505,36 +505,36 @@ qq.FileUploader = function(o){
         listElement: null,
                 
         template: '<div class="qq-uploader">' + 
-                '<div class="qq-upload-button wxuia-button YellowButton" style="font-size: 12px;">Upload an Image</div>' +
-                '<div class="qq-upload-drop-area" style="display:none; width:0; height:0;"></div>' +
-                '<ul class="qq-upload-list"></ul>' + 
-             '</div>',
+                       '<button class="qq-upload-button secondary expand">Upload image</button>' +
+                       '<div class="qq-upload-drop-area" style="display:none; width:0; height:0;"></div>' +
+                       '<ul class="qq-upload-list"></ul>' +
+                  '</div>',
 
         // template for one item in file list
-        fileTemplate: '<li>' +
-                '<span class="qq-upload-file"></span>' +
-                '<span class="qq-upload-spinner"></span>' +
-                '<span class="qq-upload-size"></span>' +
-                '<a class="qq-upload-cancel" href="#">Cancel</a>' +
-                '<span class="qq-upload-failed-text">Failed</span>' +
-            '</li>',        
+        fileTemplate:   '<li>' +
+                        '<span class="qq-upload-file"></span>' +
+                        '<span class="qq-upload-spinner"></span>' +
+                        '<span class="qq-upload-size"></span>' +
+                        '<a class="qq-upload-cancel" href="#">Cancel</a>' +
+                        '<span class="qq-upload-failed-text">Failed</span>' +
+                        '</li>',
         
         classes: {
             // used to get elements from templates
-            button: 'qq-upload-button',
-            drop: 'qq-upload-drop-area',
+            button:     'qq-upload-button',
+            drop:       'qq-upload-drop-area',
             dropActive: 'qq-upload-drop-area-active',
-            list: 'qq-upload-list',
+            list:       'qq-upload-list',
                         
-            file: 'qq-upload-file',
-            spinner: 'qq-upload-spinner',
-            size: 'qq-upload-size',
-            cancel: 'qq-upload-cancel',
+            file:       'qq-upload-file',
+            spinner:    'qq-upload-spinner',
+            size:       'qq-upload-size',
+            cancel:     'qq-upload-cancel',
 
             // added to list item when upload completes
             // used in css to hide progress spinner
-            success: 'qq-upload-success',
-            fail: 'qq-upload-fail'
+            success:    'qq-upload-success',
+            fail:       'qq-upload-fail'
         },
         callback: null
     });

@@ -5,8 +5,9 @@ wxApp = wxApp || {};
     wxApp.LogoDesign = wxApp.StyleBase.extend({
         el: '#logo_design',
         events: {
-            'change #titlebarSource': 'dropDownChange',
-            'change .color': 'colorChange',
+            // 'change #titlebarSource': 'dropDownChange',
+            'change input[name=titlebarSource]': 'dropDownChange',
+            // 'change .color': 'colorChange',
             'change .logo-design': 'logoChange' 
         },
 
@@ -14,10 +15,13 @@ wxApp = wxApp || {};
             console.log('Design view init');
             this.tpl = _.template( $('#logo-design').html() );
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
+            Backbone.Events.on('color:change', this.colorChange, this);
         },
 
         dropDownChange: function() {
-            switch($('#titlebarSource').val()) {
+            alert('ddc');
+            alert( )
+            switch($('input[name=titlebarSource]').val()) {
                 case 'text':
                     $('#logoText').show();
                     $('#logoHtml').hide();
@@ -39,7 +43,7 @@ wxApp = wxApp || {};
 
         colorChange: function(e) {
             var me = this;
-            var txt = $(e.currentTarget);
+            var txt = $(e.valueElement);
             var id = txt.attr('id');
             var val = txt.val();
             // Make sure the colour is in the form '#ffffff' rahter than just 'ffffff'
@@ -82,7 +86,7 @@ wxApp = wxApp || {};
             
             wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
             wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
-            wxApp.design.get('titlebar').type  = $('#titlebarSource').val();
+            wxApp.design.get('titlebar').type  = $('input[name=titlebarSource]').val();
             wxApp.design.get('titlebar').image = $('#titlebar_logo_live').attr('src');
             
             // The 'design' methods of Open API is kinda strange... It 
@@ -105,6 +109,7 @@ wxApp = wxApp || {};
 
     wxApp.design = new wxApp.Design();
     wxApp.design.fetch( function() {
+        console.log( 'Design Fetched.' );
         // Load the Design Views.
         wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
         wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
@@ -112,7 +117,8 @@ wxApp = wxApp || {};
         wxApp.customBranding = new wxApp.CustomBranding( {model: wxApp.design} );
         designFetched = true;
         if (configFetched) {
-            wxApp.advanced = new wxApp.Advanced();
+            console.log('advanced init');
+            wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
     } );
 
@@ -121,7 +127,8 @@ wxApp = wxApp || {};
     wxApp.config.fetch( function() {
         configFetched = true;
         if (designFetched) {
-            wxApp.advanced = new wxApp.Advanced();
+            console.log('advanced init');
+            wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
     } );
 

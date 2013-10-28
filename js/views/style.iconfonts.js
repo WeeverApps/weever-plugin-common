@@ -70,7 +70,7 @@ wxApp = wxApp || {};
 		}
 	});
 
-	wxApp.iconFontsView = new wxApp.IconFontsView({ collection: wxApp.IconFonts });
+	// wxApp.iconFontsView = new wxApp.IconFontsView({ collection: wxApp.IconFonts });
 
     // Grab the data and kick things off
     wxApp.IconFonts.fetch();

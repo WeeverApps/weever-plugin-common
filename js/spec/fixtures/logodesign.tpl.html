@@ -5,23 +5,23 @@
     <!-- logo type - text or image? -->
     <!-- -->
     <label>
-        <input type="radio" class="wx-content-radio" name="" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
+        <input type="radio" class="wx-content-radio" name="titlebarSource" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
     </label>
     <label>
-        <input type="radio" class="wx-content-radio" name="" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
+        <input type="radio" class="wx-content-radio" name="titlebarSource" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
     </label>
     <!-- -->
 
     <!-- @ mattg - please remove the select list form -->
-    <!-- -->
+    <!--
     <select id="titlebarSource" class="required" style="width: 270px">
         <option value="text"  <%- titlebar.type == 'text'  ? "selected='selected'":"" %>><?php echo __( 'Use a line of text', 'weever' ); ?> ("<%- titlebar.text %>")</option>
         <option value="image" <%- titlebar.type == 'image' ? "selected='selected'":"" %>><?php echo __( 'Use an image', 'weever' ); ?></option>
         <option value="html"  <%- titlebar.type == 'html'  ? "selected='selected'":"" %>><?php echo __( 'Use custom css and html', 'weever' ); ?></option>
     </select>
-    <!-- -->
+    -->
 
-    <img id="titlebarSource_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+    <img id="titlebarSource_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
 
     <div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
         <div class="row collapse">
@@ -32,7 +32,7 @@
                 <a href="#" onclick="return false;" class="button secondary prefix">Save</a>
             </div>
             <div class="small-2 columns loading">
-                <img id="titlebar_title_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+                <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
             </div>
         </div>
     </div>
@@ -57,31 +57,31 @@
 
     <div class="row collapse">
         <div class="small-2 columns">
-            <input type="text" class="color" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
             <label class="left inline"><?php echo __( ' &nbsp;Logo area background color', 'weever' ); ?></label>
         </div>
         <div class="small-2 columns">
-            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
     <div class="row collapse">
         <div class="small-2 columns">
-            <input type="text" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
             <label class="left inline"><?php echo __( ' &nbsp;Logo area text color (if applicable)', 'weever' ); ?></label>
         </div>
         <div class="small-2 columns">
-            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
     <div class="row collapse">
         <div class="small-2 columns">
-            <input type="text" class="color" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
             <label class="left inline">
@@ -90,19 +90,19 @@
             </label>
         </div>
         <div class="small-2 columns">
-            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
     <div class="row collapse">
         <div class="small-2 columns">
-            <input type="text" class="color" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
             <label class="left inline"><?php echo __( ' &nbsp;Subtab bar text color', 'weever' ); ?></label>
         </div>
         <div class="small-2 columns">
-            <img id="main_titlebar_color_loading" class="loading" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 

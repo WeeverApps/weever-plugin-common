@@ -1,47 +1,90 @@
 <script type="text/template" id="launch-screen">
-	<p>
-		<?php echo __( 'A launch screen appears momentarily when your app is first loading. This is a great opportunity to display your company or app logo.', 'weever' ); ?>
-	</p>
 
-	<p class="wx-ui-title"><?php echo __( 'Phone Launch Screen', 'weever' ); ?></p>
-	<p><?php echo __( 'Recommended Size: 640 x 920 pixels.', 'weever' ); ?></p>
-	
-	<div id="wx-file-uploader-phone_load_live" rel="phone_load_live" ref="wx-phone_load_live" img_width="640" img_height="920" class="wx-theme-file-uploader">
-		<noscript>
-			<p><?php echo __( 'Please enable JavaScript to use file uploader.', 'weever' ); ?></p>
-			<!-- or put a simple form for upload here -->
-			<img src="" id="wx-file-load" />
-		</noscript>
-	</div>
-    
-    <input type="hidden" class="wx-theme-input" id="phone_load_live" name="phone_load_live" size="13" />
-	<img id="wx-phone_load_live" class="wx-theme-image" src="<%- launchscreen.phone %>" />
+	<p class="wx-ui-title"><?php echo __( 'Launch screens', 'weever' ); ?><p>
 
-	<p class="wx-ui-title"><?php echo __( 'Tablet Launch Screen &ndash; Portrait Orientation', 'weever' ); ?></p>
-	<p><?php echo __( 'Recommended Size: 1536 x 2008 pixels.', 'weever' ); ?></p>
-	<div id="wx-file-uploader-tablet_load_live" rel="tablet_load_live" ref="wx-tablet_load_live" img_width="1536" img_height="2008" class="wx-theme-file-uploader">
-		<noscript>
-			<p><?php echo __( 'Please enable JavaScript to use file uploader.', 'weever' ); ?></p>
-			<!-- or put a simple form for upload here -->
-			<img src="" id="wx-file-load" />
-		</noscript>
-	</div>
+    <div class="row">
+        <div class="large-12 columns">
+            <p><?php echo __( 'A launch screen appears momentarily when your app is first loading. This is a great opportunity to display your company or app logo.', 'weever' ); ?></p>
+        </div>
+    </div>
 
-	<input type="hidden" class="wx-theme-input" name="tablet_load_live" size="13" />
-	<img id="wx-tablet_load_live" class="wx-theme-image" src="<%- launchscreen.tablet %>" />
 
-    <p class="wx-ui-title"><?php echo __( 'Tablet Launch Screen &ndash; Landscape Orientation', 'weever' ); ?></p>
-    <p><?php echo __( 'Recommended Size: 1496 x 2048 pixels.', 'weever' ); ?></p>
-	<div id="wx-file-uploader-tablet_landscape_load_live" rel="tablet_landscape_load_live" ref="wx-tablet_landscape_load_live" img_width="1496" img_height="2048" class="wx-theme-file-uploader">
-		<noscript>
-			<p><?php echo __( 'Please enable JavaScript to use file uploader.', 'weever' ); ?></p>
-			<!-- or put a simple form for upload here -->
-			<img src="" id="wx-file-load" />
-		</noscript>
-	</div>
+    <!-- start - all launch screens -->
+    <div class="row">
 
-	<input type="hidden" class="wx-theme-input" name="tablet_landscape_load_live" size="13" />
-	<img id="wx-tablet_landscape_load_live" class="wx-theme-image" src="<%- launchscreen.tablet_landscape %>" />
 
-	<button class="button secondary big" id="save_launch_screen">Save</button>
+        <!-- start - launch screen - phone -->
+        <div class="large-4 columns">
+
+            <!-- file uploader-->
+
+                <p><b><?php echo __( 'Phone', 'weever' ); ?></b><br><?php echo __( '640 x 920px', 'weever' ); ?></p>
+                <div id="wx-file-uploader-phone_load_live" rel="phone_load_live" ref="wx-phone_load_live" img_width="640" img_height="920" class="wx-theme-file-uploader">
+                <noscript>
+                <p><?php echo __( 'Please enable JavaScript to use file uploader.', 'weever' ); ?></p>
+                 <!-- or put a simple form for upload here -->
+                <img src="" id="wx-file-load" />
+                </noscript>
+                </div>
+
+            <!-- image preview -->
+                <input type="hidden" class="wx-theme-input" id="phone_load_live" name="phone_load_live" />
+                <img id="wx-phone_load_live" class="wx-launchscreen" src="<%- launchscreen.phone %>" />
+                <br>
+                <br>
+                <br>
+        </div>
+
+
+
+        <!-- start - launch screen - tablet, portrait -->
+        <div class="large-4 columns">
+
+            <!-- file uploader-->
+
+                <p><b><?php echo __( 'Tablet portrait', 'weever' ); ?></b><br><?php echo __( '1536 x 2008px', 'weever' ); ?></p>
+                <div id="wx-file-uploader-tablet_load_live" rel="tablet_load_live" ref="wx-tablet_load_live" img_width="1536" img_height="2008" class="wx-theme-file-uploader">
+                <noscript>
+                <p><?php echo __( 'Please enable JavaScript to use file uploader.', 'weever' ); ?></p>
+                <!-- or put a simple form for upload here -->
+                <img src="" id="wx-file-load" />
+                </noscript>
+                </div>
+
+            <!-- image preview -->
+                <input type="hidden" class="wx-theme-input" name="tablet_load_live" />
+                <img id="wx-tablet_load_live" class="wx-launchscreen" src="<%- launchscreen.tablet %>" />
+                <br>
+                <br>
+                <br>
+        </div>
+
+
+    <!-- start - launch screen - tablet, landscape -->
+        <div class="large-4 columns">
+
+            <!-- file uploader-->
+                <p><b><?php echo __( 'Tablet landscape', 'weever' ); ?></b><br><?php echo __( '1496 x 2048px', 'weever' ); ?></p>
+                <div id="wx-file-uploader-tablet_landscape_load_live" rel="tablet_landscape_load_live" ref="wx-tablet_landscape_load_live" img_width="1496" img_height="2048" class="wx-theme-file-uploader">
+                <noscript>
+                <p><?php echo __( 'Please enable JavaScript to use file uploader.', 'weever' ); ?></p>
+                <!-- or put a simple form for upload here -->
+                <img src="" id="wx-file-load" />
+                </noscript>
+                </div>
+
+            <!-- image preview -->
+                <input type="hidden" class="wx-theme-input" name="tablet_landscape_load_live" />
+                <img id="wx-tablet_landscape_load_live" class="wx-launchscreen" src="<%- launchscreen.tablet_landscape %>" />
+                <br>
+                <br>
+                <br>
+        </div>
+
+
+        <!-- endof - all launch screens -->
+        </div>
+
+    <!-- spacer -->
+
 </script>

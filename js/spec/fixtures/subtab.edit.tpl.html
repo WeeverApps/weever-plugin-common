@@ -16,8 +16,8 @@
 
         <div>
             <button class="wx-next-button">Preview</button>
-            <img id="dialog-loader" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
             <button class="wx-finish-button">Finish</button>
+            <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
@@ -51,14 +51,4 @@
     </div>
 
     <a class="close-reveal-modal">&#215;</a>
-</script>
-
-<script type="text/template" id="icon-selector">
-    <?php for ( $i = 1; $i <= 46; $i++ ): ?>
-        <?php if ( in_array( $i, array( 14, 33, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
-        <li>
-            <label for="wx-icon-<?php echo $i; ?>"><span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span></label>
-            <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />
-        </li>
-    <?php endfor; ?>
 </script>
