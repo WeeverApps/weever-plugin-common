@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="large-12 columns">
-            <p><?php echo __( 'Upload the icon image to be used when visitors choose to install the app to their phone or tablet home screen.', 'weever' ); ?></p>
+            <p><?php echo __( 'Define the icon image and label to be used when visitors choose to install the app to their phone or tablet home screen.', 'weever' ); ?></p>
         </div>
     </div>
 
@@ -14,9 +14,14 @@
 
         <!-- start - icon image -->
         <div class="large-4 columns">
+            <input type="hidden" class="wx-theme-input" id="icon_live"/>
+            <div style="text-align: center;" class="wx-launchscreen">
+                <img id="wx-icon_live" class="" src="<%- install.icon %>" />
+            </div>
+            <input type="text" id="title" placeholder="My App Name" maxlength="13" style="text-align: center;" value="<%- install.name %>" class="required" />
+        </div>
 
-            <p><b><?php echo __( 'Install Icon Image', 'weever' ); ?><b></p>
-
+        <div class="large-8 columns">
             <!-- file uploader-->
             <div id="wx-file-uploader-tablet_landscape_load_live" rel="icon_live" ref="wx-icon_live" img_width="144" img_height="144" class="wx-theme-file-uploader">
                 <noscript>
@@ -25,41 +30,35 @@
                     <img src="" id="wx-file-load" />
                 </noscript>
             </div>
-
-            <input type="hidden" class="wx-theme-input" id="icon_live"/>
-            <div style="text-align: center;" class="wx-launchscreen">
-            <img id="wx-icon_live" class="" src="<%- install.icon %>" />
-            </div>
-            <br>
-            <input type="text" id="title" placeholder="My App Name" maxlength="13" style="text-align: center;" value="<%- install.name %>" class="required" />
+            <!-- save install name -->
             <button class="secondary expand" id="save_install_icon">Update Label</button>
         </div>
 
+    </div>
 
-        <!-- start - install prompt on/off -->
-		<div class="large-8 columns">
-            <div class="row">
-                <div class="small-8 columns">
-                    <p><b><?php echo __( 'Prompt visitors to install?', 'weever' ); ?></b></p>
-                </div>
-                <div class="small-4 columns">
-                    <div class="switch">
-                        <input id="x" name="switch-x" type="radio" checked>
-                        <label for="x" onclick="">no</label>
-                        <input id="x1" name="switch-x" type="radio">
-                        <label for="x1" onclick="">yes</label>
-                        <span></span>
-                    </div>
+    <br>
+
+    <!-- start - install prompt on/off -->
+    <p class="wx-ui-title"><?php echo __( 'Installation Instructions', 'weever' ); ?></p>
+    <div class="row">
+            <div class="small-8 columns">
+                <p><?php echo __( 'Prompt new visitors to install?', 'weever' ); ?></p>
+            </div>
+            <div class="small-4 columns">
+                <div class="switch">
+                    <input id="x" name="switch-x" type="radio" checked>
+                    <label for="x" onclick="">no</label>
+                    <input id="x1" name="switch-x" type="radio">
+                    <label for="x1" onclick="">yes</label>
+                    <span></span>
                 </div>
             </div>
+    </div>
 
-            <p><?php echo __( 'Show new visitors a message box with &ldquo;how to install this app&rdquo; information?</p>
+    <p><?php echo __( 'When a new user visits your app, display a message box with &ldquo;how to install this app&rdquo; instructions?', 'weever' ); ?></p>
 
-            <p><b>Note:</b> The install prompt message will not display if the user has previously accessed the app or the phone or tablet does not support simple installation of web apps.', 'weever' ); ?></p>
-        </div>
-
-
-
+    <div class="panel">
+        <p><?php echo __( 'The install instructions will not display if the user has previously accessed the app, or if the phone or tablet does not support simple installation of web apps.' ); ?></p>
     </div>
 
     <!-- please remove the select -->

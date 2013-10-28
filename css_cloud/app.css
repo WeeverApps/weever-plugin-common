@@ -7526,7 +7526,7 @@ a.th {
 }
 /* line 3, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-media-animations.scss */
 .wx-load-spinner {
-  visibility: hidden;
+  display: none;
 }
 
 /* line 3, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-media-images.scss */
