@@ -9,6 +9,8 @@
         </div>
     </div>
 
+    <br>
+
     <!-- start - home screen icon settings -->
     <div class="row">
 
@@ -47,23 +49,23 @@
     <p class="wx-ui-title"><?php echo __( 'Installation Instructions', 'weever' ); ?></p>
     <div class="row">
             <div class="small-8 columns">
-                <p><?php echo __( 'Prompt new visitors to install?', 'weever' ); ?></p>
+                <p><?php echo __( 'Install prompt for first-time visitors', 'weever' ); ?></p>
             </div>
             <div class="small-4 columns">
                 <div class="switch">
                     <input id="x" name="switch-x" type="radio" checked>
-                    <label for="x" onclick="">no</label>
+                    <label for="x" onclick="">offline</label>
                     <input id="x1" name="switch-x" type="radio">
-                    <label for="x1" onclick="">yes</label>
+                    <label for="x1" onclick="">active</label>
                     <span></span>
                 </div>
             </div>
     </div>
 
-    <p><?php echo __( 'When a new user visits your app, display a message box with &ldquo;how to install this app&rdquo; instructions?', 'weever' ); ?></p>
+    <p><?php echo __( 'When the install prompt is active, first-time visitors see instructions on how to install your app their a phone or tablet home screen.', 'weever' ); ?></p>
 
     <div class="panel">
-        <p><?php echo __( 'The install instructions will not display if the user has previously accessed the app, or if the phone or tablet does not support simple installation of web apps.' ); ?></p>
+        <p><?php echo __( 'The install instructions will not display if the user has previously accessed the app, or if the phone or tablet does not provide for quick and easy installation of web apps.' ); ?></p>
     </div>
 
     <!-- please remove the select -->

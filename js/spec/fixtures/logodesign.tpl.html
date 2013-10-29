@@ -18,6 +18,7 @@
     <br>
     <br>
 
+    <!-- if logo type = text -->
     <div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
         <div class="row collapse">
             <div class="small-8 columns">
@@ -32,6 +33,7 @@
         </div>
     </div>
 
+    <!-- if logo type = image -->
     <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
         <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?><p>
         <div class="row">
@@ -56,7 +58,8 @@
         </div>
     </div>
 
-	<p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
+    <!-- start - color pickers -->
+    <p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
 
     <div class="row">
         <div class="small-3 columns">
@@ -108,5 +111,7 @@
             <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
+
+    <!-- endof - color pickers -->
 
 </script>
