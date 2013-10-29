@@ -58,7 +58,7 @@ jQuery(document).ready(function() {
         }
         console.log(tablets_enabled);
 
-        jQuery('#switch_loading').show();
+        jQuery('#switch-tablet-loading').show();
 
         jQuery.ajax({
             type: "POST",
@@ -71,6 +71,7 @@ jQuery(document).ready(function() {
             success: function(msg) {
                 console.log('Tablet status saved');
                 var status = tablets_enabled ? 'yes' : 'no';
+                jQuery('#switch-tablet-loading').fadeOut();
             },
             error: function(v, msg) { alert(msg); }
         });
