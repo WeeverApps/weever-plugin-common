@@ -3,7 +3,7 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.WordpressTagSubTab = wxApp.SubTab.extend({
-        default_icon_id: 5,
+        default_icon_id: 13,
         allowedLayouts: ['list'],
         validateFeed: false,
         typeDescription: 'Content: Tag',
@@ -11,7 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Blog',
-                icon_id: 5,
+                icon_id: 13,
                 type: 'WordpressTag',
                 content: 'html',
                 layout: 'list',
