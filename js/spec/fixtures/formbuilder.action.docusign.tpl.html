@@ -1,0 +1,22 @@
+<script type="text/template" id="form-builder-action-docusign">
+	<label>
+		DocuSign Username:
+		<input type="text" class="wx-form-builder-docusign-username" value="<%- username %>" />
+	</label>
+	<label>
+		DocuSign Password:
+		<input type="password" class="wx-form-builder-docusign-password" value="<%- password %>" />
+	</label>
+	<label>
+		Return URL (if empty, your user will be returned to your app URL):
+		<input type="url" class="wx-form-builder-docusign-returnUrl" value="<%- returnUrl %>" />
+	</label>
+	<fieldset class="wx-form-builder-action-email-pdfheader">
+		<h4>PDF Header Details</h4>
+		<input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- pdfHeader.title %>" />
+		<input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- pdfHeader.line1 %>" />
+		<input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- pdfHeader.line2 %>" />
+		<input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- pdfHeader.line3 %>" />
+	</fieldset>
+	<a class="wx-form-builder-delete wxui-btn red">Delete</a>
+</script>

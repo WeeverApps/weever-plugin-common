@@ -36,9 +36,9 @@ wxApp = wxApp || {};
 
 						this.addInfoWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'signature' ) {
+					} else if ( elementsJson[i].control === 'docusign' ) {
 
-						this.addSignature();
+						this.addDocusignAction();
 
 					} else if ( elementsJson[i].control === 'textarea' ) {
 
@@ -90,10 +90,29 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-range-input': 'addRangeInput',
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
-			'click .wx-form-builder-add-signature': 'addSignature',
+			'click .wx-form-builder-add-docusign-action': 'addDocusignAction',
 			'click .wx-form-builder-add-custom-action': 'addCustomAction',
-			'click .wx-form-builder-add-email-action': 'addEmailAction'
+			'click .wx-form-builder-add-email-action': 'addEmailAction',
+	        'sortable-update': 'sortableUpdate'
 		},
+
+	    sortableUpdate: function( event, model, position ) {
+		    console.log( 'sortableUpdate' );
+		    var formElements = this.model.get( 'config' ).formElements;
+
+		    formElements.remove( model );
+
+		    formElements.each( function( model, index ) {
+			    var ordinal = index;
+			    if ( index >= position ) {
+				    ordinal += 1;
+			    }
+			    model.set( 'ordinal', ordinal );
+		    });
+
+		    model.set( 'ordinal', position );
+		    formElements.add( model, {at: position} );
+	    },
 
 	    /**
 	     * Override __super__.finish()
@@ -102,7 +121,19 @@ wxApp = wxApp || {};
 		    console.log( 'subtab.formbuilder.edit.finish()' );
 		    console.log( this );
 
-		    if ( typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
+		    var hasUpload = false;
+		    var formElements = this.model.get( 'config' ).formElements;
+		    console.log( formElements );
+		    var model = {};
+		    for ( var i = 0; i < formElements.length; i++ ) {
+			    model = formElements.at( i );
+			    if ( 'input' == model.get( 'control' ) && 'file' == model.get( 'attributes' ).get( 'type' ) ) {
+				    hasUpload = true;
+				    break;
+			    }
+		    }
+
+		    if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
 			    this.constructor.__super__.finish.apply( this );
 			    return;
 		    }
@@ -118,6 +149,14 @@ wxApp = wxApp || {};
 			    return;
 		    }
 
+	    },
+
+	    addDocusignAction: function() {
+		    console.log( 'addDocusignAction' );
+
+		    var action = this.addCustomAction( { method : 'docusign' } );
+
+		    return action;
 	    },
 
 	    addEmailAction: function() {
@@ -324,16 +363,6 @@ wxApp = wxApp || {};
 			this.$( this.previewPaneSelector ).append( infoView.render().el );
 			this.model.get( 'config' ).formElements.push( info );
 
-		},
-
-		addSignature: function() {
-			var signature = new wxApp.FormBuilderControlSignature();
-			var signatureView = new wxApp.FormBuilderControlSignatureView({
-				model: signature
-			});
-			this.$( this.previewPaneSelector ).append( signatureView.render().el );
-//			this.model.get( 'controls' ).push( signature );
-			this.model.get( 'config' ).formElements.push( signature );
 		},
 
 		addTextarea: function() {

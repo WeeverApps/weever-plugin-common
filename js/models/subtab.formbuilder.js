@@ -20,7 +20,7 @@ wxApp = wxApp || {};
 				}
 			}
 		)
-	    
+
     });
 
 })(jQuery);

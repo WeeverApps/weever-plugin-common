@@ -11,6 +11,9 @@ wxApp = wxApp || {};
 				control: 'action',
 				method: 'post',
 				value: '',
+				username: '',
+				password: '',
+				returnUrl: '',
 				pdfHeader: {
 					title: '',
 					line1: '',
