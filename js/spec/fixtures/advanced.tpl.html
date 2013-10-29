@@ -1,41 +1,42 @@
 <script type="text/template" id="advanced-options">
-	<p class="lead"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
-	<p><?php echo __( 'Modify your app by entering valid CSS.  To identify CSS classes use a webkit browser (such as Chrome or Safari), right-click on the app and inspect the HTML elements.', 'weever' ); ?></p>
-	<textarea style="width: 100%; height: 300px;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
-	<button class="button secondary big" id="save_advanced">Save</button>
 
-	<p class="lead">Icons</p>
-	<p>Select an icon style for your application</p>
+    <p class="wx-ui-title"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
+
+	<p><?php echo __( 'Customize your mobile app design with valid CSS rules.', 'weever' ); ?></p>
+	<textarea style="min-height: 10em;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
+	<button class="secondary" id="save_advanced">Save CSS and apply to app</button>
+    <br>
+
+    <div class="panel">
+        <p><?php echo __( 'To identify CSS classes use a webkit browser such as Chrome or Safari, right-click on a specific feature inside the app and then use <a target="_blank" href="https://developers.google.com/chrome-developer-tools/">web inspector</a> to identify and style the HTML / CSS elements.', 'weever' ); ?></p>
+    </div>
+
+
+
+    <br>
+
+    <p class="wx-ui-title"><?php echo __( 'Graphic design', 'weever' ); ?> <span class="label success"><?php echo __( 'add-on service', 'weever' ); ?></span></p>
+
+	<p><?php echo __( 'Let Weever App’s design professionals create custom app illustrations that elevate your brand!.', 'weever' ); ?></p>
+    <p><a class="button secondary" target="_blank" href="http://weeverapps.com/custom-graphics">Learn more</a></p>
+
+    <br>
+
+    <p class="wx-ui-title"><?php echo __( 'Language options', 'weever' ); ?></p>
+
 	<div>
-		<select id="font-list">
-			<option value="-1">Select One...</option>
-		</select>
-
-		<div id="icon-font-preview" style="display: none;">
-			<h6>Icon Preview</h6>
-			<% for (var i = 1; i <= 64; i++) { %>
-				<span class="wxFont-1 wxIcon-<%- i %> large"></span>
-			<% }; %>
-		</div>
-	</div>
-
-	<p class="lead"><?php echo __( 'Graphic Design', 'weever' ); ?>&nbsp;<span class="label success"><?php echo __( 'add on', 'weever' ); ?></span></p>
-	<p><?php echo __( 'Let Weever App’s design professionals create custom app illustrations that elevate your brand! $399 CSS and graphics package.', 'weever' ); ?></p>
-
-	<p class="lead"><?php echo __( 'Language Options', 'weever' ); ?></p>
-	<div>
-		<p><?php echo __( 'Changes the language used for generic user-interface elements in the app such as the \'back\' button.', 'weever' ); ?></p>
+		<p><?php echo __( 'Change the language used for generic user-interface elements in the app such as the &lsquo;back&rsquo; button.', 'weever' ); ?></p>
 		<%
-// Available_locales is currently an object. Convert it into an array to make it sortable.
-var tuples = [];
-for (var key in config.available_locales) { 
-	tuples.push([key, config.available_locales[key]]);
-};
-tuples.sort(function(a,b) {
-	a = a[1];
-	b = b[1];
-	return a < b ? -1 : (a > b ? 1 : 0);
-});
+        // Available_locales is currently an object. Convert it into an array to make it sortable.
+        var tuples = [];
+        for (var key in config.available_locales) {
+	    tuples.push([key, config.available_locales[key]]);
+        };
+        tuples.sort(function(a,b) {
+	        a = a[1];
+	        b = b[1];
+	        return a < b ? -1 : (a > b ? 1 : 0);
+        });
 		%>
 		
 		<div class="row collapse">
@@ -51,4 +52,23 @@ tuples.sort(function(a,b) {
 			</div>
 		</div>
 	</div>
+
+    <br>
+    <br>
+
+    <p class="wx-ui-title"><?php echo __( 'Icon Style', 'weever' ); ?></p>
+    <p>Change the visual style used for all icons within your app.</p>
+    <div>
+        <select id="font-list">
+            <option value="-1">Select One...</option>
+        </select>
+
+        <div id="icon-font-preview" style="display: none;">
+            <p>Icon font preview:</p>
+            <% for (var i = 1; i <= 64; i++) { %>
+            <span class="wxFont-1 wxIcon-<%- i %> large"></span>
+            <% }; %>
+        </div>
+    </div>
+
 </script>

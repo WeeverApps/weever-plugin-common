@@ -7406,6 +7406,11 @@ a.th {
     line-height: 1;
   }
 }
+/* line 51, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-typography.scss */
+.large-block-grid-3 a img + div {
+  text-align: center;
+}
+
 /* line 12, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-section-subnav.scss */
 .section-container.section-subnav > section > .title {
   min-height: 3.125em;
@@ -7551,7 +7556,7 @@ a.th {
 }
 /* line 3, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-media-animations.scss */
 .wx-load-spinner {
-  visibility: hidden;
+  display: none;
 }
 
 /* line 3, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-media-images.scss */

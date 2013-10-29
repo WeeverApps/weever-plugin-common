@@ -1,19 +1,24 @@
 <script type="text/template" id="logo-design">
 
-    <p class="wx-ui-title"><?php echo __( 'Logo type', 'weever' ); ?></p>
+    <p class="wx-ui-title"><?php echo __( 'Logo Design', 'weever' ); ?></p>
 
     <!-- logo type - text or image? -->
     <!-- -->
-    <label>
-        <input type="radio" class="wx-content-radio" name="titlebarSource" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
-    </label>
-    <label>
-        <input type="radio" class="wx-content-radio" name="titlebarSource" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
-    </label>
-    <!-- -->
+    <div class="row">
+        <div class="large-12 columns">
+            <label>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
+            </label>
+            <label>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
+            </label>
+        </div>
+    </div>
 
-    <img id="titlebarSource_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
+    <br>
+    <br>
 
+    <!-- if logo type = text -->
     <div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
         <div class="row collapse">
             <div class="small-8 columns">
@@ -28,73 +33,85 @@
         </div>
     </div>
 
+    <!-- if logo type = image -->
     <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
-        <div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" class="wx-theme-file-uploader">
-            <noscript>
-                <p>Please enable JavaScript to use the file uploader.</p>
-                <!-- or put a simple form for upload here -->
-                <img src="" id="wx-file-load" />
-            </noscript>
-            <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" />
+        <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?><p>
+        <div class="row">
+            <div class="large-8 columns">
+                <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />
+                <br>
+                <br>
+                <div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" class="wx-theme-file-uploader">
+                    <noscript>
+                        <p>Please enable JavaScript to use the file uploader.</p>
+                        <!-- or put a simple form for upload here -->
+                        <img src="" id="wx-file-load" />
+                    </noscript>
+                    <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" />
+                </div>
+                <br>
+                <br>
+            </div>
+            <div class="large-4 columns">
+                <p>&nbsp;</p>
+            </div>
         </div>
-        <img id="wx-titlebar_logo_live" src="<%- titlebar.image %>" />
-        <span class="secondary label"><?php echo __( 'Optimal image size is 640 x 88px', 'weever' ); ?></span>
     </div>
 
-    <br>
-    <br>
+    <!-- start - color pickers -->
+    <p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
 
-	<p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
-
-    <div class="row collapse">
-        <div class="small-2 columns">
+    <div class="row">
+        <div class="small-3 columns">
             <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
-            <label class="left inline"><?php echo __( ' &nbsp;Logo area background color', 'weever' ); ?></label>
+            <label class="left inline"><?php echo __( 'Logo area background color', 'weever' ); ?></label>
         </div>
-        <div class="small-2 columns">
+        <div class="small-1 columns">
             <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
-    <div class="row collapse">
-        <div class="small-2 columns">
+    <div class="row">
+        <div class="small-3 columns">
             <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
-            <label class="left inline"><?php echo __( ' &nbsp;Logo area text color (if applicable)', 'weever' ); ?></label>
+            <label class="left inline"><?php echo __( 'Logo area text color (if applicable)', 'weever' ); ?></label>
         </div>
-        <div class="small-2 columns">
+        <div class="small-1 columns">
             <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
-    <div class="row collapse">
-        <div class="small-2 columns">
+    <div class="row">
+        <div class="small-3 columns">
             <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
             <label class="left inline">
-                <?php echo __(' &nbsp;Subtab bar background color', 'weever'); ?>
+                <?php echo __('Subtab bar background color', 'weever'); ?> &nbsp;
                 <span data-tooltip class="has-tip" title="<?php echo __('A horizontal line of tabs found just below the logo area when using a default layout.', 'weever'); ?>"><?php echo __('what is this?', 'weever'); ?></span>
             </label>
         </div>
-        <div class="small-2 columns">
+        <div class="small-1 columns">
             <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
 
-    <div class="row collapse">
-        <div class="small-2 columns">
+    <div class="row">
+        <div class="small-3 columns">
             <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
         </div>
-        <div class="small-8 columns">
-            <label class="left inline"><?php echo __( ' &nbsp;Subtab bar text color', 'weever' ); ?></label>
+        <div class="small-7 columns">
+            <label class="left inline"><?php echo __( 'Subtab bar text color', 'weever' ); ?></label>
         </div>
-        <div class="small-2 columns">
+        <div class="small-1 columns">
             <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/images/loading.gif" />
         </div>
     </div>
+
+    <!-- endof - color pickers -->
 
 </script>
