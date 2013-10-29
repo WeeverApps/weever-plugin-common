@@ -7,7 +7,7 @@ wxApp = wxApp || {};
 
         setModelFromView: function(model) {
             if ( this.$('.wx-edit-input') )
-                model.setConfig('url', this.$('.wx-edit-input').val());
+                model.setConfig('venue_id', this.$('.wx-edit-input').val());
             return model;
         }
     });

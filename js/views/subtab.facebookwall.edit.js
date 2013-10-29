@@ -7,7 +7,7 @@ wxApp = wxApp || {};
 
         setModelFromView: function(model) {
             if ( this.$('.wx-social-input') )
-                model.setConfig('url', this.$('.wx-social-input').val());
+                model.setConfig('user_id', this.$('.wx-social-input').val());
             return model;
         }
     });
