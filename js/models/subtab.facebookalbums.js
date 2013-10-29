@@ -14,7 +14,7 @@ var wxApp = wxApp || {};
                 type: 'facebookAlbums',
                 content: 'facebookAlbums',
                 layout: 'list',
-                config: { url: 'http://facebook.com/' }
+                config: { url: 'http://facebook.com/', user_id: 'http://facebook.com/MyPage' }
             }
         ),
 
