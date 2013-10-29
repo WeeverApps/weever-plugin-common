@@ -49,6 +49,33 @@ jQuery(document).ready(function() {
         });
     });
 
+    jQuery('input[name="switch-tablet"]').click(function() {
+        console.log('Switch tablet.');
+        if (this.id == 'on') {
+            tablets_enabled = 1;
+        } else {
+            tablets_enabled = 0;
+        }
+        console.log(tablets_enabled);
+
+        jQuery('#switch_loading').show();
+
+        jQuery.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: { 
+                action: 'ajaxToggleTabletStatus',
+                nonce: jQuery('input#nonce').val(),
+                tablets_enabled: tablets_enabled
+            },
+            success: function(msg) {
+                console.log('Tablet status saved');
+                var status = tablets_enabled ? 'yes' : 'no';
+            },
+            error: function(v, msg) { alert(msg); }
+        });
+    });
+
     jQuery( "#tabs" ).tabs();
 	
     jQuery('#preview-iphone').click(function() {
