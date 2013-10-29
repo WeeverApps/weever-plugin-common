@@ -58,7 +58,7 @@ jQuery(document).ready(function() {
         }
         console.log(tablets_enabled);
 
-        // jQuery('#status-loading').show();
+        jQuery('#switch_loading').show();
 
         jQuery.ajax({
             type: "POST",
