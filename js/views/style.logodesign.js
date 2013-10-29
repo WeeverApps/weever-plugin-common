@@ -5,9 +5,7 @@ wxApp = wxApp || {};
     wxApp.LogoDesign = wxApp.StyleBase.extend({
         el: '#logo_design',
         events: {
-            // 'change #titlebarSource': 'dropDownChange',
-            'change input[name=titlebarSource]': 'dropDownChange',
-            // 'change .color': 'colorChange',
+            'change input[name=titlebarSource]': 'radioChange',
             'change .logo-design': 'logoChange' 
         },
 
@@ -18,24 +16,15 @@ wxApp = wxApp || {};
             Backbone.Events.on('color:change', this.colorChange, this);
         },
 
-        dropDownChange: function() {
-            alert('ddc');
-            alert( )
-            switch($('input[name=titlebarSource]').val()) {
+        radioChange: function() {
+            switch($('input:radio[name=titlebarSource]:checked').val()) {
                 case 'text':
                     $('#logoText').show();
-                    $('#logoHtml').hide();
                     $('#logoImage').hide();
                     break;
                 case 'image':
                     $('#logoText').hide();
-                    $('#logoHtml').hide();
                     $('#logoImage').show();
-                    break;
-                case 'html':
-                    $('#logoText').hide();
-                    $('#logoHtml').show();
-                    $('#logoImage').hide();
                     break;
             }
             this.logoChange( this );
@@ -86,7 +75,7 @@ wxApp = wxApp || {};
             
             wxApp.design.get('titlebar').html  = $('#titlebar_html').val();
             wxApp.design.get('titlebar').text  = $('#titlebar_title').val();
-            wxApp.design.get('titlebar').type  = $('input[name=titlebarSource]').val();
+            wxApp.design.get('titlebar').type  = $('input:radio[name=titlebarSource]:checked').val();
             wxApp.design.get('titlebar').image = $('#titlebar_logo_live').attr('src');
             
             // The 'design' methods of Open API is kinda strange... It 
