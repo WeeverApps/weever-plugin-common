@@ -1,6 +1,16 @@
 <script type="text/template" id="form-builder-action-email">
 	<label>
-		Enter the email recipient:
+		<p>
+			Receiver, or receivers of the mail.
+			The formatting of this string must comply with
+			<a href="http://www.faqs.org/rfcs/rfc2822" target="_blank">RFC 2822</a>. Some examples are:
+		</p>
+		<ul>
+			<li>user@example.com</li>
+			<li>user@example.com, anotheruser@example.com</li>
+			<li>User &lt;user@example.com&gt;</li>
+			<li>User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
+		</ul>
 		<input class="wx-form-builder-action" type="email" value="<%- value %>" />
 	</label>
 	<fieldset class="wx-form-builder-action-email-pdfheader">

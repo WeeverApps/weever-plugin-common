@@ -59,6 +59,8 @@ wxApp = wxApp || {};
         },
 
 		getAPIData: function() {
+			console.log( 'getAPIData' );
+			console.log( this );
 			var data = this.toJSON();
 			data.config = JSON.stringify(data.config);
             if ( data.id == data.parent_id )

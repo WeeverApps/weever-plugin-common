@@ -22,6 +22,8 @@ wxApp = wxApp || {};
 				// New form; set the collection
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
+				this.model.get( 'config' ).formActions = new Backbone.Collection();
+
 			} else {
 
 				// Load currently existing form elements.
@@ -66,9 +68,10 @@ wxApp = wxApp || {};
 		},
 
 		setModelFromView: function( model ) {
-			console.log( 'setModelFromView' );
-//			model.setConfig( 'formElements', JSON.stringify( this.model.get( 'config' ).formElements ) );
-			console.log( model.toJSON() );
+//			console.log( 'setModelFromView' );
+//			console.log( model );
+//			model = model.toJSONrecursive();
+//			console.log( model );
 			return model;
 		},
 
@@ -91,7 +94,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
 			'click .wx-form-builder-add-docusign-action': 'addDocusignAction',
-			'click .wx-form-builder-add-custom-action': 'addCustomAction',
+			'click .wx-form-builder-add-post-action': 'addPostAction',
 			'click .wx-form-builder-add-email-action': 'addEmailAction',
 	        'sortable-update': 'sortableUpdate'
 		},
@@ -121,9 +124,11 @@ wxApp = wxApp || {};
 		    console.log( 'subtab.formbuilder.edit.finish()' );
 		    console.log( this );
 
-		    var hasUpload = false;
-		    var formElements = this.model.get( 'config' ).formElements;
+		    var hasUpload = false,
+			    formElements = this.model.get( 'config' ).formElements,
+			    formActions = this.model.get( 'config' ).formActions;
 		    console.log( formElements );
+		    console.log( formActions );
 		    var model = {};
 		    for ( var i = 0; i < formElements.length; i++ ) {
 			    model = formElements.at( i );
@@ -167,6 +172,14 @@ wxApp = wxApp || {};
 			return action;
 		},
 
+	    addPostAction: function() {
+		    console.log( 'addPostAction' );
+
+		    var action = this.addCustomAction( { method : 'post' } );
+
+		    return action;
+	    },
+
 		addCustomAction: function( customAction ) {
 			console.log( 'addCustomAction' );
 			var action = new wxApp.FormBuilderAction();
@@ -179,7 +192,8 @@ wxApp = wxApp || {};
 			});
 			this.$( this.previewPaneSelector ).append( actionView.render().el );
 
-			this.model.get( 'config' ).formElements.push( action );
+//			this.model.get( 'config' ).formElements.push( action );
+			this.model.get( 'config' ).formActions.push( action );
 			return action;
 		},
 

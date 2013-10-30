@@ -115,7 +115,7 @@ wxApp = wxApp || {};
             this.$('#dialog-loader').show();
             
             if ( undefined !== this.$('form') && undefined != this.$('form').validate ) {
-                validator = this.$('form').validate();
+                var validator = this.$('form').validate();
 
                 if ( this.$('form').valid() ) {
                     this.validateFeed();

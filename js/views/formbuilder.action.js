@@ -35,7 +35,7 @@ wxApp = wxApp || {};
 			}
 			var $template = $( tplSelector );
 			this.tpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
+//			this.model.bind('change', this.render, this);
 		},
 
 		render: function() {
