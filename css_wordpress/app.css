@@ -188,32 +188,31 @@
   vertical-align: baseline;
   background: transparent;
   border-radius: 0;
-  height: auto;
 }
-/* line 41, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 40, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder {
   line-height: 1;
 }
-/* line 46, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 45, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder article, #appbuilder aside, #appbuilder details, #appbuilder figcaption, #appbuilder figure,
 #appbuilder footer, #appbuilder header, #appbuilder hgroup, #appbuilder menu, #appbuilder nav, #appbuilder section {
   display: block;
 }
-/* line 50, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 49, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder nav ul {
   list-style: none;
 }
-/* line 54, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 53, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder blockquote, #appbuilder q {
   quotes: none;
 }
-/* line 59, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 58, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder blockquote:before, #appbuilder blockquote:after,
 #appbuilder q:before, #appbuilder q:after {
   content: '';
   content: none;
 }
-/* line 64, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 63, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder a {
   margin: 0;
   padding: 0;
@@ -223,34 +222,34 @@
   border-radius: 0;
   height: auto;
 }
-/* line 75, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 74, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder ins {
   background-color: #ff9;
   color: #000;
   text-decoration: none;
 }
-/* line 82, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 81, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder mark {
   background-color: #ff9;
   color: #000;
   font-style: italic;
   font-weight: bold;
 }
-/* line 89, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 88, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder del {
   text-decoration: line-through;
 }
-/* line 93, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 92, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder abbr[title], #appbuilder dfn[title] {
   border-bottom: 1px dotted;
   cursor: help;
 }
-/* line 98, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 97, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* line 104, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 103, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder hr {
   display: block;
   height: 1px;
@@ -259,7 +258,7 @@
   margin: 1em 0;
   padding: 0;
 }
-/* line 113, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
+/* line 112, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-css-reset.scss */
 #appbuilder input, #appbuilder select {
   vertical-align: middle;
 }
@@ -7208,12 +7207,14 @@
   display: block;
   /* allows margins */
   margin: 0 auto;
+  width: 320px;
+  height: 568px;
   box-sizing: content-box;
   box-sizing: content-box;
   background-color: #111111;
   border: 2px solid #111111;
 }
-/* line 56, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-phone.scss */
+/* line 58, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-phone.scss */
 #appbuilder #interface #preview-refresh {
   text-align: center;
 }
