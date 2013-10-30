@@ -23,6 +23,7 @@
       content_selector: '.content, [data-section-content]',
       nav_selector: '[data-section="vertical-nav"], [data-section="horizontal-nav"]',
       active_class: 'active',
+      small_breakpoint: 768,
       callback: function() {}
     },
 
@@ -407,7 +408,8 @@
         return true;
       }
       
-      return !matchMedia(Foundation.media_queries['small']).matches;
+      return $(window).width() < settings.small_breakpoint;
+      // return !matchMedia(Foundation.media_queries['small']).matches;
     },
 
     off: function() {

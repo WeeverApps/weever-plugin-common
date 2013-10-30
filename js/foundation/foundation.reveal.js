@@ -200,7 +200,7 @@
     toggle_bg : function () {
       if ($('.' + this.settings.bgClass).length === 0) {
         this.settings.bg = $('<div />', {'class': this.settings.bgClass})
-          .appendTo('body');
+          .appendTo('#interface');
       }
 
       if (this.settings.bg.filter(':visible').length > 0) {
@@ -213,6 +213,14 @@
     show : function (el, css) {
       // is modal
       if (css) {
+        // Set width to 80% of the screen size
+        var windowSize = $(window).width();
+        var modalWidth = Math.round( windowSize * 0.8 );
+        css.width = modalWidth + 'px';
+        // Set left property to properly centre the pop up.
+        css.left = (((windowSize - modalWidth) / 2) - 166) + 'px';
+        css.margin = 0;
+
         if (el.parent('body').length === 0) {
           var placeholder = el.wrap('<div style="display: none;" />').parent();
           el.on('closed.fndtn.reveal.wrapped', function() {
@@ -220,7 +228,7 @@
             el.unwrap().unbind('closed.fndtn.reveal.wrapped');
           });
 
-          el.detach().appendTo('body');
+          el.detach().appendTo('#interface');
         }
 
         if (/pop/i.test(this.settings.animation)) {
