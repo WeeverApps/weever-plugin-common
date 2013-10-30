@@ -38,10 +38,6 @@ wxApp = wxApp || {};
 
 						this.addInfoWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'docusign' ) {
-
-						this.addDocusignAction();
-
 					} else if ( elementsJson[i].control === 'textarea' ) {
 
 						this.addTextareaWithProperties( elementsJson[i] );
@@ -63,7 +59,25 @@ wxApp = wxApp || {};
 						this.addInput( elementsJson[i] );
 
 					}
-				};
+				}
+
+				// Load currently existing form actions.
+				console.log( this.model.get( 'config' ).formActions );
+				var actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
+				this.model.get( 'config' ).formActions = new Backbone.Collection();
+
+				for ( var i = actionsJson.length - 1; i >= 0; i-- ) {
+					if ( actionsJson[i].method == 'docusign' ) {
+						this.addDocusignAction( null, actionsJson[i] );
+					}
+					else if ( actionsJson[i].method == 'post' ) {
+						this.addPostAction( null, actionsJson[i] );
+					}
+					else if ( actionsJson[i].method == 'email' ) {
+						this.addEmailAction( null, actionsJson[i] );
+					}
+				}
+
 			}
 		},
 
@@ -156,26 +170,44 @@ wxApp = wxApp || {};
 
 	    },
 
-	    addDocusignAction: function() {
+	    addDocusignAction: function( event, properties ) {
 		    console.log( 'addDocusignAction' );
 
-		    var action = this.addCustomAction( { method : 'docusign' } );
+		    var action;
+		    if ( typeof properties != 'undefined' ) {
+			    action = this.addCustomAction( properties );
+		    }
+		    else {
+			    action = this.addCustomAction( { method : 'docusign' } );
+		    }
 
 		    return action;
 	    },
 
-	    addEmailAction: function() {
+	    addEmailAction: function( event, properties ) {
 			console.log( 'addEmailAction' );
 
-			var action = this.addCustomAction( { method : 'email' } );
+		    var action;
+		    if ( typeof properties != 'undefined' ) {
+			    action = this.addCustomAction( properties );
+		    }
+		    else {
+			    action = this.addCustomAction( { method : 'email' } );
+		    }
 
 			return action;
 		},
 
-	    addPostAction: function() {
+	    addPostAction: function( event, properties ) {
 		    console.log( 'addPostAction' );
 
-		    var action = this.addCustomAction( { method : 'post' } );
+		    var action;
+		    if ( typeof properties != 'undefined' ) {
+			    action = this.addCustomAction( properties );
+		    }
+		    else {
+			    action = this.addCustomAction( { method : 'post' } );
+		    }
 
 		    return action;
 	    },
