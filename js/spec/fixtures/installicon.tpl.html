@@ -49,13 +49,16 @@
     <p class="wx-ui-title"><?php echo __( 'Installation Instructions', 'weever' ); ?></p>
     <div class="row">
             <div class="small-8 columns">
-                <p><?php echo __( 'Install prompt for first-time visitors', 'weever' ); ?></p>
+                <p>
+                    <?php echo __( 'Install prompt for first-time visitors', 'weever' ); ?>
+                    <img id="install_prompt_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                </p>
             </div>
             <div class="small-4 columns">
                 <div class="switch">
-                    <input id="install-off" name="switch-install" type="radio" checked>
+                    <input id="install-off" name="switch-install" type="radio" <%- (install.prompt == '0') ? 'checked' : '' %>>
                     <label for="install-off" onclick="">off</label>
-                    <input id="install-on" name="switch-install" type="radio">
+                    <input id="install-on"  name="switch-install" type="radio" <%- (install.prompt == '1') ? 'checked' : '' %>>
                     <label for="install-on" onclick="">active</label>
                     <span></span>
                 </div>
@@ -67,17 +70,4 @@
     <div class="panel">
         <p><?php echo __( 'The install instructions do not appear if the user has previously accessed the app, or if the phone or tablet does not provide for quick and easy installation of web apps.' ); ?></p>
     </div>
-
-    <!-- please remove the select -->
-	<div class="row">
-		<div class="small-10 columns">
-			<select id="install_prompt" style="min-width: 72px;">
-				<option value="0"><?php echo __( 'NO', 'weever' ); ?></option>
-				<option value="1" <%- install.prompt == '1' ? "selected='selected'":"" %>><?php echo __( 'YES', 'weever' ); ?></option>
-			</select>
-		</div>
-		<div class="small-2 columns">
-			<img id="install_prompt_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
-		</div>
-	</div>
 </script>

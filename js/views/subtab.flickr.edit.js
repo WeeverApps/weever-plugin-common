@@ -12,6 +12,7 @@ wxApp = wxApp || {};
             // (eg, turn 'flickr.com/user/' into 'flickr.com/user')
             url = url.replace(/\/$/, '');
             model.setConfig( 'url', url );
+            model.setConfig( 'user_id', url );
             return model;
         },
 

@@ -7,7 +7,7 @@ wxApp = wxApp || {};
         el: '#install_icon',
         events: {
             'click #save_install_icon': 'clickSave',
-            'change #install_prompt': 'changeSave'
+            'change input[name=switch-install]': 'changeSave'
         },
 
         initialize: function() {
@@ -24,17 +24,24 @@ wxApp = wxApp || {};
 
         changeSave: function(e) {
             var me = this;
-            var txt = $(e.currentTarget);
-            var id = txt.attr('id');
-            var loading_id = this.showLoadingGif( id );
-
+            // var txt = $(e.currentTarget);
+            var id = 'install_prompt';
+            var loading_id = this.showLoadingGif( 'install_prompt' );
+            console.log('Saving install...');
             this.performSave( function(data) {
+                console.log('Saved!');
                 me.hideLoadGif( id, loading_id );
             } );
         },
 
         performSave: function(c) {
-            wxApp.design.get('install').prompt = $('#install_prompt').val();
+            var prompt = $('input[name=switch-install]:checked').attr('id');
+            if (prompt === 'install-on')
+                prompt = '1';
+            else
+                prompt = '0';
+
+            wxApp.design.get('install').prompt = prompt;
             wxApp.design.get('install').name   = $('#title').val();
             wxApp.design.get('install').icon   = wx.cleanUrl( $('#wx-icon_live').attr('src') );
 

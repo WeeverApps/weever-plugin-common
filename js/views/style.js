@@ -6,6 +6,7 @@ wxApp = wxApp || {};
 
         showLoadingGif: function( id ) {
             var loading_id = '#' + id + '_loading';
+            console.log(loading_id);
             $(loading_id).show();
             return loading_id;
         },
@@ -21,6 +22,7 @@ wxApp = wxApp || {};
             // Hide the loading gif
             var post_load = id + "_done";
             var span = "<span id=\"" + post_load + "\">Saved.</span>";
+            console.log(span)
             $(loading_id).before( span );
             $( '#' + post_load ).delay( 2000 ).fadeOut( 1000 ).queue( function() { $(this).remove();} );
             $(loading_id).hide();

@@ -21,13 +21,17 @@ wxApp = wxApp || {};
 
         saveLoadSpinner: function() {
             if ( this.$('#wx-load-spinner').length ) {
+                var me = this;
+                var id = 'save_load_spinner';
+                var loading_id = me.showLoadingGif( id );
+
                 wxApp.design.get('loadspinner').text = this.$('#wx-load-spinner').val();
 
                 var innerParams = JSON.stringify( wxApp.design.get('loadspinner') );
                 var params = { loadspinner: innerParams };
 
                 wx.makeApiCall('design/set_loadspinner', params, function(data) {
-                    $('#save_custom_branding').html('Saved!');
+                    me.hideLoadGif( id, loading_id );
                 });
             }
         },

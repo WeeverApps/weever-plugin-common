@@ -7,10 +7,10 @@
     <div class="row">
         <div class="large-12 columns">
             <label>
-                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image"><?php echo __( ' Upload an image', 'weever' ); ?>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image" <%- titlebar.type == 'image' ? 'checked=checked' : '' %>><?php echo __( ' Upload an image', 'weever' ); ?></input>
             </label>
             <label>
-                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text"><?php echo __( ' Use a line of text', 'weever' ); ?>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text" <%- titlebar.type == 'text' ? 'checked=checked' : '' %>><?php echo __( ' Use a line of text', 'weever' ); ?></input>
             </label>
         </div>
     </div>
@@ -81,13 +81,13 @@
             <label class="left inline"><?php echo __( 'Logo area text color (if applicable)', 'weever' ); ?></label>
         </div>
         <div class="small-1 columns">
-            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
         </div>
     </div>
 
     <div class="row">
         <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
         </div>
         <div class="small-8 columns">
             <label class="left inline">
@@ -96,7 +96,7 @@
             </label>
         </div>
         <div class="small-1 columns">
-            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            <img id="subtab_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
         </div>
     </div>
 
@@ -108,7 +108,7 @@
             <label class="left inline"><?php echo __( 'Subtab bar text color', 'weever' ); ?></label>
         </div>
         <div class="small-1 columns">
-            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            <img id="subtab_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
         </div>
     </div>
 
