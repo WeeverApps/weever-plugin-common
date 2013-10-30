@@ -27,7 +27,6 @@ wxApp = wxApp || {};
             // var txt = $(e.currentTarget);
             var id = 'install_prompt';
             var loading_id = this.showLoadingGif( 'install_prompt' );
-            console.log('Saving install...');
             this.performSave( function(data) {
                 console.log('Saved!');
                 me.hideLoadGif( id, loading_id );
