@@ -16,6 +16,7 @@
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details <http://www.gnu.org/licenses/>.
 *
+*	NOTE - Most (if not all) of this script can be removed.
 */
 
 /*
@@ -94,7 +95,8 @@ jQuery(document).ready(function(){
 
 	// Preview code
 	setTimeout(function(){
-		if (jQuery.browser.webkit) {
+		// if (jQuery.browser.webkit) {
+		if (true) {
 			jQuery('#preview-app-dialog-no-webkit').hide();
 	        jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
 			jQuery('#preview-app-dialog-webkit').show();

@@ -7578,6 +7578,8 @@ label.wx-form-builder-edit-label {
 
 .wx-subtab-movehandle { cursor: move; }
 
+span.delete a { color: #7f0a0c; }
+
 .wx-layout-tablist .wx-tab.dragging {
   background: #ffffc0;
 }

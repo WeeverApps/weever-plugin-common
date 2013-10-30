@@ -19,7 +19,6 @@ wxApp = wxApp || {};
         //},
 
         render: function() {
-            console.log('Rendering feature: ' + this.model.toJSON());
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
             if (this.model.get('rel') !== '') {

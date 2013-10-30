@@ -21,17 +21,15 @@ wxApp = wxApp || {};
             this.containerEditView = new wxApp.ContainerEditView({ model: this.model });
 
             this.model.on('change', this.render, this);
-            console.log('done initializing subtabscontainerview');
         },
 
         events: {
             'click #ContainerEditLink': 'openEditModal',
-            'click .wx-save-button': 'save'
+            'click .wx-save-button': 'save',
+            'click .wx-delete-container': 'confirmDelete'
         },
 
         render: function() {
-            wx.log('RENDERING subtabs container');
-            wx.log( this.model );
             this.$el.html( this.subTabContainerTpl( this.model.toJSON() ) );
             this.$('#ContainerEditModal').html( this.containerEditContentTpl( this.model.toJSON() ) );
             this.$('.adminlist').html( this.subTabsView.render().el );
@@ -46,6 +44,20 @@ wxApp = wxApp || {};
             this.$('#ContainerEditModal').html( this.containerEditView.render().el );
 
             this.$('.section-container').foundation('section', 'reflow');
+        },
+
+        confirmDelete: function(event) {
+            event.preventDefault();
+            if ( confirm('Are you sure you want to delete this item, including all of the sub-tabs?') )
+                this.deleteContainer();
+        },
+
+        deleteContainer: function() {
+            this.model.destroy();
+
+            // Wait half a second, then refresh the preview
+            // (The half-second helps ensure the server is synced)
+            setTimeout( function() { wx.refreshAppPreview(); }, 500);
         }
     });
 })(jQuery); 
