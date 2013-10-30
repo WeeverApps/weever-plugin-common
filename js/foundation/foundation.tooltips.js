@@ -13,7 +13,7 @@
       additionalInheritableClasses : [],
       tooltipClass : '.tooltip',
       touchCloseText: 'tap to close',
-      appendTo: 'body',
+      appendTo: '#interface',
       'disable-for-touch': false,
       tipTemplate : function (selector, content) {
         return '<span data-selector="' + selector + '" class="' 
@@ -133,7 +133,8 @@
           'bottom' : (bottom) ? bottom : 'auto',
           'left' : (left) ? left : 'auto',
           'right' : (right) ? right : 'auto',
-          'width' : (width) ? width : 'auto'
+          'width' : (width) ? width : 'auto',
+          'position': 'fixed'
         }).end();
       };
 
@@ -148,7 +149,8 @@
         if (Foundation.rtl) {
           left = target.offset().left + target.offset().width - this.outerWidth(tip);
         }
-        objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', left, width);
+        var top = (target.offset().top + this.outerHeight(target) + 10) - $(document).scrollTop();
+        objPos(tip, top, 'auto', 'auto', left, width);
         tip.removeClass('tip-override');
         if (classes && classes.indexOf('tip-top') > -1) {
           objPos(tip, (target.offset().top - this.outerHeight(tip)), 'auto', 'auto', left, width)
