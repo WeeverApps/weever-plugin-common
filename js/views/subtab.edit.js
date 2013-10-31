@@ -40,7 +40,7 @@ wxApp = wxApp || {};
 
         render: function() {
             wx.log('render');
-            
+
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
             this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
 
@@ -53,6 +53,11 @@ wxApp = wxApp || {};
             if ( this.model.validateFeed ) {
                 this.$('.wx-finish-button').hide();
                 this.$('.wx-edit-title-div').hide();
+
+                if ( this.model.get('id') !== null ) {
+                    // We're editing, let's bring up the 'Preview' window.
+                    this.next();
+                }
             } else {
                 this.$('.wx-next-button').hide();
                 if ( ! this.model.allowTitleEdit )
