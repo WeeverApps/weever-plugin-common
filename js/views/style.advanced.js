@@ -16,8 +16,6 @@ wxApp = wxApp || {};
 
 			this.tpl = _.template( $('#advanced-options').html() );
 			this.render();
-
-			$('<style id="fontstyle" type="text/css"></style>').appendTo('head');
 		},
 
 		render: function() {
@@ -90,24 +88,20 @@ wxApp = wxApp || {};
 			console.log( 'Changing to font ' + fontId );
 			var fontData = null;
 			for (var i = 0; i < wxApp.IconFonts.length; i++) {
-				fontData = wxApp.IconFonts.models[i].toJSON();
+				fontData = wxApp.IconFonts.models[i];
 				console.log( fontData.id );
 				if (fontData.id == fontId)
 					break;
 			};
 
-			var css = "@font-face { " +
-"    font-family: 'wxFont-1'; " +
-"    src: " +
-"        url('data:image/svg+xml;base64," + fontData.svg + "') format('svg'), " +
-"        url('data:application/font-woff;charset=utf-8;base64," + fontData.woff + "') format('woff'), " +
-"        url('data:application/x-font-ttf;charset=utf-8;base64," + fontData.ttf + "') format('truetype'); " +
-"} " +
-".wxFont-1:before { font-family: 'wxFont-1'; font-size: 32px; } ";
+			wxApp.appView.changeFont( fontData );
+			$('#icon-font-preview').slideDown();
 
-			$('#fontstyle').html( css );
-
-			$('#icon-font-preview').slideDown()
+			var me = this;
+			var loading_id = this.showLoadingGif('font')
+			wx.makeApiCall('design/set_font_id', { font_id: fontData.get('id') }, function(data) {
+				me.hideLoadingGif('font', loading_id);
+            });
 		}
 	});
 

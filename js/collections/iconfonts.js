@@ -14,7 +14,7 @@ var wxApp = wxApp || {};
                     for ( var i = 0; i < data.fonts.length; i++ ) {
                         var fontData = data.fonts[i];
 
-                        var font = new wxApp.Tab( fontData );
+                        var font = new wxApp.IconFont( fontData );
                         me.add( font );
                     }
                 }

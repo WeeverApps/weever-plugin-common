@@ -109,8 +109,37 @@ wxApp = wxApp || {};
 
         clearBodyStyles: function() {
             $('body').attr('style', '');
+        },
+
+        changeFont: function(font) {
+            f = font;
+            wxApp.currentFont = font;
+
+            var css = "@font-face { " +
+            "    font-family: 'wxFont-1'; " +
+            "    src: " +
+            "        url('data:image/svg+xml;base64," + font.get('svg') + "') format('svg'), " +
+            "        url('data:application/font-woff;charset=utf-8;base64," + font.get('woff') + "') format('woff'), " +
+            "        url('data:application/x-font-ttf;charset=utf-8;base64," + font.get('ttf') + "') format('truetype'); " +
+            "} " +
+            ".wxFont-1:before { font-family: 'wxFont-1'; } ";
+
+            $('#fontstyle').html( css );
         }
     });
 
+    // Start app
     wxApp.appView = new wxApp.App();
+
+    // Load the current icon font
+    wx.makeApiCall('design/get_font_id', {}, function(data) {
+        if ( typeof data.font_id !== 'undefined' ) {
+            var font = new wxApp.IconFont();
+            font.fetch( data.font_id, function() {
+                // Put the font on the page.
+                $('<style id="fontstyle" type="text/css"></style>').appendTo('head');
+                wxApp.appView.changeFont( font );
+            } );
+        }
+    });
 })(jQuery);

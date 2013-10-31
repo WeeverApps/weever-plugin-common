@@ -11,7 +11,7 @@ var wxApp = wxApp || {};
 
 				me.set( data.design );
 				if (typeof onComplete !== 'undefined') {
-					onComplete();2
+					onComplete();
 				}
 				
 			})
