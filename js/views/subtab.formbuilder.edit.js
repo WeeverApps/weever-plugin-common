@@ -16,16 +16,11 @@ wxApp = wxApp || {};
 			// Call parent's initialize() function
 			this.constructor.__super__.initialize.apply( this, arguments );
 			console.log('FormBuilderSubTabEditView initialize');
-			
-			if (this.model.get( 'config' ).formElements == undefined) {
-				
-				// New form; set the collection
-				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
-				this.model.get( 'config' ).formActions = new Backbone.Collection();
-
-			} else {
-
+			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
+				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
+			}
+			else {
 				// Load currently existing form elements.
 				console.log( this.model.get( 'config' ).formElements );
 				var elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
@@ -60,13 +55,18 @@ wxApp = wxApp || {};
 
 					}
 				}
+			}
 
+			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
+				this.model.get( 'config' ).formActions = new Backbone.Collection();
+			}
+			else {
 				// Load currently existing form actions.
 				console.log( this.model.get( 'config' ).formActions );
 				var actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-				for ( var i = 0; i < elementsJson.length; i++ ) {
+				for ( var i = 0; i < actionsJson.length; i++ ) {
 					if ( actionsJson[i].method == 'docusign' ) {
 						this.addDocusignAction( null, actionsJson[i] );
 					}
@@ -77,8 +77,8 @@ wxApp = wxApp || {};
 						this.addEmailAction( null, actionsJson[i] );
 					}
 				}
-
 			}
+
 		},
 
 		setModelFromView: function( model ) {
