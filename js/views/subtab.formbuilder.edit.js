@@ -32,7 +32,7 @@ wxApp = wxApp || {};
 
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
-				for (var i = elementsJson.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < elementsJson.length; i++ ) {
 
 					if ( elementsJson[i].control === 'div' ) {
 
@@ -66,7 +66,7 @@ wxApp = wxApp || {};
 				var actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-				for ( var i = actionsJson.length - 1; i >= 0; i-- ) {
+				for ( var i = 0; i < elementsJson.length; i++ ) {
 					if ( actionsJson[i].method == 'docusign' ) {
 						this.addDocusignAction( null, actionsJson[i] );
 					}
