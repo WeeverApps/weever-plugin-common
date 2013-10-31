@@ -88,10 +88,12 @@ wxApp = wxApp || {};
         },
 
         loadIcon: function() {
-            var me = this;
-            $.get( wx.apiUrl + 'icons/get_icon_base64', { site_key: wx.siteKey, icon_id: parseInt( me.model.get('icon_id') ) }, function(iconData) {
-                me.$('.wx-nav-icon-img').attr('src', 'data:image/png;base64,' + iconData);
-            });
+            // No longer get icon base64; get via font.
+            // May need to re-add this if/when we go for multiple fonts.
+            // var me = this;
+            // $.get( wx.apiUrl + 'icons/get_icon_base64', { site_key: wx.siteKey, icon_id: parseInt( me.model.get('icon_id') ) }, function(iconData) {
+            //     me.$('.wx-nav-icon-img').attr('src', 'data:image/png;base64,' + iconData);
+            // });
         },
 
         destroyView: function() {
