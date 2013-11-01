@@ -38,7 +38,7 @@ wxApp = wxApp || {};
                 }
             });
 
-            wx.makeApiCall( 'tabs/set_tabIcon_id', { tab_id: tabId, icon_id: iconId }, function() {
+            wx.makeApiCall( 'tabs/set_tabIcon_id', { tab_id: tabId, tabIcon_id: iconId }, function() {
                 console.log('Tab Icon Saved');
                 me.model.set('tabIcon_id', iconId);
                 if (++numCompleted == 2) {
