@@ -11,5 +11,8 @@
 			<% if ( model.get( 'attributes' ).get( 'type' ) == 'file' ) continue %>
 			<label><input type="radio" name="wx-form-builder-id-field" value="<%- i %>" /><%- model.get( 'label' ) %></label>
 		<% }; %>
+		<p class="lead">Please enter a message that will be displayed when the file upload completes.</p>
+		<% var onUpload = this.model.get( 'config' ).onUpload; %>
+		<input type="text" class="wx-form-builder-upload-message" value="<%- onUpload.message %>" />
 	</div>
 </script>

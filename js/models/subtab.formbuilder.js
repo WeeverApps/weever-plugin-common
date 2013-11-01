@@ -16,7 +16,10 @@ wxApp = wxApp || {};
 				content: 'formbuilder',
 				layout: 'panel',
 				config: {
-					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php'
+					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+					onUpload: {
+						message: 'Your upload has completed.'
+					}
 				}
 			}
 		)

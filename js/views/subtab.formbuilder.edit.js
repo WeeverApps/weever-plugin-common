@@ -6,6 +6,7 @@ wxApp = wxApp || {};
 		previewPaneSelector: '.wx-form-builder-preview',
         subTabEditTplSelector: '#form-builder-subtab-edit-template',
 	    hasCalledFinish: false,
+	    finishView: null,
 
         initializeEvents: function() {
             this.events = _.extend({}, this.genericEvents, this.events);
@@ -79,6 +80,10 @@ wxApp = wxApp || {};
 				}
 			}
 
+			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
+				this.model.get( 'config' ).onUpload = JSON.parse( this.model.get( 'config' ).onUpload );
+			}
+
 		},
 
 		setModelFromView: function( model ) {
@@ -140,9 +145,23 @@ wxApp = wxApp || {};
 
 		    var hasUpload = false,
 			    formElements = this.model.get( 'config' ).formElements,
-			    formActions = this.model.get( 'config' ).formActions;
+			    formActions = this.model.get( 'config' ).formActions,
+
+			    /**
+			     * Should be called using .call( this ) or .apply( this ) so that the scope remains the same
+			     */
+		        addFinishView = function() {
+				    this.finishView = new wxApp.FormBuilderFinishView({
+					    model: this.model
+				    });
+				    this.$( this.previewPaneSelector ).append( this.finishView.render().el );
+	//			    $( 'body' ).append( finishView.render().el );
+			    };
+
 		    console.log( formElements );
 		    console.log( formActions );
+
+		    // Check for an upload element
 		    var model = {};
 		    for ( var i = 0; i < formElements.length; i++ ) {
 			    model = formElements.at( i );
@@ -152,20 +171,23 @@ wxApp = wxApp || {};
 			    }
 		    }
 
+		    // Call super and exit if an index has already been identified
 		    if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
 			    this.constructor.__super__.finish.apply( this );
 			    return;
 		    }
 
+		    // Select index
 		    if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
-			    var finishView = new wxApp.FormBuilderFinishView({
-				    model: this.model
-			    });
-			    this.$( this.previewPaneSelector ).append( finishView.render().el );
-//			    $( 'body' ).append( finishView.render().el );
-
+			    addFinishView.apply( this );
 			    this.hasCalledFinish = true;
 			    return;
+		    }
+
+		    // Re-add finish view in case elements have changed
+		    if ( this.hasCalledFinish ) {
+			    this.finishView.remove();
+			    addFinishView.apply( this );
 		    }
 
 	    },

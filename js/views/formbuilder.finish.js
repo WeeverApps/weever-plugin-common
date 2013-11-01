@@ -24,7 +24,8 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderFinishView = Backbone.View.extend({
 
 		events: {
-			'click input[type=radio]': 'setIdFieldIndex'
+			'click input[type=radio]': 'setIdFieldIndex',
+			'blur .wx-form-builder-upload-message': 'setUploadMessage'
 		},
 
 		initialize: function() {
@@ -40,6 +41,10 @@ wxApp = wxApp || {};
 			}) );
 //			this.$el.foundation( 'reveal', 'open' );
 			return this;
+		},
+
+		setUploadMessage: function( ev ) {
+			this.model.get( 'config' ).onUpload.message = $( ev.currentTarget ).val();
 		},
 
 		setIdFieldIndex: function( ev ) {
