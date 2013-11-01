@@ -44,7 +44,7 @@ wxApp = wxApp || {};
         },
 
         events: {
-            'click .wx-add-source-icon': 'addFeature',
+            'click .wx-add-feature': 'addFeature',
             'click #preview-refresh': 'refreshAppPreview'
         },
 

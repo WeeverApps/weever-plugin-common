@@ -42,7 +42,7 @@ wxApp = wxApp || {};
             var draggedItemView = $(ui.draggable).data('backbone-view');
             console.log( draggedItemView.model.get('parent_id') )
 
-            if ( ui.draggable.hasClass('wx-add-source-icon') ) {
+            if ( ui.draggable.hasClass('wx-add-feature') ) {
                 // If we're dragging a new feature icon up
                 var featureName = ui.draggable.attr('id').replace('add-', '');
                 var tabId = me.model.get('id');
