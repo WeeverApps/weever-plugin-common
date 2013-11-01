@@ -4,7 +4,7 @@ wxApp = wxApp || {};
 (function($){
     wxApp.SubTabsContainerView = Backbone.View.extend({
         tagName: 'div',
-        className: 'wx-tabs-stdcontainer wxui-stdContainer',
+        // className: 'wx-tabs-stdcontainer wxui-stdContainer',
         tabView: false,
 
         initialize: function() {
@@ -25,14 +25,15 @@ wxApp = wxApp || {};
 
         events: {
             'click #ContainerEditLink': 'openEditModal',
-            'click .wx-save-button': 'save',
-            'click .wx-delete-container': 'confirmDelete'
+            // 'click .wx-save-button': 'save',
+            'click .wx-delete-container': 'confirmDelete',
+            'click .wx-layout-selector': 'selectLayout'
         },
 
         render: function() {
             this.$el.html( this.subTabContainerTpl( this.model.toJSON() ) );
             this.$('#ContainerEditModal').html( this.containerEditContentTpl( this.model.toJSON() ) );
-            this.$('.adminlist').html( this.subTabsView.render().el );
+            this.$('.adminlist').append( this.subTabsView.render().el );
             this.$el.attr('id', this.model.get('id') + 'Tab');
 
             return this;
@@ -44,6 +45,26 @@ wxApp = wxApp || {};
             this.$('#ContainerEditModal').html( this.containerEditView.render().el );
 
             this.$('.section-container').foundation('section', 'reflow');
+        },
+
+        selectLayout: function(e) {
+            var button = $( e.currentTarget );
+            $('.wx-layout-selector').addClass('secondary');
+            button.removeClass('secondary');
+
+            var tabLayout = button.attr('id');
+            // Change from layout-list to list
+            tabLayout = tabLayout.replace('layout-', '');
+            // Classic is the default, and should not be defined.
+            if (tabLayout === 'classic')
+                tabLayout = null;
+
+            var me = this;
+            wx.makeApiCall( 'tabs/set_tabLayout', { tab_id: this.model.get('id'), tabLayout: tabLayout }, function() {
+                console.log('Layout Saved');
+                me.model.set('tabLayout', tabLayout);
+                setTimeout( function() { wx.refreshAppPreview(); }, 500);
+            });
         },
 
         confirmDelete: function(event) {

@@ -75,11 +75,11 @@ var wxApp = wxApp || {};
 
     wx.refreshAppPreview = function() {
         console.log('Refreshing Preview');
-        if ( $.browser.webkit ) {
+        if ( true ) { // if ( $.browser.webkit ) {
             $('#preview-app-dialog-no-webkit').hide();
             $('#preview-app-dialog-frame').attr( 'src', $('#preview-app-dialog-frame').attr('rel') );
             $('#preview-app-dialog-webkit').show();
-        } else if ( $.browser.webkit == undefined || $.browser.webkit == false ) {
+        } else { // } else if ( $.browser.webkit == undefined || $.browser.webkit == false ) {
             $('#preview-app-dialog-no-webkit').show();
         }
     };
