@@ -94,6 +94,7 @@ wxApp = wxApp || {};
         },
 
         refreshAppPreview: function() {
+            console.log('Refreshing...')
             wx.refreshAppPreview();
         },
 
