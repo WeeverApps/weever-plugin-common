@@ -33,7 +33,7 @@ wxApp = wxApp || {};
         render: function() {
             this.$el.html( this.subTabContainerTpl( this.model.toJSON() ) );
             this.$('#ContainerEditModal').html( this.containerEditContentTpl( this.model.toJSON() ) );
-            this.$('.adminlist').html( this.subTabsView.render().el );
+            this.$('.adminlist').append( this.subTabsView.render().el );
             this.$el.attr('id', this.model.get('id') + 'Tab');
 
             return this;
