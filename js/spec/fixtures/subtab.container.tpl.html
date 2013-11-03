@@ -1,30 +1,33 @@
 
 <script type="text/template" id="subtab-container-template">
-    <ul class="pricing-table">
-        <li class="title">
-            <span class="wxIcon-<%- tabIcon_id || icon_id %> wxFont-1"></span>
+    <ul class="wx-tablist-layout pricing-table">
+        <li class="price">
+            <span>Editing:</span>
             <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %></a>
             <span class="delete"><a href="#" class="wx-delete-container">&times;</a></span>
         </li>
-        <li class="price" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
+        <!--<li class="bullet-item">Layout for the features (aka &lsquo;subtabs&rsquo;) assigned to this tab container.</li>-->
+
+        <li class="bullet-item wx-tablist-layout-controls" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
             <input type="hidden" id="tabLayout" />
+
             <div class="row">
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === 'list' ? '' : ' secondary' %>" id="layout-list">List</button>
+                    <button class="wx-layout-selector<%- tabLayout === null ? '' : ' secondary expand' %>"   id="layout-classic">Classic</button>
                 </div>
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === 'grid' ? '' : ' secondary' %>" id="layout-grid">Grid</button>
+                    <button class="wx-layout-selector<%- tabLayout === 'grid' ? '' : ' secondary expand' %>" id="layout-grid">Grid</button>
                 </div>
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === null ? '' : ' secondary' %>" id="layout-classic">Classic</button>
+                    <button class="wx-layout-selector<%- tabLayout === 'list' ? '' : ' secondary expand' %>" id="layout-list">List</button>
                 </div>
             </div>
         </li>
     </ul>
 
-    <ul class='adminlist pricing-table'>
-        <li class="title" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
-            Features assigned to this tab
+    <ul class='adminlist pricing-table wx-tablist-features'>
+        <li class="price" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
+            Features assigned to this tab container
         </li>
     </ul>
 

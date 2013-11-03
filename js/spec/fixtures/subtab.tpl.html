@@ -1,17 +1,19 @@
 
 <script type="text/template" id="subtab-template">
     <li class="bullet-item wx-subtab-movehandle">
-        <span title="Pretend this is an icon.">[ &#8597; ]</span>
-        
-        <span class="wxIcon-<%- icon_id %> wxFont-1 small"></span>
 
-        <span class="wx-subtab-link-text"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#"><%- title %></a></span>
+        <span>&#8627;</span>
 
-        <!-- <span class="wx-subtab-type-text"><%- typeDescription %></span> -->
+        <span class="wxIcon wxIcon-<%- icon_id %> wxFont-1 small"></span>
+
+        <span class="wx-subtab-link-text"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#"><%- title %> <span class="wx-edit-prompt">| Edit</span></a></span>
 
         <span class="delete"><a href="#" class="wx-subtab-delete" title="Delete">&times;</a></span>
     </li>
+
+    <!-- updating message -->
     <div id="wx-edit-area-<%- id %>" class="reveal-modal">
         Please wait...
     </div>
+
 </script>
