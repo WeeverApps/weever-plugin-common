@@ -632,6 +632,11 @@
 #appbuilder #interface input[type="radio"] {
   vertical-align: top;
 }
+/* line 20, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-global.scss */
+#appbuilder #interface.platform .panel > p:last-child {
+  margin-bottom: 1.25em;
+  /* matches default */
+}
 /* line 11, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/platforms/appbuilder-wordpress/_wx-appbuilder-wordpress.scss */
 #appbuilder #interface {
   margin-left: 0;
@@ -7329,20 +7334,20 @@
 #appbuilder #interface #editSpace .pricing-table.wx-tablist-features li.price {
   background-color: transparent;
 }
-/* line 116, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 117, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-subtab-movehandle {
   cursor: move;
 }
-/* line 121, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 122, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-tab.dragging,
 #appbuilder #interface .wx-tab.dragging.hover {
   background-color: #ffffc0;
 }
-/* line 129, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 130, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-subtab-movehandle .wx-edit-prompt {
   display: none;
 }
-/* line 135, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 136, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-subtab-movehandle:hover .wx-edit-prompt {
   display: inline;
 }

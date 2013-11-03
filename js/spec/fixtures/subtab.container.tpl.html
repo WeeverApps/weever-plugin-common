@@ -2,32 +2,31 @@
 <script type="text/template" id="subtab-container-template">
     <ul class="wx-tablist-layout pricing-table">
         <li class="price">
-            <span>Editing:</span>
+            <span>Editing tab:&nbsp;</span>
             <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %></a>
             <span class="delete"><a href="#" class="wx-delete-container">&times;</a></span>
         </li>
-        <!--<li class="bullet-item">Layout for the features (aka &lsquo;subtabs&rsquo;) assigned to this tab container.</li>-->
 
         <li class="bullet-item wx-tablist-layout-controls" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
             <input type="hidden" id="tabLayout" />
 
             <div class="row">
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === null ? '' : ' secondary expand' %>"   id="layout-classic">Classic</button>
+                    <button class="wx-layout-selector<%- tabLayout === null ? '' : ' secondary expand' %>"   id="layout-classic">[icon] Classic</button>
                 </div>
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === 'grid' ? '' : ' secondary expand' %>" id="layout-grid">Grid</button>
+                    <button class="wx-layout-selector<%- tabLayout === 'grid' ? '' : ' secondary expand' %>" id="layout-grid">[icon] Grid</button>
                 </div>
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === 'list' ? '' : ' secondary expand' %>" id="layout-list">List</button>
+                    <button class="wx-layout-selector<%- tabLayout === 'list' ? '' : ' secondary expand' %>" id="layout-list">[icon] List</button>
                 </div>
             </div>
         </li>
     </ul>
 
     <ul class='adminlist pricing-table wx-tablist-features'>
-        <li class="price" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
-            Features assigned to this tab container
+        <li class="price" style="">
+            Features assigned to this tab:
         </li>
     </ul>
 
@@ -39,7 +38,7 @@
 <script type="text/template" id="ContainerEditContent">
     <div class="large-6 small-6 columns">
         <div>
-            <p class="lead">Please Enter a Title:</p>
+            <p class="lead">Title for this primary tab:</p>
             <input type="text" value="<%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %>" class="wx-edit-title" id="container-title" />
         </div>
 
@@ -52,16 +51,20 @@
         <div class="section-container auto" data-section>
             <section>
                 <p class="title" data-section-title><a href="#panel1">Choose Icon</a></p>
-                <div class="content icon-selector" data-section-content style="height: 315px; overflow: scroll;">
+                <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
                         <%= _.template( jQuery('#icon-selector').html(), icon_id, {variable: 'icon_id'}) %>
                     </ul>
                 </div>
             </section>
             <section>
-                <p class="title" data-section-title><a href="#panel2">Help</a></p>
-                <div class="content" data-section-content style="height: 315px; overflow: scroll;">
-                    Help text will go here.
+                <p class="title" data-section-title><a href="#panel2">What is a primary tab?</a></p>
+                <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
+                    <p class="lead"><b>What is a primary tab?</b></p>
+                    <p>Every app is made of <b>primary tabs</b> and <b>features</b>.</p>
+                    <p><b>Primary tabs</b> have a layout and an icon.  Primary tabs give a features a place to be be viewed within your app.</p>
+                    <p><b>Features</b> (sometimes called &lsquo;subtabs&rsquo;) are things like a twitter feed, a blog post, or a map.  Features are assigned to primary tabs.</p>
+                    <p>You can move a feature from one primary tab to another and create new primary tabs, with a little practice.</p>
                 </div>
             </section>
         </div>
