@@ -1,9 +1,6 @@
 <script type="text/template" id="tab-template">
-    <p>
-    	<!--<img class="wx-nav-icon-img" src="" />-->
-    	<span class="wxIcon wxIcon-<%- icon_id %> wxFont-1"></span>
-    </p>
-    <p class="wx-nav-label" data-tab-id="ID #<%- id %>">
-    	<%- ( typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title ) %>
-    </p>
+    <button class="secondary">
+    	<div class="wxIcon wxIcon-<%- icon_id %> wxFont-1"></div>
+        <div class="wx-nav-label" data-tab-id="ID #<%- id %>"><%- ( typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title ) %></div>
+    </button>
 </script>

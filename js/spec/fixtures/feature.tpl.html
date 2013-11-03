@@ -1,18 +1,20 @@
 <script type="text/template" id="feature-template">
     <button class="button secondary expand wx-add-feature <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%- featureName %>">
+
 		<% if (iconId == 0) { %>
-            <span class="label">
-                <span class="wx-add-feature-icon">+</span>
-            </span>
+            <!--<span class="label">-->
+            <span class="wx-add-feature-icon">+</span>
+            <!--</span>-->
             <span class="wx-add-feature-name"><%- name %></span>
             <span class="wx-add-feature-tier"></span>
 
         <% } else { %>
-			<span class="label">
-                <span class="wx-add-feature-icon wxIcon-<%- iconId %> wxFont-1"></span>
-            </span>
+			<!--<span class="label">-->
+            <span class="wx-add-feature-icon wxIcon-<%- iconId %> wxFont-1"></span>
+            <!--</span>-->
             <span class="wx-add-feature-name"><%- name %></span>
             <span class="wx-add-feature-tier"></span>
+        <span></span>
 		<% } %>
 		    <!-- remove this -- <span class="wx-add-feature-name"><%- name %></span>j -->
 	</button>
