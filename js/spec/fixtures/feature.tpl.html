@@ -2,21 +2,17 @@
     <button class="button secondary expand wx-add-feature <%- includeClass %>" id="add-<%- featureName %>" <%- (includeClass.indexOf('wx-unavailable') !== -1) ? '' : 'data-reveal-id="wx-edit-area-' + featureName + '"' %>>
 
 		<% if (iconId == 0) { %>
-            <!--<span class="label">-->
             <span class="wx-add-feature-icon wxIcon">+</span>
-            <!--</span>-->
             <span class="wx-add-feature-name"><%- name %></span>
             <span class="wx-add-feature-tier"></span>
 
         <% } else { %>
-			<!--<span class="label">-->
             <span class="wx-add-feature-icon wxIcon wxIcon-<%- iconId %> wxFont-1"></span>
-            <!--</span>-->
             <span class="wx-add-feature-name"><%- name %></span>
             <span class="wx-add-feature-tier"></span>
-        <span></span>
+
 		<% } %>
-		    <!-- remove this -- <span class="wx-add-feature-name"><%- name %></span>j -->
+
 	</button>
 
     <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
