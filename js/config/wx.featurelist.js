@@ -1,6 +1,6 @@
 [
     { "featureName": "FormBuilder", "name": "Form Builder", "iconId": 30 },
-    { "featureName": "WordpressBlog", "name": "Wordpress - all posts", "filterBy": "weever_list_show_wordpress_content", "iconId": 28 },
+    { "featureName": "WordpressBlog", "name": "Wordpress - all posts", "filterBy": "weever_list_show_wordpress_content", "iconId": 28, "rel": "hide" },
     { "featureName": "WordpressCategory", "name": "Wordpress category", "filterBy": "weever_list_show_wordpress_content", "iconId": 11 },
     { "featureName": "WordpressPage", "name": "Wordpress page", "filterBy": "weever_list_show_wordpress_content", "iconId": 12 },
     { "featureName": "WordpressTag", "name": "Wordpress tag", "filterBy": "weever_list_show_wordpress_content", "iconId": 13 },
