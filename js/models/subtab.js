@@ -16,12 +16,8 @@ wxApp = wxApp || {};
             published: 1,
             config: {},
             featureName: '',
-            helpTitle: 'Help and support',
-            helpBody: '<p><b>Having trouble building your app?</b></p>' +
-                    '<p>Please submit any support tickets or feedback at <a target="_blank" href="http://suppport.weeverapps.com">support.weeverapps.com</a>.</p>' +
-                    '<p>We want your app building experience to be a happy one and we do provide support during the <b>trial period</b>.</p>' +
-                    '<p>In a rush? Our paid subscription plans include priority support with a faster response time.  <a target="_blank" class="">View plans and pricing</a>.</p>' +
-                    '<p>Thanks! &mdash; <i>The Weever Apps team</i></p>'
+            helpTitle: 'Help tips ',
+            helpBody: ''
         },
 
         typeDescription: '',
