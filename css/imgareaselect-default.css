@@ -2,40 +2,40 @@
  * imgAreaSelect default style
  */
 
-.imgareaselect-border1 {
+#appbuilder .imgareaselect-border1 {
 	background: url(border-v.gif) repeat-y left top;
 }
 
-.imgareaselect-border2 {
+#appbuilder .imgareaselect-border2 {
     background: url(border-h.gif) repeat-x left top;
 }
 
-.imgareaselect-border3 {
+#appbuilder .imgareaselect-border3 {
     background: url(border-v.gif) repeat-y right top;
 }
 
-.imgareaselect-border4 {
+#appbuilder .imgareaselect-border4 {
     background: url(border-h.gif) repeat-x left bottom;
 }
 
-.imgareaselect-border1, .imgareaselect-border2,
-.imgareaselect-border3, .imgareaselect-border4 {
+#appbuilder .imgareaselect-border1, #appbuilder .imgareaselect-border2,
+#appbuilder .imgareaselect-border3, #appbuilder .imgareaselect-border4 {
     filter: alpha(opacity=50);
 	opacity: 0.5;
 }
 
-.imgareaselect-handle {
+#appbuilder .imgareaselect-handle {
     background-color: #fff;
     border: solid 1px #000;
     filter: alpha(opacity=50);
     opacity: 0.5;
 }
 
-.imgareaselect-outer {
+#appbuilder .imgareaselect-outer {
     background-color: #000;
     filter: alpha(opacity=50);
     opacity: 0.5;
 }
 
-.imgareaselect-selection {  
+#appbuilder .imgareaselect-selection {  
 }
