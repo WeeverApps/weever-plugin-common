@@ -39,6 +39,7 @@ wxApp = wxApp || {};
         },
 
         render: function() {
+
             console.log('render');
 
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
@@ -46,8 +47,6 @@ wxApp = wxApp || {};
 
             this.$el.prepend('<form>');
             this.$el.append('</form>');
-
-            this.$el.foundation('section', 'reflow');
 
             this.startValidation();
             if ( this.model.validateFeed ) {
@@ -63,6 +62,23 @@ wxApp = wxApp || {};
                 if ( ! this.model.allowTitleEdit )
                     this.$('.wx-edit-title-div').hide();
             }
+
+            // Once the reveal modal is open...
+            var me = this.$el;
+            meeeee = me;
+            this.$el.on('opened', function() {
+                me.foundation('section', 'reflow');
+
+                // Alright, now let's set the height of the right-hand side to the height of the left-hand side
+                // var currentModal = $('.reveal-modal.open');
+                // Get the height of the current modal.
+                var height = me.height();
+                height -= 115;   // Account for margins & padding.
+                if (height < 315)
+                    height = 315;
+
+                me.find('div.content').height( height );
+            });
 
             return this;
         },
