@@ -20,8 +20,6 @@ wxApp = wxApp || {};
             var src = input.val();
 
             id = id.replace('_load_live', '');
-            alert(id);
-            alert(src);
 
             wxApp.design.get('launchscreen')[id] = src;
 

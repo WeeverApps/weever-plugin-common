@@ -148,6 +148,7 @@ jQuery(document).ready(function(){
     					},
     					success: function(msg) {
     						jQuery("#" + image_id).attr("src", msg);
+
     						var hidden = jQuery('input[name=' + input_name + ']');
 	        	        	hidden.attr('value', msg);
 	        	        	Backbone.Events.trigger( 'image:change', hidden );
