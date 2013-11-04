@@ -1,17 +1,22 @@
 <script type="text/template" id="feature-template">
     <button class="button secondary expand wx-add-feature <%- includeClass %>" id="add-<%- featureName %>" <%- (includeClass.indexOf('wx-unavailable') !== -1) ? '' : 'data-reveal-id=wx-edit-area-' + featureName %>>
 
+        <!-- Icon -->
 		<% if (iconId == 0) { %>
-            <span class="wx-add-feature-icon wxIcon">+</span>
-            <span class="wx-add-feature-name"><%- name %></span>
-            <span class="wx-add-feature-tier"></span>
-
+            <span class="wx-add-feature-icon wxIcon wxIcon-1"></span>
         <% } else { %>
             <span class="wx-add-feature-icon wxIcon wxIcon-<%- iconId %> wxFont-1"></span>
-            <span class="wx-add-feature-name"><%- name %></span>
-            <span class="wx-add-feature-tier"></span>
-
 		<% } %>
+
+        <!-- Feature Name -->
+        <span class="wx-add-feature-name"><%- name %></span>
+
+        <!-- Tiering -->
+        <% if (tierRequired != undefined && tierRequired == 2) { %>
+            <span class="wx-add-feature-tier">pro</span>
+        <% } else { %>
+            <span class="wx-add-feature-tier"></span>
+        <% } %>
 
 	</button>
 

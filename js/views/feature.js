@@ -9,7 +9,6 @@ wxApp = wxApp || {};
         initialize: function() {
             this.featureTpl = _.template( $('#feature-template').html() );
             this.model.bind( 'change', this.render, this );
-            //this.model.bind( 'destroy', this.destroyView, this );
         },
 
         // TODO - Move click code to here.
@@ -19,6 +18,10 @@ wxApp = wxApp || {};
         //},
 
         render: function() {
+            // Set default tier
+            if ( typeof this.model.get('tierRequired') === 'undefined' ) {
+                this.model.set('tierRequired', 1);
+            }
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
             if (this.model.get('rel') !== '') {
