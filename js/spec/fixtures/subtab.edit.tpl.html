@@ -7,16 +7,21 @@
 	    <div class="subtab"></div>
 
 	    <div class="wx-feed-error hide">
-	        There was an error validating, please verify the information and try again
+	        Sorry! We were not able to preview this content.  Please verify the information and try again.
 	    </div>
+
+        <br>
+
 	    <div>
-	        <p class="lead">Please Enter a Form Title:</p>
+	        <label>Give this feature a title:</label>
 	        <input type="text" value="<%- title %>" class="wx-edit-title" />
 	    </div>
 
+        <br>
+
         <div>
-            <button class="wx-next-button">Preview</button>
-            <button class="wx-finish-button">Finish</button>
+            <button class="wx-next-button">Preview &nbsp;</button>
+            <button class="wx-finish-button success">Save and add to app</button>
             <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
         </div>
     </div>
@@ -26,25 +31,32 @@
             <% if ( validateFeed === true ) { %>
                 <section class="active">
                     <p class="title" data-section-title><a href="#panel1">Preview</a></p>
-                    <div class="content" data-section-content style="height: 315px; overflow: scroll;">
+                    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
                         <div class="wx-validate-feed">
-                            <img src="http://placehold.it/515x300&text=Preview">
+                            <div class="panel wx-preview">
+                                <h3 class="wx-preview-msg">preview</h3>
+                            </div>
                         </div>
                     </div>
                 </section>
             <% } %>
             <section <% if (validateFeed === false) { %>class="active"<% } %>>
-                <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
-                <div class="content icon-selector" data-section-content style="height: 315px; overflow: scroll;">
+                <p class="title" data-section-title><a href="#panel2">Choose an icon</a></p>
+                <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
                         <%= _.template( jQuery('#icon-selector').html(), icon_id, {variable: 'icon_id'}) %>
                     </ul>
                 </div>
             </section>
             <section>
-                <p class="title" data-section-title><a href="#panel3">Help</a></p>
-                <div class="content" data-section-content style="height: 315px; overflow: scroll;">
-                    Help text will go here.
+                <p class="title" data-section-title><a href="#panel3">Help and support</a></p>
+                <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
+                    <br>
+                    <p><b>Having trouble building your app?</b></p>
+                    <p>Please submit any support tickets or feedback at <a target="_blank" href="http://suppport.weeverapps.com">support.weeverapps.com</a>.</p>
+                    <p>We want your app building experience to be a happy one and we do provide support during the <b>trial period</b>.</p>
+                    <p>In a rush? Our paid subscription plans include priority support with a faster response time.  <a target="_blank" class="">View plans and pricing</a>.</p>
+                    <p>Thanks! &mdash; <i>The Weever Apps team</i></p>
                 </div>
             </section>
         </div>

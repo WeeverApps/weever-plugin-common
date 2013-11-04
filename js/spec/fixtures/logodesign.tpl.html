@@ -35,7 +35,7 @@
 
     <!-- if logo type = image -->
     <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
-        <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?><p>
+        <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?> <span style="font-weight:normal">&mdash; 320 x 88px</span><p>
         <div class="row">
             <div class="large-8 columns">
                 <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />

@@ -6184,9 +6184,24 @@
     text-align: center;
   }
 }
-/* line 3, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-reveals.scss */
+/* line 5, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-reveals.scss */
 #appbuilder #interface .icon-selector label {
   text-align: center;
+}
+/* line 13, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-reveals.scss */
+#appbuilder #interface .wx-validate-feed {
+  height: 100%;
+}
+/* line 16, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-reveals.scss */
+#appbuilder #interface .wx-validate-feed .panel.wx-preview {
+  height: 100%;
+  background-color: #e2e2e2;
+}
+/* line 20, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-reveals.scss */
+#appbuilder #interface .wx-validate-feed .panel.wx-preview .wx-preview-msg {
+  margin: 25% auto 0;
+  text-align: center;
+  color: #bcbcbc;
 }
 /* line 3, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-media-animations.scss */
 #appbuilder #interface .wx-load-spinner {

@@ -135,7 +135,7 @@ jQuery(document).ready(function(){
 	        	setTimeout(function() { cropper_show(image_width, image_height); }, 500);
 	        	jQuery('#finish-crop').one('click', function() {
 	        		console.log('Saving cropped image...');
-	        		console.log(coords);
+	        		// console.log(coords);
 
 	        		jQuery.ajax({
     					url: ajaxurl,
@@ -149,6 +149,7 @@ jQuery(document).ready(function(){
     					success: function(msg) {
     						jQuery("#" + image_id).attr("src", msg);
 	        	        	jQuery('input[name=' + input_name + ']').attr('value', msg);
+	        	        	Backbone.Events.trigger( 'image:change', jQuery('input[name=' + input_name + ']') );
 	        	        	//jQuery('#wx-jcrop-dialog').dialog('close');
     					},
     					error: function(v,msg) {
@@ -157,58 +158,9 @@ jQuery(document).ready(function(){
     				});
 
     				jQuery('#wx-jcrop-dialog').foundation('reveal', 'close');
-	        	})
+	        	});
 
-
-	        	/*jQuery('#wx-jcrop-dialog').dialog({
-	        		modal: true,
-	        		resizable: false,
-	        		width: 'auto',
-	        		height: 'auto',
-	        		title: 'Crop Image (click and drag on image to crop)',
-	        		//show: 'fade',
-	        		hide: 'drop',
-	        		open: function(event, ui) {
-	        			setTimeout(function() { cropper_show(image_width, image_height); }, 500);
-	        		},
-	        		buttons: {
-	        			'Finish': function() {
-	        				//if ( false === coords || isNaN(coords.x1) ) {
-	        				//	alert('Please make a selection on the image first');
-	        				//} else {
-
-	        					// Call the script to crop and fetch back the url
-		        				jQuery.ajax({
-		        					url: ajaxurl,
-		        					type: 'POST',
-		        					data: {
-		        						action: 'ajaxCropImage',
-		        						selection: coords,
-		        						image_width: image_width,
-		        						image_height: image_height
-		        					},
-		        					success: function(msg) {
-		        						jQuery("#" + image_id).attr("src", msg);
-		    	        	        	jQuery('input[name=' + input_name + ']').attr('value', msg);
-		    	        	        	jQuery('#wx-jcrop-dialog').dialog('close');
-		        					},
-		        					error: function(v,msg) {
-		        						alert('There was an error saving the image, please try again');
-		        					}
-		        				});
-	        				//}
-	        			},
-	        			'Cancel': function() {
-	        				jQuery(this).dialog('close');
-	        			}
-	        		}
-	        	});*/
-	        	
-	        	//jQuery("#wx-theme-tablet-load-link").attr("href", url);
 	        	return false;
-
-	        	//jQuery("#wx-image-size-tablet").hide();
-	        	//weever.checkTabletImg(url);
 	        }
 	    });		
 	});
