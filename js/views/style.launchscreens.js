@@ -16,28 +16,67 @@ wxApp = wxApp || {};
         },
 
         saveImage: function( input ) {
-            var id = input.attr('name');
+
+            eenpoot = input;
+            var id = input.attr('id');
+            if (!id) {
+                id = input.attr('name');
+            }
             var src = input.val();
 
-            id = id.replace('_load_live', '');
+            if ( id === 'titlebar_logo_live' ) {
+                wxApp.design.get('titlebar').image = src;
+            
+                // The 'design' methods of Open API is kinda strange... It 
+                // expects top-level params to be JSON objects, and items within 
+                // the top-level params to be string representations of JSON 
+                // objects... Therefore, we have to 'stringify' the inner params.
+                var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
+                var params = { titlebar: innerParams };
 
-            wxApp.design.get('launchscreen')[id] = src;
+                wx.makeApiCall('design/set_titlebar', params, function(data) {
+                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                });
 
-            // The 'design' methods of Open API is kinda strange... It 
-            // expects top-level params to be JSON objects, and items within 
-            // the top-level params to be string representations of JSON 
-            // objects... Therefore, we have to 'stringify' the inner params.
-            var innerParams = JSON.stringify( wxApp.design.get('launchscreen') );
-            var params = { launchscreen: innerParams };
+            } else if ( id === 'icon_live' ) {
 
-            wx.makeApiCall('design/set_launchscreen', params, function(data) {
-                $('#save_launch_screen').html('Saved!');
-                // Wait half a second, then refresh the preview
-                // (The half-second helps ensure the server is synced)
-                setTimeout( function() { wx.refreshAppPreview(); }, 500);
-            });
+                wxApp.design.get('install').icon   = src;
+
+                // The 'design' methods of Open API is kinda strange... It 
+                // expects top-level params to be JSON objects, and items within 
+                // the top-level params to be string representations of JSON 
+                // objects... Therefore, we have to 'stringify' the inner params.
+                var innerParams = JSON.stringify( wxApp.design.get('install') );
+                var params = { install: innerParams };
+
+                wx.makeApiCall('design/set_install', params, function(data) {
+                    // Wait half a second, then refresh the preview
+                    // (The half-second helps ensure the server is synced)
+                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                });
+
+            } else {
+
+                // Load screen image.
+                id = id.replace('_load_live', '');
+
+                wxApp.design.get('launchscreen')[id] = src;
+
+                // The 'design' methods of Open API is kinda strange... It 
+                // expects top-level params to be JSON objects, and items within 
+                // the top-level params to be string representations of JSON 
+                // objects... Therefore, we have to 'stringify' the inner params.
+                var innerParams = JSON.stringify( wxApp.design.get('launchscreen') );
+                var params = { launchscreen: innerParams };
+
+                wx.makeApiCall('design/set_launchscreen', params, function(data) {
+                    // Wait half a second, then refresh the preview
+                    // (The half-second helps ensure the server is synced)
+                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                });
+
+            }
         }
-
     });
 
     

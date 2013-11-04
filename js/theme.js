@@ -136,7 +136,7 @@ jQuery(document).ready(function(){
 	        	jQuery('#finish-crop').one('click', function() {
 	        		console.log('Saving cropped image...');
 	        		// console.log(coords);
-
+	        		
 	        		jQuery.ajax({
     					url: ajaxurl,
     					type: 'POST',
