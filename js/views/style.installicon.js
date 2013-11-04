@@ -23,9 +23,7 @@ wxApp = wxApp || {};
         },
 
         changeSave: function(e) {
-            this.performSave( function(data) {
-                console.log('Saved!');
-            } );
+            this.performSave( function(data) { } );
         },
 
         performSave: function(c) {

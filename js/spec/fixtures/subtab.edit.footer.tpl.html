@@ -1,23 +1,29 @@
 <script type="text/template" id="subtab-edit-footer-template">
     <% if ( validateFeed === true ) { %>
         <div class="large-6 small-6 columns">
-            <div class="wx-validate-feed" style="height: 200px; overflow: scroll;">
-                <img src="http://placehold.it/515x200&text=Preview">
+            <div class="wx-validate-feed">
+                <div class="panel wx-preview">
+                    <h3 class="wx-preview-msg">preview</h3>
+                </div>
             </div>
         </div>
         <div style="clear:both"></div>
     <% } %>
+
     <div class="wx-feed-error hide">
-        There was an error validating, please verify the information and try again
+        Sorry! We were not able to preview this content.  Please verify the information and try again.
     </div>
+
+    <br>
+
     <div>
-        <p class="lead">Please Enter a Form Title:</p>
+        <p class="lead">Title for this feature inside your app</p>
         <input type="text" value="<%- title %>" class="wx-edit-title" />
     </div>
     <div>
         <button class="wx-next-button">Preview</button>
         <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
-        <button class="wx-finish-button">Finish</button>
+        <button class="wx-finish-button success">Save and add to app</button>
         <a class="close-reveal-modal">&#215;</a>
     </div>
 </script>

@@ -136,7 +136,7 @@ jQuery(document).ready(function(){
 	        	jQuery('#finish-crop').one('click', function() {
 	        		console.log('Saving cropped image...');
 	        		// console.log(coords);
-
+	        		
 	        		jQuery.ajax({
     					url: ajaxurl,
     					type: 'POST',
@@ -148,9 +148,10 @@ jQuery(document).ready(function(){
     					},
     					success: function(msg) {
     						jQuery("#" + image_id).attr("src", msg);
-	        	        	jQuery('input[name=' + input_name + ']').attr('value', msg);
-	        	        	Backbone.Events.trigger( 'image:change', jQuery('input[name=' + input_name + ']') );
-	        	        	//jQuery('#wx-jcrop-dialog').dialog('close');
+
+    						var hidden = jQuery('input[name=' + input_name + ']');
+	        	        	hidden.attr('value', msg);
+	        	        	Backbone.Events.trigger( 'image:change', hidden );
     					},
     					error: function(v,msg) {
     						alert('There was an error saving the image, please try again');

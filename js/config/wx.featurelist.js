@@ -10,7 +10,7 @@
     { "featureName": "WordpressDirectory", "name": "Add to directory", "filterBy": "weever_list_show_wordpress_content", "iconId": 11, "rel": "hide" },
     { "featureName": "WordpressPage", "name": "Make a new page", "filterBy": "weever_list_show_wordpress_content", "rel": "page" },
     { "featureName": "Coupon", "name": "Make a coupon", "filterBy": "weever_list_show_wordpress_content", "rel": "page", "includeClass": "wx-add-new-coupon" },
-    { "featureName": "Twitter", "name": "Add Twitter stream", "iconId": 21 },
+    { "featureName": "Twitter", "name": "Add Twitter feed", "iconId": 21 },
     { "featureName": "FacebookWall", "name": "Add Facebook wall", "iconId": 16 },
     { "featureName": "Youtube", "name": "Add YouTube", "iconId": 18 },
     { "featureName": "Vimeo", "name": "Add Vimeo" },

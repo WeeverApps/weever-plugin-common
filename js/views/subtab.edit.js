@@ -179,7 +179,7 @@ wxApp = wxApp || {};
 
 		hideValidateFeed: function() {
 			this.$('.wx-feed-error').hide();
-			this.$('.wx-validate-feed').html('<img src="http://placehold.it/515x315&text=Preview">');
+			this.$('.wx-validate-feed').html('<div class="panel wx-preview"><h3 class="wx-preview-msg">preview</h3></div>');
 			this.$('.wx-next-button').show();
 			this.$('.wx-finish-button').hide();
             this.$('.wx-edit-title-div').hide();
