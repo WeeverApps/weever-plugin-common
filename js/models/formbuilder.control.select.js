@@ -11,6 +11,7 @@ wxApp = wxApp || {};
 			title: 'Dropdown',
 			allowAdditional: '',
 			allowAdditionalClass: '',
+			requiredClass: '',
 			name: ''
 		},
 
