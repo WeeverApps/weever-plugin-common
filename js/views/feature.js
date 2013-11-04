@@ -11,11 +11,9 @@ wxApp = wxApp || {};
             this.model.bind( 'change', this.render, this );
         },
 
-        // TODO - Move click code to here.
-        //events: {
-        //    'dblclick .wx-nav-icon': 'editIcon',
-        //    'dblclick .wx-nav-label': 'editTitle'
-        //},
+        events: {
+            'click .wx-add-feature': 'addFeature',
+        },
 
         render: function() {
             // Set default tier
@@ -29,6 +27,12 @@ wxApp = wxApp || {};
         	}
 
             return this;
+        },
+
+        addFeature: function(ev) {
+            console.log('right');
+            console.log( this.model.get('tierRequired') );
+            wxApp.appView.createFeatureView(ev.currentTarget.id.replace('add-', ''));
         }
     });
 })(jQuery);

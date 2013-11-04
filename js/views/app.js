@@ -44,7 +44,6 @@ wxApp = wxApp || {};
         },
 
         events: {
-            'click .wx-add-feature': 'addFeature',
             'click #preview-refresh': 'refreshAppPreview'
         },
 
@@ -74,10 +73,6 @@ wxApp = wxApp || {};
         onDropOnAddArea: function(event, ui) {
             // Using global wxApp.appView since this is the dropped on li
             wxApp.appView.createFeatureView($(ui.draggable).attr('id').replace('add-', ''));
-        },
-
-        addFeature: function(ev) {
-            this.createFeatureView(ev.currentTarget.id.replace('add-', ''));
         },
 
         createFeatureView: function(id, parentId) {
