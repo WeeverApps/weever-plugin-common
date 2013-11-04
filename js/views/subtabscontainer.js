@@ -31,6 +31,8 @@ wxApp = wxApp || {};
         },
 
         render: function() {
+            console.log('tpl');
+            console.log(this.model);
             this.$el.html( this.subTabContainerTpl( this.model.toJSON() ) );
             this.$('#ContainerEditModal').html( this.containerEditContentTpl( this.model.toJSON() ) );
             this.$('.adminlist').append( this.subTabsView.render().el );
