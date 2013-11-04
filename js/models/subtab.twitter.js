@@ -14,10 +14,7 @@ var wxApp = wxApp || {};
                 type: 'twitterUser',
                 content: 'twitterUser',
                 layout: 'list',
-                config: {},
-                helpTitle: 'How do I Tweet?',
-                helpBody: '<p>You just need to <strong>focus</strong>!</p>' + 
-                    '<p>You can do it!</p>'
+                config: {}
             }
         )
     });

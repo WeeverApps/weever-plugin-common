@@ -575,6 +575,11 @@
   margin-bottom: 1.25em;
   /* matches default */
 }
+/* line 26, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-global.scss */
+#appbuilder #interface .section-container.auto > section > .content > button:last-child,
+#appbuilder #interface .section-container.auto > section > .content > a.button:last-child {
+  padding-bottom: .75em;
+}
 /* line 11, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/platforms/appbuilder-wordpress/_wx-appbuilder-wordpress.scss */
 #appbuilder #interface {
   margin-left: 0;
