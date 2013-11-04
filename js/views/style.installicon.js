@@ -23,13 +23,8 @@ wxApp = wxApp || {};
         },
 
         changeSave: function(e) {
-            var me = this;
-            // var txt = $(e.currentTarget);
-            var id = 'install_prompt';
-            var loading_id = this.showLoadingGif( 'install_prompt' );
             this.performSave( function(data) {
                 console.log('Saved!');
-                me.hideLoadGif( id, loading_id );
             } );
         },
 

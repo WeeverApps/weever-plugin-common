@@ -11,6 +11,7 @@ wxApp = wxApp || {};
             icon_id: 1,
             type: null,
             layout: null,
+            tabLayout: null,
             typeDescription: '',
             published: 1,
             config: {},

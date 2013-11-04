@@ -21,12 +21,20 @@ wxApp = wxApp || {};
         }
     });
 
-    wxApp.featureList = new wxApp.FeatureList();
+    // We need to ensure that the tiering information for the current account is set,
+    // so let's make sure that's fetched prior to loading the features.
+    wxApp.account = new wxApp.Account();
+    wxApp.account.fetch( function() {
+        console.log('Account info fetched.');
 
-    // Grab the data and kick things off
-    wxApp.featureList.collection.fetch({ 
-        url: '../wp-content/plugins/wp_weeverapps/static/js/config/wx.featurelist.js', 
-        success: function(result) { console.log('features fetched'); }, 
-        error: function() { console.log('Could not load feature list.') } 
+        wxApp.featureList = new wxApp.FeatureList();
+
+        // Grab the data and kick things off
+        wxApp.featureList.collection.fetch({ 
+            url: '../wp-content/plugins/wp_weeverapps/static/js/config/wx.featurelist.js', 
+            success: function(result) { console.log('features fetched'); }, 
+            error: function() { console.log('Could not load feature list.') } 
+        });
     });
+
 })(jQuery);

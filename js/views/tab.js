@@ -72,6 +72,12 @@ wxApp = wxApp || {};
             // Make sure we're on the right tab first
             $('a[href="#panel2"]').click();
 
+            // Highlight the currently selected tab.
+            $('.wx-tab button').addClass( 'secondary' );
+            this.$('button').removeClass( 'secondary' );
+
+            // It might be a good idea to scroll the 'Edit' tab to the same position as the 'build' tab.
+
             // Now get the edit view.
             this.subTabsContainerView = new wxApp.SubTabsContainerView({ model: this.model });
             this.subTabsContainerView.tabView = this;
