@@ -8,7 +8,7 @@ wxApp = wxApp || {};
 		model: wxApp.FormBuilderControlCheckbox,
 
 		initialize: function() {
-			console.log('radio group collection init');
+			console.log('checkbox group collection init');
 			this.on( 'add', this.onAdd );
 		},
 

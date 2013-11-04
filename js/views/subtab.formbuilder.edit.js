@@ -454,7 +454,7 @@ wxApp = wxApp || {};
 
 	    addRadioGroupWithProperties: function( properties ) {
 			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
-			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
+		    var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
 				model: radioFieldset
 			});
 
@@ -469,7 +469,7 @@ wxApp = wxApp || {};
 			if ( properties.radioGroup == undefined || properties.radioGroup.length == 0 ) {
 				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
 			} else {
-				for (var i = properties.radioGroup.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlRadio( properties.radioGroup[i] );
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
@@ -483,7 +483,7 @@ wxApp = wxApp || {};
 		},
 
 		addCheckboxGroupWithProperties: function( properties ) {
-			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset();
+			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset( properties );
 			var checkboxFieldsetView = new wxApp.FormBuilderControlCheckboxFieldsetView({
 				model: checkboxFieldset
 			});
@@ -499,7 +499,7 @@ wxApp = wxApp || {};
 			if ( properties.checkboxGroup == undefined || properties.checkboxGroup.length == 0 ) {
 				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox() );
 			} else {
-				for (var i = properties.checkboxGroup.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlCheckbox( properties.checkboxGroup[i] );
 					checkboxFieldset.get( 'checkboxGroup' ).add( option );
 				};
@@ -523,7 +523,7 @@ wxApp = wxApp || {};
 		},
 
 		addSelectWithProperties: function( properties ) {
-			var select = new wxApp.FormBuilderControlSelect();
+			var select = new wxApp.FormBuilderControlSelect( properties );
 			var selectView = new wxApp.FormBuilderControlSelectView({
 				model: select
 			});
@@ -543,7 +543,7 @@ wxApp = wxApp || {};
 			if ( properties.optionGroup == undefined || properties.optionGroup.length == 0 ) {
 				select.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
 			} else {
-				for (var i = properties.optionGroup.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlOption( properties.optionGroup[i] );
 					select.get('optionGroup').add( option );
 				};

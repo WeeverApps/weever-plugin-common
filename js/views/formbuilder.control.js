@@ -13,6 +13,7 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-max-input': 'setMax',
 			'blur .wx-form-builder-value-input': 'setValue',
 			'blur .wx-form-builder-step-input': 'setStep',
+			'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-autocomplete': 'setAutocomplete',
 			'click .wx-form-builder-control-checked': 'setChecked',
 			'click .wx-form-builder-control-selected': 'setSelected',
@@ -78,6 +79,14 @@ wxApp = wxApp || {};
 		setStep: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'step', $( ev.currentTarget ).val() );
 			this.getInput().attr( 'step', $( ev.currentTarget ).val() );
+		},
+
+		setName: function( ev ) {
+			var $me = $( ev.currentTarget );
+			if ( $me.val() !== '' )
+				this.model.get( 'attributes' ).set( 'name', $me.val() );
+
+			this.getInput().attr( 'name', $me.val() );
 		},
 
 		setAutocomplete: function( ev ) {

@@ -10,7 +10,8 @@ wxApp = wxApp || {};
 			control: 'select',
 			title: 'Dropdown',
 			allowAdditional: '',
-			allowAdditionalClass: ''
+			allowAdditionalClass: '',
+			name: ''
 		},
 
 		initialize: function() {
