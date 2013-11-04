@@ -6074,6 +6074,13 @@
   font-weight: normal;
   float: right;
 }
+@media only screen and (max-width: 767px) {
+  /* line 38, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-features.scss */
+  #appbuilder #interface #toptabs li {
+    display: block;
+    float: none;
+  }
+}
 /* line 37, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-phone.scss */
 #appbuilder #interface #wx-phone-bg {
   width: auto;
