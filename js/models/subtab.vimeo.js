@@ -5,7 +5,7 @@ wxApp = wxApp || {};
     wxApp.VimeoSubTab = wxApp.SubTab.extend({
         default_icon_id: 35,
         allowedLayouts: ['list'],
-        typeDescription: 'Vimeo',
+        typeDescription: 'Vimeo Videos',
 
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {

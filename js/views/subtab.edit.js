@@ -63,6 +63,10 @@ wxApp = wxApp || {};
                     this.$('.wx-edit-title-div').hide();
             }
 
+            // Put the cursor in the first text box
+            // zub = this.$el;
+            // this.$('input[type=text]:first').focus();
+
             // Once the reveal modal is open...
             var me = this.$el;
             meeeee = me;
@@ -78,6 +82,8 @@ wxApp = wxApp || {};
                     height = 315;
 
                 me.find('div.content').height( height );
+
+                me.find('input[type=text]:first').focus();
             });
 
             return this;

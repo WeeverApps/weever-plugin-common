@@ -1,7 +1,12 @@
 <script type="text/template" id="wordpresssearchterm-subtab-edit-template">
+
+    <p>Display matching Wordpress posts for a predefined search term inside your app.</p>
+
     <label for='wx-searchterm-value' id='wx-searchterm-url' class='wx-social-label  wx-jqui-label'>
-        Enter a search term to add matching WordPress posts to your app
+        Search Wordpress for posts matching
     </label>
+
     <input type='text' value='<%- config.search_value %>' id="wx-searchterm-value" class='wx-edit-input' placeholder='' name='component_behaviour' />
     <input type='hidden' class='wx-wordpress-siteurl' value="<?php echo esc_attr( site_url('index.php?feed=r3s') ); ?>" />
+
 </script>

@@ -37,7 +37,7 @@ wxApp = wxApp || {};
                             '<p>Create a &ldquo;Near to me &rdquo; feature with Wordpress content in exactly the same way you would create a Wordpress-based map.</p>' +
                             '<p>The difference is how the posts display.  &ldquo;Near to me&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
                             '<p><b>Wordpress Search</b></p>' +
-                            '<p>Add a blog-style list of Wordpress posts matching a predefined search term.</p>'
+                            '<p>Display Wordpress posts matching a predefined search term.</p>'
 
             }
         )

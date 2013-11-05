@@ -1,14 +1,21 @@
 <script type="text/template" id="youtube-subtab-edit-template">
+
+    <p>Showcase videos from <a target="_blank" href="http://youtube.com">Youtube</a> in your app.</p>
+
     <div>
-        <input type="radio" class="wx-content-radio" name="youtube-content" id="wx-youtube" value="youtube" <% if ( content == 'youtube' ) { %>checked<% } %> /> <label for="wx-youtube">Youtube User / Channel</label>
-        <input type="radio" class="wx-content-radio" name="youtube-content" id="wx-youtube-playlist" value="youtubePlaylist" <% if ( content == 'youtubePlaylist' ) { %>checked<% } %> /> <label for="wx-youtube-playlist">Youtube Playlist</label>
+        <label for="wx-youtube"><input type="radio" class="wx-content-radio" name="youtube-content" id="wx-youtube" value="youtube" <% if ( content == 'youtube' ) { %>checked<% } %> /> Youtube User / Channel</label>
+        <label for="wx-youtube-playlist"><input type="radio" class="wx-content-radio" name="youtube-content" id="wx-youtube-playlist" value="youtubePlaylist" <% if ( content == 'youtubePlaylist' ) { %>checked<% } %> /> Youtube Playlist</label>
     </div>
-    <label for='wx-youtube-input' id='wx-youtube-url' class='wx-social-label wx-jqui-label'></label>
+
+    <br>
+
+    <label for='wx-youtube-input' id='wx-youtube-url' class='wx-social-label wx-jqui-label'>Web address for a Youtube channel or playlist</label>
     <% if ( typeof(config.url) != 'undefined' ) { %>
     	<input type='text' value='<%- config.url %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
     <% } else if ( content == 'youtubePlaylist' ) { %>
     	<input type='text' value='http://www.youtube.com/playlist?list=<%- config.playlist_id %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
     <% } else { %>
     	<input type='text' value='http://youtube.com/<%- config.user_id %>' id="wx-youtube-input" class='wx-dialog-input wx-edit-input' name='component_behaviour' placeholder='' />
-    <% } %> 
+    <% } %>
+
 </script>
