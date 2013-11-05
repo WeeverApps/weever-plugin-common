@@ -215,10 +215,12 @@
       if (css) {
         // Set width to 80% of the screen size
         var windowSize = $(window).width();
+        var bodySize = $('#appbuilder').width();
         var modalWidth = Math.round( windowSize * 0.8 );
+        var sizeOffset = windowSize - bodySize;
         css.width = modalWidth + 'px';
         // Set left property to properly centre the pop up.
-        css.left = (((windowSize - modalWidth) / 2) - 38.5) + 'px';
+        css.left = (((windowSize - modalWidth) / 2) - sizeOffset) + 'px';
         css.margin = 0;
 
         if (el.parent('body').length === 0) {
