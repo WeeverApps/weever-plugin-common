@@ -1,10 +1,15 @@
 <script type="text/template" id="vimeo-subtab-edit-template">
+
+    <p>Showcase videos from <a target="_blank" href="http://vimeo.com">Vimeo</a> in your app.</p>
+
     <label for='wx-vimeo-user-value' id='wx-facebook-url' class='wx-social-label  wx-jqui-label'>
-        Enter a Vimeo User or Channel URL, e.g. <b>https://vimeo.com/user1234</b>
+        Web address of a Vimeo channel or user
     </label>
+
     <% if ( typeof(config.user_id) != 'undefined' ) { %>
     	<input type='text' value='http://vimeo.com/<%- config.user_id %>' class='wx-dialog-input wx-edit-input' id='wx-vimeo-user-value' name='component_behaviour' placeholder='' />
 	<% } else { %>
     	<input type='text' value='<%- config.url %>' class='wx-dialog-input wx-edit-input' id='wx-vimeo-user-value' name='component_behaviour' placeholder='http://vimeo.com/user1234' />
 	<% } %>
+
 </script>
