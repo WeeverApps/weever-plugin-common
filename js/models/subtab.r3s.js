@@ -4,13 +4,13 @@ wxApp = wxApp || {};
 (function($){
     wxApp.r3sSubTab = wxApp.SubTab.extend({
         default_icon_id: 6,
-        typeDescription: 'R3S Feed',
+        typeDescription: 'R3S Object',
         validateFeed: false,
         allowedLayouts: ['list'],
 
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
-                title: 'R3S Feed',
+                title: 'R3S Object',
                 icon_id: 6,
                 type: 'r3s',
                 content: 'htmlR3s',

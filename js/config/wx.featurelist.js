@@ -24,7 +24,7 @@
     { "featureName": "WordpressContacts",   "name": "Add phone and email",                                                          "iconId": 34 },
     { "featureName": "Wufoo",               "name": "Add Wufoo Forms",                                                              "iconId": 30,    "tierRequired": 2 },
     { "featureName": "RSS",                 "name": "Add RSS feed",                                                                 "iconId": 1  },
-    { "featureName": "r3s",                 "name": "Add R3S stream",           "filterBy": "weever_list_r3s_dialog",               "iconId": 1  },
+    { "featureName": "r3s",                 "name": "Add R3S Object",           "filterBy": "weever_list_r3s_dialog",               "iconId": 1  },
     { "featureName": "Blogger",             "name": "Add Blogger",                                                                  "iconId": 6  },
     { "featureName": "google_plus",         "name": "Add Google+",              "includeClass": "wx-unavailable disabled",          "iconId": 1  },
     { "featureName": "tumblr",              "name": "Add Tumblr",               "includeClass": "wx-unavailable disabled",          "iconId": 24 },
