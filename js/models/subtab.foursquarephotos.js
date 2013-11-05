@@ -14,7 +14,13 @@ var wxApp = wxApp || {};
                 type: 'foursquarePhotos',
                 content: 'foursquarePhotos',
                 layout: 'list',
-                config: { venue_id: 'http://foursquare.com/v/' }
+                config: { venue_id: 'http://foursquare.com/v/' },
+                helpBody: '<p><b>To find the web address of a Foursquare Venue:</b></p>' +
+                          '<p>1. Search the web for "Foursquare" and the name of the location.</p>' +
+                          '<p>2. Open the matching Foursquare venue page.</p>' +
+                          '<p>3. Copy the web address (url) of the venue page from your browser address bar.</p>' +
+                          '<p>Sharing live photos is a great way to engage event attendees or share info about a specific location.</p>'
+
             }
         )
     });

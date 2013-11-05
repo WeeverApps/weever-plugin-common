@@ -17,7 +17,7 @@
     { "featureName": "Map",                 "name": "Add a map marker",         "filterBy": "weever_list_show_wordpress_content",   "iconId": 20,    "rel": "map" },
     { "featureName": "Flickr",              "name": "Add Flickr",                                                                   "iconId": 19 },
     { "featureName": "PicasaAlbums",        "name": "Add Picasa",                                                                   "iconId": 17 },
-    { "featureName": "FoursquarePhotos",    "name": "Add Foursquare venue",                                                         "iconId": 25 },
+    { "featureName": "FoursquarePhotos",    "name": "Add Foursquare",                                                               "iconId": 25 },
     { "featureName": "FacebookAlbums",      "name": "Facebook photos",                                                              "iconId": 16 },
     { "featureName": "GoogleCalendar",      "name": "Add Google Calendar",                                                          "iconId": 29 },
     { "featureName": "FacebookEvents",      "name": "Add Facebook events",                                                          "iconId": 16 },
