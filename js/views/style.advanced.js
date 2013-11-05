@@ -36,7 +36,7 @@ wxApp = wxApp || {};
 
 		saveCss: function() {
 			var me = this;
-			this.$('#save_advanced').html('Saving...');
+			// this.$('#save_advanced').html('Saving...');
 
 			// Save CSS.
 			var styles = this.$('#css_styles').val();
@@ -46,7 +46,7 @@ wxApp = wxApp || {};
             var params = { css: innerParams };
 
             wx.makeApiCall('design/set_css', params, function(data) {
-                me.$('#save_advanced').html('Saved!');
+                // me.$('#save_advanced').html('Saved!');
                 setTimeout( function() { wx.refreshAppPreview(); }, 500);
             });
         },
