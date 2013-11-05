@@ -31,6 +31,7 @@ wxApp = wxApp || {};
                 } );
             }
             this.$el.data( 'backbone-view', this );
+            this.$el.addClass( this.model.get('id') );
             this.$el.attr('id', this.model.get('id') + 'TabID');
             return this;
         },
@@ -74,7 +75,10 @@ wxApp = wxApp || {};
 
             // Highlight the currently selected tab.
             $('.wx-tab button').addClass( 'secondary' );
-            this.$('button').removeClass( 'secondary' );
+            // Since the button is duplicated on the Build and Edit tabs, we can't just do this:
+            // this.$('button').removeClass( 'secondary' );
+            // We instead have to select by the css class
+            $('div.' + this.model.get('id') + ' button').removeClass( 'secondary' );
 
             // It might be a good idea to scroll the 'Edit' tab to the same position as the 'build' tab.
 
