@@ -218,7 +218,7 @@
         var modalWidth = Math.round( windowSize * 0.8 );
         css.width = modalWidth + 'px';
         // Set left property to properly centre the pop up.
-        css.left = (((windowSize - modalWidth) / 2) - 166) + 'px';
+        css.left = (((windowSize - modalWidth) / 2) - 38.5) + 'px';
         css.margin = 0;
 
         if (el.parent('body').length === 0) {
