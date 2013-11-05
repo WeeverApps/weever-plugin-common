@@ -83,6 +83,7 @@ wxApp = wxApp || {};
 
                 me.find('div.content').height( height );
 
+                // Put the cursor in the first text box
                 me.find('input[type=text]:first').focus();
             });
 
