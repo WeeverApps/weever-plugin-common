@@ -19,6 +19,10 @@ CSS_COMBINED_FILE="$CSS_DIR/combined.css"
 
 echo 'Compressing JavaScripts...'
 
+# 0. Include base files
+vendorFiles=(vendor/jquery-ui.custom.min.js vendor/underscore.min.js vendor/backbone.min.js weever.js modernizr.min.js jscolor/jscolor.js vendor/zepto.js account.js wx.js config/wx.features.js wx.list.wordpress.ini.js swipe.js fileuploader.js theme.js jquery.imgareaselect.js list.js)
+foundationFiles=(foundation/foundation.js foundation/foundation.*.js)
+
 # 1. Get an array of all of the model javascripts.
 allModels=(models/*.js)
 # 2. Create a new array of just the items that need to be moved to the front.
