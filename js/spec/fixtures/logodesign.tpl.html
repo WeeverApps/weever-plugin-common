@@ -23,43 +23,43 @@
 
     <!-- if logo type = text -->
     <div id="logoText" style="display: <%- titlebar.type == 'text' ? "block":"none" %>">
-    <div class="row collapse">
-        <div class="small-8 columns">
-            <input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="logo-design" />
+        <div class="row collapse">
+            <div class="small-8 columns">
+                <input type="text" id="titlebar_title" maxlength="35" value="<%- titlebar.text %>" class="logo-design" />
+            </div>
+            <div class="small-2
+                columns">
+                <a href="#" onclick="return false;" class="button secondary prefix">Save</a>
+            </div>
+            <div class="small-2 columns loading">
+                <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            </div>
         </div>
-        <div class="small-2
-            columns">
-            <a href="#" onclick="return false;" class="button secondary prefix">Save</a>
-        </div>
-        <div class="small-2 columns loading">
-            <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
-        </div>
-    </div>
     </div>
 
     <!-- if logo type = image -->
     <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
-    <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?> <span style="font-weight:normal; text-transform: lowercase">&ndash; 320 x 88px</span><p>
-    <div class="row">
-        <div class="large-7 columns">
-            <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />
-            <br>
-            <br>
-            <div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" img_width="320" img_height="88" class="wx-theme-file-uploader">
-                <noscript>
-                    <p>Please enable JavaScript to use the file uploader.</p>
-                    <!-- or put a simple form for upload here -->
-                    <img src="" id="wx-file-load" />
-                </noscript>
+        <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?> <span style="font-weight:normal; text-transform: lowercase">&ndash; 320 x 88px</span><p>
+        <div class="row">
+            <div class="large-7 columns">
+                <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />
+                <br>
+                <br>
+                <div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" img_width="320" img_height="88" class="wx-theme-file-uploader">
+                    <noscript>
+                        <p>Please enable JavaScript to use the file uploader.</p>
+                        <!-- or put a simple form for upload here -->
+                        <img src="" id="wx-file-load" />
+                    </noscript>
+                </div>
+                <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" name="titlebar_logo_live" />
+                <br>
+                <br>
             </div>
-            <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" name="titlebar_logo_live" />
-            <br>
-            <br>
+            <div class="large-5 columns">
+                <p>&nbsp;</p>
+            </div>
         </div>
-        <div class="large-5 columns">
-            <p>&nbsp;</p>
-        </div>
-    </div>
     </div>
 
     <!-- start - color pickers -->
