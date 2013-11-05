@@ -32,15 +32,15 @@ wxApp = wxApp || {};
         addFeature: function(ev) {
             var featureName = ev.currentTarget.id.replace('add-', '');
 
-            if ( this.model.get('tierRequired') > parseFloat( wxApp.account.get( 'tier_raw' ) ) ) {
-
-                // The current user doesn't have access to this feature. Prompt them to upgrade.
-                $('#wx-edit-area-' + featureName).html( $('#please-upgrade').html() );
-
-            } else if (this.$('button').hasClass( 'wx-unavailable' )) {
+            if (this.$('button').hasClass( 'wx-unavailable' )) {
 
                 // We don't have this feature yet :(
                 $('#wx-edit-area-' + featureName).html( $('#please-subscribe').html() );
+
+            } else if ( this.model.get('tierRequired') > parseFloat( wxApp.account.get( 'tier_raw' ) ) ) {
+
+                // The current user doesn't have access to this feature. Prompt them to upgrade.
+                $('#wx-edit-area-' + featureName).html( $('#please-upgrade').html() );
 
             } else {
 
