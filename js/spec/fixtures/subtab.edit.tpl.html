@@ -41,7 +41,7 @@
                 </section>
             <% } %>
             <section <% if (validateFeed === false) { %>class="active"<% } %>>
-                <p class="title" data-section-title><a href="#panel2">Choose an icon</a></p>
+                <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
                 <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
                         <%= _.template( jQuery('#icon-selector').html(), icon_id, {variable: 'icon_id'}) %>
@@ -53,10 +53,11 @@
                 <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
                     <%= helpBody %>
                     <!-- start - standard help text -->
-                    <p><b>Need help?</b></p>
-                    <p>View our <a target="_blank" href="http://suppport.weeverapps.com">support forum</a> for answers.</p>
-                    <p>Paid subscription plans have access to <b>priority ticket support</b> and a faster response time.</p>
-                    <a target="_blank" class="button success">View plans and pricing</a>
+                    <p><b>Support</b></p>
+                    <p>Our <a target="_blank" href="http://suppport.weeverapps.com">support forum</a> has answers to common questions.
+                       Pro, premium and reseller level app subscriptions have access to <a target="_blank" href="http://support.weeverapps.com/registration">support tickets</a> and faster response times.</p>
+                    <a target="_blank" class="button">View plans and pricing</a>
+                    <br>
                     <!-- endof - standard help text -->
 
                 </div>
