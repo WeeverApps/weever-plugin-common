@@ -1,0 +1,18 @@
+<script type="text/template" id="form-builder-finish">
+	<div id="wx-form-builder-finish-modal" class="">
+		<p class="lead">Please select an ID field.</p>
+		<p>
+			The value that your user fills this field in with will be used to associate them with images and other file uploads.
+			We recommend selecting an Email field, as this will be unique on a per-user basis.
+		</p>
+		<% var model; for ( var i = 0; i < collection.models.length; i++ ) { %>
+			<% model = collection.models[i] %>
+			<% if ( model.get( 'control' ) != 'input' ) continue %>
+			<% if ( model.get( 'attributes' ).get( 'type' ) == 'file' ) continue %>
+			<label><input type="radio" name="wx-form-builder-id-field" value="<%- i %>" /><%- model.get( 'label' ) %></label>
+		<% }; %>
+		<p class="lead">Please enter a message that will be displayed when the file upload completes.</p>
+		<% var onUpload = this.model.get( 'config' ).onUpload; %>
+		<input type="text" class="wx-form-builder-upload-message" value="<%- onUpload.message %>" />
+	</div>
+</script>

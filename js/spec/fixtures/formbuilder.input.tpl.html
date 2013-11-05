@@ -5,6 +5,7 @@
 		<label class="wx-form-builder-edit-label" title="Click here to edit the title!"><%- label %></label>&nbsp;<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 		<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" />
 	</fieldset>
+	<input class="wx-form-builder-name-input" type="text" placeholder="name" value="<%- attributes.attributes.name %>" />
 	<input class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" type="text" placeholder="placeholder" value="<%- attributes.attributes.placeholder %>" />
 	<input type="number" class="wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.attributes.min %>"/>
 	<input type="number" class="wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.attributes.max %>"/>

@@ -4,8 +4,9 @@ wxApp = wxApp || {};
 (function($){
     wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneSelector: '.wx-form-builder-preview',
-
         subTabEditTplSelector: '#form-builder-subtab-edit-template',
+	    hasCalledFinish: false,
+	    finishView: null,
 
         initializeEvents: function() {
             this.events = _.extend({}, this.genericEvents, this.events);
@@ -16,29 +17,22 @@ wxApp = wxApp || {};
 			// Call parent's initialize() function
 			this.constructor.__super__.initialize.apply( this, arguments );
 			console.log('FormBuilderSubTabEditView initialize');
-			
-			if (this.model.get( 'config' ).formElements == undefined) {
-				
-				// New form; set the collection
-				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
-			} else {
-
+			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
+				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
+			}
+			else {
 				// Load currently existing form elements.
 				console.log( this.model.get( 'config' ).formElements );
 				var elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
 
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
-				for (var i = elementsJson.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < elementsJson.length; i++ ) {
 
 					if ( elementsJson[i].control === 'div' ) {
 
 						this.addInfoWithProperties( elementsJson[i] );
-
-					} else if ( elementsJson[i].control === 'signature' ) {
-
-						this.addSignature();
 
 					} else if ( elementsJson[i].control === 'textarea' ) {
 
@@ -61,14 +55,42 @@ wxApp = wxApp || {};
 						this.addInput( elementsJson[i] );
 
 					}
-				};
+				}
 			}
+
+			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
+				this.model.get( 'config' ).formActions = new Backbone.Collection();
+			}
+			else {
+				// Load currently existing form actions.
+				console.log( this.model.get( 'config' ).formActions );
+				var actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
+				this.model.get( 'config' ).formActions = new Backbone.Collection();
+
+				for ( var i = 0; i < actionsJson.length; i++ ) {
+					if ( actionsJson[i].method == 'docusign' ) {
+						this.addDocusignAction( null, actionsJson[i] );
+					}
+					else if ( actionsJson[i].method == 'post' ) {
+						this.addPostAction( null, actionsJson[i] );
+					}
+					else if ( actionsJson[i].method == 'email' ) {
+						this.addEmailAction( null, actionsJson[i] );
+					}
+				}
+			}
+
+			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
+				this.model.get( 'config' ).onUpload = JSON.parse( this.model.get( 'config' ).onUpload );
+			}
+
 		},
 
 		setModelFromView: function( model ) {
-			console.log( 'setModelFromView' );
-//			model.setConfig( 'formElements', JSON.stringify( this.model.get( 'config' ).formElements ) );
-			console.log( model.toJSON() );
+//			console.log( 'setModelFromView' );
+//			console.log( model );
+//			model = model.toJSONrecursive();
+//			console.log( model );
 			return model;
 		},
 
@@ -90,20 +112,127 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-range-input': 'addRangeInput',
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
-			'click .wx-form-builder-add-signature': 'addSignature',
-			'click .wx-form-builder-add-custom-action': 'addCustomAction',
-			'click .wx-form-builder-add-email-action': 'addEmailAction'
-//			,
-//			'click .wx-finish-button': 'save'
+			'click .wx-form-builder-add-docusign-action': 'addDocusignAction',
+			'click .wx-form-builder-add-post-action': 'addPostAction',
+			'click .wx-form-builder-add-email-action': 'addEmailAction',
+	        'sortable-update': 'sortableUpdate'
 		},
 
-		addEmailAction: function() {
+	    sortableUpdate: function( event, model, position ) {
+		    console.log( 'sortableUpdate' );
+		    var formElements = this.model.get( 'config' ).formElements;
+
+		    formElements.remove( model );
+
+		    formElements.each( function( model, index ) {
+			    var ordinal = index;
+			    if ( index >= position ) {
+				    ordinal += 1;
+			    }
+			    model.set( 'ordinal', ordinal );
+		    });
+
+		    model.set( 'ordinal', position );
+		    formElements.add( model, {at: position} );
+	    },
+
+	    /**
+	     * Override __super__.finish()
+	     */
+	    finish: function() {
+		    console.log( 'subtab.formbuilder.edit.finish()' );
+		    console.log( this );
+
+		    var hasUpload = false,
+			    formElements = this.model.get( 'config' ).formElements,
+			    formActions = this.model.get( 'config' ).formActions,
+
+			    /**
+			     * Should be called using .call( this ) or .apply( this ) so that the scope remains the same
+			     */
+		        addFinishView = function() {
+				    this.finishView = new wxApp.FormBuilderFinishView({
+					    model: this.model
+				    });
+				    this.$( this.previewPaneSelector ).append( this.finishView.render().el );
+	//			    $( 'body' ).append( finishView.render().el );
+			    };
+
+		    console.log( formElements );
+		    console.log( formActions );
+
+		    // Check for an upload element
+		    var model = {};
+		    for ( var i = 0; i < formElements.length; i++ ) {
+			    model = formElements.at( i );
+			    if ( 'input' == model.get( 'control' ) && 'file' == model.get( 'attributes' ).get( 'type' ) ) {
+				    hasUpload = true;
+				    break;
+			    }
+		    }
+
+		    // Call super and exit if an index has already been identified
+		    if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
+			    this.constructor.__super__.finish.apply( this );
+			    return;
+		    }
+
+		    // Select index
+		    if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
+			    addFinishView.apply( this );
+			    this.hasCalledFinish = true;
+			    return;
+		    }
+
+		    // Re-add finish view in case elements have changed
+		    if ( this.hasCalledFinish ) {
+			    this.finishView.remove();
+			    addFinishView.apply( this );
+		    }
+
+	    },
+
+	    addDocusignAction: function( event, properties ) {
+		    console.log( 'addDocusignAction' );
+
+		    var action;
+		    if ( typeof properties != 'undefined' ) {
+			    action = this.addCustomAction( properties );
+		    }
+		    else {
+			    action = this.addCustomAction( { method : 'docusign' } );
+		    }
+
+		    return action;
+	    },
+
+	    addEmailAction: function( event, properties ) {
 			console.log( 'addEmailAction' );
 
-			var action = this.addCustomAction( { method : 'email' } );
+		    var action;
+		    if ( typeof properties != 'undefined' ) {
+			    action = this.addCustomAction( properties );
+		    }
+		    else {
+			    action = this.addCustomAction( { method : 'email' } );
+		    }
 
 			return action;
 		},
+
+	    addPostAction: function( event, properties ) {
+		    console.log( 'addPostAction' );
+
+		    var action;
+		    if ( typeof properties != 'undefined' ) {
+			    action = this.addCustomAction( properties );
+		    }
+		    else {
+			    action = this.addCustomAction( { method : 'post' } );
+		    }
+
+		    return action;
+	    },
 
 		addCustomAction: function( customAction ) {
 			console.log( 'addCustomAction' );
@@ -117,7 +246,8 @@ wxApp = wxApp || {};
 			});
 			this.$( this.previewPaneSelector ).append( actionView.render().el );
 
-			this.model.get( 'config' ).formElements.push( action );
+//			this.model.get( 'config' ).formElements.push( action );
+			this.model.get( 'config' ).formActions.push( action );
 			return action;
 		},
 
@@ -303,16 +433,6 @@ wxApp = wxApp || {};
 
 		},
 
-		addSignature: function() {
-			var signature = new wxApp.FormBuilderControlSignature();
-			var signatureView = new wxApp.FormBuilderControlSignatureView({
-				model: signature
-			});
-			this.$( this.previewPaneSelector ).append( signatureView.render().el );
-//			this.model.get( 'controls' ).push( signature );
-			this.model.get( 'config' ).formElements.push( signature );
-		},
-
 		addTextarea: function() {
 			this.addTextareaWithProperties( {} );
 		},
@@ -332,9 +452,9 @@ wxApp = wxApp || {};
 			this.addRadioGroupWithProperties( {} );
 		},
 
-		addRadioGroupWithProperties: function( properties ) {
+	    addRadioGroupWithProperties: function( properties ) {
 			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
-			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
+		    var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
 				model: radioFieldset
 			});
 
@@ -349,7 +469,7 @@ wxApp = wxApp || {};
 			if ( properties.radioGroup == undefined || properties.radioGroup.length == 0 ) {
 				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
 			} else {
-				for (var i = properties.radioGroup.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlRadio( properties.radioGroup[i] );
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
@@ -363,7 +483,7 @@ wxApp = wxApp || {};
 		},
 
 		addCheckboxGroupWithProperties: function( properties ) {
-			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset();
+			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset( properties );
 			var checkboxFieldsetView = new wxApp.FormBuilderControlCheckboxFieldsetView({
 				model: checkboxFieldset
 			});
@@ -379,7 +499,7 @@ wxApp = wxApp || {};
 			if ( properties.checkboxGroup == undefined || properties.checkboxGroup.length == 0 ) {
 				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox() );
 			} else {
-				for (var i = properties.checkboxGroup.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlCheckbox( properties.checkboxGroup[i] );
 					checkboxFieldset.get( 'checkboxGroup' ).add( option );
 				};
@@ -403,7 +523,7 @@ wxApp = wxApp || {};
 		},
 
 		addSelectWithProperties: function( properties ) {
-			var select = new wxApp.FormBuilderControlSelect();
+			var select = new wxApp.FormBuilderControlSelect( properties );
 			var selectView = new wxApp.FormBuilderControlSelectView({
 				model: select
 			});
@@ -423,7 +543,7 @@ wxApp = wxApp || {};
 			if ( properties.optionGroup == undefined || properties.optionGroup.length == 0 ) {
 				select.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
 			} else {
-				for (var i = properties.optionGroup.length - 1; i >= 0; i--) {
+				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlOption( properties.optionGroup[i] );
 					select.get('optionGroup').add( option );
 				};
@@ -432,15 +552,6 @@ wxApp = wxApp || {};
 			// Add Select to control collection
 			this.model.get( 'config' ).formElements.push( select );
 		}
-//		,
-//
-//		save: function() {
-//			wx.log( 'formbuilder save' );
-//			wx.log( this.controls.toJSONrecursive() );
-//			wx.log( JSON.stringify( this.controls.toJSONrecursive() ) );
-//			wx.log( 'Form Objects: ' + this.controls.length );
-//			alert( JSON.stringify( this.controls.toJSONrecursive() ) );
-//		}
 
 	});
 })(jQuery);

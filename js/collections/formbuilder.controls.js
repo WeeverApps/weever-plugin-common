@@ -6,17 +6,17 @@ var wxApp = wxApp || {};
 	wxApp.FormBuilderCollection = Backbone.Collection.extend({
 		model: wxApp.FormBuilderControl,
 
-//		model: function(attrs, options) {
-//			console.log(attrs);
-//		},
-
 		initialize: function() {
 			console.log(this.toJSONrecursive());
 			this.on('add', this.onAdd);
 		},
 
-		onAdd: function() {
-			//console.log(this.toJSONrecursive());
+		onAdd: function( e ) {
+			$( '.wx-form-builder-preview' ).sortable({
+				stop: function( event, ui ) {
+					ui.item.trigger( 'sortable-drop', ui.item.index() );
+				}
+			});
 		}
 	});
 

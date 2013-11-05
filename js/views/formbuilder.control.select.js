@@ -9,6 +9,7 @@ wxApp = wxApp || {};
 		events: {
 			'click .wx-form-builder-edit-title': 'editTitle',
 			'blur .wx-form-builder-title-input': 'updateTitle',
+			'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-select-allow-multiple': 'toggleMultipleSelections',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl'
@@ -32,6 +33,12 @@ wxApp = wxApp || {};
 			console.log( 'deleteControl' );
 			this.remove();
 			this.model.destroy();
+		},
+
+		setName: function( ev ) {
+			var $me = $( ev.currentTarget );
+			if ( $me.val() !== '' )
+				this.model.get( 'attributes' ).set( 'name', $me.val() );
 		},
 
 		setAllowAdditional: function( ev ) {

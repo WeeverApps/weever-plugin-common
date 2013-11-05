@@ -15,17 +15,15 @@ wxApp = wxApp || {};
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
-				config: {}
+				config: {
+					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+					onUpload: {
+						message: 'Your upload has completed.'
+					}
+				}
 			}
 		)
-//		,
-//
-//		save: function( args ) {
-//			console.log( 'FormBuilderSubTab save' );
-//			wx.log( this.toJSONrecursive() );
-//			// Write to server
-//
-//		}
+
     });
 
 })(jQuery);

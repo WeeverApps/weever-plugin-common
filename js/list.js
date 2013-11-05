@@ -333,4 +333,8 @@ jQuery(document).ready(function() {
 	    		}, 600 );    	
     });
 
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> master

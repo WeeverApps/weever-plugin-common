@@ -8,7 +8,22 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'blur .wx-form-builder-docusign-username': 'updateUsername',
+				'blur .wx-form-builder-docusign-password': 'updatePassword',
+				'blur .wx-form-builder-docusign-returnUrl': 'updateReturnUrl'
 			});
+		},
+
+		updateUsername: function( ev ) {
+			this.model.set( 'username', $( ev.currentTarget ).val() );
+		},
+
+		updatePassword: function( ev ) {
+			this.model.set( 'password', $( ev.currentTarget ).val() );
+		},
+
+		updateReturnUrl: function( ev ) {
+			this.model.set( 'returnUrl', $( ev.currentTarget ).val() );
 		},
 
 		initialize: function() {

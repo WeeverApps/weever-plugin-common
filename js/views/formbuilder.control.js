@@ -13,13 +13,20 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-max-input': 'setMax',
 			'blur .wx-form-builder-value-input': 'setValue',
 			'blur .wx-form-builder-step-input': 'setStep',
+			'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-autocomplete': 'setAutocomplete',
 			'click .wx-form-builder-control-checked': 'setChecked',
 			'click .wx-form-builder-control-selected': 'setSelected',
 			'click .wx-form-builder-allow-multiple': 'setMultiple',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-required': 'setRequired',
-			'click .wx-form-builder-delete': 'deleteControl'
+			'click .wx-form-builder-delete': 'deleteControl',
+			'sortable-drop': 'sortableDrop'
+		},
+
+		sortableDrop: function( event, index ) {
+			console.log( 'sortableDrop' );
+			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
 		deleteControl: function() {
@@ -72,6 +79,14 @@ wxApp = wxApp || {};
 		setStep: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'step', $( ev.currentTarget ).val() );
 			this.getInput().attr( 'step', $( ev.currentTarget ).val() );
+		},
+
+		setName: function( ev ) {
+			var $me = $( ev.currentTarget );
+			if ( $me.val() !== '' )
+				this.model.get( 'attributes' ).set( 'name', $me.val() );
+
+			this.getInput().attr( 'name', $me.val() );
 		},
 
 		setAutocomplete: function( ev ) {
@@ -131,7 +146,7 @@ wxApp = wxApp || {};
 		},
 
 		getInput: function() {
-			$input = this.$('.wx-form-builder-' + this.model.get('attributes').get('type') + '-input');
+			var $input = this.$('.wx-form-builder-' + this.model.get('attributes').get('type') + '-input');
 			if ( $input.length == 0 ) {
 				// Must be a text area.
 				$input = this.$('.wx-form-builder-textarea');

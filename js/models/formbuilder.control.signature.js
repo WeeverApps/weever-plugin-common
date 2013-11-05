@@ -9,7 +9,10 @@ wxApp = wxApp || {};
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'signature',
-				label: 'Signature'
+				label: 'Signature',
+				username: '',
+				password: '',
+				returnUrl: ''
 			} );
 			return newDefaults;
 		},
