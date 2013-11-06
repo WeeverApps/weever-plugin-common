@@ -20,12 +20,7 @@ CSS_COMBINED_FILE="$CSS_DIR/combined.css"
 echo 'Compressing JavaScripts...'
 
 # 0. Include base files
-<<<<<<< HEAD
-vendorFiles=(vendor/jquery-ui.custom.min.js vendor/underscore.min.js vendor/backbone.min.js weever.js modernizr.min.js jscolor/jscolor.js vendor/zepto.js account.js wx.js config/wx.features.js wx.list.wordpress.ini.js swipe.js fileuploader.js theme.js jquery.imgareaselect.js list.js)
-foundationFiles=(foundation/foundation.js foundation/foundation.*.js)
-=======
 vendorFiles=(weever.js modernizr.min.js jscolor/jscolor.js vendor/zepto.js foundation/foundation.js foundation/foundation.*.js account.js wx.js config/wx.features.js wx.list.wordpress.ini.js swipe.js fileuploader.js theme.js list.js)
->>>>>>> 88c51bc21630d3e1f807b678fd90450a6f0e3274
 
 # 1. Get an array of all of the model javascripts.
 allModels=(models/*.js)
