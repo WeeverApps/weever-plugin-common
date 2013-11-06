@@ -4,8 +4,8 @@
 
 	<div>
 	    <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitterUser" <% if ( content == 'twitterUser' ) { %>checked<% } %>  /> Twitter User</label>
-	    <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitterHashTag" /> Twitter Hashtag</label>
-	    <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitter" <% if ( content == 'twitter' ) { %>checked<% } %> /> Twitter Search Term</label>
+	    <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitterHashTag" <% if ( content == 'twitter' && config.q.indexOf('#') == 0 ) { %>checked<% } %> /> Twitter Hashtag</label>
+	    <label><input type="radio" class="wx-content-radio" name="twitter-content" value="twitter" <% if ( content == 'twitter' && config.q.indexOf('#') == -1 ) { %>checked<% } %> /> Twitter Search Term</label>
 	</div>
 
     <br>
