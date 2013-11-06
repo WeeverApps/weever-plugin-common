@@ -56,10 +56,7 @@ wxApp = wxApp || {};
 
         deleteSubTab: function() {
             this.model.destroy();
-
-            // Wait half a second, then refresh the preview
-            // (The half-second helps ensure the server is synced)
-            setTimeout( function() { wx.refreshAppPreview(); }, 500);
+            wx.rebuildApp();
         }
     });
 })(jQuery);

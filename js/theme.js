@@ -94,16 +94,16 @@ jQuery(document).ready(function(){
 	}]);
 
 	// Preview code
-	setTimeout(function(){
-		// if (jQuery.browser.webkit) {
-		if (true) {
-			jQuery('#preview-app-dialog-no-webkit').hide();
-	        jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
-			jQuery('#preview-app-dialog-webkit').show();
-	    } else if (jQuery.browser.webkit == undefined || jQuery.browser.webkit == false) {
-			jQuery('#preview-app-dialog-no-webkit').show();
-	    }		
-	}, 300);
+	// setTimeout(function(){
+	// 	// if (jQuery.browser.webkit) {
+	// 	if (true) {
+	// 		jQuery('#preview-app-dialog-no-webkit').hide();
+	//         jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
+	// 		jQuery('#preview-app-dialog-webkit').show();
+	//     } else if (jQuery.browser.webkit == undefined || jQuery.browser.webkit == false) {
+	// 		jQuery('#preview-app-dialog-no-webkit').show();
+	//     }		
+	// }, 300);
 
 	// Uploaders
 

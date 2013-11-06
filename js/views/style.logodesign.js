@@ -55,9 +55,7 @@ wxApp = wxApp || {};
                 success: function(msg) {
                     me.hideLoadGif( id, loading_id );
                     
-                    // Wait half a second, then refresh the preview
-                    // (The half-second helps ensure the server is synced)
-                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                    wx.rebuildApp();
                 },
                 error: function(v, msg) {
                     alert(msg);
@@ -87,7 +85,7 @@ wxApp = wxApp || {};
 
             wx.makeApiCall('design/set_titlebar', params, function(data) {
                 me.hideLoadGif( id, loading_id );
-                setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                wx.rebuildApp();
             });
         }
     });

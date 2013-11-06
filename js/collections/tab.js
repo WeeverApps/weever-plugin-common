@@ -78,8 +78,6 @@ var wxApp = wxApp || {};
                     me.reset();
                     for ( i = 0; i < tabs.length; i++ )
                         me.add( tabs[i] );
-                    if ( me.length )
-                        wx.refreshAppPreview();
                 }
             });
         }

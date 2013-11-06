@@ -35,7 +35,7 @@ wxApp = wxApp || {};
                 var params = { titlebar: innerParams };
 
                 wx.makeApiCall('design/set_titlebar', params, function(data) {
-                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                    wx.rebuildApp();
                 });
 
             } else if ( id === 'icon_live' ) {
@@ -50,9 +50,7 @@ wxApp = wxApp || {};
                 var params = { install: innerParams };
 
                 wx.makeApiCall('design/set_install', params, function(data) {
-                    // Wait half a second, then refresh the preview
-                    // (The half-second helps ensure the server is synced)
-                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                    wx.rebuildApp();
                 });
 
             } else {
@@ -70,9 +68,7 @@ wxApp = wxApp || {};
                 var params = { launchscreen: innerParams };
 
                 wx.makeApiCall('design/set_launchscreen', params, function(data) {
-                    // Wait half a second, then refresh the preview
-                    // (The half-second helps ensure the server is synced)
-                    setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                    wx.rebuildApp();
                 });
 
             }

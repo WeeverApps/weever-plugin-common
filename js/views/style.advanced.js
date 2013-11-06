@@ -47,7 +47,7 @@ wxApp = wxApp || {};
 
             wx.makeApiCall('design/set_css', params, function(data) {
                 // me.$('#save_advanced').html('Saved!');
-                setTimeout( function() { wx.refreshAppPreview(); }, 500);
+                wx.rebuildApp();
             });
         },
 

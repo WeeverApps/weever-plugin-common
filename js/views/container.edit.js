@@ -34,7 +34,7 @@ wxApp = wxApp || {};
                 console.log('Title Saved');
                 me.model.set('tabTitle', title);
                 if (++numCompleted == 2) {
-                    wx.refreshAppPreview();
+                    wx.rebuildApp();
                 }
             });
 
@@ -42,7 +42,7 @@ wxApp = wxApp || {};
                 console.log('Tab Icon Saved');
                 me.model.set('tabIcon_id', iconId);
                 if (++numCompleted == 2) {
-                    wx.refreshAppPreview();
+                    wx.rebuildApp();
                 }
             });
 

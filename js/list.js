@@ -24,7 +24,7 @@ var wxApp = wxApp || {};
 (function($){
     wx.makeApiCall = function(endpoint, paramsObj, successCallback) {
 		var method = 'POST', data = '';
-        var apiUrl = wx.apiUrl + endpoint + '?site_key=' + wx.siteKey;
+        var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
         var queryStr = [];
 
         for ( var p in paramsObj ) {
@@ -73,6 +73,25 @@ var wxApp = wxApp || {};
         Backbone.Events.trigger( 'api:success' );
     };
 
+    wx.getText = function(endpoint, successCallback) {
+        var method = 'GET';
+        var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
+
+        $.ajax({
+            url: apiUrl,
+            type: method,
+            datatype: 'text',
+            success: function(v) {
+                if (successCallback){
+                    successCallback( v );
+                }
+            },
+            error: function(v, message) {
+                console.log(message);
+            }
+        });
+};
+
     wx.refreshAppPreview = function() {
         console.log('Refreshing Preview');
         if ( true ) { // if ( $.browser.webkit ) {
@@ -82,6 +101,14 @@ var wxApp = wxApp || {};
         } else { // } else if ( $.browser.webkit == undefined || $.browser.webkit == false ) {
             $('#preview-app-dialog-no-webkit').show();
         }
+    };
+
+    wx.rebuildApp = function() {
+        // Right now this method just hides the preview, and when the build is complete, it's reshown
+        // (See the doPoll method in layout.php)
+        // This will be improved when we have build events in v3.0
+        $('#preview-app-dialog-frame').attr('src', 'about:blank');
+        $('#preview-app-dialog-frame').contents().find('html').html('<body style="color:white; font-weight: bold;">Please wait while we rebuild your application...</body>');
     };
 
     // Gets rid of params from an image URL.

@@ -56,7 +56,6 @@ do
 done
 
 final=("${final[@]}" "${viewsToBeMovedForward[@]} ${allViews[@]}")
-> $JS_TEMP
 
 for F in ${final[@]}; do
   CURR_FILE="$JS_DIR/$F"
@@ -72,7 +71,7 @@ java -jar yuicompressor-2.4.8.jar $JS_TEMP -o $JS_COMBINED_FILE
 
 # Now do the same above for Style Sheets.
 echo 'Compressing Style Sheets...'
-styleSheets=(app.css weever-icon-font-1.css imgareaselect-default.css)
+styleSheets=(app.css weever-icon-font-1.css imgareaselect-default.css colors-fresh.min.css)
 
 for F in ${styleSheets[@]}; do
 	CURR_FILE="$CSS_DIR/$F"
