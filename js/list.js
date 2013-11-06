@@ -22,10 +22,12 @@ var wx = wx || {};
 var wxApp = wxApp || {};
 
 (function($){
-    wx.makeApiCall = function(endpoint, paramsObj, successCallback) {
+    wx.makeApiCall = function(endpoint, paramsObj, successCallback, datatype) {
 		var method = 'POST', data = '';
         var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
         var queryStr = [];
+        datatype = datatype || 'json';
+        console.log( datatype );
 
         for ( var p in paramsObj ) {
             queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );
@@ -38,7 +40,7 @@ var wxApp = wxApp || {};
             url: apiUrl,
             type: method,
 			data: data,
-            datatype: 'json',
+            datatype: datatype,
             success: function(v) {
                 wx.apiSuccess( v, successCallback );
             },
