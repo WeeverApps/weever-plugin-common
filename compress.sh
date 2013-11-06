@@ -20,12 +20,7 @@ CSS_COMBINED_FILE="$CSS_DIR/combined.css"
 echo 'Compressing JavaScripts...'
 
 # 0. Include base files
-<<<<<<< HEAD
-vendorFiles=(vendor/jquery-ui.custom.min.js vendor/underscore.min.js vendor/backbone.min.js weever.js modernizr.min.js jscolor/jscolor.js vendor/zepto.js account.js wx.js config/wx.features.js wx.list.wordpress.ini.js swipe.js fileuploader.js theme.js jquery.imgareaselect.js list.js)
-foundationFiles=(foundation/foundation.js foundation/foundation.*.js)
-=======
 vendorFiles=(weever.js modernizr.min.js jscolor/jscolor.js vendor/zepto.js foundation/foundation.js foundation/foundation.*.js account.js wx.js config/wx.features.js wx.list.wordpress.ini.js swipe.js fileuploader.js theme.js list.js)
->>>>>>> 88c51bc21630d3e1f807b678fd90450a6f0e3274
 
 # 1. Get an array of all of the model javascripts.
 allModels=(models/*.js)
@@ -75,20 +70,20 @@ done
 java -jar yuicompressor-2.4.8.jar $JS_TEMP -o $JS_COMBINED_FILE
 
 # Now do the same above for Style Sheets.
-echo 'Compressing Style Sheets...'
-styleSheets=(app.css weever-icon-font-1.css imgareaselect-default.css colors-fresh.min.css)
+# echo 'Compressing Style Sheets...'
+# styleSheets=(app.css weever-icon-font-1.css imgareaselect-default.css colors-fresh.min.css)
 
-for F in ${styleSheets[@]}; do
-	CURR_FILE="$CSS_DIR/$F"
-	cat $CURR_FILE >> $CSS_TEMP
-done
+# for F in ${styleSheets[@]}; do
+# 	CURR_FILE="$CSS_DIR/$F"
+# 	cat $CURR_FILE >> $CSS_TEMP
+# done
 
-java -jar yuicompressor-2.4.8.jar $CSS_TEMP -o $CSS_COMBINED_FILE
+# java -jar yuicompressor-2.4.8.jar $CSS_TEMP -o $CSS_COMBINED_FILE
 
 # Remove the temp files
 echo 'Cleanup...'
 rm $JS_TEMP
-rm $CSS_TEMP
+# rm $CSS_TEMP
 
 echo 'Compression complete!'
 
