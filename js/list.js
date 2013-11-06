@@ -109,8 +109,8 @@ var wxApp = wxApp || {};
         // Right now this method just hides the preview, and when the build is complete, it's reshown
         // (See the doPoll method in layout.php)
         // This will be improved when we have build events in v3.0
-        $('#preview-app-dialog-frame').attr('src', 'about:blank');
-        $('#preview-app-dialog-frame').contents().find('html').html('<body style="color:white; font-weight: bold;">Please wait while we rebuild your application...</body>');
+        jQuery('#preview-app-dialog-frame').hide();
+        jQuery('#iframe-loading').show();
     };
 
     // Gets rid of params from an image URL.
