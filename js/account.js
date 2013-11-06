@@ -48,7 +48,10 @@ jQuery(document).ready(function(){
 		var millisecondsBetween = d.getTime() - (new Date()).getTime();
 		var days = millisecondsBetween / millisecondsPerDay;
 		days = Math.floor( days );
-		if (days < 0) { return; }
+		if (days < 0) { 
+			jQuery('#account-expired').show();
+			return;
+		}
 
 		if (days < 5) {
 			jQuery('#account-expiration-warning .secondary').addClass('alert').removeClass('secondary');
