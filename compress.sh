@@ -70,20 +70,20 @@ done
 java -jar yuicompressor-2.4.8.jar $JS_TEMP -o $JS_COMBINED_FILE
 
 # Now do the same above for Style Sheets.
-echo 'Compressing Style Sheets...'
-styleSheets=(app.css weever-icon-font-1.css imgareaselect-default.css colors-fresh.min.css)
+# echo 'Compressing Style Sheets...'
+# styleSheets=(app.css weever-icon-font-1.css imgareaselect-default.css colors-fresh.min.css)
 
-for F in ${styleSheets[@]}; do
-	CURR_FILE="$CSS_DIR/$F"
-	cat $CURR_FILE >> $CSS_TEMP
-done
+# for F in ${styleSheets[@]}; do
+# 	CURR_FILE="$CSS_DIR/$F"
+# 	cat $CURR_FILE >> $CSS_TEMP
+# done
 
-java -jar yuicompressor-2.4.8.jar $CSS_TEMP -o $CSS_COMBINED_FILE
+# java -jar yuicompressor-2.4.8.jar $CSS_TEMP -o $CSS_COMBINED_FILE
 
 # Remove the temp files
 echo 'Cleanup...'
 rm $JS_TEMP
-rm $CSS_TEMP
+# rm $CSS_TEMP
 
 echo 'Compression complete!'
 
