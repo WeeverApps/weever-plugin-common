@@ -85,21 +85,18 @@ wxApp = wxApp || {};
 			if (fontId === '-1')
 				return;
 
-			console.log( 'Changing to font ' + fontId );
-			var fontData = null;
-			for (var i = 0; i < wxApp.IconFonts.length; i++) {
-				fontData = wxApp.IconFonts.models[i];
-				console.log( fontData.id );
-				if (fontData.id == fontId)
-					break;
-			};
+			// Put the font on the page.
+			var font = new wxApp.IconFont();
+			font.fetch( fontId, function() {
+                $('<style id="fontstyle" type="text/css"></style>').appendTo('head');
+                wxApp.appView.changeFont( font );
+                $('#icon-font-preview').slideDown();
+            } );
 
-			wxApp.appView.changeFont( fontData );
-			$('#icon-font-preview').slideDown();
-
+			// Save the font to the API
 			var me = this;
 			var loading_id = this.showLoadingGif('font')
-			wx.makeApiCall('design/set_font_id', { font_id: fontData.get('id') }, function(data) {
+			wx.makeApiCall('design/set_font_id', { font_id: fontId }, function(data) {
 				me.hideLoadingGif('font', loading_id);
             });
 		}
