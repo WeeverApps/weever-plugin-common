@@ -63,6 +63,7 @@ wxApp = wxApp || {};
                             return element.replace('SubtabID', '');
                         }) );
                         wx.makeApiCall( 'tabs/sort_tabs', { order: order }, function() {
+                            wx.rebuildApp();
                             me.setSubTabCollectionOrder( order.split(',') );
                             var firstTabId = order.split(',')[0];
                             var mainTabId = $(ui.item).data('backbone-view').model.get('parent_id');

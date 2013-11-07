@@ -72,7 +72,7 @@ wxApp = wxApp || {};
                             else
                                 return null;
                         });
-                        wx.makeApiCall( 'tabs/sort_tabs', { order: String( order ) }, function() {});
+                        wx.makeApiCall( 'tabs/sort_tabs', { order: String( order ) }, function() { wx.rebuildApp(); });
 
                         // Clear any erroneous styling on the dragged element
                         if ( $(ui.item).attr('rel') != 'unpublished' )
