@@ -110,9 +110,6 @@ wxApp = wxApp || {};
         },
 
         changeFont: function(font) {
-            f = font;
-            wxApp.currentFont = font;
-
             var css = "@font-face { " +
             "    font-family: 'wxFont-1'; " +
             "    src: " +
