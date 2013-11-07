@@ -101,6 +101,7 @@ wxApp = wxApp || {};
         hideDropTab: function() {
             $('#dropTab').hide();
             $('.wx-layout-tablist .wx-tab.dragging').removeClass('dragging');
+            wx.rebuildApp();
         },
 
         clearBodyStyles: function() {

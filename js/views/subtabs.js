@@ -55,7 +55,6 @@ wxApp = wxApp || {};
                         Backbone.Events.trigger( 'subtab:dragstart' );
                     },
                     stop: function(event, ui) {
-                        console.log('trigger dragstop');
                         Backbone.Events.trigger( 'subtab:dragstop' );
                     },
                     update: function(event, ui) {
