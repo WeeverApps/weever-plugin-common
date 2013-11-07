@@ -96,11 +96,13 @@ wxApp = wxApp || {};
         showDropTab: function() {
             $('#dropTab').show();
             $('.wx-layout-tablist .wx-tab').addClass('dragging');
+            $('#editListTabsSortable').addClass('dragging');
         },
 
         hideDropTab: function() {
             $('#dropTab').hide();
             $('.wx-layout-tablist .wx-tab.dragging').removeClass('dragging');
+            $('#editListTabsSortable.dragging').removeClass('dragging');
         },
 
         clearBodyStyles: function() {
