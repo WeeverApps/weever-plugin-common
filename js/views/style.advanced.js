@@ -88,7 +88,6 @@ wxApp = wxApp || {};
 			// Put the font on the page.
 			var font = new wxApp.IconFont();
 			font.fetch( fontId, function() {
-                $('<style id="fontstyle" type="text/css"></style>').appendTo('head');
                 wxApp.appView.changeFont( font );
                 $('#icon-font-preview').slideDown();
             } );

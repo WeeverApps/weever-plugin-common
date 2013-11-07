@@ -109,6 +109,7 @@ var wxApp = wxApp || {};
         // Right now this method just hides the preview, and when the build is complete, it's reshown
         // (See the doPoll method in layout.php)
         // This will be improved when we have build events in v3.0
+        wx.poll = true;
         jQuery('#preview-app-dialog-frame').hide();
         jQuery('#iframe-loading').show();
     };
