@@ -73,8 +73,8 @@ wxApp = wxApp || {};
                     },
                     helper: 'clone',
                     cursor: 'move',
-                    handle: '.wx-subtab-movehandle',
-                    cursorAt: { top: 0, left: 0 }
+                    handle: '.wx-subtab-movehandle'/*,
+                    cursorAt: { top: 0, left: 0 }*/
                 });
             }
         },
