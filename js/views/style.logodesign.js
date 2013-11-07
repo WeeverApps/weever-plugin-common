@@ -10,7 +10,6 @@ wxApp = wxApp || {};
         },
 
         initialize: function() {
-            console.log('Design view init');
             this.tpl = _.template( $('#logo-design').html() );
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
             Backbone.Events.on('color:change', this.colorChange, this);
@@ -57,7 +56,7 @@ wxApp = wxApp || {};
                 success: function(msg) {
                     me.hideLoadGif( id, loading_id );
                     
-                    wx.rebuildApp();
+                    // wx.rebuildApp();
                 },
                 error: function(v, msg) {
                     alert(msg);
@@ -98,7 +97,6 @@ wxApp = wxApp || {};
 
     wxApp.design = new wxApp.Design();
     wxApp.design.fetch( function() {
-        console.log( 'Design Fetched.' );
         // Load the Design Views.
         wxApp.logoDesign = new wxApp.LogoDesign( {model: wxApp.design} );
         wxApp.launchSreen = new wxApp.LaunchScreen( {model: wxApp.design} );
@@ -106,7 +104,6 @@ wxApp = wxApp || {};
         wxApp.customBranding = new wxApp.CustomBranding( {model: wxApp.design} );
         designFetched = true;
         if (configFetched) {
-            console.log('advanced init');
             wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
     } );
@@ -116,7 +113,6 @@ wxApp = wxApp || {};
     wxApp.config.fetch( function() {
         configFetched = true;
         if (designFetched) {
-            console.log('advanced init');
             wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
     } );
