@@ -1,5 +1,30 @@
 <script type="text/template" id="advanced-options">
 
+    <p class="wx-ui-title"><?php echo __( 'Icon Style', 'weever' ); ?></p>
+    <p>Change the visual style used for all icons within your app.</p>
+    <div>
+        <div class="row">
+            <div class="small-10 columns">
+                <select id="font-list">
+                    <option value="-1">Select One...</option>
+                </select>
+
+                <div id="icon-font-preview" style="display: none;">
+                    <p>Icon font preview:</p>
+                    <% for (var i = 1; i <= 64; i++) { %>
+                    <span class="wxFont-1 wxIcon-<%- i %> large"></span>
+                    <% }; %>
+                </div>
+            </div>
+            <div class="small-2 columns">
+                <img id="font_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
     <p class="wx-ui-title"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
 
 	<p><?php echo __( 'Customize your mobile app design with valid CSS rules.', 'weever' ); ?></p>
@@ -45,30 +70,5 @@
 			</div>
 		</div>
 	</div>
-
-    <br>
-    <br>
-
-    <p class="wx-ui-title"><?php echo __( 'Icon Style', 'weever' ); ?></p>
-    <p>Change the visual style used for all icons within your app.</p>
-    <div>
-        <div class="row">
-            <div class="small-10 columns">
-                <select id="font-list">
-                    <option value="-1">Select One...</option>
-                </select>
-
-                <div id="icon-font-preview" style="display: none;">
-                    <p>Icon font preview:</p>
-                    <% for (var i = 1; i <= 64; i++) { %>
-                    <span class="wxFont-1 wxIcon-<%- i %> large"></span>
-                    <% }; %>
-                </div>
-            </div>
-            <div class="small-2 columns">
-                <img id="font_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
-            </div>
-        </div>
-    </div>
 
 </script>
