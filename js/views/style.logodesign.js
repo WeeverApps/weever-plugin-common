@@ -14,6 +14,8 @@ wxApp = wxApp || {};
             this.tpl = _.template( $('#logo-design').html() );
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
             Backbone.Events.on('color:change', this.colorChange, this);
+
+            jscolor.bind();
         },
 
         radioChange: function() {
