@@ -1,11 +1,14 @@
 <script type="text/template" id="icon-selector">
-    <?php for ( $i = 1; $i <= 46; $i++ ): ?>
-        <?php if ( in_array( $i, array( 14, 33, 37, 38, 39, 40, 41, 42, 44, 45 ) ) ) continue; ?>
+	<?php 
+	// I hate that this is hardcoded, but there's no intelligent way of determining which icons are in use.
+	$icons = Array( 1, 2, 5, 9, 13, 14, 17, 18, 21, 22, 25, 30, 29, 33, 37, 41, 45, 46, 49, 53, 57, 61, 62, 65, 66, 69, 73, 74, 77, 78, 81, 82, 85, 89, 90, 93, 94, 97, 98, 101, 102, 200, 204, 208, 209, 212, 216, 220, 224, 228, 232, 236, 240, 244, 248, 249, 252, 253, 256, 260, 262, 276, 277, 600, 604, 608, 800, 804, 808, 812, 816, 820, 828, 832, 836, 840, 900 ) ?>
+    
+	foreach ( $icons as $i ) { ?>
         <li>
             <label>
             	<span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span>
             	<input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id == <?php echo $i; ?> ) ? 'checked' : '' ) %> />
             </label>
         </li>
-    <?php endfor; ?>
+    <?php } ?>
 </script>
