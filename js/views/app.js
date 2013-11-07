@@ -110,17 +110,14 @@ wxApp = wxApp || {};
         },
 
         changeFont: function(font) {
-            f = font;
-            console.log( font.get('svg') );
-
-            var css = "@font-face { \r\n" +
-            "    font-family: 'wxFont-1'; \r\n" +
-            "    src: \r\n" +
-            "        url('data:image/svg+xml;base64," + font.get('svg') + "') format('svg'), \r\n" +
-            "        url('data:application/font-woff;charset=utf-8;base64," + font.get('woff') + "') format('woff'), \r\n" +
-            "        url('data:application/x-font-ttf;charset=utf-8;base64," + font.get('ttf') + "') format('truetype'); \r\n" +
-            "}";// +
-            //".wxFont-1:before { font-family: 'wxFont-1'; } \r\n";
+            var css = "@font-face { " +
+            "    font-family: 'wxFont-1'; " +
+            "    src: " +
+            "        url('data:image/svg+xml;base64," + font.get('svg') + "') format('svg'), " +
+            "        url('data:application/font-woff;charset=utf-8;base64," + font.get('woff') + "') format('woff'), " +
+            "        url('data:application/x-font-ttf;charset=utf-8;base64," + font.get('ttf') + "') format('truetype'); " +
+            "} " +
+            ".wxFont-1:before { font-family: 'wxFont-1'; } ";
 
             $('#fontstyle').html( css );
         }
