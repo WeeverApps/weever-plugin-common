@@ -72,7 +72,11 @@ wxApp = wxApp || {};
 			font = font.toJSON();
 			console.log(font);
 
-			$( '#font-list' ).append($('<option>', {
+			var tag = '<option';
+			if (font.id == wxApp.font) 
+				tag += ' selected="selected"';
+			tag += '>';
+			$( '#font-list' ).append($(tag, {
 				value: font.id,
 				text : font.name
 			}))

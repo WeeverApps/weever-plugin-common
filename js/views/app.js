@@ -129,6 +129,7 @@ wxApp = wxApp || {};
     // Load the current icon font
     wx.makeApiCall('design/get_font_id', {}, function(data) {
         if ( typeof data.font_id !== 'undefined' ) {
+            wxApp.font = data.font_id;
             var font = new wxApp.IconFont();
             font.fetch( data.font_id, function() {
                 // Put the font on the page.
