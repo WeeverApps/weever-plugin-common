@@ -2,16 +2,16 @@
     <button class="secondary">
     	<%
     		var i = tabIcon;
-    		if ( i === '\\e000' ) {
+    		if ( i === null || i === '\\e000' ) {
     			i = tabIcon_id;
     			if ( !i ) {
     				i = icon;
-    				if ( i === '\\e000' ) {
+    				if ( i === null || i === '\\e000' ) {
     					i = icon_id;
     				}
     			}
     		}
-    		i = i.replace('\\', '');
+            if ( i !== null ) i = i.replace('\\', '');
     	%>
     	<div class="wxIcon wxIcon-<%- i %> wxFont-1"></div>
         <div class="wx-nav-label" data-tab-id="ID #<%- id %>"><%- ( typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title ) %></div>

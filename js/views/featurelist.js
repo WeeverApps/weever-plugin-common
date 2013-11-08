@@ -31,7 +31,7 @@ wxApp = wxApp || {};
 
         // Grab the data and kick things off
         wxApp.featureList.collection.fetch({ 
-            url: '../wp-content/plugins/wp_weeverapps/static/js/config/wx.featurelist.js', 
+            url: wx.pluginUrl + 'static/js/config/wx.featurelist.js', 
             success: function(result) { console.log('features fetched'); }, 
             error: function() { console.log('Could not load feature list.') } 
         });

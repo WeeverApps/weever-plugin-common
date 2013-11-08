@@ -13,7 +13,7 @@
 var jscolor = {
 
 	// TODO - Figure out way to make this URL more generic.
-	dir : '../wp-content/plugins/wp_weeverapps/static/js/jscolor/', // location of jscolor directory (leave empty to autodetect)
+	dir : wx.pluginUrl + 'static/js/jscolor/', // location of jscolor directory (leave empty to autodetect)
 	bindClass : 'color', // class name
 	binding : false, // automatic binding via <input class="...">
 	preloading : true, // use image preloading?

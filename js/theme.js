@@ -84,7 +84,7 @@ jQuery(document).ready(function(){
 		test: Modernizr.inputtypes.color,
 		// If colors are not supported, load the jscolor.js script
 		// TODO - Figure out way to make this URL more generic.
-		nope: '../wp-content/plugins/wp_weeverapps/static/js/jscolor/jscolor.js',
+		nope: wx.pluginUrl + 'static/js/jscolor/jscolor.js',
 		// Initialize jscolor once its loaded, 
 		// because the builtin jscolor.install hook is bind to window.load,
 		// which has already happend
