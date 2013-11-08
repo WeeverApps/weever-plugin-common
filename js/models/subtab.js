@@ -9,6 +9,7 @@ wxApp = wxApp || {};
             title: '',
             tabTitle: '',
             icon_id: 1,
+            icon: '',
             type: null,
             layout: null,
             tabLayout: null,
