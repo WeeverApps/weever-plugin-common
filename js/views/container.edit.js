@@ -30,6 +30,12 @@ wxApp = wxApp || {};
             var iconId = $('input:radio[name="wx-icon"]:checked').val();
             var numCompleted = 0;
 
+            // Prefix with e, then pad with zeros as necessary.
+            iconId = 'e' + ("000" + iconId).slice(-3);
+            // Convert from hex string, to integer, to unicode character.
+            var b16char = String.fromCharCode( parseInt( iconId, 16 ) );
+            alert( b16char );
+
             wx.makeApiCall( 'tabs/set_tabTitle', { tab_id: tabId, tabTitle: title }, function() {
                 console.log('Title Saved');
                 me.model.set('tabTitle', title);
@@ -38,9 +44,10 @@ wxApp = wxApp || {};
                 }
             });
 
-            wx.makeApiCall( 'tabs/set_tabIcon_id', { tab_id: tabId, tabIcon_id: iconId }, function() {
+            wx.makeApiCall( 'tabs/set_tabIcon', { tab_id: tabId, tabIcon_id: b16char }, function() {
                 console.log('Tab Icon Saved');
-                me.model.set('tabIcon_id', iconId);
+                me.model.set('tabIcon_id', null);
+                me.model.set('tabIcon', b16char);
                 if (++numCompleted == 2) {
                     wx.rebuildApp();
                 }

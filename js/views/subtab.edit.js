@@ -147,7 +147,13 @@ wxApp = wxApp || {};
         },
 
         setIconFromView: function( model ) {
-            model.set( 'icon_id', this.$('input:radio[name="wx-icon"]:checked').val() );
+            // model.set( 'icon_id', this.$('input:radio[name="wx-icon"]:checked').val() );
+            var icon = this.$('input:radio[name="wx-icon"]:checked').val();
+            // Prefix with \e, then pad with zeros as necessary.
+            icon = '\e' + ("000" + icon).slice(-3);
+            alert(icon);
+            model.set( 'icon_id', null );
+            model.set( 'icon', icon );
             return model;
         },
 
