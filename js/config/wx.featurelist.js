@@ -1,5 +1,5 @@
 [
-    { "featureName": "FormBuilder",         "name": "Form Builder",                                                                 "iconId": "e248",   "rel": "hide",          "tierRequired": 2 },
+    { "featureName": "FormBuilder",         "name": "Form Builder",                                                                 "iconId": "e248" },
     { "featureName": "WordpressBlog",       "name": "Wordpress - all posts",    "filterBy": "weever_list_show_wordpress_content",   "iconId": "e800",   "rel": "hide" },
     { "featureName": "WordpressCategory",   "name": "Add Wordpress posts",      "filterBy": "weever_list_show_wordpress_content",   "iconId": "e800" },
     { "featureName": "WordpressPage",       "name": "Add Wordpress page",       "filterBy": "weever_list_show_wordpress_content",   "iconId": "e013" },
