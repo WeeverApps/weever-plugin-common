@@ -1,6 +1,6 @@
 <script type="text/template" id="tab-template">
     <button class="secondary">
-    	<div class="wxIcon wxIcon-<%- tabIcon_id || icon_id %> wxFont-1"></div>
+    	<div class="wxIcon wxIcon-<%- tabIcon.replace('\\', '') || tabIcon_id || icon.replace('\\', '') || icon_id %> wxFont-1"></div>
         <div class="wx-nav-label" data-tab-id="ID #<%- id %>"><%- ( typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title ) %></div>
     </button>
 </script>
