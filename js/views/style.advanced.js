@@ -68,18 +68,15 @@ wxApp = wxApp || {};
 		},
 
 		addFont: function(font) {
-			console.log('Add Font Called.');
 			font = font.toJSON();
-			console.log(font);
 
-			var tag = '<option';
-			if (font.id == wxApp.font) 
-				tag += ' selected="selected"';
-			tag += '>';
-			$( '#font-list' ).append($(tag, {
+			var options = {
 				value: font.id,
 				text : font.name
-			}))
+			};
+			if (font.id == wxApp.font) 
+				options.selected = true;
+			$( '#font-list' ).append($('<option>', options));
 		},
 
 		changeFont: function() {
