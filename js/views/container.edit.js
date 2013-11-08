@@ -23,6 +23,7 @@ wxApp = wxApp || {};
     	},
 
     	save: function() {
+            alert(' Saving... ');
             var me = this,
                 tabId = this.model.get('id'),
                 title = $('#container-title').val(),
@@ -36,7 +37,8 @@ wxApp = wxApp || {};
                 }
             });
 
-            wx.makeApiCall( 'tabs/set_tabIcon', { tab_id: tabId, tabIcon_id: iconId }, function() {
+            wx.makeApiCall( 'tabs/set_tabIcon', { tab_id: tabId, tabIcon: iconId }, function() {
+                alert('updating');
                 me.model.set('tabIcon_id', null);
                 me.model.set('tabIcon', iconId);
                 if (++numCompleted == 2) {
