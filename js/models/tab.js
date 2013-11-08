@@ -7,6 +7,7 @@ var wxApp = wxApp || {};
             id: '',
             title: '',
             icon_id: 1,
+            icon: '',
             subTabs: false
         },
 
