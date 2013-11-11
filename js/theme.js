@@ -23,33 +23,33 @@
  * Image uploader script
  */
 
-var coords = false;
-var imgselect = false;
+// var coords = false;
+// var imgselect = false;
 
-function cropper_show(image_width, image_height) {
-	// Make sure upload drop area is hidden
-	jQuery('.qq-upload-drop-area').hide();
+// function cropper_show(image_width, image_height) {
+// 	// Make sure upload drop area is hidden
+// 	jQuery('.qq-upload-drop-area').hide();
 	
-    if (jQuery('#wx-jcrop-dialog-img').is(':visible')) {
-    	if ( imgselect === false ) {
-    		imgselect = jQuery('#wx-jcrop-dialog-img').imgAreaSelect({ 
-    			//x1: 0, y1: 0, x2: 10000, y2: 10000,
-    			handles: true,
-    			instance: true,
-    			parent: '#wx-jcrop-dialog',
-    			onSelectChange: function(img, selection) {
-    				coords = selection;
-    				console.debug(coords);
-    			}
-    		});
-    	} else {
-    		imgselect.cancelSelection();
-    		imgselect.update();
-    	}
-    }
-    else
-        setTimeout( function() { cropper_show(image_width, image_height); }, 50);
-}
+//     if (jQuery('#wx-jcrop-dialog-img').is(':visible')) {
+//     	if ( imgselect === false ) {
+//     		imgselect = jQuery('#wx-jcrop-dialog-img').imgAreaSelect({ 
+//     			//x1: 0, y1: 0, x2: 10000, y2: 10000,
+//     			handles: true,
+//     			instance: true,
+//     			parent: '#wx-jcrop-dialog',
+//     			onSelectChange: function(img, selection) {
+//     				coords = selection;
+//     				console.debug(coords);
+//     			}
+//     		});
+//     	} else {
+//     		imgselect.cancelSelection();
+//     		imgselect.update();
+//     	}
+//     }
+//     else
+//         setTimeout( function() { cropper_show(image_width, image_height); }, 50);
+// }
 
 
 
@@ -113,8 +113,6 @@ jQuery(document).ready(function(){
 		//console.log('loading theme uploader');
 		var image_id = jQuery(this).attr('ref');
 		var input_name = jQuery(this).attr('rel');
-		var image_width = jQuery(this).attr('img_width');
-		var image_height = jQuery(this).attr('img_height');
 	    var weeverUploader = new qq.FileUploader({
 	        element: jQuery(this)[0],
 	        action: ajaxurl + '?action=ajaxHandleUpload',
@@ -126,40 +124,12 @@ jQuery(document).ready(function(){
 	        	jQuery("#wx-upload-info").remove();
 	        	jQuery('.qq-upload-success').hide();
 
-	        	// Call the cropper
-	        	jQuery('#wx-jcrop-dialog-img').attr('src', url);
-	        	
-	        	coords = false;
-	        	
-	        	jQuery('#wx-jcrop-dialog').foundation('reveal', 'open');
-	        	setTimeout(function() { cropper_show(image_width, image_height); }, 500);
-	        	jQuery('#finish-crop').one('click', function() {
-	        		console.log('Saving cropped image...');
-	        		// console.log(coords);
-	        		
-	        		jQuery.ajax({
-    					url: ajaxurl,
-    					type: 'POST',
-    					data: {
-    						action: 'ajaxCropImage',
-    						selection: coords,
-    						image_width: image_width,
-    						image_height: image_height
-    					},
-    					success: function(msg) {
-    						jQuery("#" + image_id).attr("src", msg);
+	        	// Assign the new URL
+				jQuery("#" + image_id).attr("src", url);
 
-    						var hidden = jQuery('input[name=' + input_name + ']');
-	        	        	hidden.attr('value', msg);
-	        	        	Backbone.Events.trigger( 'image:change', hidden );
-    					},
-    					error: function(v,msg) {
-    						alert('There was an error saving the image, please try again');
-    					}
-    				});
-
-    				jQuery('#wx-jcrop-dialog').foundation('reveal', 'close');
-	        	});
+				var hidden = jQuery('input[name=' + input_name + ']');
+	        	hidden.attr('value', url);
+	        	Backbone.Events.trigger( 'image:change', hidden );
 
 	        	return false;
 	        }

@@ -17,7 +17,6 @@ wxApp = wxApp || {};
 
         saveImage: function( input ) {
 
-            eenpoot = input;
             var id = input.attr('id');
             if (!id) {
                 id = input.attr('name');
