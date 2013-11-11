@@ -19,98 +19,9 @@
 *	NOTE - Most (if not all) of this script can be removed.
 */
 
-/*
- * Image uploader script
- */
-
-// var coords = false;
-// var imgselect = false;
-
-// function cropper_show(image_width, image_height) {
-// 	// Make sure upload drop area is hidden
-// 	jQuery('.qq-upload-drop-area').hide();
-	
-//     if (jQuery('#wx-jcrop-dialog-img').is(':visible')) {
-//     	if ( imgselect === false ) {
-//     		imgselect = jQuery('#wx-jcrop-dialog-img').imgAreaSelect({ 
-//     			//x1: 0, y1: 0, x2: 10000, y2: 10000,
-//     			handles: true,
-//     			instance: true,
-//     			parent: '#wx-jcrop-dialog',
-//     			onSelectChange: function(img, selection) {
-//     				coords = selection;
-//     				console.debug(coords);
-//     			}
-//     		});
-//     	} else {
-//     		imgselect.cancelSelection();
-//     		imgselect.update();
-//     	}
-//     }
-//     else
-//         setTimeout( function() { cropper_show(image_width, image_height); }, 50);
-// }
-
-
-
-jQuery(document).ready(function(){ 
-
-	// Loading for image cropper
-	jQuery('#wx-jcrop-dialog-loading').ajaxStart(function() {
-		jQuery(this).show();
-	});
-	jQuery('#wx-jcrop-dialog-loading').ajaxStop(function() {
-		jQuery(this).hide();
-	});
-	
-	jQuery('#wx-modal-loading')
-	    .hide()  
-	    .ajaxStart(function() {
-	    	jQuery('#wx-modal-error-text').html('');
-	        jQuery(this).fadeIn(200);
-	        jQuery('#wx-modal-loading-text').html(WPText.WEEVER_JS_SAVING_CHANGES);
-	        jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_PLEASE_WAIT);
-	    })
-	    .ajaxStop(function() {
-	    	var jObj = jQuery(this);
-	    	setTimeout( function() {
-	    			jObj.fadeOut(750);
-	    		}, 600 );
-	    });
-	
-	// Load JSColor.
-	Modernizr.load([{
-		// Test if Input Color is supported using Modernizr
-		test: Modernizr.inputtypes.color,
-		// If colors are not supported, load the jscolor.js script
-		// TODO - Figure out way to make this URL more generic.
-		nope: wx.pluginUrl + 'static/js/jscolor/jscolor.js',
-		// Initialize jscolor once its loaded, 
-		// because the builtin jscolor.install hook is bind to window.load,
-		// which has already happend
-		callback: function(id, testResult) {
-			jscolor.init();
-		}
-	}]);
-
-	// Preview code
-	// setTimeout(function(){
-	// 	// if (jQuery.browser.webkit) {
-	// 	if (true) {
-	// 		jQuery('#preview-app-dialog-no-webkit').hide();
-	//         jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
-	// 		jQuery('#preview-app-dialog-webkit').show();
-	//     } else if (jQuery.browser.webkit == undefined || jQuery.browser.webkit == false) {
-	// 		jQuery('#preview-app-dialog-no-webkit').show();
-	//     }		
-	// }, 300);
-
-	// Uploaders
-
-	/* uploader for the banner / logo image */
-	
+// jQuery(document).ready(function(){ 
+function loadImageUploaders() {
 	jQuery('.wx-theme-file-uploader').each(function() {
-		//console.log('loading theme uploader');
 		var image_id = jQuery(this).attr('ref');
 		var input_name = jQuery(this).attr('rel');
 	    var weeverUploader = new qq.FileUploader({
@@ -137,4 +48,5 @@ jQuery(document).ready(function(){
 	        }
 	    });		
 	});
-});
+}
+// });
