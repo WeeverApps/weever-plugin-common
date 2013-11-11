@@ -65,11 +65,15 @@
     <!-- start - color pickers -->
     <p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
 
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
         </div>
-        <div class="small-7 columns">
+        <div class="small-1 columns">
+            <button class="postfix secondary" data-color-picker="main_titlebar_color">[i]</button>
+        </div>
+        <div class="small-1 columns">&nbsp;</div>
+        <div class="small-6 columns">
             <label class="left inline"><?php echo __( 'Logo area background color', 'weever' ); ?></label>
         </div>
         <div class="small-2 columns">
@@ -77,11 +81,15 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
         </div>
-        <div class="small-7 columns">
+        <div class="small-1 columns">
+            <button class="postfix secondary" data-color-picker="main_titlebar_text_color">[i]</button>
+        </div>
+        <div class="small-1 columns">&nbsp;</div>
+        <div class="small-6 columns">
             <label class="left inline"><?php echo __( 'Logo area text color (if applicable)', 'weever' ); ?></label>
         </div>
         <div class="small-2 columns">
@@ -89,11 +97,15 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
         </div>
-        <div class="small-7 columns">
+        <div class="small-1 columns">
+            <button class="postfix secondary" data-color-picker="subtab_color">[i]</button>
+        </div>
+        <div class="small-1 columns">&nbsp;</div>
+        <div class="small-6 columns">
             <label class="left inline">
                 <?php echo __('Subtab bar background color', 'weever'); ?> &nbsp;
             </label>
@@ -103,11 +115,15 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
         </div>
-        <div class="small-7 columns">
+        <div class="small-1 columns">
+            <button class="postfix secondary" data-color-picker="subtab_text_color">[i]</button>
+        </div>
+        <div class="small-1 columns">&nbsp;</div>
+        <div class="small-6 columns">
             <label class="left inline"><?php echo __( 'Subtab bar text color', 'weever' ); ?></label>
         </div>
         <div class="small-2 columns">
