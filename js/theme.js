@@ -19,7 +19,6 @@
 *	NOTE - Most (if not all) of this script can be removed.
 */
 
-// jQuery(document).ready(function(){ 
 function loadImageUploaders() {
 	jQuery('.wx-theme-file-uploader').each(function() {
 		var image_id = jQuery(this).attr('ref');
@@ -49,4 +48,3 @@ function loadImageUploaders() {
 	    });		
 	});
 }
-// });
