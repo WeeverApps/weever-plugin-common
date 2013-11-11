@@ -8,6 +8,8 @@ var wxApp = wxApp || {};
             title: '',
             icon_id: 1,
             icon: '',
+            tabIcon: null,
+            tabIcon_id: 0,
             subTabs: false
         },
 
