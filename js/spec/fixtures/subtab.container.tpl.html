@@ -2,9 +2,9 @@
 <script type="text/template" id="subtab-container-template">
     <ul class="wx-tablist-layout pricing-table">
         <li class="price">
-            <span>Editing tab:&nbsp;</span>
-            <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %></a>
-            <span class="delete"><a href="#" class="wx-delete-container">&times;</a></span>
+            <span>Editing tab: &nbsp;</span>
+            <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %> | Change title or icon</a>
+            <span class="delete"><a href="#" class="wx-delete-container">&times; <span class="wx-delete-label">delete</span></a></span>
         </li>
 
         <li class="bullet-item wx-tablist-layout-controls" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
