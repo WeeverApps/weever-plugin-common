@@ -53,7 +53,7 @@
                 <p class="title" data-section-title><a href="#panel1">Choose Icon</a></p>
                 <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
-                        <%= _.template( jQuery('#icon-selector').html(), tabIcon || tabIcon_id, {variable: 'icon_id'}) %>
+                        <%= _.template( jQuery('#icon-selector').html(), tabIcon || tabIcon_id || icon || icon_id, {variable: 'icon_id'}) %>
                     </ul>
                 </div>
             </section>
