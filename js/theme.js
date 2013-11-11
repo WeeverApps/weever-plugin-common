@@ -117,15 +117,17 @@ jQuery(document).ready(function(){
 	        element: jQuery(this)[0],
 	        action: ajaxurl + '?action=ajaxHandleUpload',
 	        debug: true,
-	        onComplete: function(id, fileName, responseJSON){
-	        	//console.debug(responseJSON);
+	        onSubmit: function() {
+	        	jQuery('#' + image_id).fadeOut({ duration: 500, queue: true });
 	        },
 	        callback: function(url) {
 	        	jQuery("#wx-upload-info").remove();
 	        	jQuery('.qq-upload-success').hide();
 
 	        	// Assign the new URL
-				jQuery("#" + image_id).attr("src", url);
+				jQuery("#" + image_id).attr("src", url).load(function() {
+					jQuery('#' + image_id).fadeIn({ queue: true });
+				});
 
 				var hidden = jQuery('input[name=' + input_name + ']');
 	        	hidden.attr('value', url);
@@ -135,6 +137,4 @@ jQuery(document).ready(function(){
 	        }
 	    });		
 	});
- 
-		
 });
