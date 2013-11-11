@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Search',
+                icon: 'e256',
                 icon_id: 8,
                 type: 'WordpressSearchterm',
                 content: 'html',

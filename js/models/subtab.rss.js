@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'RSS Feed',
+                icon: 'e836',
                 icon_id: 6,
                 type: 'rss',
                 content: 'html',

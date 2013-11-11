@@ -10,6 +10,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Vimeo',
+                icon: 'e041',
                 icon_id: 35,
                 type: 'vimeo',
                 content: 'vimeo',

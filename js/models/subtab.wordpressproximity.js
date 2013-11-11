@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Nearby',
+                icon: 'e101',
                 icon_id: 27,
                 type: 'WordpressProximity',
                 content: 'html',

@@ -12,6 +12,7 @@ var wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Contact',
+                icon: 'e065',
                 icon_id: 34,
                 type: 'wordpress-contact',
                 content: 'contact',

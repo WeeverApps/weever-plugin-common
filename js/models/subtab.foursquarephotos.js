@@ -10,6 +10,7 @@ var wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Photos',
+                icon: 'e057',
                 icon_id: 25,
                 type: 'foursquarePhotos',
                 content: 'foursquarePhotos',

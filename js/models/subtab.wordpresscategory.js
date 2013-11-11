@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Blog',
+                icon: 'e836',
                 icon_id: 5,
                 type: 'WordpressCategory',
                 content: 'html',

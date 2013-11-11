@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Directory',
+                icon: 'e800',
                 icon_id: 11,
                 type: 'WordpressDirectory',
                 content: 'html',

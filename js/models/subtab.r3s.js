@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'R3S Object',
+                icon: 'e836',
                 icon_id: 6,
                 type: 'r3s',
                 content: 'htmlR3s',
