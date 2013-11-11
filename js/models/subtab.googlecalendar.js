@@ -10,6 +10,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Calendar',
+                icon: 'e061',
                 icon_id: 7,
                 type: 'googleCalendar',
                 content: 'googleCalendar',

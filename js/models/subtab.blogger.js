@@ -10,6 +10,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Blog',
+                icon: 'e836',
                 icon_id: 6,
                 type: 'blogger',
                 content: 'blogger',

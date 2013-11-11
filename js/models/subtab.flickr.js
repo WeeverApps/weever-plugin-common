@@ -10,6 +10,7 @@ var wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Flickr',
+                icon: 'e049',
                 icon_id: 19,
                 type: 'flickr',
                 content: 'flickrPhotostream',

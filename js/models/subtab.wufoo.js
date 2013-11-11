@@ -10,6 +10,7 @@ var wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Forms',
+                icon: 'e832',
                 icon_id: 30,
                 type: 'wufoo',
                 content: 'wufoo',

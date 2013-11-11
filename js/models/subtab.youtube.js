@@ -10,6 +10,7 @@ var wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'YouTube',
+                icon: 'e037',
                 icon_id: 18,
                 type: 'youtube',
                 content: 'youtube',

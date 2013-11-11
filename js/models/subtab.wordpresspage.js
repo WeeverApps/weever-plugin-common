@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Pages',
+                icon: 'e014',
                 icon_id: 28,
                 type: 'WordpressPage',
                 content: 'htmlPage',

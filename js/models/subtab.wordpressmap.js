@@ -11,6 +11,7 @@ wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Map',
+                icon: 'e097',
                 icon_id: 20,
                 type: 'WordpressMap',
                 content: 'html',

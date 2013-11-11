@@ -10,6 +10,7 @@ var wxApp = wxApp || {};
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
             {
                 title: 'Events',
+                icon: 'e029',
                 icon_id: 16,
                 type: 'facebookEvents',
                 content: 'facebookEvents',
