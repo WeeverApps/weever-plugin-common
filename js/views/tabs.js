@@ -150,6 +150,12 @@ wxApp = wxApp || {};
             tab.addSubTab( model );
             // this.addTabToCollection( tab );
             wxApp.Tabs.add( tab );
+
+            if ( wxApp.Tabs.length === 2 ) {
+                // The user has just added their first tab (Share App + Whatever they just added === 2)
+                // Let's show them the Joyride.
+                $(document).foundation('joyride', 'start');
+            }
         },
 
         addNewSubTab: function(model) {

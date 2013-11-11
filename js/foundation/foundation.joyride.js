@@ -28,7 +28,7 @@
       cookieName           : 'joyride', // Name the cookie you'll use
       cookieDomain         : false,     // Will this cookie be attached to a domain, ie. '.notableapp.com'
       cookieExpires        : 365,       // set when you would like the cookie to expire.
-      tipContainer         : 'body',    // Where will the tip be attached
+      tipContainer         : '#interface',    // Where will the tip be attached
       postRideCallback     : function (){},    // A method to call once the tour closes (canceled or complete)
       postStepCallback     : function (){},    // A method to call after each step
       preStepCallback      : function (){},    // A method to call before each step
@@ -442,8 +442,13 @@
             if (Foundation.rtl) {
               leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
             }
+
+            leftOffset = leftOffset - this.settings.$body.offset().left;
+            nub_height = Math.ceil( $('.joyride-nub').outerHeight() / 2 );
+            var topOffset = (this.settings.$target.offset().top + nub_height + this.outerHeight(this.settings.$target)) - this.settings.$body.offset().top;
+
             this.settings.$next_tip.css({
-              top: (this.settings.$target.offset().top + nub_height + this.outerHeight(this.settings.$target)),
+              top: topOffset,
               left: leftOffset});
 
             this.nub_position($nub, this.settings.tipSettings.nubPosition, 'top');
