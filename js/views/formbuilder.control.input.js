@@ -64,7 +64,16 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			var model = this.model.toJSON();
+			this.$el.html( this.inputTpl( model ) );
+			if ( model.attributes.attributes.min )
+				this.$('input').attr('min', model.attributes.attributes.min );
+			if ( model.attributes.attributes.max )
+				this.$('input').attr('max', model.attributes.attributes.max );
+			if ( model.attributes.attributes.step )
+				this.$('input').attr('step', model.attributes.attributes.step );
+			if ( model.attributes.attributes.value )
+				this.$('input').attr('value', model.attributes.attributes.value );
 			return this;
 		}
 

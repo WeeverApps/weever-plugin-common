@@ -10,10 +10,10 @@ wxApp = wxApp || {};
 			// 'click .wx-form-builder-edit-label': 'editLabel',
 			'keyup .wx-form-builder-label-input': 'updateLabel',
 			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
-			// 'blur .wx-form-builder-min-input': 'setMin',
-			// 'blur .wx-form-builder-max-input': 'setMax',
-			// 'blur .wx-form-builder-value-input': 'setValue',
-			// 'blur .wx-form-builder-step-input': 'setStep',
+			'blur .wx-form-builder-min-input': 'setMin',
+			'blur .wx-form-builder-max-input': 'setMax',
+			'blur .wx-form-builder-value-input': 'setValue',
+			'blur .wx-form-builder-step-input': 'setStep',
 			// 'blur .wx-form-builder-name-input': 'setName',
 			// 'click .wx-form-builder-autocomplete': 'setAutocomplete',
 			// 'click .wx-form-builder-control-checked': 'setChecked',
@@ -64,22 +64,22 @@ wxApp = wxApp || {};
 
 		setMin: function( ev ) {
 			this.model.get( 'attributes' ).set( 'min', $( ev.currentTarget ).val() );
-			this.getInput().attr( 'min', $( ev.currentTarget ).val() );
+			this.model.trigger('change');
 		},
 
 		setMax: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'max', $( ev.currentTarget ).val() );
-			this.getInput().attr( 'max', $( ev.currentTarget ).val() );
+			this.model.trigger('change');
 		},
 
 		setValue: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'value', $( ev.currentTarget ).val() );
-			this.getInput().val( $( ev.currentTarget ).val() );
+			this.model.trigger('change');
 		},
 
 		setStep: function ( ev ) {
 			this.model.get( 'attributes' ).set( 'step', $( ev.currentTarget ).val() );
-			this.getInput().attr( 'step', $( ev.currentTarget ).val() );
+			this.model.trigger('change');
 		},
 
 		setName: function( ev ) {
