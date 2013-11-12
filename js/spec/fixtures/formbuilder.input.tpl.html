@@ -1,10 +1,14 @@
 <script type="text/template" id="form-builder-input">
-	<p class="title" data-section-title><a href="#panel<%- order %>">Text: <span class="wx-form-builder-label"><%- label %></span></a></p>
+	<p class="title" data-section-title>
+		<a href="#panel<%- order %>">
+			<span style="text-transform: capitalize;"><%- attributes.attributes.type %> Field</span>: <span class="wx-form-builder-label"><%- label %></span>
+		</a>
+	</p>
 	<div class="content" data-section-content style="height: 315px; overflow-y: auto;">
 		<label>Label</label>
 		<input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
 		<label>Placeholder</label>
-		<input type='text' class="wx-form-builder-placeholder-input" value='<%- attributes.attributes.placeholder %>' placeholder="Placeholder" />
+		<input type='text' class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" value='<%- attributes.attributes.placeholder %>' placeholder="Placeholder" />
 		<label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> />Required</label>
 		<a class="wx-form-builder-delete">&times; Delete</a>
 	</div>

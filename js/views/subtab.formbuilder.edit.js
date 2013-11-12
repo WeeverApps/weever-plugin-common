@@ -279,11 +279,21 @@ wxApp = wxApp || {};
 				model: input
 			});
 			this.$( this.buildPaneSelector ).append( inputView.render().el );
+			
+			// Open the newly added tab.
+			$('.wx-form-builder-row').removeClass('active');
+			inputView.$el.addClass('active');
 
 //			this.model.get( 'controls' ).push( input );
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
 
+			// Now scroll down to it
+			var offset = $('.wx-form-builder-row.active').offset().top - 230;
+			console.log( offset );
+			$('#form-creation').animate({scrollTop: offset}, 1000);
+
+			// Add the preview to the Preview tab.
 			$( this.previewPaneSelector ).append( inputView.getPreview().render().el );
 
 			return input;
