@@ -24,6 +24,7 @@ wxApp = wxApp || {};
         typeDescription: '',
 
         validateFeed: true,
+        buildPreview: true,
 
         allowTitleEdit: true,
 

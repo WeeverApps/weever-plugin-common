@@ -5,6 +5,7 @@ wxApp = wxApp || {};
     wxApp.FormBuilderSubTab = wxApp.SubTab.extend({
         default_icon_id: 30,
         validateFeed: false,
+        buildPreview: true,
         typeDescription: 'Form Builder',
 
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
