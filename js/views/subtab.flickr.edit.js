@@ -6,7 +6,13 @@ wxApp = wxApp || {};
         subTabEditTplSelector: '#flickr-subtab-edit-template',
 
         setModelFromView: function(model) {
-            model.set( 'content', this.$('.wx-content-radio:checked').val() );
+            var content = this.$('.wx-content-radio:checked').val();
+            model.set( 'content', content );
+            if ( content === 'flickrPhotostream' )
+                model.set('layout', 'carousel');
+            else
+                model.set('layout', 'list');
+
             var url = this.$('.wx-edit-input').val();
             // Remove any trailing forward slashes
             // (eg, turn 'flickr.com/user/' into 'flickr.com/user')

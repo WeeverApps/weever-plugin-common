@@ -19,7 +19,6 @@ wxApp = wxApp || {};
         },
 
         rerender: function() {
-            alert('rerender');
             this.render();
         },
 
