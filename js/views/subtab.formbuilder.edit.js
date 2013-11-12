@@ -271,30 +271,12 @@ wxApp = wxApp || {};
 
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
 			input.get( 'attributes' ).set( attributes );
-			var count = this.model.get( 'config' ).formElements.length;
-			count++;
-			input.set( 'order', count );
 
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
-			this.$( this.buildPaneSelector ).append( inputView.render().el );
 			
-			// Open the newly added tab.
-			$('.wx-form-builder-row').removeClass('active');
-			inputView.$el.addClass('active');
-
-//			this.model.get( 'controls' ).push( input );
-			this.model.get( 'config' ).formElements.push( input );
-			$( this.buildPaneSelector ).foundation('section', 'reflow');
-
-			// Now scroll down to it
-			var offset = $('.wx-form-builder-row.active').offset().top - 230;
-			console.log( offset );
-			$('#form-creation').animate({scrollTop: offset}, 1000);
-
-			// Add the preview to the Preview tab.
-			$( this.previewPaneSelector ).append( inputView.getPreview().render().el );
+			this.addControl( input, inputView );
 
 			return input;
 		},
@@ -302,12 +284,6 @@ wxApp = wxApp || {};
 		addDateInput: function() {
 			this.addInput({
 				label: 'Date',
-//				minClass: '',
-//				maxClass: '',
-//				valueClass: '',
-//				minType: 'date',
-//				maxType: 'date',
-//				valueType: 'date',
 				attributes: {
 					type: 'date'
 				}
@@ -317,13 +293,6 @@ wxApp = wxApp || {};
 		addDateTimeLocalInput: function() {
 			this.addInput({
 				label: 'Date/Time',
-//				minClass: '',
-//				maxClass: '',
-//				stepClass: '',
-//				valueClass: '',
-//				minType: 'date',
-//				maxType: 'date',
-//				valueType: 'date',
 				attributes: {
 					type: 'datetime-local'
 				}
@@ -465,7 +434,6 @@ wxApp = wxApp || {};
 				model: textArea
 			});
 			this.$( this.buildPaneSelector ).append( textAreaView.render().el );
-//			this.model.get( 'controls' ).push( textArea );
 			this.model.get( 'config' ).formElements.push( textArea );
 		},
 
@@ -479,7 +447,8 @@ wxApp = wxApp || {};
 				model: radioFieldset
 			});
 
-			this.$( this.buildPaneSelector ).append( radioFieldsetView.render().el );
+			// this.$( this.buildPaneSelector ).append( radioFieldsetView.render().el );
+			this.addControl( radioFieldset, radioFieldsetView );
 
 			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
 				collection: radioFieldset.get( 'radioGroup' )
@@ -495,8 +464,9 @@ wxApp = wxApp || {};
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
 			}
-
-			this.model.get( 'config' ).formElements.push( radioFieldset );
+			
+			// radioFieldsetView.getPreview().render();
+			// this.model.get( 'config' ).formElements.push( radioFieldset );
 		},
 
 		addCheckboxGroup: function() {
@@ -572,6 +542,30 @@ wxApp = wxApp || {};
 
 			// Add Select to control collection
 			this.model.get( 'config' ).formElements.push( select );
+		},
+
+		addControl: function( input, view ) {
+			var count = this.model.get( 'config' ).formElements.length;
+			count++;
+			input.set( 'ordinal', count );
+
+			this.$( this.buildPaneSelector ).append( view.render().el );
+			
+			// Open the newly added tab.
+			$('.wx-form-builder-row').removeClass('active');
+			view.$el.addClass('active');
+
+//			this.model.get( 'controls' ).push( input );
+			this.model.get( 'config' ).formElements.push( input );
+			$( this.buildPaneSelector ).foundation('section', 'reflow');
+
+			// Now scroll down to it
+			var offset = $('.wx-form-builder-row.active').offset().top - 230;
+			console.log( offset );
+			$('#form-creation').animate({scrollTop: offset}, 1000);
+
+			// Add the preview to the Preview tab.
+			$( this.previewPaneSelector ).append( view.getPreview().render().el );
 		}
 
 	});

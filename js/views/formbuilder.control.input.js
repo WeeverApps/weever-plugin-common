@@ -4,14 +4,14 @@ wxApp = wxApp || {};
 (function($){
 	wxApp.FormBuilderControlInputView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-input',
-		radioTplSelector: '#form-builder-radio',
+		// radioTplSelector: '#form-builder-radio',
 		checkboxTplSelector: '#form-builder-checkbox',
 		preview: null,
 
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'click .wx-form-builder-add-radio': 'addRadio',
+				// 'click .wx-form-builder-add-radio': 'addRadio',
 				'click .wx-form-builder-add-checkbox': 'addCheckbox'
 			});
 		},
@@ -36,12 +36,12 @@ wxApp = wxApp || {};
 			return this;
 		},
 
-		addRadio: function() {
-			console.log('radio view add');
-			console.log(this.model);
-			this.model.collection.add( new wxApp.FormBuilderControlRadio() );
-			console.log(this.model.collection);
-		},
+		// addRadio: function() {
+		// 	console.log('radio view add');
+		// 	console.log(this.model);
+		// 	this.model.collection.add( new wxApp.FormBuilderControlRadio() );
+		// 	console.log(this.model.collection);
+		// },
 
 		addCheckbox: function() {
 			console.log('checkbox view add');
@@ -78,5 +78,72 @@ wxApp = wxApp || {};
 		}
 
 	});
+
+	wxApp.FormBuilderControlRadioView = wxApp.FormBuilderControlView.extend({
+		tagName: 'div',
+		className: 'row',
+		radioTplSelector: '#form-builder-radio',
+		preview: null,
+
+		// Extend the events from the parent
+		events: function() {
+			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'click .wx-form-builder-add-radio': 'addRadio'
+			});
+		},
+
+		initialize: function( options ) {
+			console.log( options );
+			var $template = $( this.radioTplSelector );
+			this.inputTpl = _.template( $template.html() );
+			// this.model.bind('change', this.render, this);
+		},
+
+		getPreview: function() {
+			if ( this.preview === null ) {
+				this.preview = new wxApp.FormBuilderControlRadioPreview({ model: this.model });
+			}
+			return this.preview;
+		},
+
+		updateLabel: function( ev ) {
+			console.log('updateRadioLabel');
+			var value = $( ev.currentTarget ).val();
+			this.model.set( 'label', value );
+		},
+
+		render: function() {
+			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			return this;
+		},
+
+		addRadio: function() {
+			console.log('radio view add');
+			console.log(this.model);
+			this.model.collection.add( new wxApp.FormBuilderControlRadio() );
+			console.log(this.model.collection);
+		}
+	});
+
+
+	wxApp.FormBuilderControlRadioPreview = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-preview-row',
+
+		initialize: function() {
+			var selector = '#form-builder-radio-preview';
+			var $template = $( selector );
+			this.inputTpl = _.template( $template.html() );
+			this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			monkey = this.model.toJSON();
+			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			return this;
+		}
+
+	});
+
 
 })(jQuery);

@@ -37,15 +37,16 @@ wxApp = wxApp || {};
 			this.model.destroy();
 		},
 
-		editLabel: function( ev ) {
-			console.log('editLabel');
-			ev.preventDefault();
-			this.$label = $( ev.currentTarget );
-			this.$( '.wx-form-builder-label-input' ).val( this.$label.text() ).show().select();
-			this.$label.hide();
-		},
+		// editLabel: function( ev ) {
+		// 	console.log('editLabel');
+		// 	ev.preventDefault();
+		// 	this.$label = $( ev.currentTarget );
+		// 	this.$( '.wx-form-builder-label-input' ).val( this.$label.text() ).show().select();
+		// 	this.$label.hide();
+		// },
 
 		updateLabel: function( ev ) {
+			console.log('updateLabel');
 			var value = $( ev.currentTarget ).val();
 			this.model.set( 'label', value );
 

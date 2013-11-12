@@ -4,11 +4,14 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlRadioFieldsetView = Backbone.View.extend({
+		tagName: 'section',
+		className: 'wx-form-builder-row',
 		tplSelector: '#form-builder-radio-fieldset',
+		preview: null,
 
 		events: {
 			'click .wx-form-builder-edit-title': 'editTitle',
-			'blur .wx-form-builder-title-input': 'updateTitle',
+			'keyup .wx-form-builder-title-input': 'updateTitle',
 			'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl'
@@ -57,22 +60,54 @@ wxApp = wxApp || {};
 			}
 		},
 
-		editTitle: function( ev ) {
-			console.log('editTitle');
-			ev.preventDefault();
-			this.$title = $( ev.currentTarget );
-			this.$( '.wx-form-builder-title-input' ).val( this.$title.text() ).show().select();
-			this.$title.hide();
-		},
+		// editTitle: function( ev ) {
+		// 	console.log('editTitle');
+		// 	ev.preventDefault();
+		// 	this.$title = $( ev.currentTarget );
+		// 	this.$( '.wx-form-builder-title-input' ).val( this.$title.text() ).show().select();
+		// 	this.$title.hide();
+		// },
 
 		updateTitle: function( ev ) {
 			console.log('updateTitle');
 			var $me = $( ev.currentTarget );
-			this.$title.text( $me.val() ).show();
-			$me.hide();
+			// this.$title.text( $me.val() ).show();
+			// $me.hide();
 
+			this.$('.wx-form-builder-label').text( $me.val() );2
 			this.model.set( 'title', $me.val() );
+		},
+
+		getPreview: function() {
+			if ( this.preview === null ) {
+				this.preview = new wxApp.FormBuilderControlRadioFieldsetPreview({ model: this.model });
+			}
+			return this.preview;
 		}
 
+	});
+
+	wxApp.FormBuilderControlRadioFieldsetPreview = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-preview-row',
+
+		initialize: function() {
+			var selector = '#form-builder-radio-fieldset-preview';
+			var $template = $( selector );
+			this.fieldsetTpl = _.template( $template.html() );
+			this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			var model = this.model.toJSON();
+			this.$el.html( this.fieldsetTpl( model ) );
+
+			// for (var i = 0; i < this.model.get('radioGroup').length; i++) {
+			// 	var preview = this.model.get('radioGroup').models[i].getPreview();
+			// 	this.$('fieldset').append( preview.render() );
+			// };
+
+			return this;
+		}
 	});
 })(jQuery);

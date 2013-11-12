@@ -5,6 +5,7 @@ wxApp = wxApp || {};
 (function($){
 
 	wxApp.FormBuilderControlRadioFieldset = Backbone.Model.extend({
+		preview: null,
 
 		defaults: {
 			control: 'radiofieldset',
@@ -26,7 +27,6 @@ wxApp = wxApp || {};
 			console.log( 'onRadioGroupAdd' );
 			checkbox.get( 'attributes' ).set( 'name', this.get( 'name' ) );
 		}
-
 
 	});
 
