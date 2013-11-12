@@ -3,7 +3,8 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
-		previewPaneSelector: '.wx-form-builder-preview',
+		previewPaneSelector: '.wx-validate-feed',
+		buildPaneSelector: '#form-build-area',
         subTabEditTplSelector: '#form-builder-subtab-edit-template',
 	    hasCalledFinish: false,
 	    finishView: null,
@@ -17,6 +18,9 @@ wxApp = wxApp || {};
 			// Call parent's initialize() function
 			this.constructor.__super__.initialize.apply( this, arguments );
 			console.log('FormBuilderSubTabEditView initialize');
+
+			// Clear the preview window
+			$( this.previewPaneSelector ).html( '' );
 
 			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
 				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
@@ -154,7 +158,7 @@ wxApp = wxApp || {};
 				    this.finishView = new wxApp.FormBuilderFinishView({
 					    model: this.model
 				    });
-				    this.$( this.previewPaneSelector ).append( this.finishView.render().el );
+				    this.$( this.buildPaneSelector ).append( this.finishView.render().el );
 	//			    $( 'body' ).append( finishView.render().el );
 			    };
 
@@ -244,7 +248,7 @@ wxApp = wxApp || {};
 			var actionView = new wxApp.FormBuilderActionView({
 				model: action
 			});
-			this.$( this.previewPaneSelector ).append( actionView.render().el );
+			this.$( this.buildPaneSelector ).append( actionView.render().el );
 
 //			this.model.get( 'config' ).formElements.push( action );
 			this.model.get( 'config' ).formActions.push( action );
@@ -267,14 +271,21 @@ wxApp = wxApp || {};
 
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
 			input.get( 'attributes' ).set( attributes );
+			var count = this.model.get( 'config' ).formElements.length;
+			count++;
+			input.set( 'order', count );
 
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
-			this.$( this.previewPaneSelector ).append( inputView.render().el );
+			this.$( this.buildPaneSelector ).append( inputView.render().el );
 
 //			this.model.get( 'controls' ).push( input );
 			this.model.get( 'config' ).formElements.push( input );
+			$( this.buildPaneSelector ).foundation('section', 'reflow');
+
+			$( this.previewPaneSelector ).append( inputView.getPreview().render().el );
+
 			return input;
 		},
 
@@ -428,7 +439,7 @@ wxApp = wxApp || {};
 			var infoView = new wxApp.FormBuilderControlInfoView({
 				model: info
 			});
-			this.$( this.previewPaneSelector ).append( infoView.render().el );
+			this.$( this.buildPaneSelector ).append( infoView.render().el );
 			this.model.get( 'config' ).formElements.push( info );
 
 		},
@@ -443,7 +454,7 @@ wxApp = wxApp || {};
 			var textAreaView = new wxApp.FormBuilderControlTextareaView({
 				model: textArea
 			});
-			this.$( this.previewPaneSelector ).append( textAreaView.render().el );
+			this.$( this.buildPaneSelector ).append( textAreaView.render().el );
 //			this.model.get( 'controls' ).push( textArea );
 			this.model.get( 'config' ).formElements.push( textArea );
 		},
@@ -458,7 +469,7 @@ wxApp = wxApp || {};
 				model: radioFieldset
 			});
 
-			this.$( this.previewPaneSelector ).append( radioFieldsetView.render().el );
+			this.$( this.buildPaneSelector ).append( radioFieldsetView.render().el );
 
 			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
 				collection: radioFieldset.get( 'radioGroup' )
@@ -488,7 +499,7 @@ wxApp = wxApp || {};
 				model: checkboxFieldset
 			});
 
-			this.$( this.previewPaneSelector ).append( checkboxFieldsetView.render().el );
+			this.$( this.buildPaneSelector ).append( checkboxFieldsetView.render().el );
 
 			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({
 				collection: checkboxFieldset.get( 'checkboxGroup' )
@@ -528,8 +539,8 @@ wxApp = wxApp || {};
 				model: select
 			});
 
-			// Add Select to preview pane
-			this.$( this.previewPaneSelector ).append( selectView.render().el );
+			// Add Select to build pane
+			this.$( this.buildPaneSelector ).append( selectView.render().el );
 
 			var optionGroupView = new wxApp.FormBuilderControlOptionGroupView({
 				collection: select.get('optionGroup')

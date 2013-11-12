@@ -17,6 +17,7 @@ wxApp = wxApp || {};
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
+        		buildPreview: true,
 				config: {
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
 					onUpload: {

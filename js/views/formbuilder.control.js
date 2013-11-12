@@ -3,25 +3,26 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlView = Backbone.View.extend({
+		tagName: 'section',
 		className: 'wx-form-builder-row',
 
 		events: {
-			'click .wx-form-builder-edit-label': 'editLabel',
-			'blur .wx-form-builder-label-input': 'updateLabel',
-			'blur .wx-form-builder-placeholder-input': 'updatePlaceholder',
-			'blur .wx-form-builder-min-input': 'setMin',
-			'blur .wx-form-builder-max-input': 'setMax',
-			'blur .wx-form-builder-value-input': 'setValue',
-			'blur .wx-form-builder-step-input': 'setStep',
-			'blur .wx-form-builder-name-input': 'setName',
-			'click .wx-form-builder-autocomplete': 'setAutocomplete',
-			'click .wx-form-builder-control-checked': 'setChecked',
-			'click .wx-form-builder-control-selected': 'setSelected',
-			'click .wx-form-builder-allow-multiple': 'setMultiple',
-			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
+			// 'click .wx-form-builder-edit-label': 'editLabel',
+			'keyup .wx-form-builder-label-input': 'updateLabel',
+			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
+			// 'blur .wx-form-builder-min-input': 'setMin',
+			// 'blur .wx-form-builder-max-input': 'setMax',
+			// 'blur .wx-form-builder-value-input': 'setValue',
+			// 'blur .wx-form-builder-step-input': 'setStep',
+			// 'blur .wx-form-builder-name-input': 'setName',
+			// 'click .wx-form-builder-autocomplete': 'setAutocomplete',
+			// 'click .wx-form-builder-control-checked': 'setChecked',
+			// 'click .wx-form-builder-control-selected': 'setSelected',
+			// 'click .wx-form-builder-allow-multiple': 'setMultiple',
+			// 'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-required': 'setRequired',
 			'click .wx-form-builder-delete': 'deleteControl',
-			'sortable-drop': 'sortableDrop'
+			// 'sortable-drop': 'sortableDrop'
 		},
 
 		sortableDrop: function( event, index ) {
@@ -31,6 +32,7 @@ wxApp = wxApp || {};
 
 		deleteControl: function() {
 			console.log( 'deleteControl' );
+			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
 		},
@@ -44,21 +46,20 @@ wxApp = wxApp || {};
 		},
 
 		updateLabel: function( ev ) {
-			console.log('updateLabel');
-			var $me = $( ev.currentTarget );
-			this.$label.text( $me.val() ).show();
-			$me.hide();
+			var value = $( ev.currentTarget ).val();
+			this.model.set( 'label', value );
 
-			this.model.set( 'label', $me.val() );
+			// Update the title on the 'Add Fields' tab
+			this.$('.wx-form-builder-label').text( value );
 		},
 
 		updatePlaceholder: function(ev) {
-			console.log('updatePlaceholder');
 			var $me = $( ev.currentTarget );
-			if ( $me.val() !== '' )
-				this.model.get( 'attributes' ).set( 'placeholder', $me.val() );
-			
-			this.getInput().attr( 'placeholder', $me.val() );
+
+			// Backbone doesn't notice when attributes are changed, so we 
+			// have to trigger a change even manually.
+			this.model.get( 'attributes' ).set( 'placeholder', $me.val() );
+			this.model.trigger('change');
 		},
 
 		setMin: function( ev ) {
@@ -133,16 +134,17 @@ wxApp = wxApp || {};
 		},
 
 		setRequired: function( ev ) {
-			console.log('setRequired');
 			var $me = $( ev.currentTarget );
 			if ( $me.is( ':checked' ) ) {
 				this.model.get( 'attributes' ).set( 'required', 'checked' );
-				$('span.required').show();
 			}
 			else {
 				this.model.get( 'attributes' ).unset( 'required' );
-				$('span.required').hide();
 			}
+
+			// Backbone doesn't notice when attributes are changed, so we 
+			// have to trigger a change even manually.
+			this.model.trigger('change');
 		},
 
 		getInput: function() {

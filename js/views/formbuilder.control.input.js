@@ -6,6 +6,7 @@ wxApp = wxApp || {};
 		inputTplSelector: '#form-builder-input',
 		radioTplSelector: '#form-builder-radio',
 		checkboxTplSelector: '#form-builder-checkbox',
+		preview: null,
 
 		// Extend the events from the parent
 		events: function() {
@@ -20,13 +21,19 @@ wxApp = wxApp || {};
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
 			var $template = $( this[options.type + 'TplSelector'] );
 			this.inputTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
+			// this.model.bind('change', this.render, this);
+		},
+
+		getPreview: function() {
+			if ( this.preview === null ) {
+				this.preview = new wxApp.FormBuilderControlInputPreview({ model: this.model });
+			}
+			return this.preview;
 		},
 
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
-			console.log('input render');
 		},
 
 		addRadio: function() {
@@ -44,4 +51,23 @@ wxApp = wxApp || {};
 		}
 
 	});
+
+	wxApp.FormBuilderControlInputPreview = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-preview-row',
+
+		initialize: function() {
+			var selector = '#form-builder-input-preview';
+			var $template = $( selector );
+			this.inputTpl = _.template( $template.html() );
+			this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			return this;
+		}
+
+	});
+
 })(jQuery);
