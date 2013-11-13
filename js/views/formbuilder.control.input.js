@@ -86,11 +86,11 @@ wxApp = wxApp || {};
 		preview: null,
 
 		// Extend the events from the parent
-		events: function() {
-			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'click .wx-form-builder-add-radio': 'addRadio'
-			});
-		},
+		// events: function() {
+		// 	return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+		// 		'click .wx-form-builder-add-radio': 'addRadio'
+		// 	});
+		// },
 
 		initialize: function( options ) {
 			console.log( options );
@@ -115,14 +115,14 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
-		},
+		}//,
 
-		addRadio: function() {
-			console.log('radio view add');
-			console.log(this.model);
-			this.model.collection.add( new wxApp.FormBuilderControlRadio() );
-			console.log(this.model.collection);
-		}
+		// addRadio: function() {
+		// 	console.log('radio view add');
+		// 	console.log(this.model);
+		// 	this.model.collection.add( new wxApp.FormBuilderControlRadio() );
+		// 	console.log(this.model.collection);
+		// }
 	});
 
 

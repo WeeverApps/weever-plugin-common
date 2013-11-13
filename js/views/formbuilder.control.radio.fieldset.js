@@ -10,11 +10,12 @@ wxApp = wxApp || {};
 		preview: null,
 
 		events: {
-			'click .wx-form-builder-edit-title': 'editTitle',
+			// 'click .wx-form-builder-edit-title': 'editTitle',
 			'keyup .wx-form-builder-title-input': 'updateTitle',
-			'blur .wx-form-builder-name-input': 'setName',
+			// 'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
-			'click .wx-form-builder-delete': 'deleteControl'
+			'click .wx-form-builder-delete': 'deleteControl',
+			'click .wx-form-builder-add-radio': 'addRadio'
 		},
 
 		initialize: function() {
@@ -31,22 +32,23 @@ wxApp = wxApp || {};
 
 		deleteControl: function() {
 			console.log( 'deleteControl' );
+			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
 		},
 
-		setName: function( ev ) {
-			console.log( 'setName' );
-			var $me = $( ev.currentTarget );
-			console.log( this );
-			if ( $me.val() !== '' ) {
-				this.model.set( 'name', $me.val() );
-				this.model.get( 'radioGroup' ).each( function( model ) {
-					model.get( 'attributes' ).set( 'name', $me.val() );
-					console.log( model );
-				} );
-			}
-		},
+		// setName: function( ev ) {
+		// 	console.log( 'setName' );
+		// 	var $me = $( ev.currentTarget );
+		// 	console.log( this );
+		// 	if ( $me.val() !== '' ) {
+		// 		this.model.set( 'name', $me.val() );
+		// 		this.model.get( 'radioGroup' ).each( function( model ) {
+		// 			model.get( 'attributes' ).set( 'name', $me.val() );
+		// 			console.log( model );
+		// 		} );
+		// 	}
+		// },
 
 		setAllowAdditional: function( ev ) {
 			console.log('setAllowAdditional');
@@ -83,6 +85,13 @@ wxApp = wxApp || {};
 				this.preview = new wxApp.FormBuilderControlRadioFieldsetPreview({ model: this.model });
 			}
 			return this.preview;
+		},
+
+		addRadio: function() {
+			console.log('radio view add');
+			console.log(this.model.get( 'radioGroup' ));
+			this.model.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
+			console.log(this.model.get( 'radioGroup' ));
 		}
 
 	});

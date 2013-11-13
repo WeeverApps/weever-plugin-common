@@ -457,7 +457,9 @@ wxApp = wxApp || {};
 			radioFieldsetView.$( '.wx-form-builder-radio-fieldset' ).append( radioGroupView.render().el );
 
 			if ( properties.radioGroup == undefined || properties.radioGroup.length == 0 ) {
-				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
+				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio('Option A') );
+				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio('Option B') );
+				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio('Option C') );
 			} else {
 				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlRadio( properties.radioGroup[i] );
