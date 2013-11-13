@@ -76,6 +76,6 @@ wxApp = wxApp || {};
 				this.$('input').attr('value', model.attributes.attributes.value );
 			return this;
 		}
-
 	});
+	
 })(jQuery);

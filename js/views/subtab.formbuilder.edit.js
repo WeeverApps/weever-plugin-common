@@ -433,8 +433,10 @@ wxApp = wxApp || {};
 			var textAreaView = new wxApp.FormBuilderControlTextareaView({
 				model: textArea
 			});
-			this.$( this.buildPaneSelector ).append( textAreaView.render().el );
-			this.model.get( 'config' ).formElements.push( textArea );
+
+			this.addControl( textArea, textAreaView );
+			// this.$( this.buildPaneSelector ).append( textAreaView.render().el );
+			// this.model.get( 'config' ).formElements.push( textArea );
 		},
 
 		addRadioGroup: function() {

@@ -1,12 +1,19 @@
 <script type="text/template" id="form-builder-textarea">
-	<fieldset>
-		<legend>Preview</legend>
-		<input type="text" class="wx-form-builder-label-input hide" value="<%- label %>" />
-		<label class="wx-form-builder-edit-label"><%- label %></label>&nbsp;<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
-		<textarea class="wx-form-builder-textarea"></textarea>
-	</fieldset>
-	<input class="wx-form-builder-name-input" type="text" placeholder="name" value="<%- attributes.attributes.name %>" />
-	<input class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" type="text" placeholder="placeholder" value="<%- attributes.attributes.placeholder %>"/>
-	<label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> />Required</label>
-	<a class="wx-form-builder-delete wxui-btn red">Delete</a>
+	<p class="title" data-section-title>
+		<a href="#panel<%- ordinal %>">
+			<span style="text-transform: capitalize;">Text Area</span>: <span class="wx-form-builder-label"><%- label %></span>
+		</a>
+	</p>
+	<div class="content" data-section-content>
+		<label>Label</label>
+		<input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
+		<a class="wx-form-builder-delete">&times; Delete</a>
+	</div>
+</script>
+
+<script type="text/template" id="form-builder-textarea-preview">
+	<label class="wx-form-builder-label">
+		<%- label %>
+	</label>
+	<textarea class="wx-form-builder-textarea"></textarea>
 </script>
