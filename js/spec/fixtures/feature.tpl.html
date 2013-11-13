@@ -1,26 +1,36 @@
 <script type="text/template" id="feature-template">
-    <button class="button secondary expand wx-add-feature <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%-featureName %>">
 
-        <!-- Icon -->
-		<% if (iconId == 0) { %>
-            <span class="wx-add-feature-icon wxIcon wxIcon-1"></span>
-        <% } else { %>
-            <span class="wx-add-feature-icon wxIcon wxIcon-<%- iconId %> wxFont-1"></span>
-		<% } %>
+   <!-- add feature action -->
+    <a class="wx-add-feature <%- includeClass %>" id="add-<%- featureName %>" data-reveal-id="wx-edit-area-<%-featureName %>">
 
-        <!-- Feature Name -->
-        <span class="wx-add-feature-name"><%- name %></span>
+        &nbsp;
 
-        <!-- Tiering -->
+        <!-- show "pro" label if tier is free trial or basic -->
         <% if (tierRequired != undefined && tierRequired == 2) { %>
-            <span class="wx-add-feature-tier">pro</span>
+            <span class="label success wx-add-feature-tier">pro</span>
         <% } else { %>
-            <span class="wx-add-feature-tier"></span>
+            <span class="label secondary wx-add-feature-tier">+ add</span>
         <% } %>
 
-	</button>
+	</a>
+
+    <!-- add feature title -->
+    <div class="wx-add-feature-name">
+        <%- name %>
+    </div>
+
+
 
     <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
         Please wait...
     </div>
+
+
 </script>
+
+
+
+<!-- Display subscription tier info -->
+<!--
+
+-->
