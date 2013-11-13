@@ -418,8 +418,10 @@ wxApp = wxApp || {};
 			var infoView = new wxApp.FormBuilderControlInfoView({
 				model: info
 			});
-			this.$( this.buildPaneSelector ).append( infoView.render().el );
-			this.model.get( 'config' ).formElements.push( info );
+
+			this.addControl( info, infoView );
+			// this.$( this.buildPaneSelector ).append( infoView.render().el );
+			// this.model.get( 'config' ).formElements.push( info );
 
 		},
 

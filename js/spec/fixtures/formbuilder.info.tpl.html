@@ -1,6 +1,18 @@
 <script type="text/template" id="form-builder-info">
-	<label>Enter your informational text below. You may use inline HTML.<br />
+	<p class="title" data-section-title>
+		<a href="#panel<%- ordinal %>">
+			<span style="text-transform: capitalize;">Informational Text</span>
+		</a>
+	</p>
+	<div class="content" data-section-content>
+		Enter your informational text below. You may use inline HTML.<br/>
 		<textarea class="wx-form-builder-info"><%- innerHTML %></textarea>
-	</label>
-	<a class="wx-form-builder-delete wxui-btn red">Delete</a>
+		<a class="wx-form-builder-delete">&times; Delete</a>
+	</div>
+</script>
+
+<script type="text/template" id="form-builder-info-preview">
+	<p>
+		<%= innerHTML %>
+	</p>
 </script>
