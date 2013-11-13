@@ -4,12 +4,15 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlOptionGroupView = Backbone.View.extend({
+		className: 'wx-form-builder-option-group',
 
-		initialize: function() {
+		initialize: function( options ) {
 			console.log('option group view init');
+			console.log( options.collection );
+			console.log( this.collection );
 			this.template = _.template( $('#form-builder-option-group').html() );
-			console.log(this);
 			this.collection.bind('add', this.addOne, this);
+			this.previewArea = options.previewArea;
 		},
 
 		render: function() {
@@ -23,7 +26,10 @@ wxApp = wxApp || {};
 			var view = new wxApp.FormBuilderControlOptionView({
 				model: option
 			});
-			this.$('.wx-form-builder-option-group').append( view.render().el );
+
+			this.$el.append( view.render().el );
+			
+			this.previewArea.$('select').append( view.getPreview().render().el );
 		}
 
 	});

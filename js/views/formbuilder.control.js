@@ -104,13 +104,13 @@ wxApp = wxApp || {};
 			this.model.trigger('change');
 		},
 
-		setSelected: function( ev ) {
-			console.log('setSelected');
-			this.model.collection.models.forEach( function( control ) {
-				control.get( 'attributes' ).unset( 'selected' );
-			});
-			this.model.get( 'attributes' ).set( 'selected', 'checked' );
-		},
+		// setSelected: function( ev ) {
+		// 	console.log('setSelected');
+		// 	this.model.collection.models.forEach( function( control ) {
+		// 		control.get( 'attributes' ).unset( 'selected' );
+		// 	});
+		// 	this.model.get( 'attributes' ).set( 'selected', 'checked' );
+		// },
 
 		setMultiple: function( ev ) {
 			console.log('setMultiple');

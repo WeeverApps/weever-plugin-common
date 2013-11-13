@@ -4,13 +4,17 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlSelectView = Backbone.View.extend({
+		tagName: 'section',
+		className: 'wx-form-builder-row',
 		tplSelector: '#form-builder-select',
+		preview: null,
 
 		events: {
-			'click .wx-form-builder-edit-title': 'editTitle',
-			'blur .wx-form-builder-title-input': 'updateTitle',
-			'blur .wx-form-builder-name-input': 'setName',
-			'click .wx-form-builder-select-allow-multiple': 'toggleMultipleSelections',
+			// 'click .wx-form-builder-edit-title': 'editTitle',
+			'keyup .wx-form-builder-title-input': 'updateTitle',
+			// 'blur .wx-form-builder-name-input': 'setName',
+			// 'click .wx-form-builder-select-allow-multiple': 'toggleMultipleSelections',
+			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl'
 		},
@@ -24,22 +28,24 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			console.log('select group view render');
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
 		},
 
 		deleteControl: function() {
-			console.log( 'deleteControl' );
 			this.remove();
 			this.model.destroy();
 		},
 
-		setName: function( ev ) {
-			var $me = $( ev.currentTarget );
-			if ( $me.val() !== '' )
-				this.model.get( 'attributes' ).set( 'name', $me.val() );
+		addOption: function() {
+			this.model.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
 		},
+
+		// setName: function( ev ) {
+		// 	var $me = $( ev.currentTarget );
+		// 	if ( $me.val() !== '' )
+		// 		this.model.get( 'attributes' ).set( 'name', $me.val() );
+		// },
 
 		setAllowAdditional: function( ev ) {
 			console.log('setAllowAdditional');
@@ -53,33 +59,59 @@ wxApp = wxApp || {};
 			}
 		},
 
-		toggleMultipleSelections: function( ev ) {
-			// This field has been removed as Sencha Touch doesn't support multiple selections in a <select> group
-			var $me = $( ev.currentTarget );
-			if ( $me.is( ':checked' ) ) {
-				this.model.get( 'attributes' ).set( 'multiple', 'checked' );
+		getPreview: function() {
+			if ( this.preview === null ) {
+				this.preview = new wxApp.FormBuilderControlSelectPreview({ model: this.model });
 			}
-			else {
-				this.model.get( 'attributes' ).unset( 'multiple' );
-			}
+			return this.preview;
 		},
 
-		editTitle: function( ev ) {
-			console.log('editTitle');
-			ev.preventDefault();
-			this.$title = $( ev.currentTarget );
-			this.$( '.wx-form-builder-title-input' ).val( this.$title.text() ).show().select();
-			this.$title.hide();
-		},
+		// toggleMultipleSelections: function( ev ) {
+		// 	// This field has been removed as Sencha Touch doesn't support multiple selections in a <select> group
+		// 	var $me = $( ev.currentTarget );
+		// 	if ( $me.is( ':checked' ) ) {
+		// 		this.model.get( 'attributes' ).set( 'multiple', 'checked' );
+		// 	}
+		// 	else {
+		// 		this.model.get( 'attributes' ).unset( 'multiple' );
+		// 	}
+		// },
+
+		// editTitle: function( ev ) {
+		// 	console.log('editTitle');
+		// 	ev.preventDefault();
+		// 	this.$title = $( ev.currentTarget );
+		// 	this.$( '.wx-form-builder-title-input' ).val( this.$title.text() ).show().select();
+		// 	this.$title.hide();
+		// },
 
 		updateTitle: function( ev ) {
 			console.log('updateTitle');
 			var $me = $( ev.currentTarget );
-			this.$title.text( $me.val() ).show();
-			$me.hide();
+			this.$('.wx-form-builder-edit-title').text( $me.val() ); //.show();
+			// $me.hide();
 
 			this.model.set( 'title', $me.val() );
+			this.getPreview().$('label').text( $me.val() );
 		}
 
+	});
+
+	wxApp.FormBuilderControlSelectPreview = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-preview-row',
+
+		initialize: function() {
+			var selector = '#form-builder-select-preview';
+			var $template = $( selector );
+			this.inputTpl = _.template( $template.html() );
+			// this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			var model = this.model.toJSON();
+			this.$el.html( this.inputTpl( model ) );
+			return this;
+		}
 	});
 })(jQuery);

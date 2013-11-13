@@ -528,11 +528,14 @@ wxApp = wxApp || {};
 				model: select
 			});
 
+			this.addControl( select, selectView );
+
 			// Add Select to build pane
-			this.$( this.buildPaneSelector ).append( selectView.render().el );
+			// this.$( this.buildPaneSelector ).append( selectView.render().el );
 
 			var optionGroupView = new wxApp.FormBuilderControlOptionGroupView({
-				collection: select.get('optionGroup')
+				collection: select.get('optionGroup'),
+				previewArea: selectView.getPreview()
 			});
 
 			// Add Option Group to Select
@@ -541,7 +544,9 @@ wxApp = wxApp || {};
 			// Add an Option to the Option Group
 			console.log( properties );
 			if ( properties.optionGroup == undefined || properties.optionGroup.length == 0 ) {
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( 'Option A' ) );
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( 'Option B' ) );
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( 'Option C' ) );
 			} else {
 				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlOption( properties.optionGroup[i] );
@@ -550,7 +555,7 @@ wxApp = wxApp || {};
 			}
 
 			// Add Select to control collection
-			this.model.get( 'config' ).formElements.push( select );
+			// this.model.get( 'config' ).formElements.push( select );
 		},
 
 		addControl: function( input, view ) {

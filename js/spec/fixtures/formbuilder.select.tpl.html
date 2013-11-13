@@ -1,11 +1,27 @@
 <script type="text/template" id="form-builder-select">
-	<fieldset class="wx-form-builder-select">
-		<input type="text" class="wx-form-builder-title-input hide" value="<%- title %>" />
-		<h4 class="wx-form-builder-edit-title"><%- title %></h4>
-		<!--<label><input type="checkbox" class="wx-form-builder-select-allow-multiple" <%- attributes.attributes.multiple %> />Allow multiple selections</label>-->
-		<input class="wx-form-builder-name-input" type="text" placeholder="name" value="<%- attributes.attributes.name %>" />
-		<label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> />Required</label>
+	<p class="title" data-section-title>
+		<a href="#panel<%- ordinal %>">
+			Drop Down: <span class="wx-form-builder-edit-title"><%- title %></span>
+		</a>
+	</p>
+	<div class="content" data-section-content>
+		<label>Label</label>
+		<input type='text' class="wx-form-builder-title-input" value='<%- title %>' />
+
+		<div class="wx-form-builder-select"></div>
+
+		<a href="#" class="wx-form-builder-add-option">+ Add New Option</a>
+
 		<label class="<%- allowAdditionalClass %>"><input type="checkbox" class="wx-form-builder-allow-additional" <%- allowAdditional %> />Allow Additional</label>
-		<a class="wx-form-builder-delete wxui-btn red">Delete</a>
-	</fieldset>
+		<a class="wx-form-builder-delete">&times; Delete</a>
+	</div>
+</script>
+
+<script type="text/template" id="form-builder-select-preview">
+	<label>
+		<%- title %>
+		<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
+	</label>
+	<select>
+	</select>
 </script>
