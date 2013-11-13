@@ -27,7 +27,7 @@
 
 <script type="text/template" id="form-builder-radio-preview">
 	<label>
-		<input type="radio">
+		<input type="radio" name="<%- collectionId %>" <% if (typeof attributes.get('checked') !== 'undefined') { %>checked="checked"<% } %>>
 		<%- label %>
 	</label>
 </script>

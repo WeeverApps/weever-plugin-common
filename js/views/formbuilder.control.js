@@ -16,7 +16,7 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-step-input': 'setStep',
 			// 'blur .wx-form-builder-name-input': 'setName',
 			// 'click .wx-form-builder-autocomplete': 'setAutocomplete',
-			// 'click .wx-form-builder-control-checked': 'setChecked',
+			'click .wx-form-builder-control-checked': 'setChecked',
 			// 'click .wx-form-builder-control-selected': 'setSelected',
 			// 'click .wx-form-builder-allow-multiple': 'setMultiple',
 			// 'click .wx-form-builder-allow-additional': 'setAllowAdditional',
@@ -101,6 +101,7 @@ wxApp = wxApp || {};
 				control.get( 'attributes' ).unset( 'checked' );
 			});
 			this.model.get( 'attributes' ).set( 'checked', 'checked' );
+			this.model.trigger('change');
 		},
 
 		setSelected: function( ev ) {

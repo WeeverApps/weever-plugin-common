@@ -105,6 +105,14 @@ wxApp = wxApp || {};
 			this.model.set( 'label', value );
 		},
 
+		setChecked: function( ev ) {
+			this.model.collection.models.forEach( function( control ) {
+				control.get( 'attributes' ).unset( 'checked' );
+			});
+			this.model.get( 'attributes' ).set( 'checked', 'checked' );
+			this.model.trigger('change');
+		},
+
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
@@ -124,7 +132,7 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			monkey = this.model.toJSON();
+			console.log('render radio');
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
 		}
@@ -155,6 +163,18 @@ wxApp = wxApp || {};
 			console.log('updateLabel');
 			var value = $( ev.currentTarget ).val();
 			this.model.set( 'label', value );
+		},
+
+		setChecked: function( ev ) {
+			// this.model.collection.models.forEach( function( control ) {
+			// 	control.get( 'attributes' ).unset( 'checked' );
+			// });
+			if ( this.model.get( 'attributes' ).get( 'checked' ) ) {
+				this.model.get( 'attributes' ).unset( 'checked' );
+			} else {
+				this.model.get( 'attributes' ).set( 'checked', 'checked' );
+			}
+			this.model.trigger('change');
 		},
 
 		render: function() {
