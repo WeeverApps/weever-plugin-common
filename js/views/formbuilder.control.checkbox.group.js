@@ -4,6 +4,7 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlCheckboxGroupView = Backbone.View.extend({
+		className: 'wx-form-builder-checkbox-group',
 
 		initialize: function() {
 			console.log('checkbox group view init');
@@ -19,11 +20,13 @@ wxApp = wxApp || {};
 
 		addOne: function( checkbox ) {
 			console.log('checkbox group view add');
-			var view = new wxApp.FormBuilderControlInputView({
+			var view = new wxApp.FormBuilderControlCheckboxView({
 				model: checkbox,
 				type: 'checkbox'
 			});
-			this.$('.wx-form-builder-checkbox-group').append( view.render().el );
+			this.$el.append( view.render().el );
+
+			$('.wx-form-preview-row fieldset').append( view.getPreview().render().el );
 		}
 
 	});

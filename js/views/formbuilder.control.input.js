@@ -5,16 +5,16 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlInputView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-input',
 		// radioTplSelector: '#form-builder-radio',
-		checkboxTplSelector: '#form-builder-checkbox',
+		// checkboxTplSelector: '#form-builder-checkbox',
 		preview: null,
 
 		// Extend the events from the parent
-		events: function() {
-			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				// 'click .wx-form-builder-add-radio': 'addRadio',
-				'click .wx-form-builder-add-checkbox': 'addCheckbox'
-			});
-		},
+		// events: function() {
+		// 	return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+		// 		// 'click .wx-form-builder-add-radio': 'addRadio',
+		// 		// 'click .wx-form-builder-add-checkbox': 'addCheckbox'
+		// 	});
+		// },
 
 		initialize: function( options ) {
 			console.log( options );
@@ -34,7 +34,7 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
-		},
+		} //,
 
 		// addRadio: function() {
 		// 	console.log('radio view add');
@@ -43,12 +43,12 @@ wxApp = wxApp || {};
 		// 	console.log(this.model.collection);
 		// },
 
-		addCheckbox: function() {
-			console.log('checkbox view add');
-			console.log(this.model);
-			this.model.collection.add( new wxApp.FormBuilderControlCheckbox() );
-			console.log(this.model.collection);
-		}
+		// addCheckbox: function() {
+		// 	console.log('checkbox view add');
+		// 	console.log(this.model);
+		// 	this.model.collection.add( new wxApp.FormBuilderControlCheckbox() );
+		// 	console.log(this.model.collection);
+		// }
 
 	});
 
@@ -85,13 +85,6 @@ wxApp = wxApp || {};
 		radioTplSelector: '#form-builder-radio',
 		preview: null,
 
-		// Extend the events from the parent
-		// events: function() {
-		// 	return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-		// 		'click .wx-form-builder-add-radio': 'addRadio'
-		// 	});
-		// },
-
 		initialize: function( options ) {
 			console.log( options );
 			var $template = $( this.radioTplSelector );
@@ -115,14 +108,7 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
-		}//,
-
-		// addRadio: function() {
-		// 	console.log('radio view add');
-		// 	console.log(this.model);
-		// 	this.model.collection.add( new wxApp.FormBuilderControlRadio() );
-		// 	console.log(this.model.collection);
-		// }
+		}
 	});
 
 
@@ -132,6 +118,58 @@ wxApp = wxApp || {};
 
 		initialize: function() {
 			var selector = '#form-builder-radio-preview';
+			var $template = $( selector );
+			this.inputTpl = _.template( $template.html() );
+			this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			monkey = this.model.toJSON();
+			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			return this;
+		}
+
+	});
+
+	wxApp.FormBuilderControlCheckboxView = wxApp.FormBuilderControlView.extend({
+		tagName: 'div',
+		className: 'row',
+		checkTplSelector: '#form-builder-checkbox',
+		preview: null,
+
+		initialize: function( options ) {
+			console.log( options );
+			var $template = $( this.checkTplSelector );
+			this.inputTpl = _.template( $template.html() );
+			// this.model.bind('change', this.render, this);
+		},
+
+		getPreview: function() {
+			if ( this.preview === null ) {
+				this.preview = new wxApp.FormBuilderControlCheckboxPreview({ model: this.model });
+			}
+			return this.preview;
+		},
+
+		updateLabel: function( ev ) {
+			console.log('updateLabel');
+			var value = $( ev.currentTarget ).val();
+			this.model.set( 'label', value );
+		},
+
+		render: function() {
+			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			return this;
+		}
+	});
+
+
+	wxApp.FormBuilderControlCheckboxPreview = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-preview-row',
+
+		initialize: function() {
+			var selector = '#form-builder-checkbox-preview';
 			var $template = $( selector );
 			this.inputTpl = _.template( $template.html() );
 			this.model.bind('change', this.render, this);

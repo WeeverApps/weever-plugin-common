@@ -27,10 +27,7 @@ wxApp = wxApp || {};
 			});
 			this.$el.append( view.render().el );
 
-			console.log('ALL-O-GISTICS');
-			console.log( $('.wx-form-preview-row fieldset').html() );
 			$('.wx-form-preview-row fieldset').append( view.getPreview().render().el );
-			console.log( $('.wx-form-preview-row fieldset').html() );
 		}
 
 	});

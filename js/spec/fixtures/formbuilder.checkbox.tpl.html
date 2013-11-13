@@ -1,14 +1,11 @@
 <script type="text/template" id="form-builder-checkbox">
-	<fieldset>
-		<legend>Preview</legend>
-		<input type="text" class="wx-form-builder-label-input hide" value="<%- label %>" />
-		<label class="wx-form-builder-edit-label"><%- label %></label>
-		<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" />
-	</fieldset>
-	<label>
-		Checked: <input type="radio" class="wx-form-builder-control-checked" name="wx-form-builder-checkbox-checked-<%- collectionId %>" <%- attributes.attributes.checked %> />
-	</label>
-	<label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> />Required</label>
-	<a class="wx-form-builder-add-checkbox wxui-btn">+</a>
-	<a class="wx-form-builder-delete wxui-btn red">Delete</a>
+	<div class="small-1 large-1 columns">
+		<input type="checkbox" class="wx-form-builder-control-checked" name="wx-form-builder-checkbox-checked-<%- collectionId %>" <%- attributes.attributes.checked %> />
+	</div>
+	<div class="small-10 large-10 columns">
+		<input type="text" class="wx-form-builder-label-input" value="<%- label %>" />
+	</div>
+	<div class="small-1 large-1 columns">
+		<a class="wx-form-builder-delete">&times;</a>
+	</div>
 </script>

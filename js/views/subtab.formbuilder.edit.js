@@ -481,7 +481,8 @@ wxApp = wxApp || {};
 				model: checkboxFieldset
 			});
 
-			this.$( this.buildPaneSelector ).append( checkboxFieldsetView.render().el );
+			// this.$( this.buildPaneSelector ).append( checkboxFieldsetView.render().el );
+			this.addControl( checkboxFieldset, checkboxFieldsetView );
 
 			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({
 				collection: checkboxFieldset.get( 'checkboxGroup' )
@@ -490,7 +491,9 @@ wxApp = wxApp || {};
 			checkboxFieldsetView.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );
 
 			if ( properties.checkboxGroup == undefined || properties.checkboxGroup.length == 0 ) {
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox() );
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox('Option A') );
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox('Option B') );
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox('Option C') );
 			} else {
 				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlCheckbox( properties.checkboxGroup[i] );
@@ -498,7 +501,7 @@ wxApp = wxApp || {};
 				};
 			}
 
-			this.model.get( 'config' ).formElements.push( checkboxFieldset );
+			// this.model.get( 'config' ).formElements.push( checkboxFieldset );
 		},
 
 		/**
