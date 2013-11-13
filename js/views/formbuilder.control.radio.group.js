@@ -6,16 +6,15 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlRadioGroupView = Backbone.View.extend({
 		className: 'wx-form-builder-radio-group',
 
-		initialize: function() {
+		initialize: function(options) {
 			console.log('radio group view init');
 			this.template = _.template( $('#form-builder-radio-group').html() );
-			//console.log(this);
 			this.collection.bind('add', this.addOne, this);
+			this.previewArea = options.previewArea;
 		},
 
 		render: function() {
 			console.log('Radio Group');
-			console.log( this.template() );
 			this.$el.html( this.template() );
 			return this;
 		},
@@ -27,7 +26,7 @@ wxApp = wxApp || {};
 			});
 			this.$el.append( view.render().el );
 
-			$('.wx-form-preview-row fieldset').append( view.getPreview().render().el );
+			this.previewArea.$('fieldset').append( view.getPreview().render().el );
 		}
 
 	});

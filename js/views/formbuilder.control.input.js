@@ -176,7 +176,6 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			monkey = this.model.toJSON();
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 			return this;
 		}

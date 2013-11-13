@@ -451,7 +451,8 @@ wxApp = wxApp || {};
 			this.addControl( radioFieldset, radioFieldsetView );
 
 			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
-				collection: radioFieldset.get( 'radioGroup' )
+				collection: radioFieldset.get( 'radioGroup' ),
+				previewArea: radioFieldsetView.getPreview()
 			});
 
 			radioFieldsetView.$( '.wx-form-builder-radio-fieldset' ).append( radioGroupView.render().el );
@@ -485,7 +486,8 @@ wxApp = wxApp || {};
 			this.addControl( checkboxFieldset, checkboxFieldsetView );
 
 			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({
-				collection: checkboxFieldset.get( 'checkboxGroup' )
+				collection: checkboxFieldset.get( 'checkboxGroup' ),
+				previewArea: checkboxFieldsetView.getPreview()
 			});
 
 			checkboxFieldsetView.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );

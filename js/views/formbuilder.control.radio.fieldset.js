@@ -77,6 +77,7 @@ wxApp = wxApp || {};
 			// $me.hide();
 
 			this.$('.wx-form-builder-label').text( $me.val() );
+			this.getPreview().$('legend').text( $me.val() );
 			this.model.set( 'title', $me.val() );
 		},
 
@@ -104,7 +105,6 @@ wxApp = wxApp || {};
 			var selector = '#form-builder-radio-fieldset-preview';
 			var $template = $( selector );
 			this.fieldsetTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
 		},
 
 		render: function() {
