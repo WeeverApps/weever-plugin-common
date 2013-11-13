@@ -3,6 +3,7 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.TabsView = Backbone.View.extend({
+        el: '#editListTabsSortable',
 
         initialize: function() {
             this.collection.bind('add', this.addOne, this);
@@ -84,64 +85,6 @@ wxApp = wxApp || {};
             }
         },
 
-        refreshUiTabs: function() {
-            if ( undefined != $('#listTabs').tabs ) {
-                $('#listTabs').tabs( 'refresh' );
-            }
-        },
-
-        removeOne: function(tab) {
-            wx.log('removeOne called (tabs view)');
-            $('#listTabs').tabs( 'refresh' );
-        },
-
-        addNewlyCreatedTab: function(model) {
-            console.log('addNewlyCreatedTab');
-            console.log( model.get('parent_id') );
-            if ( model.get('parent_id') )
-                this.addNewSubTab(model);
-            else
-                this.addNewMainTab(model);
-        },
-
-        addNewMainTab: function(model) {
-            console.log('addNewMainTab');
-            var tab = new wxApp.Tab( model.getAPIData() );
-            tab.addSubTab( model );
-            // this.addTabToCollection( tab );
-            wxApp.Tabs.add( tab );
-        },
-
-        addNewSubTab: function(model) {
-            console.log('addNewSubTab');
-            var tab = wxApp.Tabs.get( model.get('parent_id') );
-            if ( tab )
-                tab.addSubTab( model );
-            else
-                throw new Error('No main tab with id' + model.get('parent_id'));
-        },
-
-        addTabToCollection: function(tab) {
-            wxApp.Tabs.add( tab );
-        },
-
-        removeTabFromCollection: function(tab) {
-            wxApp.Tabs.remove( tab );
-        }
-    });
-
-
-    wxApp.BuildTabsView = wxApp.TabsView.extend({
-        el: '#buildListTabsSortable',
-
-        startDroppable: function() {
-            // console.log('You can\'t drop on this one, dummy.')
-        }
-    });
-
-    wxApp.EditTabsView = wxApp.TabsView.extend({
-        el: '#editListTabsSortable',
-
         startDroppable: function() {
             console.log('Drop it like it\'s hot.');
             this.$el.droppable( {
@@ -179,12 +122,68 @@ wxApp = wxApp || {};
             var lastStyleTag = $('style')[ $('style').length-1 ];
             if ( lastStyleTag.innerHTML.indexOf('*{ cursor') == 0 )
                 lastStyleTag.remove();
+        },
+
+        refreshUiTabs: function() {
+            if ( undefined != $('#listTabs').tabs ) {
+                $('#listTabs').tabs( 'refresh' );
+            }
+        },
+
+        removeOne: function(tab) {
+            wx.log('removeOne called (tabs view)');
+            $('#listTabs').tabs( 'refresh' );
+        },
+
+        addNewlyCreatedTab: function(model) {
+            console.log('addNewlyCreatedTab');
+            console.log( model.get('parent_id') );
+            if ( model.get('parent_id') )
+                this.addNewSubTab(model);
+            else
+                this.addNewMainTab(model);
+        },
+
+        addNewMainTab: function(model) {
+            console.log('addNewMainTab');
+            var tab = new wxApp.Tab( model.getAPIData() );
+            tab.addSubTab( model );
+            // this.addTabToCollection( tab );
+            wxApp.Tabs.add( tab );
+
+            if ( wxApp.Tabs.length === 2 ) {
+                // The user has just added their first tab (Share App + Whatever they just added === 2)
+                // Let's show them the Joyride.
+                $(document).foundation('joyride', 'start');
+            }
+        },
+
+        addNewSubTab: function(model) {
+            console.log('addNewSubTab');
+            var tab = wxApp.Tabs.get( model.get('parent_id') );
+            if ( tab )
+                tab.addSubTab( model );
+            else
+                throw new Error('No main tab with id' + model.get('parent_id'));
+        },
+
+        addTabToCollection: function(tab) {
+            wxApp.Tabs.add( tab );
+        },
+
+        removeTabFromCollection: function(tab) {
+            wxApp.Tabs.remove( tab );
         }
     });
 
-    //wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
-    wxApp.buildTabsView = new wxApp.BuildTabsView({ collection: wxApp.Tabs });
-    wxApp.editTabsView = new wxApp.EditTabsView({ collection: wxApp.Tabs });
+    // wxApp.EditTabsView = wxApp.TabsView.extend({
+    //     el: '#editListTabsSortable',
+
+    // });
+
+    wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
+    // wxApp.buildTabsView = new wxApp.BuildTabsView({ collection: wxApp.Tabs });
+    // wxApp.editTabsView = new wxApp.EditTabsView({ collection: wxApp.Tabs });
 
     // Grab the data and kick things off
     wxApp.Tabs.fetch();

@@ -17,7 +17,6 @@ wxApp = wxApp || {};
 
         saveImage: function( input ) {
 
-            eenpoot = input;
             var id = input.attr('id');
             if (!id) {
                 id = input.attr('name');
@@ -35,7 +34,7 @@ wxApp = wxApp || {};
                 var params = { titlebar: innerParams };
 
                 wx.makeApiCall('design/set_titlebar', params, function(data) {
-                    wx.rebuildApp();
+                    // wx.rebuildApp();
                 });
 
             } else if ( id === 'icon_live' ) {
@@ -50,7 +49,7 @@ wxApp = wxApp || {};
                 var params = { install: innerParams };
 
                 wx.makeApiCall('design/set_install', params, function(data) {
-                    wx.rebuildApp();
+                    // wx.rebuildApp();
                 });
 
             } else {
@@ -68,7 +67,7 @@ wxApp = wxApp || {};
                 var params = { launchscreen: innerParams };
 
                 wx.makeApiCall('design/set_launchscreen', params, function(data) {
-                    wx.rebuildApp();
+                    // wx.rebuildApp();
                 });
 
             }

@@ -65,55 +65,103 @@
     <!-- start - color pickers -->
     <p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
 
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+    <div class="row collapse wx-colorpicker">
+        <div class="small-12 large-8 push-4 columns">
+            <div class="row collapse">
+                <div class="small-10 columns">
+                    <label class="left inline"><?php echo __( 'Logo area background color', 'weever' ); ?></label>
+                </div>
+                <div class="small-2 columns">
+                    <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                </div>
+            </div>
         </div>
-        <div class="small-7 columns">
-            <label class="left inline"><?php echo __( 'Logo area background color', 'weever' ); ?></label>
-        </div>
-        <div class="small-2 columns">
-            <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
-        </div>
-        <div class="small-7 columns">
-            <label class="left inline"><?php echo __( 'Logo area text color (if applicable)', 'weever' ); ?></label>
-        </div>
-        <div class="small-2 columns">
-            <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
-        </div>
-        <div class="small-7 columns">
-            <label class="left inline">
-                <?php echo __('Subtab bar background color', 'weever'); ?> &nbsp;
-            </label>
-        </div>
-        <div class="small-2 columns">
-            <img id="subtab_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+        <div class="small-12 large-4 pull-8 columns">
+            <div class="row collapse">
+                <div class="small-6 columns">
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+                </div>
+                <div class="small-6 columns">
+                    <button class="postfix success" data-color-picker="main_titlebar_color">choose</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="small-3 columns">
-            <input type="text" class="color {onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+    <!-- color picker: titlebar text -->
+    <div class="row collapse wx-colorpicker">
+        <div class="small-12 large-8 push-4 columns">
+            <div class="row collapse">
+                <div class="small-10 columns">
+                    <label class="left inline">&nbsp;<?php echo __( 'Logo area text color (if applicable)', 'weever' ); ?></label>
+                </div>
+                <div class="small-2 columns">
+                    <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                </div>
+            </div>
         </div>
-        <div class="small-7 columns">
-            <label class="left inline"><?php echo __( 'Subtab bar text color', 'weever' ); ?></label>
-        </div>
-        <div class="small-2 columns">
-            <img id="subtab_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+        <div class="small-12 large-4 pull-8 columns">
+            <div class="row collapse">
+                <div class="small-6 columns">
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+                </div>
+                <div class="small-6 columns">
+                    <button class="postfix success" data-color-picker="main_titlebar_text_color">choose</button>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <!-- color picker: subtab bgcolor -->
+    <div class="row collapse wx-colorpicker">
+        <div class="small-12 large-8 push-4 columns">
+            <div class="row collapse">
+                <div class="small-10 columns">
+                    <label class="left inline">&nbsp;<?php echo __('Subtab bar background color', 'weever'); ?></label>
+                </div>
+                <div class="small-2 columns">
+                    <img id="subtab_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                </div>
+            </div>
+        </div>
+        <div class="small-12 large-4 pull-8 columns">
+            <div class="row collapse">
+                <div class="small-6 columns">
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
+                </div>
+                <div class="small-6 columns">
+                    <button class="postfix success" data-color-picker="subtab_color">choose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- color picker: subtab text color -->
+    <div class="row collapse wx-colorpicker">
+        <div class="small-12 large-8 push-4 columns">
+            <div class="row collapse">
+                <div class="small-10 columns">
+                    <label class="left inline">&nbsp;<?php echo __( 'Subtab bar text color', 'weever' ); ?></label>
+                </div>
+                <div class="small-2 columns">
+                    <img id="subtab_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                </div>
+            </div>
+        </div>
+        <div class="small-12 large-4 pull-8 columns">
+            <div class="row collapse">
+                <div class="small-6 columns">
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+                </div>
+                <div class="small-6 columns">
+                    <button class="postfix success" data-color-picker="subtab_text_color">choose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- endof - color pickers -->
 

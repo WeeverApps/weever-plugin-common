@@ -6,6 +6,7 @@ wxApp = wxApp || {};
         el: '#logo_design',
         events: {
             'change input[name=titlebarSource]': 'radioChange',
+            'click button.postfix': 'showPicker',
             'change .logo-design': 'logoChange' 
         },
 
@@ -15,6 +16,14 @@ wxApp = wxApp || {};
             Backbone.Events.on('color:change', this.colorChange, this);
 
             jscolor.bind();
+        },
+
+        showPicker: function(ev) {
+            var button = ev.currentTarget;
+            btn = button;
+            var id = $(button).data('color-picker');
+            console.log(id);
+            this.$('#' + id)[0].color.showPicker();
         },
 
         radioChange: function() {
@@ -106,6 +115,8 @@ wxApp = wxApp || {};
         if (configFetched) {
             wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
+
+        loadImageUploaders();
     } );
 
 

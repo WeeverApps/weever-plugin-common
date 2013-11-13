@@ -129,6 +129,15 @@ wxApp = wxApp || {};
     // Load the current icon font
     wx.makeApiCall('design/get_font_id', {}, function(data) {
         if ( typeof data.font_id !== 'undefined' ) {
+            if ( data.font_id == 1 ) {
+                // Magic numbers ahoy!
+                // If this user is using wx-legacy (ID 1) for their font, we 
+                // need them to upgrade. Switch them over to wx-primary (ID 300,001).
+                data.font_id = 300001;
+                wx.makeApiCall('design/set_font_id', { font_id: data.font_id }, function(data) { console.log('Font upgraded.') });
+            }
+
+
             wxApp.font = data.font_id;
             var font = new wxApp.IconFont();
             font.fetch( data.font_id, function() {

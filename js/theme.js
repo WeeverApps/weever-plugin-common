@@ -19,152 +19,32 @@
 *	NOTE - Most (if not all) of this script can be removed.
 */
 
-/*
- * Image uploader script
- */
-
-var coords = false;
-var imgselect = false;
-
-function cropper_show(image_width, image_height) {
-	// Make sure upload drop area is hidden
-	jQuery('.qq-upload-drop-area').hide();
-	
-    if (jQuery('#wx-jcrop-dialog-img').is(':visible')) {
-    	if ( imgselect === false ) {
-    		imgselect = jQuery('#wx-jcrop-dialog-img').imgAreaSelect({ 
-    			//x1: 0, y1: 0, x2: 10000, y2: 10000,
-    			handles: true,
-    			instance: true,
-    			parent: '#wx-jcrop-dialog',
-    			onSelectChange: function(img, selection) {
-    				coords = selection;
-    				console.debug(coords);
-    			}
-    		});
-    	} else {
-    		imgselect.cancelSelection();
-    		imgselect.update();
-    	}
-    }
-    else
-        setTimeout( function() { cropper_show(image_width, image_height); }, 50);
-}
-
-
-
-jQuery(document).ready(function(){ 
-
-	// Loading for image cropper
-	jQuery('#wx-jcrop-dialog-loading').ajaxStart(function() {
-		jQuery(this).show();
-	});
-	jQuery('#wx-jcrop-dialog-loading').ajaxStop(function() {
-		jQuery(this).hide();
-	});
-	
-	jQuery('#wx-modal-loading')
-	    .hide()  
-	    .ajaxStart(function() {
-	    	jQuery('#wx-modal-error-text').html('');
-	        jQuery(this).fadeIn(200);
-	        jQuery('#wx-modal-loading-text').html(WPText.WEEVER_JS_SAVING_CHANGES);
-	        jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_PLEASE_WAIT);
-	    })
-	    .ajaxStop(function() {
-	    	var jObj = jQuery(this);
-	    	setTimeout( function() {
-	    			jObj.fadeOut(750);
-	    		}, 600 );
-	    });
-	
-	// Load JSColor.
-	Modernizr.load([{
-		// Test if Input Color is supported using Modernizr
-		test: Modernizr.inputtypes.color,
-		// If colors are not supported, load the jscolor.js script
-		// TODO - Figure out way to make this URL more generic.
-		nope: wx.pluginUrl + 'static/js/jscolor/jscolor.js',
-		// Initialize jscolor once its loaded, 
-		// because the builtin jscolor.install hook is bind to window.load,
-		// which has already happend
-		callback: function(id, testResult) {
-			jscolor.init();
-		}
-	}]);
-
-	// Preview code
-	// setTimeout(function(){
-	// 	// if (jQuery.browser.webkit) {
-	// 	if (true) {
-	// 		jQuery('#preview-app-dialog-no-webkit').hide();
-	//         jQuery('#preview-app-dialog-frame').attr('src', jQuery('#preview-app-dialog-frame').attr('rel'));
-	// 		jQuery('#preview-app-dialog-webkit').show();
-	//     } else if (jQuery.browser.webkit == undefined || jQuery.browser.webkit == false) {
-	// 		jQuery('#preview-app-dialog-no-webkit').show();
-	//     }		
-	// }, 300);
-
-	// Uploaders
-
-	/* uploader for the banner / logo image */
-	
+function loadImageUploaders() {
 	jQuery('.wx-theme-file-uploader').each(function() {
-		//console.log('loading theme uploader');
 		var image_id = jQuery(this).attr('ref');
 		var input_name = jQuery(this).attr('rel');
-		var image_width = jQuery(this).attr('img_width');
-		var image_height = jQuery(this).attr('img_height');
 	    var weeverUploader = new qq.FileUploader({
 	        element: jQuery(this)[0],
 	        action: ajaxurl + '?action=ajaxHandleUpload',
 	        debug: true,
-	        onComplete: function(id, fileName, responseJSON){
-	        	//console.debug(responseJSON);
+	        onSubmit: function() {
+	        	jQuery('#' + image_id).fadeOut({ duration: 500, queue: true });
 	        },
 	        callback: function(url) {
 	        	jQuery("#wx-upload-info").remove();
 	        	jQuery('.qq-upload-success').hide();
 
-	        	// Call the cropper
-	        	jQuery('#wx-jcrop-dialog-img').attr('src', url);
-	        	
-	        	coords = false;
-	        	
-	        	jQuery('#wx-jcrop-dialog').foundation('reveal', 'open');
-	        	setTimeout(function() { cropper_show(image_width, image_height); }, 500);
-	        	jQuery('#finish-crop').one('click', function() {
-	        		console.log('Saving cropped image...');
-	        		// console.log(coords);
-	        		
-	        		jQuery.ajax({
-    					url: ajaxurl,
-    					type: 'POST',
-    					data: {
-    						action: 'ajaxCropImage',
-    						selection: coords,
-    						image_width: image_width,
-    						image_height: image_height
-    					},
-    					success: function(msg) {
-    						jQuery("#" + image_id).attr("src", msg);
+	        	// Assign the new URL
+				jQuery("#" + image_id).attr("src", url).load(function() {
+					jQuery('#' + image_id).fadeIn({ queue: true });
+				});
 
-    						var hidden = jQuery('input[name=' + input_name + ']');
-	        	        	hidden.attr('value', msg);
-	        	        	Backbone.Events.trigger( 'image:change', hidden );
-    					},
-    					error: function(v,msg) {
-    						alert('There was an error saving the image, please try again');
-    					}
-    				});
-
-    				jQuery('#wx-jcrop-dialog').foundation('reveal', 'close');
-	        	});
+				var hidden = jQuery('input[name=' + input_name + ']');
+	        	hidden.attr('value', url);
+	        	Backbone.Events.trigger( 'image:change', hidden );
 
 	        	return false;
 	        }
 	    });		
 	});
- 
-		
-});
+}

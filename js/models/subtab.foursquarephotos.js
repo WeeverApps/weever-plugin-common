@@ -4,7 +4,7 @@ var wxApp = wxApp || {};
 (function($){
     wxApp.FoursquarePhotosSubTab = wxApp.SubTab.extend({
         default_icon_id: 25,
-        allowedLayouts: ['list'],
+        allowedLayouts: ['carousel'],
         typeDescription: 'Foursquare',
 
         defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
@@ -14,7 +14,7 @@ var wxApp = wxApp || {};
                 icon_id: 25,
                 type: 'foursquarePhotos',
                 content: 'foursquarePhotos',
-                layout: 'list',
+                layout: 'carousel',
                 config: { venue_id: 'http://foursquare.com/v/' },
                 helpBody: '<p><b>To find the web address of a Foursquare Venue:</b></p>' +
                           '<p>1. Search the web for "Foursquare" and the name of the location.</p>' +
