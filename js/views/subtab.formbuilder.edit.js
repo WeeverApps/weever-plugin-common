@@ -2,10 +2,11 @@
 wxApp = wxApp || {};
 
 (function($){
+
     wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
-        subTabEditTplSelector: '#form-builder-subtab-edit-template',
+		subTabEditTplSelector: '#form-builder-subtab-edit-template',
 	    hasCalledFinish: false,
 	    finishView: null,
 	    previews: null,
@@ -17,7 +18,7 @@ wxApp = wxApp || {};
 
 		initialize: function() {
 			// Call parent's initialize() function
-			this.constructor.__super__.initialize.apply( this, arguments );
+			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
 			console.log('FormBuilderSubTabEditView initialize');
 
 			// Clear the preview window
@@ -67,21 +68,7 @@ wxApp = wxApp || {};
 			}
 
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
-				this.model.get( 'config' ).formActions = new Backbone.Collection();
-				var post = new wxApp.FormBuilderAction();
-				post.set( { method: 'post' } );
-				var email = new wxApp.FormBuilderAction();
-				email.set( { method: 'email' } );
-				var docusign = new wxApp.FormBuilderAction();
-				docusign.set( { method: 'docusign' } );
-
-				this.model.get( 'config' ).formActions.push( post );
-				this.model.get( 'config' ).formActions.push( email );
-				this.model.get( 'config' ).formActions.push( docusign );
-
-				this.addPostAction( post );
-				this.addEmailAction( email );
-				this.addDocusignAction( docusign );
+				this.getDefaultFormActions();
 			}
 			else {
 				// Load currently existing form actions.
@@ -105,6 +92,27 @@ wxApp = wxApp || {};
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
 				this.model.get( 'config' ).onUpload = JSON.parse( this.model.get( 'config' ).onUpload );
 			}
+
+		},
+
+		getDefaultFormActions: function() {
+			
+			console.log(' FORMBUILDER FORM ACTIONS ');
+			this.model.get( 'config' ).formActions = new Backbone.Collection();
+			var post = new wxApp.FormBuilderAction();
+			post.set( { method: 'post' } );
+			var email = new wxApp.FormBuilderAction();
+			email.set( { method: 'email' } );
+			// var docusign = new wxApp.FormBuilderAction();
+			// docusign.set( { method: 'docusign' } );
+
+			this.model.get( 'config' ).formActions.push( post );
+			this.model.get( 'config' ).formActions.push( email );
+			// this.model.get( 'config' ).formActions.push( docusign );
+
+			this.addPostAction( post );
+			this.addEmailAction( email );
+			// this.addDocusignAction( docusign );
 
 		},
 
@@ -626,4 +634,21 @@ wxApp = wxApp || {};
 		}
 
 	});
+
+	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
+
+		getDefaultFormActions: function() {
+			console.log(' DOCUSIGN FORM ACTIONS ');
+
+			wxApp.FormBuilderSubTabEditView.prototype.getDefaultFormActions.apply( this );
+
+			// Add DocuSign
+			var docusign = new wxApp.FormBuilderAction();
+			docusign.set( { method: 'docusign' } );
+			this.model.get( 'config' ).formActions.push( docusign );
+			this.addDocusignAction( docusign );
+		}
+		
+	});
+
 })(jQuery);

@@ -30,4 +30,6 @@ wxApp = wxApp || {};
 		
     });
 
+    wxApp.DocuSignSubTab = wxApp.FormBuilderSubTab.extend({});
+
 })(jQuery);
