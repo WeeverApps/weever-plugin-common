@@ -108,6 +108,26 @@ wxApp = wxApp || {};
 
 		},
 
+		validate: function() {
+			var success = false;
+            $('.wx-form-builder-action').each(function(index, value) { 
+            	var $text = $( value );
+            	if ( $text.val() ) {
+            		success = true;
+            	}
+            });
+
+            if (!success) {
+            	// Display an error message.
+	            var errorMessage = "Your form could not be saved! Please add an email recipient, or custom POST action, under the <b>Form Settings</b> tab.";
+	            var $alert = $('.alert-box.alert .message').html( errorMessage );
+	            $alert.parent().slideDown();
+	        }
+
+
+            return success;
+        },
+
 		getDefaultFormActions: function() {
 			
 			console.log(' FORMBUILDER FORM ACTIONS ');
@@ -116,16 +136,12 @@ wxApp = wxApp || {};
 			post.set( { method: 'post' } );
 			var email = new wxApp.FormBuilderAction();
 			email.set( { method: 'email' } );
-			// var docusign = new wxApp.FormBuilderAction();
-			// docusign.set( { method: 'docusign' } );
 
 			this.model.get( 'config' ).formActions.push( post );
 			this.model.get( 'config' ).formActions.push( email );
-			// this.model.get( 'config' ).formActions.push( docusign );
 
 			this.addPostAction( post );
 			this.addEmailAction( email );
-			// this.addDocusignAction( docusign );
 
 		},
 
@@ -238,7 +254,7 @@ wxApp = wxApp || {};
 
 		    // Call super and exit if an index has already been identified
 		    if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
-			    this.constructor.__super__.finish.apply( this );
+			    wxApp.SubTabEditView.prototype.finish.apply( this );
 			    return;
 		    }
 
@@ -649,15 +665,36 @@ wxApp = wxApp || {};
 
 	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
 
+		validate: function() {
+			var success = false;
+            if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
+            	success = true;
+            }
+
+            if (!success) {
+            	// Display an error message.
+	            var errorMessage = "Your form could not be saved! Please enter your DocuSign&trade; username and password under the <b>Form Settings</b> tab.";
+	            var $alert = $('.alert-box.alert .message').html( errorMessage );
+	            $alert.parent().slideDown();
+	        }
+
+
+            return success;
+        },
+
 		getDefaultFormActions: function() {
 			console.log(' DOCUSIGN FORM ACTIONS ');
 
-			wxApp.FormBuilderSubTabEditView.prototype.getDefaultFormActions.apply( this );
-
-			// Add DocuSign
+			this.model.get( 'config' ).formActions = new Backbone.Collection();
+			var post = new wxApp.FormBuilderAction();
+			post.set( { method: 'post' } );
 			var docusign = new wxApp.FormBuilderAction();
 			docusign.set( { method: 'docusign' } );
+
+			this.model.get( 'config' ).formActions.push( post );
 			this.model.get( 'config' ).formActions.push( docusign );
+
+			this.addPostAction( post );
 			this.addDocusignAction( docusign );
 		}
 		

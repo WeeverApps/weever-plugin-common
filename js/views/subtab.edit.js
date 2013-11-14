@@ -101,15 +101,22 @@ wxApp = wxApp || {};
         },
 
 		finish: function() {
-            this.setModelFromView(this.model);
-            this.setTitleFromView(this.model);
-            this.setIconFromView(this.model);
-			this.saveModel();
+            if ( this.validate() ) {
+                this.setModelFromView(this.model);
+                this.setTitleFromView(this.model);
+                this.setIconFromView(this.model);
+    			this.saveModel();
 
-            this.$el.foundation('reveal', 'close');
+                this.$el.foundation('reveal', 'close');
 
-            wx.rebuildApp();
+                wx.rebuildApp();
+            }
 		},
+
+        validate: function() {
+            // This can be overridden in child sub tabs.
+            return true;
+        },
 
 		next: function() {
             if ( !this.model.validateFeed ) { return; }
