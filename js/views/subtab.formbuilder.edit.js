@@ -407,6 +407,7 @@ wxApp = wxApp || {};
 		addPasswordInput: function() {
 			this.addInput({
 				label: 'Password',
+				showPlaceholder: true,
 				attributes: {
 					type: 'password'
 				}
@@ -441,8 +442,6 @@ wxApp = wxApp || {};
 				label: 'Text',
 				type: 'text',
 				showPlaceholder: true,
-				valueType: 'text',
-				valueClass: '',
 				attributes: {
 					type: 'text'
 				}
