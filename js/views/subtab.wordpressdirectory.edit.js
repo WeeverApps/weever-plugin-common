@@ -6,7 +6,7 @@ wxApp = wxApp || {};
         subTabEditTplSelector: '#wordpressdirectory-subtab-edit-template',
 
         render: function() {
-			wxApp.WordpressDirectorySubTabEditView.__super__.render.call( this );
+			wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
 			$('.wx-add-wordpress-directory-select').val( url );

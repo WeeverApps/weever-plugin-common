@@ -6,7 +6,7 @@ wxApp = wxApp || {};
         subTabEditTplSelector: '#wordpressproximity-subtab-edit-template',
 
         render: function() {
-			wxApp.WordpressProximitySubTabEditView.__super__.render.call( this );
+			wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
 			$('.wx-add-wordpress-proximity-select').val( url );

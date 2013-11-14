@@ -6,7 +6,7 @@ wxApp = wxApp || {};
         subTabEditTplSelector: '#wordpressblog-subtab-edit-template',
 
         render: function() {
-			wxApp.WordpressBlogSubTabEditView.__super__.render.call( this );
+            wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
 			$('.wx-add-wordpress-blog-select').val( url );

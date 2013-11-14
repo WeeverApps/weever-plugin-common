@@ -11,7 +11,7 @@ wxApp = wxApp || {};
 			var searchString = url.substr(i+2);
 			this.model.get('config').search_value = _.unescape( searchString ).replace('%20', ' ');
 
-			wxApp.WordpressSearchtermSubTabEditView.__super__.render.call( this );
+			wxApp.SubTabEditView.prototype.render.apply( this );
         },
 
         setModelFromView: function(model) {

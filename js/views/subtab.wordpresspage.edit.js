@@ -6,7 +6,7 @@ wxApp = wxApp || {};
         subTabEditTplSelector: '#wordpresspage-subtab-edit-template',
 
         render: function() {
-			wxApp.WordpressPageSubTabEditView.__super__.render.call( this );
+			wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
 			$('.wx-add-wordpress-page-select').val( url );
