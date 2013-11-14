@@ -22,7 +22,7 @@ wxApp = wxApp || {};
 			// 'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-required': 'setRequired',
 			'click .wx-form-builder-delete': 'deleteControl',
-			// 'sortable-drop': 'sortableDrop'
+			'sortable-drop': 'sortableDrop'
 		},
 
 		sortableDrop: function( event, index ) {

@@ -3,11 +3,12 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
-		previewPaneSelector: '.wx-validate-feed',
+		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
         subTabEditTplSelector: '#form-builder-subtab-edit-template',
 	    hasCalledFinish: false,
 	    finishView: null,
+	    previews: null,
 
         initializeEvents: function() {
             this.events = _.extend({}, this.genericEvents, this.events);
@@ -20,7 +21,10 @@ wxApp = wxApp || {};
 			console.log('FormBuilderSubTabEditView initialize');
 
 			// Clear the preview window
-			$( this.previewPaneSelector ).html( '' );
+			$( '.wx-validate-feed' ).html( '<h3>' + this.model.get('title') + '</h3>' );
+			$( '.wx-validate-feed' ).append( '<div class="' + this.previewPaneClass + '"></div>' );
+			$( '.wx-validate-feed' ).append( '<button class="success">' + this.model.get('buttonText') + '</button>' );
+			$( '.wx-validate-feed' ).addClass( 'panel' );
 
 			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
 				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
@@ -64,6 +68,20 @@ wxApp = wxApp || {};
 
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
+				var post = new wxApp.FormBuilderAction();
+				post.set( { method: 'post' } );
+				var email = new wxApp.FormBuilderAction();
+				email.set( { method: 'email' } );
+				var docusign = new wxApp.FormBuilderAction();
+				docusign.set( { method: 'docusign' } );
+
+				this.model.get( 'config' ).formActions.push( post );
+				this.model.get( 'config' ).formActions.push( email );
+				this.model.get( 'config' ).formActions.push( docusign );
+
+				this.addPostAction( post );
+				this.addEmailAction( email );
+				this.addDocusignAction( docusign );
 			}
 			else {
 				// Load currently existing form actions.
@@ -116,10 +134,19 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-range-input': 'addRangeInput',
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
-			'click .wx-form-builder-add-docusign-action': 'addDocusignAction',
-			'click .wx-form-builder-add-post-action': 'addPostAction',
-			'click .wx-form-builder-add-email-action': 'addEmailAction',
+			// 'click .wx-form-builder-add-docusign-action': 'addDocusignAction',
+			// 'click .wx-form-builder-add-post-action': 'addPostAction',
+			// 'click .wx-form-builder-add-email-action': 'addEmailAction',
+			'keyup .button-text': 'updateButtonText',
 	        'sortable-update': 'sortableUpdate'
+		},
+
+		updateButtonText: function( ev ) {
+			var $text = $( ev.currentTarget );
+			this.model.set( 'buttonText', $text.val() );
+
+			// Update in the preview panel.
+			$('.wx-validate-feed.panel button.success').text( $text.val() );
 		},
 
 	    sortableUpdate: function( event, model, position ) {
@@ -138,6 +165,20 @@ wxApp = wxApp || {};
 
 		    model.set( 'ordinal', position );
 		    formElements.add( model, {at: position} );
+
+		    // Re-render the previews.
+		    var me = this;
+			$( '.' + this.previewPaneClass ).html( '' );
+		    formElements.each( function( model, index ) {
+		    	for (var i = 0; i < me.previews.length; i++) {
+		    		var preview = me.previews[i];
+		    		console.log(  )
+		    		if ( preview.model.cid === model.cid ) {
+		    			$( '.' + me.previewPaneClass ).append( preview.render().el );
+		    			break;
+		    		}
+		    	}
+		    });
 	    },
 
 	    /**
@@ -159,7 +200,6 @@ wxApp = wxApp || {};
 					    model: this.model
 				    });
 				    this.$( this.buildPaneSelector ).append( this.finishView.render().el );
-	//			    $( 'body' ).append( finishView.render().el );
 			    };
 
 		    console.log( formElements );
@@ -248,9 +288,8 @@ wxApp = wxApp || {};
 			var actionView = new wxApp.FormBuilderActionView({
 				model: action
 			});
-			this.$( this.buildPaneSelector ).append( actionView.render().el );
+			this.$( '#form-settings-accordion' ).append( actionView.render().el );
 
-//			this.model.get( 'config' ).formElements.push( action );
 			this.model.get( 'config' ).formActions.push( action );
 			return action;
 		},
@@ -555,9 +594,6 @@ wxApp = wxApp || {};
 					select.get('optionGroup').add( option );
 				};
 			}
-
-			// Add Select to control collection
-			// this.model.get( 'config' ).formElements.push( select );
 		},
 
 		addControl: function( input, view ) {
@@ -581,7 +617,12 @@ wxApp = wxApp || {};
 			$('#form-creation').animate({scrollTop: offset}, 1000);
 
 			// Add the preview to the Preview tab.
-			$( this.previewPaneSelector ).append( view.getPreview().render().el );
+			if ( !this.previews ) {
+				this.previews = []
+			}
+			this.previews.push( view.getPreview() );
+			console.log( 'previews:' + this.previews.length );
+			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
 		}
 
 	});

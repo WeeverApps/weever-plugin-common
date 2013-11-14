@@ -12,7 +12,10 @@ var wxApp = wxApp || {};
 		},
 
 		onAdd: function( e ) {
-			$( '.wx-form-builder-preview' ).sortable({
+			$( '#form-build-area' ).sortable({
+				start: function( event, ui ) {
+					$( '#form-build-area section' ).removeClass('active');
+				},
 				stop: function( event, ui ) {
 					ui.item.trigger( 'sortable-drop', ui.item.index() );
 				}

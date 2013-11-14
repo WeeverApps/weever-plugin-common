@@ -18,6 +18,7 @@ wxApp = wxApp || {};
 				content: 'formbuilder',
 				layout: 'panel',
         		buildPreview: true,
+        		buttonText: 'Submit',
 				config: {
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
 					onUpload: {
@@ -26,7 +27,7 @@ wxApp = wxApp || {};
 				}
 			}
 		)
-
+		
     });
 
 })(jQuery);

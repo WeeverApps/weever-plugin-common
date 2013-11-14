@@ -3,6 +3,7 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderActionView = Backbone.View.extend({
+		tagName: 'section',
 		className: 'wx-form-builder-row',
 		tplPostSelector: '#form-builder-action-post',
 		tplEmailSelector: '#form-builder-action-email',

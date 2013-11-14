@@ -33,6 +33,7 @@ wxApp = wxApp || {};
             'change .wx-dialog-input': 'next',
 			'change .wx-social-input': 'next',
 			'keydown .wx-dialog-input': 'hideValidateFeed',
+            'keyup .wx-edit-title': 'editTitle',
 			'click .wx-finish-button': 'finish',
 			'click .wx-next-button': 'next',
             'change .wx-content-radio' : 'contentChange'
@@ -136,6 +137,13 @@ wxApp = wxApp || {};
 		saveModel: function() {
             this.model.save();
 		},
+
+        editTitle: function( ev ) {
+            // This is really only needed for Form Builder.
+            if ( $('.wx-validate-feed.panel').length ) {
+                $('.wx-validate-feed.panel > h3').text( $( ev.currentTarget ).val() );
+            }
+        },
 
         setTitleFromView: function( model ) {
             if ( model.allowTitleEdit && this.$('.wx-edit-title') )
