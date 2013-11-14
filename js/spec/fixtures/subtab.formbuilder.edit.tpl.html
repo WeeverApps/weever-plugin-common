@@ -1,53 +1,75 @@
 <script type="text/template" id="form-builder-subtab-edit-template">
-    <div class="section-container auto" data-section>
-		<section class="active">
-		    <p class="title" data-section-title><a href="#panel1">Add Fields</a></p>
-		    <div id="form-creation" class="content" data-section-content style="height: 315px; overflow-y: auto;">
-		    	<div class="wx-form-builder-controls">
-			        <a class="wx-form-builder-add-text-input">Text Field</a>&nbsp;|
-				    <a class="wx-form-builder-add-password-input">Password Field</a>&nbsp;|
-				    <a class="wx-form-builder-add-date-input">Date Field</a>&nbsp;|
-				    <!--<a class="wx-form-builder-add-datetime-local-input">Date/Time Field (No Time Zone)</a>&nbsp;|-->
-					<a class="wx-form-builder-add-email-input">Email Field</a>&nbsp;|
-					<a class="wx-form-builder-add-file-input">File Upload</a>&nbsp;|
-					<!--<a class="wx-form-builder-add-month-input">Month/Year Field</a>&nbsp;|-->
-				    <a class="wx-form-builder-add-number-input">Number Field</a>&nbsp;|
-				    <a class="wx-form-builder-add-tel-input">Phone Number</a>&nbsp;|
-				    <!--<a class="wx-form-builder-add-time-input">Time Field</a>&nbsp;|-->
-				    <a class="wx-form-builder-add-url-input">URL Field</a>&nbsp;|
-					<a class="wx-form-builder-add-radio-group">Radio Buttons</a>&nbsp;|
-					<a class="wx-form-builder-add-checkbox-group">Checkbox Group</a>&nbsp;|
-					<a class="wx-form-builder-add-textarea">Text Area</a>&nbsp;|
-					<a class="wx-form-builder-add-range-input">Range Slider</a>&nbsp;|
-					<a class="wx-form-builder-add-select">Dropdown</a>&nbsp;|
-					<a class="wx-form-builder-add-info">Info Text</a>&nbsp;|
-					<a class="wx-form-builder-add-docusign-action">DocuSign eSignature&trade;</a>&nbsp;|
-					<a class="wx-form-builder-add-post-action">Custom POST action</a>&nbsp;|
-					<a class="wx-form-builder-add-email-action">Email PDF To...</a>
-				</div>
-				<br><br>
-				<div id="form-build-area" class="section-container accordion" data-section="accordion">
+    <div>
 
-				</div>
-		    </div>
-		</section>
+    <!-- start: add-field buttons -->
 
-		<section>
-		    <p class="title" data-section-title><a href="#panel2">Form Settings</a></p>
-		    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
-		        <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
-		        	<!-- Button Text -->
-		        	<section class="active">
-			        	<p class="title" data-section-title><a href="#panel1">Button Text</a></p>
-			        	<div class="content" data-section-content>
-			        		<p>
-			        			Change the text of your form&apos;s submit button.
-			        			<input type="text" class="button-text" value="<%- buttonText %>" />
-			        		</p>
-			        	</div>
-		        	</section>
-		        </div>
-		    </div>
-		</section>
+        <p class="wx-ui-title">Add a field</p>
+
+        <div id="form-creation" class="content" data-section-content overflow-y: auto;">
+
+            <div class="wx-form-builder-controls">
+                    <!-- form builder add-new-field buttons -->
+                    <ul class="large-block-grid-3" id="add-fields">
+                        <!-- text fields and common elements -->
+                        <li><button class="tiny expand wx-form-builder-add-text-input">Single line text</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-textarea">Paragraph text</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-info">Info box</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-email-input">Email</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-tel-input">Phone</a></button></li>
+
+                         <!-- radio buttons, checkboxes, etc. -->
+                        <li><button class="tiny expand wx-form-builder-add-select">Dropdown</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-radio-group">Multiple choice</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-checkbox-group">Checkboxes</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-number-input">Number</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-range-input">Slider</button></li>
+
+                        <!-- more rare elements, e.g, sliders -->
+                        <li><button class="tiny expand wx-form-builder-add-file-input">Photo/Upload</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-url-input">Web site</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-date-input">Date</button></li>
+                        <li><button class="tiny expand wx-form-builder-add-password-input">Password</button></li>
+                    </ul>
+            </div>
+
+        </div>
+
+        <br>
+
+        <!-- start: edit new and existing form fields -->
+        <!--<p class="wx-ui-title">Edit new and existing fields</p>-->
+
+        <div id="form-build-area" class="section-container accordion" data-section="accordion">
+
+        </div>
+
+        <!-- start: form settings -->
+
+        <p class="wx-ui-title">Form / Submit Settings</p>
+
+            <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
+                <!-- Button Text -->
+                <section class="active">
+                    <p class="title" data-section-title><a href="#panel1">Submit form button</a></p>
+                    <div class="content" data-section-content>
+                        <p>
+                            Change the label text on your form&apos;s submit button.
+                            <input type="text" class="button-text" value="<%- buttonText %>" />
+                        </p>
+                    </div>
+                </section>
+            </div>
+
     </div>
+    <br>
+    <br>
+
 </script>
+
+<!-- start: removed for production -->
+<!--
+<a class="button success small expand wx-form-builder-add-datetime-local-input">Date/Time Field (No Time Zone)</a>
+<a class="wx-form-builder-add-month-input">Month/Year Field</a>
+<a class="wx-form-builder-add-time-input">Time Field</a>
+-->
+<!-- endof: removed for production -->

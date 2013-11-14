@@ -22,7 +22,7 @@ wxApp = wxApp || {};
 			console.log('FormBuilderSubTabEditView initialize');
 
 			// Clear the preview window
-			$( '.wx-validate-feed' ).html( '<h3>' + this.model.get('title') + '</h3>' );
+			$( '.wx-validate-feed' ).html( '<br><h3>' + this.model.get('title') + '<span> &mdash; preview</span></h3>' );
 			$( '.wx-validate-feed' ).append( '<div class="' + this.previewPaneClass + '"></div>' );
 			$( '.wx-validate-feed' ).append( '<button class="success">' + this.model.get('buttonText') + '</button>' );
 			$( '.wx-validate-feed' ).addClass( 'panel' );
