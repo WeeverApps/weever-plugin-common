@@ -19,14 +19,12 @@ var wxApp = wxApp || {};
 
         initialize: function() {
             var me = this;
-            console.log('This function has been initialized');
             var subTabs = new wxApp.SubTabCollection();
             this.set({ subTabs: subTabs });
             this.on('invalid', function(model, error) {
                 console.log(error);
             });
             this.get('subTabs').on('remove', function(subTab) {
-                console.log('detected subTabs remove event');
                 if ( ! me.getSubTabs().length )
                     me.trigger('destroy');
             });
@@ -43,14 +41,11 @@ var wxApp = wxApp || {};
             subTab.set( 'parent_id', this.get('id') );
             this.get('subTabs').add( subTab );
             subTab.on('tab:move', function() {
-                console.log('detected tab:move for subtab in Tab model');
                 me.getSubTabs().remove(this);
             } );
         },
 
         deleteSubTab: function(subTab) {
-            wx.log('removing sub tab from collection');
-            wx.log(subTab.get('id'));
             this.get('subTabs').remove(subTab);
         },
 

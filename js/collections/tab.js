@@ -53,10 +53,8 @@ var wxApp = wxApp || {};
         },
 
         fetch: function() {
-            console.log('Get tabs.');
             var me = this;
             wx.makeApiCall('tabs/get_tabs', {}, function(data) {
-                console.log(data.tabs.length + ' tabs got.');
                 if ( typeof data.tabs != 'undefined' ) {
                     var tabs = [];
                     for ( var tabIndex = 0; tabIndex < data.tabs.length; tabIndex++ ) {

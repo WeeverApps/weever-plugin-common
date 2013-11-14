@@ -7,7 +7,6 @@ var wxApp = wxApp || {};
 		model: wxApp.Feature,
 
 		initialize: function() {
-			console.log('loading feature collection.');
 		}
 	});
 })();

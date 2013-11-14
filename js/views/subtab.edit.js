@@ -41,8 +41,6 @@ wxApp = wxApp || {};
 
         render: function() {
 
-            console.log('render');
-
             m = this.model;
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
             this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
@@ -103,7 +101,6 @@ wxApp = wxApp || {};
         },
 
 		finish: function() {
-            console.log('Finish clicked.');
             this.setModelFromView(this.model);
             this.setTitleFromView(this.model);
             this.setIconFromView(this.model);
@@ -116,8 +113,6 @@ wxApp = wxApp || {};
 
 		next: function() {
             if ( !this.model.validateFeed ) { return; }
-
-            console.log('next');
 
             this.$('#dialog-loader').show();
             
@@ -164,7 +159,6 @@ wxApp = wxApp || {};
         },
 
 		validateFeed: function() {
-            console.log('validate feed');
             var me = this;
 			// copy the model to validate with the server, without updating the existing model
             var modelCopy = this.getModelCopy();
@@ -173,7 +167,6 @@ wxApp = wxApp || {};
 		},
 
         getModelCopy: function() {
-            console.log('get model copy');
             var modelCopy = $.extend( true, {}, this.model );
             return modelCopy;
         },
@@ -194,8 +187,6 @@ wxApp = wxApp || {};
 		displayFeedSample: function(feedSample) {
 			var me = this;
 			this.$('.wx-validate-feed').show();
-			wx.log('displayFeedSample ***');
-			wx.log(feedSample);
 			if ( ! feedSample.feed.length ) {
 				this.$('.wx-validate-feed').html('No content added yet?');
 			} else {
@@ -215,7 +206,6 @@ wxApp = wxApp || {};
 		},
 
 		getFeedSample: function(model, callback) {
-            console.log('get feed sample');
 			var data = model.getAPIData();
 			data.api_check = 1;
 			data.confirm_feed = 1;

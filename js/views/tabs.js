@@ -16,15 +16,12 @@ wxApp = wxApp || {};
         },
 
         addOne: function(tab) {
-            wx.log('addOne called');
-            
             var me = this;
             var view = new wxApp.TabView({ model: tab });
             this.$el.append( view.render().el );
             view.subTabsContainerView = new wxApp.SubTabsContainerView({ model: tab });
             view.subTabsContainerView.tabView = view;
             tab.on('destroy', function(tab) {
-                wx.log('removing tab from collection');
                 me.removeTabFromCollection(tab);
             });
             tab.on('change', this.refreshUiTabs, this);
@@ -86,7 +83,6 @@ wxApp = wxApp || {};
         },
 
         startDroppable: function() {
-            console.log('Drop it like it\'s hot.');
             this.$el.droppable( {
                 accept: ".list-sub-items li, .list-add-content-items li",
                 hoverClass: "hover",
@@ -96,13 +92,9 @@ wxApp = wxApp || {};
         },
 
         onDrop: function( event, ui ) {
-            console.log('onDrop');
 
             var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');
-            console.log( draggedItemView.model.get('parent_id') );
-            console.log( draggedItemView.model.get('id') );
-            // console.log( me.model.get('id') );
 
             // We're moving a subtab up into another tab, update the db then move the subtab across
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
@@ -131,13 +123,10 @@ wxApp = wxApp || {};
         },
 
         removeOne: function(tab) {
-            wx.log('removeOne called (tabs view)');
             $('#listTabs').tabs( 'refresh' );
         },
 
         addNewlyCreatedTab: function(model) {
-            console.log('addNewlyCreatedTab');
-            console.log( model.get('parent_id') );
             if ( model.get('parent_id') )
                 this.addNewSubTab(model);
             else
@@ -145,7 +134,6 @@ wxApp = wxApp || {};
         },
 
         addNewMainTab: function(model) {
-            console.log('addNewMainTab');
             var tab = new wxApp.Tab( model.getAPIData() );
             tab.addSubTab( model );
             // this.addTabToCollection( tab );
@@ -159,7 +147,6 @@ wxApp = wxApp || {};
         },
 
         addNewSubTab: function(model) {
-            console.log('addNewSubTab');
             var tab = wxApp.Tabs.get( model.get('parent_id') );
             if ( tab )
                 tab.addSubTab( model );

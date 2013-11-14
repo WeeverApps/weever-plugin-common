@@ -6,7 +6,6 @@ wxApp = wxApp || {};
         el: '#toptabs',
 
         initialize: function() {
-            console.log('initialize feature list view');
             this.collection = new wxApp.FeatureCollection();
             this.collection.bind('add', this.addOne, this);
         },
@@ -25,14 +24,12 @@ wxApp = wxApp || {};
     // so let's make sure that's fetched prior to loading the features.
     wxApp.account = new wxApp.Account();
     wxApp.account.fetch( function() {
-        console.log('Account info fetched.');
-
         wxApp.featureList = new wxApp.FeatureList();
 
         // Grab the data and kick things off
         wxApp.featureList.collection.fetch({ 
             url: wx.pluginUrl + 'static/js/config/wx.featurelist.js', 
-            success: function(result) { console.log('features fetched'); }, 
+            success: function(result) {  }, 
             error: function() { console.log('Could not load feature list.') } 
         });
     });

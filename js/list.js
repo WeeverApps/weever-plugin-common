@@ -27,7 +27,6 @@ var wxApp = wxApp || {};
         var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
         var queryStr = [];
         datatype = datatype || 'json';
-        console.log( datatype );
 
         for ( var p in paramsObj ) {
             queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );

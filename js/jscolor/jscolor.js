@@ -114,7 +114,6 @@ var jscolor = {
 		if(!jscolor.imgLoaded[filename]) {
 			jscolor.imgLoaded[filename] = new Image();
 
-			console.log(jscolor.getDir());
 			jscolor.imgLoaded[filename].src = jscolor.getDir()+filename;
 		}
 	},
