@@ -7,8 +7,8 @@ wxApp = wxApp || {};
         allowedLayouts: ['list'],
         typeDescription: 'Blogger',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Blog',
                 icon: 'e836',
                 icon_id: 6,
@@ -16,8 +16,8 @@ wxApp = wxApp || {};
                 content: 'blogger',
                 layout: 'list',
                 config: { blog_url: 'http://blogname.blogspot.com' }
-            }
-        )
+            });
+        }
     });
 
 })(jQuery);

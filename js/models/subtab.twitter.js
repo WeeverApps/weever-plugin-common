@@ -7,8 +7,8 @@ var wxApp = wxApp || {};
         allowedLayouts: ['list'],
         typeDescription: 'Twitter',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Social',
                 icon: 'e025',
                 icon_id: 21,
@@ -16,8 +16,8 @@ var wxApp = wxApp || {};
                 content: 'twitterUser',
                 layout: 'list',
                 config: {}
-            }
-        )
+            });
+        }
     });
 
 })(jQuery);

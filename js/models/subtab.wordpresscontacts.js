@@ -9,8 +9,8 @@ var wxApp = wxApp || {};
         validateFeed: false,
         allowTitleEdit: false,
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Contact',
                 icon: 'e065',
                 icon_id: 34,
@@ -19,7 +19,8 @@ var wxApp = wxApp || {};
                 layout: 'panel',
                 config_cache: {}
             }
-        ),
+        );
+        },
 
         filterAPIData: function( data ) {
             data.config_cache = JSON.stringify( this.get( 'config_cache' ) );

@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         typeDescription: 'Add map locations',
         validateFeed: false,
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Map',
                 icon: 'e097',
                 icon_id: 20,
@@ -41,7 +41,8 @@ wxApp = wxApp || {};
                             '<p><b>Wordpress Search</b></p>' +
                             '<p>Display Wordpress posts matching a predefined search term.</p>'
             }
-        )
+        );
+}
     });
 
 })(jQuery);

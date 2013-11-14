@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         typeDescription: 'Content: Posts',
         validateFeed: false,
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Blog',
                 icon: 'e800',
                 icon_id: 5,
@@ -18,7 +18,8 @@ wxApp = wxApp || {};
                 layout: 'list',
                 config: { subtab_name: 'WordpressBlogSubTab' }
             }
-        )
+        );
+        }
     });
 
 })(jQuery);

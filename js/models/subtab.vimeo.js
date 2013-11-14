@@ -7,8 +7,8 @@ wxApp = wxApp || {};
         allowedLayouts: ['list'],
         typeDescription: 'Vimeo Videos',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Vimeo',
                 icon: 'e041',
                 icon_id: 35,
@@ -22,7 +22,8 @@ wxApp = wxApp || {};
                           '<p><b>Sharing specific sets of videos</b></p>' +
                           '<p>One vimeo &lsquo;user&rsquo; can have multiple &lsquo;channels&rsquo;.  Each channel includes specific collection of videos.</p>'
             }
-        )
+        );
+        }
     });
 
 })(jQuery);

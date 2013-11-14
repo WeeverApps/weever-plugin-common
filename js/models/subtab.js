@@ -3,24 +3,26 @@ wxApp = wxApp || {};
 
 (function($){
     wxApp.SubTab = wxApp.Tab.extend({
-        defaults: {
-            id: null,
-            parent_id: null,
-            title: '',
-            tabTitle: '',
-            icon_id: 1,
-            icon: '',
-            type: null,
-            layout: null,
-            tabLayout: null,
-            typeDescription: '',
-            published: 1,
-            config: {},
-            featureName: '',
-            validateFeed: true,
-            buildPreview: false,
-            helpTitle: 'Help tips ',
-            helpBody: ''
+        defaults: function() {
+            return {
+                id: null,
+                parent_id: null,
+                title: '',
+                tabTitle: '',
+                icon_id: 1,
+                icon: '',
+                type: null,
+                layout: null,
+                tabLayout: null,
+                typeDescription: '',
+                published: 1,
+                config: {},
+                featureName: '',
+                validateFeed: true,
+                buildPreview: false,
+                helpTitle: 'Help tips ',
+                helpBody: ''
+            };
         },
 
         typeDescription: '',

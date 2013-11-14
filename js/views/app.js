@@ -78,6 +78,9 @@ wxApp = wxApp || {};
         createFeatureView: function(id, parentId) {
             if ( undefined !== wxApp[id + 'SubTab'] && undefined !== wxApp[id + 'SubTabEditView'] ) {
                 var tab = new wxApp[id + 'SubTab']();
+                // alert(' CREATING NEW ' + id);
+                // alert( tab.get('title') );
+                // alert( tab.get('config').screen_name );
                 if ( undefined != parentId && parentId )
                     tab.set( 'parent_id', parseInt( parentId ) );
                 
@@ -86,6 +89,16 @@ wxApp = wxApp || {};
             } else {
                 throw new Error('Invalid type ' + id);
             }
+
+            // var test1 = new myTestModel();
+            // test1.set('title', 'A New Title');
+            // test1.get('config').screen_name = 'Joe';
+            // alert( test1.get('title') );
+            // alert( test1.get('config').screen_name );
+
+            // var test2 = new myTestModel();
+            // alert( test2.get('title') );
+            // alert( test2.get('config').screen_name );
         },
 
         refreshAppPreview: function() {
@@ -147,4 +160,14 @@ wxApp = wxApp || {};
             } );
         }
     });
+
+    // myTestModel = Backbone.Model.extend({
+    //     defaults: function () {
+    //         return {
+    //             title: 'My Title',
+    //             config: {},
+    //             active: 1
+    //         };
+    //     }
+    // })
 })(jQuery);

@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         validateFeed: false,
         allowedLayouts: ['list'],
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'R3S Object',
                 icon: 'e836',
                 icon_id: 6,
@@ -25,7 +25,8 @@ wxApp = wxApp || {};
                           '<p>2.  To stream content into an app from a custom application that is generating an R3S stream object.</p>' +
                           '<p>If you are a developer and are interested in utilizing R3S, please check out the <a target="_blank" href="https://github.com/WeeverApps/r3s-spec">R3S repo on GitHub</a> and <a target="_blank" href="http://support.weeverapps.com">contact us</a> for more information.</p>'
             }
-        )
+        );
+}
     });
 
 })(jQuery);

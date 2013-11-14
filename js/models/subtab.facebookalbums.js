@@ -7,8 +7,8 @@ var wxApp = wxApp || {};
 
         allowedLayouts: ['list'],
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Photos',
                 icon: 'e046',
                 icon_id: 15,
@@ -20,7 +20,7 @@ var wxApp = wxApp || {};
                           '<p>Due to privacy restrictions, only <b>Facebook Page</b> content can be added to your app.  Make sure you are trying to add photos from a public-facing &ldquo;page&rdquo; and not a personal profile.</p>' +
                           '<p>Photos must be public.  You can check your Facebook sharing settings by logging out of Facebook completely and refreshing the Facebook page in question.</p>'
             }
-        ),
+        )},
 
         typeDescription: 'Facebook Photos'
     });

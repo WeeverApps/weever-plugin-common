@@ -7,8 +7,8 @@ var wxApp = wxApp || {};
         allowedLayouts: ['list', 'carousel'],
         typeDescription: 'Flickr',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Flickr',
                 icon: 'e049',
                 icon_id: 19,
@@ -21,7 +21,8 @@ var wxApp = wxApp || {};
                           '<p><b>Coming soon</b></p>' +
                           '<p>Support for Flickr &ldquo;group pools&rdquo; (community galleries) and the ability to add just one photo set at a time to your app.</p>'
             }
-        )
+        );
+        }
     });
 
 })(jQuery);

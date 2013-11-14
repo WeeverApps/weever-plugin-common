@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         typeDescription: 'Wordpress Search',
         validateFeed: false,
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Search',
                 icon: 'e256',
                 icon_id: 8,
@@ -40,7 +40,8 @@ wxApp = wxApp || {};
                             '<p>Create a &ldquo;Near to me &rdquo; feature with Wordpress content in exactly the same way you would create a Wordpress-based map.</p>' +
                             '<p>The difference is how the posts display.  &ldquo;Near to me&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>'
             }
-        )
+        );
+}
     });
 
 })(jQuery);

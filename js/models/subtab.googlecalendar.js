@@ -7,8 +7,8 @@ wxApp = wxApp || {};
         allowedLayouts: ['list'],
         typeDescription: 'Google Calendar',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Calendar',
                 icon: 'e061',
                 icon_id: 7,
@@ -28,7 +28,8 @@ wxApp = wxApp || {};
                            '<p>3. Copy and paste the calendar ID from this page.</p>' +
                            '<p>The web address for the group calendar will be in a format like &ldquo;abc123@group.calendar.google.com&rdquo;.</p>'
             }
-        )
+        );
+}
     });
 
 })(jQuery);

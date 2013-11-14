@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         typeDescription: 'Content: Directory',
         validateFeed: false,
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Directory',
                 icon: 'e800',
                 icon_id: 11,
@@ -18,7 +18,7 @@ wxApp = wxApp || {};
                 layout: 'list',
                 config: { subtab_name: 'WordpressDirectorySubTab' }
             }
-        )
+        );}
     });
 
 })(jQuery);

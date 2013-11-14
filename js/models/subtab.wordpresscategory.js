@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         typeDescription: 'Wordpress Posts',
         validateFeed: false,
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Blog',
                 icon: 'e836',
                 icon_id: 5,
@@ -41,7 +41,7 @@ wxApp = wxApp || {};
                             '<p>Display Wordpress posts matching a predefined search term.</p>'
 
             }
-        )
+        );}
     });
 
 })(jQuery);

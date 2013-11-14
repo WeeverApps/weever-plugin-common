@@ -7,8 +7,8 @@ var wxApp = wxApp || {};
         allowedLayouts: ['list'],
         typeDescription: 'Picasa Photos',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Photos',
                 icon: 'e053',
                 icon_id: 15,
@@ -17,7 +17,8 @@ var wxApp = wxApp || {};
                 layout: 'list',
                 config: { user_id: 'your.email@gmail.com' }
             }
-        )
+        );
+        }
     });
 
 })(jQuery);

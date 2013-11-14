@@ -8,8 +8,8 @@ wxApp = wxApp || {};
         buildPreview: true,
         typeDescription: 'Form Builder',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-			{
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
 				title: 'Formbuilder Title',
                 icon: 'e074',
 				tabTitle: 'Form',
@@ -26,7 +26,8 @@ wxApp = wxApp || {};
 					}
 				}
 			}
-		)
+		);
+        }
 		
     });
 

@@ -7,8 +7,8 @@ var wxApp = wxApp || {};
         allowedLayouts: ['list'],
         typeDescription: 'Wufoo Forms',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Forms',
                 icon: 'e832',
                 icon_id: 30,
@@ -26,7 +26,8 @@ var wxApp = wxApp || {};
                             '<p>Connections / integrations include MailChimp, Campaign Monitor, PayPal Donations and Payments, SalesForce CRM, Freshbooks Accounting &amp; Billing, Highrise CRM and Twitter.</p>' +
                             '<p>For more information check out: <a target="_blank" href="http://wufoo.com/integrations">wufoo.com/integrations</a></p>'
             }
-        )
+        );
+}
     });
 
 })(jQuery);

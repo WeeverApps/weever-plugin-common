@@ -7,8 +7,8 @@ var wxApp = wxApp || {};
         allowedLayouts: ['carousel'],
         typeDescription: 'Foursquare',
 
-        defaults: _.extend( {}, wxApp.SubTab.prototype.defaults,
-            {
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title: 'Photos',
                 icon: 'e057',
                 icon_id: 25,
@@ -23,7 +23,8 @@ var wxApp = wxApp || {};
                           '<p>Sharing live photos is a great way to engage event attendees or share info about a specific location.</p>'
 
             }
-        )
+        );
+        }
     });
 
 })(jQuery);

@@ -32,8 +32,14 @@ wxApp = wxApp || {};
 			}
 			else {
 				// Load currently existing form elements.
+				frmElem = this.model.get( 'config' ).formElements;
 				console.log( this.model.get( 'config' ).formElements );
-				var elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
+				var elementsJson;
+				try {
+					elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
+				} catch(err) {
+					elementsJson = this.model.get( 'config' ).formElements.toJSON();
+				}
 
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
@@ -73,18 +79,25 @@ wxApp = wxApp || {};
 			else {
 				// Load currently existing form actions.
 				console.log( this.model.get( 'config' ).formActions );
-				var actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
+				var actionsJson;
+				try {
+					actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
+				} catch(err) {
+					actionsJson = this.model.get( 'config' ).formActions.toJSON();
+				}
+
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
 				for ( var i = 0; i < actionsJson.length; i++ ) {
-					if ( actionsJson[i].method == 'docusign' ) {
-						this.addDocusignAction( null, actionsJson[i] );
+					var action = actionsJson[i];
+					if ( action.method == 'docusign' ) {
+						this.addDocusignAction( null, action );
 					}
-					else if ( actionsJson[i].method == 'post' ) {
-						this.addPostAction( null, actionsJson[i] );
+					else if ( action.method == 'post' ) {
+						this.addPostAction( null, action );
 					}
-					else if ( actionsJson[i].method == 'email' ) {
-						this.addEmailAction( null, actionsJson[i] );
+					else if ( action.method == 'email' ) {
+						this.addEmailAction( null, action );
 					}
 				}
 			}
