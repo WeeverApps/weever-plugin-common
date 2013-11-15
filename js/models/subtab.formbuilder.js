@@ -15,7 +15,7 @@ wxApp = wxApp || {};
 				tabTitle: 'Form',
 				icon_id: 30,
 				type: 'formbuilder',
-				content: 'formBuilder',
+				content: 'formbuilder',
 				layout: 'panel',
         		buildPreview: true,
         		buttonText: 'Submit',

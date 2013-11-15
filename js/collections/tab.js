@@ -11,13 +11,18 @@ var wxApp = wxApp || {};
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
                 case 'twitter':
+                case 'twitterUser':
                     retVal = 'TwitterSubTab';
                     break;
+                case 'youtube':
                 case 'youtubePlaylist':
                     retVal = 'YoutubeSubTab';
                     break;
                 case 'flickrPhotosets':
                     retVal = 'FlickrSubTab';
+                    break;
+                case 'formbuilder':
+                    retVal = 'FormBuilderSubTab';
                     break;
                 default:
                     // Check against type first (more specific but only newer tabs), then content (more generic)
