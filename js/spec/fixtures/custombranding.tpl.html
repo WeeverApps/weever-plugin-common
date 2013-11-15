@@ -11,14 +11,14 @@
 
     <?php if ( $weeverapp->tier != 4 ): ?>
 		<p>
-            <a target="_blank" class="button success" href="http://weeverapps.com/new-app/?site_url=<?php echo urlencode($weeverapp->primary_domain); ?>&subscription_type=premium"><?php echo __( 'Upgrade Your App', 'weever' ); ?></a>
+            <a target="_blank" class="button radius success" href="http://weeverapps.com/new-app/?site_url=<?php echo urlencode($weeverapp->primary_domain); ?>&subscription_type=premium"><?php echo __( 'Upgrade Your App', 'weever' ); ?></a>
         </p>
 	<?php else: ?>
 		<p>Add custom text or HTML to appear as the app loads.  If this field is left blank, the load spinner will not appear.</p>
 		<div>
 			<p>Loading spinner text:</p>
 			<textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="<?php echo __( 'Powered By...', 'weever' ); ?>"><%- loadspinner.text %></textarea>
-			<button class="button success" id="save_load_spinner">Save</button>
+			<button class="button success radius" id="save_load_spinner">Save</button>
 			<img id="save_load_spinner_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
 		</div>
 	<?php endif; ?>
@@ -40,7 +40,7 @@
 				<input type="text" name="domain" id="wx-domain-map-input" placeholder="app.yourdomain.com" />
 			</div>
 			<div class="small-2 columns">
-				<a href="#" onclick="return false;" id="save_domain" class="button prefix success">Save</a>
+				<a href="#" onclick="return false;" id="save_domain" class="button postfix success radius">Save</a>
 			</div>
 			<div class="small-2 columns loading">
 				<img id="wx-domain-map-input_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />

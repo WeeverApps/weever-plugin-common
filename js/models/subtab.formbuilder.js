@@ -10,7 +10,7 @@ wxApp = wxApp || {};
 
         defaults: function() {
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
-				title: 'Formbuilder Title',
+				title: 'My Form Title',
                 icon: 'e074',
 				tabTitle: 'Form',
 				icon_id: 30,

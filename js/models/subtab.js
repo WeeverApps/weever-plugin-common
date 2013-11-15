@@ -56,14 +56,18 @@ wxApp = wxApp || {};
 		},
 
         getModelName: function() {
+            //console.log( 'Looking for class' + this.constructor );
             var retVal = false;
             // Use reverse inspection of wxApp
+            console.log( this.get('content') );
             for ( var name in wxApp ) {
-                if ( wxApp[name] == this.constructor ) {
+                // console.log(name);
+                if ( name !== 'SubTab' && wxApp[name] == this.constructor ) {
                     retVal = name;
                     break;
                 }
             }
+            console.log('Returning ' + retVal);
             return retVal;
         },
 

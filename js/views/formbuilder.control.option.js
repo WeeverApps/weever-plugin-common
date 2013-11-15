@@ -24,7 +24,18 @@ wxApp = wxApp || {};
 
 		render: function() {
 			console.log('select view render');
-			this.$el.html( this.selectTpl( this.model.toJSON() ) );
+
+			var text = this.model.get('innerText').toString();
+			if ( text === '[object Object]' ) {
+				// innerText seems to be some sort of wacky 
+				// reserved keyword in backbone, so we have 
+				// to get it the "old fashioned" way.
+				text = this.model.attributes.innerText.innerText;
+			}
+			var jsonModel = this.model.toJSON();
+			jsonModel.innerText = text;
+
+			this.$el.html( this.selectTpl( jsonModel ) );
 			return this;
 		},
 
@@ -77,7 +88,15 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			this.$el.html( this.model.get('innerText') );
+			var text = this.model.get('innerText').toString();
+			if ( text === '[object Object]' ) {
+				// innerText seems to be some sort of wacky 
+				// reserved keyword in backbone, so we have 
+				// to get it the "old fashioned" way.
+				text = this.model.attributes.innerText.innerText;
+			}
+
+			this.$el.html( text );
 			this.$el.attr('value', this.model.get('attributes').get('value'));
 
 			if ( this.model.get( 'attributes' ).get( 'selected' ) ) {

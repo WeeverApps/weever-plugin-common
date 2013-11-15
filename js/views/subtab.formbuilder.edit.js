@@ -3,18 +3,18 @@ wxApp = wxApp || {};
 
 (function($){
 
-    wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
+	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
 		subTabEditTplSelector: '#form-builder-subtab-edit-template',
-	    hasCalledFinish: false,
-	    finishView: null,
-	    previews: null,
+		hasCalledFinish: false,
+		finishView: null,
+		previews: null,
 
-        initializeEvents: function() {
-            this.events = _.extend({}, this.genericEvents, this.events);
+		initializeEvents: function() {
+			this.events = _.extend({}, this.genericEvents, this.events);
 //			this.controls = new wxApp.FormBuilderCollection();
-        },
+		},
 
 		initialize: function() {
 			// Call parent's initialize() function
@@ -22,7 +22,7 @@ wxApp = wxApp || {};
 			console.log('FormBuilderSubTabEditView initialize');
 
 			// Clear the preview window
-			$( '.wx-validate-feed' ).html( '<h3>' + this.model.get('title') + '</h3>' );
+			$( '.wx-validate-feed' ).html( '<br><h3>' + this.model.get('title') + '<span> &mdash; preview</span></h3>' );
 			$( '.wx-validate-feed' ).append( '<div class="' + this.previewPaneClass + '"></div>' );
 			$( '.wx-validate-feed' ).append( '<button class="success">' + this.model.get('buttonText') + '</button>' );
 			$( '.wx-validate-feed' ).addClass( 'panel' );
@@ -32,7 +32,6 @@ wxApp = wxApp || {};
 			}
 			else {
 				// Load currently existing form elements.
-				frmElem = this.model.get( 'config' ).formElements;
 				console.log( this.model.get( 'config' ).formElements );
 				var elementsJson;
 				try {
@@ -110,23 +109,23 @@ wxApp = wxApp || {};
 
 		validate: function() {
 			var success = false;
-            $('.wx-form-builder-action').each(function(index, value) { 
-            	var $text = $( value );
-            	if ( $text.val() ) {
-            		success = true;
-            	}
-            });
+			$('.wx-form-builder-action').each(function(index, value) { 
+				var $text = $( value );
+				if ( $text.val() ) {
+					success = true;
+				}
+			});
 
-            if (!success) {
-            	// Display an error message.
-	            var errorMessage = "Your form could not be saved! Please add an email recipient, or custom POST action, under the <b>Form Settings</b> tab.";
-	            var $alert = $('.alert-box.alert .message').html( errorMessage );
-	            $alert.parent().slideDown();
-	        }
+			if (!success) {
+				// Display an error message.
+				var errorMessage = "Your form could not be saved! Please add an email recipient, or custom POST action, under the <b>Form Settings</b> tab.";
+				var $alert = $('.alert-box.alert .message').html( errorMessage );
+				$alert.parent().slideDown();
+			}
 
 
-            return success;
-        },
+			return success;
+		},
 
 		getDefaultFormActions: function() {
 			
@@ -153,8 +152,8 @@ wxApp = wxApp || {};
 			return model;
 		},
 
-        events: {
-            'click .wx-form-builder-add-text-input': 'addTextInput',
+		events: {
+			'click .wx-form-builder-add-text-input': 'addTextInput',
 			'click .wx-form-builder-add-password-input': 'addPasswordInput',
 			'click .wx-form-builder-add-date-input': 'addDateInput',
 			'click .wx-form-builder-add-datetime-local-input': 'addDateTimeLocalInput',
@@ -175,7 +174,7 @@ wxApp = wxApp || {};
 			// 'click .wx-form-builder-add-post-action': 'addPostAction',
 			// 'click .wx-form-builder-add-email-action': 'addEmailAction',
 			'keyup .button-text': 'updateButtonText',
-	        'sortable-update': 'sortableUpdate'
+			'sortable-update': 'sortableUpdate'
 		},
 
 		updateButtonText: function( ev ) {
@@ -186,134 +185,133 @@ wxApp = wxApp || {};
 			$('.wx-validate-feed.panel button.success').text( $text.val() );
 		},
 
-	    sortableUpdate: function( event, model, position ) {
-		    console.log( 'sortableUpdate' );
-		    var formElements = this.model.get( 'config' ).formElements;
+		sortableUpdate: function( event, model, position ) {
+			console.log( 'sortableUpdate' );
+			var formElements = this.model.get( 'config' ).formElements;
 
-		    formElements.remove( model );
+			formElements.remove( model );
 
-		    formElements.each( function( model, index ) {
-			    var ordinal = index;
-			    if ( index >= position ) {
-				    ordinal += 1;
-			    }
-			    model.set( 'ordinal', ordinal );
-		    });
+			formElements.each( function( model, index ) {
+				var ordinal = index;
+				if ( index >= position ) {
+					ordinal += 1;
+				}
+				model.set( 'ordinal', ordinal );
+			});
 
-		    model.set( 'ordinal', position );
-		    formElements.add( model, {at: position} );
+			model.set( 'ordinal', position );
+			formElements.add( model, {at: position} );
 
-		    // Re-render the previews.
-		    var me = this;
+			// Re-render the previews.
+			var me = this;
 			$( '.' + this.previewPaneClass ).html( '' );
-		    formElements.each( function( model, index ) {
-		    	for (var i = 0; i < me.previews.length; i++) {
-		    		var preview = me.previews[i];
-		    		console.log(  )
-		    		if ( preview.model.cid === model.cid ) {
-		    			$( '.' + me.previewPaneClass ).append( preview.render().el );
-		    			break;
-		    		}
-		    	}
-		    });
-	    },
+			formElements.each( function( model, index ) {
+				for (var i = 0; i < me.previews.length; i++) {
+					var preview = me.previews[i];
+					if ( preview.model.cid === model.cid ) {
+						$( '.' + me.previewPaneClass ).append( preview.render().el );
+						break;
+					}
+				}
+			});
+		},
 
-	    /**
-	     * Override __super__.finish()
-	     */
-	    finish: function() {
-		    console.log( 'subtab.formbuilder.edit.finish()' );
-		    console.log( this );
+		/**
+		 * Override __super__.finish()
+		 */
+		finish: function() {
+			console.log( 'subtab.formbuilder.edit.finish()' );
+			console.log( this );
 
-		    var hasUpload = false,
-			    formElements = this.model.get( 'config' ).formElements,
-			    formActions = this.model.get( 'config' ).formActions,
+			var hasUpload = false,
+				formElements = this.model.get( 'config' ).formElements,
+				formActions = this.model.get( 'config' ).formActions,
 
-			    /**
-			     * Should be called using .call( this ) or .apply( this ) so that the scope remains the same
-			     */
-		        addFinishView = function() {
-				    this.finishView = new wxApp.FormBuilderFinishView({
-					    model: this.model
-				    });
-				    this.$( this.buildPaneSelector ).append( this.finishView.render().el );
-			    };
+				/**
+				 * Should be called using .call( this ) or .apply( this ) so that the scope remains the same
+				 */
+				addFinishView = function() {
+					this.finishView = new wxApp.FormBuilderFinishView({
+						model: this.model
+					});
+					this.$( this.buildPaneSelector ).append( this.finishView.render().el );
+				};
 
-		    console.log( formElements );
-		    console.log( formActions );
+			console.log( formElements );
+			console.log( formActions );
 
-		    // Check for an upload element
-		    var model = {};
-		    for ( var i = 0; i < formElements.length; i++ ) {
-			    model = formElements.at( i );
-			    if ( 'input' == model.get( 'control' ) && 'file' == model.get( 'attributes' ).get( 'type' ) ) {
-				    hasUpload = true;
-				    break;
-			    }
-		    }
+			// Check for an upload element
+			var model = {};
+			for ( var i = 0; i < formElements.length; i++ ) {
+				model = formElements.at( i );
+				if ( 'input' == model.get( 'control' ) && 'file' == model.get( 'attributes' ).get( 'type' ) ) {
+					hasUpload = true;
+					break;
+				}
+			}
 
-		    // Call super and exit if an index has already been identified
-		    if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
-			    wxApp.SubTabEditView.prototype.finish.apply( this );
-			    return;
-		    }
+			// Call super and exit if an index has already been identified
+			if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
+				wxApp.SubTabEditView.prototype.finish.apply( this );
+				return;
+			}
 
-		    // Select index
-		    if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
-			    addFinishView.apply( this );
-			    this.hasCalledFinish = true;
-			    return;
-		    }
+			// Select index
+			if ( typeof this.model.get( 'config' ).idFieldIndex != 'number' && ! this.hasCalledFinish ) {
+				addFinishView.apply( this );
+				this.hasCalledFinish = true;
+				return;
+			}
 
-		    // Re-add finish view in case elements have changed
-		    if ( this.hasCalledFinish ) {
-			    this.finishView.remove();
-			    addFinishView.apply( this );
-		    }
+			// Re-add finish view in case elements have changed
+			if ( this.hasCalledFinish ) {
+				this.finishView.remove();
+				addFinishView.apply( this );
+			}
 
-	    },
+		},
 
-	    addDocusignAction: function( event, properties ) {
-		    console.log( 'addDocusignAction' );
+		addDocusignAction: function( event, properties ) {
+			console.log( 'addDocusignAction' );
 
-		    var action;
-		    if ( typeof properties != 'undefined' ) {
-			    action = this.addCustomAction( properties );
-		    }
-		    else {
-			    action = this.addCustomAction( { method : 'docusign' } );
-		    }
-
-		    return action;
-	    },
-
-	    addEmailAction: function( event, properties ) {
-			console.log( 'addEmailAction' );
-
-		    var action;
-		    if ( typeof properties != 'undefined' ) {
-			    action = this.addCustomAction( properties );
-		    }
-		    else {
-			    action = this.addCustomAction( { method : 'email' } );
-		    }
+			var action;
+			if ( typeof properties != 'undefined' ) {
+				action = this.addCustomAction( properties );
+			}
+			else {
+				action = this.addCustomAction( { method : 'docusign' } );
+			}
 
 			return action;
 		},
 
-	    addPostAction: function( event, properties ) {
-		    console.log( 'addPostAction' );
+		addEmailAction: function( event, properties ) {
+			console.log( 'addEmailAction' );
 
-		    var action;
-		    if ( typeof properties != 'undefined' ) {
-			    action = this.addCustomAction( properties );
-		    }
-		    else {
-			    action = this.addCustomAction( { method : 'post' } );
-		    }
+			var action;
+			if ( typeof properties != 'undefined' ) {
+				action = this.addCustomAction( properties );
+			}
+			else {
+				action = this.addCustomAction( { method : 'email' } );
+			}
 
-		    return action;
-	    },
+			return action;
+		},
+
+		addPostAction: function( event, properties ) {
+			console.log( 'addPostAction' );
+
+			var action;
+			if ( typeof properties != 'undefined' ) {
+				action = this.addCustomAction( properties );
+			}
+			else {
+				action = this.addCustomAction( { method : 'post' } );
+			}
+
+			return action;
+		},
 
 		addCustomAction: function( customAction ) {
 			console.log( 'addCustomAction' );
@@ -446,6 +444,7 @@ wxApp = wxApp || {};
 		addTelInput: function() {
 			this.addInput({
 				label: 'Telephone',
+				type: 'tel',
 				showPlaceholder: true,
 				attributes: {
 					type: 'tel'
@@ -520,9 +519,9 @@ wxApp = wxApp || {};
 			this.addRadioGroupWithProperties( {} );
 		},
 
-	    addRadioGroupWithProperties: function( properties ) {
+		addRadioGroupWithProperties: function( properties ) {
 			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
-		    var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
+			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
 				model: radioFieldset
 			});
 
@@ -588,12 +587,12 @@ wxApp = wxApp || {};
 		/**
 		 * Structure:
 		 * Select Model
-		 *     allowMultipleSelections
-		 *     optionCollection (current Select Group)
-		 *         model: Option
+		 *	 allowMultipleSelections
+		 *	 optionCollection (current Select Group)
+		 *		 model: Option
 		 *
-		 *         Option Model
-		 *             (current Select Model)
+		 *		 Option Model
+		 *			 (current Select Model)
 		 */
 		addSelect: function() {
 			this.addSelectWithProperties( {} );
@@ -667,20 +666,20 @@ wxApp = wxApp || {};
 
 		validate: function() {
 			var success = false;
-            if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
-            	success = true;
-            }
+			if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
+				success = true;
+			}
 
-            if (!success) {
-            	// Display an error message.
-	            var errorMessage = "Your form could not be saved! Please enter your DocuSign&trade; username and password under the <b>Form Settings</b> tab.";
-	            var $alert = $('.alert-box.alert .message').html( errorMessage );
-	            $alert.parent().slideDown();
-	        }
+			if (!success) {
+				// Display an error message.
+				var errorMessage = "Your form could not be saved! Please enter your DocuSign&trade; username and password under the <b>Form Settings</b> tab.";
+				var $alert = $('.alert-box.alert .message').html( errorMessage );
+				$alert.parent().slideDown();
+			}
 
 
-            return success;
-        },
+			return success;
+		},
 
 		getDefaultFormActions: function() {
 			console.log(' DOCUSIGN FORM ACTIONS ');
