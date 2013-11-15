@@ -1,26 +1,39 @@
 <script type="text/template" id="form-builder-action-email">
-	<p class="title" data-section-title><a href="#panel3">Email PDF To&hellip;</a></p>
+	<p class="title" data-section-title><a href="#panel3">Send PDF to&hellip;</a></p>
 	<div class="content" data-section-content>
-		<label>
-			<p>
-				Receiver, or receivers of the mail.
-				The formatting of this string must comply with
-				<a href="http://www.faqs.org/rfcs/rfc2822" target="_blank">RFC 2822</a>. Some examples are:
-			</p>
-			<ul>
-				<li>user@example.com</li>
-				<li>user@example.com, anotheruser@example.com</li>
-				<li>User &lt;user@example.com&gt;</li>
-				<li>User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
-			</ul>
-			<input class="wx-form-builder-action" type="email" value="<%- value %>" />
-		</label>
-		<fieldset class="wx-form-builder-action-email-pdfheader">
-			<h4>PDF Header Details</h4>
-			<input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- pdfHeader.title %>" />
-			<input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- pdfHeader.line1 %>" />
-			<input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- pdfHeader.line2 %>" />
-			<input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- pdfHeader.line3 %>" />
-		</fieldset>
+
+        <!-- container for detailed help text -->
+        <div class="wx-form-tips">
+
+            <p>Optional. When a user fills out your form, email a PDF of their submission to the person(s) you specify.</P>
+
+            <label>Please specify the email recipient(s)</label>
+
+            <input class="wx-form-builder-action" type="email" value="<%- value %>" />
+
+            <ul class="no-bullet">
+                <li>Examples of valid entries:</li>
+                <li>user@example.com</li>
+                <li>user@example.com, anotheruser@example.com</li>
+                <li>User &lt;user@example.com&gt;</li>
+                <li>User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
+            </ul>
+
+            <div class="wx-form-builder-action-email-pdfheader">
+
+                <label>PDF Document title</label>
+                <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfHeader.title %>" />
+
+                <label>Text line 1 (below the title)</label>
+                <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfHeader.line1 %>" />
+
+                <label>Text line 2</label>
+                <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfHeader.line2 %>" />
+
+                <label>Text line 3</label>
+                <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfHeader.line3 %>" />
+
+            </div>
+        </div>
 	</div>
 </script>

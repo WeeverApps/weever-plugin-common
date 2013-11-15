@@ -25,7 +25,7 @@
                         <li><button class="tiny expand radius wx-form-builder-add-range-input">Slider</button></li>
 
                         <!-- more rare elements, e.g, sliders -->
-                        <li><button class="tiny expand radius wx-form-builder-add-file-input">Photo / Upload</button></li>
+                        <li><button class="tiny expand radius wx-form-builder-add-file-input">Photo/Upload</button></li>
                         <li><button class="tiny expand radius wx-form-builder-add-url-input">Web site</button></li>
                         <li><button class="tiny expand radius wx-form-builder-add-date-input">Date</button></li>
                         <li><button class="tiny expand radius wx-form-builder-add-password-input">Password</button></li>
@@ -45,24 +45,22 @@
 
         <!-- start: form settings -->
 
-        <p class="wx-ui-title">Form / Submit Settings</p>
+        <p class="wx-ui-title">Form submission settings</p>
 
             <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
                 <!-- Button Text -->
                 <section class="active">
                     <p class="title" data-section-title><a href="#panel1">Submit form button</a></p>
                     <div class="content" data-section-content>
-                        <p>
-                            Change the label text on your form&apos;s submit button.
-                            <input type="text" class="button-text" value="<%- buttonText %>" />
-                        </p>
+
+                        <label>Change the label text used for your form&apos;s submit button</label>
+                        <input type="text" class="button-text" value="<%- buttonText %>" />
+                        <!-- fix for last-child bug in foundation -->
                     </div>
                 </section>
             </div>
 
     </div>
-    <br>
-    <br>
 
 </script>
 

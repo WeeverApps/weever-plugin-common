@@ -22,7 +22,7 @@ wxApp = wxApp || {};
 			console.log('FormBuilderSubTabEditView initialize');
 
 			// Clear the preview window
-			$( '.wx-validate-feed' ).html( '<br><h3>' + this.model.get('title') + '<span> &mdash; preview</span></h3>' );
+			$( '.wx-validate-feed' ).html( '<br><h3 class="subheader">' + this.model.get('title') + ' &mdash; preview</h3>' );
 			$( '.wx-validate-feed' ).append( '<div class="' + this.previewPaneClass + '"></div>' );
 			$( '.wx-validate-feed' ).append( '<button class="success">' + this.model.get('buttonText') + '</button>' );
 			$( '.wx-validate-feed' ).addClass( 'panel' );
@@ -118,7 +118,7 @@ wxApp = wxApp || {};
 
 			if (!success) {
 				// Display an error message.
-				var errorMessage = "Your form could not be saved! Please add an email recipient, or custom POST action, under the <b>Form Settings</b> tab.";
+				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient or custom post action in &ldquo;Form submission settings&rdquo;.";
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
 			}
@@ -454,7 +454,7 @@ wxApp = wxApp || {};
 
 		addTextInput: function() {
 			this.addInput({
-				label: 'Text',
+				label: 'Enter a line of text',
 				type: 'text',
 				showPlaceholder: true,
 				attributes: {
