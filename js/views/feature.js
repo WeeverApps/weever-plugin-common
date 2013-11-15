@@ -23,7 +23,7 @@ wxApp = wxApp || {};
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
             if (this.model.get('rel') !== '') {
-            	this.$('button').attr('rel', this.model.get('rel'));
+            	this.$('a').attr('rel', this.model.get('rel'));
         	}
 
             return this;
@@ -32,7 +32,7 @@ wxApp = wxApp || {};
         addFeature: function(ev) {
             var featureName = ev.currentTarget.id.replace('add-', '');
 
-            if (this.$('button').hasClass( 'wx-unavailable' )) {
+            if (this.$('a').hasClass( 'wx-unavailable' )) {
 
                 // We don't have this feature yet :(
                 $('#wx-edit-area-' + featureName).html( $('#please-subscribe').html() );
