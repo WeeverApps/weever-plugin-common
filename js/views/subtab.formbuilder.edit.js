@@ -13,7 +13,6 @@ wxApp = wxApp || {};
 
 		initializeEvents: function() {
 			this.events = _.extend({}, this.genericEvents, this.events);
-//			this.controls = new wxApp.FormBuilderCollection();
 		},
 
 		initialize: function() {
@@ -145,10 +144,6 @@ wxApp = wxApp || {};
 		},
 
 		setModelFromView: function( model ) {
-//			console.log( 'setModelFromView' );
-//			console.log( model );
-//			model = model.toJSONrecursive();
-//			console.log( model );
 			return model;
 		},
 
@@ -355,8 +350,9 @@ wxApp = wxApp || {};
 			return input;
 		},
 
-		addDateInput: function() {
+		addDateInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Date',
 				attributes: {
 					type: 'date'
@@ -364,8 +360,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addDateTimeLocalInput: function() {
+		addDateTimeLocalInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Date/Time',
 				attributes: {
 					type: 'datetime-local'
@@ -373,8 +370,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addEmailInput: function() {
+		addEmailInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Email',
 				showPlaceholder: true,
 				multiClass: '',
@@ -384,8 +382,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addFileInput: function() {
+		addFileInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'File',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -396,8 +395,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addMonthInput: function() {
+		addMonthInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Month',
 				attributes: {
 					type: 'month'
@@ -405,8 +405,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addNumberInput: function() {
+		addNumberInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Number',
 				minClass: '',
 				maxClass: '',
@@ -418,8 +419,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addPasswordInput: function() {
+		addPasswordInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Password',
 				showPlaceholder: true,
 				attributes: {
@@ -428,8 +430,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addRangeInput: function() {
+		addRangeInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Range',
 				minClass: '',
 				maxClass: '',
@@ -441,8 +444,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addTelInput: function() {
+		addTelInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Telephone',
 				type: 'tel',
 				showPlaceholder: true,
@@ -452,8 +456,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addTextInput: function() {
+		addTextInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Enter a line of text',
 				type: 'text',
 				showPlaceholder: true,
@@ -463,8 +468,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addTimeInput: function() {
+		addTimeInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'Time',
 				attributes: {
 					type: 'time'
@@ -472,8 +478,9 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addUrlInput: function() {
+		addUrlInput: function(ev) {
 			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
 				label: 'URL',
 				showPlaceholder: true,
 				attributes: {
@@ -483,7 +490,9 @@ wxApp = wxApp || {};
 		},
 
 		addInfo: function( event ) {
-			this.addInfoWithProperties( {} );
+			this.addInfoWithProperties( { 
+				controlTitle: $(ev.currentTarget).text() 
+			} );
 		},
 
 		addInfoWithProperties: function( properties ) {
@@ -499,8 +508,10 @@ wxApp = wxApp || {};
 
 		},
 
-		addTextarea: function() {
-			this.addTextareaWithProperties( {} );
+		addTextarea: function(ev) {
+			this.addTextareaWithProperties( {
+				controlTitle: $(ev.currentTarget).text()
+			} );
 		},
 
 		addTextareaWithProperties: function( properties ) {
@@ -515,8 +526,10 @@ wxApp = wxApp || {};
 			// this.model.get( 'config' ).formElements.push( textArea );
 		},
 
-		addRadioGroup: function() {
-			this.addRadioGroupWithProperties( {} );
+		addRadioGroup: function(ev) {
+			this.addRadioGroupWithProperties( {
+				controlTitle: $(ev.currentTarget).text()
+			} );
 		},
 
 		addRadioGroupWithProperties: function( properties ) {
@@ -550,8 +563,10 @@ wxApp = wxApp || {};
 			// this.model.get( 'config' ).formElements.push( radioFieldset );
 		},
 
-		addCheckboxGroup: function() {
-			this.addCheckboxGroupWithProperties( {} );
+		addCheckboxGroup: function(ev) {
+			this.addCheckboxGroupWithProperties( {
+				controlTitle: $(ev.currentTarget).text()
+			} );
 		},
 
 		addCheckboxGroupWithProperties: function( properties ) {
@@ -594,8 +609,10 @@ wxApp = wxApp || {};
 		 *		 Option Model
 		 *			 (current Select Model)
 		 */
-		addSelect: function() {
-			this.addSelectWithProperties( {} );
+		addSelect: function(ev) {
+			this.addSelectWithProperties( {
+				controlTitle: $(ev.currentTarget).text()
+			} );
 		},
 
 		addSelectWithProperties: function( properties ) {
