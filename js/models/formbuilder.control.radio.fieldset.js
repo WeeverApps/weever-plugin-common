@@ -9,7 +9,7 @@ wxApp = wxApp || {};
 
 		defaults: {
 			control: 'radiofieldset',
-			title: 'Radio Fieldset',
+			title: 'Select a choice',
 			allowAdditional: '',
 			allowAdditionalClass: '',
 			name: ''

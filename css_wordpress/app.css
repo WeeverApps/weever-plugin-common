@@ -6565,12 +6565,19 @@
 #appbuilder #interface #form-creation #add-fields button {
   margin-bottom: 0;
 }
-/* line 20, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 18, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .wx-form-tips {
+  font-size: 0.875em;
+}
+/* line 21, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .wx-form-tips p,
 #appbuilder #interface .wx-form-tips ul {
-  font-size: 0.875em;
   color: #4d4d4d;
   font-weight: normal;
+}
+/* line 30, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .wx-form-builder-radio-group label.inline {
+  margin-bottom: 0;
 }
 /* line 37, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-phone.scss */
 #appbuilder #interface #wx-phone-bg {
