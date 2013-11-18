@@ -154,6 +154,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-datetime-local-input': 'addDateTimeLocalInput',
 			'click .wx-form-builder-add-email-input': 'addEmailInput',
 			'click .wx-form-builder-add-file-input': 'addFileInput',
+			'click .wx-form-builder-add-photo-input': 'addPhotoInput',
 			'click .wx-form-builder-add-month-input': 'addMonthInput',
 			'click .wx-form-builder-add-number-input': 'addNumberInput',
 			'click .wx-form-builder-add-tel-input': 'addTelInput',
@@ -385,7 +386,20 @@ wxApp = wxApp || {};
 		addFileInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
-				label: 'Photo or file upload',
+				label: 'File upload',
+				multiClass: '',
+				autocompleteClass: 'hide',
+				attributes: {
+					type: 'file',
+					accept: 'image/*'
+				}
+			});
+		},
+
+		addPhotoInput: function(ev) {
+			this.addInput({
+				controlTitle: $(ev.currentTarget).text(),
+				label: 'Photo upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
 				attributes: {
