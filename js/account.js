@@ -26,8 +26,8 @@ jQuery(document).ready(function(){
 	    .ajaxStart(function() {
 	    	jQuery('#wx-modal-error-text').html('');
 	        jQuery(this).fadeIn(200);
-	        jQuery('#wx-modal-loading-text').html(WPText.WEEVER_JS_SAVING_CHANGES);
-	        jQuery('#wx-modal-secondary-text').html(WPText.WEEVER_JS_PLEASE_WAIT);
+	        jQuery('#wx-modal-loading-text').html( 'Please Wait...' );
+	        jQuery('#wx-modal-secondary-text').html( 'Please wait, communicating with server' );
 	    })
 	    .ajaxStop(function() {
 	    	var jObj = jQuery(this);
