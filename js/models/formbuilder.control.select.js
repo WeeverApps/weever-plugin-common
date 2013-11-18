@@ -8,7 +8,7 @@ wxApp = wxApp || {};
 
 		defaults: {
 			control: 'select',
-			title: 'Dropdown',
+			title: 'Select a choice',
 			allowAdditional: '',
 			allowAdditionalClass: '',
 			requiredClass: '',

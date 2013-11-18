@@ -8,7 +8,7 @@ wxApp = wxApp || {};
 
 		defaults: {
 			control: 'checkboxfieldset',
-			title: 'Checkbox Fieldset',
+			title: 'Check all that apply',
 			allowAdditional: '',
 			allowAdditionalClass: '',
 			name: ''

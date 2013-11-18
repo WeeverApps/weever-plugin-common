@@ -9,17 +9,26 @@
 		<input type="text" class="wx-form-builder-title-input" value="<%- title %>" />
 
 		<div class="wx-form-builder-checkbox-fieldset">
-			<!-- Check box groups go here -->
+			<!-- Checkbox groups go here -->
 		</div>
 
+        <div class="row">
+            <div class="small-1 columns">&nbsp;</div>
+
+            <div class="small-11 columns">
+                <a href="#" class="wx-form-builder-add-option">+ add new checkbox</a>
+            </div>
+        </div>
+
         <br>
         <br>
 
-		<a href="#" class="wx-form-builder-add-option">+ Add New Option</a>
+        <label class="<%- allowAdditionalClass %>"><input type="checkbox" class="wx-form-builder-allow-additional" <%- allowAdditional %> /> Allow users to create and select new checkboxes</label>
 
-		<label class="<%- allowAdditionalClass %>"><input type="checkbox" class="wx-form-builder-allow-additional" <%- allowAdditional %> />Allow Additional</label>
-		<a class="wx-form-builder-delete">&times; Delete</a>
+        <a class="wx-form-builder-delete">&times; Delete</a>
+
 	</div>
+
 </script>
 
 <script type="text/template" id="form-builder-checkbox-fieldset-preview">

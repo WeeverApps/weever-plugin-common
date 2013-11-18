@@ -9,7 +9,7 @@ wxApp = wxApp || {};
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'textarea',
-				label: 'Text Area',
+				label: 'Untitled',
 				showPlaceholder: true
 			} );
 			return newDefaults;

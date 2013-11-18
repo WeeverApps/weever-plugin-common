@@ -23,7 +23,7 @@ wxApp = wxApp || {};
 			// Clear the preview window
 			$( '.wx-validate-feed' ).html( '<br><h3 class="subheader">' + this.model.get('title') + ' &mdash; preview</h3>' );
 			$( '.wx-validate-feed' ).append( '<div class="' + this.previewPaneClass + '"></div>' );
-			$( '.wx-validate-feed' ).append( '<button class="success">' + this.model.get('buttonText') + '</button>' );
+			$( '.wx-validate-feed' ).append( '<br><button class="success radius">' + this.model.get('buttonText') + '</button><br><br>' );
 			$( '.wx-validate-feed' ).addClass( 'panel' );
 
 			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
@@ -363,7 +363,7 @@ wxApp = wxApp || {};
 		addDateTimeLocalInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
-				label: 'Date/Time',
+				label: 'Date / Time',
 				attributes: {
 					type: 'datetime-local'
 				}
@@ -385,7 +385,7 @@ wxApp = wxApp || {};
 		addFileInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
-				label: 'File',
+				label: 'Photo or file upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
 				attributes: {
@@ -433,7 +433,7 @@ wxApp = wxApp || {};
 		addRangeInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
-				label: 'Range',
+				label: 'Untitled',
 				minClass: '',
 				maxClass: '',
 				stepClass: '',
@@ -459,7 +459,7 @@ wxApp = wxApp || {};
 		addTextInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
-				label: 'Enter a line of text',
+				label: 'Untitled',
 				type: 'text',
 				showPlaceholder: true,
 				attributes: {

@@ -1,14 +1,11 @@
 <script type="text/template" id="form-builder-select-option">
-	<div class="large-1 small-1 columns">
-		<input type="radio" class="wx-form-builder-control-selected inline" name="wx-form-builder-option-selected-<%- collectionId %>" <%- attributes.attributes.selected %> />
+	<div class="small-1 columns">
+        <label class="inline"><input type="radio" class="wx-form-builder-control-selected inline" name="wx-form-builder-option-selected-<%- collectionId %>" <%- attributes.attributes.selected %> /></label>
 	</div>
-	<div class="large-5 small-5 columns" style="padding-right: 0">
-		<input class="wx-form-builder-select-option-text" type="text" placeholder="text to display" value="<%- innerText %>"/><br/>
+	<div class="small-10 columns">
+		<input class="wx-form-builder-select-option-text" type="text" placeholder="text to display" value="<%- innerText %>"/>
 	</div>
-	<div class="large-5 small-5 columns" style="padding-right: 0">
-		<input class="wx-form-builder-select-option-value" type="text" placeholder="value (optional)" value="<%- attributes.attributes.value %>"/>
-	</div>
-	<div class="large-1 small-1 columns">
-		<a class="wx-form-builder-delete wxui-btn red">&times;</a>
+	<div class="small-1 columns">
+		<label class="inline"><a class="wx-form-builder-delete wxui-btn red">&times;</a></label>
 	</div>
 </script>
