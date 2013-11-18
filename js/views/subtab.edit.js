@@ -36,7 +36,9 @@ wxApp = wxApp || {};
             'keyup .wx-edit-title': 'editTitle',
 			'click .wx-finish-button': 'finish',
 			'click .wx-next-button': 'next',
-            'change .wx-content-radio' : 'contentChange'
+            'change .wx-content-radio' : 'contentChange',
+            'click .close-reveal-modal': 'close',
+            'close': 'close'
         },
 
         render: function() {
@@ -84,6 +86,11 @@ wxApp = wxApp || {};
             });
 
             return this;
+        },
+
+        close: function() {
+            this.model.destroy();
+            this.undelegateEvents();
         },
 
         startValidation: function() {

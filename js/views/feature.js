@@ -12,7 +12,7 @@ wxApp = wxApp || {};
         },
 
         events: {
-            'click .wx-add-feature': 'addFeature',
+            'click .wx-add-feature': 'addFeature'
         },
 
         render: function() {
