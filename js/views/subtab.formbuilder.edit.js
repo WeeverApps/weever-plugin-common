@@ -489,7 +489,7 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addInfo: function( event ) {
+		addInfo: function( ev ) {
 			this.addInfoWithProperties( { 
 				controlTitle: $(ev.currentTarget).text() 
 			} );
