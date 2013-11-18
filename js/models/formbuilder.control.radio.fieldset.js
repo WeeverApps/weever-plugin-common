@@ -12,6 +12,7 @@ wxApp = wxApp || {};
 			title: 'Select a choice',
 			allowAdditional: '',
 			allowAdditionalClass: '',
+			requiredClass: '',
 			name: ''
 		},
 

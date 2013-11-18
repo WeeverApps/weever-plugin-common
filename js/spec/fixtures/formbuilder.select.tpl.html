@@ -21,6 +21,7 @@
         <br>
         <br>
 
+        <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
         <label class="<%- allowAdditionalClass %>"><input type="checkbox" class="wx-form-builder-allow-additional" <%- allowAdditional %> /> Allow users to create and select new choices</label>
 
 		<a class="wx-form-builder-delete">&times; Delete</a>
@@ -30,7 +31,7 @@
 
 <script type="text/template" id="form-builder-select-preview">
 	<label>
-		<%- title %>
+		<span class="title"><%- title %></span>
 		<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
 	<select>

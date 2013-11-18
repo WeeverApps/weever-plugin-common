@@ -14,7 +14,8 @@ wxApp = wxApp || {};
 			// 'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
-			'click .wx-form-builder-add-option': 'addOption'
+			'click .wx-form-builder-add-option': 'addOption',
+			'click .wx-form-builder-required': 'setRequired'
 		},
 
 		initialize: function() {
@@ -45,12 +46,25 @@ wxApp = wxApp || {};
 			}
 		},
 
+		setRequired: function( ev ) {
+			console.log('Set Required.')
+			var $me = $( ev.currentTarget );
+			if ( $me.is( ':checked' ) ) {
+				this.model.get( 'attributes' ).set( 'required', 'checked' );
+				this.getPreview().$('legend .required').css('display', 'inline');
+			}
+			else {
+				this.model.get( 'attributes' ).unset( 'required' );
+				this.getPreview().$('legend .required').css('display', 'none');
+			}
+		},
+
 		updateTitle: function( ev ) {
 			console.log('updateTitle');
 			var $me = $( ev.currentTarget );
 
 			this.$('.wx-form-builder-label').text( $me.val() );
-			this.getPreview().$('legend').text( $me.val() );
+			this.getPreview().$('legend .title').text( $me.val() );
 			this.model.set( 'title', $me.val() );
 		},
 

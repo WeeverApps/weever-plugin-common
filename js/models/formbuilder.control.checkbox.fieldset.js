@@ -11,6 +11,7 @@ wxApp = wxApp || {};
 			title: 'Check all that apply',
 			allowAdditional: '',
 			allowAdditionalClass: '',
+			requiredClass: '',
 			name: ''
 		},
 

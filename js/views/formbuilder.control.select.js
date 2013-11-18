@@ -16,7 +16,8 @@ wxApp = wxApp || {};
 			// 'click .wx-form-builder-select-allow-multiple': 'toggleMultipleSelections',
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
-			'click .wx-form-builder-delete': 'deleteControl'
+			'click .wx-form-builder-delete': 'deleteControl',
+			'click .wx-form-builder-required': 'setRequired'
 		},
 
 		initialize: function() {
@@ -85,6 +86,19 @@ wxApp = wxApp || {};
 		// 	this.$title.hide();
 		// },
 
+		setRequired: function( ev ) {
+			console.log('Set Required.')
+			var $me = $( ev.currentTarget );
+			if ( $me.is( ':checked' ) ) {
+				this.model.get( 'attributes' ).set( 'required', 'checked' );
+				this.getPreview().$('.required').removeClass('hide');
+			}
+			else {
+				this.model.get( 'attributes' ).unset( 'required' );
+				this.getPreview().$('.required').addClass('hide');
+			}
+		},
+
 		updateTitle: function( ev ) {
 			console.log('updateTitle');
 			var $me = $( ev.currentTarget );
@@ -92,7 +106,7 @@ wxApp = wxApp || {};
 			// $me.hide();
 
 			this.model.set( 'title', $me.val() );
-			this.getPreview().$('label').text( $me.val() );
+			this.getPreview().$('label .title').text( $me.val() );
 		}
 
 	});
