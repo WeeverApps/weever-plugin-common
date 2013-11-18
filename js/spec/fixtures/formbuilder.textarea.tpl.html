@@ -18,6 +18,7 @@
 <script type="text/template" id="form-builder-textarea-preview">
 	<label class="wx-form-builder-label">
 		<%- label %>
+		<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
 	<textarea class="wx-form-builder-textarea"></textarea>
 </script>
