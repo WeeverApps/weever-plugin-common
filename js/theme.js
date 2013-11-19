@@ -2,7 +2,7 @@
 *	Weever Apps Administrator Component for Joomla
 *	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter (rob.porter@weever.ca)
+*	Author: 	Robert Gerald Porter (rob.porter@weeverapps.com)
 *	Version: 	0.9.2
 *   License: 	GPL v3.0
 *

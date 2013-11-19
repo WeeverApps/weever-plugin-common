@@ -95,11 +95,14 @@ var wxApp = wxApp || {};
 
     wx.refreshAppPreview = function() {
         console.log('Refreshing Preview');
-        if ( true ) { // if ( $.browser.webkit ) {
+        $('#iframe-loading').hide();
+
+        if ( Modernizr.flexbox ) {
             $('#preview-app-dialog-no-webkit').hide();
             $('#preview-app-dialog-frame').attr( 'src', $('#preview-app-dialog-frame').attr('rel') );
-            $('#preview-app-dialog-webkit').show();
-        } else { // } else if ( $.browser.webkit == undefined || $.browser.webkit == false ) {
+            $('#preview-app-dialog-frame').show();
+        } else {
+            $('#preview-app-dialog-frame').hide();
             $('#preview-app-dialog-no-webkit').show();
         }
     };
@@ -109,8 +112,9 @@ var wxApp = wxApp || {};
         // (See the doPoll method in layout.php)
         // This will be improved when we have build events in v3.0
         wx.poll = true;
-        jQuery('#preview-app-dialog-frame').hide();
-        jQuery('#iframe-loading').show();
+        $('#preview-app-dialog-frame').hide();
+        $('#preview-app-dialog-no-webkit').hide();
+        $('#iframe-loading').show();
     };
 
     // Gets rid of params from an image URL.
