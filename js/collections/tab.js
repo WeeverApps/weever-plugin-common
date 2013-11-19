@@ -24,6 +24,9 @@ var wxApp = wxApp || {};
                 case 'formbuilder':
                     retVal = 'FormBuilderSubTab';
                     break;
+                case 'wufoo':
+                    retVal = 'WufooSubTab';
+                    break;    
                 default:
                     // Check against type first (more specific but only newer tabs), then content (more generic)
                     if ( tabData.config != undefined && tabData.config.subtab_name != undefined ) {
