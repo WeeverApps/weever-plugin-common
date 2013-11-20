@@ -21,21 +21,6 @@
 
 jQuery(document).ready(function(){ 
 
-	jQuery('#wx-modal-loading')
-	    .hide()  
-	    .ajaxStart(function() {
-	    	jQuery('#wx-modal-error-text').html('');
-	        jQuery(this).fadeIn(200);
-	        jQuery('#wx-modal-loading-text').html( 'Please Wait...' );
-	        jQuery('#wx-modal-secondary-text').html( 'Please wait, communicating with server' );
-	    })
-	    .ajaxStop(function() {
-	    	var jObj = jQuery(this);
-	    	setTimeout( function() {
-	    			jObj.fadeOut(750);
-	    		}, 600 );
-	    });
-	
 	wx.makeApiCall('account/get_expiry', {}, function(data) {
 		// data.expiry = "2013-10-17 20:00:00";
 		if (data.expiry == "0000-00-00 00:00:00") {

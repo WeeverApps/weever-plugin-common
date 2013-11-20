@@ -18,6 +18,8 @@
 *
 */
 
+// I think this file can be completely removed, but I will have to verify when I have extra time.
+// Matt. Nov 20, 2013.
 jQuery( document ).ready( function() {
 
 	jQuery('select.wx-cms-feed-select').change( function() {

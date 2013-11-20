@@ -20,7 +20,7 @@ CSS_COMBINED_FILE="$CSS_DIR/combined.css"
 echo 'Compressing JavaScripts...'
 
 # 0. Include base files
-vendorFiles=(weever.js vendor/custom.modernizr.js jscolor/jscolor.js vendor/zepto.js foundation/foundation.js foundation/foundation.*.js account.js wx.js config/wx.features.js wx.list.wordpress.ini.js swipe.js fileuploader.js theme.js list.js)
+vendorFiles=(weever.js vendor/custom.modernizr.js jscolor/jscolor.js foundation/foundation.js foundation/foundation.*.js account.js fileuploader.js theme.js list.js)
 
 # 1. Get an array of all of the model javascripts.
 allModels=(models/*.js)

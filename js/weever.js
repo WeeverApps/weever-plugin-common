@@ -77,47 +77,6 @@ jQuery(document).ready(function() {
         });
     });
 
-    jQuery( "#tabs" ).tabs();
-	
-    jQuery('#preview-iphone').click(function() {
-
-        jQuery('#preview-bg').attr('class', 'iphone');
-        jQuery('#preview-app-dialog-webkit iframe').attr('width', '300');
-        jQuery('#preview-app-dialog-webkit iframe').attr('height', '520');
-        jQuery('#preview-iphone').attr('class', 'active');
-        jQuery('#preview-android, #preview-blackberry').attr('class', '');
-
-        jQuery('#preview-app-padding-box').attr('style', 'padding-top:45px; padding-left: 10px;');
-        jQuery('#preview-app ').attr('style', 'width: 400px !important; height: 550px !important;');
-
-    });
-    jQuery('#preview-android').click(function() {
-
-        jQuery('#preview-bg').attr('class', 'android');
-        jQuery('#preview-app-dialog-webkit iframe').attr('width', '310');
-        jQuery('#preview-app-dialog-webkit iframe').attr('height', '505');
-        jQuery('#preview-android').attr('class', 'active');
-        jQuery('#preview-iphone, #preview-blackberry').attr('class', '');
-
-        jQuery('#preview-app-padding-box').attr('style', 'padding-top: 68px; padding-left: 0px;');
-        jQuery('#preview-app-dialog-webkit #preview-app ').attr('style', 'width: 310px; height: 550px;')
-
-    });
-    jQuery('#preview-blackberry').click(function() {
-
-        jQuery('#preview-bg').attr('class', 'blackberry');
-        jQuery('#preview-app-dialog-webkit iframe').attr('width', '290');
-        jQuery('#preview-app-dialog-webkit iframe').attr('height', '390');
-        jQuery('#preview-blackberry').attr('class', 'active');
-        jQuery('#preview-iphone, #preview-android').attr('class', '');
-
-        jQuery('#preview-app-dialog-webkit #preview-app ').attr('style', 'width: 290px; height: 390px;');
-
-        jQuery('#preview-app-padding-box').attr('style', 'padding-top: 55px; padding-left: 14px;');
-        jQuery('#preview-app ').attr('style', 'width: 400px !important; height: 550px !important;');
-
-    });
-
     // This is strange... The '.on' method on its own doesn't work. The 
     // '.click' method on its own doesn't work... But when they're both present
     // the refresh fires twice.
