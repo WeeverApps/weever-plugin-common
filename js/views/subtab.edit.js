@@ -89,7 +89,6 @@ wxApp = wxApp || {};
         },
 
         close: function() {
-            this.model.destroy();
             this.undelegateEvents();
         },
 
