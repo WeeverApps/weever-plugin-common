@@ -97,6 +97,7 @@ wxApp = wxApp || {};
 			var me = this;
 			var loading_id = this.showLoadingGif('font')
 			wx.makeApiCall('design/set_font_id', { font_id: fontId }, function(data) {
+				wx.rebuildApp();
 				me.hideLoadingGif('font', loading_id);
             });
 		}
