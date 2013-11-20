@@ -97,7 +97,7 @@ var wxApp = wxApp || {};
         console.log('Refreshing Preview');
         $('#iframe-loading').hide();
 
-        if ( Modernizr.flexbox ) {
+        if ( $.browser.webkit ) {
             $('#preview-app-dialog-no-webkit').hide();
             $('#preview-app-dialog-frame').attr( 'src', $('#preview-app-dialog-frame').attr('rel') );
             $('#preview-app-dialog-frame').show();
