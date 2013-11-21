@@ -15,7 +15,7 @@ var wxApp = wxApp || {};
                 type: 'foursquarePhotos',
                 content: 'foursquarePhotos',
                 layout: 'carousel',
-                config: { venue_id: 'http://foursquare.com/v/' },
+                config: { venue_id: 'http://foursquare.com/v/', subtab_name: 'FoursquarePhotosSubTab' },
                 helpBody: '<p><b>To find the web address of a Foursquare Venue:</b></p>' +
                           '<p>1. Search the web for "Foursquare" and the name of the location.</p>' +
                           '<p>2. Open the matching Foursquare venue page.</p>' +

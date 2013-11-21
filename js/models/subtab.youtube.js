@@ -15,7 +15,7 @@ var wxApp = wxApp || {};
                     type: 'youtube',
                     content: 'youtube',
                     layout: 'list',
-                    config: { url: 'http://youtube.com/' },
+                    config: { url: 'http://youtube.com/', subtab_name: 'YoutubeSubTab' },
                     helpTitle:  'About Youtube videos',
                     helpBody:   '<p><b>Youtube Channels</b></p>' +
                                 '<p>A YouTube Channel displays all videos associated with one YouTube user account.</p>' +

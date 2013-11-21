@@ -16,7 +16,7 @@ wxApp = wxApp || {};
                 type: 'WordpressPage',
                 content: 'htmlPage',
                 layout: 'panel',
-                config: { url: '' },
+                config: { url: '', subtab_name: 'WordpressPageSubTab' },
                 helpTitle:  'Adding Wordpress content',
                 helpBody:   '<p><b>Adding Wordpress content to your app</b></p>' +
                             '<p>Any Wordpress content you add to your app updates in real-time as you make changes.</p>' +

@@ -17,6 +17,7 @@ var wxApp = wxApp || {};
                 type: 'wordpress-contact',
                 content: 'contact',
                 layout: 'panel',
+                config: { subtab_name: 'WordpressContactsSubTab' },
                 config_cache: {}
             }
         );

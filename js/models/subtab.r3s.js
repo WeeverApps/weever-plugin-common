@@ -16,7 +16,7 @@ wxApp = wxApp || {};
                 type: 'r3s',
                 content: 'htmlR3s',
                 layout: 'list',
-                config: { url: 'http://yourwebsite.com/?feed=r3s' },
+                config: { url: 'http://yourwebsite.com/?feed=r3s', subtab_name: 'r3sSubTab' },
                 helpTitle: 'What is an R3S Object?',
                 helpBody: '<p><b>What is an R3S Object?</b></p>' +
                           '<p>R3S is an open source specification for streaming content from web sites, social feeds, and other sources into apps.</p>' +

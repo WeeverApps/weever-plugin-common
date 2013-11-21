@@ -16,7 +16,7 @@ wxApp = wxApp || {};
                 type: 'rss',
                 content: 'html',
                 layout: 'list',
-                config: { url: 'http://yourwebsite.com/' }
+                config: { url: 'http://yourwebsite.com/', subtab_name: 'RSSSubTab' }
             }
         );
         }

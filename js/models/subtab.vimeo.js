@@ -15,7 +15,7 @@ wxApp = wxApp || {};
                 type: 'vimeo',
                 content: 'vimeo',
                 layout: 'list',
-                config: { url: 'http://vimeo.com/user1234' },
+                config: { url: 'http://vimeo.com/user1234', subtab_name: 'VimeoSubTab' },
                 helpTitle: 'Vimeo users and channels',
                 helpBody: '<p><b>Vimeo users and channels</b></p>' +
                           '<p>Adding a Vimeo user shares all videos associated with one <a target="_blank" href="http://vimeo.com">Vimeo.com</a> user account.</p>' +

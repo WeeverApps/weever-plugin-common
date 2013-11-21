@@ -23,7 +23,8 @@ wxApp = wxApp || {};
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
 					onUpload: {
 						message: 'Your upload has completed.'
-					}
+					}, 
+					subtab_name: 'FormBuilderSubTab'
 				}
 			}
 		);

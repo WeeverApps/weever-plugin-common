@@ -15,7 +15,7 @@ var wxApp = wxApp || {};
                 type: 'picasaAlbums',
                 content: 'picasaAlbums',
                 layout: 'list',
-                config: { user_id: 'your.email@gmail.com' }
+                config: { user_id: 'your.email@gmail.com', subtab_name: 'PicasaAlbumsSubTab' }
             }
         );
         }

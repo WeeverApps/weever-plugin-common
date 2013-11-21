@@ -15,7 +15,7 @@ wxApp = wxApp || {};
                 type: 'blogger',
                 content: 'blogger',
                 layout: 'list',
-                config: { blog_url: 'http://blogname.blogspot.com' }
+                config: { blog_url: 'http://blogname.blogspot.com', subtab_name: 'BloggerSubTab' }
             });
         }
     });

@@ -15,7 +15,7 @@ var wxApp = wxApp || {};
                 type: 'twitterUser',
                 content: 'twitterUser',
                 layout: 'list',
-                config: {}
+                config: { subtab_name: 'TwitterSubTab' }
             });
         }
     });
