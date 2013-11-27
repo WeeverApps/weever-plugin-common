@@ -126,7 +126,6 @@ wxApp = wxApp || {};
 				$alert.parent().slideDown();
 			}
 
-
 			return success;
 		},
 
@@ -148,6 +147,27 @@ wxApp = wxApp || {};
 		},
 
 		setModelFromView: function( model ) {
+
+			for (var i = 0; i < model.get( 'config' ).formActions.length; i++) {
+				var action = model.get( 'config' ).formActions.models[i];
+				if ( action.get( 'method' ) === 'post' || action.get( 'method' ) === 'email' ) {
+
+					// Remove from array if nothing is set.
+					if ( !action.get('value') ) {
+						model.get( 'config' ).formActions.remove( action );
+						i--;
+					}
+
+				} else {
+
+					// DocuSign - Remove from array if nothing is set.
+					if ( (typeof action.get('username') === 'undefined') || !action.get('password') ) {
+						model.get( 'config' ).formActions.remove( action );
+						i--;
+					}
+				}
+			};
+
 			return model;
 		},
 
