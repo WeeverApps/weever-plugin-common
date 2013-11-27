@@ -2,8 +2,8 @@
 *	Weever Apps Administrator Component for Joomla
 *	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter (rob.porter@weeverapps.com)
-*	Version: 	0.9.2
+*	Author: 	Matt Grande (matt@weeverapps.com)
+*	Version: 	3.0.15
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 
 jQuery(document).ready(function(){ 
 
-	wx.makeApiCall('account/get_tier' {}, function(data) {
+	wx.makeApiCall('account/get_tier', {}, function(data) {
 
 		if ( data.expiry == 2.1 || data.expiry == '2.1' ) {
 
@@ -57,6 +57,7 @@ jQuery(document).ready(function(){
 
 				jQuery('#account-expiration-warning').show();
 			});
+		
 		}
 
 	});
