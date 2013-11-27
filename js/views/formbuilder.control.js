@@ -9,6 +9,7 @@ wxApp = wxApp || {};
 		events: {
 			// 'click .wx-form-builder-edit-label': 'editLabel',
 			'keyup .wx-form-builder-label-input': 'updateLabel',
+			'keyup .wx-form-builder-text-input': 'updateText',
 			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
 			'blur .wx-form-builder-min-input': 'setMin',
 			'blur .wx-form-builder-max-input': 'setMax',
@@ -46,12 +47,17 @@ wxApp = wxApp || {};
 		// },
 
 		updateLabel: function( ev ) {
-			console.log('updateLabel');
 			var value = $( ev.currentTarget ).val();
 			this.model.set( 'label', value );
 
 			// Update the title on the 'Add Fields' tab
 			this.$('.wx-form-builder-label').text( value );
+		},
+
+		updateText: function( ev ) {
+			console.log('updateText');
+			var value = $( ev.currentTarget ).val();
+			this.model.set( 'text', value );
 		},
 
 		updatePlaceholder: function(ev) {

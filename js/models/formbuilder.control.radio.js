@@ -24,10 +24,28 @@ wxApp = wxApp || {};
 			wxApp.FormBuilderControl.prototype.initialize.apply( this );
 
 			this.get( 'attributes' ).set( 'type', 'radio' );
+		}
 
-			console.log( this );
-			console.log( this.cid );
-			console.log( this.collection );
+	});
+
+	wxApp.FormBuilderControlTextSliderOption = wxApp.FormBuilderControlInput.extend({
+		defaults: function() {
+			// This is annoying
+			// https://github.com/documentcloud/backbone/issues/476
+			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
+				text: 'Option',
+				autocompleteClass: 'hide'
+			} );
+			return newDefaults;
+		},
+
+		initialize: function(l) {
+			if ( l )
+				this.set( 'text', l );
+
+			// So is this
+			// http://documentcloud.github.com/backbone/#Model-extend
+			wxApp.FormBuilderControl.prototype.initialize.apply( this );
 		}
 
 	});

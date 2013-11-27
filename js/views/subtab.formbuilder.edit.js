@@ -63,6 +63,10 @@ wxApp = wxApp || {};
 
 						this.addSelectWithProperties( elementsJson[i] );
 
+					} else if ( elementsJson[i].type === 'textSlider' ) {
+
+						this.addTextSlider( elementsJson[i] );
+
 					} else {
 
 						this.addInput( elementsJson[i] );
@@ -164,6 +168,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-checkbox-group': 'addCheckboxGroup',
 			'click .wx-form-builder-add-textarea': 'addTextarea',
 			'click .wx-form-builder-add-range-input': 'addRangeInput',
+			'click .wx-form-builder-add-text-range-input': 'addTextRangeInput',
 			'click .wx-form-builder-add-select': 'addSelect',
 			'click .wx-form-builder-add-info': 'addInfo',
 			// 'click .wx-form-builder-add-docusign-action': 'addDocusignAction',
@@ -351,6 +356,38 @@ wxApp = wxApp || {};
 			return input;
 		},
 
+		addTextSlider: function( properties ) {
+			var mainProperties = {};
+			var attributes = {};
+			for ( var propKey in properties ) {
+				if ( propKey != 'attributes' ) {
+					mainProperties[propKey] = properties[propKey];
+				}
+				else {
+					for ( var attrKey in properties[propKey] ) {
+						attributes[attrKey] = properties[propKey][attrKey];
+					}
+				}
+			}
+
+			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
+			input.get( 'attributes' ).set( attributes );
+
+			var inputView = new wxApp.FormBuilderControlTextRangeView({
+				model: input
+			});
+
+			this.addControl( input, inputView );
+
+			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'S. Disagree' ) );
+			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'Disagree' ) );
+			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'N/A' ) );
+			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'Agree' ) );
+			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'S. Agree' ) );
+			
+			return input;
+		},
+
 		addDateInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
@@ -454,6 +491,17 @@ wxApp = wxApp || {};
 				valueClass: '',
 				attributes: {
 					type: 'range'
+				}
+			});
+		},
+
+		addTextRangeInput: function(ev) {
+			this.addTextSlider({
+				controlTitle: $(ev.currentTarget).text(),
+				label: 'Select One',
+				type: 'textSlider',
+				attributes: {
+					type: 'textSlider'
 				}
 			});
 		},
