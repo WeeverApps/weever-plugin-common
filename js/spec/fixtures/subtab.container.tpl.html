@@ -3,7 +3,7 @@
     <ul class="wx-tablist-layout pricing-table">
         <li class="price">
             <span>Editing tab: &nbsp;</span>
-            <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %> | Change title or icon</a>
+            <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title %> | Change title or icon</a>
             <span class="delete"><a href="#" class="wx-delete-container">&times; <span class="wx-delete-label">delete</span></a></span>
         </li>
 
@@ -39,7 +39,7 @@
     <div class="large-6 small-12 columns">
         <div>
             <p class="lead">Title for this primary tab:</p>
-            <input type="text" value="<%- typeof tabTitle !== 'undefined' && tabTitle.length ? tabTitle : title %>" class="wx-edit-title" id="container-title" />
+            <input type="text" value="<%- typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title %>" class="wx-edit-title" id="container-title" />
         </div>
 
         <div>

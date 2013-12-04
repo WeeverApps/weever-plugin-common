@@ -365,7 +365,10 @@ wxApp = wxApp || {};
 			}
 
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
-			input.get( 'attributes' ).set( attributes );
+
+			for ( var attrKey in attributes ) {
+				input.get( 'attributes' )[attrKey] = attributes[attrKey];
+			};
 
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
@@ -391,7 +394,9 @@ wxApp = wxApp || {};
 			}
 
 			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
-			input.get( 'attributes' ).set( attributes );
+			for ( var attrKey in attributes ) {
+				input.get( 'attributes' )[attrKey] = attributes[attrKey];
+			};
 
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
