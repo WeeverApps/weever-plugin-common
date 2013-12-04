@@ -365,7 +365,7 @@ wxApp = wxApp || {};
 			}
 
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
-
+			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
