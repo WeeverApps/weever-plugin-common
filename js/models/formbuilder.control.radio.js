@@ -15,9 +15,7 @@ wxApp = wxApp || {};
 			return newDefaults;
 		},
 
-		initialize: function(l) {
-			if ( l )
-				this.set( 'label', l );
+		initialize: function() {
 
 			// So is this
 			// http://documentcloud.github.com/backbone/#Model-extend
@@ -39,10 +37,8 @@ wxApp = wxApp || {};
 			return newDefaults;
 		},
 
-		initialize: function(l) {
-			if ( l )
-				this.set( 'text', l );
-
+		initialize: function() {
+			
 			// So is this
 			// http://documentcloud.github.com/backbone/#Model-extend
 			wxApp.FormBuilderControl.prototype.initialize.apply( this );

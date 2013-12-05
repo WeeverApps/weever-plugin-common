@@ -404,11 +404,11 @@ wxApp = wxApp || {};
 
 			this.addControl( input, inputView );
 
-			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'S. Disagree' ) );
-			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'Disagree' ) );
-			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'N/A' ) );
-			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'Agree' ) );
-			input.get('options').add(new wxApp.FormBuilderControlTextSliderOption( 'S. Agree' ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'S. Disagree' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'Disagree' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'N/A' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'Agree' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'S. Agree' } ) );
 			
 			return input;
 		},
@@ -636,9 +636,13 @@ wxApp = wxApp || {};
 			radioFieldsetView.$( '.wx-form-builder-radio-fieldset' ).append( radioGroupView.render().el );
 
 			if ( properties.radioGroup == undefined || properties.radioGroup.length == 0 ) {
-				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio('Option A') );
-				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio('Option B') );
-				radioFieldset.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio('Option C') );
+				var optionA = new wxApp.FormBuilderControlRadio( { label: 'Option A' } );
+				var optionB = new wxApp.FormBuilderControlRadio( { label: 'Option B' } );
+				var optionC = new wxApp.FormBuilderControlRadio( { label: 'Option C' } );
+
+				radioFieldset.get( 'radioGroup' ).add( optionA );
+				radioFieldset.get( 'radioGroup' ).add( optionB );
+				radioFieldset.get( 'radioGroup' ).add( optionC );
 			} else {
 				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlRadio( properties.radioGroup[i] );
@@ -673,9 +677,9 @@ wxApp = wxApp || {};
 			checkboxFieldsetView.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );
 
 			if ( properties.checkboxGroup == undefined || properties.checkboxGroup.length == 0 ) {
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox('Option A') );
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox('Option B') );
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox('Option C') );
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option A'}) );
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option B'}) );
+				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option C'}) );
 			} else {
 				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlCheckbox( properties.checkboxGroup[i] );
@@ -724,9 +728,9 @@ wxApp = wxApp || {};
 			// Add an Option to the Option Group
 			console.log( properties );
 			if ( properties.optionGroup == undefined || properties.optionGroup.length == 0 ) {
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( 'Option A' ) );
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( 'Option B' ) );
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( 'Option C' ) );
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option A' } ) );
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option B' } ) );
+				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option C' } ) );
 			} else {
 				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
 					var option = new wxApp.FormBuilderControlOption( properties.optionGroup[i] );

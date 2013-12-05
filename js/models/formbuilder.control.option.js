@@ -15,8 +15,7 @@ wxApp = wxApp || {};
 			return newDefaults;
 		},
 
-		initialize: function( l ) {
-			if ( l ) { this.set('innerText', l); }
+		initialize: function() {
 
 			// So is this
 			// http://documentcloud.github.com/backbone/#Model-extend
