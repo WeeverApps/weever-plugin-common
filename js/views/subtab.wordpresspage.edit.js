@@ -9,6 +9,9 @@ wxApp = wxApp || {};
 			wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
+
+            // Convert from page_id to wx_page_id
+            url = url.replace( '?page_id', '?wx_page_id' );
 			$('.wx-add-wordpress-page-select').val( url );
         },
 
