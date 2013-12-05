@@ -719,9 +719,6 @@ wxApp = wxApp || {};
 
 			this.addControl( select, selectView );
 
-			// Add Select to build pane
-			// this.$( this.buildPaneSelector ).append( selectView.render().el );
-
 			var optionGroupView = new wxApp.FormBuilderControlOptionGroupView({
 				collection: select.get('optionGroup'),
 				previewArea: selectView.getPreview()
@@ -737,8 +734,13 @@ wxApp = wxApp || {};
 				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option C' } ) );
 			} else {
 				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
-					var option = new wxApp.FormBuilderControlOption( properties.optionGroup[i] );
-					select.get('optionGroup').add( option );
+					var optionJson = properties.optionGroup[i];	// JSON object coming from the API
+					if ( !optionJson ) {
+						optionJson = properties.optionGroup.models[i].attributes;	// Backbone object coming from the app
+					}
+					console.log( optionJson );
+					var optionModel = new wxApp.FormBuilderControlOption( optionJson );
+					select.get('optionGroup').add( optionModel );
 				};
 			}
 		},
@@ -754,7 +756,6 @@ wxApp = wxApp || {};
 			$('.wx-form-builder-row').removeClass('active');
 			view.$el.addClass('active');
 
-//			this.model.get( 'controls' ).push( input );
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
 

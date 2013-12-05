@@ -10,7 +10,6 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				// 'click .wx-form-builder-add-select-option': 'addOption',
 				'keyup .wx-form-builder-select-option-text': 'updateOptionText',
 				'blur .wx-form-builder-select-option-value': 'updateOptionValue',
 				'click .wx-form-builder-control-selected': 'setSelected'
@@ -19,7 +18,6 @@ wxApp = wxApp || {};
 
 		initialize: function() {
 			this.selectTpl = _.template( $('#form-builder-select-option').html() );
-//			this.model.bind('change', this.render, this);
 		},
 
 		render: function() {
@@ -36,12 +34,6 @@ wxApp = wxApp || {};
 			this.$el.html( this.selectTpl( jsonModel ) );
 			return this;
 		},
-
-		// addOption: function() {
-		// 	console.log('select view add');
-		// 	this.model.collection.add( new wxApp.FormBuilderControlOption() );
-		// 	console.log(this.model.collection);
-		// },
 
 		setSelected: function( ev ) {
 			console.log('setSelected');
@@ -79,9 +71,6 @@ wxApp = wxApp || {};
 		tagName: 'option',
 
 		initialize: function() {
-			// var selector = '#form-builder-select-preview';
-			// var $template = $( selector );
-			// this.inputTpl = _.template( $template.html() );
 			this.model.bind('change', this.render, this);
 		},
 
