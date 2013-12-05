@@ -24,14 +24,29 @@ wxApp = wxApp || {};
 					onUpload: {
 						message: 'Your upload has completed.'
 					}, 
-					subtab_name: 'FormBuilderSubTab'
+					subtab_name: 'FormBuilderSubTab',
+					isDocuSign: false
 				}
-			}
-		);
+			});
         }
 		
     });
 
-    wxApp.DocuSignSubTab = wxApp.FormBuilderSubTab.extend({});
+    wxApp.DocuSignSubTab = wxApp.FormBuilderSubTab.extend({
+
+    	defaults: function() {
+            return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
+        		config: {
+					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+					onUpload: {
+						message: 'Your upload has completed.'
+					}, 
+					subtab_name: 'FormBuilderSubTab',
+					isDocuSign: true
+				}
+			});
+        }
+
+    });
 
 })(jQuery);

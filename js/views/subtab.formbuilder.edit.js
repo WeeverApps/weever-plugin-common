@@ -87,17 +87,36 @@ wxApp = wxApp || {};
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
+				var hasDocusign	= false,
+					hasPost		= false,
+					hasEmail	= false;
 				for ( var i = 0; i < actionsJson.length; i++ ) {
 					var action = actionsJson[i];
 					if ( action.method == 'docusign' ) {
 						this.addDocusignAction( null, action );
+						hasDocusign = true;
 					}
 					else if ( action.method == 'post' ) {
 						this.addPostAction( null, action );
+						hasPost = true;
 					}
 					else if ( action.method == 'email' ) {
 						this.addEmailAction( null, action );
+						hasEmail = true;
 					}
+				}
+
+				// If we don't have some of the actions, we should add them.
+				if ( this.model.get( 'config' ).isDocuSign && !hasDocusign ) {
+					this.addDocusignAction( null, { method: 'docusign' } );
+				}
+
+				if ( !hasPost ) {
+					this.addPostAction( null, { method: 'post' } );
+				}
+
+				if ( !hasEmail ) {
+					this.addEmailAction( null, { method: 'email' } );
 				}
 			}
 
