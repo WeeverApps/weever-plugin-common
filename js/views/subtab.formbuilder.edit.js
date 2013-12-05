@@ -650,7 +650,11 @@ wxApp = wxApp || {};
 				radioFieldset.get( 'radioGroup' ).add( optionC );
 			} else {
 				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
-					var option = new wxApp.FormBuilderControlRadio( properties.radioGroup[i] );
+					var optionJson = properties.radioGroup[i];	// JSON object coming from the API
+					if ( !optionJson ) {
+						optionJson = properties.radioGroup.models[i].attributes;	// Backbone object coming from the app
+					}
+					var option = new wxApp.FormBuilderControlRadio( optionJson );
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
 			}
@@ -687,7 +691,11 @@ wxApp = wxApp || {};
 				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option C'}) );
 			} else {
 				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
-					var option = new wxApp.FormBuilderControlCheckbox( properties.checkboxGroup[i] );
+					var optionJson = properties.checkboxGroup[i];	// JSON object coming from the API
+					if ( !optionJson ) {
+						optionJson = properties.checkboxGroup.models[i].attributes;	// Backbone object coming from the app
+					}
+					var option = new wxApp.FormBuilderControlCheckbox( optionJson );
 					checkboxFieldset.get( 'checkboxGroup' ).add( option );
 				};
 			}
@@ -738,7 +746,6 @@ wxApp = wxApp || {};
 					if ( !optionJson ) {
 						optionJson = properties.optionGroup.models[i].attributes;	// Backbone object coming from the app
 					}
-					console.log( optionJson );
 					var optionModel = new wxApp.FormBuilderControlOption( optionJson );
 					select.get('optionGroup').add( optionModel );
 				};
