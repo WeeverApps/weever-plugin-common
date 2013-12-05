@@ -9,9 +9,7 @@ wxApp = wxApp || {};
 		preview: null,
 
 		events: {
-			// 'click .wx-form-builder-edit-title': 'editTitle',
 			'keyup .wx-form-builder-title-input': 'updateTitle',
-			// 'blur .wx-form-builder-name-input': 'setName',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-add-option': 'addOption',
@@ -19,13 +17,11 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
-			console.log('Radio fieldset view init');
 			var $template = $( this.tplSelector );
 			this.tpl = _.template( $template.html() );
 		},
 
 		render: function() {
-			console.log('checkbox fieldset view render');
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
 		},
@@ -47,7 +43,6 @@ wxApp = wxApp || {};
 		},
 
 		setRequired: function( ev ) {
-			console.log('Set Required.')
 			var $me = $( ev.currentTarget );
 			if ( $me.is( ':checked' ) ) {
 				this.model.get( 'attributes' ).set( 'required', 'checked' );
@@ -60,7 +55,6 @@ wxApp = wxApp || {};
 		},
 
 		updateTitle: function( ev ) {
-			console.log('updateTitle');
 			var $me = $( ev.currentTarget );
 
 			this.$('.wx-form-builder-label').text( $me.val() );

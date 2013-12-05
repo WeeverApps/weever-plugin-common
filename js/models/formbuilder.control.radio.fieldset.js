@@ -20,12 +20,10 @@ wxApp = wxApp || {};
 			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
 			this.set( 'radioGroup', new wxApp.FormBuilderControlRadioGroup() );
 			this.get( 'radioGroup' ).on( 'add', this.onRadioGroupAdd, this );
-			//console.log(this);
 			return this;
 		},
 
 		onRadioGroupAdd: function( checkbox ) {
-			console.log( 'onRadioGroupAdd' );
 			checkbox.get( 'attributes' ).set( 'name', this.get( 'name' ) );
 		}
 

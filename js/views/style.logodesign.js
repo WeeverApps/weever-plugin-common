@@ -22,7 +22,6 @@ wxApp = wxApp || {};
             var button = ev.currentTarget;
             btn = button;
             var id = $(button).data('color-picker');
-            console.log(id);
             this.$('#' + id)[0].color.showPicker();
         },
 

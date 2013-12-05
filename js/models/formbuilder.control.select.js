@@ -18,7 +18,6 @@ wxApp = wxApp || {};
 		initialize: function() {
 			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
 			this.set( 'optionGroup', new wxApp.FormBuilderControlOptionGroup() );
-			console.log(this);
 			return this;
 		}
 

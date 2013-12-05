@@ -8,7 +8,6 @@ wxApp = wxApp || {};
 		model: wxApp.FormBuilderControlRadio,
 
 		initialize: function() {
-			console.log('radio group collection init');
 			this.on( 'add', this.onAdd );
 		},
 

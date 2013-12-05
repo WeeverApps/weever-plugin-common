@@ -10,10 +10,7 @@ wxApp = wxApp || {};
 		preview: null,
 
 		events: {
-			// 'click .wx-form-builder-edit-title': 'editTitle',
 			'keyup .wx-form-builder-title-input': 'updateTitle',
-			// 'blur .wx-form-builder-name-input': 'setName',
-			// 'click .wx-form-builder-select-allow-multiple': 'toggleMultipleSelections',
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
@@ -21,8 +18,6 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
-			console.log('select group view init');
-			//this.template = _.template( $('#form-builder-select').html() );
 			var $template = $( this.tplSelector );
 			this.tpl = _.template( $template.html() );
 
@@ -41,12 +36,6 @@ wxApp = wxApp || {};
 		addOption: function() {
 			this.model.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
 		},
-
-		// setName: function( ev ) {
-		// 	var $me = $( ev.currentTarget );
-		// 	if ( $me.val() !== '' )
-		// 		this.model.get( 'attributes' ).set( 'name', $me.val() );
-		// },
 
 		setAllowAdditional: function( ev ) {
 			console.log('setAllowAdditional');
@@ -67,25 +56,6 @@ wxApp = wxApp || {};
 			return this.preview;
 		},
 
-		// toggleMultipleSelections: function( ev ) {
-		// 	// This field has been removed as Sencha Touch doesn't support multiple selections in a <select> group
-		// 	var $me = $( ev.currentTarget );
-		// 	if ( $me.is( ':checked' ) ) {
-		// 		this.model.get( 'attributes' ).set( 'multiple', 'checked' );
-		// 	}
-		// 	else {
-		// 		this.model.get( 'attributes' ).unset( 'multiple' );
-		// 	}
-		// },
-
-		// editTitle: function( ev ) {
-		// 	console.log('editTitle');
-		// 	ev.preventDefault();
-		// 	this.$title = $( ev.currentTarget );
-		// 	this.$( '.wx-form-builder-title-input' ).val( this.$title.text() ).show().select();
-		// 	this.$title.hide();
-		// },
-
 		setRequired: function( ev ) {
 			console.log('Set Required.')
 			var $me = $( ev.currentTarget );
@@ -102,8 +72,7 @@ wxApp = wxApp || {};
 		updateTitle: function( ev ) {
 			console.log('updateTitle');
 			var $me = $( ev.currentTarget );
-			this.$('.wx-form-builder-edit-title').text( $me.val() ); //.show();
-			// $me.hide();
+			this.$('.wx-form-builder-edit-title').text( $me.val() );
 
 			this.model.set( 'title', $me.val() );
 			this.getPreview().$('label .title').text( $me.val() );
@@ -119,7 +88,6 @@ wxApp = wxApp || {};
 			var selector = '#form-builder-select-preview';
 			var $template = $( selector );
 			this.inputTpl = _.template( $template.html() );
-			// this.model.bind('change', this.render, this);
 		},
 
 		render: function() {

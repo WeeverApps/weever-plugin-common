@@ -23,8 +23,6 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			console.log('select view render');
-
 			var text = this.model.get('innerText').toString();
 			if ( text === '[object Object]' ) {
 				// innerText seems to be some sort of wacky 

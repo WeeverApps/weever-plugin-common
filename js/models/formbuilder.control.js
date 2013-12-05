@@ -33,13 +33,11 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
-			//console.log( this );
 
 			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
 
 			this.togglePlaceholder();
 			this.on( 'change:showPlaceholder', this.togglePlaceholder );
-			console.log( this );
 		},
 
 		togglePlaceholder: function() {
