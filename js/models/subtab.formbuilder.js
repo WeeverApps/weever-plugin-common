@@ -8,6 +8,20 @@ wxApp = wxApp || {};
         buildPreview: true,
         typeDescription: 'Form Builder',
 
+        filterAPIData: function( data ) {
+
+        	/* The 'geo' attribute is being sent erroneously in get_tabs, and
+        	 * its presence causes issues when provided to add_tabs (Undefined
+        	 * property: 'latitude'). So, until Rob gets a chance to fix the 
+    		 * API, we have to remove the geo attribute here.
+    		 */
+        	if ( typeof data.geo !== 'undefined' ) {
+        		delete data.geo;
+        	}
+
+            return data;
+        },
+
         defaults: function() {
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
 				title: 'My Form Title',
