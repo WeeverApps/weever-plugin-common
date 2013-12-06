@@ -399,6 +399,7 @@ wxApp = wxApp || {};
 			}
 
 			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
+			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
@@ -406,6 +407,8 @@ wxApp = wxApp || {};
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
 			});
+
+			console.log( input );
 
 			this.addControl( input, inputView );
 
@@ -514,7 +517,7 @@ wxApp = wxApp || {};
 		addRangeInput: function(ev) {
 			this.addInput({
 				controlTitle: $(ev.currentTarget).text(),
-				label: 'Untitled',
+				label: 'Range',
 				minClass: '',
 				maxClass: '',
 				stepClass: '',
@@ -531,7 +534,7 @@ wxApp = wxApp || {};
 				label: 'Select One',
 				type: 'textSlider',
 				attributes: {
-					type: 'textSlider'
+					type: 'range'
 				}
 			});
 		},
