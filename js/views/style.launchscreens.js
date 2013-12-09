@@ -12,6 +12,12 @@ wxApp = wxApp || {};
         initialize: function() {
             Backbone.Events.on( 'image:change', this.saveImage, this );
             this.tpl = _.template( $('#launch-screen').html() );
+
+            jsonModel = this.model.toJSON();
+            jsonModel.launchscreen.phone            = this.fixImageUrl( jsonModel.launchscreen.phone );
+            jsonModel.launchscreen.tablet           = this.fixImageUrl( jsonModel.launchscreen.tablet );
+            jsonModel.launchscreen.tablet_landscape = this.fixImageUrl( jsonModel.launchscreen.tablet_landscape );
+
             this.$('.content').html( this.tpl( this.model.toJSON() ) );
         },
 
@@ -71,6 +77,13 @@ wxApp = wxApp || {};
                 });
 
             }
+        },
+
+        fixImageUrl: function( url ) {
+            if ( url.indexOf( 'wp_weeverapps-live/static/images' ) > 0 ) {
+                url = url.replace( 'wp_weeverapps-live/static/images', 'weever-apps-20-mobile-web-apps/static/img/launchscreens' );
+            }
+            return url;
         }
     });
 

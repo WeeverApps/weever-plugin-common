@@ -1,16 +1,16 @@
 <script type="text/template" id="logo-design">
 
-    <p class="wx-ui-title"><?php echo __( 'Logo Design', 'weever' ); ?></p>
+    <p class="wx-ui-title">Logo Design</p>
 
     <!-- logo type - text or image? -->
     <!-- -->
     <div class="row">
         <div class="large-6 columns">
             <label>
-                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image" <%- titlebar.type == 'image' ? 'checked=checked' : '' %>><?php echo __( ' Upload an image', 'weever' ); ?></input>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image" <%- titlebar.type == 'image' ? 'checked=checked' : '' %>>Upload an image</input>
             </label>
             <label>
-                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text" <%- titlebar.type == 'text' ? 'checked=checked' : '' %>><?php echo __( ' Use a line of text', 'weever' ); ?></input>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text" <%- titlebar.type == 'text' ? 'checked=checked' : '' %>>Use a line of text</input>
             </label>
         </div>
         <div class="large-6 columns">
@@ -39,7 +39,7 @@
 
     <!-- if logo type = image -->
     <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
-        <p class="wx-ui-title"><?php echo __( 'Logo image', 'weever' ); ?> <span style="font-weight:normal; text-transform: lowercase">&ndash; 640 x 88px</span><p>
+        <p class="wx-ui-title">Logo image <span style="font-weight:normal; text-transform: lowercase">&ndash; 640 x 88px</span><p>
         <div class="row">
             <div class="large-7 columns">
                 <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />
@@ -63,13 +63,13 @@
     </div>
 
     <!-- start - color pickers -->
-    <p class="wx-ui-title"><?php echo __( 'Logo area colors', 'weever' ); ?></p>
+    <p class="wx-ui-title">Logo area colors</p>
 
     <div class="row collapse wx-colorpicker">
         <div class="small-12 large-8 push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
-                    <label class="left inline"><?php echo __( 'Logo area background color', 'weever' ); ?></label>
+                    <label class="left inline">Logo area background color</label>
                 </div>
                 <div class="small-2 columns">
                     <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
@@ -93,7 +93,7 @@
         <div class="small-12 large-8 push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
-                    <label class="left inline">&nbsp;<?php echo __( 'Logo area text color (if applicable)', 'weever' ); ?></label>
+                    <label class="left inline">&nbsp;Logo area text color (if applicable)</label>
                 </div>
                 <div class="small-2 columns">
                     <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
@@ -118,7 +118,7 @@
         <div class="small-12 large-8 push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
-                    <label class="left inline">&nbsp;<?php echo __('Subtab bar background color', 'weever'); ?></label>
+                    <label class="left inline">&nbsp;Subtab bar background color</label>
                 </div>
                 <div class="small-2 columns">
                     <img id="subtab_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
@@ -143,7 +143,7 @@
         <div class="small-12 large-8 push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
-                    <label class="left inline">&nbsp;<?php echo __( 'Subtab bar text color', 'weever' ); ?></label>
+                    <label class="left inline">&nbsp;Subtab bar text color</label>
                 </div>
                 <div class="small-2 columns">
                     <img id="subtab_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
