@@ -84,6 +84,22 @@ wxApp = wxApp || {};
 		},
 
         filterAPIData: function( data ) {
+
+            /* The 'geo' attribute is being sent erroneously in get_tabs, and
+             * its presence causes issues when provided to add_tabs (Undefined
+             * property: 'latitude'). So, until Rob gets a chance to fix the 
+             * API, we have to remove the geo attribute here.
+             *
+             * More Info: The problem comes from attempting to send 'false'
+             * because the API is looking for _any_ value. If it's false,
+             * we delete it here.
+             */
+            if ( typeof data.geo !== 'undefined' ) {
+                if ( ! data.geo ) {
+                    delete data.geo;
+                }
+            }
+
             return data;
         },
 
