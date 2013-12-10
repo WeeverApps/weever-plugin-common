@@ -255,7 +255,6 @@ wxApp = wxApp || {};
 		 * Override __super__.finish()
 		 */
 		finish: function() {
-			
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
 				formActions = this.model.get( 'config' ).formActions,
@@ -277,6 +276,21 @@ wxApp = wxApp || {};
 				if ( 'input' == model.get( 'control' ) && 'file' == model.get( 'attributes' ).get( 'type' ) ) {
 					hasUpload = true;
 					break;
+				}
+				else if ( 'textSlider' == model.get( 'type' ) ) {
+					
+					// Set the extra parameters for text slider.
+					model.get('attributes').set('step', 1);
+					model.get('attributes').set('min',  1);
+					model.get('attributes').set('max',  model.get('options').length);
+					for (var i = 0; i < model.get('options').length; i++) {
+						var option = model.get('options').models[i];
+						if ( option.get('attributes').attributes.checked ) {
+							// Set the value of the slider as a 1-based index.
+							model.get('attributes').set('value', i+1);
+							break;
+						}
+					};
 				}
 			}
 
