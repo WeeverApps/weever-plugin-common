@@ -69,23 +69,46 @@ wxApp = wxApp || {};
 			this.model.trigger('change');
 		},
 
+		getFixedValue: function( value, decimalPlaces ) {
+			var fixedValue;
+			if ( typeof value == 'string' ) {
+				fixedValue = parseFloat( value ).toFixed( decimalPlaces );
+			}
+			else if ( typeof value == 'number' ) {
+				fixedValue = value.toFixed( decimalPlaces );
+			}
+			return fixedValue; // returns a string!
+		},
+
 		setMin: function( ev ) {
-			this.model.get( 'attributes' ).set( 'min', $( ev.currentTarget ).val() );
+			// Limit to 2 decimal places
+			var fixedValue = this.getFixedValue( $( ev.currentTarget ).val(), 2 );
+			$( ev.currentTarget ).val( fixedValue );
+			this.model.get( 'attributes' ).set( 'min', parseFloat( fixedValue ) );
 			this.model.trigger('change');
 		},
 
 		setMax: function ( ev ) {
-			this.model.get( 'attributes' ).set( 'max', $( ev.currentTarget ).val() );
+			// Limit to 2 decimal places
+			var fixedValue = this.getFixedValue( $( ev.currentTarget ).val(), 2 );
+			$( ev.currentTarget ).val( fixedValue );
+			this.model.get( 'attributes' ).set( 'max', parseFloat( fixedValue ) );
 			this.model.trigger('change');
 		},
 
 		setValue: function ( ev ) {
-			this.model.get( 'attributes' ).set( 'value', $( ev.currentTarget ).val() );
+			// Limit to 2 decimal places
+			var fixedValue = this.getFixedValue( $( ev.currentTarget ).val(), 2 );
+			$( ev.currentTarget ).val( fixedValue );
+			this.model.get( 'attributes' ).set( 'value', parseFloat( fixedValue ) );
 			this.model.trigger('change');
 		},
 
 		setStep: function ( ev ) {
-			this.model.get( 'attributes' ).set( 'step', $( ev.currentTarget ).val() );
+			// Limit to 2 decimal places
+			var fixedValue = this.getFixedValue( $( ev.currentTarget ).val(), 2 );
+			$( ev.currentTarget ).val( fixedValue );
+			this.model.get( 'attributes' ).set( 'step', parseFloat( fixedValue ) );
 			this.model.trigger('change');
 		},
 
