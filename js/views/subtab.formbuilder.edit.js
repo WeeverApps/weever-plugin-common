@@ -270,15 +270,14 @@ wxApp = wxApp || {};
 				};
 
 			// Check for an upload element
+			// Process text slider min/max/step/value
 			var model = {};
 			for ( var i = 0; i < formElements.length; i++ ) {
 				model = formElements.at( i );
 				if ( 'input' == model.get( 'control' ) && 'file' == model.get( 'attributes' ).get( 'type' ) ) {
 					hasUpload = true;
-					break;
 				}
 				else if ( 'textSlider' == model.get( 'type' ) ) {
-					
 					// Set the extra parameters for text slider.
 					model.get('attributes').set('step', 1);
 					model.get('attributes').set('min', 0);
