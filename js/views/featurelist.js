@@ -26,12 +26,18 @@ wxApp = wxApp || {};
     wxApp.account.fetch( function() {
         wxApp.featureList = new wxApp.FeatureList();
 
-        // Grab the data and kick things off
-        wxApp.featureList.collection.fetch({ 
-            url: wx.pluginUrl + 'static/js/config/wx.featurelist.js', 
-            success: function(result) {  }, 
-            error: function() { console.log('Could not load feature list.') } 
-        });
+	    // Grab the data and kick things off
+	    wxApp.featureList.collection.fetch({
+		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
+		    success: function(result) {},
+		    error: function() {
+			    wxApp.featureList.collection.fetch({
+				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+				    success: function(result) {  },
+				    error: function() { console.log('Could not load feature list.') }
+			    });
+		    }
+	    });
     });
 
 })(jQuery);
