@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 
 	wx.makeApiCall('account/get_tier', {}, function(data) {
 
-		if ( data.expiry == 2.1 || data.expiry == '2.1' ) {
+		if ( data.tier_raw == 2.1 || data.tier_raw == '2.1' ) {
 
 			// This user has a trial account. Check the expiration date.
 			wx.makeApiCall('account/get_expiry', {}, function(data) {
