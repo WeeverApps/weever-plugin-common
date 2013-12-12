@@ -1,6 +1,6 @@
 <script type="text/template" id="advanced-options">
 
-    <p class="wx-ui-title"><?php echo __( 'Icon Style', 'weever' ); ?></p>
+    <p class="wx-ui-title">Icon Style</p>
     <p>Change the visual style used for all icons within your app.</p>
     <div>
         <div class="row">
@@ -27,25 +27,25 @@
     <br>
     <br>
 
-    <p class="wx-ui-title"><?php echo __( 'Custom CSS', 'weever' ); ?></p>
+    <p class="wx-ui-title">Custom CSS</p>
 
-	<p><?php echo __( 'Customize your mobile app design with valid CSS rules.', 'weever' ); ?></p>
+	<p>Customize your mobile app design with valid CSS rules.</p>
 	<textarea style="min-height: 10em;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
 	<button class="success radius" id="save_advanced">Save CSS and apply to app</button>
     <br>
 
     <div class="panel">
-        <p><?php echo __( 'To identify CSS classes use a webkit browser such as Chrome or Safari, right-click on a specific feature inside the app and then use <a target="_blank" href="https://developers.google.com/chrome-developer-tools/">web inspector</a> to identify and style the HTML / CSS elements.', 'weever' ); ?></p>
+        <p>To identify CSS classes use a webkit browser such as Chrome or Safari, right-click on a specific feature inside the app and then use <a target="_blank" href="https://developers.google.com/chrome-developer-tools/">web inspector</a> to identify and style the HTML / CSS elements.</p>
     </div>
 
 
 
     <br>
 
-    <p class="wx-ui-title"><?php echo __( 'Language options', 'weever' ); ?></p>
+    <p class="wx-ui-title">Language options</p>
 
 	<div>
-		<p><?php echo __( 'Change the language used for generic user-interface elements in the app such as the &lsquo;back&rsquo; button.', 'weever' ); ?></p>
+		<p>Change the language used for generic user-interface elements in the app such as the &lsquo;back&rsquo; button.</p>
 		<%
         // Available_locales is currently an object. Convert it into an array to make it sortable.
         var tuples = [];
