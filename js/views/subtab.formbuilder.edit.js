@@ -107,7 +107,7 @@ wxApp = wxApp || {};
 				}
 
 				// If we don't have some of the actions, we should add them.
-				if ( this.model.get( 'config' ).isDocuSign && !hasDocusign ) {
+				if ( !hasDocusign ) {
 					this.addDocusignAction( null, { method: 'docusign' } );
 				}
 
@@ -135,9 +135,17 @@ wxApp = wxApp || {};
 				}
 			});
 
+			// If DocuSign username or password is provided,
+			// both username and password must be provided.
+			if ( $('.wx-form-builder-docusign-username').val() || $('.wx-form-builder-docusign-password').val() ) {
+				if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
+					success = true;
+				}
+			}
+
 			if (!success) {
 				// Display an error message.
-				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient or custom post action in &ldquo;Form submission settings&rdquo;.";
+				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient, DocuSign login information, or custom post action in &ldquo;Form submission settings&rdquo;.";
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
 			}
@@ -152,12 +160,16 @@ wxApp = wxApp || {};
 			post.set( { method: 'post' } );
 			var email = new wxApp.FormBuilderAction();
 			email.set( { method: 'email' } );
+			var docusign = new wxApp.FormBuilderAction();
+			docusign.set( { method: 'docusign' } );
 
 			this.model.get( 'config' ).formActions.push( post );
 			this.model.get( 'config' ).formActions.push( email );
+			this.model.get( 'config' ).formActions.push( docusign );
 
 			this.addPostAction( post );
 			this.addEmailAction( email );
+			this.addDocusignAction( docusign );
 
 		},
 
