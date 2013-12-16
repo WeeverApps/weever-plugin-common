@@ -45,12 +45,11 @@
                 <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />
                 <br>
                 <br>
-                <div id="wx-file-uploader-titlebar_logo_live" rel="titlebar_logo_live" ref="wx-titlebar_logo_live" img_width="320" img_height="44" class="wx-theme-file-uploader">
-                    <noscript>
-                        <p>Please enable JavaScript to use the file uploader.</p>
-                        <!-- or put a simple form for upload here -->
-                        <img src="" id="wx-file-load" />
-                    </noscript>
+                <div class="new_uploader">
+                    <button class="success expand radius" style="position: relative; overflow: hidden; direction: ltr;">
+                        <span id="save_image_titlebar_logo_live">Upload image</span>
+                        <input multiple="multiple" type="file" id="upload_titlebar_logo_live" name="upload_titlebar_logo_live" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+                    </button>
                 </div>
                 <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" name="titlebar_logo_live" />
                 <br>

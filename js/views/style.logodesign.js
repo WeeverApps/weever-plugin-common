@@ -7,7 +7,8 @@ wxApp = wxApp || {};
         events: {
             'change input[name=titlebarSource]': 'radioChange',
             'click button.postfix': 'showPicker',
-            'change .logo-design': 'logoChange' 
+            'change .logo-design': 'logoChange',
+            'change #upload_titlebar_logo_live': 'uploadFile'
         },
 
         initialize: function() {
@@ -92,10 +93,55 @@ wxApp = wxApp || {};
             var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
             var params = { titlebar: innerParams };
 
-            wx.makeApiCall('design/set_titlebar', params, function(data) {
+            this.save( function(data) {
                 me.hideLoadGif( id, loading_id );
                 wx.rebuildApp();
-            });
+            } );
+        },
+
+        uploadFile: function( e ) {
+
+            var me = this,
+                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
+                $input = $( e.currentTarget ),
+                span_id = $input.attr('id').replace('upload_', '#save_image_'),
+                hidden_id = $input.attr('id').replace('upload_', '#');
+
+            $( span_id ).html('Saving...');
+
+            $.ajax( url, {
+                iframe: true,
+                files: $input,
+                success: function( data ) {
+
+                    // The stupid data comes in HTML for some reason (WP only?)
+                    // Strip out the HTML, and convert to json object.
+                    data = data.replace(/(<([^>]+)>)/ig,"");
+                    data = JSON.parse( data );
+                    
+                    $( hidden_id ).val( data.file_name );
+                    wxApp.design.get('titlebar').image = data.file_name;
+
+                    me.save( function(response) {
+                        $('#wx-titlebar_logo_live').attr('src', data.file_name);
+                        $( span_id ).html('Saved!').delay(2000).queue( function() { $(this).html('Upload image'); } );
+                        wx.rebuildApp();
+                    } );
+                }
+            } );
+        },
+
+        save:           function( callback ) {
+
+            // The 'design' methods of Open API is kinda strange... It 
+            // expects top-level params to be JSON objects, and items within 
+            // the top-level params to be string representations of JSON 
+            // objects... Therefore, we have to 'stringify' the inner params.
+            var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
+            var params = { titlebar: innerParams };
+
+            wx.makeApiCall('design/set_titlebar', params, callback);
+
         }
     });
 
