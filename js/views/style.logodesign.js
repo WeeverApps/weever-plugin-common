@@ -160,8 +160,6 @@ wxApp = wxApp || {};
         if (configFetched) {
             wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
-
-        loadImageUploaders();
     } );
 
 
