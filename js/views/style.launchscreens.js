@@ -6,7 +6,8 @@ wxApp = wxApp || {};
         el: '#launch_screen',
 
         events: {
-            'change .wx-theme-input': 'saveImage'
+            'change .wx-theme-input': 'saveImage',
+            'change .file_upload'   : 'uploadFile'
         },
 
         initialize: function() {
@@ -61,8 +62,10 @@ wxApp = wxApp || {};
             } else {
 
                 // Load screen image.
+                var img_id  = '#wx-' + id;
+                var span_id = '#save_image_' + id;
                 id = id.replace('_load_live', '');
-
+                
                 wxApp.design.get('launchscreen')[id] = src;
 
                 // The 'design' methods of Open API is kinda strange... It 
@@ -73,6 +76,8 @@ wxApp = wxApp || {};
                 var params = { launchscreen: innerParams };
 
                 wx.makeApiCall('design/set_launchscreen', params, function(data) {
+                    $( span_id ).html('Saved!').delay(2000).queue( function() { $(this).html('Upload image'); } );
+                    $( img_id ).attr( 'src', src );
                     // wx.rebuildApp();
                 });
 
@@ -84,6 +89,34 @@ wxApp = wxApp || {};
                 url = url.replace( 'wp_weeverapps-live/static/images', 'weever-apps-20-mobile-web-apps/static/img/launchscreens' );
             }
             return url;
+        },
+
+        uploadFile: function( e ) {
+
+            console.log('uploadFile');
+            var me = this,
+                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
+                $input = $( e.currentTarget ),
+                span_id = $input.attr('id').replace('upload_', '#save_image_'),
+                hidden_id = $input.attr('id').replace('upload_', '#');
+
+            $( span_id ).html('Saving...');
+
+            $.ajax( url, {
+                iframe: true,
+                files: $input,
+                success: function( data ) {
+
+                    // The stupid data comes in HTML for some reason (WP only?)
+                    // Strip out the HTML, and convert to json object.
+                    data = data.replace(/(<([^>]+)>)/ig,"");
+                    data = JSON.parse( data );
+                    
+                    $( hidden_id ).val( data.file_name );
+                    me.saveImage( $( hidden_id ) );
+                }
+            } );
+
         }
     });
 
