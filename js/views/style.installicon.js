@@ -7,7 +7,8 @@ wxApp = wxApp || {};
         el: '#install_icon',
         events: {
             'click #save_install_icon': 'clickSave',
-            'change input[name=switch-install]': 'changeSave'
+            'change input[name=switch-install]': 'changeSave',
+            'change #file_upload': 'uploadFile'
         },
 
         initialize: function() {
@@ -26,7 +27,7 @@ wxApp = wxApp || {};
             this.performSave( function(data) { } );
         },
 
-        performSave: function(c) {
+        performSave: function(callback) {
             var prompt = $('input[name=switch-install]:checked').attr('id');
             if (prompt === 'install-on')
                 prompt = '1';
@@ -37,6 +38,37 @@ wxApp = wxApp || {};
             wxApp.design.get('install').name   = $('#title').val();
             wxApp.design.get('install').icon   = wx.cleanUrl( $('#wx-icon_live').attr('src') );
 
+            this.save( callback );
+        },
+
+        uploadFile:     function(e) {
+            var me = this,
+                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl;
+
+            $('#save_image').html('Saving...');
+
+            $.ajax( url, {
+                iframe: true,
+                files: $( e.currentTarget ),
+                success: function( data ) {
+
+                    // The stupid data comes in HTML for some reason (WP only?)
+                    // Strip out the HTML, and convert to json object.
+                    data = data.replace(/(<([^>]+)>)/ig,"");
+                    data = JSON.parse( data );
+
+                    wxApp.design.get('install').icon = data.file_name;
+                    me.save( function( response ) {
+                        $('#save_image').html('Saved!').delay(2000).queue( function() { $(this).html('Upload image'); } );
+                        $('#wx-icon_live').attr( 'src', data.file_name );
+                    } );
+                }
+            } );
+
+        },
+
+        save:           function( callback ) {
+
             // The 'design' methods of Open API is kinda strange... It 
             // expects top-level params to be JSON objects, and items within 
             // the top-level params to be string representations of JSON 
@@ -44,7 +76,7 @@ wxApp = wxApp || {};
             var innerParams = JSON.stringify( wxApp.design.get('install') );
             var params = { install: innerParams };
 
-            wx.makeApiCall('design/set_install', params, c);
+            wx.makeApiCall('design/set_install', params, callback);
         }
     });
 
