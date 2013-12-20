@@ -21,34 +21,6 @@
 // Navigation tabs
 jQuery(document).ready(function() {
     
-	jQuery('input[name="switch-x"]').click(function() {
-        if (this.id == 'on') {
-            app_enabled = 1;
-        } else {
-            app_enabled = 0;
-        }
-
-        jQuery('#status-loading').show();
-
-        jQuery.ajax({
-            type: "POST",
-            url: ajaxurl,
-            data: { 
-                action: 'ajaxToggleAppStatus',
-                nonce: jQuery('input#nonce').val(),
-                app_enabled: app_enabled
-            },
-            success: function(msg) {
-                console.log('OK');
-                var status = app_enabled ? 'online' : 'offline';
-                status = '<b>' + status + '</b>';
-                jQuery('#appStatus').html( status );
-                jQuery('#status-loading').fadeOut();
-            },
-            error: function(v, msg) { alert(msg); }
-        });
-    });
-
     jQuery('input[name="switch-tablet"]').click(function() {
         console.log('Switch tablet.');
         if (this.id == 'on') {

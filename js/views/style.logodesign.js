@@ -264,6 +264,7 @@ wxApp = wxApp || {};
         if (designFetched) {
             wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
         }
+        wxApp.appToggle = new wxApp.AppStatusToggle( { model: wxApp.config } );
     } );
 
     wxApp.IconFonts.fetch();
