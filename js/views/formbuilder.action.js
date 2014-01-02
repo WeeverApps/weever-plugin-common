@@ -10,15 +10,19 @@ wxApp = wxApp || {};
 		tplDocusignSelector: '#form-builder-action-docusign',
 
 		events: {
-			'blur .wx-form-builder-action': 'updateAction',
-			'click .wx-form-builder-delete': 'deleteControl',
-			'blur .wx-form-builder-docusign-username': 'updateUsername',
-			'blur .wx-form-builder-docusign-password': 'updatePassword',
-			'blur .wx-form-builder-docusign-returnUrl': 'updateReturnUrl',
-			'blur .wx-form-builder-pdfheader-title': 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line1': 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line2': 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line3': 'updatePdfHeader'
+			'blur .wx-form-builder-action'             : 'updateAction',
+			'click .wx-form-builder-delete'            : 'deleteControl',
+			'blur .wx-form-builder-docusign-username'  : 'updateUsername',
+			'blur .wx-form-builder-docusign-password'  : 'updatePassword',
+			'blur .wx-form-builder-docusign-returnUrl' : 'updateReturnUrl',
+			'blur .wx-form-builder-pdfheader-title'    : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line1'    : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
+			'click #docusignLogin'                     : 'showLogin',
+			'click #docusignCreate'                    : 'showCreateAccount',
+			'click #wx-docusign-login-button'          : 'login',
+			'click #wx-docusign-create-account-button' : 'createAccount'
 		},
 
 		initialize: function() {
@@ -83,6 +87,50 @@ wxApp = wxApp || {};
 			console.log( 'deleteControl' );
 			this.remove();
 			this.model.destroy();
+		},
+
+		showLogin: function( ev ) {
+			ev.preventDefault();
+			this.$('#docusignLoginForm').slideDown();
+			this.$('#docusignCreateForm').slideUp();
+		},
+
+		showCreateAccount: function( ev ) {
+			ev.preventDefault();
+			this.$('#docusignLoginForm').slideUp();
+			this.$('#docusignCreateForm').slideDown();
+		},
+
+		login: function() {
+			console.log( 'login' );
+			var me = this,
+			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
+			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val();
+
+			me.$('.login.alert-box').slideUp();
+			me.$('#login_loading').show();
+
+			console.log(username);
+			console.log(password);
+
+			var params = { username: username, password: password };
+			wx.makeApiCall('_docusign/clientLogin', params, function(data) {
+				me.$('#login_loading').hide();
+				alert('got it!');
+				alert( data );
+				console.log( data );
+				me.$('#docusignAccountInfo').hide();
+				me.$('#docusignOtherInfo').show();
+			}, function(data) {
+				me.$('#login_loading').hide();
+				me.$('.login.alert-box').text( data.message );
+				me.$('.login.alert-box').slideDown();
+			});
+		},
+
+		createAccount: function() {
+			this.$('#docusignAccountInfo').hide();
+			this.$('#docusignOtherInfo').show();
 		}
 
 	});

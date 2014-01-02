@@ -24,8 +24,8 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
-			console.log( 'FormBuilderAction init' );
-			console.log( this );
+			// console.log( 'FormBuilderAction init' );
+			// console.log( this );
 		}
 
 	});
