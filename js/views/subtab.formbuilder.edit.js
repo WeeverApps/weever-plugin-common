@@ -267,6 +267,7 @@ wxApp = wxApp || {};
 		 * Override __super__.finish()
 		 */
 		finish: function() {
+			console.log( 'subtab.formbuilder.edit finish' );
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
 				formActions = this.model.get( 'config' ).formActions,
@@ -294,10 +295,10 @@ wxApp = wxApp || {};
 					model.get('attributes').set('step', 1);
 					model.get('attributes').set('min', 0);
 					model.get('attributes').set('max', model.get('options').length - 1);
-					for (var i = 0; i < model.get('options').length; i++) {
-						var option = model.get('options').models[i];
+					for (var j = 0; j < model.get('options').length; j++) {
+						var option = model.get('options').models[j];
 						if ( option.get('attributes').attributes.checked ) {
-							model.get('attributes').set('value', i);
+							model.get('attributes').set('value', j);
 							break;
 						}
 					};
