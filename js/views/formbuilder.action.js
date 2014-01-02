@@ -103,29 +103,28 @@ wxApp = wxApp || {};
 
 		login: function() {
 			console.log( 'login' );
-			var me = this,
+			var me       = this,
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
-			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val();
+			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
+			    success  = function success( data ) {
+			    	me.$('#login_loading').hide();
+					me.$('#docusignAccountInfo').slideUp();
+					me.$('.login.alert-box.success').text( 'Okay! You\'ve been logged in!' );
+					me.$('#docusignOtherInfo').slideDown();
+			    },
+			    failure  = function failure( data ) {
+			    	me.$('#login_loading').hide();
+					me.$('.login.alert-box.alert').text( data.message );
+					me.$('.login.alert-box.alert').slideDown();
+			    }
 
-			me.$('.login.alert-box').slideUp();
+			// Hide the alerts, show the loading gif.
+			me.$('.login.alert-box.alert').slideUp();
 			me.$('#login_loading').show();
 
-			console.log(username);
-			console.log(password);
-
 			var params = { username: username, password: password };
-			wx.makeApiCall('_docusign/clientLogin', params, function(data) {
-				me.$('#login_loading').hide();
-				alert('got it!');
-				alert( data );
-				console.log( data );
-				me.$('#docusignAccountInfo').hide();
-				me.$('#docusignOtherInfo').show();
-			}, function(data) {
-				me.$('#login_loading').hide();
-				me.$('.login.alert-box').text( data.message );
-				me.$('.login.alert-box').slideDown();
-			});
+			if ( true ) params.demo = 1;	// TODO - Remove this.
+			wx.makeApiCall('_docusign/clientLogin', params, success, failure);
 		},
 
 		createAccount: function() {
