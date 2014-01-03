@@ -102,7 +102,6 @@ wxApp = wxApp || {};
 		},
 
 		login: function() {
-			console.log( 'login' );
 			var me       = this,
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
@@ -128,8 +127,101 @@ wxApp = wxApp || {};
 		},
 
 		createAccount: function() {
-			this.$('#docusignAccountInfo').hide();
-			this.$('#docusignOtherInfo').show();
+			console.log( 'createAccount' );
+			var me = this;
+				account = me.validateAccount();
+			console.log( 'account' );
+			console.log( account );
+
+			if ( account.valid ) {
+				// Remove values we don't need to send to the API.
+				delete account.valid;
+				delete account.errors;
+
+				wx.makeApiCall( '_docusign/createAccount', account, function() {}, function() {} );
+			}
+			else {
+
+				// Display validation errors.
+				var msg = 'There were some validation errors. Please correct them and try again.<br/><ul>';
+				for (var i = 0; i < account.errors.length; i++) {
+					msg += '<li>' + account.errors[i] + '</li>';
+				};
+				msg += '</ul>';
+				me.$('.account.alert-box.alert').text( msg )
+
+			}
+		},
+
+		validateAccount: function() {
+
+            var me = this,
+                accountObject = {
+            		valid       : true,
+            		errors      : [],
+	                accountName : me.$('.wx-form-builder-docusign-accountName').val().trim(),
+				    username    : me.$('.wx-form-builder-docusign-username').val().trim(),
+				    email       : me.$('.wx-form-builder-docusign-email').val().trim(),
+				    title       : me.$('.wx-form-builder-docusign-title').val().trim(),
+				    firstName   : me.$('.wx-form-builder-docusign-firstName').val().trim(),
+				    middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
+				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
+				    suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
+				    password    : me.$('.wx-form-builder-docusign-password').val()
+			    },
+			    passwordAgain = me.$('.wx-form-builder-docusign-password-again').val();
+
+            // Validation Rules.
+            // 1. Account Name is required.
+            if ( accountObject.accountName.length === 0 ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "Account Name is required.";
+            }
+
+            // 2. User Name is required.
+            if ( accountObject.username.length === 0 ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "User Name is required.";
+            }
+
+            // 3. Email address is required.
+            if ( accountObject.email.length === 0 ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "Email address is required.";
+            }
+
+            // 4. Email address must be valid.
+            else if ( !accountObject.email.match( /.+@.+/ ) ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "Email address is not valid.";
+            }
+
+            // 5. First name is required.
+            if ( accountObject.firstName.length === 0 ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "First name is required.";
+            }
+
+            // 6. Last name is required.
+            if ( accountObject.lastName.length === 0 ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "Last name is required.";
+            }
+
+            // 7. Password is required.
+            if ( accountObject.password.length === 0 ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "Password is required.";
+            }
+
+            // 8. Passwords must match.
+            else if ( accountObject.password.length !== passwordAgain ) {
+            	accountObject.valid = false;
+            	accountObject.errors[ accountObject.errors.length ] = "Passwords must match.";
+            }
+
+            return accountObject;
+
 		}
 
 	});
