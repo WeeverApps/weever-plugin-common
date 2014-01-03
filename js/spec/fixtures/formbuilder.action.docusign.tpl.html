@@ -4,13 +4,13 @@
 		<p>When you DocuSign your documents, good things happen (I dunno, some sort of DocuSign marketing text here).</p>
 		
 		<div id="docusignAccountInfo">
-			<a href="#" id="docusignLogin">Login</a> | <a href="#" id="docusignCreate">Create Account</a> | Change Password
+			<a href="#" id="docusignLogin">Login</a> | <a href="#" id="docusignCreate">Create Account</a> | <a href="#" id="docusignChangePassword">Change Password</a>
 			<br>
 			<br>
 			<div id="docusignLoginForm" style="display: none">
 				<div data-alert class="login alert-box alert" style="display: none"></div>
 				<label>
-					DocuSign Username:
+					DocuSign Email Address:
 					<input type="text" class="wx-form-builder-docusign-username" value="<%- username %>" />
 				</label>
 				<label>
@@ -69,6 +69,35 @@
 					<input type="password" class="wx-form-builder-docusign-password-again" />
 				</label>
 				<button id="wx-docusign-create-account-button" class="success small radius">Create Account</button>
+			</div>
+
+			<div id="docusignChangePassord" style="display: none">
+				<div data-alert class="changePassword alert-box alert" style="display: none"></div>
+				<label>
+					DocuSign Email Address:
+					<input type="text" class="wx-form-builder-docusign-username" value="<%- username %>" />
+				</label>
+				<label>
+					Current Password:
+					<input type="password" class="wx-form-builder-docusign-old-password" value="<%- password %>" />
+				</label>
+				<label>
+					New Password:
+					<input type="password" class="wx-form-builder-docusign-password" />
+				</label>
+				<label>
+					Repeat New Password:
+					<input type="password" class="wx-form-builder-docusign-new-password-again" />
+				</label>
+				<label>
+					Forgot Password Question (eg, What is your mother&apos;s maiden name?) *
+					<input type="text" class="wx-form-builder-docusign-forgot-password-q1" />
+				</label>
+				<label>
+					Forgot Password Answer
+					<input type="text" class="wx-form-builder-docusign-forgot-password-a1" />
+				</label>
+				<button id="wx-docusign-change-password-button" class="success small radius">Change Password</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
 			</div>
 		</div>
 

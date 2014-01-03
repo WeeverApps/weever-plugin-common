@@ -21,8 +21,10 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
 			'click #docusignLogin'                     : 'showLogin',
 			'click #docusignCreate'                    : 'showCreateAccount',
+			'click #docusignChangePassword'            : 'showChangePassword',
 			'click #wx-docusign-login-button'          : 'login',
-			'click #wx-docusign-create-account-button' : 'createAccount'
+			'click #wx-docusign-create-account-button' : 'createAccount',
+			'click #wx-docusign-change-password-button': 'changePassword'
 		},
 
 		initialize: function() {
@@ -48,7 +50,6 @@ wxApp = wxApp || {};
 		},
 
 		updateUsername: function( ev ) {
-			alert('UPDATE USERNAME');
 			this.model.set( 'username', $( ev.currentTarget ).val() );
 		},
 
@@ -88,12 +89,21 @@ wxApp = wxApp || {};
 			ev.preventDefault();
 			this.$('#docusignLoginForm').slideDown();
 			this.$('#docusignCreateForm').slideUp();
+			this.$('#docusignChangePassord').slideUp();
 		},
 
 		showCreateAccount: function( ev ) {
 			ev.preventDefault();
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideDown();
+			this.$('#docusignChangePassord').slideUp();
+		},
+
+		showChangePassword: function( ev ) {
+			ev.preventDefault();
+			this.$('#docusignLoginForm').slideUp();
+			this.$('#docusignCreateForm').slideUp();
+			this.$('#docusignChangePassord').slideDown();
 		},
 
 		login: function() {
@@ -152,6 +162,42 @@ wxApp = wxApp || {};
 				msg += '</ul>';
 				me.$('.account.alert-box.alert').html( msg );
 				me.$('.account.alert-box.alert').slideDown();
+			}
+		},
+
+		changePassword: function() {
+			var me               = this,
+			    username         = me.$('#docusignChangePassord .wx-form-builder-docusign-username').val(),
+			    oldPassword      = me.$('#docusignChangePassord .wx-form-builder-docusign-old-password').val(),
+			    newPassword      = me.$('#docusignChangePassord .wx-form-builder-docusign-password').val(),
+			    newPasswordAgain = me.$('#docusignChangePassord .wx-form-builder-docusign-new-password-again').val(),
+			    question1        = me.$('#docusignChangePassord .wx-form-builder-docusign-forgot-password-q1').val(),
+			    answer1          = me.$('#docusignChangePassord .wx-form-builder-docusign-forgot-password-a1').val(),
+			    success          = function success( data ) {
+			    	me.$('#change_password_loading').hide();
+					me.$('#docusignAccountInfo').slideUp();
+					me.$('.login.alert-box.success').text( 'Okay! Your password has been changed, and you\'ve been logged in!' );
+					me.$('#docusignOtherInfo').slideDown();
+			    },
+			    failure          = function failure( data ) {
+			    	me.$('#change_password_loading').hide();
+					me.$('.changePassword.alert-box.alert').text( data.message );
+					me.$('.changePassword.alert-box.alert').slideDown();
+			    }
+
+			// Hide the alerts, show the loading gif.
+			me.$('.changePassword.alert-box.alert').slideUp();
+			me.$('#change_password_loading').show();
+
+			if ( newPassword !== newPasswordAgain ) {
+
+				me.$('.changePassword.alert-box.alert').text( 'Validation Error: Your passwords do not match.' );
+
+			} else {
+
+				var params = { username: username, password: oldPassword, newPassword: newPassword, question1: question1, answer1: answer1 };
+				if ( true ) params.demo = 1;	// TODO - Remove this.
+				wx.makeApiCall('_docusign/changePassword', params, success, failure);
 			}
 		},
 

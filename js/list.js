@@ -41,7 +41,6 @@ var wxApp = wxApp || {};
 			data: data,
             datatype: datatype,
             success: function(v) {
-                console.log( 'success' );
                 wx.apiSuccess( v, successCallback, failureCallback );
             },
             error: function(v, message) {
