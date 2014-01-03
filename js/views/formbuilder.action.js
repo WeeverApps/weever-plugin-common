@@ -48,6 +48,7 @@ wxApp = wxApp || {};
 		},
 
 		updateUsername: function( ev ) {
+			alert('UPDATE USERNAME');
 			this.model.set( 'username', $( ev.currentTarget ).val() );
 		},
 
@@ -60,7 +61,6 @@ wxApp = wxApp || {};
 		},
 
 		updatePdfHeader: function( ev ) {
-			console.log( 'updatePdfHeader' );
 			var $me = $( ev.currentTarget );
 
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) )
@@ -71,20 +71,15 @@ wxApp = wxApp || {};
 				this.model.get( 'pdfHeader' ).line2 = $me.val();
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) )
 				this.model.get( 'pdfHeader' ).line3 = $me.val();
-
-			console.log( this.model );
 		},
 
 		updateAction: function( ev ) {
-			console.log( 'updateAction' );
 			ev.preventDefault();
 			var $me = $( ev.currentTarget );
 			this.model.set( 'value', $me.val() );
-			console.log( this.model );
 		},
 
 		deleteControl: function() {
-			console.log( 'deleteControl' );
 			this.remove();
 			this.model.destroy();
 		},
@@ -127,18 +122,25 @@ wxApp = wxApp || {};
 		},
 
 		createAccount: function() {
-			console.log( 'createAccount' );
 			var me = this;
-				account = me.validateAccount();
-			console.log( 'account' );
-			console.log( account );
+				account = me.validateAccount(),
+				success = function success( data ) {
+					me.$('#docusignAccountInfo').slideUp();
+					me.$('.login.alert-box.success').text( 'Okay! Your account has been created!' );
+					me.$('#docusignOtherInfo').slideDown();
+				},
+				failure = function failure( data ) {
+					me.$('.account.alert-box.alert').text( data.message );
+					me.$('.account.alert-box.alert').slideDown();
+				};
 
 			if ( account.valid ) {
 				// Remove values we don't need to send to the API.
 				delete account.valid;
 				delete account.errors;
+				if ( true ) account.demo = 1;	// TODO - Remove this.
 
-				wx.makeApiCall( '_docusign/createAccount', account, function() {}, function() {} );
+				wx.makeApiCall( '_docusign/createAccount', account, success, failure );
 			}
 			else {
 
@@ -148,8 +150,8 @@ wxApp = wxApp || {};
 					msg += '<li>' + account.errors[i] + '</li>';
 				};
 				msg += '</ul>';
-				me.$('.account.alert-box.alert').text( msg )
-
+				me.$('.account.alert-box.alert').html( msg );
+				me.$('.account.alert-box.alert').slideDown();
 			}
 		},
 
@@ -160,14 +162,14 @@ wxApp = wxApp || {};
             		valid       : true,
             		errors      : [],
 	                accountName : me.$('.wx-form-builder-docusign-accountName').val().trim(),
-				    username    : me.$('.wx-form-builder-docusign-username').val().trim(),
+				    username    : me.$('#docusignCreateForm .wx-form-builder-docusign-username').val().trim(),
 				    email       : me.$('.wx-form-builder-docusign-email').val().trim(),
 				    title       : me.$('.wx-form-builder-docusign-title').val().trim(),
 				    firstName   : me.$('.wx-form-builder-docusign-firstName').val().trim(),
 				    middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
 				    suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
-				    password    : me.$('.wx-form-builder-docusign-password').val()
+				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val()
 			    },
 			    passwordAgain = me.$('.wx-form-builder-docusign-password-again').val();
 
@@ -215,7 +217,7 @@ wxApp = wxApp || {};
             }
 
             // 8. Passwords must match.
-            else if ( accountObject.password.length !== passwordAgain ) {
+            else if ( accountObject.password !== passwordAgain ) {
             	accountObject.valid = false;
             	accountObject.errors[ accountObject.errors.length ] = "Passwords must match.";
             }
