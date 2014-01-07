@@ -1,5 +1,5 @@
 [
-    { "featureName": "FormBuilder",         "name": "FormBuilder" },
+    { "featureName": "FormBuilder",         "name": "FormBuilder",      "rel": "hide" },
     { "featureName": "DocuSign",            "name": "DocuSign",         "rel": "hide" },
     { "featureName": "RSS",                 "name": "RSS feed"          },
     { "featureName": "WordpressBlog",       "name": "WP All",           "filterBy": "weever_list_show_wordpress_content", "rel": "hide" },
@@ -23,9 +23,9 @@
     { "featureName": "Flickr",              "name": "Flickr"            },
     { "featureName": "PicasaAlbums",        "name": "Picasa"            },
     { "featureName": "FoursquarePhotos",    "name": "Foursquare"        },
-    { "featureName": "GoogleCalendar",      "name": "Calendar"       },
+    { "featureName": "GoogleCalendar",      "name": "Calendar"          },
     { "featureName": "Wufoo",               "name": "Wufoo",            "tierRequired": 2 },
-    { "featureName": "r3s",                 "name": "R3S Code",       "filterBy": "weever_list_r3s_dialog"},
+    { "featureName": "r3s",                 "name": "R3S Code",         "filterBy": "weever_list_r3s_dialog"},
     { "featureName": "Blogger",             "name": "Blogger"           },
     { "featureName": "google_plus",         "name": "Google+",          "includeClass": "wx-unavailable disabled"   },
     { "featureName": "tumblr",              "name": "Tumblr",           "includeClass": "wx-unavailable disabled"   },
