@@ -152,20 +152,20 @@ wxApp = wxApp || {};
 
 		getDefaultFormActions: function() {
 			
-			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			var post = new wxApp.FormBuilderAction();
-			post.set( { method: 'post' } );
-			var email = new wxApp.FormBuilderAction();
-			email.set( { method: 'email' } );
-			var docusign = new wxApp.FormBuilderAction();
-			docusign.set( { method: 'docusign' } );
+			// this.model.get( 'config' ).formActions = new Backbone.Collection();
+			// var post = new wxApp.FormBuilderAction();
+			// post.set( { method: 'post' } );
+			// var email = new wxApp.FormBuilderAction();
+			// email.set( { method: 'email' } );
+			// var docusign = new wxApp.FormBuilderAction();
+			// docusign.set( { method: 'docusign' } );
 
-			this.model.get( 'config' ).formActions.push( post );
-			this.model.get( 'config' ).formActions.push( email );
+			// this.model.get( 'config' ).formActions.push( post );
+			// this.model.get( 'config' ).formActions.push( email );
 			this.model.get( 'config' ).formActions.push( docusign );
 
-			this.addPostAction( post );
-			this.addEmailAction( email );
+			// this.addPostAction( post );
+			// this.addEmailAction( email );
 			this.docusign = this.addDocusignAction( docusign );
 
 		},
@@ -1074,15 +1074,15 @@ wxApp = wxApp || {};
 		getDefaultFormActions: function() {
 			
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			var post = new wxApp.FormBuilderAction();
-			post.set( { method: 'post' } );
+			// var post = new wxApp.FormBuilderAction();
+			// post.set( { method: 'post' } );
 			var docusign = new wxApp.FormBuilderAction();
 			docusign.set( { method: 'docusign' } );
 
-			this.model.get( 'config' ).formActions.push( post );
+			// this.model.get( 'config' ).formActions.push( post );
 			this.model.get( 'config' ).formActions.push( docusign );
 
-			this.addPostAction( post );
+			// this.addPostAction( post );
 			this.docusign = this.addDocusignAction( docusign );
 		}
 		
