@@ -7,7 +7,6 @@ var wxApp = wxApp || {};
 		model: wxApp.FormBuilderControl,
 
 		initialize: function() {
-			console.log(this.toJSONrecursive());
 			this.on('add', this.onAdd);
 		},
 

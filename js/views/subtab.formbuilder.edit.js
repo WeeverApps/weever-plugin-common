@@ -802,7 +802,7 @@ wxApp = wxApp || {};
 
 			// Now scroll down to it
 			var offset = $('.wx-form-builder-row.active').offset().top - 230;
-			$('#form-creation').animate({scrollTop: offset}, 1000);
+			$('body').animate({scrollTop: offset}, 1000);
 
 			// Add the preview to the Preview tab.
 			if ( !this.previews ) {

@@ -7,7 +7,6 @@ wxApp = wxApp || {};
 		preview: null,
 
 		initialize: function( options ) {
-			console.log( options );
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
 			var $template = $( this[options.type + 'TplSelector'] );
 			this.inputTpl = _.template( $template.html() );
