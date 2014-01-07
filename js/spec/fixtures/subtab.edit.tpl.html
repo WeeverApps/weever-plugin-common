@@ -31,7 +31,7 @@
 
     <div class="large-6 small-12 columns">
         <div class="section-container auto previewTabs" data-section>
-            <% if ( validateFeed || buildPreview ) { %>
+            <% if ( validateFeed ) { %>
                 <section class="active">
                     <p class="title" data-section-title><a href="#panel1">Preview</a></p>
                     <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
@@ -43,7 +43,7 @@
                     </div>
                 </section>
             <% } %>
-            <section <% if ( ! (validateFeed || buildPreview) ) { %>class="active"<% } %>>
+            <section <% if ( ! (validateFeed) ) { %>class="active"<% } %>>
                 <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
                 <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">

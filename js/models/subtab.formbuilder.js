@@ -5,7 +5,6 @@ wxApp = wxApp || {};
     wxApp.FormBuilderSubTab = wxApp.SubTab.extend({
         default_icon_id: 30,
         validateFeed: false,
-        buildPreview: true,
         typeDescription: 'Form Builder',
 
         filterAPIData: function( data ) {
@@ -31,7 +30,6 @@ wxApp = wxApp || {};
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
-        		buildPreview: true,
         		buttonText: 'Submit',
 				config: {
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',

@@ -1,0 +1,41 @@
+<script type="text/template" id="form-builder-edit-template">
+	<div class="large-6 small-12 columns">
+	    <div>
+	        <h2><%- typeDescription %>zzz</h2>
+	    </div>
+
+	    <div class="subtab"></div>
+
+	    <div class="wx-feed-error hide">
+	        Sorry! We were not able to preview this content.  Please verify the information and try again.
+	    </div>
+
+        <div data-alert class="alert-box alert" style="display: none">
+            <span class="message"></span>
+            <a href="#" class="close">&times;</a>
+        </div>
+
+	    <div>
+	        <label>Title for this feature inside your app</label>
+	        <input type="text" value="<%- title %>" class="wx-edit-title" />
+	    </div>
+
+        <br>
+
+        <div>
+            <button class="wx-next-button radius">Preview &nbsp;</button>
+            <button class="wx-finish-button success radius">Save and add to app</button>
+            <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+        </div>
+    </div>
+
+    <div class="large-6 small-12 columns">
+        <div class="wx-validate-feed">
+            <div class="panel wx-preview">
+                <h3 class="wx-preview-msg">preview</h3>
+            </div>
+        </div>
+    </div>
+
+    <a class="close-reveal-modal">&#215;</a>
+</script>

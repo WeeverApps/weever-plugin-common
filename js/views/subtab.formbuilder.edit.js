@@ -7,6 +7,7 @@ wxApp = wxApp || {};
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
 		subTabEditTplSelector: '#form-builder-subtab-edit-template',
+		baseEditTplSelector: '#form-builder-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,

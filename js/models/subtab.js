@@ -19,7 +19,6 @@ wxApp = wxApp || {};
                 config: {},
                 featureName: '',
                 validateFeed: true,
-                buildPreview: false,
                 helpTitle: 'Help tips ',
                 helpBody: ''
             };
@@ -28,7 +27,6 @@ wxApp = wxApp || {};
         typeDescription: '',
 
         validateFeed: true,
-        buildPreview: false,
 
         allowTitleEdit: true,
 
