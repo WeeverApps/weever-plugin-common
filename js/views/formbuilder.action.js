@@ -18,13 +18,13 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-pdfheader-title'    : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line1'    : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
-			'click #docusignLogin'                     : 'showLogin',
-			'click #docusignCreate'                    : 'showCreateAccount',
-			'click #docusignChangePassword'            : 'showChangePassword',
-			'click #wx-docusign-login-button'          : 'login',
-			'click #wx-docusign-create-account-button' : 'createAccount',
-			'click #wx-docusign-change-password-button': 'changePassword'
+			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader' //,
+			// 'click #docusignLogin'                     : 'showLogin',
+			// 'click #docusignCreate'                    : 'showCreateAccount',
+			// 'click #docusignChangePassword'            : 'showChangePassword',
+			// 'click #wx-docusign-login-button'          : 'login',
+			// 'click #wx-docusign-create-account-button' : 'createAccount',
+			// 'click #wx-docusign-change-password-button': 'changePassword'
 		},
 
 		initialize: function() {
@@ -83,9 +83,11 @@ wxApp = wxApp || {};
 		deleteControl: function() {
 			this.remove();
 			this.model.destroy();
-		},
+		} //,
 
-		showLogin: function( ev ) {
+		// Commented out DocuSign Stuff Below.
+
+		/*showLogin: function( ev ) {
 			ev.preventDefault();
 			this.$('#docusignLoginForm').slideDown();
 			this.$('#docusignCreateForm').slideUp();
@@ -270,7 +272,7 @@ wxApp = wxApp || {};
 
             return accountObject;
 
-		}
+		}*/
 
 	});
 })(jQuery);

@@ -30,7 +30,7 @@ wxApp = wxApp || {};
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
-        		buttonText: 'Submit',
+        		buttonText: 'Tap to Review & Sign',
 				config: {
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
 					onUpload: {
