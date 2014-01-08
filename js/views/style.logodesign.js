@@ -61,14 +61,14 @@ wxApp = wxApp || {};
                     css = this.updateLogoColor( val, '.wx-titlebar .wx-logo', 'color' );
                     break;
                 case 'subtab_color':
-                    css = this.updateLogoColor( val, '.wx-subtabpanel-tabbar', 'background-color' );
+                    css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar', 'background-color' );
                     break;
                 case 'subtab_text_color':
-                    css = this.updateLogoColor( val, '.wx-subtabpanel-tabbar .x-tab', 'color' );
+                    css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar .x-tab', 'color' );
                     break;
             }
 
-            wxApp.design.get('css').styles = styles;
+            wxApp.design.get('css').styles = css;
 
             var innerParams = JSON.stringify( wxApp.design.get('css') );
             var params = { css: innerParams };
@@ -206,8 +206,6 @@ wxApp = wxApp || {};
             }
             else {
                 var bgColorIndex = css.indexOf( cssAttribute, index );
-                alert( bgColorIndex );
-                alert( endIndex );
                 if ( bgColorIndex === -1 || bgColorIndex > endIndex ) {
 
                     // We found the class, but not the attribute.
