@@ -200,6 +200,7 @@ wxApp = wxApp || {};
 			// "Step One" stuff (ie, DocuSign)
 			'blur .wx-form-builder-docusign-username'        : 'updateUsername',
 			'blur .wx-form-builder-docusign-password'        : 'updatePassword',
+			'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
 			'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
 			'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line1'          : 'updatePdfHeader',
@@ -247,6 +248,15 @@ wxApp = wxApp || {};
 
 		updatePassword: function( ev ) {
 			this.docusign.set( 'password', $( ev.currentTarget ).val() );
+		},
+
+		// Login when 'enter' is pressed.
+		passwordKeyUp: function( ev ) {
+			if ( ev.keyCode == 13 ) {
+				// Login.
+				ev.preventDefault();
+				this.login();
+			}
 		},
 
 		updateReturnUrl: function( ev ) {
