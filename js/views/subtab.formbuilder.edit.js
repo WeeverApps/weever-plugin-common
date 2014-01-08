@@ -282,6 +282,8 @@ wxApp = wxApp || {};
 			this.$('#docusignLoginForm').slideDown();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideUp();
+
+			this.$('#docusignLoginForm .wx-form-builder-docusign-username').focus();
 		},
 
 		showCreateAccount: function( ev ) {
@@ -289,6 +291,8 @@ wxApp = wxApp || {};
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideDown();
 			this.$('#docusignChangePassord').slideUp();
+
+			this.$('#docusignCreateForm .wx-form-builder-docusign-accountName').focus();
 		},
 
 		showChangePassword: function( ev ) {
@@ -296,6 +300,8 @@ wxApp = wxApp || {};
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideDown();
+
+			this.$('#docusignChangePassord .wx-form-builder-docusign-username').focus();
 		},
 
 		login: function() {
@@ -400,7 +406,8 @@ wxApp = wxApp || {};
             		valid       : true,
             		errors      : [],
 	                accountName : me.$('.wx-form-builder-docusign-accountName').val().trim(),
-				    username    : me.$('#docusignCreateForm .wx-form-builder-docusign-username').val().trim(),
+				    // username    : me.$('#docusignCreateForm .wx-form-builder-docusign-username').val().trim(),
+				    username    : me.$('.wx-form-builder-docusign-email').val().trim(),
 				    email       : me.$('.wx-form-builder-docusign-email').val().trim(),
 				    title       : me.$('.wx-form-builder-docusign-title').val().trim(),
 				    firstName   : me.$('.wx-form-builder-docusign-firstName').val().trim(),
