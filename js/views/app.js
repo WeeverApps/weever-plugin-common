@@ -75,30 +75,19 @@ wxApp = wxApp || {};
             wxApp.appView.createFeatureView($(ui.draggable).attr('id').replace('add-', ''));
         },
 
-        createFeatureView: function(id, parentId) {
+        createFeatureView: function(id, parentId, allowAdvanced) {
             if ( undefined !== wxApp[id + 'SubTab'] && undefined !== wxApp[id + 'SubTabEditView'] ) {
                 var tab = new wxApp[id + 'SubTab']();
-                // alert(' CREATING NEW ' + id);
-                // alert( tab.get('title') );
-                // alert( tab.get('config').screen_name );
+
                 if ( undefined != parentId && parentId )
                     tab.set( 'parent_id', parseInt( parentId ) );
+                if ( undefined != allowAdvanced && allowAdvanced )
+                    tab.set( 'allowAdvanced', true );
                 
-                //tab.set( 'feature_name', id );
                 var view = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
             } else {
                 throw new Error('Invalid type ' + id);
             }
-
-            // var test1 = new myTestModel();
-            // test1.set('title', 'A New Title');
-            // test1.get('config').screen_name = 'Joe';
-            // alert( test1.get('title') );
-            // alert( test1.get('config').screen_name );
-
-            // var test2 = new myTestModel();
-            // alert( test2.get('title') );
-            // alert( test2.get('config').screen_name );
         },
 
         refreshAppPreview: function() {

@@ -1,4 +1,7 @@
 <script type="text/template" id="form-builder-input">
+	<% if (advanced) { %>
+		<span>Advanced</span>
+	<% } %>
 	<p class="title" data-section-title>
 		<a href="#panel<%- ordinal %>">
 			&#8597; <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span>

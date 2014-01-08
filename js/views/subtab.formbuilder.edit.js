@@ -215,6 +215,7 @@ wxApp = wxApp || {};
 			'click .wx-continue-button'                      : 'next',
 
 			// "Step Two" stuff (ie, FormBuilder)
+			'change .switch-advanced'                        : 'toggleAdvancedMode',
 			'click .wx-form-builder-add-text-input'          : 'addTextInput',
 			'click .wx-form-builder-add-password-input'      : 'addPasswordInput',
 			'click .wx-form-builder-add-date-input'          : 'addDateInput',
@@ -481,6 +482,18 @@ wxApp = wxApp || {};
 		/****************/
 		/* Step One End */
 		/****************/
+
+		toggleAdvancedMode: function( ev ) {
+
+			var advanced = $( ev.currentTarget ).attr('id') === 'on',
+			    formElements = this.model.get( 'config' ).formElements;
+
+			for (var i = 0; i < formElements.length; i++) {
+				formElements.models[i].set('advanced', advanced);
+			};
+
+			// TODO - Add POST method.
+		},
 
 		updateButtonText: function( ev ) {
 			var $text = $( ev.currentTarget );
