@@ -64,7 +64,7 @@ wxApp = wxApp || {};
                     css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar', 'background-color' );
                     break;
                 case 'subtab_text_color':
-                    css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar .x-tab', 'color' );
+                    css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar .x-tab .x-button-label', 'color' );
                     break;
             }
 
