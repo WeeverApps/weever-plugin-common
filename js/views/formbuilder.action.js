@@ -46,6 +46,7 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
+			this.$el.addClass( this.model.get( 'method' ) );
 			return this;
 		},
 

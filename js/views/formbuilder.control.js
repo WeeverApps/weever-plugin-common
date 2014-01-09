@@ -15,7 +15,7 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-max-input': 'setMax',
 			'blur .wx-form-builder-value-input': 'setValue',
 			'blur .wx-form-builder-step-input': 'setStep',
-			// 'blur .wx-form-builder-name-input': 'setName',
+			'blur .wx-form-builder-name-input': 'setName',
 			// 'click .wx-form-builder-autocomplete': 'setAutocomplete',
 			'click .wx-form-builder-control-checked': 'setChecked',
 			// 'click .wx-form-builder-control-selected': 'setSelected',

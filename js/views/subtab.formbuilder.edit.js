@@ -11,6 +11,7 @@ wxApp = wxApp || {};
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
+		controls: null,
 		docusign: null,
 
 		initializeEvents: function() {
@@ -488,11 +489,41 @@ wxApp = wxApp || {};
 			var advanced = $( ev.currentTarget ).attr('id') === 'on',
 			    formElements = this.model.get( 'config' ).formElements;
 
+			// Set the 'advanced' flag on all the models.
 			for (var i = 0; i < formElements.length; i++) {
-				formElements.models[i].set('advanced', advanced);
+				var model = formElements.models[i];
+				model.set('advanced', advanced);
 			};
 
-			// TODO - Add POST method.
+			// Re-render all of the controls
+			if ( this.controls ) {
+				for (var i = 0; i < this.controls.length; i++) {
+					this.controls[i].render();
+				};
+			}
+
+			// Add or show the Custom POST form action.
+			if ( advanced ) {
+
+				if ( this.$('.wx-form-builder-row.post').length ) {
+
+					// POST action already exists; Show it.
+					this.$('.wx-form-builder-row.post').show();
+				}
+				else {
+
+					// POST action doesn't exist; Add it.
+					var post = new wxApp.FormBuilderAction();
+					post.set( { method: 'post' } );
+					this.model.get( 'config' ).formActions.push( post );
+					this.addPostAction( post );
+				}
+			}
+			else {
+
+				// Hide the POST action.
+				this.$('.wx-form-builder-row.post').hide();
+			}
 		},
 
 		updateButtonText: function( ev ) {
@@ -1067,9 +1098,15 @@ wxApp = wxApp || {};
 			var offset = $('.wx-form-builder-row.active').offset().top - 230;
 			$('body').animate({scrollTop: offset}, 250);
 
+			// Add the view to the Controls array.
+			if ( !this.controls ) {
+				this.controls = [];
+			}
+			this.controls.push( view );
+
 			// Add the preview to the Preview tab.
 			if ( !this.previews ) {
-				this.previews = []
+				this.previews = [];
 			}
 			this.previews.push( view.getPreview() );
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
