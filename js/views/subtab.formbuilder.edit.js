@@ -236,6 +236,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-text-range-input'    : 'addTextRangeInput',
 			'click .wx-form-builder-add-select'              : 'addSelect',
 			'click .wx-form-builder-add-info'                : 'addInfo',
+			'click .wx-form-builder-add-signature'           : 'addSignature',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate'
 		},
@@ -923,9 +924,20 @@ wxApp = wxApp || {};
 			});
 
 			this.addControl( info, infoView );
-			// this.$( this.buildPaneSelector ).append( infoView.render().el );
-			// this.model.get( 'config' ).formElements.push( info );
+		},
 
+		addSignature: function( ev ) {
+			this.addSignatureWithProperties( {
+				controlTitle: $(ev.currentTarget).text()
+			} );
+		},
+
+		addSignatureWithProperties: function( properties ) {
+
+			var signature = new wxApp.FormBuilderControlSignature( properties ),
+			    sigView   = new wxApp.FormBuilderControlSignatureView({ model: signature });
+
+			this.addControl( signature, sigView );
 		},
 
 		addTextarea: function(ev) {
