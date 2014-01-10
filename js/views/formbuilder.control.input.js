@@ -5,7 +5,6 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlInputView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-input',
 		preview: null,
-		firstRender: true,
 
 		initialize: function( options ) {
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );

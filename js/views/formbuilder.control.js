@@ -5,6 +5,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlView = Backbone.View.extend({
 		tagName: 'section',
 		className: 'wx-form-builder-row',
+		firstRender: true,
 
 		events: {
 			// 'click .wx-form-builder-edit-label': 'editLabel',
