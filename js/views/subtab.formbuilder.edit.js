@@ -238,7 +238,8 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-info'                : 'addInfo',
 			'click .wx-form-builder-add-signature'           : 'addSignature',
 			'keyup .button-text'                             : 'updateButtonText',
-			'sortable-update'                                : 'sortableUpdate'
+			'sortable-update'                                : 'sortableUpdate',
+			'click .wx-close-button'                         : 'closePopup'
 		},
 
 		/******************/
@@ -1122,6 +1123,13 @@ wxApp = wxApp || {};
 			}
 			this.previews.push( view.getPreview() );
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
+		},
+
+		closePopup: function() {
+			var ok = confirm( "Are you sure you want to cancel?" );
+			if ( ok ) {
+				this.$el.foundation('reveal', 'close');
+			}
 		}
 
 	});

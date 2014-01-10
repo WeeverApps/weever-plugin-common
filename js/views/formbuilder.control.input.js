@@ -5,6 +5,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlInputView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-input',
 		preview: null,
+		firstRender: true,
 
 		initialize: function( options ) {
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
@@ -21,6 +22,14 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+
+			if ( this.firstRender ) {
+				// Focus on the label the first time you render this control.
+				// We need to add this 1ms delay for Chrome and Safari, as otherwise the focus doesn't really happen.
+				setTimeout( function() { this.$('.wx-form-builder-label-input').focus(); }, 1);
+				this.firstRender = false;
+			}
+
 			return this;
 		}
 	});
