@@ -29,6 +29,14 @@ wxApp = wxApp || {};
     // so let's make sure that's fetched prior to loading the features.
     wxApp.account = new wxApp.Account();
     wxApp.account.fetch( function() {
+
+        // Set the app's preview url & kick off the polling.
+        var domain = wxApp.account.get('site');
+        domain = domain.replace('http://', '').replace('https://', '');
+        domain = $('#preview-app-dialog-frame').attr('rel') + domain + '?simphone=1&cache_manifest=false';
+        $('#preview-app-dialog-frame').attr('rel', domain);
+        wx.poll = true;
+
         wxApp.featureList = new wxApp.FeatureList();
 
 	    // Grab the data and kick things off
