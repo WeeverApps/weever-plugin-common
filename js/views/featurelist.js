@@ -11,8 +11,13 @@ wxApp = wxApp || {};
         },
 
         addOne: function(feature) {
-            // We currently don't handle the 'rel' features (Coupons, Pages, and Map Locations).
-            if (feature.get('rel') === '') {
+            // Ensure the the CMS is either:
+            // a) null (which defaults to 'all')
+            // b) Set to 'all'
+            // c) Present in the array Set to 'all'
+            if ( feature.get('cms') == null ||
+                 $.inArray( 'all',  feature.get('cms') ) === 0  || 
+                 $.inArray( wx.cms, feature.get('cms') ) === 0 ) {
                 var me = this;
                 var view = new wxApp.FeatureView({ model: feature });
                 this.$el.append( view.render().el );
