@@ -39,10 +39,11 @@ wxApp = wxApp || {};
                             '<p>The difference is how the posts display.  &ldquo;Near to me&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
                             '<p><b>Wordpress Search</b></p>' +
                             '<p>Display Wordpress posts matching a predefined search term.</p>'
-            }
-        );
-}
+            } );
+        }
 
     });
+
+    wxApp.WordpressAddPageSubTab = wxApp.WordpressPageSubTab.extend({});
 
 })(jQuery);
