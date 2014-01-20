@@ -42,6 +42,10 @@ wxApp = wxApp || {};
         },
 
         uploadFile:     function(e) {
+        
+        	console.log('installicon upload file');
+        	console.log(wx.pluginUrl);
+        	
             var me = this,
                 url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl;
 

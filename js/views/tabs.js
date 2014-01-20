@@ -16,6 +16,9 @@ wxApp = wxApp || {};
         },
 
         addOne: function(tab) {
+        
+        	console.log('aba');
+        	
             var me = this;
             var view = new wxApp.TabView({ model: tab });
             this.$el.append( view.render().el );
@@ -27,6 +30,8 @@ wxApp = wxApp || {};
             tab.on('change', this.refreshUiTabs, this);
             $('#listTabs').append( view.subTabsContainerView.render().el );
             this.refreshUiTabs();
+            
+           console.log('3443');
         },
 
         startTabs: function() {

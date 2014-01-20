@@ -1,6 +1,8 @@
 
 wxApp = wxApp || {};
 
+jQuery( document ).ready( function() {
+
 (function($){
     wxApp.FeatureList = Backbone.View.extend({
         el: '#toptabs',
@@ -12,6 +14,7 @@ wxApp = wxApp || {};
 
         addOne: function(feature) {
             // We currently don't handle the 'rel' features (Coupons, Pages, and Map Locations).
+            
             if (feature.get('rel') === '') {
                 var me = this;
                 var view = new wxApp.FeatureView({ model: feature });
@@ -25,15 +28,17 @@ wxApp = wxApp || {};
     wxApp.account = new wxApp.Account();
     wxApp.account.fetch( function() {
         wxApp.featureList = new wxApp.FeatureList();
-
+		
 	    // Grab the data and kick things off
 	    wxApp.featureList.collection.fetch({
-		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
-		    success: function(result) {},
+		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+		    success: function(result) {
+		    },
 		    error: function() {
 			    wxApp.featureList.collection.fetch({
 				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
-				    success: function(result) {  },
+				    success: function(result) {
+				     },
 				    error: function() { console.log('Could not load feature list.') }
 			    });
 		    }
@@ -41,3 +46,5 @@ wxApp = wxApp || {};
     });
 
 })(jQuery);
+
+});

@@ -107,7 +107,7 @@ wxApp = wxApp || {};
 				}
 
 				// If we don't have some of the actions, we should add them.
-				if ( !hasDocusign ) {
+				if ( this.model.get( 'config' ).isDocuSign && !hasDocusign ) {
 					this.addDocusignAction( null, { method: 'docusign' } );
 				}
 
@@ -135,17 +135,9 @@ wxApp = wxApp || {};
 				}
 			});
 
-			// If DocuSign username or password is provided,
-			// both username and password must be provided.
-			if ( $('.wx-form-builder-docusign-username').val() || $('.wx-form-builder-docusign-password').val() ) {
-				if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
-					success = true;
-				}
-			}
-
 			if (!success) {
 				// Display an error message.
-				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient, DocuSign login information, or custom post action in &ldquo;Form submission settings&rdquo;.";
+				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient or custom post action in &ldquo;Form submission settings&rdquo;.";
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
 			}
@@ -160,16 +152,12 @@ wxApp = wxApp || {};
 			post.set( { method: 'post' } );
 			var email = new wxApp.FormBuilderAction();
 			email.set( { method: 'email' } );
-			var docusign = new wxApp.FormBuilderAction();
-			docusign.set( { method: 'docusign' } );
 
 			this.model.get( 'config' ).formActions.push( post );
 			this.model.get( 'config' ).formActions.push( email );
-			this.model.get( 'config' ).formActions.push( docusign );
 
 			this.addPostAction( post );
 			this.addEmailAction( email );
-			this.addDocusignAction( docusign );
 
 		},
 
@@ -267,7 +255,6 @@ wxApp = wxApp || {};
 		 * Override __super__.finish()
 		 */
 		finish: function() {
-			console.log( 'subtab.formbuilder.edit finish' );
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
 				formActions = this.model.get( 'config' ).formActions,
@@ -295,10 +282,10 @@ wxApp = wxApp || {};
 					model.get('attributes').set('step', 1);
 					model.get('attributes').set('min', 0);
 					model.get('attributes').set('max', model.get('options').length - 1);
-					for (var j = 0; j < model.get('options').length; j++) {
-						var option = model.get('options').models[j];
+					for (var i = 0; i < model.get('options').length; i++) {
+						var option = model.get('options').models[i];
 						if ( option.get('attributes').attributes.checked ) {
-							model.get('attributes').set('value', j);
+							model.get('attributes').set('value', i);
 							break;
 						}
 					};
@@ -437,11 +424,16 @@ wxApp = wxApp || {};
 
 			this.addControl( input, inputView );
 
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
 			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
+			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
+//			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'S. Disagree' } ) );
+//			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'Disagree' } ) );
+//			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'N/A' } ) );
+//			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'Agree' } ) );
+//			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'S. Agree' } ) );
 
 			return input;
 		},

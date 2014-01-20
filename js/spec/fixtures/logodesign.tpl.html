@@ -46,10 +46,10 @@
                 <br>
                 <br>
                 <div class="new_uploader">
-                    <div class="button success expand radius">
+                    <button class="success expand radius" style="position: relative; overflow: hidden; direction: ltr;">
                         <span id="save_image_titlebar_logo_live">Upload image</span>
                         <input multiple="multiple" type="file" id="upload_titlebar_logo_live" name="upload_titlebar_logo_live" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
-                    </div>
+                    </button>
                 </div>
                 <input type="hidden" class="wx-theme-input" id="titlebar_logo_live" name="titlebar_logo_live" />
                 <br>
@@ -78,7 +78,7 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="#ffffff" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="main_titlebar_color">choose</button>
@@ -102,7 +102,7 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="#ffffff" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="main_titlebar_text_color">choose</button>
@@ -127,7 +127,7 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="#ffffff" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="subtab_color">choose</button>
@@ -152,7 +152,7 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="#ffffff" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="subtab_text_color">choose</button>

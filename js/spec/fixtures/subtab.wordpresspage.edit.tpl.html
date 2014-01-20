@@ -4,9 +4,6 @@
 
     <select class='wx-add-wordpress-page-select'>
         <option value="">Select a Page...</option>
-        <?php foreach ( get_pages() as $page ): ?>
-            <option value="<?php echo site_url( WeeverHelper::get_page_link_relative( $page ) ); ?>"><?php echo $page->post_title; ?></option>
-        <?php endforeach; ?>
     </select>
 
 </script>

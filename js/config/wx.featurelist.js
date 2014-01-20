@@ -1,5 +1,5 @@
 [
-    { "featureName": "FormBuilder",         "name": "FormBuilder" },
+    { "featureName": "FormBuilder",         "name": "FormBuilder",      "rel": "hide" },
     { "featureName": "DocuSign",            "name": "DocuSign",         "rel": "hide" },
     { "featureName": "RSS",                 "name": "RSS feed"          },
     { "featureName": "WordpressBlog",       "name": "WP All",           "filterBy": "weever_list_show_wordpress_content", "rel": "hide" },

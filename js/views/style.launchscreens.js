@@ -93,7 +93,9 @@ wxApp = wxApp || {};
 
         uploadFile: function( e ) {
 
-            console.log('uploadFile');
+            console.log('launchscreen uploadFile');
+            console.log(wx.pluginUrl);
+            
             var me = this,
                 url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
                 $input = $( e.currentTarget ),
