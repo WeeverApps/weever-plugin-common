@@ -44,6 +44,25 @@ wxApp = wxApp || {};
 
     });
 
-    wxApp.WordpressAddPageSubTab = wxApp.WordpressPageSubTab.extend({});
+    wxApp.WordpressAddPageSubTab = wxApp.WordpressPageSubTab.extend({
+        validateFeed: false,
+        default_icon_id: 28,
+        allowedLayouts: ['list'],
+        typeDescription: 'Add Page',
+
+        defaults: function() {
+            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
+                published: 1,
+                tabLayout: 'list',
+                bodyContent: '',
+                validateFeed: false,
+                config:    { 
+                    url: '', 
+                    subtab_name: 'WordpressAddPageSubTab', 
+                    type: 'htmlContent'
+                }
+            } );
+        }
+    });
 
 })(jQuery);
