@@ -8,13 +8,14 @@ jQuery( document ).ready( function() {
         el: '#toptabs',
 
         initialize: function() {
+        	console.log('*initialize*');
             this.collection = new wxApp.FeatureCollection();
             this.collection.bind('add', this.addOne, this);
         },
 
         addOne: function(feature) {
             // We currently don't handle the 'rel' features (Coupons, Pages, and Map Locations).
-            
+            console.log('*addOne*');
             if (feature.get('rel') === '') {
                 var me = this;
                 var view = new wxApp.FeatureView({ model: feature });
@@ -33,6 +34,10 @@ jQuery( document ).ready( function() {
 	    wxApp.featureList.collection.fetch({
 		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
 		    success: function(result) {
+		    
+		    	console.log('featurelist....');
+		    	console.log(result);
+		    	
 		    },
 		    error: function() {
 			    wxApp.featureList.collection.fetch({

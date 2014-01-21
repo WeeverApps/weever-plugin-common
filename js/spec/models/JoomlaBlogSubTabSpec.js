@@ -1,6 +1,6 @@
-describe('WordpressBlog SubTab', function() {
+describe('JoomlaBlog SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.WordpressBlogSubTab();
+        var model = new wxApp.JoomlaBlogSubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -13,8 +13,8 @@ describe('WordpressBlog SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Blog');
 	});
 
-    it('should have default type of wordpressCategory', function() {
-        expect( this.model.get('type') ).toEqual('WordpressBlog');
+    it('should have default type of joomlaBlog', function() {
+        expect( this.model.get('type') ).toEqual('JoomlaBlog');
     });
 
     it('should have default content of html', function() {

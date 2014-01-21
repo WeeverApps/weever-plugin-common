@@ -2,28 +2,28 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.WordpressPageSubTab = wxApp.SubTab.extend({
-        default_icon_id: 28,
+    wxApp.JoomlaCategorySubTab = wxApp.SubTab.extend({
+        default_icon_id: 5,
         allowedLayouts: ['list'],
-        typeDescription: 'Wordpress Page',
+        typeDescription: 'Joomla Content',
         validateFeed: false,
 
         defaults: function() {
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
-                title: 'Pages',
-                icon: 'e014',
-                icon_id: 28,
-                type: 'WordpressPage',
-                content: 'htmlPage',
-                layout: 'panel',
-                config: { url: '', subtab_name: 'WordpressPageSubTab' },
-                helpTitle:  'Adding Wordpress content',
-                helpBody:   '<p><b>Adding Wordpress content to your app</b></p>' +
-                            '<p>Any Wordpress content you add to your app updates in real-time as you make changes.</p>' +
-                            '<p><b>Wordpress Pages</b></p>' +
-                            '<p>Add specific individual Wordpress &lsquo;pages&rsquo; to your app and arrange them in the layout of your preference.</p>' +
+                title: 'Category',
+                icon: 'e836',
+                icon_id: 5,
+                type: 'JoomlaCategory',
+                content: 'html',
+                layout: 'list',
+                config: { subtab_name: 'JoomlaCategorySubTab' },
+                helpTitle:  'Adding Joomla content',
+                helpBody:   '<p><b>Adding Joomla content to your app</b></p>' +
+                            '<p>Any Joomla content you add to your app updates in real-time as you make changes.</p>' +
                             '<p><b>Wordpress Posts</b></p>' +
                             '<p>Add categories of Wordpress &lsquo;posts&rsquo; to share a blog or specific content in real-time with app visitors.</p>' +
+                            '<p><b>Wordpress Pages</b></p>' +
+                            '<p>Add specific individual Wordpress &lsquo;pages&rsquo; to your app and arrange them in the layout of your preference.</p>' +
                             '<p><b>Wordpress Tags</b></p>' +
                             '<p>Wordpress &lsquo;tags&rsquo; are a powerful feature for adding content to your app.</p>' +
                             '<p>Tag items with specific values like &lsquo;mobile&rsquo;, &lsquo;map&rsquo; or cross-category tags.</p>' +
@@ -39,10 +39,9 @@ wxApp = wxApp || {};
                             '<p>The difference is how the posts display.  &ldquo;Near to me&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
                             '<p><b>Wordpress Search</b></p>' +
                             '<p>Display Wordpress posts matching a predefined search term.</p>'
-            }
-        );
-}
 
+            }
+        );}
     });
 
 })(jQuery);

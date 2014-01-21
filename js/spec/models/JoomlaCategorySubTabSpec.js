@@ -1,6 +1,6 @@
-describe('WordpressCategory SubTab', function() {
+describe('JoomlaCategory SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.WordpressCategorySubTab();
+        var model = new wxApp.JoomlaCategorySubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -10,11 +10,11 @@ describe('WordpressCategory SubTab', function() {
     });
 
 	it('should have default title of Blog', function() {
-		expect( this.model.get('title') ).toEqual('Blog');
+		expect( this.model.get('title') ).toEqual('Category');
 	});
 
-    it('should have default type of wordpressCategory', function() {
-        expect( this.model.get('type') ).toEqual('WordpressCategory');
+    it('should have default type of joomlaCategory', function() {
+        expect( this.model.get('type') ).toEqual('JoomlaCategory');
     });
 
     it('should have default content of html', function() {

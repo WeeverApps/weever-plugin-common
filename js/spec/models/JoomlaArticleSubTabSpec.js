@@ -1,6 +1,6 @@
-describe('WordpressPage SubTab', function() {
+describe('JoomlaArticle SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.WordpressPageSubTab();
+        var model = new wxApp.JoomlaArticleSubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -9,12 +9,12 @@ describe('WordpressPage SubTab', function() {
         this.model = null;
     });
 
-	it('should have default title of Pages', function() {
-		expect( this.model.get('title') ).toEqual('Pages');
+	it('should have default title of Articles', function() {
+		expect( this.model.get('title') ).toEqual('Article');
 	});
 
     it('should have default type of WordpressPage', function() {
-        expect( this.model.get('type') ).toEqual('WordpressPage');
+        expect( this.model.get('type') ).toEqual('JoomlaArticle');
     });
 
     it('should have default layout of panel', function() {
