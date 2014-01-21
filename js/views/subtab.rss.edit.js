@@ -9,12 +9,13 @@ wxApp = wxApp || {};
         	var url = this.$('.wx-edit-input').val();
 
             if ( url ) {
+            	model.setConfig( 'rawUrl', url );
             	if ( url.indexOf('_rss2r3s') == -1 ) {
 					url = 'http://weeverapp.com/api/v2/_rss2r3s/byUrl?url=' + encodeURIComponent(url);
 				}
 				model.setConfig("url", url);
 			}
-			
+
             return model;
         }
     });

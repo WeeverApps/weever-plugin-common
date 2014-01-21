@@ -5,6 +5,6 @@
     <label for='wx-rss-user-value' id='wx-rss-url'>
         Valid RSS Feed or the web address of a site with RSS available
     </label>
-    <input type='text' value='<%- config.url %>' class='wx-edit-input required url' name='component_behaviour' placeholder='' />
+    <input type='text' value='<%- config.rawUrl || config.url %>' class='wx-edit-input required url' name='component_behaviour' placeholder='' />
 
 </script>
