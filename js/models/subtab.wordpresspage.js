@@ -51,7 +51,7 @@ wxApp = wxApp || {};
         typeDescription: 'Add Page',
 
         defaults: function() {
-            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
+            return _.extend( {}, wxApp.WordpressPageSubTab.prototype.defaults(), {
                 published: 1,
                 tabLayout: 'list',
                 bodyContent: '',

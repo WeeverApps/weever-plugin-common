@@ -8,6 +8,8 @@ var wxApp = wxApp || {};
 
         getModelNameByTabData: function( tabData ) {
             var retVal = 'SubTab';
+            console.log('retVal');
+            console.log( tabData );
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
                 case 'contact':
@@ -23,7 +25,10 @@ var wxApp = wxApp || {};
                     retVal = 'FormBuilderSubTab';
                     break;
                 case 'htmlPage':
-                    retVal = 'WordpressPageSubTab';
+                    if ( tabData.config.subtab_name )
+                        retVal = tabData.config.subtab_name;
+                    else
+                        retVal = 'WordpressPageSubTab';
                     break;
                 case 'twitter':
                 case 'twitterUser':

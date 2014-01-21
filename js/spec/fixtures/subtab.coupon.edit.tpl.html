@@ -1,0 +1,40 @@
+<script type="text/template" id="coupon-subtab-edit-template">
+
+	<div class="coupon-preview item-page">
+		<div>
+			<div class="wx-coupon-container" style="padding-bottom: 1em">
+				<div style="padding: 20px; border: dashed 2px #333; background: #fff">
+					<div class="wx_title_preview" style="font-size: 2em; line-height: 1; font-weight: bold; padding: .5em; background: <%- config.titleBackgroundColor %>; color: <%- config.titleTextColor %>">
+						<span id="wx_coupon_title_preview"><%- title || 'Coupon Title' %></span></div>
+					<p style="margin: 1em">
+						<span id="wx_coupon_content_preview" style="text-align: center">
+							<%- config.description || 'EXAMPLE: Shop anytime in the next 30 days and receive up to 25% off' %>
+						</span>
+					</p>
+					<div id="wx_coupon_barcode_preview">[Barcode will go here]</div>
+					<div>
+						<p id="wx_coupon_conditions_preview" style="font-size: .75em; margin: 1.5em 0 0; border-style: solid; border-width: 1px 0 0 0; border-color: #d5d5d5; padding-top: 1.5em;">
+							<%- config.termsAndConditions || 'EXAMPLE: Limit One Coupon Per Customer' %>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <label>Give Your Coupon a Short Title:</label>
+    <input type="text" placeholder="Coupon Title" class="wx-coupon-title" />
+
+    <label>Describe the Coupon Offer:</label>
+    <textarea placeholder="EXAMPLE: Shop anytime in the next 30 days and receive up to 25% off" class="wx-coupon-description"></textarea>
+
+    <label>Optional: Add a Scannable Bar Code</label>
+    <input type="text" placeholder="2014-30DaySale" class="wx-coupon-barcode" />
+    <p>The Barcode graphic will be added to the coupon in your app when you save this form.</p>
+
+    <label>Enter any Terms and Conditions:</label>
+    <input type="text" placeholder="EXAMPLE: Limit One Per Customer" class="wx-coupon-terms" />
+
+    <label>Coupon Colour Options:</label>
+
+</script>

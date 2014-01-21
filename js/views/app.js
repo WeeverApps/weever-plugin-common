@@ -76,6 +76,7 @@ wxApp = wxApp || {};
         },
 
         createFeatureView: function(id, parentId) {
+            
             if ( undefined !== wxApp[id + 'SubTab'] && undefined !== wxApp[id + 'SubTabEditView'] ) {
                 var tab = new wxApp[id + 'SubTab']();
                 // alert(' CREATING NEW ' + id);

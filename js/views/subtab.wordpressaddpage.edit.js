@@ -23,7 +23,6 @@ wxApp = wxApp || {};
 
             model.setConfig('name',  name);
             model.set('title',       name);
-            model.set('bodyContent', content);
             model.set('parent_id',   null);
 
         	jQuery.ajax({
@@ -40,16 +39,13 @@ wxApp = wxApp || {};
 	                console.log(url);
 
 	                model.setConfig('url', url);
-	                alert('success');
 	            },
 	            error: function(v,msg){
-	                alert('error');
 	                console.log(v);
 	                console.log(msg);
 	            }
 	        });
 
-	        alert('done');
 	        return model;
 
         }
