@@ -2,8 +2,8 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.CouponSubTabEditView = wxApp.SubTabEditView.extend({
-        subTabEditTplSelector: '#coupon-subtab-edit-template',
+    wxApp.CouponSubTabEditView = wxApp.WordpressAddPageSubTabEditView.extend({
+        // subTabEditTplSelector: '#coupon-subtab-edit-template',
         events : {
 			'keyup .wx-coupon-title'       : 'updatePreview',
 			'keyup .wx-coupon-description' : 'updatePreview',
@@ -16,7 +16,11 @@ wxApp = wxApp || {};
 		},
 
         render: function() {
-			wxApp.SubTabEditView.prototype.render.apply( this );
+			wxApp.WordpressAddPageSubTabEditView.prototype.render.apply( this );
+
+			$('section.editor').hide();
+			$('section.coupon').show();
+			$('section.mapper').hide();
         },
 
         setModelFromView: function(model) {
@@ -24,34 +28,15 @@ wxApp = wxApp || {};
         	var title       = this.$('.wx-coupon-title').val(),
         	    description = this.$('.wx-coupon-description').val()
         	    terms       = this.$('.wx-coupon-terms').val(),
-        	    content     = this.$('.coupon-preview').html();
+        	    content     = this.$('.coupon-preview').html(),
+        	    url         = this.createPage( title, content );
 
         	content = '<div class="item-page">' + content + '</div>';
 
             model.setConfig('title',       title);
             model.setConfig('description', description);
             model.setConfig('terms',       terms);
-
-        	jQuery.ajax({
-	            type: "POST",
-	            url: ajaxurl,
-	            async: false,
-	            data: {
-	                action: 'ajaxAddNewContent',
-	                content: content, 
-	                name: title,
-	                nonce: jQuery('input#nonce').val()
-	            },
-	            success: function(url){
-	                console.log(url);
-
-	                model.setConfig('url', url);
-	            },
-	            error: function(v,msg){
-	                console.log(v);
-	                console.log(msg);
-	            }
-	        });
+            model.setConfig('url',         url);
 
 	        return model;
 
