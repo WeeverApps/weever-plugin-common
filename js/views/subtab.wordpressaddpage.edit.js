@@ -7,18 +7,18 @@ wxApp = wxApp || {};
 
         render: function() {
 			wxApp.SubTabEditView.prototype.render.apply( this );
-			tinymce.init( { selector:'textarea.wx-content-editor' } );
 
-			// var url = this.model.get('config').url;
-
-   //          // Convert from page_id to wx_page_id
-   //          url = url.replace( '?page_id', '?wx_page_id' );
-			// $('.wx-add-wordpress-page-select').val( url );
+			// We have to add this .2 second delay in because otherwise the 
+			// textarea reports it's width as 100px in Chrome, which causes
+			// the editor to display as 100px wide.
+			setTimeout( function() {
+				new nicEditor({fullPanel : true}).panelInstance('wx-content-value');
+			}, 200);
         },
 
         setModelFromView: function(model) {
             
-			var content = tinyMCE.activeEditor.getContent(), //{format : 'raw'}), //jQuery('#wx-add-content-editor').val(),
+			var content = nicEditors.findEditor('wx-content-value').getContent(),
         		name = $( '#wx-title-value' ).val();
 
             model.setConfig('name',  name);
@@ -36,8 +36,6 @@ wxApp = wxApp || {};
 	                nonce: jQuery('input#nonce').val()
 	            },
 	            success: function(url){
-	                console.log(url);
-
 	                model.setConfig('url', url);
 	            },
 	            error: function(v,msg){
