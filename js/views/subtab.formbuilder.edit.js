@@ -283,6 +283,11 @@ wxApp = wxApp || {};
 
 		showLogin: function( ev ) {
 			ev.preventDefault();
+console.log('showLogin');
+			this.$('.wx-subnav-item').removeClass('active');
+			this.$('#docusignLogin').addClass('active');
+console.log('showLogin');
+
 			this.$('#docusignLoginForm').slideDown();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideUp();
@@ -292,6 +297,10 @@ wxApp = wxApp || {};
 
 		showCreateAccount: function( ev ) {
 			ev.preventDefault();
+
+			this.$('.wx-subnav-item').removeClass('active');
+			this.$('#docusignCreate').addClass('active');
+
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideDown();
 			this.$('#docusignChangePassord').slideUp();
@@ -301,6 +310,10 @@ wxApp = wxApp || {};
 
 		showChangePassword: function( ev ) {
 			ev.preventDefault();
+
+			this.$('.wx-subnav-item').removeClass('active');
+			this.$('#docusignChangePassword').addClass('active');
+
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideDown();
