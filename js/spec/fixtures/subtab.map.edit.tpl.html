@@ -1,0 +1,16 @@
+<script type="text/template" id="map-subtab-edit-template">
+
+    <label for='wx-title-value' id='wx-title-value-label'>Article Title:</label>
+    <input type='text' value='<%- title %>' class='wx-edit-input' name='component_behaviour' placeholder='' id='wx-title-value' />
+
+    <!-- TODO - TinyMCE this -->
+    <textarea id="wx-content-value" class="wx-content-editor" cols="60"></textarea>
+
+    <label for='geolocation-address'>Map location</label>
+	<input type="text" id="geolocation-address" name="geolocation-address" class="newtag form-input-tip" size="25" autocomplete="off" value="" />
+    <button id="geolocation-load" class="button geolocationadd">Geolocate</button>
+    <input type="hidden" id="geolocation-latitude"  />
+    <input type="hidden" id="geolocation-longitude" />
+	<div id="map" class="geolocation-map" style="width: 500px;height: 200px;"></div>
+
+</script>
