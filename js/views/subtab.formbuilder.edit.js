@@ -324,7 +324,7 @@ wxApp = wxApp || {};
 			    success  = function success( data ) {
 			    	me.$('#login_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'You have successfully logged in to your DocuSign account.' );
+					me.$('.login.alert-box.success').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure  = function failure( data ) {
@@ -347,7 +347,7 @@ wxApp = wxApp || {};
 				account = me.validateAccount(),
 				success = function success( data ) {
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Success! DocuSign account created.  You are now logged in' );
+					me.$('.login.alert-box.success').html( 'Success! DocuSign account created.  You are now logged in.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 				},
 				failure = function failure( data ) {
@@ -387,7 +387,7 @@ wxApp = wxApp || {};
 			    success          = function success( data ) {
 			    	me.$('#change_password_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Success! DocuSign password updated.  You are now logged in.' );
+					me.$('.login.alert-box.success').html( 'Success! DocuSign password updated.  You are now logged in.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure          = function failure( data ) {
