@@ -3,9 +3,9 @@
     { "featureName": "DocuSign",            "name": "DocuSign",         "rel": "hide" },
     { "featureName": "RSS",                 "name": "RSS feed"          },
     
-    { "featureName": "JoomlaBlog",       "name": "Joomla Blog",       "filterBy": "weever_list_show_joomla_content" },
-    { "featureName": "JoomlaCategory",   "name": "Joomla Category",   "filterBy": "weever_list_show_joomla_content" },
-    { "featureName": "JoomlaArticle",       "name": "Joomla Article", "filterBy": "weever_list_show_joomla_content" },
+    { "featureName": "JoomlaBlog",       "name": "Joomla Blog" },
+    { "featureName": "JoomlaCategory",   "name": "Joomla Category" },
+    { "featureName": "JoomlaArticle",       "name": "Joomla Article" },
     
     { "featureName": "WordpressMap",        "name": "GPS Map",          "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
     { "featureName": "WordpressProximity",  "name": "Near Me",          "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },

@@ -1,9 +1,64 @@
 <script type="text/template" id="joomlaarticle-subtab-edit-template">
 
     <p>Add a specific Joomla &lsquo;article&rsquo; to your app.</p>
-
-    <select class='wx-add-joomla-article-select'>
-        <option value="">Select a article...</option>
-    </select>
-
+    
+    <div id="wx-add-joomla-article-dialog" class="wx-add-joomla-article">
+                    
+            <div id='wx-add-joomla-article-item'>
+            
+                    <select id='wx-add-joomla-article-select' class='wx-add-joomla-article-select'>
+                            <option><?php echo "Choose Joomla article";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
+                            
+                            <?php foreach( (object) $this->contentArticles as $k=>$v ) : ?>
+                            
+                                    <?php if( $v->access > 1 ) : ?>
+                                    
+                                            <?php $note = " (non-public)"; ?>
+                                            
+                                    <?php else : ?>
+                                    
+                                            <?php $note = ""; ?>
+                                    
+                                    <?php endif; ?>
+                            
+                                    <?php $link = "http://".$this->siteDomain."/index.php?option=com_content&view=article&id=".$v->id; ?>
+                                    
+                                    <option value='<?php echo $link; ?>&template=weever_cartographer'><?php echo $v->name; ?><?php echo $note; ?></option>
+                            
+                            <?php endforeach; ?>
+                    
+                    </select>
+            
+            </div>
+    
+    </div>
+    
+    <!--
+    <div id="wx-add-joomla-article-dialog" class="wx-add-joomla-article">
+    
+    	<?php
+    	    $link = $this->siteDomain.'/index.php?option=com_content&amp;task=element&amp;tmpl=component&amp;layout=modal&amp;function=jSelectArticleNew&amp;object=jarticle';
+    
+    	?>
+    
+    	<div id='wx-add-joomla-article-panel'>
+    	
+    		<div class="button2-left">
+    		
+    			<div class="blank">
+    				<a class="modal" title="<?php echo JText::_('WEEVER_PANEL_SELECT_JOOMLA_ARTICLE'); ?>" href="<?php echo $link; ?>" rel="{handler: 'iframe', size: {x: 700, y: 450}}">&nbsp;&nbsp;<?php echo JText::_('WEEVER_PANEL_SELECT'); ?>&nbsp;&nbsp;</a>
+    			</div>
+    			
+    			<input type="text" id="wx-add-joomla-article-name" placeholder="Select content..." class='wx-dialog-input wx-panel-input wx-panel-content-name' disabled="disabled" />
+    			
+    			<input type="hidden" id="wx-add-joomla-article-url" class="wx-panel-input" name="urlparams[id]" value="0" />
+    			
+    		</div>
+    		
+    	</div>
+    
+    </div>
+	-->
 </script>
+
+
