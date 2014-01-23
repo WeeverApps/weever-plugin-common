@@ -9,7 +9,7 @@
     
     { "featureName": "K2Blog",       "name": "K2 Blog" },
     { "featureName": "K2Category",   "name": "K2 Category" },
-    { "featureName": "K2Article",       "name": "K2 Article" },
+    { "featureName": "K2Item",       "name": "K2 Item" },
     
     
     { "featureName": "Twitter",             "name": "Twitter"           },

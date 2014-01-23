@@ -8,10 +8,11 @@ var wxApp = wxApp || {};
 
         getModelNameByTabData: function( tabData ) {
             var retVal = 'SubTab';
+            
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
                 case 'contact':
-                    retVal = 'WordpressContactsSubTab';
+                    retVal = 'JoomlaContactsSubTab';
                     break;
                 case 'facebookAlbums':
                     retVal = 'FacebookAlbumsSubTab';
@@ -22,9 +23,9 @@ var wxApp = wxApp || {};
                 case 'formbuilder':
                     retVal = 'FormBuilderSubTab';
                     break;
-                case 'htmlPage':
-                    retVal = 'WordpressPageSubTab';
-                    break;
+                //case 'htmlPage':
+                    //retVal = 'WordpressPageSubTab';
+                    //break;
                 case 'twitter':
                 case 'twitterUser':
                     retVal = 'TwitterSubTab';
@@ -39,6 +40,7 @@ var wxApp = wxApp || {};
                 default:
                     // Check against type first (more specific but only newer tabs), then content (more generic)
                     if ( tabData.config != undefined && tabData.config.subtab_name != undefined ) {
+                    
                         if ( tabData.config.subtab_name in wxApp ) {
                             retVal = tabData.config.subtab_name;
                         }
@@ -73,13 +75,16 @@ var wxApp = wxApp || {};
             var me = this;
             wx.makeApiCall('tabs/get_tabs', {}, function(data) {
                 if ( typeof data.tabs != 'undefined' ) {
+                
                     var tabs = [];
                     for ( var tabIndex = 0; tabIndex < data.tabs.length; tabIndex++ ) {
                         var tabData = data.tabs[tabIndex];
+                        	
                         if ( !tabData.parent_id ) {
                             var tab = new wxApp.Tab( tabData );
                             // This 'main' tab is also a 'sub' tab
                             var modelName = me.getModelNameByTabData( tabData );
+                            	
                             tab.addSubTab( new wxApp[modelName]( tabData ) );
                             for ( var i = 0; i < data.tabs.length; i++ ) {
                                 if ( tab.get('id') == data.tabs[i].parent_id ) {
