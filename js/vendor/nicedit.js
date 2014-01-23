@@ -1427,6 +1427,7 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 	makeRequest : function() {
 		if(this.pane && this.pane.pane) {
 			nicUploadButton.lastPlugin = this;
+			alert(this.uri);
 			var s = new bkElement('script').setAttributes({ type : 'text/javascript', src : this.uri+'?check='+this.myID+'&rand='+Math.round(Math.random()*Math.pow(10,15))}).addEvent('load', function() {
 				s.parentNode.removeChild(s);
 			}).appendTo(document.getElementsByTagName('head')[0]);

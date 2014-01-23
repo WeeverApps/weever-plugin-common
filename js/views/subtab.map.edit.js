@@ -4,7 +4,6 @@ wxApp = wxApp || {};
 (function($){
     wxApp.MapSubTabEditView = wxApp.WordpressAddPageSubTabEditView.extend({
         // subTabEditTplSelector: '#map-subtab-edit-template',
-        customAddress: false,
         hasLocation: false,
         marker: null,
         map: null,
@@ -51,8 +50,10 @@ wxApp = wxApp || {};
         	    },
         	    url         = this.createPage( title, content, data );
         	
-            model.setConfig('name',       title);
-            model.setConfig('type',       'htmlContent');
+        	model.set('tabLayout',  'map');
+            model.setConfig('name', title);
+            model.setConfig('type', 'htmlContent');
+            model.setConfig('url',  url);
             
 	        return model;
 
@@ -61,7 +62,6 @@ wxApp = wxApp || {};
         loadGeolocation: function() {
 
         	if ( $('#geolocation-address').val() != '' ) {
-        		this.customAddress = true;
         		var currentAddress = $('#geolocation-address').val();
         		this.geocode( currentAddress );
         	}
@@ -91,9 +91,6 @@ wxApp = wxApp || {};
 				$("#geolocation-latitude").val(  location.lat() );
 				$("#geolocation-longitude").val( location.lng() );
 			}
-			
-			// if(!customAddress)
-			// 	reverseGeocode(location);
         }
     });
 })(jQuery);
