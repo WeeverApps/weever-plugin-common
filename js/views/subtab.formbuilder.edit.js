@@ -287,6 +287,9 @@ wxApp = wxApp || {};
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideUp();
 
+			this.$('.wx-subnav-item').removeClass('active');
+       		this.$('#docusignLogin').addClass('active');
+
 			this.$('#docusignLoginForm .wx-form-builder-docusign-username').focus();
 		},
 
@@ -296,6 +299,9 @@ wxApp = wxApp || {};
 			this.$('#docusignCreateForm').slideDown();
 			this.$('#docusignChangePassord').slideUp();
 
+			this.$('.wx-subnav-item').removeClass('active');
+       		this.$('#docusignCreate').addClass('active');
+
 			this.$('#docusignCreateForm .wx-form-builder-docusign-accountName').focus();
 		},
 
@@ -304,6 +310,9 @@ wxApp = wxApp || {};
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideDown();
+
+			this.$('.wx-subnav-item').removeClass('active');
+       		this.$('#docusignChangePassword').addClass('active');
 
 			this.$('#docusignChangePassord .wx-form-builder-docusign-username').focus();
 		},
