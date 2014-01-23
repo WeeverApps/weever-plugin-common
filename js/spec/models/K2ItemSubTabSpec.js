@@ -1,6 +1,6 @@
-describe('WordpressContact SubTab', function() {
+describe('K2Item SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.WordpressContactsSubTab();
+        var model = new wxApp.K2ItemSubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -9,16 +9,20 @@ describe('WordpressContact SubTab', function() {
         this.model = null;
     });
 
-	it('should have default title of Forms', function() {
-		expect( this.model.get('title') ).toEqual('Contact');
+	it('should have default title of Items', function() {
+		expect( this.model.get('title') ).toEqual('Item');
 	});
 
-    it('should have default content of contact', function() {
-        expect( this.model.get('content') ).toEqual('contact');
+    it('should have default type of WordpressPage', function() {
+        expect( this.model.get('type') ).toEqual('K2Item');
     });
 
     it('should have default layout of panel', function() {
         expect( this.model.get('layout') ).toEqual('panel');
+    });
+
+    it('should have default content of htmlPage', function() {
+        expect( this.model.get('content') ).toEqual('htmlPage');
     });
 
     it('should be published by default', function() {

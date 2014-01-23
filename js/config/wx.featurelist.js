@@ -7,16 +7,17 @@
     { "featureName": "JoomlaCategory",   "name": "Joomla Category" },
     { "featureName": "JoomlaArticle",       "name": "Joomla Article" },
     
-    { "featureName": "WordpressMap",        "name": "GPS Map",          "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
-    { "featureName": "WordpressProximity",  "name": "Near Me",          "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
+    { "featureName": "K2Blog",       "name": "K2 Blog" },
+    { "featureName": "K2Category",   "name": "K2 Category" },
+    { "featureName": "K2Article",       "name": "K2 Article" },
+    
+    
     { "featureName": "Twitter",             "name": "Twitter"           },
     { "featureName": "Youtube",             "name": "YouTube"           },
     { "featureName": "Vimeo",               "name": "Vimeo"             },
-    { "featureName": "Map",                 "name": "Map POI",          "filterBy": "weever_list_show_wordpress_content", "rel": "map"  },
     { "featureName": "FacebookWall",        "name": "FB Wall"           },
     { "featureName": "FacebookEvents",      "name": "FB Events"         },
     { "featureName": "FacebookAlbums",      "name": "FB Photos"         },
-    { "featureName": "WordpressContacts",   "name": "Contact"           },
     { "featureName": "Flickr",              "name": "Flickr"            },
     { "featureName": "PicasaAlbums",        "name": "Picasa"            },
     { "featureName": "FoursquarePhotos",    "name": "Foursquare"        },

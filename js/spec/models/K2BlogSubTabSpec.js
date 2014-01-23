@@ -1,6 +1,6 @@
-describe('WordpressTag SubTab', function() {
+describe('K2Blog SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.WordpressTagSubTab();
+        var model = new wxApp.K2BlogSubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -13,8 +13,8 @@ describe('WordpressTag SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Blog');
 	});
 
-    it('should have default type of WordpressTag', function() {
-        expect( this.model.get('type') ).toEqual('WordpressTag');
+    it('should have default type of k2Blog', function() {
+        expect( this.model.get('type') ).toEqual('K2Blog');
     });
 
     it('should have default content of html', function() {

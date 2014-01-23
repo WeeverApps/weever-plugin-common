@@ -1,6 +1,6 @@
-describe('WordpressMap SubTab', function() {
+describe('K2Category SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.WordpressMapSubTab();
+        var model = new wxApp.K2CategorySubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -10,15 +10,11 @@ describe('WordpressMap SubTab', function() {
     });
 
 	it('should have default title of Blog', function() {
-		expect( this.model.get('title') ).toEqual('Map');
+		expect( this.model.get('title') ).toEqual('Category');
 	});
 
-    it('should have default type of wordpressCategory', function() {
-        expect( this.model.get('type') ).toEqual('WordpressMap');
-    });
-
-    it('should have default tabLayout of map', function() {
-        expect( this.model.get('tabLayout') ).toEqual('map');
+    it('should have default type of k2Category', function() {
+        expect( this.model.get('type') ).toEqual('K2Category');
     });
 
     it('should have default content of html', function() {
