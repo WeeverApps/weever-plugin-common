@@ -5,7 +5,7 @@ wxApp = wxApp || {};
     wxApp.FormBuilderSubTab = wxApp.SubTab.extend({
         default_icon_id: 30,
         validateFeed: false,
-        typeDescription: 'Form Builder',
+        typeDescription: 'FormBuilder',
 
         filterAPIData: function( data ) {
 

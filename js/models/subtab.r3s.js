@@ -14,7 +14,7 @@ wxApp = wxApp || {};
                 icon: 'e836',
                 icon_id: 6,
                 type: 'r3s',
-                content: 'html',
+                content: 'htmlR3s',
                 layout: 'list',
                 config: { url: 'http://yourwebsite.com/?feed=r3s', subtab_name: 'r3sSubTab' },
                 helpTitle: 'What is an R3S Object?',

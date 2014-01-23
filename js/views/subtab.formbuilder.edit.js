@@ -143,7 +143,7 @@ wxApp = wxApp || {};
 
 			if (!success) {
 				// Display an error message.
-				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient, DocuSign login information, or custom post action in &ldquo;Form submission settings&rdquo;.";
+				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient, DocuSign account information, or a custom post action in &ldquo;Form submission settings&rdquo;.";
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
 			}
@@ -283,11 +283,6 @@ wxApp = wxApp || {};
 
 		showLogin: function( ev ) {
 			ev.preventDefault();
-console.log('showLogin');
-			this.$('.wx-subnav-item').removeClass('active');
-			this.$('#docusignLogin').addClass('active');
-console.log('showLogin');
-
 			this.$('#docusignLoginForm').slideDown();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideUp();
@@ -297,10 +292,6 @@ console.log('showLogin');
 
 		showCreateAccount: function( ev ) {
 			ev.preventDefault();
-
-			this.$('.wx-subnav-item').removeClass('active');
-			this.$('#docusignCreate').addClass('active');
-
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideDown();
 			this.$('#docusignChangePassord').slideUp();
@@ -310,10 +301,6 @@ console.log('showLogin');
 
 		showChangePassword: function( ev ) {
 			ev.preventDefault();
-
-			this.$('.wx-subnav-item').removeClass('active');
-			this.$('#docusignChangePassword').addClass('active');
-
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideDown();
@@ -328,7 +315,7 @@ console.log('showLogin');
 			    success  = function success( data ) {
 			    	me.$('#login_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Okay! You\'ve been logged in!' );
+					me.$('.login.alert-box.success').text( 'You have successfully logged in to your DocuSign account.' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure  = function failure( data ) {
@@ -351,7 +338,7 @@ console.log('showLogin');
 				account = me.validateAccount(),
 				success = function success( data ) {
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Okay! Your account has been created!' );
+					me.$('.login.alert-box.success').text( 'Success! DocuSign account created.  You are now logged in' );
 					me.$('#docusignOtherInfo').slideDown();
 				},
 				failure = function failure( data ) {
@@ -391,7 +378,7 @@ console.log('showLogin');
 			    success          = function success( data ) {
 			    	me.$('#change_password_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Okay! Your password has been changed, and you\'ve been logged in!' );
+					me.$('.login.alert-box.success').text( 'Success! DocuSign password updated.  You are now logged in.' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure          = function failure( data ) {
@@ -439,7 +426,7 @@ console.log('showLogin');
             // 1. Account Name is required.
             if ( accountObject.accountName.length === 0 ) {
             	accountObject.valid = false;
-            	accountObject.errors[ accountObject.errors.length ] = "Account Name is required.";
+            	accountObject.errors[ accountObject.errors.length ] = "Company Name is required.";
             }
 
             // 2. User Name is required.

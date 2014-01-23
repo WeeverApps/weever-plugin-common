@@ -29,7 +29,7 @@ wxApp = wxApp || {};
 				requiredClass: '',
 				autocompleteClass: 'hide',
 				controlTitle: '',
-				advanced: false,
+				advanced: false
 			};
 		},
 
