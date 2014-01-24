@@ -3,5 +3,14 @@
 	<div class="content" data-section-content>
 		<label>Enter a custom POST action</label>
 	    <input class="wx-form-builder-action" type="text" value="<%- value %>" />
+	    <label>Mode</label>
+	    <label for="direct">
+	    	<input id="direct" value="direct" name="radio-mode" type="radio" class="radio-mode" <% if (mode === 'direct') { %>checked<% } %>>
+        	Direct
+        </label>
+        <label for="proxy">
+	        <input id="proxy"  value="proxy"  name="radio-mode"  type="radio" class="radio-mode" <% if (mode !== 'direct') { %>checked<% } %>>
+	        Proxy
+        </label>
 	</div>
 </script>

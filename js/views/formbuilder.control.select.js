@@ -8,6 +8,7 @@ wxApp = wxApp || {};
 		className: 'wx-form-builder-row',
 		tplSelector: '#form-builder-select',
 		preview: null,
+		firstRender: true,
 
 		events: {
 			'keyup .wx-form-builder-title-input': 'updateTitle',
@@ -25,6 +26,14 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
+			
+			if ( this.firstRender ) {
+				// Focus on the label the first time you render this control.
+				// We need to add this 1ms delay for Chrome and Safari, as otherwise the focus doesn't really happen.
+				setTimeout( function() { this.$('.wx-form-builder-title-input').focus(); }, 1);
+				this.firstRender = false;
+			}
+
 			return this;
 		},
 

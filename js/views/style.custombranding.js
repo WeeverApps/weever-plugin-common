@@ -40,8 +40,8 @@ wxApp = wxApp || {};
             if ( !this.$('#wx-domain-map-input').length )
                 return;
 
-            // Set domain to empty array if domain is null or false.
-            if (!wxApp.design.get('domain'))
+            // Set domain to empty array if domain is null.
+            if (wxApp.design.get('domain') === null)
                 wxApp.design.set('domain', []);
 
             var me = this;

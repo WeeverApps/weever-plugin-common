@@ -5,6 +5,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlView = Backbone.View.extend({
 		tagName: 'section',
 		className: 'wx-form-builder-row',
+		firstRender: true,
 
 		events: {
 			// 'click .wx-form-builder-edit-label': 'editLabel',
@@ -15,7 +16,7 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-max-input': 'setMax',
 			'blur .wx-form-builder-value-input': 'setValue',
 			'blur .wx-form-builder-step-input': 'setStep',
-			// 'blur .wx-form-builder-name-input': 'setName',
+			'blur .wx-form-builder-name-input': 'setName',
 			// 'click .wx-form-builder-autocomplete': 'setAutocomplete',
 			'click .wx-form-builder-control-checked': 'setChecked',
 			// 'click .wx-form-builder-control-selected': 'setSelected',
