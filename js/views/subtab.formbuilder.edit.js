@@ -174,12 +174,14 @@ wxApp = wxApp || {};
 		setModelFromView: function( model ) {
 
 			for (var i = 0; i < model.get( 'config' ).formActions.length; i++) {
-				var action = model.get( 'config' ).formActions.models[i];
+				var action = model.get( 'config' ).formActions.models[i],
+				    kept = true;
 				if ( action.get( 'method' ) === 'post' || action.get( 'method' ) === 'email' ) {
 
 					// Remove from array if nothing is set.
 					if ( !action.get('value') ) {
 						model.get( 'config' ).formActions.remove( action );
+						kept = false;
 						i--;
 					}
 
@@ -190,6 +192,10 @@ wxApp = wxApp || {};
 						model.get( 'config' ).formActions.remove( action );
 						i--;
 					}
+				}
+
+				if ( kept && action.get( 'method' ) === 'post' ) {
+					action.setUrl();
 				}
 			};
 
@@ -1103,6 +1109,7 @@ wxApp = wxApp || {};
 		},
 
 		addControl: function( input, view ) {
+
 			var count = this.model.get( 'config' ).formElements.length;
 			count++;
 			input.set( 'ordinal', count );
@@ -1116,9 +1123,11 @@ wxApp = wxApp || {};
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
 
-			// Now scroll down to it
-			var offset = $('.wx-form-builder-row.active').offset().top - 230;
-			$('body').animate({scrollTop: offset}, 250);
+			// Now scroll down to it, if possible
+			if ( $('.wx-form-builder-row.active').length ) {
+				var offset = $('.wx-form-builder-row.active').offset().top - 230;
+				$('body').animate({scrollTop: offset}, 250);
+			}
 
 			// Add the view to the Controls array.
 			if ( !this.controls ) {

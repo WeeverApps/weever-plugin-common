@@ -18,7 +18,8 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-pdfheader-title'    : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line1'    : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader' //,
+			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
+			'click .radio-mode'                        : 'updateMode',
 			// 'click #docusignLogin'                     : 'showLogin',
 			// 'click #docusignCreate'                    : 'showCreateAccount',
 			// 'click #docusignChangePassword'            : 'showChangePassword',
@@ -84,7 +85,14 @@ wxApp = wxApp || {};
 		deleteControl: function() {
 			this.remove();
 			this.model.destroy();
-		} //,
+		},
+
+		updateMode: function( ev ) {
+			var $me = $( ev.currentTarget );
+			this.model.set( 'mode', $me.val() );
+		}
+
+		 //,
 
 		// Commented out DocuSign Stuff Below.
 
