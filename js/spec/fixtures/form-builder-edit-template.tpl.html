@@ -14,7 +14,7 @@
             }
             };
             %>
-            <p>FormBuilder allows you to add custom forms to your app.
+            <p>FormBuilder allows you create custom forms and add them to your app.
                &nbsp;As a person completes your form they will review their submission and provide an <b>electronic signature</b> using their finger.
                &nbsp;Getting info and agreements anytime, anywhere, has never never been easier!</p>
 
@@ -40,6 +40,8 @@
 
                         <div data-alert class="login alert-box alert" style="display: none"></div>
 
+                        <p><b>Login</b></p>
+
                         <label>
                             DocuSign account email address
                             <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
@@ -50,7 +52,7 @@
                             <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
                         </label>
 
-                        <button id="wx-docusign-login-button" class="success radius">Login and start building a form &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                        <button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
                     </div>
                     <!-- endof: docusign login form -->
 
@@ -61,6 +63,7 @@
 
                         <div data-alert class="account alert-box alert" style="display: none"></div>
 
+                        <p><b>Create account</b></p>
                         <label>
                             Company name* (the name to be used to identify this account)
                             <input type="text" class="wx-form-builder-docusign-accountName" />
@@ -110,6 +113,8 @@
 
                         <div data-alert class="changePassword alert-box alert" style="display: none"></div>
 
+                        <p><b>Change password</b></p>
+
                         <label>
                             DocuSign account email address*
                             <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
@@ -140,36 +145,37 @@
 
                 </div>
                 <!-- start: docusign account management -->
-
-
                 <!-- start: enter docusign pdf attributes and return url -->
                 <div id="docusignOtherInfo" style="display: none">
 
                     <div data-alert class="login alert-box success"></div>
 
-                    <p>As a person completes the form, a PDF of their entry will be automatically generated and display for their review and electronic signature.
-                       &nbsp;The signed PDF will then be saved to your DocuSign account.</p>
+                    <p>As a person completes the form, a PDF of their form entry is displayed for review and electronic signature.
+                       &nbsp;The signed PDF is then saved to your DocuSign account.</p>
+
+                    <p><b>PDF Document details</b> (optional)</p>
 
                     <label>
-                        Please provide a title for the PDF document
+                        Document Title
                         <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader.title %>" />
                     </label>
                     <label>
-                        Optional &ndash; add preface text to the PDF (line one)
+                        Business Name
                         <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- docusign.pdfHeader.line1 %>" />
                     </label>
                     <label>
-                        Optional &ndash; add preface text to the PDF (line two)
+                        Address line one
                         <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- docusign.pdfHeader.line2 %>" />
                     </label>
                     <label>
-                        Optional &ndash; add preface text to the PDF (line three)
+                        Address line two
                         <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader.line3 %>" />
                     </label>
 
+                    <p><b>App Settings</b></p>
 
                     <label>
-                        Optional &ndash; After signing the PDF, the user will be returned to the app.  You can specify a different return URL
+                        Optional &ndash; Specify a return url on signature completion (default is to return to the app)
                         <input type="url" class="wx-form-builder-docusign-returnUrl" value="<%- docusign.returnUrl %>" />
                     </label>
 
@@ -178,7 +184,35 @@
                         <input type="text" value="<%- title %>" class="wx-edit-title" />
                     </div>
 
-                    <button class="wx-continue-button radius">Next &rarr;</button>
+                    <button class="wx-continue-button success radius">Save PDF details and start building a form &rarr;</button>
+                </div>
+                <!-- endof: enter docusign pdf attributes and return url -->
+            </div>
+            <!-- endof: left col -->
+
+        <!-- start: right col -->
+        <div class="large-4 columns">
+
+            <!-- about your current subscription -->
+            <div class="row">
+                <div class="large-12 columns">
+
+                    <div class="panel">
+
+                        <p class=""><b>What is DocuSign?</b></p>
+
+                        <p>Completed forms are saved to your account at DocuSign, a Weever Apps partner and the world's most trusted eSignature standard.</p>
+
+                        <p>Electronic signatures are <a target="_blank" href="http://www.docusign.com/electronic-signature-legality">legally binding</a> in the U.S. and many countries around the world.</p>
+
+                        <p class=""><b>Where I do view form submissions?</b></p>
+
+                        <p>You can view form submissions and manage email notifications in your <a target="_blank" href="http://www.docusign.com/">DocuSign</a> account.</p>
+
+                        <p>View the <a target="_blank" href="http://www.docusign.com/faq">DocuSign FAQ</a> for more information on eSignatures.</p>
+
+                    </div>
+
                 </div>
                 <!-- endof: enter docusign pdf attributes and return url -->
             </div>
@@ -237,8 +271,8 @@
             <br>
 
             <div>
-                <button class="wx-finish-button success radius">Save and add to app</button>
-                <button class="wx-close-button alert radius">Cancel</button>
+                <button class="wx-finish-button success radius">Save and add this form to your app</button>
+                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
             </div>
         </div>
