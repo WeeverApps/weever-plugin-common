@@ -158,8 +158,8 @@ wxApp = wxApp || {};
 			// post.set( { method: 'post' } );
 			// var email = new wxApp.FormBuilderAction();
 			// email.set( { method: 'email' } );
-			// var docusign = new wxApp.FormBuilderAction();
-			// docusign.set( { method: 'docusign' } );
+			var docusign = new wxApp.FormBuilderAction();
+			docusign.set( { method: 'docusign' } );
 
 			// this.model.get( 'config' ).formActions.push( post );
 			// this.model.get( 'config' ).formActions.push( email );
