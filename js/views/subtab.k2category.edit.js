@@ -9,12 +9,12 @@ wxApp = wxApp || {};
 			wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
-			$('.wx-add-k2-category-select').val( url );
+			$('#wx-add-k2-category-select').val( url );
         },
 
         setModelFromView: function(model) {
-            if ( this.$('.wx-add-k2-category-select') )
-                model.setConfig('url', this.$('.wx-add-k2-category-select').find(':selected').val());
+            if ( this.$('#wx-add-k2-category-select') )
+                model.setConfig('url', wx.siteDomain + this.$('#wx-add-k2-category-select').val());
             return model;
         }
     });

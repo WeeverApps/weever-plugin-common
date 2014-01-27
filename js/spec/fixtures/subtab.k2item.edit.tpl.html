@@ -3,7 +3,8 @@
     <p>Add a specific k2 &lsquo;item&rsquo; to your app.</p>
     
     <div id="wx-add-k2-item-dialog" class="wx-add-k2-item">
-                    
+            
+            <!--        
             <div id='wx-add-k2-item-item'>
             
                     <select id='wx-add-k2-item-select' class='wx-add-k2-item-select'>
@@ -30,6 +31,35 @@
                     </select>
             
             </div>
+            -->
+            
+            <?php 
+            	
+            	if( comWeeverHelper::joomlaVersion() == '2.5' )  // ### 2.5 only
+            		$link = 'index.php?option=com_k2&amp;view=items&amp;task=element&amp;tmpl=component&amp;object=k2item';
+        
+        	?>
+            
+            <div id='wx-add-k2-item-panel'>
+            
+            		<div class="select-k2-content">
+            		
+            			<a href="#" class="wx-load-k2-item" data-reveal-id="select-k2-item">Select K2 Item</a>
+            			
+            			<input type="hidden" id="wx-add-k2-item-select" class="" value="" />
+            			
+            		</div>
+            		
+            </div>
+            <br>
+            
+            <div id="select-k2-item" class="reveal-modal" data-reveal>
+            	<div class="row">
+            	    <iframe src="<?php echo $link; ?>" frameborder="0" width="700" height="450">
+            	</div>
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
+            
     
     </div>
 

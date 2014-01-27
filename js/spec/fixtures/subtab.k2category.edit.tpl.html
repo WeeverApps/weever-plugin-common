@@ -3,7 +3,8 @@
     <p>Add a category of k2 &lsquo;posts&rsquo;.  Your app will display newly published category automatically.</p>
     
     <div id="wx-add-k2-category-dialog" class="wx-add-k2-category">
-                    
+            
+            <!--       
             <div id='wx-add-k2-category-item'>
             
                     <select id='wx-add-k2-category-select' class='wx-add-k2-category-select'>
@@ -30,6 +31,35 @@
                     </select>
             
             </div>
+            -->
+            
+            <?php 
+            	
+            	if( comWeeverHelper::joomlaVersion() == '2.5' )  // ### 2.5 only
+            		$link = 'index.php?option=com_k2&amp;view=categories&amp;task=element&amp;tmpl=component&amp;object=k2category';
+        
+        	?>
+            
+            <div id='wx-add-k2-category-panel'>
+            
+            		<div class="select-k2-content">
+            		
+            			<a href="#" class="wx-load-k2-category" data-reveal-id="select-k2-category">Select K2 Category</a>
+            			
+            			<input type="hidden" id="wx-add-k2-category-select" class="" value="" />
+            			
+            		</div>
+            		
+            </div>
+            <br>
+            
+            <div id="select-k2-category" class="reveal-modal" data-reveal>
+            	<div class="row">
+            	    <iframe src="<?php echo $link; ?>" frameborder="0" width="700" height="450">
+            	</div>
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
+            
     
     </div>
 

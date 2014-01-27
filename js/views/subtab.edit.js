@@ -114,6 +114,7 @@ wxApp = wxApp || {};
     			this.saveModel();
 
                 this.$el.foundation('reveal', 'close');
+                jQuery('.reveal-modal-bg').hide();
 
                 wx.rebuildApp();
             }

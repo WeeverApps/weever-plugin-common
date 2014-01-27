@@ -29,7 +29,9 @@ jQuery(document).ready(function() {
         }
 
         jQuery('#status-loading').show();
-
+		
+		console.log('ajaxurl...');
+		
         jQuery.ajax({
             type: "POST",
             url: ajaxurl,
