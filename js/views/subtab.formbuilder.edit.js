@@ -7,7 +7,6 @@ wxApp = wxApp || {};
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
 		subTabEditTplSelector: '#form-builder-subtab-edit-template',
-//		baseEditTplSelector: '#form-builder-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
@@ -152,22 +151,22 @@ wxApp = wxApp || {};
 		},
 
 		getDefaultFormActions: function() {
-
+			
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
 			var post = new wxApp.FormBuilderAction();
 			post.set( { method: 'post' } );
 			var email = new wxApp.FormBuilderAction();
 			email.set( { method: 'email' } );
-			var docusign = new wxApp.FormBuilderAction();
-			docusign.set( { method: 'docusign' } );
+			// var docusign = new wxApp.FormBuilderAction();
+			// docusign.set( { method: 'docusign' } );
 
 			this.model.get( 'config' ).formActions.push( post );
 			this.model.get( 'config' ).formActions.push( email );
-			this.model.get( 'config' ).formActions.push( docusign );
+			// this.model.get( 'config' ).formActions.push( docusign );
 
 			this.addPostAction( post );
 			this.addEmailAction( email );
-			this.docusign = this.addDocusignAction( docusign );
+			// this.docusign = this.addDocusignAction( docusign );
 
 		},
 
@@ -205,21 +204,21 @@ wxApp = wxApp || {};
 		events: {
 			
 			// "Step One" stuff (ie, DocuSign)
-			'blur .wx-form-builder-docusign-username'        : 'updateUsername',
-			'blur .wx-form-builder-docusign-password'        : 'updatePassword',
-			'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
-			'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
-			'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line1'          : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line2'          : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line3'          : 'updatePdfHeader',
-			'click #docusignLogin'                           : 'showLogin',
-			'click #docusignCreate'                          : 'showCreateAccount',
-			'click #docusignChangePassword'                  : 'showChangePassword',
-			'click #wx-docusign-login-button'                : 'login',
-			'click #wx-docusign-create-account-button'       : 'createAccount',
-			'click #wx-docusign-change-password-button'      : 'changePassword',
-			'click .wx-continue-button'                      : 'next',
+			// 'blur .wx-form-builder-docusign-username'        : 'updateUsername',
+			// 'blur .wx-form-builder-docusign-password'        : 'updatePassword',
+			// 'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
+			// 'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
+			// 'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
+			// 'blur .wx-form-builder-pdfheader-line1'          : 'updatePdfHeader',
+			// 'blur .wx-form-builder-pdfheader-line2'          : 'updatePdfHeader',
+			// 'blur .wx-form-builder-pdfheader-line3'          : 'updatePdfHeader',
+			// 'click #docusignLogin'                           : 'showLogin',
+			// 'click #docusignCreate'                          : 'showCreateAccount',
+			// 'click #docusignChangePassword'                  : 'showChangePassword',
+			// 'click #wx-docusign-login-button'                : 'login',
+			// 'click #wx-docusign-create-account-button'       : 'createAccount',
+			// 'click #wx-docusign-change-password-button'      : 'changePassword',
+			// 'click .wx-continue-button'                      : 'next',
 
 			// "Step Two" stuff (ie, FormBuilder)
 			'change .switch-advanced'                        : 'toggleAdvancedMode',
@@ -519,7 +518,6 @@ wxApp = wxApp || {};
 				};
 			}
 
-			advanced = true;
 			// Add or show the Custom POST form action.
 			if ( advanced ) {
 
@@ -527,20 +525,19 @@ wxApp = wxApp || {};
 
 					// POST action already exists; Show it.
 					this.$('.wx-form-builder-row.post').show();
+					this.$('.wx-form-builder-row.email').show();
 				}
 				else {
 
-					// POST action doesn't exist; Add it.
-					var post = new wxApp.FormBuilderAction();
-					post.set( { method: 'post' } );
-					this.model.get( 'config' ).formActions.push( post );
-					this.addPostAction( post );
+					// Custom form actions don't exist; Add them.
+					this.getDefaultFormActions();
 				}
 			}
 			else {
 
 				// Hide the POST action.
 				this.$('.wx-form-builder-row.post').hide();
+				this.$('.wx-form-builder-row.email').hide();
 			}
 		},
 
@@ -1154,6 +1151,35 @@ wxApp = wxApp || {};
 	});
 
 	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
+		baseEditTplSelector: '#form-builder-edit-template',
+
+		initializeEvents: function() {
+			this.events = _.extend({}, this.genericEvents, this.events);
+		},
+
+		events: {
+			// "Step One" stuff (ie, DocuSign)
+			'blur .wx-form-builder-docusign-username'        : 'updateUsername',
+			'blur .wx-form-builder-docusign-password'        : 'updatePassword',
+			'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
+			'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
+			'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line1'          : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line2'          : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line3'          : 'updatePdfHeader',
+			'click #docusignLogin'                           : 'showLogin',
+			'click #docusignCreate'                          : 'showCreateAccount',
+			'click #docusignChangePassword'                  : 'showChangePassword',
+			'click #wx-docusign-login-button'                : 'login',
+			'click #wx-docusign-create-account-button'       : 'createAccount',
+			'click #wx-docusign-change-password-button'      : 'changePassword',
+			'click .wx-continue-button'                      : 'next',
+		},
+
+		initialize: function() {
+			alert('DocuSignSubTabEditView');
+			wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( this, arguments );
+		},
 
 		validate: function() {
 			var success = false;
@@ -1170,22 +1196,22 @@ wxApp = wxApp || {};
 
 
 			return success;
-		}
+		},
 
-//		getDefaultFormActions: function() {
-//
-//			this.model.get( 'config' ).formActions = new Backbone.Collection();
-//			var post = new wxApp.FormBuilderAction();
-//			post.set( { method: 'post' } );
-//			var docusign = new wxApp.FormBuilderAction();
-//			docusign.set( { method: 'docusign' } );
-//
-//			this.model.get( 'config' ).formActions.push( post );
-//			this.model.get( 'config' ).formActions.push( docusign );
-//
-//			this.addPostAction( post );
-//			this.docusign = this.addDocusignAction( docusign );
-//		}
+		getDefaultFormActions: function() {
+
+			this.model.get( 'config' ).formActions = new Backbone.Collection();
+			var post = new wxApp.FormBuilderAction();
+			post.set( { method: 'post' } );
+			// var docusign = new wxApp.FormBuilderAction();
+			// docusign.set( { method: 'docusign' } );
+
+			this.model.get( 'config' ).formActions.push( post );
+			// this.model.get( 'config' ).formActions.push( docusign );
+
+			this.addPostAction( post );
+			// this.docusign = this.addDocusignAction( docusign );
+		}
 		
 	});
 
