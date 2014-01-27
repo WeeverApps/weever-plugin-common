@@ -7,7 +7,10 @@ wxApp = wxApp || {};
 		baseEditTplSelector: '#form-builder-edit-template',
 
 		initializeEvents: function() {
-			this.events = _.extend({}, this.genericEvents, this.events);
+			
+			var parentEvents = wxApp.FormBuilderSubTabEditView.prototype.events;
+			parentEvents = _.extend({}, this.genericEvents, parentEvents);
+			this.events = _.extend({}, parentEvents, this.events);
 		},
 
 		events: {
