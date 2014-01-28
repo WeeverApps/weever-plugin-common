@@ -247,7 +247,7 @@ wxApp = wxApp || {};
 				    firstName   : me.$('.wx-form-builder-docusign-firstName').val().trim(),
 				    // middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
-				    suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
+				    // suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
 				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val()
 			    },
 			    passwordAgain = me.$('.wx-form-builder-docusign-password-again').val();
