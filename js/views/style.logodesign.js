@@ -43,36 +43,76 @@ jQuery( document ).ready( function() {
 	        },
 	
 	        colorChange: function(e) {
-	            var me = this;
-	            var txt = $(e.valueElement);
-	            var id = txt.attr('id');
-	            var val = txt.val();
+	            var me         = this,
+	                txt        = $(e.valueElement),
+	                id         = txt.attr('id'),
+	                loading_id = this.showLoadingGif( id ),
+	                val        = txt.val(),
+	                css        = '';
+	
 	            // Make sure the colour is in the form '#ffffff' rahter than just 'ffffff'
 	            if (val.indexOf('#') !== 0)
 	                val = '#' + val;
 	
-	            // Show loading gif
-	            var loading_id = this.showLoadingGif( id );
-	            
-	            var data = { 
-	                    action: 'ajaxSaveTheme',
-	                    nonce: $('input#nonce').val()
-	            };
-	            data[id] = val;
+	            switch (id) {
 	
-	            $.ajax({
-	                type: "POST",
-	                url: ajaxurl,
-	                data: data,
-	                success: function(msg) {
-	                    me.hideLoadGif( id, loading_id );
-	                    
-	                    // wx.rebuildApp();
-	                },
-	                error: function(v, msg) {
-	                    alert(msg);
-	                }
+	                case 'main_titlebar_color':
+	                    css = this.updateLogoColor( val, '.wx-titlebar', 'background-color' );
+	                    break;
+	                case 'main_titlebar_text_color':
+	                    css = this.updateLogoColor( val, '.wx-titlebar .wx-logo', 'color' );
+	                    break;
+	                case 'subtab_color':
+	                    css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar', 'background-color' );
+	                    break;
+	                case 'subtab_text_color':
+	                    css = this.updateLogoColor( val, '.x-tabbar.x-docked-top.wx-subtabpanel-tabbar .x-tab .x-button-label', 'color' );
+	                    break;
+	            }
+	
+	            wxApp.design.get('css').styles = css;
+	
+	            var innerParams = JSON.stringify( wxApp.design.get('css') );
+	            var params = { css: innerParams };
+	
+	            wx.makeApiCall('design/set_css', params, function(data) {
+	
+	                // Hide the load spinner.
+	                me.hideLoadGif( id, loading_id );
+	
+	                // Re-render the advanced tab.
+	                wxApp.advanced.render();
+	
+	                // Re-build the app
+	                wx.rebuildApp();
 	            });
+	
+	            /**
+	             * We need to either
+	             * a) surround this with a "if (Wordpress)" or something similar, or
+	             * b) save Logo Area Colours through the API.
+	             */
+	            if ( true ) {
+	                var data = { 
+	                        action: 'ajaxSaveTheme',
+	                        nonce: $('input#nonce').val()
+	                };
+	                data[id] = val;
+	
+	                $.ajax({
+	                    type: "POST",
+	                    url: ajaxurl,
+	                    data: data,
+	                    success: function(msg) {
+	                        me.hideLoadGif( id, loading_id );
+	                        
+	                        // wx.rebuildApp();
+	                    },
+	                    error: function(v, msg) {
+	                        alert(msg);
+	                    }
+	                });
+	            }
 	        },
 	
 	        logoChange: function(e) {
@@ -102,9 +142,7 @@ jQuery( document ).ready( function() {
 	        },
 	
 	        uploadFile: function( e ) {
-				console.log('logodesign upload file');
-				console.log(wx.pluginUrl);
-				
+	
 	            var me = this,
 	                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
 	                $input = $( e.currentTarget ),
@@ -146,6 +184,59 @@ jQuery( document ).ready( function() {
 	
 	            wx.makeApiCall('design/set_titlebar', params, callback);
 	
+	        },
+	
+	        /*
+	         * Update the "Advanced CSS" of this site by either adding or editing
+	         * the logo colours.
+	         */
+	        updateLogoColor:    function( newColor, className, cssAttribute ) {
+	
+	            var css = wxApp.design.get('css').styles || '';
+	            
+	            // Let's change the CSS class name into a proper regex search.
+	            // Escape periods, then look for the closing curly brace.
+	            var regex = className.replace( '.', '\\.' ) + '\\s*\\{';
+	            var index = css.search( regex );
+	            var endIndex = css.indexOf( '}', index );
+	            if ( index === -1 || endIndex === -1 ) {
+	
+	                // We couldn't find the class. Let's add it!
+	                css += '\n\n' + className + ' {\n' +
+	                    this.getCssAttribute( cssAttribute, newColor ) +
+	                '}';
+	            }
+	            else {
+	                var bgColorIndex = css.indexOf( cssAttribute, index );
+	                if ( bgColorIndex === -1 || bgColorIndex > endIndex ) {
+	
+	                    // We found the class, but not the attribute.
+	                    // Let's add attribute!
+	                    var attr = this.getCssAttribute( cssAttribute, newColor );
+	                    css = css.substring(0, endIndex) + attr + css.substring( endIndex, css.length );
+	                }
+	                else {
+	
+	                    // The attribute we're looking for is within this css rule.
+	                    // Let's find everything between the next : and either the next ; or }...
+	                    var colorStart = css.indexOf( ':', bgColorIndex );
+	                    var colorEnd   = css.indexOf( ';', colorStart );
+	                    if ( colorEnd > endIndex ) {
+	                        colorEnd = endIndex;
+	                    }
+	                    colorStart++;
+	                    colorEnd++;
+	
+	                    // And then replace it with the new colour.
+	                    css = css.substring( 0, colorStart ) + ' ' + newColor + ';' + css.substring( colorEnd );
+	                }
+	            }
+	
+	            return css;
+	        },
+	
+	        getCssAttribute:    function( cssAttribute, value ) {
+	            return '  ' + cssAttribute + ': ' + value + ';\n';
 	        }
 	    });
 	
@@ -173,6 +264,7 @@ jQuery( document ).ready( function() {
 	        if (designFetched) {
 	            wxApp.advanced = new wxApp.Advanced({collection: wxApp.IconFonts});
 	        }
+	        wxApp.appToggle = new wxApp.AppStatusToggle( { model: wxApp.config } );
 	    } );
 	
 	    wxApp.IconFonts.fetch();
