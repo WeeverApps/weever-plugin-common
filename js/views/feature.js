@@ -23,8 +23,8 @@ wxApp = wxApp || {};
             this.$el.html( this.featureTpl( this.model.toJSON() ) );
 
             if (this.model.get('rel') !== '') {
-            	this.$('a').attr('rel', this.model.get('rel'));
-        	}
+                    this.$('a').attr('rel', this.model.get('rel'));
+                }
 
             return this;
         },
@@ -44,7 +44,7 @@ wxApp = wxApp || {};
 
             } else {
 
-                wxApp.appView.createFeatureView( featureName );
+                wxApp.appView.createFeatureView( featureName, null, this.model.get('allowAdvanced') );
 
             }
         }

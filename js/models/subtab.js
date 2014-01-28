@@ -19,7 +19,6 @@ wxApp = wxApp || {};
                 config: {},
                 featureName: '',
                 validateFeed: true,
-                buildPreview: false,
                 helpTitle: 'Help tips ',
                 helpBody: ''
             };
@@ -28,22 +27,21 @@ wxApp = wxApp || {};
         typeDescription: '',
 
         validateFeed: true,
-        buildPreview: false,
 
         allowTitleEdit: true,
 
         initialize: function() {
         },
 
-		setConfig: function(key, val) {
-			var config = this.getConfig();
-			config[key] = val;
+                setConfig: function(key, val) {
+                        var config = this.getConfig();
+                        config[key] = val;
             try {
-			    this.set('config', config);
+                            this.set('config', config);
             } catch ( e ) {
 
             }
-		},
+                },
 
         deleteConfig: function(key) {
             var config = this.getConfig();
@@ -51,9 +49,9 @@ wxApp = wxApp || {};
             this.set('config', config);
         },
 
-		getConfig: function() {
-			return this.get('config');
-		},
+                getConfig: function() {
+                        return this.get('config');
+                },
 
         getModelName: function() {
             //console.log( 'Looking for class' + this.constructor );
@@ -71,17 +69,17 @@ wxApp = wxApp || {};
             return retVal;
         },
 
-		getAPIData: function() {
-			console.log( 'getAPIData' );
-			console.log( this );
-			var data = this.toJSON();
-			data.config = JSON.stringify(data.config);
+                getAPIData: function() {
+                        console.log( 'getAPIData' );
+                        console.log( this );
+                        var data = this.toJSON();
+                        data.config = JSON.stringify(data.config);
             if ( data.id == data.parent_id )
                 delete data['parent_id'];
             if ( data.id )
                 data.tab_id = data.id;
-			return this.filterAPIData( data );
-		},
+                        return this.filterAPIData( data );
+                },
 
         filterAPIData: function( data ) {
 

@@ -1,34 +1,33 @@
-
 wxApp = wxApp || {};
 
 (function($){
 
-	var escapeJSON = function( key, val ) {
-		if ( typeof val !== 'string' ) {
+        var escapeJSON = function( key, val ) {
+                if ( typeof val !== 'string' ) {
             return val;
         }
 
-		var replaced = encodeURIComponent( val );
-		return replaced;
-	};
+                var replaced = encodeURIComponent( val );
+                return replaced;
+        };
 
-	var toJSONrecursive = function() {
-		return JSON.parse(JSON.stringify(this.attributes, escapeJSON));
-	}
+        var toJSONrecursive = function() {
+                return JSON.parse(JSON.stringify(this.attributes, escapeJSON));
+        }
 
-	var collectionToJSONrecursive = function() {
-		var coll = [];
-		this.models.forEach( function( model ) {
-			coll.push( model.toJSONrecursive() );
-		} );
-		return JSON.parse(JSON.stringify(coll));
-	}
+        var collectionToJSONrecursive = function() {
+                var coll = [];
+                this.models.forEach( function( model ) {
+                        coll.push( model.toJSONrecursive() );
+                } );
+                return JSON.parse(JSON.stringify(coll));
+        }
 
-//	Backbone.Model.prototype.toJSON = toJSONrecursive;
-//	Backbone.Collection.prototype.toJSON = collectionToJSONrecursive;
+//        Backbone.Model.prototype.toJSON = toJSONrecursive;
+//        Backbone.Collection.prototype.toJSON = collectionToJSONrecursive;
 
-	Backbone.Model.prototype.toJSONrecursive = toJSONrecursive;
-	Backbone.Collection.prototype.toJSONrecursive = collectionToJSONrecursive;
+        Backbone.Model.prototype.toJSONrecursive = toJSONrecursive;
+        Backbone.Collection.prototype.toJSONrecursive = collectionToJSONrecursive;
 
     wxApp.App = Backbone.View.extend({
         el: '#toptabs',
@@ -74,32 +73,20 @@ wxApp = wxApp || {};
             // Using global wxApp.appView since this is the dropped on li
             wxApp.appView.createFeatureView($(ui.draggable).attr('id').replace('add-', ''));
         },
-
-        createFeatureView: function(id, parentId) {
-        	
+        
+        createFeatureView: function(id, parentId, allowAdvanced) {
             if ( undefined !== wxApp[id + 'SubTab'] && undefined !== wxApp[id + 'SubTabEditView'] ) {
                 var tab = new wxApp[id + 'SubTab']();
-                // alert(' CREATING NEW ' + id);
-                // alert( tab.get('title') );
-                // alert( tab.get('config').screen_name );
+
                 if ( undefined != parentId && parentId )
                     tab.set( 'parent_id', parseInt( parentId ) );
+                if ( undefined != allowAdvanced && allowAdvanced )
+                    tab.set( 'allowAdvanced', true );
                 
-                //tab.set( 'feature_name', id );
                 var view = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
             } else {
                 throw new Error('Invalid type ' + id);
             }
-
-            // var test1 = new myTestModel();
-            // test1.set('title', 'A New Title');
-            // test1.get('config').screen_name = 'Joe';
-            // alert( test1.get('title') );
-            // alert( test1.get('config').screen_name );
-
-            // var test2 = new myTestModel();
-            // alert( test2.get('title') );
-            // alert( test2.get('config').screen_name );
         },
 
         refreshAppPreview: function() {
