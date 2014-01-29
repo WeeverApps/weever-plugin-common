@@ -24,7 +24,8 @@ wxApp = wxApp || {};
 			}
 			else {
 				// Load currently existing form elements.
-				var elementsJson;
+				var me = this,
+				    elementsJson;
 				try {
 					elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
 				} catch(err) {
@@ -33,38 +34,40 @@ wxApp = wxApp || {};
 
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
-				for ( var i = 0; i < elementsJson.length; i++ ) {
+				setTimeout( function() { 
+					for ( var i = 0; i < elementsJson.length; i++ ) {
 
-					if ( elementsJson[i].control === 'div' ) {
+						if ( elementsJson[i].control === 'div' ) {
 
-						this.addInfoWithProperties( elementsJson[i] );
+							me.addInfoWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'textarea' ) {
+						} else if ( elementsJson[i].control === 'textarea' ) {
 
-						this.addTextareaWithProperties( elementsJson[i] );
+							me.addTextareaWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'radiofieldset' ) {
+						} else if ( elementsJson[i].control === 'radiofieldset' ) {
 
-						this.addRadioGroupWithProperties( elementsJson[i] );
+							me.addRadioGroupWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'checkboxfieldset' ) {
+						} else if ( elementsJson[i].control === 'checkboxfieldset' ) {
 
-						this.addCheckboxGroupWithProperties( elementsJson[i] );
+							me.addCheckboxGroupWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'select' ) {
+						} else if ( elementsJson[i].control === 'select' ) {
 
-						this.addSelectWithProperties( elementsJson[i] );
+							me.addSelectWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].type === 'textSlider' ) {
+						} else if ( elementsJson[i].type === 'textSlider' ) {
 
-						this.addTextSlider( elementsJson[i] );
+							me.addTextSlider( elementsJson[i] );
 
-					} else {
+						} else {
 
-						this.addInput( elementsJson[i] );
+							me.addInput( elementsJson[i] );
 
+						}
 					}
-				}
+				}, 1 );
 			}
 
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
@@ -425,6 +428,10 @@ wxApp = wxApp || {};
 		},
 
 		addInput: function( properties ) {
+
+			console.log('addInput');
+			console.log( properties );
+
 			var mainProperties = {};
 			var attributes = {};
 			for ( var propKey in properties ) {
@@ -438,15 +445,21 @@ wxApp = wxApp || {};
 				}
 			}
 
+			console.log( mainProperties );
+			console.log( attributes );
+
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
-			input.get( 'attributes' ).set( attributes );
+			// input.get( 'attributes' ).set( attributes );
+			input.set( 'attributes', attributes );
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
+			console.log( input );
 
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
+			console.log( inputView );
 			
 			this.addControl( input, inputView );
 
@@ -837,10 +850,13 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
+			console.log('addControl');
+
 			var count = this.model.get( 'config' ).formElements.length;
 			count++;
 			input.set( 'ordinal', count );
 
+			console.log( this.buildPaneSelector );
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
 			// Open the newly added tab.

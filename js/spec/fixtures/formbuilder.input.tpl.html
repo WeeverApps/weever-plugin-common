@@ -8,16 +8,16 @@
 		<label>Label</label>
 		<input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
 		<label class="<%- hidePlaceholderClass %>">Placeholder</label>
-		<input type='text' class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" value='<%- attributes.attributes.placeholder %>' placeholder="Placeholder" />
-		<input type="number" class="wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.attributes.min %>"/>
-		<input type="number" class="wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.attributes.max %>"/>
-		<input type="<%- valueType %>" class="wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.attributes.value %>"/>
-		<input type="number" class="wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.attributes.step %>"/>
+		<input type='text' class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" value='<%- attributes.placeholder %>' placeholder="Placeholder" />
+		<input type="number" class="wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.min %>"/>
+		<input type="number" class="wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.max %>"/>
+		<input type="<%- valueType %>" class="wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.value %>"/>
+		<input type="number" class="wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.step %>"/>
 		<% if (advanced) { %>
 			<label>Name (for POST)</label>
-			<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
+			<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.name %>" />
 		<% } %>
-        <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
+        <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.required %> /> Required</label>
 		<button class="wx-form-builder-delete small alert">Delete Field</button>
 	</div>
 </script>
@@ -25,7 +25,7 @@
 <script type="text/template" id="form-builder-input-preview">
 	<label class="wx-form-builder-label">
 		<%- label %>
-		<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
+		<span class="required<%= attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
-	<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" placeholder="<%- attributes.attributes.placeholder %>" />
+	<input class="wx-form-builder-<%- attributes.type %>-input" type="<%- attributes.type %>" placeholder="<%- attributes.placeholder %>" />
 </script>
