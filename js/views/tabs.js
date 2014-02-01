@@ -9,59 +9,74 @@ wxApp = wxApp || {};
             this.collection.bind('add', this.addOne, this);
             this.collection.bind('remove', this.removeOne, this);
             Backbone.Events.on('tab:new', this.addNewlyCreatedTab, this);
-            this.startTabs();
+            //this.startTabs();
             this.startSortable();
             this.startDroppable();
             this.refreshUiTabs();
         },
 
         addOne: function(tab) {
+        
+        	console.log('addOne...');
+        	console.log(tab);
+        	
             var me = this;
             var view = new wxApp.TabView({ model: tab });
+            
             this.$el.append( view.render().el );
+            
             view.subTabsContainerView = new wxApp.SubTabsContainerView({ model: tab });
             view.subTabsContainerView.tabView = view;
             tab.on('destroy', function(tab) {
                 me.removeTabFromCollection(tab);
             });
+            
+            
             tab.on('change', this.refreshUiTabs, this);
-            $('#listTabs').append( view.subTabsContainerView.render().el );
+            // $('#listTabs').append( view.subTabsContainerView.render().el );
             this.refreshUiTabs();
+            
         },
 
         startTabs: function() {
-            if ( undefined != $('#listTabs').tabs ) {
-                $("#listTabs").tabs( {
-                    select: function(e, ui) {
-                        jQuery('#wxuia-header-parentMenu li').removeClass('wxuia-selected');
+            // if ( undefined != $('#listTabs').tabs ) {
+            //     $("#listTabs").tabs( {
+            //         select: function(e, ui) {
+            //             jQuery('#wxuia-header-parentMenu li').removeClass('wxuia-selected');
 
-                        if ( ui.tab.href.indexOf('addTab') != -1 ) {
-                            jQuery('#addtabspan').show();
-                            jQuery('#addtabspan').css('display', 'block');
-                            jQuery('#edittabspan').hide();
+            //             if ( ui.tab.href.indexOf('addTab') != -1 ) {
+            //                 jQuery('#addtabspan').show();
+            //                 jQuery('#addtabspan').css('display', 'block');
+            //                 jQuery('#edittabspan').hide();
 
-                            // Get the header selected correctly
-                            jQuery('#wxuia-header-parentMenu li:first').addClass('wxuia-selected');
-                        } else {
-                            jQuery('#addtabspan').hide();
-                            jQuery('#edittabspan').show();
-                            jQuery('#edittabspan').css('display', 'block');
-                            // Get the header selected correctly
-                            jQuery('#wxuia-header-parentMenu li:nth-child(2)').addClass('wxuia-selected');
-                        }
-                    }
-                } );
-            }
+            //                 // Get the header selected correctly
+            //                 jQuery('#wxuia-header-parentMenu li:first').addClass('wxuia-selected');
+            //             } else {
+            //                 jQuery('#addtabspan').hide();
+            //                 jQuery('#edittabspan').show();
+            //                 jQuery('#edittabspan').css('display', 'block');
+            //                 // Get the header selected correctly
+            //                 jQuery('#wxuia-header-parentMenu li:nth-child(2)').addClass('wxuia-selected');
+            //             }
+            //         }
+            //     } );
+            // }
         },
 
         startSortable: function() {
             var me = this;
             if ( undefined != this.$el.sortable ) {
+            
+            	console.log('startSortable***');
+            	
                 this.$el.sortable({
                     axis: "x",
                     cancel:	'.wx-nosort',
                     placeholder: 'wx-tab',
                     update: function(event, ui) {
+                    	
+                    	console.log('startSortable-update***');
+                    	
                         var order = $(this).sortable('toArray');
                         order = $.map( order, function(element) {
                             var tabId = element.toLowerCase().replace('tabid', '');
@@ -117,13 +132,13 @@ wxApp = wxApp || {};
         },
 
         refreshUiTabs: function() {
-            if ( undefined != $('#listTabs').tabs ) {
-                $('#listTabs').tabs( 'refresh' );
-            }
+            // if ( undefined != $('#listTabs').tabs ) {
+            //     $('#listTabs').tabs( 'refresh' );
+            // }
         },
 
         removeOne: function(tab) {
-            $('#listTabs').tabs( 'refresh' );
+            // $('#listTabs').tabs( 'refresh' );
         },
 
         addNewlyCreatedTab: function(model) {

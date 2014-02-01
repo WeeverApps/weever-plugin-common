@@ -78,7 +78,14 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="#ffffff" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php 
+                    
+                    	if( $this->weeverMainTitlebarColor != '' )
+                    		echo $this->weeverMainTitlebarColor;
+                    	else
+                    		echo '#ffffff';
+                    
+                    ?>" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="main_titlebar_color">choose</button>
@@ -102,7 +109,14 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="#ffffff" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php 
+                    
+                    	if( $this->weeverMainTitlebarTextColor != '' )
+                    		echo $this->weeverMainTitlebarTextColor;
+                    	else
+                    		echo '#ffffff';
+                    
+                    ?>" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="main_titlebar_text_color">choose</button>
@@ -127,7 +141,14 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="#ffffff" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php 
+                    
+                    	if( $this->weeverSubtabColor != '' )
+                    		echo $this->weeverSubtabColor;
+                    	else
+                    		echo '#ffffff';
+                    
+                    ?>" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="subtab_color">choose</button>
@@ -152,7 +173,14 @@
         <div class="small-12 large-4 pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
-                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="#ffffff" />
+                    <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php 
+                    
+                    	if( $this->weeverSubtabTextColor != '' )
+                    		echo $this->weeverSubtabTextColor;
+                    	else
+                    		echo '#ffffff';
+                    
+                    ?>" />
                 </div>
                 <div class="small-6 columns">
                     <button class="postfix success radius" data-color-picker="subtab_text_color">choose</button>

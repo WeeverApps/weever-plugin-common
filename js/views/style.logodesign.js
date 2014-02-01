@@ -92,18 +92,22 @@ jQuery( document ).ready( function() {
 	             * a) surround this with a "if (Wordpress)" or something similar, or
 	             * b) save Logo Area Colours through the API.
 	             */
+	             
+	            
 	            if ( true ) {
 	                var data = { 
-	                        action: 'ajaxSaveTheme',
-	                        nonce: $('input#nonce').val()
+	                        task: 'save_logo_color'//,
+	                        //nonce: $('input#nonce').val()
 	                };
 	                data[id] = val;
 	
 	                $.ajax({
 	                    type: "POST",
-	                    url: ajaxurl,
+	                    url: wx.ajaxurl,
 	                    data: data,
 	                    success: function(msg) {
+	                    
+	                    	console.log(msg);
 	                        me.hideLoadGif( id, loading_id );
 	                        
 	                        // wx.rebuildApp();
@@ -113,6 +117,7 @@ jQuery( document ).ready( function() {
 	                    }
 	                });
 	            }
+	            
 	        },
 	
 	        logoChange: function(e) {

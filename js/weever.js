@@ -34,10 +34,10 @@ jQuery(document).ready(function() {
 
         jQuery.ajax({
             type: "POST",
-            url: ajaxurl,
+            url: wx.ajaxurl,
             data: { 
-                action: 'ajaxToggleTabletStatus',
-                nonce: jQuery('input#nonce').val(),
+                task: 'save_device',
+                //nonce: jQuery('input#nonce').val(),
                 tablets_enabled: tablets_enabled
             },
             success: function(msg) {
