@@ -37,6 +37,21 @@ wxApp = wxApp || {};
                 $('#status-loading').fadeOut();
 
             });
+            
+            jQuery.ajax({
+                type: "POST",
+                url: wx.ajaxurl,
+                data: { 
+                    task: 'save_appEnabled',
+                    //nonce: jQuery('input#nonce').val(),
+                    app_enabled: app_enabled
+                },
+                success: function(msg) {
+                    console.log(msg);
+                },
+                error: function(v, msg) { alert(msg); }
+            });
+            
         }
         
     });
