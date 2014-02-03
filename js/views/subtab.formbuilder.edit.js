@@ -67,7 +67,7 @@ wxApp = wxApp || {};
 
 						}
 					}
-				}, 1 );
+				}, 100 );
 			}
 
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
@@ -429,9 +429,6 @@ wxApp = wxApp || {};
 
 		addInput: function( properties ) {
 
-			console.log('addInput');
-			console.log( properties );
-
 			var mainProperties = {};
 			var attributes = {};
 			for ( var propKey in properties ) {
@@ -445,12 +442,8 @@ wxApp = wxApp || {};
 				}
 			}
 
-			console.log( mainProperties );
-			console.log( attributes );
-
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
-			// input.get( 'attributes' ).set( attributes );
-			input.set( 'attributes', attributes );
+			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
