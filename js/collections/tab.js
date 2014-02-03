@@ -20,7 +20,11 @@ var wxApp = wxApp || {};
                     retVal = 'FlickrSubTab';
                     break;
                 case 'formbuilder':
-                    retVal = 'FormBuilderSubTab';
+                    // Ugh... It's a string, not a bool.
+                    if ( tabData.config.isDocuSign == 'true' )
+                        retVal = 'DocuSignSubTab';
+                    else
+                        retVal = 'FormBuilderSubTab';
                     break;
                 case 'htmlPage':
                     retVal = 'WordpressPageSubTab';
