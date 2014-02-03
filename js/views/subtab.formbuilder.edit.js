@@ -209,7 +209,6 @@ wxApp = wxApp || {};
 
 		events: {
 			
-			'change .switch-advanced'                        : 'toggleAdvancedMode',
 			'click .wx-form-builder-add-text-input'          : 'addTextInput',
 			'click .wx-form-builder-add-password-input'      : 'addPasswordInput',
 			'click .wx-form-builder-add-date-input'          : 'addDateInput',
@@ -233,49 +232,6 @@ wxApp = wxApp || {};
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 			'click .wx-close-button'                         : 'closePopup'
-		},
-
-		toggleAdvancedMode: function( ev ) {
-
-			var advanced = $( ev.currentTarget ).attr('id') === 'on',
-			    formElements = this.model.get( 'config' ).formElements;
-
-		    this.model.get( 'config' ).advanced = advanced;
-
-			// Set the 'advanced' flag on all the models.
-			for (var i = 0; i < formElements.length; i++) {
-				var model = formElements.models[i];
-				model.set('advanced', advanced);
-			};
-
-			// Re-render all of the controls
-			if ( this.controls ) {
-				for (var i = 0; i < this.controls.length; i++) {
-					this.controls[i].render();
-				};
-			}
-
-			// Add or show the Custom POST form action.
-			if ( advanced ) {
-
-				if ( this.$('.wx-form-builder-row.post').length ) {
-
-					// POST action already exists; Show it.
-					this.$('.wx-form-builder-row.post').show();
-					this.$('.wx-form-builder-row.email').show();
-				}
-				else {
-
-					// Custom form actions don't exist; Add them.
-					this.getDefaultFormActions();
-				}
-			}
-			else {
-
-				// Hide the POST action.
-				this.$('.wx-form-builder-row.post').hide();
-				this.$('.wx-form-builder-row.email').hide();
-			}
 		},
 
 		updateButtonText: function( ev ) {

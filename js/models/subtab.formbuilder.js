@@ -31,8 +31,9 @@ wxApp = wxApp || {};
 				content: 'formbuilder',
 				layout: 'panel',
         		buttonText: 'Review and Sign',
-                advancedMode: false,
+                advancedMode: wx.formbuilderAdvanced,
 				config: {
+                    advanced: wx.formbuilderAdvanced,
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
 					onUpload: {
 						message: 'Your upload has completed.'
@@ -50,6 +51,7 @@ wxApp = wxApp || {};
     	defaults: function() {
             return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
+                    advanced: wx.formbuilderAdvanced,
 					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
 					onUpload: {
 						message: 'Your upload has completed.'
