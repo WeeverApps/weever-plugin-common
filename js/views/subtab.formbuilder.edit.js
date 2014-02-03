@@ -70,6 +70,10 @@ wxApp = wxApp || {};
 				}, 100 );
 			}
 
+			console.log( 'FORM-ACTIONS TYPE' );
+			console.log( typeof this.model.get( 'config' ).formActions );
+			console.log( 'FORM-ACTIONS' );
+			console.log( this.model.get( 'config' ).formActions );
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
 				this.getDefaultFormActions();
 			}
@@ -81,6 +85,7 @@ wxApp = wxApp || {};
 				} catch(err) {
 					actionsJson = this.model.get( 'config' ).formActions.toJSON();
 				}
+				console.log(actionsJson);
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
@@ -117,7 +122,6 @@ wxApp = wxApp || {};
 						me.addEmailAction( null, { method: 'email' } );
 					}
 				}, 100);
-
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
