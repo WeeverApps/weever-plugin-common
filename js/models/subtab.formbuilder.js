@@ -30,7 +30,7 @@ wxApp = wxApp || {};
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
-        		buttonText: 'Tap to Review & Sign',
+        		buttonText: 'Review and Sign',
                 allowAdvanced: false,
                 advancedMode: false,
 				config: {
