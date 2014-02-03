@@ -237,6 +237,8 @@ wxApp = wxApp || {};
 			var advanced = $( ev.currentTarget ).attr('id') === 'on',
 			    formElements = this.model.get( 'config' ).formElements;
 
+		    this.model.get( 'config' ).advanced = advanced;
+
 			// Set the 'advanced' flag on all the models.
 			for (var i = 0; i < formElements.length; i++) {
 				var model = formElements.models[i];
@@ -845,9 +847,14 @@ wxApp = wxApp || {};
 
 			console.log('addControl');
 
-			var count = this.model.get( 'config' ).formElements.length;
+			var config   = this.model.get( 'config' )
+			    count    = config.formElements.length,
+			    advanced = config.advanced || false;
+			
 			count++;
 			input.set( 'ordinal', count );
+
+			input.set( 'advanced', advanced );
 
 			console.log( this.buildPaneSelector );
 			this.$( this.buildPaneSelector ).append( view.render().el );

@@ -1,6 +1,22 @@
 <script type="text/template" id="form-builder-subtab-edit-template">
     <div>
 
+      <% if (allowAdvanced) { %>
+        <div class="row">
+            <div class="large-8 columns"><div style="float: right; padding-top: 10px">Advanced Mode:</div></div>
+            <div class="large-4 columns">
+                <div class="switch">
+                    <input id="off" name="switch-advanced" class="switch-advanced" type="radio" <% if (!advancedMode) { %>checked<% } %>>
+                    <label for="off" onclick="">off</label>
+                    <input id="on" name="switch-advanced" class="switch-advanced" type="radio"  <% if ( advancedMode) { %>checked<% } %>>
+                    <label for="on" onclick="">on</label>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+      <% } %>
+
+
     <!-- start: add-field buttons -->
 
         <p class="wx-ui-title">Add a form input field</p>
