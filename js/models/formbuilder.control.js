@@ -12,7 +12,6 @@ wxApp = wxApp || {};
 		// http://documentcloud.github.com/backbone/#Model-defaults
 		defaults: function() {
 			return {
-				attributes: new wxApp.FormBuilderControlAttributes(),
 				control: '',
 				type: '',
 				label: '',
@@ -36,10 +35,7 @@ wxApp = wxApp || {};
 
 		initialize: function() {
 
-			console.log( 'init' );
-			
 			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
-			this.set( 'attrs', new wxApp.FormBuilderControlAttributes() );
 
 			this.togglePlaceholder();
 			this.on( 'change:showPlaceholder', this.togglePlaceholder );

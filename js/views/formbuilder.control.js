@@ -63,11 +63,10 @@ wxApp = wxApp || {};
 
 		updatePlaceholder: function(ev) {
 			var $me = $( ev.currentTarget );
-			leModel = this.model;
 
 			// Backbone doesn't notice when attributes are changed, so we 
 			// have to trigger a change even manually.
-			this.model.get('attributes').placeholder = $me.val();
+			this.model.get('attributes').set('placeholder', $me.val());
 			this.model.trigger('change');
 		},
 

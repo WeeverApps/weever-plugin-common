@@ -1,29 +1,25 @@
 <script type="text/template" id="form-builder-subtab-edit-template">
     <div>
 
+      <?php if ( WeeverConst::ADVANCED_FORMBUILDER ): ?>
+        <div class="row">
+            <div class="large-8 columns"><div style="float: right; padding-top: 10px">Advanced Mode:</div></div>
+            <div class="large-4 columns">
+                <div class="switch">
+                    <input id="off" name="switch-advanced" class="switch-advanced" type="radio" <% if (!config.advanced) { %>checked<% } %>>
+                    <label for="off" onclick="">off</label>
+                    <input id="on" name="switch-advanced" class="switch-advanced" type="radio"  <% if ( config.advanced) { %>checked<% } %>>
+                    <label for="on" onclick="">on</label>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+      <?php endif; ?>
+
+
     <!-- start: add-field buttons -->
 
-        <div class="row">
-            <div class="large-5 columns">
-                <p class="wx-ui-title">Add a form input field</p>
-            </div>
-
-            <!-- advanced toggle -->
-            <% if (allowAdvanced) { %>
-                <div class="large-3 columns">
-                    Advanced Mode:
-                </div>
-                <div class="large-4 columns">
-                    <div class="switch">
-                        <input id="off" name="switch-advanced" class="switch-advanced" type="radio" <% if (!advancedMode) { %>checked<% } %>>
-                        <label for="off" onclick="">off</label>
-                        <input id="on" name="switch-advanced" class="switch-advanced" type="radio"  <% if ( advancedMode) { %>checked<% } %>>
-                        <label for="on" onclick="">on</label>
-                        <span></span>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <p class="wx-ui-title">Add a form input field</p>
 
         <div id="form-creation" class="content" data-section-content>
 
@@ -228,6 +224,9 @@
 
 
                         <!-- more rare elements, e.g, sliders -->
+
+                        <!-- file upload -->
+                        <!--
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-file-input">
                                 <div class="wx-button-label">File Upload</div>
@@ -241,9 +240,11 @@
                                 </span>
                             </button>
                         </li>
+                        -->
+
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-photo-input">
-                                Submit A Photo
+                                <div class="wx-button-label">Submit a Photo</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Submit A Photo</b><p>
                                        <p>Adds a button to launch the camera application for the purpose of taking a new photo or uploading an existing one.</p>
@@ -300,9 +301,9 @@
                             <button class="tiny expand radius wx-form-builder-add-signature">
                                 <div class="wx-button-label">eSignature</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                      title="<p><b>eSignature</b><p>
-                                       <p>Adds an additional eSignature field.</p>
-                                       <p>On form completion a PDF of the submission is presented to the user for review and signature.  An additional signature field will be included in the PDF where specified.</b>
+                                      title="<p><b>eSignature (required)</b><p>
+                                       <p>Adds an electronic signature field to your form at the location you specify.</p>
+                                       <p>On completion of the form a PDF of the submission is presented to the user for review and signature.  The signed PDF is then saved to your DocuSign account.</b>
                                        <p><b>Example:</b></p>
                                        <label>I have read and understand the preface and terms of this agreement.</label>
                                        <label class='wx-esignature-example'>x</label>">

@@ -14,11 +14,11 @@
                 }
             };
             %>
-            <p>
-                FormBuilder allows you create custom forms and add them to your app.
-                &nbsp;As a person completes your form they will review their submission and provide an <b>electronic signature</b> using their finger.
-                &nbsp;Getting info and agreements anytime, anywhere, has never never been easier!
-            </p>
+            <p><b>Create an eSignature-enabled form and add it to your app.</b></p>
+
+            <p>As a person completes the form a PDF of their form entry is displayed for review and eSignature. The signed PDF is then saved to your DocuSign account.</p>
+
+            <!-- <p>Getting info and agreements anytime, anywhere, has never never been easier!</p> -->
 
             <br/>
 
@@ -30,7 +30,7 @@
                     <a class="wx-subnav-item active" href="#" id="docusignLogin">DocuSign login</a>
                     <a class="wx-subnav-item" href="#" id="docusignCreate">Create account</a>
                     <a class="wx-subnav-item" href="#" id="docusignChangePassword">Change password</a>
-                    <a class="wx-subnav-item" href="https://www.docusign.net/Member/MemberForgotPassword.aspx" target="_BLANK">Forgot password?</a>
+                    <a target="_blank" class="wx-subnav-item" href="https://www.docusign.net/Member/MemberForgotPassword.aspx">Forgot password?</a>
                 </div>
                 <br/>
                 <br/>
@@ -38,71 +38,84 @@
                 <!-- start: docusign login form -->
                 <div id="docusignLoginForm" style="">
 
-                    <p>Please login to your DocuSign account or <a href="#" id="docusignCreate">create a new account</a>.</p>
-
                     <div data-alert class="login alert-box alert" style="display: none"></div>
 
-                    <p><b>Login</b></p>
+                    <p>Please login or <a href="#" id="docusignCreate">create a new account</a>.</p>
 
-                    <label>
-                        DocuSign account email address
-                        <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
-                    </label>
+                    <div class="row collapse">
+                        <div class="large-8 columns">
+                            <label>
+                                DocuSign account email address
+                                <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
+                            </label>
 
-                    <label>
-                        DocuSign account password
-                        <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
-                    </label>
+                            <label>
+                                DocuSign account password
+                                <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <br>
 
                     <button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+
                 </div>
                 <!-- endof: docusign login form -->
 
                 <!-- start: docusign create account form -->
                 <div id="docusignCreateForm" style="display: none">
 
-                    <p>Create a new DocuSign account and start collecting eSignatures today.</p>
-
                     <div data-alert class="account alert-box alert" style="display: none"></div>
 
-                    <p><b>Create account</b></p>
-                    <label>
-                        Company name* (the name to be used to identify this account)
-                        <input type="text" class="wx-form-builder-docusign-accountName" />
-                    </label>
+                    <p>Create a new DocuSign account and collecting eSignatures today.</p>
 
-                    <label>
-                        Email address*
-                        <input type="text" class="wx-form-builder-docusign-email" />
-                    </label>
+                    <div class="row collapse">
+                        <div class="large-8 columns">
 
-                    <label>
-                        Honorific*
-                        <select class="wx-form-builder-docusign-title">
-                            <option>Mr</option>
-                            <option>Mrs</option>
-                            <option>Miss</option>
-                            <option>Ms</option>
-                            <option>Dr</option>
-                        </select>
-                    </label>
+                            <label>
+                                Company name* (used to identify this account)
+                                <input type="text" class="wx-form-builder-docusign-accountName" />
+                            </label>
 
-                    <label>
-                        First name*
-                        <input type="text" class="wx-form-builder-docusign-firstName" />
-                    </label>
-                    <label>
-                        Last name*
-                        <input type="text" class="wx-form-builder-docusign-lastName" />
-                    </label>
-                    <label>
-                        Password*
-                        <input type="password" class="wx-form-builder-docusign-password" />
-                    </label>
-                    <label>
-                        Repeat Password*
-                        <input type="password" class="wx-form-builder-docusign-password-again" />
-                    </label>
+                            <label>
+                                Email address*
+                                <input type="text" class="wx-form-builder-docusign-email" />
+                            </label>
+
+                            <label>
+                                Honorific*
+                                <select class="wx-form-builder-docusign-title">
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                    <option>Miss</option>
+                                    <option>Ms</option>
+                                    <option>Dr</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                First name*
+                                <input type="text" class="wx-form-builder-docusign-firstName" />
+                            </label>
+                            <label>
+                                Last name*
+                                <input type="text" class="wx-form-builder-docusign-lastName" />
+                            </label>
+                            <label>
+                                Password*
+                                <input type="password" class="wx-form-builder-docusign-password" />
+                            </label>
+                            <label>
+                                Repeat Password*
+                                <input type="password" class="wx-form-builder-docusign-password-again" />
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <br>
 
                     <button id="wx-docusign-create-account-button" class="success radius">Create account and start building a form &rarr;</button>
                 </div>
@@ -111,36 +124,44 @@
                 <!-- start: docusign change password form -->
                 <div id="docusignChangePassord" style="display: none">
 
-                    <p>Update the password on your existing DocuSign account and login.</p>
-
                     <div data-alert class="changePassword alert-box alert" style="display: none"></div>
 
-                    <p><b>Change password</b></p>
+                    <p>Update your existing DocuSign account password and login.</p>
 
-                    <label>
-                        DocuSign account email address*
-                        <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
-                    </label>
-                    <label>
-                        Current password*
-                        <input type="password" class="wx-form-builder-docusign-old-password" value="<%- docusign.password %>" />
-                    </label>
-                    <label>
-                        New password*
-                        <input type="password" class="wx-form-builder-docusign-password" />
-                    </label>
-                    <label>
-                        Repeat new password*
-                        <input type="password" class="wx-form-builder-docusign-new-password-again" />
-                    </label>
-                    <label>
-                        Forgot password question* (e.g. &ldquo;What is your mother&apos;s maiden name?&rdquo;)
-                        <input type="text" class="wx-form-builder-docusign-forgot-password-q1" />
-                    </label>
-                    <label>
-                        Forgot password answer*
-                        <input type="text" class="wx-form-builder-docusign-forgot-password-a1" />
-                    </label>
+                    <div class="row collapse">
+                        <div class="large-8 columns">
+
+                            <label>
+                                DocuSign account email address*
+                                <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
+                            </label>
+                            <label>
+                                Current password*
+                                <input type="password" class="wx-form-builder-docusign-old-password" value="<%- docusign.password %>" />
+                            </label>
+                            <label>
+                                New password*
+                                <input type="password" class="wx-form-builder-docusign-password" />
+                            </label>
+                            <label>
+                                Repeat new password*
+                                <input type="password" class="wx-form-builder-docusign-new-password-again" />
+                            </label>
+                            <label>
+                                Set a new forgot password question*<br>For example: &ldquo;What is your mother&apos;s maiden name?&rdquo;
+                                <input type="text" class="wx-form-builder-docusign-forgot-password-q1" />
+                            </label>
+                            <label>
+                                Forgot password answer*
+                                <input type="text" class="wx-form-builder-docusign-forgot-password-a1" />
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
                     <button id="wx-docusign-change-password-button" class="success radius">Change password and start building a form &rarr;</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
                 </div>
                 <!-- endof: docusign change password form -->
@@ -151,9 +172,6 @@
             <div id="docusignOtherInfo" style="display: none">
 
                 <div data-alert class="login alert-box success"></div>
-
-                <p>As a person completes the form, a PDF of their form entry is displayed for review and electronic signature.
-                   &nbsp;The signed PDF is then saved to your DocuSign account.</p>
 
                 <p><b>PDF Document details</b> (optional)</p>
 
@@ -174,6 +192,8 @@
                     <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader.line3 %>" />
                 </label>
 
+                <br>
+
                 <p><b>App Settings</b></p>
 
                 <label>
@@ -185,6 +205,8 @@
                     <label>Title for this tab inside your app (you can change this later)</label>
                     <input type="text" value="<%- title %>" class="wx-edit-title" />
                 </div>
+
+                <br>
 
                 <button class="wx-continue-button success radius">Save PDF details and start building a form &rarr;</button>
             </div>
@@ -203,13 +225,11 @@
 
                         <p class=""><b>What is DocuSign?</b></p>
 
-                        <p>Completed forms are saved to your account at DocuSign, a Weever Apps partner and the world&apos;s most trusted eSignature standard.</p>
+                        <p>Completed forms are saved to your account at <a target="_blank" href="http://www.docusign.com/">DocuSign</a>, a Weever Apps partner and the world&apos;s most trusted eSignature standard.</p>
 
-                        <p>Electronic signatures are <a target="_blank" href="http://www.docusign.com/electronic-signature-legality">legally binding</a> in the U.S. and many countries around the world.</p>
+                        <p><b>How do people sign?</b></p>
 
-                        <p><b>Where I do view form submissions?</b></p>
-
-                        <p>You can view form submissions and manage email notifications in your <a target="_blank" href="http://www.docusign.com/">DocuSign</a> account.</p>
+                        <p>Signatures are made using a finger on the touch screen. Electronic signatures are <a target="_blank" href="http://www.docusign.com/electronic-signature-legality">legally binding</a> in the U.S. and many countries around the world.</p>
 
                         <p>View the <a target="_blank" href="http://www.docusign.com/faq">DocuSign FAQ</a> for more information on eSignatures.</p>
 

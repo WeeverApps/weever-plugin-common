@@ -43,7 +43,7 @@ wxApp = wxApp || {};
 
         render: function() {
 
-            m = this.model;
+            m = this.model.toJSON();
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
             this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
 

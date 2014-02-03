@@ -16,11 +16,11 @@ wxApp = wxApp || {};
             var me = this;
             var view = new wxApp.TabView({ model: tab });
             this.$el.append( view.render().el );
-            // view.subTabsContainerView = new wxApp.SubTabsContainerView({ model: tab });
-            // view.subTabsContainerView.tabView = view;
-            // tab.on('destroy', function(tab) {
-            //     me.removeTabFromCollection(tab);
-            // });
+            view.subTabsContainerView = new wxApp.SubTabsContainerView({ model: tab });
+            view.subTabsContainerView.tabView = view;
+            tab.on('destroy', function(tab) {
+                me.removeTabFromCollection(tab);
+            });
         },
 
         startSortable: function() {

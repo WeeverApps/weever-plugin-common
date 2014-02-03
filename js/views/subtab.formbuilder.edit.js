@@ -70,6 +70,10 @@ wxApp = wxApp || {};
 				}, 100 );
 			}
 
+			console.log( 'FORM-ACTIONS TYPE' );
+			console.log( typeof this.model.get( 'config' ).formActions );
+			console.log( 'FORM-ACTIONS' );
+			console.log( this.model.get( 'config' ).formActions );
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
 				this.getDefaultFormActions();
 			}
@@ -81,40 +85,44 @@ wxApp = wxApp || {};
 				} catch(err) {
 					actionsJson = this.model.get( 'config' ).formActions.toJSON();
 				}
+				console.log(actionsJson);
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
+setTimeout( function() { 
 				var hasDocusign	= false,
 					hasPost		= false,
 					hasEmail	= false;
 				for ( var i = 0; i < actionsJson.length; i++ ) {
 					var action = actionsJson[i];
 					if ( action.method == 'docusign' ) {
-						this.docusign = this.addDocusignAction( null, action );
+						me.docusign = me.addDocusignAction( null, action );
 						hasDocusign = true;
 					}
 					else if ( action.method == 'post' ) {
-						this.addPostAction( null, action );
+						me.addPostAction( null, action );
 						hasPost = true;
 					}
 					else if ( action.method == 'email' ) {
-						this.addEmailAction( null, action );
+						me.addEmailAction( null, action );
 						hasEmail = true;
 					}
 				}
 
 				// If we don't have some of the actions, we should add them.
 				if ( !hasDocusign ) {
-					this.docusign = this.addDocusignAction( null, { method: 'docusign' } );
+					me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
 				}
 
 				if ( !hasPost ) {
-					this.addPostAction( null, { method: 'post' } );
+					me.addPostAction( null, { method: 'post' } );
 				}
 
 				if ( !hasEmail ) {
-					this.addEmailAction( null, { method: 'email' } );
+					me.addEmailAction( null, { method: 'email' } );
 				}
+}, 1000);
+
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
@@ -237,6 +245,8 @@ wxApp = wxApp || {};
 			var advanced = $( ev.currentTarget ).attr('id') === 'on',
 			    formElements = this.model.get( 'config' ).formElements;
 
+		    this.model.get( 'config' ).advanced = advanced;
+
 			// Set the 'advanced' flag on all the models.
 			for (var i = 0; i < formElements.length; i++) {
 				var model = formElements.models[i];
@@ -315,7 +325,6 @@ wxApp = wxApp || {};
 		 * Override __super__.finish()
 		 */
 		finish: function() {
-			console.log( 'subtab.formbuilder.edit finish' );
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
 				formActions = this.model.get( 'config' ).formActions,
@@ -429,9 +438,6 @@ wxApp = wxApp || {};
 
 		addInput: function( properties ) {
 
-			console.log('addInput');
-			console.log( properties );
-
 			var mainProperties = {};
 			var attributes = {};
 			for ( var propKey in properties ) {
@@ -445,21 +451,15 @@ wxApp = wxApp || {};
 				}
 			}
 
-			console.log( mainProperties );
-			console.log( attributes );
-
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
-			// input.get( 'attributes' ).set( attributes );
-			input.set( 'attributes', attributes );
+			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
-			console.log( input );
-
+			
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
-			console.log( inputView );
 			
 			this.addControl( input, inputView );
 
@@ -489,8 +489,6 @@ wxApp = wxApp || {};
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
 			});
-
-			console.log( input );
 
 			this.addControl( input, inputView );
 
@@ -850,13 +848,15 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
-			console.log('addControl');
-
-			var count = this.model.get( 'config' ).formElements.length;
+			var config   = this.model.get( 'config' )
+			    count    = config.formElements.length,
+			    advanced = config.advanced || false;
+			
 			count++;
 			input.set( 'ordinal', count );
 
-			console.log( this.buildPaneSelector );
+			input.set( 'advanced', advanced );
+
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
 			// Open the newly added tab.
