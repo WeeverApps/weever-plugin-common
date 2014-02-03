@@ -84,37 +84,40 @@ wxApp = wxApp || {};
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-				var hasDocusign	= false,
-					hasPost		= false,
-					hasEmail	= false;
-				for ( var i = 0; i < actionsJson.length; i++ ) {
-					var action = actionsJson[i];
-					if ( action.method == 'docusign' ) {
-						this.docusign = this.addDocusignAction( null, action );
-						hasDocusign = true;
+				setTimeout( function() { 
+					var hasDocusign	= false,
+						hasPost		= false,
+						hasEmail	= false;
+					for ( var i = 0; i < actionsJson.length; i++ ) {
+						var action = actionsJson[i];
+						if ( action.method == 'docusign' ) {
+							me.docusign = me.addDocusignAction( null, action );
+							hasDocusign = true;
+						}
+						else if ( action.method == 'post' ) {
+							me.addPostAction( null, action );
+							hasPost = true;
+						}
+						else if ( action.method == 'email' ) {
+							me.addEmailAction( null, action );
+							hasEmail = true;
+						}
 					}
-					else if ( action.method == 'post' ) {
-						this.addPostAction( null, action );
-						hasPost = true;
+
+					// If we don't have some of the actions, we should add them.
+					// if ( !hasDocusign ) {
+					// 	me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
+					// }
+
+					if ( !hasPost ) {
+						me.addPostAction( null, { method: 'post' } );
 					}
-					else if ( action.method == 'email' ) {
-						this.addEmailAction( null, action );
-						hasEmail = true;
+
+					if ( !hasEmail ) {
+						me.addEmailAction( null, { method: 'email' } );
 					}
-				}
+				}, 100);
 
-				// If we don't have some of the actions, we should add them.
-				if ( !hasDocusign ) {
-					this.docusign = this.addDocusignAction( null, { method: 'docusign' } );
-				}
-
-				if ( !hasPost ) {
-					this.addPostAction( null, { method: 'post' } );
-				}
-
-				if ( !hasEmail ) {
-					this.addEmailAction( null, { method: 'email' } );
-				}
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
@@ -317,7 +320,6 @@ wxApp = wxApp || {};
 		 * Override __super__.finish()
 		 */
 		finish: function() {
-			console.log( 'subtab.formbuilder.edit finish' );
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
 				formActions = this.model.get( 'config' ).formActions,
@@ -449,12 +451,10 @@ wxApp = wxApp || {};
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
-			console.log( input );
-
+			
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
-			console.log( inputView );
 			
 			this.addControl( input, inputView );
 
@@ -484,8 +484,6 @@ wxApp = wxApp || {};
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
 			});
-
-			console.log( input );
 
 			this.addControl( input, inputView );
 
@@ -845,8 +843,6 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
-			console.log('addControl');
-
 			var config   = this.model.get( 'config' )
 			    count    = config.formElements.length,
 			    advanced = config.advanced || false;
@@ -856,7 +852,6 @@ wxApp = wxApp || {};
 
 			input.set( 'advanced', advanced );
 
-			console.log( this.buildPaneSelector );
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
 			// Open the newly added tab.
