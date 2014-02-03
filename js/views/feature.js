@@ -44,7 +44,7 @@ wxApp = wxApp || {};
 
             } else {
 
-                wxApp.appView.createFeatureView( featureName, null, this.model.get('allowAdvanced') );
+                wxApp.appView.createFeatureView( featureName, null );
 
             }
         }

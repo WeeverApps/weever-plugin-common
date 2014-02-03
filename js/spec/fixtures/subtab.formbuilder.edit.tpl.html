@@ -1,7 +1,7 @@
 <script type="text/template" id="form-builder-subtab-edit-template">
     <div>
 
-      <% if (allowAdvanced) { %>
+      <?php if ( WeeverConst::ADVANCED_FORMBUILDER ): ?>
         <div class="row">
             <div class="large-8 columns"><div style="float: right; padding-top: 10px">Advanced Mode:</div></div>
             <div class="large-4 columns">
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-      <% } %>
+      <?php endif; ?>
 
 
     <!-- start: add-field buttons -->
