@@ -6621,48 +6621,47 @@
 /* line 74, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface #editSpace .pricing-table.wx-tablist-layout .wx-tablist-layout-controls {
   border-bottom-color: transparent;
-  margin-top: .9375em;
   padding-bottom: 0;
 }
-/* line 82, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 81, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface #editSpace .pricing-table.wx-tablist-features {
   border-top-color: transparent;
 }
-/* line 85, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 84, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface #editSpace .pricing-table.wx-tablist-features li.price {
   background-color: transparent;
 }
-/* line 97, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 96, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-subtab-movehandle {
   cursor: move;
 }
-/* line 101, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 100, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface #editListTabsSortable.dragging {
   background-color: #ffffc0;
 }
-/* line 105, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 104, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface #editListTabsSortable.dragging.hover {
   background-color: #ffffa6;
 }
-/* line 109, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 108, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-tab.dragging.hover button {
   border-color: #222222;
   border-style: dashed;
 }
-/* line 116, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 115, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface .wx-delete-label {
   display: none;
 }
-/* line 117, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+/* line 116, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
 #appbuilder #interface #ContainerEditLink {
   display: inline-block;
 }
 @media only screen and (min-width: 768px) {
-  /* line 120, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+  /* line 119, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
   #appbuilder #interface .wx-delete-label {
     display: inline;
   }
-  /* line 123, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
+  /* line 122, ../../../../../../../../../Users/HoldenCreative/Desktop/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
   #appbuilder #interface #ContainerEditLink {
     display: inline;
   }
