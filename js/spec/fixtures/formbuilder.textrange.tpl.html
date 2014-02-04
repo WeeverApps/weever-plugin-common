@@ -11,11 +11,22 @@
 		<div class="options">
 
 		</div>
-		
-		<% if (advanced) { %>
-			<label>Name (for POST)</label>
-			<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
-		<% } %>
+
+        <% if (advanced) { %>
+        <label>POST field name (optional, advanced)
+                    <span data-tooltip data-options="disable-for-touch:true"
+                          class="has-tip tip-right"
+                          title="<p><b>POST field name</b><p>
+                           <p>The HTML &ldquo;name&rdquo; attribute. For use with a custom POST action.</p>
+                           <p><b>Advanced mode:</b></p>
+                           <p>This option is only displayed when &ldquo;advanced mode&rdquo; is enabled.
+                           ">
+                           ?
+                    </span>
+        </label>
+        <input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
+        <% } %>
+
         <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
         <button class="wx-form-builder-delete small alert">Delete Field</button>
 	</div>
