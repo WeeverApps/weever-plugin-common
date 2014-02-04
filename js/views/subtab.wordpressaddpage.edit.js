@@ -63,7 +63,7 @@ wxApp = wxApp || {};
 	            model.setConfig('terms',       terms);
         	}
 
-        	url = this.createPage( title, content );
+        	url = this.createPage( name, content );
 
             model.setConfig('name',  name);
             model.setConfig('title', name);
@@ -78,10 +78,10 @@ wxApp = wxApp || {};
 
         	var pageUrl = '',
         		data = {
-	        		action: 'ajaxAddNewContent',
-	        		name  : name,
+	        		action : 'ajaxAddNewContent',
+	        		name   : name,
 	        		content: content,
-	        		nonce  : $('input#nonce')
+	        		nonce  : $('input#nonce').val()
 	        	};
 
         	// Merge otherData with data (mostly for map stuff).
@@ -97,13 +97,9 @@ wxApp = wxApp || {};
 	            type: "POST",
 	            url: ajaxurl,
 	            async: false,
-	            data: {
-	                action: 'ajaxAddNewContent',
-	                content: content, 
-	                name: name,
-	                nonce: jQuery('input#nonce').val()
-	            },
+	            data: data,
 	            success: function(url) {
+
 	            	// I'm not sure where that trailing 0 comes from, but it has to go.
 	            	pageUrl = url.replace('weever_cartographer0', 'weever_cartographer');
 	            },
