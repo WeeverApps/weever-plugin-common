@@ -18,14 +18,15 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
+			var me = this,
+				elementsJson,
+				actionsJson;
 
 			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
 				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
 			}
 			else {
 				// Load currently existing form elements.
-				var me = this,
-				    elementsJson;
 				try {
 					elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
 				} catch(err) {
@@ -70,16 +71,13 @@ wxApp = wxApp || {};
 				}, 100 );
 			}
 
-			console.log( 'FORM-ACTIONS TYPE' );
-			console.log( typeof this.model.get( 'config' ).formActions );
-			console.log( 'FORM-ACTIONS' );
-			console.log( this.model.get( 'config' ).formActions );
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
-				this.getDefaultFormActions();
+				setTimeout( function() { 
+					me.getDefaultFormActions();
+				}, 100);
 			}
 			else {
 				// Load currently existing form actions.
-				var actionsJson;
 				try {
 					actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
 				} catch(err) {
@@ -89,40 +87,39 @@ wxApp = wxApp || {};
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-setTimeout( function() { 
-				var hasDocusign	= false,
-					hasPost		= false,
-					hasEmail	= false;
-				for ( var i = 0; i < actionsJson.length; i++ ) {
-					var action = actionsJson[i];
-					if ( action.method == 'docusign' ) {
-						me.docusign = me.addDocusignAction( null, action );
-						hasDocusign = true;
+				setTimeout( function() { 
+					var hasDocusign	= false,
+						hasPost		= false,
+						hasEmail	= false;
+					for ( var i = 0; i < actionsJson.length; i++ ) {
+						var action = actionsJson[i];
+						if ( action.method == 'docusign' ) {
+							me.docusign = me.addDocusignAction( null, action );
+							hasDocusign = true;
+						}
+						else if ( action.method == 'post' ) {
+							me.addPostAction( null, action );
+							hasPost = true;
+						}
+						else if ( action.method == 'email' ) {
+							me.addEmailAction( null, action );
+							hasEmail = true;
+						}
 					}
-					else if ( action.method == 'post' ) {
-						me.addPostAction( null, action );
-						hasPost = true;
+
+					// If we don't have some of the actions, we should add them.
+					// if ( !hasDocusign ) {
+					// 	me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
+					// }
+
+					if ( !hasPost ) {
+						me.addPostAction( null, { method: 'post' } );
 					}
-					else if ( action.method == 'email' ) {
-						me.addEmailAction( null, action );
-						hasEmail = true;
+
+					if ( !hasEmail ) {
+						me.addEmailAction( null, { method: 'email' } );
 					}
-				}
-
-				// If we don't have some of the actions, we should add them.
-				if ( !hasDocusign ) {
-					me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
-				}
-
-				if ( !hasPost ) {
-					me.addPostAction( null, { method: 'post' } );
-				}
-
-				if ( !hasEmail ) {
-					me.addEmailAction( null, { method: 'email' } );
-				}
-}, 1000);
-
+				}, 100);
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
@@ -214,7 +211,6 @@ setTimeout( function() {
 
 		events: {
 			
-			'change .switch-advanced'                        : 'toggleAdvancedMode',
 			'click .wx-form-builder-add-text-input'          : 'addTextInput',
 			'click .wx-form-builder-add-password-input'      : 'addPasswordInput',
 			'click .wx-form-builder-add-date-input'          : 'addDateInput',
@@ -238,49 +234,6 @@ setTimeout( function() {
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 			'click .wx-close-button'                         : 'closePopup'
-		},
-
-		toggleAdvancedMode: function( ev ) {
-
-			var advanced = $( ev.currentTarget ).attr('id') === 'on',
-			    formElements = this.model.get( 'config' ).formElements;
-
-		    this.model.get( 'config' ).advanced = advanced;
-
-			// Set the 'advanced' flag on all the models.
-			for (var i = 0; i < formElements.length; i++) {
-				var model = formElements.models[i];
-				model.set('advanced', advanced);
-			};
-
-			// Re-render all of the controls
-			if ( this.controls ) {
-				for (var i = 0; i < this.controls.length; i++) {
-					this.controls[i].render();
-				};
-			}
-
-			// Add or show the Custom POST form action.
-			if ( advanced ) {
-
-				if ( this.$('.wx-form-builder-row.post').length ) {
-
-					// POST action already exists; Show it.
-					this.$('.wx-form-builder-row.post').show();
-					this.$('.wx-form-builder-row.email').show();
-				}
-				else {
-
-					// Custom form actions don't exist; Add them.
-					this.getDefaultFormActions();
-				}
-			}
-			else {
-
-				// Hide the POST action.
-				this.$('.wx-form-builder-row.post').hide();
-				this.$('.wx-form-builder-row.email').hide();
-			}
 		},
 
 		updateButtonText: function( ev ) {
@@ -503,7 +456,7 @@ setTimeout( function() {
 
 		addDateInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date',
 				attributes: {
 					type: 'date'
@@ -513,7 +466,7 @@ setTimeout( function() {
 
 		addDateTimeLocalInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date / Time',
 				attributes: {
 					type: 'datetime-local'
@@ -523,7 +476,7 @@ setTimeout( function() {
 
 		addEmailInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Email',
 				showPlaceholder: true,
 				multiClass: '',
@@ -535,7 +488,7 @@ setTimeout( function() {
 
 		addFileInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'File upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -548,7 +501,7 @@ setTimeout( function() {
 
 		addPhotoInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Photo upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -561,7 +514,7 @@ setTimeout( function() {
 
 		addMonthInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Month',
 				attributes: {
 					type: 'month'
@@ -571,7 +524,7 @@ setTimeout( function() {
 
 		addNumberInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
 				minClass: '',
 				maxClass: '',
@@ -585,7 +538,7 @@ setTimeout( function() {
 
 		addPasswordInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Password',
 				showPlaceholder: true,
 				attributes: {
@@ -596,7 +549,7 @@ setTimeout( function() {
 
 		addRangeInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Range',
 				minClass: '',
 				maxClass: '',
@@ -610,7 +563,7 @@ setTimeout( function() {
 
 		addTextRangeInput: function(ev) {
 			this.addTextSlider({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Select One',
 				type: 'textSlider',
 				attributes: {
@@ -621,7 +574,7 @@ setTimeout( function() {
 
 		addTelInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Telephone',
 				type: 'tel',
 				showPlaceholder: true,
@@ -633,7 +586,7 @@ setTimeout( function() {
 
 		addTextInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Untitled',
 				type: 'text',
 				showPlaceholder: true,
@@ -645,7 +598,7 @@ setTimeout( function() {
 
 		addTimeInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Time',
 				attributes: {
 					type: 'time'
@@ -655,7 +608,7 @@ setTimeout( function() {
 
 		addUrlInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'URL',
 				showPlaceholder: true,
 				attributes: {
@@ -666,7 +619,7 @@ setTimeout( function() {
 
 		addInfo: function( ev ) {
 			this.addInfoWithProperties( { 
-				controlTitle: $(ev.currentTarget).text() 
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim() 
 			} );
 		},
 
@@ -682,7 +635,7 @@ setTimeout( function() {
 
 		addSignature: function( ev ) {
 			this.addSignatureWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -696,7 +649,7 @@ setTimeout( function() {
 
 		addTextarea: function(ev) {
 			this.addTextareaWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -714,7 +667,7 @@ setTimeout( function() {
 
 		addRadioGroup: function(ev) {
 			this.addRadioGroupWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -759,7 +712,7 @@ setTimeout( function() {
 
 		addCheckboxGroup: function(ev) {
 			this.addCheckboxGroupWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -809,7 +762,7 @@ setTimeout( function() {
 		 */
 		addSelect: function(ev) {
 			this.addSelectWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
