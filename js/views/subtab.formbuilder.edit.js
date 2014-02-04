@@ -72,9 +72,7 @@ wxApp = wxApp || {};
 			}
 
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
-				setTimeout( function() { 
-					me.getDefaultFormActions();
-				}, 100);
+				me.getDefaultFormActions();
 			}
 			else {
 				// Load currently existing form actions.
@@ -375,7 +373,9 @@ wxApp = wxApp || {};
 		},
 
 		addCustomAction: function( customAction ) {
-			var action = new wxApp.FormBuilderAction();
+			var action = new wxApp.FormBuilderAction(),
+			    me = this;
+
 			if ( typeof customAction == 'object' ) {
 				action.set( customAction );
 			}
@@ -383,7 +383,10 @@ wxApp = wxApp || {};
 			var actionView = new wxApp.FormBuilderActionView({
 				model: action
 			});
-			this.$( '#form-settings-accordion' ).append( actionView.render().el );
+
+			setTimeout(function() {
+				me.$( '#form-settings-accordion' ).append( actionView.render().el );
+			}, 100);
 
 			this.model.get( 'config' ).formActions.push( action );
 			return action;
