@@ -456,7 +456,7 @@ wxApp = wxApp || {};
 
 		addDateInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date',
 				attributes: {
 					type: 'date'
@@ -466,7 +466,7 @@ wxApp = wxApp || {};
 
 		addDateTimeLocalInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date / Time',
 				attributes: {
 					type: 'datetime-local'
@@ -476,7 +476,7 @@ wxApp = wxApp || {};
 
 		addEmailInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Email',
 				showPlaceholder: true,
 				multiClass: '',
@@ -488,7 +488,7 @@ wxApp = wxApp || {};
 
 		addFileInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'File upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -501,7 +501,7 @@ wxApp = wxApp || {};
 
 		addPhotoInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Photo upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -514,7 +514,7 @@ wxApp = wxApp || {};
 
 		addMonthInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Month',
 				attributes: {
 					type: 'month'
@@ -524,7 +524,7 @@ wxApp = wxApp || {};
 
 		addNumberInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
 				minClass: '',
 				maxClass: '',
@@ -538,7 +538,7 @@ wxApp = wxApp || {};
 
 		addPasswordInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Password',
 				showPlaceholder: true,
 				attributes: {
@@ -549,7 +549,7 @@ wxApp = wxApp || {};
 
 		addRangeInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Range',
 				minClass: '',
 				maxClass: '',
@@ -563,7 +563,7 @@ wxApp = wxApp || {};
 
 		addTextRangeInput: function(ev) {
 			this.addTextSlider({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Select One',
 				type: 'textSlider',
 				attributes: {
@@ -574,7 +574,7 @@ wxApp = wxApp || {};
 
 		addTelInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Telephone',
 				type: 'tel',
 				showPlaceholder: true,
@@ -586,7 +586,7 @@ wxApp = wxApp || {};
 
 		addTextInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Untitled',
 				type: 'text',
 				showPlaceholder: true,
@@ -598,7 +598,7 @@ wxApp = wxApp || {};
 
 		addTimeInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Time',
 				attributes: {
 					type: 'time'
@@ -608,7 +608,7 @@ wxApp = wxApp || {};
 
 		addUrlInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'URL',
 				showPlaceholder: true,
 				attributes: {
@@ -619,7 +619,7 @@ wxApp = wxApp || {};
 
 		addInfo: function( ev ) {
 			this.addInfoWithProperties( { 
-				controlTitle: $(ev.currentTarget).text() 
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim() 
 			} );
 		},
 
@@ -635,7 +635,7 @@ wxApp = wxApp || {};
 
 		addSignature: function( ev ) {
 			this.addSignatureWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -649,7 +649,7 @@ wxApp = wxApp || {};
 
 		addTextarea: function(ev) {
 			this.addTextareaWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -667,7 +667,7 @@ wxApp = wxApp || {};
 
 		addRadioGroup: function(ev) {
 			this.addRadioGroupWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -712,7 +712,7 @@ wxApp = wxApp || {};
 
 		addCheckboxGroup: function(ev) {
 			this.addCheckboxGroupWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -762,7 +762,7 @@ wxApp = wxApp || {};
 		 */
 		addSelect: function(ev) {
 			this.addSelectWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
