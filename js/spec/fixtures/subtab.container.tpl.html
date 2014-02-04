@@ -2,12 +2,15 @@
 <script type="text/template" id="subtab-container-template">
     <ul class="wx-tablist-layout pricing-table">
         <li class="price">
-            <span>Editing tab: &nbsp;</span>
+            Editing primary tab:
             <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title %> | Change title or icon</a>
             <span class="delete"><a href="#" class="wx-delete-container">&times; <span class="wx-delete-label">delete</span></a></span>
         </li>
 
         <li class="bullet-item wx-tablist-layout-controls" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
+
+            <p class="wx-tablist-edit-title">Layout for this primary tab:</p>
+
             <input type="hidden" id="tabLayout" />
 
             <div class="row">
@@ -26,7 +29,7 @@
 
     <ul class='adminlist pricing-table wx-tablist-features'>
         <li class="price" style="">
-            Features assigned to this tab:
+            Features assigned to this primary tab:
         </li>
     </ul>
 
