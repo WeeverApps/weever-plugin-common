@@ -18,14 +18,15 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
+			var me = this,
+				elementsJson,
+				actionsJson;
 
 			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
 				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
 			}
 			else {
 				// Load currently existing form elements.
-				var me = this,
-				    elementsJson;
 				try {
 					elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
 				} catch(err) {
@@ -70,16 +71,13 @@ wxApp = wxApp || {};
 				}, 100 );
 			}
 
-			console.log( 'FORM-ACTIONS TYPE' );
-			console.log( typeof this.model.get( 'config' ).formActions );
-			console.log( 'FORM-ACTIONS' );
-			console.log( this.model.get( 'config' ).formActions );
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
-				this.getDefaultFormActions();
+				setTimeout( function() { 
+					me.getDefaultFormActions();
+				}, 100);
 			}
 			else {
 				// Load currently existing form actions.
-				var actionsJson;
 				try {
 					actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
 				} catch(err) {
