@@ -7,16 +7,16 @@ var wxApp = wxApp || {};
 		model: wxApp.FormBuilderControl,
 
 		initialize: function() {
-			console.log(this.toJSONrecursive());
 			this.on('add', this.onAdd);
 		},
 
 		onAdd: function( e ) {
 			$( '#form-build-area' ).sortable({
+				axis:  'y',
 				start: function( event, ui ) {
 					$( '#form-build-area section' ).removeClass('active');
 				},
-				stop: function( event, ui ) {
+				stop:  function( event, ui ) {
 					ui.item.trigger( 'sortable-drop', ui.item.index() );
 				}
 			});

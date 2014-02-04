@@ -1,0 +1,19 @@
+<script type="text/template" id="form-builder-signature">
+	<p class="title" data-section-title>
+		<a href="#panel<%- ordinal %>">
+			<%- controlTitle %>
+		</a>
+	</p>
+	<div class="content" data-section-content>
+		<label>Enter the text that will appear above your signature below.</label>
+		<input type="text" class="wx-form-builder-label-input" value="<%- label %>" />
+        <button class="wx-form-builder-delete small alert">Delete Field</button>
+	</div>
+</script>
+
+<script type="text/template" id="form-builder-signature-preview">
+	<p>
+		<%= label %><br/>
+		<em style="font-family: Times New Roman, Serif">x</em>&nbsp;_____________________________________
+	</p>
+</script>

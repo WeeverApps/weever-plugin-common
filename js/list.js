@@ -22,7 +22,7 @@ var wx = wx || {};
 var wxApp = wxApp || {};
 
 (function($){
-    wx.makeApiCall = function(endpoint, paramsObj, successCallback, datatype) {
+    wx.makeApiCall = function(endpoint, paramsObj, successCallback, failureCallback, datatype) {
 		var method = 'POST', data = '';
         var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
         var queryStr = [];
@@ -41,7 +41,7 @@ var wxApp = wxApp || {};
 			data: data,
             datatype: datatype,
             success: function(v) {
-                wx.apiSuccess( v, successCallback );
+                wx.apiSuccess( v, successCallback, failureCallback );
             },
             error: function(v, message) {
                 // Sometimes the call appears to be an error because we get PHP
@@ -51,25 +51,33 @@ var wxApp = wxApp || {};
                     if (i > -1) {
                         var responseJson = v.responseText.substring( i );
                         responseJson = JSON.parse( responseJson );
-                        wx.apiSuccess( responseJson, successCallback );
+                        wx.apiSuccess( responseJson, successCallback, failureCallback );
                         return;
                     }
                 }
 
-                jQuery('#wx-modal-loading-text').html(message);
-                jQuery('#wx-modal-secondary-text').html('');
-                jQuery('#wx-modal-error-text').html( 'Server Error Occurred' );
+                if ( failureCallback ) {
+                    failureCallback( v );
+                } else {
+                    jQuery('#wx-modal-loading-text').html(message);
+                    jQuery('#wx-modal-secondary-text').html('');
+                    jQuery('#wx-modal-error-text').html( 'Server Error Occurred' );
+                }
             }
         });
     };
 
-    wx.apiSuccess = function( v, successCallback ) {
+    wx.apiSuccess = function( v, successCallback, failureCallback ) {
         if ( ! v.error && v.success )
             successCallback(v);
         else {
-            jQuery('#wx-modal-loading-text').html(v.message ? v.message : 'Error');
-            jQuery('#wx-modal-secondary-text').html('');
-            jQuery('#wx-modal-error-text').html( 'Server Error Occurred' );
+            if ( failureCallback ) {
+                failureCallback( v )
+            } else {
+                jQuery('#wx-modal-loading-text').html(v.message ? v.message : 'Error');
+                jQuery('#wx-modal-secondary-text').html('');
+                jQuery('#wx-modal-error-text').html( 'Server Error Occurred' );
+            }
         }
         Backbone.Events.trigger( 'api:success' );
     };

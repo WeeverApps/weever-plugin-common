@@ -1,24 +1,128 @@
 <script type="text/template" id="form-builder-action-docusign">
 	<p class="title" data-section-title><a href="#panel4">DocuSign eSignature&trade;</a></p>
 	<div class="content" data-section-content>
-		<label>
-			DocuSign Username:
-			<input type="text" class="wx-form-builder-docusign-username" value="<%- username %>" />
-		</label>
-		<label>
-			DocuSign Password:
-			<input type="password" class="wx-form-builder-docusign-password" value="<%- password %>" />
-		</label>
-		<label>
-			Return URL (if empty, your user will be returned to your app URL):
-			<input type="url" class="wx-form-builder-docusign-returnUrl" value="<%- returnUrl %>" />
-		</label>
-		<fieldset class="wx-form-builder-action-email-pdfheader">
-			<h4>PDF Header Details</h4>
-			<input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- pdfHeader.title %>" />
-			<input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- pdfHeader.line1 %>" />
-			<input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- pdfHeader.line2 %>" />
-			<input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- pdfHeader.line3 %>" />
-		</fieldset>
+		<p>When you DocuSign your documents, good things happen (I dunno, some sort of DocuSign marketing text here).</p>
+		
+		<div id="docusignAccountInfo">
+			<a href="#" id="docusignLogin">Login</a> | <a href="#" id="docusignCreate">Create Account</a> | <a href="#" id="docusignChangePassword">Change Password</a> | <a href="https://www.docusign.net/Member/MemberForgotPassword.aspx" target="_BLANK">Forgot Password</a>
+			<br>
+			<br>
+			<div id="docusignLoginForm" style="display: none">
+				<div data-alert class="login alert-box alert" style="display: none"></div>
+				<label>
+					DocuSign Email Address:
+					<input type="text" class="wx-form-builder-docusign-username" value="<%- username %>" />
+				</label>
+				<label>
+					DocuSign Password:
+					<input type="password" class="wx-form-builder-docusign-password" value="<%- password %>" />
+				</label>
+				<button id="wx-docusign-login-button" class="success radius">Login</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+			</div>
+
+			<div id="docusignCreateForm" style="display: none">
+				<div data-alert class="account alert-box alert" style="display: none"></div>
+				<label>
+					Account Name (The name of this account, eg, your company name) *:
+					<input type="text" class="wx-form-builder-docusign-accountName" />
+				</label>
+				<label>
+					User Name (The name you will use to login) *:
+					<input type="text" class="wx-form-builder-docusign-username" />
+				</label>
+				<label>
+					Email *:
+					<input type="text" class="wx-form-builder-docusign-email" />
+				</label>
+				<label>
+					Title *:
+					<select class="wx-form-builder-docusign-title">
+						<option>Mr</option>
+						<option>Mrs</option>
+						<option>Miss</option>
+						<option>Ms</option>
+						<option>Dr</option>
+					</select>
+				</label>
+				<label>
+					First Name *:
+					<input type="text" class="wx-form-builder-docusign-firstName" />
+				</label>
+				<label>
+					Middle Name:
+					<input type="text" class="wx-form-builder-docusign-middleName" />
+				</label>
+				<label>
+					Last Name *:
+					<input type="text" class="wx-form-builder-docusign-lastName" />
+				</label>
+				<label>
+					Name Suffix:
+					<input type="text" class="wx-form-builder-docusign-suffix" />
+				</label>
+				<label>
+					Password *:
+					<input type="password" class="wx-form-builder-docusign-password" />
+				</label>
+				<label>
+					Repeat Password *:
+					<input type="password" class="wx-form-builder-docusign-password-again" />
+				</label>
+				<button id="wx-docusign-create-account-button" class="success radius">Create Account</button>
+			</div>
+
+			<div id="docusignChangePassord" style="display: none">
+				<div data-alert class="changePassword alert-box alert" style="display: none"></div>
+				<label>
+					DocuSign Email Address:
+					<input type="text" class="wx-form-builder-docusign-username" value="<%- username %>" />
+				</label>
+				<label>
+					Current Password:
+					<input type="password" class="wx-form-builder-docusign-old-password" value="<%- password %>" />
+				</label>
+				<label>
+					New Password:
+					<input type="password" class="wx-form-builder-docusign-password" />
+				</label>
+				<label>
+					Repeat New Password:
+					<input type="password" class="wx-form-builder-docusign-new-password-again" />
+				</label>
+				<label>
+					Forgot Password Question (eg, What is your mother&apos;s maiden name?) *
+					<input type="text" class="wx-form-builder-docusign-forgot-password-q1" />
+				</label>
+				<label>
+					Forgot Password Answer *
+					<input type="text" class="wx-form-builder-docusign-forgot-password-a1" />
+				</label>
+				<button id="wx-docusign-change-password-button" class="success radius">Change Password</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+			</div>
+		</div>
+
+		<div id="docusignOtherInfo" style="display: none">
+			<div data-alert class="login alert-box success"></div>
+			<label>
+				Return URL (if empty, your user will be returned to your app URL):
+				<input type="url" class="wx-form-builder-docusign-returnUrl" value="<%- returnUrl %>" />
+			</label>
+			<label>
+				The title of the PDF Document
+				<input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- pdfHeader.title %>" />
+			</label>
+			<label>
+				Line One (???)
+				<input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- pdfHeader.line1 %>" />
+			</label>
+			<label>
+				Line Two (???)
+				<input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- pdfHeader.line2 %>" />
+			</label>
+			<label>
+				Line Three (???)
+				<input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- pdfHeader.line3 %>" />
+			</label>
+		</div>
 	</div>
 </script>

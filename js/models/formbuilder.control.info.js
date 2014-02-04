@@ -10,7 +10,7 @@ wxApp = wxApp || {};
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'div',
 				label: 'Informational text',
-				innerHTML: ''
+				innerHTML: 'Enter some informational text here!'
 			} );
 
 			return newDefaults;

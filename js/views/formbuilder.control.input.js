@@ -5,9 +5,9 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlInputView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-input',
 		preview: null,
+		firstRender: true,
 
 		initialize: function( options ) {
-			console.log( options );
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
 			var $template = $( this[options.type + 'TplSelector'] );
 			this.inputTpl = _.template( $template.html() );
@@ -22,6 +22,13 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+
+			if ( this.firstRender ) {
+				// Focus on the label the first time you render this control.
+				setTimeout( function() { this.$('.wx-form-builder-label-input').focus(); console.log('focused'); }, 1);
+				this.firstRender = false;
+			}
+
 			return this;
 		}
 	});
