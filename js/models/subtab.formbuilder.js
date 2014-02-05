@@ -9,7 +9,7 @@ wxApp = wxApp || {};
 			uploadUrl = window.location.origin + '/wp-admin/admin-ajax.php';
 			break;
 		case 'joomla':
-			uploadUrl = '';
+			uploadUrl = window.location.origin + '/administrator/components/com_weever/helpers/file-upload.php'; // + '?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl
 			break;
 		default:
 			uploadUrl = 'http://weeverapp.com/api/v3/_google_drive/upload';

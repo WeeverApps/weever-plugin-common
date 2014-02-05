@@ -2,8 +2,8 @@
 wxApp = wxApp || {};
 
 (function($){
-	wxApp.FormBuilderControlSignatureView = wxApp.FormBuilderControlView.extend({
-		tplSelector: '#form-builder-signature',
+	wxApp.FormBuilderControlDocusignSignatureView = wxApp.FormBuilderControlView.extend({
+		tplSelector: '#form-builder-docusign-signature',
 		preview: null,
 
 		initialize: function() {
@@ -27,19 +27,19 @@ wxApp = wxApp || {};
 
 		getPreview: function() {
 			if ( this.preview === null ) {
-				this.preview = new wxApp.FormBuilderControlSignaturePreview({ model: this.model });
+				this.preview = new wxApp.FormBuilderControlDocusignSignaturePreview({ model: this.model });
 			}
 			return this.preview;
 		}
 
 	});
 
-	wxApp.FormBuilderControlSignaturePreview = Backbone.View.extend({
+	wxApp.FormBuilderControlDocusignSignaturePreview = Backbone.View.extend({
 		tagName: 'div',
 		className: 'wx-form-preview-row',
 
 		initialize: function() {
-			var selector = '#form-builder-signature-preview';
+			var selector = '#form-builder-docusign-signature-preview';
 			var $template = $( selector );
 			this.inputTpl = _.template( $template.html() );
 			this.model.bind('change', this.render, this);

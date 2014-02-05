@@ -3,12 +3,12 @@ wxApp = wxApp || {};
 
 (function($){
 
-	wxApp.FormBuilderControlSignature = wxApp.FormBuilderControl.extend({
+	wxApp.FormBuilderControlDocusignSignature = wxApp.FormBuilderControl.extend({
 		defaults: function() {
 			// This is annoying
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
-				control: 'signature',
+				control: 'docusignSignature',
 				label: 'Sign Here',
 				username: '',
 				password: '',
