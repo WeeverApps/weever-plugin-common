@@ -97,7 +97,7 @@ wxApp = wxApp || {};
             console.log(wx.pluginUrl);
             
             var me = this,
-                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
+                url = wx.pluginUrl + 'helpers/file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
                 $input = $( e.currentTarget ),
                 span_id = $input.attr('id').replace('upload_', '#save_image_'),
                 hidden_id = $input.attr('id').replace('upload_', '#');
