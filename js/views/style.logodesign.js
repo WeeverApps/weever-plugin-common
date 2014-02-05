@@ -149,27 +149,40 @@ jQuery( document ).ready( function() {
 	        uploadFile: function( e ) {
 	
 	            var me = this,
-	                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
+	                url = wx.pluginUrl + 'helpers/file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
 	                $input = $( e.currentTarget ),
 	                span_id = $input.attr('id').replace('upload_', '#save_image_'),
 	                hidden_id = $input.attr('id').replace('upload_', '#');
 	
 	            $( span_id ).html('Saving...');
-	
+				
+				console.log('upload...');
+				console.log(url);
+				console.log($input);
+				
 	            $.ajax( url, {
 	                iframe: true,
 	                files: $input,
 	                success: function( data ) {
-	
+						
+						console.log('success...');
+						console.log(data);
+						
 	                    // The stupid data comes in HTML for some reason (WP only?)
 	                    // Strip out the HTML, and convert to json object.
 	                    data = data.replace(/(<([^>]+)>)/ig,"");
 	                    data = JSON.parse( data );
 	                    
+	                    console.log(data);
+	                    
 	                    $( hidden_id ).val( data.file_name );
 	                    wxApp.design.get('titlebar').image = data.file_name;
-	
+						
+						console.log(wxApp.design.get('titlebar').image);
+						
 	                    me.save( function(response) {
+	                    
+	                    	console.log('saved...');
 	                        $('#wx-titlebar_logo_live').attr('src', data.file_name);
 	                        $( span_id ).html('Saved!').delay(2000).queue( function() { $(this).html('Upload image'); } );
 	                        wx.rebuildApp();
@@ -185,6 +198,10 @@ jQuery( document ).ready( function() {
 	            // the top-level params to be string representations of JSON 
 	            // objects... Therefore, we have to 'stringify' the inner params.
 	            var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
+	            
+	            console.log('save...');
+	            console.log(innerParams);
+	            
 	            var params = { titlebar: innerParams };
 	
 	            wx.makeApiCall('design/set_titlebar', params, callback);
