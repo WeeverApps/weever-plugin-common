@@ -5,13 +5,13 @@
         <!-- container for detailed help text -->
         <div class="wx-form-tips">
 
-            <p>Optional. When a user fills out your form, email a PDF of their submission to the person(s) you specify.</P>
+            <p><b>Optional.</b> When a person completes the form email a PDF copy of their submission to the receipients you specify.</P>
 
             <label>Please specify the email recipient(s)</label>
 
             <input class="wx-form-builder-action" type="email" value="<%- value %>" />
 
-            <ul class="no-bullet">
+            <ul class="no-bullet" style="font-size: .875em;">
                 <li>Examples of valid entries:</li>
                 <li>user@example.com</li>
                 <li>user@example.com, anotheruser@example.com</li>
@@ -19,18 +19,20 @@
                 <li>User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
             </ul>
 
+            <p><b>PDF Document details</b> (optional)</p>
+
             <div class="wx-form-builder-action-email-pdfheader">
 
                 <label>PDF Document title</label>
                 <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfHeader.title %>" />
 
-                <label>Text line 1 (below the title)</label>
+                <label>Business Name</label>
                 <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfHeader.line1 %>" />
 
-                <label>Text line 2</label>
+                <label>Address line one</label>
                 <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfHeader.line2 %>" />
 
-                <label>Text line 3</label>
+                <label>Address line two</label>
                 <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfHeader.line3 %>" />
 
             </div>
