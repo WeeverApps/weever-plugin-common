@@ -24,6 +24,14 @@ wxApp = wxApp || {};
 			var modelJSON = this.model.toJSON();
 			var inputTpl = this.inputTpl( modelJSON );
 			this.$el.html( inputTpl );
+
+			if ( this.firstRender ) {
+				// Focus on the label the first time you render this control.
+				// We need to add this 1ms delay for Chrome and Safari, as otherwise the focus doesn't really happen.
+				setTimeout( function() { this.$('.wx-form-builder-info').focus().select(); }, 1);
+				this.firstRender = false;
+			}
+
 			return this;
 		},
 

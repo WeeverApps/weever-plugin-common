@@ -4,27 +4,7 @@ wxApp = wxApp || {};
 (function($){
 	wxApp.FormBuilderControlSignatureView = wxApp.FormBuilderControlView.extend({
 		tplSelector: '#form-builder-signature',
-
-		// Extend the events from the parent
-		events: function() {
-			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'blur .wx-form-builder-docusign-username': 'updateUsername',
-				'blur .wx-form-builder-docusign-password': 'updatePassword',
-				'blur .wx-form-builder-docusign-returnUrl': 'updateReturnUrl'
-			});
-		},
-
-		updateUsername: function( ev ) {
-			this.model.set( 'username', $( ev.currentTarget ).val() );
-		},
-
-		updatePassword: function( ev ) {
-			this.model.set( 'password', $( ev.currentTarget ).val() );
-		},
-
-		updateReturnUrl: function( ev ) {
-			this.model.set( 'returnUrl', $( ev.currentTarget ).val() );
-		},
+		preview: null,
 
 		initialize: function() {
 			var $template = $( this.tplSelector );
@@ -34,9 +14,42 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+						
+			if ( this.firstRender ) {
+				// Focus on the label the first time you render this control.
+				// We need to add this 1ms delay for Chrome and Safari, as otherwise the focus doesn't really happen.
+				setTimeout( function() { this.$('.wx-form-builder-label-input').focus(); }, 1);
+				this.firstRender = false;
+			}
+
 			return this;
-			console.log('input render');
+		},
+
+		getPreview: function() {
+			if ( this.preview === null ) {
+				this.preview = new wxApp.FormBuilderControlSignaturePreview({ model: this.model });
+			}
+			return this.preview;
 		}
 
 	});
+
+	wxApp.FormBuilderControlSignaturePreview = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-preview-row',
+
+		initialize: function() {
+			var selector = '#form-builder-signature-preview';
+			var $template = $( selector );
+			this.inputTpl = _.template( $template.html() );
+			this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			var model = this.model.toJSON();
+			this.$el.html( this.inputTpl( model ) );
+			return this;
+		}
+	});
+
 })(jQuery);

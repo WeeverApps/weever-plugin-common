@@ -1,4 +1,3 @@
-
 wxApp = wxApp || {};
 
 jQuery( document ).ready( function() {
@@ -8,7 +7,6 @@ jQuery( document ).ready( function() {
         el: '#toptabs',
 
         initialize: function() {
-                console.log('*initialize*');
             this.collection = new wxApp.FeatureCollection();
             this.collection.bind('add', this.addOne, this);
         },
@@ -33,25 +31,19 @@ jQuery( document ).ready( function() {
     wxApp.account = new wxApp.Account();
     wxApp.account.fetch( function() {
         wxApp.featureList = new wxApp.FeatureList();
-                
-            // Grab the data and kick things off
-            wxApp.featureList.collection.fetch({
-                    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
-                    success: function(result) {
-                    
-                            console.log('featurelist....');
-                            console.log(result);
-                            
-                    },
-                    error: function() {
-                            wxApp.featureList.collection.fetch({
-                                    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
-                                    success: function(result) {
-                                     },
-                                    error: function() { console.log('Could not load feature list.') }
-                            });
-                    }
-            });
+
+	    // Grab the data and kick things off
+	    wxApp.featureList.collection.fetch({
+		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
+		    success: function(result) {},
+		    error: function() {
+			    wxApp.featureList.collection.fetch({
+				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+				    success: function(result) {  },
+				    error: function() { console.log('Could not load feature list.') }
+			    });
+		    }
+	    });
     });
 
 })(jQuery);

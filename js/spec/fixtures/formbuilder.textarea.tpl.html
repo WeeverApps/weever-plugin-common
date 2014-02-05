@@ -1,7 +1,7 @@
 <script type="text/template" id="form-builder-textarea">
 	<p class="title" data-section-title>
 		<a href="#panel<%- ordinal %>">
-			<%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span>
+			&#8597; <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span>
 		</a>
 	</p>
 	<div class="content" data-section-content>
@@ -9,9 +9,13 @@
 
 		<input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
 
+		<% if (advanced) { %>
+			<label>Name (for POST)</label>
+			<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
+		<% } %>
         <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
 
-        <a class="wx-form-builder-delete">&times; Delete</a>
+        <button class="wx-form-builder-delete small alert">Delete Field</button>
 	</div>
 </script>
 
