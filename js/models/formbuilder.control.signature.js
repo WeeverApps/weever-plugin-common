@@ -9,7 +9,9 @@ wxApp = wxApp || {};
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'docusignSignature',
-				label: 'Email and signature',
+				label: 'Sign here',
+				instructions: 'On completing this form your data will be presented back to you for review and signature.',
+				title: 'Name, email and signature',
 				username: '',
 				password: '',
 				returnUrl: ''

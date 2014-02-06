@@ -29,7 +29,7 @@ wxApp = wxApp || {};
 			'click #wx-docusign-login-button'                : 'login',
 			'click #wx-docusign-create-account-button'       : 'createAccount',
 			'click #wx-docusign-change-password-button'      : 'changePassword',
-			'click .wx-continue-button'                      : 'next',
+			'click .wx-continue-button'                      : 'next'
 		},
 
 		validate: function() {

@@ -313,6 +313,11 @@ wxApp = wxApp || {};
 				}
 			}
 
+			// Removal of the file index association prompt
+			// @TODO: Make the file index association prompt clearer or something
+			wxApp.SubTabEditView.prototype.finish.apply( this );
+			return;
+
 			// Call super and exit if an index has already been identified
 			if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
 				wxApp.SubTabEditView.prototype.finish.apply( this );
