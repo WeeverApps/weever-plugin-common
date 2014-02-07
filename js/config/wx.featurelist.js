@@ -1,6 +1,4 @@
 [
-    { "featureName": "FormBuilder",         "name": "FormBuilder",      "rel": "hide" },
-    { "featureName": "DocuSign",            "name": "DocuSign",         "rel": "hide" },
     { "featureName": "RSS",                 "name": "RSS feed"          },
     
     { "featureName": "JoomlaBlog",       "name": "Joomla Blog" },
