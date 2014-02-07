@@ -6,8 +6,11 @@
             
             <?php 
         	
-	        	if( comWeeverHelper::joomlaVersion() == '2.5' )  // ### 2.5 only
+	        	if( comWeeverHelper::joomlaVersion() == 2.5 )  // ### 2.5 only
 	        		$link = 'index.php?option=com_content&amp;task=element&amp;tmpl=component&amp;layout=modal&amp;function=jSelectArticleNew&amp;object=jarticle';
+	        	
+	        	if( comWeeverHelper::joomlaVersion() >= 3 )  // ### 2.5 only
+	        		$link = 'index.php?option=com_content&amp;view=articles&amp;tmpl=component&amp;layout=modal&amp;function=jSelectArticle_jform_request_id';
         
         	?>
             
