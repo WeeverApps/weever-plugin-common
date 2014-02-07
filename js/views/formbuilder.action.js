@@ -20,6 +20,7 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
 			'click .radio-mode'                        : 'updateMode',
+			'change .wx-form-builder-docusign-demomode': 'toggleDemoMode'
 			// 'click #docusignLogin'                     : 'showLogin',
 			// 'click #docusignCreate'                    : 'showCreateAccount',
 			// 'click #docusignChangePassword'            : 'showChangePassword',
@@ -49,6 +50,17 @@ wxApp = wxApp || {};
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			this.$el.addClass( this.model.get( 'method' ) );
 			return this;
+		},
+
+		toggleDemoMode: function( ev ) {
+
+			if ( $( ev.currentTarget ).is( ':checked' ) ) {
+				this.model.set( 'demomode', true );
+			}
+			else {
+				this.model.unset( 'demomode' );
+			}
+
 		},
 
 		updateUsername: function( ev ) {

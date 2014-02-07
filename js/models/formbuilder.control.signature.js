@@ -10,6 +10,10 @@ wxApp = wxApp || {};
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'docusignSignature',
 				label: 'Sign here',
+				labelOption: {
+					verb: '',
+					fields: []
+				},
 				instructions: 'On completing this form your data will be presented back to you for review and signature.',
 				title: 'Name, email and signature',
 				username: '',

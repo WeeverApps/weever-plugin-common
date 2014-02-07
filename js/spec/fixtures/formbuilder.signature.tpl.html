@@ -23,7 +23,23 @@
         <input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
         <% } %>
 
-        <button class="wx-form-builder-delete small alert">Delete Field</button>
+		<fieldset>
+			<legend>On review and signature</legend>
+			<label>
+				<input
+						type="checkbox"
+						name="wx-form-builder-docusign-label-option"
+						value="append-name"
+						class="wx-form-builder-docusign-label-append-name"> Display the name of the signer below the signature field</label>
+			<label>
+				<input
+						type="checkbox"
+						name="wx-form-builder-docusign-label-option"
+						value="append-email"
+						class="wx-form-builder-docusign-label-append-email"> Display the email address of the signer below the signature field</label>
+		</fieldset>
+
+		<button class="wx-form-builder-delete small alert">Delete Field</button>
 	</div>
 
 
