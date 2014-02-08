@@ -37,6 +37,9 @@
             	
             	if( comWeeverHelper::joomlaVersion() == '2.5' )  // ### 2.5 only
             		$link = 'index.php?option=com_k2&amp;view=items&amp;task=element&amp;tmpl=component&amp;object=k2item';
+
+                if( comWeeverHelper::joomlaVersion() >= 3 )
+                    $link = 'index.php?option=com_k2&amp;task=element&amp;view=items&amp;tmpl=component&amp;layout=modal&amp;function=jSelectItem';
         
         	?>
             
