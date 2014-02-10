@@ -12,6 +12,7 @@ jQuery( document ).ready( function() {
         },
 
         addOne: function(feature) {
+        
             // Ensure the the CMS is either:
             // a) null (which defaults to 'all')
             // b) Set to 'all'
@@ -19,9 +20,15 @@ jQuery( document ).ready( function() {
             if ( feature.get('cms') == null ||
                  $.inArray( 'all',  feature.get('cms') ) === 0  || 
                  $.inArray( wx.cms, feature.get('cms') ) === 0 ) {
-                var me = this;
-                var view = new wxApp.FeatureView({ model: feature });
-                this.$el.append( view.render().el );
+                
+                if ( wx.hasK2 == 1 || feature.attributes.featureName.search(/k2/i) == -1  ) {                
+                	
+                	var me = this;
+                	var view = new wxApp.FeatureView({ model: feature });
+                	this.$el.append( view.render().el );
+                	
+                }
+                
             }
         }
     });
