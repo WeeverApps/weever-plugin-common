@@ -87,14 +87,24 @@ wxApp = wxApp || {};
         },
 
         refreshSortable: function() {
-            if ( undefined != this.$el.sortable )
-                this.$el.sortable( 'refresh' );
+            try {
+                if ( undefined != this.$el.sortable )
+                    this.$el.sortable( 'refresh' );
+            }
+            catch (e) {
+                // Do nothing. This occurs when you're dragging the last item out.
+            }
         },
 
         cancelSort: function( tabId ) {
-            var me = this;
-            if ( undefined != this.$el.sortable && tabId == this.model.get('id') ) {
-                me.$el.sortable( 'cancel' );
+            try {
+                var me = this;
+                if ( undefined != this.$el.sortable && tabId == this.model.get('id') ) {
+                    me.$el.sortable( 'cancel' );
+                }
+            }
+            catch (e) {
+                // Do nothing. This occurs when you're dragging the last item out.
             }
         },
 
