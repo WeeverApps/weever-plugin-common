@@ -160,7 +160,7 @@ wxApp = wxApp || {};
 
 			var params = { username: username, password: password };
 			if ( true ) params.demomode = 1;	// TODO - Remove this.
-			wx.makeApiCall('_docusign/clientLogin', params, success, failure);
+			wx.makeApiCall('_docusign/client_login', params, success, failure);
 		},
 
 		createAccount: function() {
@@ -182,7 +182,7 @@ wxApp = wxApp || {};
 				delete account.errors;
 				if ( true ) account.demomode = 1;	// TODO - Remove this.
 
-				wx.makeApiCall( '_docusign/createAccount', account, success, failure );
+				wx.makeApiCall( '_docusign/create_account', account, success, failure );
 			}
 			else {
 
@@ -229,7 +229,7 @@ wxApp = wxApp || {};
 
 				var params = { username: username, password: oldPassword, newPassword: newPassword, question1: question1, answer1: answer1 };
 				if ( true ) params.demomode = 1;	// TODO - Remove this.
-				wx.makeApiCall('_docusign/changePassword', params, success, failure);
+				wx.makeApiCall('_docusign/change_password', params, success, failure);
 			}
 		},
 
