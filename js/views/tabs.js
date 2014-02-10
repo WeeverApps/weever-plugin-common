@@ -97,7 +97,7 @@ wxApp = wxApp || {};
 
             // We're moving a subtab up into a new parent tab, update the db then move the subtab across
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
-            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: '0' }, function() {
+            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: 0 }, function() {
                 draggedItemView.model.trigger('tab:move');
                 wxApp.tabsView.addNewMainTab( draggedItemView.model );
 
