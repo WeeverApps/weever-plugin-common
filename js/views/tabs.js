@@ -84,7 +84,7 @@ wxApp = wxApp || {};
 
         startDroppable: function() {
             this.$el.droppable( {
-                accept: ".list-sub-items li, .list-add-content-items li",
+                accept: ".list-sub-items li",
                 hoverClass: "hover",
                 drop: this.onDrop,
                 tolerance: 'pointer',
