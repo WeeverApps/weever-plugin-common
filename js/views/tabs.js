@@ -93,7 +93,6 @@ wxApp = wxApp || {};
 
         onDrop: function( event, ui ) {
 
-            var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');
 
             // We're moving a subtab up into a new parent tab, update the db then move the subtab across
