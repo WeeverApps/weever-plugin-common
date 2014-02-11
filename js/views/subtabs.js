@@ -97,15 +97,10 @@ wxApp = wxApp || {};
         },
 
         cancelSort: function( tabId ) {
-            try {
-                var me = this;
-                if ( undefined != this.$el.sortable && tabId == this.model.get('id') ) {
-                    me.$el.sortable( 'cancel' );
-                }
-            }
-            catch (e) {
-                // Do nothing. This occurs when you're dragging the last item out.
-            }
+            // var me = this;
+            // if ( undefined != this.$el.sortable && tabId == this.model.get('id') ) {
+            //     me.$el.sortable( 'cancel' );
+            // }
         },
 
         deleteSubTab: function(subTab) {

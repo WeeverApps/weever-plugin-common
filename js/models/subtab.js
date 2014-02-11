@@ -68,12 +68,11 @@ wxApp = wxApp || {};
             console.log('Returning ' + retVal);
             return retVal;
         },
-
-                getAPIData: function() {
-                        console.log( 'getAPIData' );
-                        console.log( this );
-                        var data = this.toJSON();
-                        data.config = JSON.stringify(data.config);
+        
+		getAPIData: function() {
+			var data = this.toJSON();
+			data.config = JSON.stringify(data.config);
+			
             if ( data.id == data.parent_id )
                 delete data['parent_id'];
             if ( data.id )
