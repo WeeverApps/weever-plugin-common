@@ -1,0 +1,32 @@
+<script type="text/template" id="joomlacontact-subtab-edit-template">
+
+    <p>Add a contact of Joomla &lsquo;posts&rsquo;.  Your app will display newly published contact automatically.</p>
+    
+    <div id="wx-add-joomla-contact-dialog" class="wx-add-joomla-contact">
+                    
+            <div id='wx-add-joomla-contact-item'>
+            
+                    <select id='wx-add-joomla-contact-select' class='wx-add-joomla-contact-select'>
+                            <option><?php echo "Choose Joomla contact";//echo JText::_('WEEVER_CHOOSE_BLOG_Jcontact_PARENTHESES'); ?></option>
+                            
+                            <?php foreach( (object) $this->joomlaContacts as $k=>$v ) : ?>
+                            
+                                    <option value='<?php echo $v->id; ?>'><?php echo $v->name; ?></option>
+                                    
+                                    <?php $hidden = "<input type='hidden' name='contact_name[]' value='".$v->name."' />"; ?>
+                                    <?php $hidden_array .= $v->id.","; ?>
+                            
+                            <?php endforeach; ?>
+                            
+                            <?php $hidden_array = rtrim($hidden_array,","); ?>
+                            <?php $hidden .= "<input type='hidden' name='comp_array' value='".$hidden_array."' />"; ?>
+                    
+                    </select>
+                    
+                    <?php echo $hidden; ?>
+            
+            </div>
+    
+    </div>
+    
+</script>

@@ -3,7 +3,8 @@
     
     { "featureName": "JoomlaBlog",       "name": "Joomla Blog" },
     { "featureName": "JoomlaCategory",   "name": "Joomla Category" },
-    { "featureName": "JoomlaArticle",       "name": "Joomla Article" },
+    { "featureName": "JoomlaArticle",    "name": "Joomla Article" },
+    { "featureName": "JoomlaContact",    "name": "Joomla Contact" },
     
     { "featureName": "K2Blog",       "name": "K2 Blog" },
     { "featureName": "K2Category",   "name": "K2 Category" },
