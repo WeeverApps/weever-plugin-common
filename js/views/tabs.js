@@ -84,7 +84,7 @@ wxApp = wxApp || {};
 
         startDroppable: function() {
             this.$el.droppable( {
-                accept: ".list-sub-items li, .list-add-content-items li",
+                accept: ".list-sub-items li",
                 hoverClass: "hover",
                 drop: this.onDrop,
                 tolerance: 'pointer',
@@ -93,20 +93,17 @@ wxApp = wxApp || {};
 
         onDrop: function( event, ui ) {
 
-            var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');
 
-            // We're moving a subtab up into another tab, update the db then move the subtab across
+            // We're moving a subtab up into a new parent tab, update the db then move the subtab across
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
-            //if ( draggedItemView.model.get('parent_id') != me.model.get('id') ) {
-                wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: 0 }, function() {
-                    draggedItemView.model.trigger('tab:move');
-                    // me.model.addSubTab( draggedItemView.model );
-                    wxApp.EditTabsView.__super__.addNewMainTab.call( this, draggedItemView.model );
-                    // Select the parent tab.
-                    $('#' + draggedItemView.model.get('id') + 'TabID').click();
-                });
-            //}
+            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: 0 }, function() {
+                draggedItemView.model.trigger('tab:move');
+                wxApp.tabsView.addNewMainTab( draggedItemView.model );
+
+                // Select the parent tab.
+                $('#' + draggedItemView.model.get('id') + 'TabID').click();
+            });
 
             Backbone.Events.trigger( 'subtab:dragstop' );
 
