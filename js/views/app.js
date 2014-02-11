@@ -34,8 +34,6 @@ wxApp = wxApp || {};
         el: '#toptabs',
 
         initialize: function() {
-            this.allowAddContentButtonsToBeDragged();
-            this.allowDroppingOnAddArea();
             // Backbone.Events.on( 'api:success', this.highlightAppPreviewRefresh, this );
             Backbone.Events.on( 'subtab:dragstart', this.showDropTab, this );
             Backbone.Events.on( 'subtab:dragstop', this.hideDropTab, this );
@@ -45,34 +43,6 @@ wxApp = wxApp || {};
 
         events: {
             'click #preview-refresh': 'refreshAppPreview'
-        },
-
-        allowAddContentButtonsToBeDragged: function() {
-            if ( undefined != this.$('list-add-content-items li').draggable ) {
-                this.$('.list-add-content-items li').draggable({
-                    cursor: "move",
-                    cursorAt: { top: 10, left: 10 },
-                    helper: function( event ) {
-                        return $( "<div class='ui-widget-draggable'>" + $(event.delegateTarget).find('span')[0].innerHTML + "</div>" );
-                    },
-                    revert: true
-                });
-            }
-        },
-
-        allowDroppingOnAddArea: function() {
-            if ( undefined !== this.$('#addFeatureID').droppable ) {
-                this.$('#addFeatureID').droppable( {
-                    accept: ".list-add-content-items li",
-                    hoverClass: "ui-state-hover",
-                    drop: this.onDropOnAddArea
-                } );
-            }
-        },
-
-        onDropOnAddArea: function(event, ui) {
-            // Using global wxApp.appView since this is the dropped on li
-            wxApp.appView.createFeatureView($(ui.draggable).attr('id').replace('add-', ''));
         },
 
         createFeatureView: function(id, parentId, allowAdvanced) {
