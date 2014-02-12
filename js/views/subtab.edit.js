@@ -110,10 +110,10 @@ wxApp = wxApp || {};
                 this.setModelFromView(this.model);
                 this.setTitleFromView(this.model);
                 this.setIconFromView(this.model);
-    			this.saveModel();
-
+                this.saveModel();
+                
                 this.$el.foundation('reveal', 'close');
-
+                
                 wx.rebuildApp();
             }
 		},
@@ -161,8 +161,10 @@ wxApp = wxApp || {};
         setIconFromView: function( model ) {
             var icon = this.$('input:radio[name="wx-icon"]:checked').val();
 
-            model.set( 'icon_id', null );
-            model.set( 'icon', icon );
+            if ( icon ) {
+                model.set( 'icon_id', null );
+                model.set( 'icon', icon );
+            }
             return model;
         },
 
