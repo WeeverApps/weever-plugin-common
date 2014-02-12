@@ -1,0 +1,36 @@
+<script type="text/template" id="joomlamap-subtab-edit-template">
+
+    <p>Add a map of Joomla articles.  Your app will display newly published articles automatically.</p>
+    
+    <div id="wx-add-joomla-map-dialog" class="wx-add-joomla-map">
+                    
+            <div id='wx-add-joomla-map-item'>
+            
+                    <select id='wx-add-joomla-map-select' class='wx-add-joomla-map-select'>
+                            <option><?php echo "Select map";//echo JText::_('WEEVER_CHOOSE_BLOG_Jmap_PARENTHESES'); ?></option>
+                            
+                            <?php foreach( (object) $this->contentCategories as $k=>$v ) : ?>
+                            
+                                    <?php if( $v->access > 1 ) : ?>
+                                    
+                                            <?php $note = " (non-public)"; ?>
+                                            
+                                    <?php else : ?>
+                                    
+                                            <?php $note = ""; ?>
+                                    
+                                    <?php endif; ?>
+                            
+                                    <?php $link = "http://".$this->siteDomain."/index.php?option=com_content&view=category&layout=blog&id=".$v->id; ?>
+                                    
+                                    <option value='<?php echo $link; ?>&template=weever_cartographer'><?php echo $v->name; ?><?php echo $note; ?></option>
+                            
+                            <?php endforeach; ?>
+                    
+                    </select>
+            
+            </div>
+    
+    </div>
+
+</script>
