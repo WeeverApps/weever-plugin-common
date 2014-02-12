@@ -9,7 +9,7 @@ describe('JoomlaCategory SubTab', function() {
         this.model = null;
     });
 
-	it('should have default title of Category', function() {
+	it('should have default title of Blog', function() {
 		expect( this.model.get('title') ).toEqual('Category');
 	});
 

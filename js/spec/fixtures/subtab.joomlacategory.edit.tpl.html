@@ -1,13 +1,13 @@
 <script type="text/template" id="joomlacategory-subtab-edit-template">
 
-    <p>Add a category of Joomla &lsquo;posts&rsquo;.  Your app will display newly published category automatically.</p>
+    <p>Add a category of Joomla articles.  Your app will display newly published articles automatically.</p>
     
     <div id="wx-add-joomla-category-dialog" class="wx-add-joomla-category">
                     
             <div id='wx-add-joomla-category-item'>
             
                     <select id='wx-add-joomla-category-select' class='wx-add-joomla-category-select'>
-                            <option><?php echo "Choose Joomla category";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
+                            <option><?php echo "Select category";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
                             
                             <?php foreach( (object) $this->contentCategories as $k=>$v ) : ?>
                             

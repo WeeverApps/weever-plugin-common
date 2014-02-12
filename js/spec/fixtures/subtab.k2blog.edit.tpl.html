@@ -1,13 +1,13 @@
 <script type="text/template" id="k2blog-subtab-edit-template">
 
-    <p>Add all published k2 &lsquo;Blogs&lsquo; to your app.</p>
+    <p>Add K2 item content to your app via an existing menu item.  Your app will display article updates automatically.</p>
     
     <div id="wx-add-k2-blog-dialog" class="wx-add-k2-blog">
                     
             <div id='wx-add-k2-blog-item'>
             
                     <select id='wx-add-k2-blog-select' class='wx-add-k2-blog-select'>
-                            <option><?php echo "Choose K2 blog";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
+                            <option><?php echo "Select menu item";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
                             
                             <?php foreach( (object) $this->MenuK2Blogs as $k=>$v ) : ?>
                             
@@ -26,8 +26,7 @@
                             <?php endforeach; ?>
                     
                     </select>
-                    <label for='wx-add-k2-blog-select' class='wx-k2-blog-label'><?php echo "Weever Add K2 Blog";//echo JText::_('WEEVER_ADD_k2_BLOG'); ?></label>
-            
+
             </div>
     
     </div>

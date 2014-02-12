@@ -1,6 +1,6 @@
 <script type="text/template" id="joomlaarticle-subtab-edit-template">
 
-    <p>Add a specific Joomla &lsquo;article&rsquo; to your app.</p>
+    <p>Add a specific Joomla article to your app.</p>
     
     <div id="wx-add-joomla-article-dialog" class="wx-add-joomla-article">
             
@@ -18,19 +18,33 @@
             
             		<div class="select-joomla-content">
             		
-            			<a href="#" class="wx-load-joomla-article" data-reveal-id="select-joomla-article">Select Joomla Article</a>
+            			<a href="#" class="wx-load-joomla-article button secondary radius" data-reveal-id="select-joomla-article">Select article</a>
             			
             			<input type="hidden" id="wx-add-joomla-article-select" class="" value="" />
+
+                        <br>
             			
             		</div>
-            		
+
             </div>
+
             <br>
             
             <div id="select-joomla-article" class="reveal-modal" data-reveal>
             	<div class="row">
-            	    <iframe src="<?php echo $link; ?>" frameborder="0" width="700" height="450">
-            	</div>
+                    <div class="large-6 small-12 columns">
+                        <br>
+                        <h2>Joomla Article</h2>
+                        <p>Please select an article.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="wx-embed-container wx-content-selector">
+                            <iframe src="<?php echo $link; ?>" frameborder="0" seamless>
+                        </div>
+                    </div>
+                </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
     

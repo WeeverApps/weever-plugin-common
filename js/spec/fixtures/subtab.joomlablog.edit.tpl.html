@@ -1,13 +1,13 @@
 <script type="text/template" id="joomlablog-subtab-edit-template">
 
-    <p>Add all published Joomla &lsquo;Blogs&lsquo; to your app.</p>
+    <p>Add Joomla! article content to your app via an existing menu item.  Your app will display article updates automatically.</p>
     
     <div id="wx-add-joomla-blog-dialog" class="wx-add-joomla-blog">
                     
             <div id='wx-add-joomla-blog-item'>
             
                     <select id='wx-add-joomla-blog-select' class='wx-add-joomla-blog-select'>
-                            <option><?php echo "Choose Joomla blog";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
+                            <option><?php echo "Select menu item";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
                             
                             <?php foreach( (object) $this->MenuJoomlaBlogs as $k=>$v ) : ?>
                             
@@ -26,8 +26,6 @@
                             <?php endforeach; ?>
                     
                     </select>
-                    <label for='wx-add-joomla-blog-select' class='wx-joomla-blog-label'><?php echo "Weever Add Joomla Blog";//echo JText::_('WEEVER_ADD_JOOMLA_BLOG'); ?></label>
-            
             </div>
     
     </div>

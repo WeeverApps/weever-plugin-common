@@ -1,37 +1,8 @@
 <script type="text/template" id="k2category-subtab-edit-template">
 
-    <p>Add a category of k2 &lsquo;posts&rsquo;.  Your app will display newly published category automatically.</p>
+    <p>Add a category of K2 items. Your app will display newly published items automatically.</p>
     
     <div id="wx-add-k2-category-dialog" class="wx-add-k2-category">
-            
-            <!--       
-            <div id='wx-add-k2-category-item'>
-            
-                    <select id='wx-add-k2-category-select' class='wx-add-k2-category-select'>
-                            <option><?php echo "Choose K2 category";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
-                            
-                            <?php foreach( (object) $this->k2Categories as $k=>$v ) : ?>
-                            
-                                    <?php if( $v->access > 1 ) : ?>
-                                    
-                                            <?php $note = " (non-public)"; ?>
-                                            
-                                    <?php else : ?>
-                                    
-                                            <?php $note = ""; ?>
-                                    
-                                    <?php endif; ?>
-                            
-                                    <?php $link = "http://".$this->siteDomain."/index.php?option=com_k2&view=itemlist&cid=".$v->id; ?>
-                                    
-                                    <option value='<?php echo $link; ?>&template=weever_cartographer'><?php echo $v->name; ?><?php echo $note; ?></option>
-                            
-                            <?php endforeach; ?>
-                    
-                    </select>
-            
-            </div>
-            -->
             
             <?php 
             	
@@ -47,7 +18,7 @@
             
             		<div class="select-k2-content">
             		
-            			<a href="#" class="wx-load-k2-category" data-reveal-id="select-k2-category">Select K2 Category</a>
+            			<a href="#" class="wx-load-k2-category button secondary radius" data-reveal-id="select-k2-category">Select K2 category</a>
             			
             			<input type="hidden" id="wx-add-k2-category-select" class="" value="" />
             			
@@ -57,9 +28,20 @@
             <br>
             
             <div id="select-k2-category" class="reveal-modal" data-reveal>
-            	<div class="row">
-            	    <iframe src="<?php echo $link; ?>" frameborder="0" width="700" height="450">
-            	</div>
+                <div class="row">
+                    <div class="large-6 small-12 columns">
+                        <br>
+                        <h2>K2 Category</h2>
+                        <p>Please select a category.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="wx-embed-container wx-content-selector">
+                            <iframe src="<?php echo $link; ?>" frameborder="0" seamless>
+                        </div>
+                    </div>
+                </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
             

@@ -1,37 +1,8 @@
 <script type="text/template" id="k2item-subtab-edit-template">
 
-    <p>Add a specific k2 &lsquo;item&rsquo; to your app.</p>
+    <p>Add a specific K2 Item to your app.</p>
     
     <div id="wx-add-k2-item-dialog" class="wx-add-k2-item">
-            
-            <!--        
-            <div id='wx-add-k2-item-item'>
-            
-                    <select id='wx-add-k2-item-select' class='wx-add-k2-item-select'>
-                            <option><?php echo "Choose K2 item";//echo JText::_('WEEVER_CHOOSE_BLOG_JCATEGORY_PARENTHESES'); ?></option>
-                            
-                            <?php foreach( (object) $this->k2Items as $k=>$v ) : ?>
-                            
-                                    <?php if( $v->access > 1 ) : ?>
-                                    
-                                            <?php $note = " (non-public)"; ?>
-                                            
-                                    <?php else : ?>
-                                    
-                                            <?php $note = ""; ?>
-                                    
-                                    <?php endif; ?>
-                            
-                                    <?php $link = "http://".$this->siteDomain."/index.php?option=com_k2&view=item&id=".$v->id; ?>
-                                    
-                                    <option value='<?php echo $link; ?>&template=weever_cartographer'><?php echo $v->name; ?><?php echo $note; ?></option>
-                            
-                            <?php endforeach; ?>
-                    
-                    </select>
-            
-            </div>
-            -->
             
             <?php 
             	
@@ -47,7 +18,7 @@
             
             		<div class="select-k2-content">
             		
-            			<a href="#" class="wx-load-k2-item" data-reveal-id="select-k2-item">Select K2 Item</a>
+            			<a href="#" class="wx-load-k2-item button secondary readius" data-reveal-id="select-k2-item">Select K2 Item</a>
             			
             			<input type="hidden" id="wx-add-k2-item-select" class="" value="" />
             			
@@ -57,9 +28,20 @@
             <br>
             
             <div id="select-k2-item" class="reveal-modal" data-reveal>
-            	<div class="row">
-            	    <iframe src="<?php echo $link; ?>" frameborder="0" width="700" height="450">
-            	</div>
+                <div class="row">
+                    <div class="large-6 small-12 columns">
+                        <br>
+                        <h2>K2 Item</h2>
+                        <p>Please select a K2 item.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="wx-embed-container wx-content-selector">
+                            <iframe src="<?php echo $link; ?>" frameborder="0" seamless>
+                        </div>
+                    </div>
+                </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
             

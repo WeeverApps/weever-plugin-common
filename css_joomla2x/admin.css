@@ -1,0 +1,35 @@
+/* Joomla 2.x admin view modifiers */
+
+/* remove admin bar */
+
+#toolbar-box,
+.header,
+.subhead-collapse,
+.btn-subhead {
+    display: none !important;
+}
+
+/* fix problematic container styles */
+
+div.m {
+    padding: 0 10px 10px !important;
+    border-radius: 0 !important;
+}
+
+/* give 2.x a semi-responsive admin UI */
+
+body#minwidth-body {
+    min-width: 1045px !important;
+}
+
+@media only screen and (max-width: 767px) {
+    body#minwidth-body {
+        min-width: 0 !important;
+    }
+}
+
+/* remove weird menu highlight when reveals are active */
+
+#header-box #menu li {
+    border-color: transparent;
+}
