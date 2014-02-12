@@ -68,12 +68,11 @@ wxApp = wxApp || {};
             console.log('Returning ' + retVal);
             return retVal;
         },
-
-                getAPIData: function() {
-                        console.log( 'getAPIData' );
-                        console.log( this );
-                        var data = this.toJSON();
-                        data.config = JSON.stringify(data.config);
+        
+        getAPIData: function() {
+            var data = this.toJSON();
+            data.config = JSON.stringify(data.config);
+            
             if ( data.id == data.parent_id )
                 delete data['parent_id'];
             if ( data.id )
@@ -114,7 +113,38 @@ wxApp = wxApp || {};
 
         save: function() {
             var me = this;
-           
+            
+            console.log('api call****');
+            console.log(me.attributes);         
+            
+            if ( me.getAPIData().type == 'JoomlaContact' ) {
+            
+                jQuery.ajax({
+                    type: "POST",
+                    url: wx.ajaxUrl,
+                    data: { 
+                        task: 'get_contact_feed',
+                        contact_id: me.attributes.config.contact_id
+                    },
+                    success: function(data) {
+                        console.log('contact feed***');
+                        console.log(data);
+                        console.log(JSON.parse(data));
+                        
+                        var config_cache = {};
+                        config_cache['contacts'] = JSON.parse(data).contacts;
+                        
+                        me.attributes.config_cache = config_cache;
+                        
+                        console.log(me.getAPIData());
+                        
+                    },
+                    error: function(v, data) { alert(data); }
+                });
+                
+                
+            }
+            
             wx.makeApiCall( 'tabs/add_tab', me.getAPIData(), function(data) {
                 if ( ! me.get('id') ) {
                     me.set('id', data.tab_id);
@@ -123,6 +153,7 @@ wxApp = wxApp || {};
                     me.trigger('save', me);
                 }
             });
+            
         }
     });
 })(jQuery);

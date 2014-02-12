@@ -1,6 +1,6 @@
-describe('JoomlaCategory SubTab', function() {
+describe('JoomlaContact SubTab', function() {
     beforeEach(function() {
-        var model = new wxApp.JoomlaCategorySubTab();
+        var model = new wxApp.JoomlaContactSubTab();
         this.model = model;
         wx.log( JSON.stringify( this.model.getConfig() ) );
     });
@@ -9,16 +9,16 @@ describe('JoomlaCategory SubTab', function() {
         this.model = null;
     });
 
-	it('should have default title of Category', function() {
-		expect( this.model.get('title') ).toEqual('Category');
+	it('should have default title of Contact', function() {
+		expect( this.model.get('title') ).toEqual('Contact');
 	});
 
-    it('should have default type of joomlaCategory', function() {
-        expect( this.model.get('type') ).toEqual('JoomlaCategory');
+    it('should have default type of joomlaContact', function() {
+        expect( this.model.get('type') ).toEqual('JoomlaContact');
     });
 
-    it('should have default content of html', function() {
-        expect( this.model.get('content') ).toEqual('html');
+    it('should have default content of contact', function() {
+        expect( this.model.get('content') ).toEqual('contact');
     });
 
     it('should be published by default', function() {

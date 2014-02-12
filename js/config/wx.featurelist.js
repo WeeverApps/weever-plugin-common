@@ -2,7 +2,8 @@
     { "featureName": "RSS",                 "name": "RSS feed"          },
     
     { "featureName": "JoomlaCategory",      "name": "Category"          },
-    { "featureName": "JoomlaArticle",       "name": "Article"           },
+    { "featureName": "JoomlaArticle",       "name": "Joomla Article"    },
+    { "featureName": "JoomlaContact",       "name": "Joomla Contact"    },
     { "featureName": "JoomlaBlog",          "name": "Menu Item"         },
 
     { "featureName": "K2Category",          "name": "K2 Cat."           },
