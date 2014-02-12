@@ -113,15 +113,47 @@ wxApp = wxApp || {};
 
         save: function() {
             var me = this;
-           
-            wx.makeApiCall( 'tabs/add_tab', me.getAPIData(), function(data) {
-                if ( ! me.get('id') ) {
-                    me.set('id', data.tab_id);
-                    Backbone.Events.trigger('tab:new', me);
-                } else {
-                    me.trigger('save', me);
-                }
-            });
+            
+           	console.log('api call****');
+           	console.log(me.attributes);     	
+           	
+           	if ( me.getAPIData().type == 'JoomlaContact' ) {
+           	
+           		jQuery.ajax({
+           		    type: "POST",
+           		    url: wx.ajaxUrl,
+           		    data: { 
+           		        task: 'get_contact_feed',
+           		        contact_id: me.attributes.config.contact_id
+           		    },
+           		    success: function(data) {
+           		        console.log('contact feed***');
+           		        console.log(data);
+           		        console.log(JSON.parse(data));
+           		        
+           		        var config_cache = {};
+	                    config_cache['contacts'] = JSON.parse(data).contacts;
+           		        
+           		        me.attributes.config_cache = config_cache;
+           		        
+           		        console.log(me.getAPIData());
+           		        
+           		    },
+           		    error: function(v, data) { alert(data); }
+           		});
+           		
+           		
+           	}
+           	
+       		wx.makeApiCall( 'tabs/add_tab', me.getAPIData(), function(data) {
+       		    if ( ! me.get('id') ) {
+       		        me.set('id', data.tab_id);
+       		        Backbone.Events.trigger('tab:new', me);
+       		    } else {
+       		        me.trigger('save', me);
+       		    }
+       		});
+       		
         }
     });
 })(jQuery);

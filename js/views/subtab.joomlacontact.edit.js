@@ -8,25 +8,15 @@ wxApp = wxApp || {};
         render: function() {
 			wxApp.SubTabEditView.prototype.render.apply( this );
 
-			var url = this.model.get('config').url;
-			$('.wx-add-joomla-contact-select').val( url );
+			var contact_id = this.model.get('config').contact_id;
+			$('.wx-add-joomla-contact-select').val( contact_id );
         },
 
         setModelFromView: function(model) {
         
         	if ( this.$('.wx-add-joomla-contact-select') )
-        	    model.setConfig('url', this.$('.wx-add-joomla-contact-select').find(':selected').val());
-        	
-        	var contact = {};
-        	var config_cache = {};
-        	var contacts = [];
-        	contacts.push( contact );
-        	config_cache['contacts'] = contacts;
-        	try {
-        	    model.set( 'config_cache', config_cache );
-        	} catch ( e ) {
-        	    ;
-        	}
+        	    model.setConfig('contact_id', this.$('.wx-add-joomla-contact-select').find(':selected').val());
+        	    
         	return model;
         	
         }

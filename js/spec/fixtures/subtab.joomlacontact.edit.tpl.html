@@ -12,14 +12,8 @@
                             <?php foreach( (object) $this->joomlaContacts as $k=>$v ) : ?>
                             
                                     <option value='<?php echo $v->id; ?>'><?php echo $v->name; ?></option>
-                                    
-                                    <?php $hidden = "<input type='hidden' name='contact_name[]' value='".$v->name."' />"; ?>
-                                    <?php $hidden_array .= $v->id.","; ?>
                             
                             <?php endforeach; ?>
-                            
-                            <?php $hidden_array = rtrim($hidden_array,","); ?>
-                            <?php $hidden .= "<input type='hidden' name='comp_array' value='".$hidden_array."' />"; ?>
                     
                     </select>
                     
