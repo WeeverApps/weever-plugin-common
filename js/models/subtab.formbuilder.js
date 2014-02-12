@@ -65,6 +65,7 @@ wxApp = wxApp || {};
     	defaults: function() {
             return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
+                    icon: 'e074',
                     advanced: wx.formbuilderAdvanced,
 					uploadUrl: uploadUrl,
 					onUpload: {

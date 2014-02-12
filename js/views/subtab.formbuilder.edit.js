@@ -85,7 +85,7 @@ wxApp = wxApp || {};
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-				setTimeout( function() { 
+				// setTimeout( function() { 
 					var hasDocusign	= false,
 						hasPost		= false,
 						hasEmail	= false;
@@ -117,7 +117,7 @@ wxApp = wxApp || {};
 					if ( !hasEmail ) {
 						me.addEmailAction( null, { method: 'email' } );
 					}
-				}, 100);
+				// }, 100);
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
