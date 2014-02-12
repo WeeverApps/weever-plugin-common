@@ -28,7 +28,7 @@ body#minwidth-body {
     }
 }
 
-/* remove weird menu highlight when reveals are active */
+/* remove odd top menu hightlight when reveals are active */
 
 #header-box #menu li {
     border-color: transparent;

@@ -1,0 +1,8 @@
+/* Joomla 3.x admin view modifiers */
+
+#toolbar-box,
+.header,
+.subhead-collapse,
+.btn-subhead {
+    display: none !important;
+}
