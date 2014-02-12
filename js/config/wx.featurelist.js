@@ -5,7 +5,8 @@
     { "featureName": "JoomlaArticle",       "name": "Joomla Article"    },
     { "featureName": "JoomlaContact",       "name": "Joomla Contact"    },
     { "featureName": "JoomlaBlog",          "name": "Menu Item"         },
-    { "featureName": "JoomlaMap",          "name": "Joomla Map"         },
+    { "featureName": "JoomlaMap",           "name": "Joomla Map"        },
+    { "featureName": "JoomlaProximity",  	"name": "Joomla Near Me" 	},
 
     { "featureName": "K2Category",          "name": "K2 Cat."           },
     { "featureName": "K2Item",              "name": "K2 Item"           },
