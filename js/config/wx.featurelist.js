@@ -11,6 +11,7 @@
     { "featureName": "K2Category",          "name": "K2 Cat."           },
     { "featureName": "K2Item",              "name": "K2 Item"           },
     { "featureName": "K2Blog",              "name": "K2 Menu"           },
+    { "featureName": "K2Map",           	"name": "K2 Map"        	},
 
     { "featureName": "Twitter",             "name": "Twitter"           },
     { "featureName": "Youtube",             "name": "YouTube"           },
