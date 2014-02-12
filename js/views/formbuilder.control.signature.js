@@ -6,8 +6,10 @@ wxApp = wxApp || {};
 		tplSelector: '#form-builder-docusign-signature',
 		preview: null,
 
-		events: {
-			'change [name="wx-form-builder-docusign-label-option"]': 'labelOption'
+		events: function() {
+			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'change [name="wx-form-builder-docusign-label-option"]': 'labelOption'
+			});
 		},
 
 		labelOption: function( ev ) {
