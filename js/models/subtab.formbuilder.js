@@ -2,6 +2,20 @@
 wxApp = wxApp || {};
 
 (function($){
+
+	var uploadUrl = '';
+	switch ( wx.cms ) {
+		case 'wordpress':
+			uploadUrl = window.location.origin + '/wp-admin/admin-ajax.php';
+			break;
+		case 'joomla':
+			uploadUrl = window.location.origin + '/administrator/components/com_weever/helpers/file-upload.php'; // + '?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl
+			break;
+		default:
+			uploadUrl = wx.apiUrl + '/_google_drive/upload';
+			break;
+	}
+	
     wxApp.FormBuilderSubTab = wxApp.SubTab.extend({
         default_icon_id: 30,
         validateFeed: false,
@@ -34,7 +48,7 @@ wxApp = wxApp || {};
                 advancedMode: wx.formbuilderAdvanced,
 				config: {
                     advanced: wx.formbuilderAdvanced,
-					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
 					}, 
@@ -52,7 +66,7 @@ wxApp = wxApp || {};
             return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
                     advanced: wx.formbuilderAdvanced,
-					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
 					}, 

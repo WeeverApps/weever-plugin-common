@@ -228,7 +228,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-text-range-input'    : 'addTextRangeInput',
 			'click .wx-form-builder-add-select'              : 'addSelect',
 			'click .wx-form-builder-add-info'                : 'addInfo',
-			'click .wx-form-builder-add-signature'           : 'addSignature',
+			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 			'click .wx-close-button'                         : 'closePopup'
@@ -312,6 +312,11 @@ wxApp = wxApp || {};
 					};
 				}
 			}
+
+			// Removal of the file index association prompt
+			// @TODO: Make the file index association prompt clearer or something
+			wxApp.SubTabEditView.prototype.finish.apply( this );
+			return;
 
 			// Call super and exit if an index has already been identified
 			if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
@@ -636,16 +641,16 @@ wxApp = wxApp || {};
 			this.addControl( info, infoView );
 		},
 
-		addSignature: function( ev ) {
-			this.addSignatureWithProperties( {
+		addDocusignSignature: function( ev ) {
+			this.addDocusignSignatureWithProperties( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
-		addSignatureWithProperties: function( properties ) {
+		addDocusignSignatureWithProperties: function( properties ) {
 
-			var signature = new wxApp.FormBuilderControlSignature( properties ),
-			    sigView   = new wxApp.FormBuilderControlSignatureView({ model: signature });
+			var signature = new wxApp.FormBuilderControlDocusignSignature( properties ),
+			    sigView   = new wxApp.FormBuilderControlDocusignSignatureView({ model: signature });
 
 			this.addControl( signature, sigView );
 		},
@@ -804,7 +809,7 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
-			var config   = this.model.get( 'config' )
+			var config   = this.model.get( 'config' ),
 			    count    = config.formElements.length,
 			    advanced = config.advanced || false;
 			
@@ -840,6 +845,9 @@ wxApp = wxApp || {};
 			}
 			this.previews.push( view.getPreview() );
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
+
+			console.log( 'addControl' );
+			console.log( this.model.get( 'config' ) );
 		},
 
 		closePopup: function() {

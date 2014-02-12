@@ -1,20 +1,20 @@
-<script type="text/template" id="form-builder-signature">
+<script type="text/template" id="form-builder-docusign-signature">
 	<p class="title" data-section-title>
 		<a href="#panel<%- ordinal %>">
-			<%- controlTitle %>
+            &#8597; <%- controlTitle %>
 		</a>
 	</p>
 	<div class="content" data-section-content>
-		<label>Enter the text that will appear above your signature below.</label>
+		<label>Label</label>
 		<input type="text" class="wx-form-builder-label-input" value="<%- label %>" />
 
         <% if (advanced) { %>
-        <label>POST field name (optional, advanced)
+        <label>Field name (optional, advanced)
                     <span data-tooltip data-options="disable-for-touch:true"
                           class="has-tip tip-right"
-                          title="<p><b>POST field name</b><p>
+                          title="<p><b>Field name</b><p>
                            <p>The HTML &ldquo;name&rdquo; attribute. For use with a custom POST action.</p>
-                           <p><b>Advanced mode:</b></p>
+                           <p><b>Advanced mode</b></p>
                            <p>This option is only displayed when &ldquo;advanced mode&rdquo; is enabled.
                            ">
                            ?
@@ -23,13 +23,29 @@
         <input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
         <% } %>
 
-        <button class="wx-form-builder-delete small alert">Delete Field</button>
+		<fieldset>
+			<legend>On review and signature</legend>
+			<label>
+				<input
+						type="checkbox"
+						name="wx-form-builder-docusign-label-option"
+						value="append-name"
+						class="wx-form-builder-docusign-label-append-name"> Display the name of the signer below the signature field</label>
+			<label>
+				<input
+						type="checkbox"
+						name="wx-form-builder-docusign-label-option"
+						value="append-email"
+						class="wx-form-builder-docusign-label-append-email"> Display the email address of the signer below the signature field</label>
+		</fieldset>
+
+		<button class="wx-form-builder-delete small alert">Delete Field</button>
 	</div>
 
 
 </script>
 
-<script type="text/template" id="form-builder-signature-preview">
+<script type="text/template" id="form-builder-docusign-signature-preview">
 	<p>
 		<%= label %><br/>
 		<label class="wx-esignature-example">x</label>
