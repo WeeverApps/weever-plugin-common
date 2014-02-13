@@ -44,8 +44,16 @@ wxApp = wxApp || {};
 		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
 		    success: function(result) {},
 		    error: function() {
+
+                if ( wxApp.account.get('tier_raw') >= 100 ) {
+                    fileName = 'wx.featurelist.docusign.js';
+                }
+                else {
+                    fileName = 'wx.featurelist.js';
+                }
+
 			    wxApp.featureList.collection.fetch({
-				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+				    url: wx.pluginUrl + 'static/js/config/' + fileName,
 				    success: function(result) {  },
 				    error: function() { console.log('Could not load feature list.') }
 			    });
