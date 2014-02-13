@@ -1,4 +1,3 @@
-
 wxApp = wxApp || {};
 
 (function($){
@@ -33,15 +32,15 @@ wxApp = wxApp || {};
         initialize: function() {
         },
 
-                setConfig: function(key, val) {
-                        var config = this.getConfig();
-                        config[key] = val;
+		setConfig: function(key, val) {
+			var config = this.getConfig();
+			config[key] = val;
             try {
-                            this.set('config', config);
+			    this.set('config', config);
             } catch ( e ) {
 
             }
-                },
+		},
 
         deleteConfig: function(key) {
             var config = this.getConfig();
@@ -49,9 +48,9 @@ wxApp = wxApp || {};
             this.set('config', config);
         },
 
-                getConfig: function() {
-                        return this.get('config');
-                },
+		getConfig: function() {
+			return this.get('config');
+		},
 
         getModelName: function() {
             //console.log( 'Looking for class' + this.constructor );
@@ -68,17 +67,16 @@ wxApp = wxApp || {};
             console.log('Returning ' + retVal);
             return retVal;
         },
-        
-        getAPIData: function() {
-            var data = this.toJSON();
-            data.config = JSON.stringify(data.config);
-            
+
+		getAPIData: function() {
+			var data = this.toJSON();
+			data.config = JSON.stringify(data.config);
             if ( data.id == data.parent_id )
                 delete data['parent_id'];
             if ( data.id )
                 data.tab_id = data.id;
-                        return this.filterAPIData( data );
-                },
+			return this.filterAPIData( data );
+		},
 
         filterAPIData: function( data ) {
 
@@ -113,38 +111,7 @@ wxApp = wxApp || {};
 
         save: function() {
             var me = this;
-            
-            console.log('api call****');
-            console.log(me.attributes);         
-            
-            if ( me.getAPIData().type == 'JoomlaContact' ) {
-            
-                jQuery.ajax({
-                    type: "POST",
-                    url: wx.ajaxUrl,
-                    data: { 
-                        task: 'get_contact_feed',
-                        contact_id: me.attributes.config.contact_id
-                    },
-                    success: function(data) {
-                        console.log('contact feed***');
-                        console.log(data);
-                        console.log(JSON.parse(data));
-                        
-                        var config_cache = {};
-                        config_cache['contacts'] = JSON.parse(data).contacts;
-                        
-                        me.attributes.config_cache = config_cache;
-                        
-                        console.log(me.getAPIData());
-                        
-                    },
-                    error: function(v, data) { alert(data); }
-                });
-                
-                
-            }
-            
+           
             wx.makeApiCall( 'tabs/add_tab', me.getAPIData(), function(data) {
                 if ( ! me.get('id') ) {
                     me.set('id', data.tab_id);
@@ -153,7 +120,6 @@ wxApp = wxApp || {};
                     me.trigger('save', me);
                 }
             });
-            
         }
     });
 })(jQuery);

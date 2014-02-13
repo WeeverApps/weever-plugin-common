@@ -13,7 +13,7 @@ describe('JoomlaMap SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Map');
 	});
 
-    it('should have default type of joomlaCategory', function() {
+    it('should have default type of JoomlaCategory', function() {
         expect( this.model.get('type') ).toEqual('JoomlaMap');
     });
 

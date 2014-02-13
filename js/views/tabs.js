@@ -17,8 +17,8 @@ wxApp = wxApp || {};
 
         addOne: function(tab) {
         
-        	console.log('addOne...');
-        	console.log(tab);
+        	//console.log('addOne...');
+        	//console.log(tab);
         	
             var me = this;
             var view = new wxApp.TabView({ model: tab });
@@ -67,7 +67,7 @@ wxApp = wxApp || {};
             var me = this;
             if ( undefined != this.$el.sortable ) {
             
-            	console.log('startSortable***');
+            	//console.log('startSortable***');
             	
                 this.$el.sortable({
                     axis: "x",
@@ -75,7 +75,7 @@ wxApp = wxApp || {};
                     placeholder: 'wx-tab',
                     update: function(event, ui) {
                     	
-                    	console.log('startSortable-update***');
+                    	//console.log('startSortable-update***');
                     	
                         var order = $(this).sortable('toArray');
                         order = $.map( order, function(element) {

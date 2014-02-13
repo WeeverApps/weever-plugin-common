@@ -40,9 +40,8 @@ wxApp = wxApp || {};
                             '<p>Select a tag in appBuilder and stream those specific posts into your app in real-time.</p>' +
                             '<p><b>Joomla Search</b></p>' +
                             '<p>Display Joomla posts matching a predefined search term.</p>'
-            }
-        );
-}
+            });
+    	}
     });
 
 })(jQuery);

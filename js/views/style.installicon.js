@@ -43,17 +43,17 @@ wxApp = wxApp || {};
 
         uploadFile:     function(e) {
         
-        	console.log('installicon upload file');
-        	console.log(wx.pluginUrl);
+        	//console.log('installicon upload file');
+        	//console.log(wx.pluginUrl);
         	
             var me = this,
                 url = wx.pluginUrl + 'helpers/file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl;
 
             $('#save_image').html('Saving...');
 			
-			console.log('install icon upload...');
-			console.log(url);
-			console.log($( e.currentTarget ));
+			//console.log('install icon upload...');
+			//console.log(url);
+			//console.log($( e.currentTarget ));
 			
             $.ajax( url, {
                 iframe: true,
@@ -62,13 +62,13 @@ wxApp = wxApp || {};
 
                     // The stupid data comes in HTML for some reason (WP only?)
                     // Strip out the HTML, and convert to json object.
-                    console.log('success...');
-                    console.log(data);
+                    //console.log('success...');
+                    //console.log(data);
                     
                     data = data.replace(/(<([^>]+)>)/ig,"");
                     data = JSON.parse( data );
 					
-					console.log(data);
+					//console.log(data);
 					
                     wxApp.design.get('install').icon = data.file_name;
                     me.save( function( response ) {

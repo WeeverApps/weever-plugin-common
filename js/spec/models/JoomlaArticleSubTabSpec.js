@@ -13,7 +13,7 @@ describe('JoomlaArticle SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Article');
 	});
 
-    it('should have default type of WordpressPage', function() {
+    it('should have default type of JoomlaArticle', function() {
         expect( this.model.get('type') ).toEqual('JoomlaArticle');
     });
 

@@ -44,7 +44,7 @@ wxApp = wxApp || {};
                 }
             });
 
-            console.log('Closing...');
+            //console.log('Closing...');
             $('#ContainerEditModal').foundation('reveal', 'close');
     	}
     });

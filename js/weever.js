@@ -22,13 +22,13 @@
 jQuery(document).ready(function() {
 
     jQuery('input[name="switch-tablet"]').click(function() {
-        console.log('Switch tablet.');
+        //console.log('Switch tablet.');
         if (this.id == 'on') {
             tablets_enabled = 1;
         } else {
             tablets_enabled = 0;
         }
-        console.log(tablets_enabled);
+        //console.log(tablets_enabled);
 
         jQuery('#switch-tablet-loading').show();
 
@@ -41,7 +41,7 @@ jQuery(document).ready(function() {
                 tablets_enabled: tablets_enabled
             },
             success: function(msg) {
-                console.log('Tablet status saved');
+                //console.log('Tablet status saved');
                 var status = tablets_enabled ? 'yes' : 'no';
                 jQuery('#switch-tablet-loading').fadeOut();
             },
@@ -53,12 +53,12 @@ jQuery(document).ready(function() {
     // '.click' method on its own doesn't work... But when they're both present
     // the refresh fires twice.
     jQuery('#refresh_preview').on('click', function() {
-        console.log('Refresh Clicked.');
+        //console.log('Refresh Clicked.');
         wx.refreshAppPreview();
     });
 
     jQuery('#refresh_preview').click( function() {
-        console.log('Refresh Clicked.');
+        //console.log('Refresh Clicked.');
         wx.refreshAppPreview();
     });
     

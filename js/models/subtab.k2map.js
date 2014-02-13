@@ -40,9 +40,8 @@ wxApp = wxApp || {};
                             '<p>Select a tag in appBuilder and stream those specific posts into your app in real-time.</p>' +
                             '<p><b>K2 Search</b></p>' +
                             '<p>Display K2 posts matching a predefined search term.</p>'
-            }
-        );
-}
+            });
+		}
     });
 
 })(jQuery);

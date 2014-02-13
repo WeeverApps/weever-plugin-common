@@ -96,13 +96,13 @@ var wxApp = wxApp || {};
                 }
             },
             error: function(v, message) {
-                console.log(message);
+                //console.log(message);
             }
         });
 };
 
     wx.refreshAppPreview = function() {
-        console.log('Refreshing Preview');
+        //console.log('Refreshing Preview');
         $('#iframe-loading').hide();
 
         if ( $.browser.webkit ) {

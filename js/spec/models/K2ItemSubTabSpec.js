@@ -13,7 +13,7 @@ describe('K2Item SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Item');
 	});
 
-    it('should have default type of WordpressPage', function() {
+    it('should have default type of K2Item', function() {
         expect( this.model.get('type') ).toEqual('K2Item');
     });
 

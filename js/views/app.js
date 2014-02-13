@@ -60,7 +60,7 @@ wxApp = wxApp || {};
         },
 
         refreshAppPreview: function() {
-            console.log('Refreshing...')
+            //console.log('Refreshing...')
             wx.refreshAppPreview();
         },
 

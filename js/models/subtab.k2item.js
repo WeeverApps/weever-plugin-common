@@ -35,9 +35,8 @@ wxApp = wxApp || {};
                             '<p>&ldquo;Near to me&rdquo; shows app users location listings nearest to them and distances.</p>' +
                             '<p>Create a &ldquo;Near to me&rdquo; feature with K2 or Joomla content in exactly the same way you would create a K2 or Joomla-based map.</p>' +
                             '<p>The difference is how the geotagged content displays.  &ldquo;Near to me&rdquo; lists K2 items or Joomla articles in order of nearest-distance instead of creating a custom Google map.</p>'
-            }
-        );
-}
+            });
+		}
 
     });
 

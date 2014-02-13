@@ -107,7 +107,7 @@ jQuery( document ).ready( function() {
 	                    data: data,
 	                    success: function(msg) {
 	                    
-	                    	console.log(msg);
+	                    	//console.log(msg);
 	                        me.hideLoadGif( id, loading_id );
 	                        
 	                        // wx.rebuildApp();
@@ -156,33 +156,33 @@ jQuery( document ).ready( function() {
 	
 	            $( span_id ).html('Saving...');
 				
-				console.log('upload...');
-				console.log(url);
-				console.log($input);
+				//console.log('upload...');
+				//console.log(url);
+				//console.log($input);
 				
 	            $.ajax( url, {
 	                iframe: true,
 	                files: $input,
 	                success: function( data ) {
 						
-						console.log('success...');
-						console.log(data);
+						//console.log('success...');
+						//console.log(data);
 						
 	                    // The stupid data comes in HTML for some reason (WP only?)
 	                    // Strip out the HTML, and convert to json object.
 	                    data = data.replace(/(<([^>]+)>)/ig,"");
 	                    data = JSON.parse( data );
 	                    
-	                    console.log(data);
+	                    //console.log(data);
 	                    
 	                    $( hidden_id ).val( data.file_name );
 	                    wxApp.design.get('titlebar').image = data.file_name;
 						
-						console.log(wxApp.design.get('titlebar').image);
+						//console.log(wxApp.design.get('titlebar').image);
 						
 	                    me.save( function(response) {
 	                    
-	                    	console.log('saved...');
+	                    	//console.log('saved...');
 	                        $('#wx-titlebar_logo_live').attr('src', data.file_name);
 	                        $( span_id ).html('Saved!').delay(2000).queue( function() { $(this).html('Upload image'); } );
 	                        wx.rebuildApp();
@@ -199,8 +199,8 @@ jQuery( document ).ready( function() {
 	            // objects... Therefore, we have to 'stringify' the inner params.
 	            var innerParams = JSON.stringify( wxApp.design.get('titlebar') );
 	            
-	            console.log('save...');
-	            console.log(innerParams);
+	            //console.log('save...');
+	            //console.log(innerParams);
 	            
 	            var params = { titlebar: innerParams };
 	

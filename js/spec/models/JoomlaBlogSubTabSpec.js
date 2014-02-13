@@ -13,7 +13,7 @@ describe('JoomlaBlog SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Blog');
 	});
 
-    it('should have default type of joomlaBlog', function() {
+    it('should have default type of JoomlaBlog', function() {
         expect( this.model.get('type') ).toEqual('JoomlaBlog');
     });
 

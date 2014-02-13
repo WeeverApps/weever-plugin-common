@@ -40,7 +40,7 @@ wxApp = wxApp || {};
         },
 
         openEditModal: function() {
-            console.log('editing container...');
+            //console.log('editing container...');
             this.containerEditView = new wxApp.ContainerEditView({ model: this.model });
             this.$('#ContainerEditModal').html( this.containerEditView.render().el );
 
@@ -61,7 +61,7 @@ wxApp = wxApp || {};
 
             var me = this;
             wx.makeApiCall( 'tabs/set_tabLayout', { tab_id: this.model.get('id'), tabLayout: tabLayout }, function() {
-                console.log('Layout Saved');
+                //console.log('Layout Saved');
                 me.model.set('tabLayout', tabLayout);
                 wx.rebuildApp();
             });
