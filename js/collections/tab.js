@@ -12,7 +12,7 @@ var wxApp = wxApp || {};
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
                 case 'contact':
-                    retVal = 'JoomlaContactsSubTab';
+                    retVal = 'WordpressContactsSubTab';
                     break;
                 case 'facebookAlbums':
                     retVal = 'FacebookAlbumsSubTab';
