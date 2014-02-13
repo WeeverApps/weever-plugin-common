@@ -40,6 +40,13 @@ jQuery( document ).ready( function() {
         wxApp.featureList = new wxApp.FeatureList();
 
 	    // Grab the data and kick things off
+	    
+	    wxApp.featureList.collection.fetch({
+	        url: wx.pluginUrl + 'static/js/config/wx.featurelist.js?_dc=' + Math.random(),
+	        success: function(result) {  },
+	        error: function() { console.log('Could not load feature list.') }
+	    });
+	    /*
 	    wxApp.featureList.collection.fetch({
 		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js?_dc=' + Math.random(),
 		    success: function(result) {},
@@ -51,6 +58,7 @@ jQuery( document ).ready( function() {
 			    });
 		    }
 	    });
+	    */
     });
 
 })(jQuery);
