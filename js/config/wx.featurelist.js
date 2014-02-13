@@ -13,6 +13,8 @@
     { "featureName": "K2Blog",              "name": "K2 Menu"           },
     { "featureName": "K2Map",           	"name": "K2 Map"        	},
     { "featureName": "K2Proximity",         "name": "K2 Near Me"        },
+    
+    { "featureName": "WordpressContacts",   "name": "Contact"      		},
 
     { "featureName": "Twitter",             "name": "Twitter"           },
     { "featureName": "Youtube",             "name": "YouTube"           },
