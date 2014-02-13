@@ -51,14 +51,14 @@ wxApp = wxApp || {};
             if ( undefined != this.$el.sortable ) {
                 this.$el.sortable({
                     start: function(event, ui) {
-                        console.log('trigger dragstart');
+                        //console.log('trigger dragstart');
                         Backbone.Events.trigger( 'subtab:dragstart' );
                     },
                     stop: function(event, ui) {
                         Backbone.Events.trigger( 'subtab:dragstop' );
                     },
                     update: function(event, ui) {
-                        console.log('update');
+                        //console.log('update');
                         var order = String( $(this).sortable('toArray').map( function(element) {
                             return element.replace('SubtabID', '');
                         }) );

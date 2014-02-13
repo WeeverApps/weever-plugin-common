@@ -265,7 +265,7 @@ $.imgAreaSelect = function (img, options) {
     }
 
     function areaMouseDown(event) {
-        console.log('areaMouseDown');
+        //console.log('areaMouseDown');
         if (event.which != 1) return false;
 
         adjust();
@@ -399,7 +399,7 @@ $.imgAreaSelect = function (img, options) {
     }
 
     function startSelection() {
-        console.log('startSelection');
+        //console.log('startSelection');
         $(document).unbind('mousemove', startSelection);
         adjust();
 
@@ -436,7 +436,7 @@ $.imgAreaSelect = function (img, options) {
     }
 
     function imgMouseDown(event) {
-        console.log('imgMouseDown');
+        //console.log('imgMouseDown');
         if (event.which != 1 || $outer.is(':animated')) return false;
         
         adjust();
@@ -546,7 +546,7 @@ $.imgAreaSelect = function (img, options) {
     }
 
     function setOptions(newOptions) {
-        console.log('setOptions');
+        //console.log('setOptions');
         if (newOptions.parent)
             ($parent = $(newOptions.parent)).append($box.add($outer));
 
@@ -706,7 +706,7 @@ $.imgAreaSelect = function (img, options) {
 };
 
 $.fn.imgAreaSelect = function (options) {
-    console.log('imgAreaSelect');
+    //console.log('imgAreaSelect');
     options = options || {};
 
     this.each(function () {

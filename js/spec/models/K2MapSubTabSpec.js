@@ -13,7 +13,7 @@ describe('K2Map SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Map');
 	});
 
-    it('should have default type of K2Category', function() {
+    it('should have default type of K2Map', function() {
         expect( this.model.get('type') ).toEqual('K2Map');
     });
 

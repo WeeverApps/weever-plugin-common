@@ -37,6 +37,7 @@ wxApp = wxApp || {};
             }
         );
 }
+
     });
 
 })(jQuery);

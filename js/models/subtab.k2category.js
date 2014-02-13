@@ -36,8 +36,8 @@ wxApp = wxApp || {};
                             '<p>Create a &ldquo;Nearby&rdquo; feature with Joomla or K2 content in exactly the same way you would create a Joomla-based map.</p>' +
                             '<p>The difference is how the geotagged content displays.  &ldquo;Nearby&rdquo; lists articles or K2 items in order of nearest-distance instead of creating a custom Google map.</p>'
 
-            }
-        );}
+            });
+		}
     });
 
 })(jQuery);

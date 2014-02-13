@@ -41,7 +41,7 @@ wxApp = wxApp || {};
         },
 
         onDrop: function( event, ui ) {
-            console.log('onDrop');
+            //console.log('onDrop');
             
             var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');

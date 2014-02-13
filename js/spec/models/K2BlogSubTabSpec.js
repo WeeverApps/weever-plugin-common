@@ -13,7 +13,7 @@ describe('K2Blog SubTab', function() {
 		expect( this.model.get('title') ).toEqual('Blog');
 	});
 
-    it('should have default type of k2Blog', function() {
+    it('should have default type of K2Blog', function() {
         expect( this.model.get('type') ).toEqual('K2Blog');
     });
 
