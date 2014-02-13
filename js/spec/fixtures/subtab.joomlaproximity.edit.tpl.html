@@ -1,0 +1,36 @@
+<script type="text/template" id="joomlaproximity-subtab-edit-template">
+
+    <p>Add a proximity of Joomla articles.  Your app will display newly published articles automatically.</p>
+    
+    <div id="wx-add-joomla-proximity-dialog" class="wx-add-joomla-proximity">
+                    
+            <div id='wx-add-joomla-proximity-item'>
+            
+                    <select id='wx-add-joomla-proximity-select' class='wx-add-joomla-proximity-select'>
+                            <option><?php echo "Select proximity";//echo JText::_('WEEVER_CHOOSE_BLOG_Jproximity_PARENTHESES'); ?></option>
+                            
+                            <?php foreach( (object) $this->contentCategories as $k=>$v ) : ?>
+                            
+                                    <?php if( $v->access > 1 ) : ?>
+                                    
+                                            <?php $note = " (non-public)"; ?>
+                                            
+                                    <?php else : ?>
+                                    
+                                            <?php $note = ""; ?>
+                                    
+                                    <?php endif; ?>
+                            
+                                    <?php $link = "http://".$this->siteDomain."/index.php?option=com_content&view=category&layout=blog&id=".$v->id; ?>
+                                    
+                                    <option value='<?php echo $link; ?>&template=weever_cartographer'><?php echo $v->name; ?><?php echo $note; ?></option>
+                            
+                            <?php endforeach; ?>
+                    
+                    </select>
+            
+            </div>
+    
+    </div>
+
+</script>

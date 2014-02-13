@@ -1,0 +1,36 @@
+<script type="text/template" id="k2proximity-subtab-edit-template">
+
+    <p>Add a proximity of K2 articles.  Your app will display newly published articles automatically.</p>
+    
+    <div id="wx-add-k2-proximity-dialog" class="wx-add-k2-proximity">
+                    
+            <div id='wx-add-k2-proximity-item'>
+            
+                    <select id='wx-add-k2-proximity-select' class='wx-add-k2-proximity-select'>
+                            <option><?php echo "Select proximity";//echo JText::_('WEEVER_CHOOSE_BLOG_Jproximity_PARENTHESES'); ?></option>
+                            
+                            <?php foreach( (object) $this->k2Categories as $k=>$v ) : ?>
+                            
+                                    <?php if( $v->access > 1 ) : ?>
+                                    
+                                            <?php $note = " (non-public)"; ?>
+                                            
+                                    <?php else : ?>
+                                    
+                                            <?php $note = ""; ?>
+                                    
+                                    <?php endif; ?>
+                            
+                                    <?php $link = "http://".$this->siteDomain."/index.php?option=com_k2&view=itemlist&layout=category&task=category&id=".$v->id; ?>
+                                    
+                                    <option value='<?php echo $link; ?>&template=weever_cartographer'><?php echo $v->name; ?><?php echo $note; ?></option>
+                            
+                            <?php endforeach; ?>
+                    
+                    </select>
+            
+            </div>
+    
+    </div>
+
+</script>
