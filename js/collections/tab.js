@@ -12,7 +12,7 @@ var wxApp = wxApp || {};
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
                 case 'contact':
-                    retVal = 'JoomlaContactsSubTab';
+                    retVal = 'WordpressContactsSubTab';
                     break;
                 case 'facebookAlbums':
                     retVal = 'FacebookAlbumsSubTab';
@@ -84,6 +84,9 @@ var wxApp = wxApp || {};
                             var tab = new wxApp.Tab( tabData );
                             // This 'main' tab is also a 'sub' tab
                             var modelName = me.getModelNameByTabData( tabData );
+
+                            console.log( modelName );
+                            console.log( tab );
                             	
                             tab.addSubTab( new wxApp[modelName]( tabData ) );
                             for ( var i = 0; i < data.tabs.length; i++ ) {
