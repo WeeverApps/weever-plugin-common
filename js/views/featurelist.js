@@ -41,11 +41,11 @@ jQuery( document ).ready( function() {
 
 	    // Grab the data and kick things off
 	    wxApp.featureList.collection.fetch({
-		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
+		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js?_dc=' + Math.random(),
 		    success: function(result) {},
 		    error: function() {
 			    wxApp.featureList.collection.fetch({
-				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js?_dc=' + Math.random(),
 				    success: function(result) {  },
 				    error: function() { console.log('Could not load feature list.') }
 			    });
