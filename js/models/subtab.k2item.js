@@ -26,15 +26,15 @@ wxApp = wxApp || {};
                             '<p>Add categories of K2 items to share a blog or specific content in real-time with app visitors.</p>' +
                             '<p><b>K2 Menu Items</b></p>' +
                             '<p>Add K2 item content to your app via an existing K2 menu item.  The app will display content according to the &ldquo;ordering&rdquo; and content source(s) specified for the menu item.</p>' +
-                            '<p><b>K2 Maps</b></p>' +
-                            '<p>&ldquo;GeoTag&rdquo; individual K2 items or Joomla articles with a location/address and create a mobile, GPS-enabled map of those locations with appBuilder.</p>' +
+                            '<p><b>Maps</b></p>' +
+                            '<p>&ldquo;GeoTag&rdquo; individual Joomla articles or K2 items with a location/address and create a mobile, GPS-enabled map of those locations with appBuilder.</p>' +
                             '<p>We recommend using the &ldquo;Geotagger for Joomla&rdquo; plugin to add location information to articles or K2 items.</p>' +
-                            '<p>Once you have added locations to K2 items or articles, use the appBuilder map making features to create a map using Joomla or K2 item categories.</p>' +
-                            '<p>Note: K2 items or Joomla articles which are not Geotagged with location info will not display on your map.</p>' +
-                            '<p><b>K2 Near to me</b></p>' +
-                            '<p>&ldquo;Near to me&rdquo; shows app users location listings nearest to them and distances.</p>' +
-                            '<p>Create a &ldquo;Near to me&rdquo; feature with K2 or Joomla content in exactly the same way you would create a K2 or Joomla-based map.</p>' +
-                            '<p>The difference is how the geotagged content displays.  &ldquo;Near to me&rdquo; lists K2 items or Joomla articles in order of nearest-distance instead of creating a custom Google map.</p>'
+                            '<p>Once you have added locations to articles or K2 items, use the appBuilder map making features to create a map using Joomla or K2 content categories.</p>' +
+                            '<p>Note: articles or K2 items which are not Geotagged with location info will not display on your map.</p>' +
+                            '<p><b>Nearby</b></p>' +
+                            '<p>&ldquo;Nearby&rdquo; shows app users location listings nearest to them and distances.</p>' +
+                            '<p>Create a &ldquo;Nearby&rdquo; feature with Joomla or K2 content in exactly the same way you would create a Joomla-based map.</p>' +
+                            '<p>The difference is how the geotagged content displays.  &ldquo;Nearby&rdquo; lists articles or K2 items in order of nearest-distance instead of creating a custom Google map.</p>'
             }
         );
 }

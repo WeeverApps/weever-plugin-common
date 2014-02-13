@@ -1,13 +1,13 @@
 <script type="text/template" id="joomlaproximity-subtab-edit-template">
 
-    <p>Add a proximity of Joomla articles.  Your app will display newly published articles automatically.</p>
+    <p>Display location listings nearest to your app visitors using Joomla content and displayed in miles or kilometers.</p>
     
     <div id="wx-add-joomla-proximity-dialog" class="wx-add-joomla-proximity">
                     
             <div id='wx-add-joomla-proximity-item'>
             
                     <select id='wx-add-joomla-proximity-select' class='wx-add-joomla-proximity-select'>
-                            <option><?php echo "Select proximity";//echo JText::_('WEEVER_CHOOSE_BLOG_Jproximity_PARENTHESES'); ?></option>
+                            <option><?php echo "Select category";//echo JText::_('WEEVER_CHOOSE_BLOG_Jproximity_PARENTHESES'); ?></option>
                             
                             <?php foreach( (object) $this->contentCategories as $k=>$v ) : ?>
                             

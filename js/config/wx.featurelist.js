@@ -1,17 +1,18 @@
 [
     { "featureName": "RSS",                 "name": "RSS feed"          },
-    
+
     { "featureName": "JoomlaCategory",      "name": "Category"          },
     { "featureName": "JoomlaArticle",       "name": "Article"    		},
     { "featureName": "JoomlaBlog",          "name": "Menu Item"         },
-    { "featureName": "JoomlaMap",           "name": "Joomla Map"        },
-    { "featureName": "JoomlaProximity",  	"name": "Joomla Near Me" 	},
 
     { "featureName": "K2Category",          "name": "K2 Cat."           },
     { "featureName": "K2Item",              "name": "K2 Item"           },
     { "featureName": "K2Blog",              "name": "K2 Menu"           },
+
+    { "featureName": "JoomlaMap",           "name": "J! Map"           },
     { "featureName": "K2Map",           	"name": "K2 Map"        	},
-    { "featureName": "K2Proximity",         "name": "K2 Near Me"        },
+    { "featureName": "JoomlaProximity",  	"name": "J! Nearby" 	        },
+    { "featureName": "K2Proximity",         "name": "K2 Nearby"           },
     
     { "featureName": "WordpressContacts",   "name": "Contact"      		},
 
