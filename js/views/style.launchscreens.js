@@ -112,6 +112,7 @@ wxApp = wxApp || {};
                     // The stupid data comes in HTML for some reason (WP only?)
                     // Strip out the HTML, and convert to json object.
                     data = data.replace(/(<([^>]+)>)/ig,"");
+                    console.log(data);
                     data = JSON.parse( data );
                     
                     $( hidden_id ).val( data.file_name );

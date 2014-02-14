@@ -33,6 +33,9 @@ jQuery(document).ready(function(){
 					return;
 				}
 
+				console.log("EXPIRY");
+				console.log(data);
+
 				var d = new Date(data.expiry);
 				var millisecondsPerDay = 86400000; //1000 * 60 * 60 * 24;
 				var millisecondsBetween = d.getTime() - (new Date()).getTime();
