@@ -6,6 +6,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
+		baseEditTplSelector: '#form-builder-edit-template',
 		subTabEditTplSelector: '#form-builder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
@@ -827,11 +828,16 @@ wxApp = wxApp || {};
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
 
-			// Now scroll down to it, if possible
-			if ( $('.wx-form-builder-row.active').length ) {
-				var offset = $('.wx-form-builder-row.active').offset().top - 230;
-				$('body').animate({scrollTop: offset}, 250);
-			}
+			// Now show the edit tab.
+			$('#formbuilder-edit-tab').parent()
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500);
 
 			// Add the view to the Controls array.
 			if ( !this.controls ) {
