@@ -20,8 +20,11 @@
     </div>
 
 
-
-    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
+	<% if ( featureName.toLowerCase() == 'formbuilder' || featureName.toLowerCase() == 'docusign' ) { %>
+	    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:false">
+	<% } else { %>
+		<div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:true">
+	<% } %>
         Please wait...
     </div>
 

@@ -25,6 +25,7 @@
         <div>
             <button class="wx-next-button radius">Preview &nbsp;</button>
             <button class="wx-finish-button success radius">Save and add to app</button>
+			&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
             <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
         </div>
     </div>
@@ -36,7 +37,7 @@
                     <p class="title" data-section-title><a href="#panel1">Preview</a></p>
                     <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
                         <div class="wx-validate-feed">
-                            <div class="panel wx-preview">
+                            <div class="panel wx-preview-form">
                                 <h3 class="wx-preview-msg">preview</h3>
                             </div>
                         </div>
@@ -68,5 +69,9 @@
         </div>
     </div>
 
-    <a class="close-reveal-modal">&#215;</a>
+	<% if ( type == 'formbuilder' ) { %>
+		<a class="wx-close-reveal-modal">&#215;</a>
+	<% } else { %>
+		<a class="close-reveal-modal">&#215;</a>
+	<% } %>
 </script>

@@ -27,7 +27,7 @@ wxApp = wxApp || {};
             this.loadIcon();
             if ( undefined !== this.$el.droppable ) {
                 this.$el.droppable( {
-                    accept: ".list-sub-items li, .list-add-content-items li",
+                    accept: ".list-sub-items li",
                     hoverClass: "hover",
                     drop: this.onDrop,
                     tolerance: 'pointer',
@@ -45,24 +45,16 @@ wxApp = wxApp || {};
             
             var me = $(this).data('backbone-view');
             var draggedItemView = $(ui.draggable).data('backbone-view');
-            console.log( draggedItemView.model.get('parent_id') )
-
-            if ( ui.draggable.hasClass('wx-add-feature') ) {
-                // If we're dragging a new feature icon up
-                var featureName = ui.draggable.attr('id').replace('add-', '');
-                var tabId = me.model.get('id');
-                wxApp.appView.createFeatureView( featureName, tabId );
-            } else {
-                // We're moving a subtab up into another tab, update the db then move the subtab across
-                Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
-                if ( draggedItemView.model.get('parent_id') != me.model.get('id') ) {
-                    wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: me.model.get('id') }, function() {
-                        draggedItemView.model.trigger('tab:move');
-                        me.model.addSubTab( draggedItemView.model );
-                        // Select the parent tab.
-                        $('#' + me.model.get('id') + 'TabID').click();
-                    });
-                }
+            
+            // We're moving a subtab up into another tab, update the db then move the subtab across
+            Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
+            if ( draggedItemView.model.get('parent_id') != me.model.get('id') ) {
+                wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: me.model.get('id') }, function() {
+                    draggedItemView.model.trigger('tab:move');
+                    me.model.addSubTab( draggedItemView.model );
+                    // Select the parent tab.
+                    $('#' + me.model.get('id') + 'TabID').click();
+                });
             }
 
             Backbone.Events.trigger( 'subtab:dragstop' );

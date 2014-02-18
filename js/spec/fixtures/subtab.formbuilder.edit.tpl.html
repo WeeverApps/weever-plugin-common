@@ -1,15 +1,268 @@
-<script type="text/template" id="form-builder-subtab-edit-template">
-    <div>
+<script type="text/template" id="formbuilder-subtab-edit-template">
+    <% if ( config.isDocuSign ) { %>
+        <!-- start: formbuilder step one - DocuSign Login / Account Info -->
+        <div class="form-builder-step-one">
+            <!-- start: left col -->
+            <div class="large-8 columns">
+                <h2><%- typeDescription %></h2>
 
-    <!-- start: add-field buttons -->
+                <%
+                var docusign = null;
+                for (var i = 0; i < config.formActions.length; i++) {
+                    if ( config.formActions[i].method === 'docusign' ) {
+                        docusign = config.formActions[i];
+                        break;
+                    }
+                };
+                %>
+                <p><b>Create an eSignature-enabled form and add it to your app.</b></p>
 
-        <p class="wx-ui-title">Add a form input field</p>
+                <p>As a person completes the form a PDF of their form entry is displayed for review and eSignature. The signed PDF is then saved to your DocuSign account.</p>
 
-        <div id="form-creation" class="content" data-section-content>
+                <br>
 
-            <div class="wx-form-builder-controls">
+                <!-- start: docusign account management -->
+                <div id="docusignAccountInfo">
+
+                    <!-- docusign account management menu -->
+                    <div class="wx-list-subnav">
+                        <a class="wx-subnav-item active" href="#" id="docusignLogin">DocuSign login</a>
+                        <a class="wx-subnav-item" href="#" id="docusignCreate">Create account</a>
+                        <a class="wx-subnav-item" href="#" id="docusignChangePassword">Change password</a>
+                        <a target="_blank" class="wx-subnav-item" href="https://www.docusign.net/Member/MemberForgotPassword.aspx">Forgot password?</a>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <!-- start: docusign login form -->
+                    <div id="docusignLoginForm" style="">
+
+                        <div data-alert class="login alert-box alert" style="display: none"></div>
+
+                        <!-- login prompt message -->
+                        <!-- <p>Please login or <a href="#" id="docusignCreate">create a new account</a>.</p> -->
+
+                        <div class="row collapse">
+                            <div class="large-8 columns">
+                                <label>
+                                    DocuSign account email address
+                                    <input type="email" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
+                                </label>
+
+                                <label>
+                                    DocuSign account password
+                                    <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <br>
+
+						<button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+
+                    </div>
+                    <!-- endof: docusign login form -->
+
+                    <!-- start: docusign create account form -->
+                    <div id="docusignCreateForm" style="display: none">
+
+                        <div data-alert class="account alert-box alert" style="display: none"></div>
+
+                        <p>Create a new DocuSign account and collecting eSignatures today.</p>
+
+                        <div class="row collapse">
+                            <div class="large-8 columns">
+
+                                <label>
+                                    Company name* (used to identify this account)
+                                    <input type="text" class="wx-form-builder-docusign-accountName" />
+                                </label>
+
+                                <label>
+                                    Email address*
+                                    <input type="text" class="wx-form-builder-docusign-email" />
+                                </label>
+
+                                <label>
+                                    Honorific*
+                                    <select class="wx-form-builder-docusign-title">
+                                        <option>Mr</option>
+                                        <option>Mrs</option>
+                                        <option>Miss</option>
+                                        <option>Ms</option>
+                                        <option>Dr</option>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    First name*
+                                    <input type="text" class="wx-form-builder-docusign-firstName" />
+                                </label>
+                                <label>
+                                    Last name*
+                                    <input type="text" class="wx-form-builder-docusign-lastName" />
+                                </label>
+                                <label>
+                                    Password*
+                                    <input type="password" class="wx-form-builder-docusign-password" />
+                                </label>
+                                <label>
+                                    Repeat Password*
+                                    <input type="password" class="wx-form-builder-docusign-password-again" />
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <button id="wx-docusign-create-account-button" class="success radius">Create account and start building a form &rarr;</button>
+						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                    </div>
+                    <!-- endof: docusign create account form -->
+
+                    <!-- start: docusign change password form -->
+                    <div id="docusignChangePassord" style="display: none">
+
+                        <div data-alert class="changePassword alert-box alert" style="display: none"></div>
+
+                        <p>Update your existing DocuSign account password and login.</p>
+
+                        <div class="row collapse">
+                            <div class="large-8 columns">
+
+                                <label>
+                                    DocuSign account email address*
+                                    <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
+                                </label>
+                                <label>
+                                    Current password*
+                                    <input type="password" class="wx-form-builder-docusign-old-password" value="<%- docusign.password %>" />
+                                </label>
+                                <label>
+                                    New password*
+                                    <input type="password" class="wx-form-builder-docusign-password" />
+                                </label>
+                                <label>
+                                    Repeat new password*
+                                    <input type="password" class="wx-form-builder-docusign-new-password-again" />
+                                </label>
+                                <label>
+                                    Set a new forgot password question*<br>For example: &ldquo;What is your mother&apos;s maiden name?&rdquo;
+                                    <input type="text" class="wx-form-builder-docusign-forgot-password-q1" />
+                                </label>
+                                <label>
+                                    Forgot password answer*
+                                    <input type="text" class="wx-form-builder-docusign-forgot-password-a1" />
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <button id="wx-docusign-change-password-button" class="success radius">Change password and start building a form &rarr;</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                    </div>
+                    <!-- endof: docusign change password form -->
+
+                </div>
+                <!-- start: docusign account management -->
+                <!-- start: enter docusign pdf attributes and return url -->
+                <div id="docusignOtherInfo" style="display: none">
+
+                    <div data-alert class="login alert-box success"></div>
+
+                    <p><b>PDF Document details</b> (optional)</p>
+
+                    <label>
+                        Document Title
+                        <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader.title %>" />
+                    </label>
+                    <label>
+                        Business Name
+                        <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- docusign.pdfHeader.line1 %>" />
+                    </label>
+                    <label>
+                        Address line one
+                        <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- docusign.pdfHeader.line2 %>" />
+                    </label>
+                    <label>
+                        Address line two
+                        <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader.line3 %>" />
+                    </label>
+
+                    <br>
+
+                    <p><b>App Settings</b></p>
+
+                    <label>
+                        Optional &ndash; Specify a return url on signature completion (default is to return to the app)
+                        <input type="url" class="wx-form-builder-docusign-returnUrl" value="<%- docusign.returnUrl %>" />
+                    </label>
+
+                    <div>
+                        <label>Title for this tab inside your app (you can change this later)</label>
+                        <input type="text" value="<%- title %>" class="wx-edit-title" />
+                    </div>
+
+                    <br>
+
+                    <button class="wx-continue-button success radius">Save PDF details and start building a form &rarr;</button>
+					&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                </div>
+                <!-- endof: enter docusign pdf attributes and return url -->
+            </div>
+            <!-- endof: left col -->
+
+            <!-- start: right col -->
+            <div class="large-4 columns">
+
+                <!-- about your current subscription -->
+                <div class="row">
+
+                        <div class="panel">
+
+                            <p class=""><b>What is DocuSign?</b></p>
+
+                            <p>Completed forms are saved to your account at <a target="_blank" href="http://www.docusign.com/">DocuSign</a>, a Weever Apps partner and the world&apos;s most trusted eSignature standard.</p>
+
+                            <p><b>How do people sign?</b></p>
+
+                            <p>Signatures are made using a finger on the touch screen. Electronic signatures are <a target="_blank" href="http://www.docusign.com/electronic-signature-legality">legally binding</a> in the U.S. and many countries around the world.</p>
+
+                            <p>View the <a target="_blank" href="http://www.docusign.com/faq">DocuSign FAQ</a> for more information on eSignatures.</p>
+
+                        </div>
+
+                    <!-- endof: enter docusign pdf attributes and return url -->
+                </div>
+                <!-- endof: left col -->
+            </div>
+            <!-- endof: right col -->
+
+        </div>
+        <!-- endof: formbuilder step one -->
+    <% } %>
+
+    <!-- start: formbuilder step two -->
+    <div class="form-builder-step-two" <% if ( config.isDocuSign ) { %>style="display: none;" <% } %>>
+        <div class="large-12 columns">
+            <div>
+                <h2><%- typeDescription %></h2>
+            </div>
+
+            <!-- start: add-field buttons -->
+            <p class="wx-ui-title">Add a form input field</p>
+
+            <div id="form-creation" class="content" data-section-content>
+
+                <div class="wx-form-builder-controls">
                     <!-- form builder add-new-field buttons -->
-                    <ul class="large-block-grid-3" id="add-fields">
+                    <ul class="large-block-grid-6 small-block-grid-2" id="add-fields">
 
 
                         <!-- text fields and common elements -->
@@ -85,7 +338,7 @@
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-select">
                                 <div class="wx-button-label">Dropdown</div>
-                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-left"
                                       title="<p><b>Dropdown</b><p>
                                        <p>Adds a drop-down list of predefined options.  Only one option may be selected at any time.</p>
                                        <p><b>Example:</b></p>
@@ -229,7 +482,7 @@
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-photo-input">
                                 <div class="wx-button-label">Submit a Photo</div>
-                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-left"
                                       title="<p><b>Submit A Photo</b><p>
                                        <p>Adds a button to launch the camera application for the purpose of taking a new photo or uploading an existing one.</p>
                                        <p>The photo will be included in the form submission.</p>
@@ -281,37 +534,45 @@
                                 </span>
                             </button>
                         </li>
-                        <li>
-                            <button class="tiny expand radius wx-form-builder-add-docusign-signature">
-                                <div class="wx-button-label">DocuSign eSignature</div>
-                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                      title="<p><b>DocuSign eSignature (required)</b><p>
-                                       <p>Adds an electronic signature field to your form at the location you specify.</p>
-                                       <p>On completion of the form a PDF of the submission is presented to the user for review and signature.  The signed PDF is then saved to your DocuSign account.</b>
-                                       <p><b>Example:</b></p>
-                                       <label>I have read and understand the preface and terms of this agreement.</label>
-                                       <label class='wx-esignature-example'>x</label>">
-                                        ?
-                                </span>
-                            </button>
-                        </li>
+                        <% if ( config.isDocuSign ) { %>
+                            <li>
+                                <button class="tiny expand radius wx-form-builder-add-docusign-signature">
+                                    <div class="wx-button-label">DocuSign eSignature</div>
+                                    <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                          title="<p><b>DocuSign eSignature (required)</b><p>
+                                           <p>Adds an electronic signature field to your form at the location you specify.</p>
+                                           <p>On completion of the form a PDF of the submission is presented to the user for review and signature.  The signed PDF is then saved to your DocuSign account.</b>
+                                           <p><b>Example:</b></p>
+                                           <label>I have read and understand the preface and terms of this agreement.</label>
+                                           <label class='wx-esignature-example'>x</label>">
+                                            ?
+                                    </span>
+                                </button>
+                            </li>
+                        <% } %>
                     </ul>
+                </div>
+
+            </div>
+        </div>
+    	<div class="large-6 columns">
+
+            <div>
+                <!-- start: edit new and existing form fields -->
+                <!--<p class="wx-ui-title">Edit new and existing fields</p>-->
+
+                <div id="form-build-area" class="section-container accordion" data-section="accordion">
+
+                </div>
             </div>
 
-        </div>
+            <div data-alert class="alert-box alert" style="display: none">
+                <span class="message"></span>
+                <a href="#" class="close">&times;</a>
+            </div>
 
-        <br>
-
-        <!-- start: edit new and existing form fields -->
-        <!--<p class="wx-ui-title">Edit new and existing fields</p>-->
-
-        <div id="form-build-area" class="section-container accordion" data-section="accordion">
-
-        </div>
-
-        <!-- start: form settings -->
-
-        <p class="wx-ui-title">Form submission settings</p>
+            <!-- start: form settings -->
+            <p class="wx-ui-title">Form submission settings</p>
 
             <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
                 <!-- Button Text -->
@@ -326,14 +587,55 @@
                 </section>
             </div>
 
+            <br>
+
+            <div>
+                <button class="wx-finish-button success radius">Save and add this form to your app</button>
+                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            </div>
+        </div>
+
+        <div class="large-6 columns">
+            <div class="section-container tabs" data-section="tabs">
+                <section class="active">
+                    <p class="title" data-section-title><a href="#panel1">Form Preview</a></p>
+                    <div class="content" data-section-content>
+                        <div class="wx-validate-feed panel">
+                            <br/>
+                            <h3 class="subheader"><%- title %> &mdash; preview</h3>
+                            <div class="wx-preview-form"></div>
+                            <br/>
+                            <button class="success radius"><%- buttonText %></button>
+                            <br/><br/>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
+                    <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
+                        <ul class="large-block-grid-7">
+                            <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                <p class="title" data-section-title><a href="#panel3"><%- helpTitle %></a></p>
+                    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
+                        <%= helpBody %>
+                        <!-- start - standard help text -->
+                        <p><b>Support</b></p>
+                        <p>Our <a target="_blank" href="http://suppport.weeverapps.com">support forum</a> has answers to common questions.</p>
+                        <p>Would you like our team to build the app for you.  Do you require special features?</p>
+                        <p>Please enter a support ticket and our professional services department will contact you.</p>
+                        <br>
+                        <!-- endof - standard help text -->
+
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
+    <a class="wx-close-reveal-modal">&#215;</a>
 </script>
-
-<!-- start: removed for production -->
-<!--
-<a class="button success small expand wx-form-builder-add-datetime-local-input">Date/Time Field (No Time Zone)</a>
-<a class="wx-form-builder-add-month-input">Month/Year Field</a>
-<a class="wx-form-builder-add-time-input">Time Field</a>
--->
-<!-- endof: removed for production -->

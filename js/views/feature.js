@@ -31,7 +31,6 @@ wxApp = wxApp || {};
 
         addFeature: function(ev) {
             var featureName = ev.currentTarget.id.replace('add-', '');
-            console.log( featureName );
 
             if (this.$('a').hasClass( 'wx-unavailable' )) {
 

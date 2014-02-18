@@ -6,7 +6,8 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
-		subTabEditTplSelector: '#form-builder-subtab-edit-template',
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
+		// subTabEditTplSelector: '#form-builder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
@@ -85,7 +86,7 @@ wxApp = wxApp || {};
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-				setTimeout( function() { 
+				// setTimeout( function() { 
 					var hasDocusign	= false,
 						hasPost		= false,
 						hasEmail	= false;
@@ -117,7 +118,7 @@ wxApp = wxApp || {};
 					if ( !hasEmail ) {
 						me.addEmailAction( null, { method: 'email' } );
 					}
-				}, 100);
+				// }, 100);
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
@@ -231,7 +232,9 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
-			'click .wx-close-button'                         : 'closePopup'
+			'click .wx-close-button'                         : 'closeConfirmation',
+			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
+//			'close'                                          : 'confirmClosePopup' // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 		},
 
 		updateButtonText: function( ev ) {
@@ -827,11 +830,16 @@ wxApp = wxApp || {};
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
 
-			// Now scroll down to it, if possible
-			if ( $('.wx-form-builder-row.active').length ) {
-				var offset = $('.wx-form-builder-row.active').offset().top - 230;
-				$('body').animate({scrollTop: offset}, 250);
-			}
+			// Now show the edit tab.
+			$('#formbuilder-edit-tab').parent()
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500);
 
 			// Add the view to the Controls array.
 			if ( !this.controls ) {
@@ -850,8 +858,17 @@ wxApp = wxApp || {};
 			console.log( this.model.get( 'config' ) );
 		},
 
-		closePopup: function() {
-			var ok = confirm( "Are you sure you want to cancel?" );
+		confirmClosePopup: function( e ) {
+			e.preventDefault();
+			var ok = confirm( 'Are you sure you want to cancel? Your changes will not be saved.' );
+			console.log( ok );
+			if ( ! ok ) {
+				return false;
+			}
+		},
+
+		closeConfirmation: function() {
+			var ok = confirm( "Are you sure you want to cancel? Your changes will not be saved." );
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}

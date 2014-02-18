@@ -4,7 +4,7 @@ wxApp = wxApp || {};
 (function($){
 
 	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
-		baseEditTplSelector: '#form-builder-edit-template',
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
 
 		initializeEvents: function() {
 
@@ -33,20 +33,22 @@ wxApp = wxApp || {};
 		},
 
 		validate: function() {
-			var success = false;
-			if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
-				success = true;
-			}
+			var signatureFound = false,
+			    errorMessage   = "Your form could not be saved! Please ensure you have added a DocuSign&trade; eSignature to your form.",
+			    formElements   = this.model.get( 'config' ).formElements;
 
-			if (!success) {
-				// Display an error message.
-				var errorMessage = "Your form could not be saved! Please enter your DocuSign&trade; username and password under the <b>Form Settings</b> tab.";
+			formElements.each( function( model, index ) {
+				if ( model.get( 'control' ) === 'docusignSignature' ) {
+					signatureFound = true;
+				}
+			});
+
+			if ( !signatureFound ) {
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
 			}
 
-
-			return success;
+			return signatureFound;
 		},
 
 		getDefaultFormActions: function() {
@@ -309,6 +311,7 @@ wxApp = wxApp || {};
 
 			$('.form-builder-step-one').slideUp();
 			$('.form-builder-step-two').slideDown();
+			$( this.buildPaneSelector ).foundation('section', 'reflow');
 
 		},
 
