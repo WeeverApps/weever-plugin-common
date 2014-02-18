@@ -45,7 +45,9 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
+			console.log('render preview');
 			var model = this.model.toJSON();
+			console.log( model );
 			this.$el.html( this.inputTpl( model ) );
 			if ( model.attributes.min )
 				this.$('input').attr('min', model.attributes.min );
