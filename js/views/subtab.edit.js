@@ -30,15 +30,17 @@ wxApp = wxApp || {};
         },
 
         genericEvents: {
-            'change .wx-dialog-input': 'next',
-			'change .wx-social-input': 'next',
-			'keydown .wx-dialog-input': 'hideValidateFeed',
-            'keyup .wx-edit-title': 'editTitle',
-			'click .wx-finish-button': 'finish',
-			'click .wx-next-button': 'next',
-            'change .wx-content-radio' : 'contentChange',
-            'click .close-reveal-modal': 'close',
-            'close': 'close'
+            'change .wx-dialog-input'       : 'next',
+			'change .wx-social-input'       : 'next',
+			'keydown .wx-dialog-input'      : 'hideValidateFeed',
+            'keyup .wx-edit-title'          : 'editTitle',
+			'click .wx-finish-button'       : 'finish',
+			'click .wx-next-button'         : 'next',
+            'change .wx-content-radio'      : 'contentChange',
+            'click .close-reveal-modal'     : 'close',
+	        'click .wx-close-reveal-modal'  : 'closeReveal',
+	        'click .wx-close-button'        : 'closeReveal',
+            'close'                         : 'close'
         },
 
         render: function() {
@@ -86,6 +88,10 @@ wxApp = wxApp || {};
 
             return this;
         },
+
+	    closeReveal: function() {
+		    this.$el.foundation('reveal', 'close');
+	    },
 
         close: function() {
             this.undelegateEvents();

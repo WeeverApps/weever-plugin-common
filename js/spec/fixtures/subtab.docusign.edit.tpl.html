@@ -1,4 +1,4 @@
-<script type="text/template" id="form-builder-edit-template">
+<script type="text/template" id="docusign-subtab-edit-template">
     <!-- start: formbuilder step one - DocuSign Login / Account Info -->
     <div class="form-builder-step-one">
         <!-- start: left col -->
@@ -57,6 +57,7 @@
                     <br>
 
                     <button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+					&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
 
                 </div>
                 <!-- endof: docusign login form -->
@@ -116,6 +117,7 @@
                     <br>
 
                     <button id="wx-docusign-create-account-button" class="success radius">Create account and start building a form &rarr;</button>
+					&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
                 <!-- endof: docusign create account form -->
 
@@ -161,6 +163,7 @@
                     <br>
 
                     <button id="wx-docusign-change-password-button" class="success radius">Change password and start building a form &rarr;</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+					&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
                 <!-- endof: docusign change password form -->
 
@@ -207,6 +210,7 @@
                 <br>
 
                 <button class="wx-continue-button success radius">Save PDF details and start building a form &rarr;</button>
+				&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
             </div>
             <!-- endof: enter docusign pdf attributes and return url -->
         </div>
@@ -283,5 +287,5 @@
         </div>
     </div>
 
-    <a class="close-reveal-modal">&#215;</a>
+    <a class="wx-close-reveal-modal">&#215;</a>
 </script>
