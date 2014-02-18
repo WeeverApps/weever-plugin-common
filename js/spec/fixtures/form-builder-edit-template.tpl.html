@@ -251,321 +251,310 @@
             <div>
                 <h2><%- typeDescription %></h2>
             </div>
+
+            <!-- start: add-field buttons -->
+            <p class="wx-ui-title">Add a form input field</p>
+
+            <div id="form-creation" class="content" data-section-content>
+
+                <div class="wx-form-builder-controls">
+                    <!-- form builder add-new-field buttons -->
+                    <ul class="large-block-grid-3" id="add-fields">
+
+
+                        <!-- text fields and common elements -->
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-text-input">
+                                <div class="wx-button-label">Single line text</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                title="<p><b>Single Line Text</b><p>
+                                       <p>Adds an input field for a single line of text.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>What is your favorite color?</label>
+                                       <input type='text' placeholder='Enter a color'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-textarea">
+                                <div class="wx-button-label">Paragraph text</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Paragraph Text</b><p>
+                                       <p>Adds an input for a multiple lines of text.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>What are your favorite colors?</label>
+                                       <textarea>Blue, Magenta, Gray, Purple, Orange, Yellow, Mauve, Teal</textarea>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-info">
+                                <div class="wx-button-label">Info box</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Info Box</b><p>
+                                       <p>Add a block of instructional text or other content.  HTML is permitted.</p>
+                                       <p><b>Example:</b></p>
+                                       <p>&ldquo;Please fill out the form to learn more about our products and services.  If you need assistance please call us at 555-5555.&rdquo;</p>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-email-input">
+                                <div class="wx-button-label">Email</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Email</b><p>
+                                       <p>Adds an input field for an email address.</p>
+                                       <p>On form submission the app will verify the entry has a valid name@address.com syntax.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please enter your email address</label>
+                                       <input type='email' placeholder='name@website.com'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-tel-input">
+                                <div class="wx-button-label">Phone</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Phone</b><p>
+                                       <p>Adds an input field for a phone number.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please enter your phone number</label>
+                                       <input type='tel' placeholder='555-5555555'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+
+
+                         <!-- radio buttons, checkboxes, etc. -->
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-select">
+                                <div class="wx-button-label">Dropdown</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Dropdown</b><p>
+                                       <p>Adds a drop-down list of predefined options.  Only one option may be selected at any time.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please select a sport</label>
+                                       <select>
+                                        <option>Football</option>
+                                        <option>Basketball</option>
+                                        <option>Cricket</option>
+                                        <option>Volleyball</option>
+                                        <option>Other</option>
+                                        </select>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-radio-group">
+                                <div class="wx-button-label">Multiple choice</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Multiple choice</b><p>
+                                       <p>Adds an input with a set of predefined options, aka &ldquo;radio buttons&rdquo;. Only one option may be selected at any time.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>How do you prefer to travel?</label>
+                                       <br>
+                                       <label>
+                                       <input type='radio'> Bicycle
+                                       </label>
+                                       <label>
+                                       <input type='radio' checked> Automobile
+                                       </label>
+                                       <label>
+                                       <input type='radio'> Spaceship
+                                       </label>">
+                                       ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-checkbox-group">
+                                <div class="wx-button-label">Checkboxes</div>
+                                        <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                        title="<p><b>Checkboxes</b></p>
+                                        <p>Adds one or more check box options. Multiple check boxes may be selected at one time.</p>
+                                        <p><b>Example:</b></p>
+                                        <label>What do you like about mobile forms?</label>
+                                        <br>
+                                        <label>
+                                            <input type='checkbox'> They are easy to use
+                                        </label>
+                                        <label>
+                                            <input type='checkbox' checked> They standardize incoming data
+                                        </label>
+                                        <label>
+                                            <input type='checkbox' checked> They can be submitted from any location
+                                        </label>
+                                        <label>
+                                            <input type='checkbox'> They save paper and processing
+                                        </label>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-number-input">
+                                <div class="wx-button-label">Number</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Number</b><p>
+                                       <p>Adds an input field for a number.  On activation of this input field a mobile device will display a number pad to the end-user.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Number of years since last service visit</label>
+                                       <input type='number' placeholder='12'>">
+                                       ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-range-input">
+                                <div class="wx-button-label">Number Slider</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Number Slider</b><p>
+                                       <p>Adds a slider element for selecting a number from a range of predefined values.</p>
+                                       <p>For a range above 10 values in total or using decimals or large numbers use the standard, non-slider number input field.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please rate our service (1-5, 5 being best)</label>
+                                       <br>
+                                       <input type='range' name='points' min='1' max='5'>
+                                       <table class='wx-tooltip-slider wx-tooltip-slider-5'><tr>
+                                           <td class='wx-tooltip-slider-label wx-label-1'>1</td>
+                                           <td class='wx-tooltip-slider-label wx-label-2'>2</td>
+                                           <td class='wx-tooltip-slider-label wx-label-3'>3</td>
+                                           <td class='wx-tooltip-slider-label wx-label-4'>4</td>
+                                           <td class='wx-tooltip-slider-label wx-label-5'>5</td>
+                                        </tr></table>">
+                                       ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-text-range-input">
+                                <div class="wx-button-label">Text Slider</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Text Slider</b><p>
+                                       <p>Adds a slider element for selecting one option from a range of predefined text options.</p>
+                                       <p>A text slider input field should be used only with 10 or less options in total.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>In your opinion, how much supervision do our trainees require compared to the previous year?</label>
+                                       <br>
+                                       <input type='range' name='points' min='1' max='5'>
+                                       <table class='wx-tooltip-slider wx-tooltip-slider-5'><tr>
+                                           <td class='wx-tooltip-slider-label wx-label-1'>None</td>
+                                           <td class='wx-tooltip-slider-label wx-label-2'>Less</td>
+                                           <td class='wx-tooltip-slider-label wx-label-3'>NA</td>
+                                           <td class='wx-tooltip-slider-label wx-label-4'>More</td>
+                                           <td class='wx-tooltip-slider-label wx-label-5'>Full</td>
+                                        </tr></table>">
+                                       ?
+                                </span>
+                            </button>
+                        </li>
+
+
+                        <!-- more rare elements, e.g, sliders -->
+
+                        <!-- file upload -->
+                        <!--
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-file-input">
+                                <div class="wx-button-label">File Upload</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>File Upload</b><p>
+                                       <p>Adds a button to upload a file.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please upload your brochure in PDF format.</label>
+                                       <input style='font-size: .875em' type='file'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        -->
+
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-photo-input">
+                                <div class="wx-button-label">Submit a Photo</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Submit A Photo</b><p>
+                                       <p>Adds a button to launch the camera application for the purpose of taking a new photo or uploading an existing one.</p>
+                                       <p>The photo will be included in the form submission.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please include a photo of the damaged area.</label>
+                                       <input style='font-size: .875em' type='file'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-url-input">
+                                <div class="wx-button-label">Web site</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Web site</b><p>
+                                       <p>Adds an input field for a web site address.</p>
+                                       <p>On form submission the app will verify the entry has a valid URL syntax.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please enter a web site address</label>
+                                       <input type='url' placeholder='http://google.com'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-date-input">
+                                Date
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Date</b><p>
+                                       <p>Adds an input field for a calendar date.</p>
+                                       <p>On selection the app will show a &ldquo;date picker&rdquo; with day, month and year options.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Request a date for your event</label>
+                                       <input type='date'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-password-input">
+                                <div class="wx-button-label">Password</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Password</b><p>
+                                       <p>Adds an input field for a user password.  The entry will be masked with asterixes or circles.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please specify a password</label>
+                                       <input type='password' value='password'>">
+                                        ?
+                                </span>
+                            </button>
+                        </li>
+                        <% if ( config.isDocuSign ) { %>
+                            <li>
+                                <button class="tiny expand radius wx-form-builder-add-docusign-signature">
+                                    <div class="wx-button-label">DocuSign eSignature</div>
+                                    <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                          title="<p><b>DocuSign eSignature (required)</b><p>
+                                           <p>Adds an electronic signature field to your form at the location you specify.</p>
+                                           <p>On completion of the form a PDF of the submission is presented to the user for review and signature.  The signed PDF is then saved to your DocuSign account.</b>
+                                           <p><b>Example:</b></p>
+                                           <label>I have read and understand the preface and terms of this agreement.</label>
+                                           <label class='wx-esignature-example'>x</label>">
+                                            ?
+                                    </span>
+                                </button>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+
+            </div>
         </div>
     	<div class="large-6 columns">
 
-            <div class="section-container tabs" data-section="tabs">
-                <section class="active">
-                    <p class="title" data-section-title><a href="#panel1">Add</a></p>
-                    <div class="content" data-section-content>
-                        <!-- start: add-field buttons -->
-                        <p class="wx-ui-title">Add a form input field</p>
-
-                        <div id="form-creation" class="content" data-section-content>
-
-                            <div class="wx-form-builder-controls">
-                                <!-- form builder add-new-field buttons -->
-                                <ul class="large-block-grid-3" id="add-fields">
-
-
-                                    <!-- text fields and common elements -->
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-text-input">
-                                            <div class="wx-button-label">Single line text</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                            title="<p><b>Single Line Text</b><p>
-                                                   <p>Adds an input field for a single line of text.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>What is your favorite color?</label>
-                                                   <input type='text' placeholder='Enter a color'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-textarea">
-                                            <div class="wx-button-label">Paragraph text</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Paragraph Text</b><p>
-                                                   <p>Adds an input for a multiple lines of text.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>What are your favorite colors?</label>
-                                                   <textarea>Blue, Magenta, Gray, Purple, Orange, Yellow, Mauve, Teal</textarea>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-info">
-                                            <div class="wx-button-label">Info box</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Info Box</b><p>
-                                                   <p>Add a block of instructional text or other content.  HTML is permitted.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <p>&ldquo;Please fill out the form to learn more about our products and services.  If you need assistance please call us at 555-5555.&rdquo;</p>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-email-input">
-                                            <div class="wx-button-label">Email</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Email</b><p>
-                                                   <p>Adds an input field for an email address.</p>
-                                                   <p>On form submission the app will verify the entry has a valid name@address.com syntax.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please enter your email address</label>
-                                                   <input type='email' placeholder='name@website.com'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-tel-input">
-                                            <div class="wx-button-label">Phone</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Phone</b><p>
-                                                   <p>Adds an input field for a phone number.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please enter your phone number</label>
-                                                   <input type='tel' placeholder='555-5555555'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-
-
-                                     <!-- radio buttons, checkboxes, etc. -->
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-select">
-                                            <div class="wx-button-label">Dropdown</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Dropdown</b><p>
-                                                   <p>Adds a drop-down list of predefined options.  Only one option may be selected at any time.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please select a sport</label>
-                                                   <select>
-                                                    <option>Football</option>
-                                                    <option>Basketball</option>
-                                                    <option>Cricket</option>
-                                                    <option>Volleyball</option>
-                                                    <option>Other</option>
-                                                    </select>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-radio-group">
-                                            <div class="wx-button-label">Multiple choice</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Multiple choice</b><p>
-                                                   <p>Adds an input with a set of predefined options, aka &ldquo;radio buttons&rdquo;. Only one option may be selected at any time.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>How do you prefer to travel?</label>
-                                                   <br>
-                                                   <label>
-                                                   <input type='radio'> Bicycle
-                                                   </label>
-                                                   <label>
-                                                   <input type='radio' checked> Automobile
-                                                   </label>
-                                                   <label>
-                                                   <input type='radio'> Spaceship
-                                                   </label>">
-                                                   ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-checkbox-group">
-                                            <div class="wx-button-label">Checkboxes</div>
-                                                    <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                    title="<p><b>Checkboxes</b></p>
-                                                    <p>Adds one or more check box options. Multiple check boxes may be selected at one time.</p>
-                                                    <p><b>Example:</b></p>
-                                                    <label>What do you like about mobile forms?</label>
-                                                    <br>
-                                                    <label>
-                                                        <input type='checkbox'> They are easy to use
-                                                    </label>
-                                                    <label>
-                                                        <input type='checkbox' checked> They standardize incoming data
-                                                    </label>
-                                                    <label>
-                                                        <input type='checkbox' checked> They can be submitted from any location
-                                                    </label>
-                                                    <label>
-                                                        <input type='checkbox'> They save paper and processing
-                                                    </label>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-number-input">
-                                            <div class="wx-button-label">Number</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Number</b><p>
-                                                   <p>Adds an input field for a number.  On activation of this input field a mobile device will display a number pad to the end-user.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Number of years since last service visit</label>
-                                                   <input type='number' placeholder='12'>">
-                                                   ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-range-input">
-                                            <div class="wx-button-label">Number Slider</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Number Slider</b><p>
-                                                   <p>Adds a slider element for selecting a number from a range of predefined values.</p>
-                                                   <p>For a range above 10 values in total or using decimals or large numbers use the standard, non-slider number input field.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please rate our service (1-5, 5 being best)</label>
-                                                   <br>
-                                                   <input type='range' name='points' min='1' max='5'>
-                                                   <table class='wx-tooltip-slider wx-tooltip-slider-5'><tr>
-                                                       <td class='wx-tooltip-slider-label wx-label-1'>1</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-2'>2</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-3'>3</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-4'>4</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-5'>5</td>
-                                                    </tr></table>">
-                                                   ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-text-range-input">
-                                            <div class="wx-button-label">Text Slider</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Text Slider</b><p>
-                                                   <p>Adds a slider element for selecting one option from a range of predefined text options.</p>
-                                                   <p>A text slider input field should be used only with 10 or less options in total.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>In your opinion, how much supervision do our trainees require compared to the previous year?</label>
-                                                   <br>
-                                                   <input type='range' name='points' min='1' max='5'>
-                                                   <table class='wx-tooltip-slider wx-tooltip-slider-5'><tr>
-                                                       <td class='wx-tooltip-slider-label wx-label-1'>None</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-2'>Less</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-3'>NA</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-4'>More</td>
-                                                       <td class='wx-tooltip-slider-label wx-label-5'>Full</td>
-                                                    </tr></table>">
-                                                   ?
-                                            </span>
-                                        </button>
-                                    </li>
-
-
-                                    <!-- more rare elements, e.g, sliders -->
-
-                                    <!-- file upload -->
-                                    <!--
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-file-input">
-                                            <div class="wx-button-label">File Upload</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>File Upload</b><p>
-                                                   <p>Adds a button to upload a file.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please upload your brochure in PDF format.</label>
-                                                   <input style='font-size: .875em' type='file'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    -->
-
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-photo-input">
-                                            <div class="wx-button-label">Submit a Photo</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Submit A Photo</b><p>
-                                                   <p>Adds a button to launch the camera application for the purpose of taking a new photo or uploading an existing one.</p>
-                                                   <p>The photo will be included in the form submission.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please include a photo of the damaged area.</label>
-                                                   <input style='font-size: .875em' type='file'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-url-input">
-                                            <div class="wx-button-label">Web site</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Web site</b><p>
-                                                   <p>Adds an input field for a web site address.</p>
-                                                   <p>On form submission the app will verify the entry has a valid URL syntax.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please enter a web site address</label>
-                                                   <input type='url' placeholder='http://google.com'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-date-input">
-                                            Date
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Date</b><p>
-                                                   <p>Adds an input field for a calendar date.</p>
-                                                   <p>On selection the app will show a &ldquo;date picker&rdquo; with day, month and year options.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Request a date for your event</label>
-                                                   <input type='date'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="tiny expand radius wx-form-builder-add-password-input">
-                                            <div class="wx-button-label">Password</div>
-                                            <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                  title="<p><b>Password</b><p>
-                                                   <p>Adds an input field for a user password.  The entry will be masked with asterixes or circles.</p>
-                                                   <p><b>Example:</b></p>
-                                                   <label>Please specify a password</label>
-                                                   <input type='password' value='password'>">
-                                                    ?
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <% if ( config.isDocuSign ) { %>
-                                        <li>
-                                            <button class="tiny expand radius wx-form-builder-add-docusign-signature">
-                                                <div class="wx-button-label">DocuSign eSignature</div>
-                                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-                                                      title="<p><b>DocuSign eSignature (required)</b><p>
-                                                       <p>Adds an electronic signature field to your form at the location you specify.</p>
-                                                       <p>On completion of the form a PDF of the submission is presented to the user for review and signature.  The signed PDF is then saved to your DocuSign account.</b>
-                                                       <p><b>Example:</b></p>
-                                                       <label>I have read and understand the preface and terms of this agreement.</label>
-                                                       <label class='wx-esignature-example'>x</label>">
-                                                        ?
-                                                </span>
-                                            </button>
-                                        </li>
-                                    <% } %>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <p class="title" data-section-title><a href="#panel1" id="formbuilder-edit-tab">Edit</a></p>
-                    <div class="content" data-section-content>
-                        <div class="subtab"></div>
-                    </div>
-                </section>
-            </div>
+            <div class="subtab"></div>
 
             <div data-alert class="alert-box alert" style="display: none">
                 <span class="message"></span>
@@ -598,14 +587,42 @@
         </div>
 
         <div class="large-6 columns">
-            <div class="wx-validate-feed panel">
-                <br/>
-                <h3 class="subheader"><%- title %> &mdash; preview</h3>
-                <div class="wx-preview-form"></div>
-                <br/>
-                <button class="success radius"><%- buttonText %></button>
-                <br/><br/>
+            <div class="section-container tabs" data-section="tabs">
+                <section class="active">
+                    <p class="title" data-section-title><a href="#panel1">Preview</a></p>
+                    <div class="content" data-section-content>
+                        <div class="wx-validate-feed panel">
+                            <br/>
+                            <h3 class="subheader"><%- title %> &mdash; preview</h3>
+                            <div class="wx-preview-form"></div>
+                            <br/>
+                            <button class="success radius"><%- buttonText %></button>
+                            <br/><br/>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
+                    <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
+                        <ul class="large-block-grid-7">
+                            <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                <p class="title" data-section-title><a href="#panel3"><%- helpTitle %></a></p>
+                    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
+                        <%= helpBody %>
+                        <!-- start - standard help text -->
+                        <p><b>Support</b></p>
+                        <p>Our <a target="_blank" href="http://suppport.weeverapps.com">support forum</a> has answers to common questions.
+                           Pro, premium and reseller level app subscriptions have access to <a target="_blank" href="http://support.weeverapps.com/registration">support tickets</a> and faster response times.</p>
+                        <a target="_blank" class="button radius">View plans and pricing</a>
+                        <br>
+                        <!-- endof - standard help text -->
 
+                    </div>
+                </section>
             </div>
         </div>
     </div>
