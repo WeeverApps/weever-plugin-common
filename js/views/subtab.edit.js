@@ -13,7 +13,8 @@ wxApp = wxApp || {};
 
             this.initializeEvents();
 
-            this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
+            if ( this.subTabEditTplSelector )
+                this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
             this.baseEditTpl = _.template( $(this.baseEditTplSelector).html() );
 			this.feedSampleTpl = _.template( $(this.feedSampleTplSelector).html() );
             this.render();
@@ -46,7 +47,8 @@ wxApp = wxApp || {};
         render: function() {
 
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
-            this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
+            if ( this.subTabEditTpl )
+                this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
 
             this.$el.prepend('<form>');
             this.$el.append('</form>');
