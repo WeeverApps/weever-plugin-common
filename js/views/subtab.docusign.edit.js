@@ -4,7 +4,7 @@ wxApp = wxApp || {};
 (function($){
 
 	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
-		baseEditTplSelector: '#docusign-subtab-edit-template',
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
 
 		initializeEvents: function() {
 

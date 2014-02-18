@@ -6,8 +6,8 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
-		baseEditTplSelector: '#docusign-subtab-edit-template',
-		subTabEditTplSelector: '#form-builder-subtab-edit-template',
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
+		// subTabEditTplSelector: '#form-builder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
