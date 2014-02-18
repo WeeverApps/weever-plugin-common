@@ -32,6 +32,44 @@ wxApp = wxApp || {};
 			'click .wx-continue-button'                      : 'next'
 		},
 
+		initialize: function() {
+			var me = this,
+				args = arguments;
+
+			if ( typeof me.model.get( 'docusign' ) == 'undefined' ) {
+				me.model.set( 'docusign', {
+					username: '',
+					password: ''
+				} );
+			}
+
+			$.ajax( {
+				url: ajaxurl + '?action=ajaxRetrieveDocusignCredentials',
+				type: 'GET',
+				dataType: 'json',
+				success: function( data ) {
+					console.log( 'success', data );
+					if ( !! data ) {
+						me.model.get( 'docusign' ).username = ( typeof data.username != 'undefined' ? data.username : '' );
+						me.model.get( 'docusign' ).password = ( typeof data.password != 'undefined' ? data.password : '' );
+//						me.render();
+
+						$( '.wx-form-builder-docusign-username' ).val( me.model.get( 'docusign' ).username );
+						$( '.wx-form-builder-docusign-password' ).val( me.model.get( 'docusign' ).password );
+
+					}
+				},
+				error: function( data ) {
+					console.log( 'error', data );
+				},
+				complete: function() {
+//					wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( me, args );
+				}
+			} );
+
+			wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( this, arguments );
+		},
+
 		validate: function() {
 			var signatureFound = false,
 			    errorMessage   = "Your form could not be saved! Please ensure you have added a DocuSign&trade; eSignature to your form.",
@@ -145,6 +183,21 @@ wxApp = wxApp || {};
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
 			    success  = function success( data ) {
+				    console.log( me );
+				    $.ajax( {
+					    url: ajaxurl + '?action=ajaxSaveDocusignCredentials',
+					    type: 'POST',
+					    data: {
+						    username: username,
+						    password: password
+					    },
+					    success: function( data ) {
+						    console.log( 'success', data );
+					    },
+					    error: function( data ) {
+						    console.log( 'error', data );
+					    }
+				    } );
 			    	me.$('#login_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
 					me.$('.login.alert-box.success').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );

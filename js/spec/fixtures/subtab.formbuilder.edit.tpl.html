@@ -7,10 +7,16 @@
                 <h2><%- typeDescription %></h2>
 
                 <%
-                var docusign = null;
+                var docusign = docusign || { username: '', password: '' };
                 for (var i = 0; i < config.formActions.length; i++) {
                     if ( config.formActions[i].method === 'docusign' ) {
-                        docusign = config.formActions[i];
+						var clone = _( config.formActions[i] ).clone();
+						if ( docusign.username == '' || docusign.password == '' ) {
+							docusign = clone;
+						}
+						else {
+							docusign = _.extend( clone, docusign );
+						}
                         break;
                     }
                 };
