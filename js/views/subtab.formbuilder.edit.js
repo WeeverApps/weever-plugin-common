@@ -388,13 +388,15 @@ wxApp = wxApp || {};
 				action.set( customAction );
 			}
 
-			var actionView = new wxApp.FormBuilderActionView({
-				model: action
-			});
+			if ( wx.formbuilderAdvanced ) {
+				var actionView = new wxApp.FormBuilderActionView({
+					model: action
+				});
 
-			setTimeout(function() {
-				me.$( '#form-settings-accordion' ).append( actionView.render().el );
-			}, 100);
+				setTimeout(function() {
+					me.$( '#form-settings-accordion' ).append( actionView.render().el );
+				}, 100);
+			}
 
 			this.model.get( 'config' ).formActions.push( action );
 			return action;
@@ -860,8 +862,7 @@ wxApp = wxApp || {};
 
 		confirmClosePopup: function( e ) {
 			e.preventDefault();
-			var ok = confirm( 'Are you sure you want to cancel? Your changes will not be saved.' );
-
+			var ok = confirm( 'Are you sure you want to cancel? Your form changes will be lost.' );
 			console.log( ok );
 			if ( ! ok ) {
 				return false;
@@ -869,8 +870,7 @@ wxApp = wxApp || {};
 		},
 
 		closeConfirmation: function() {
-			var ok = confirm( "Are you sure you want to cancel? Your changes will not be saved." );
-
+			var ok = confirm( "Are you sure you want to cancel?" );
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}
