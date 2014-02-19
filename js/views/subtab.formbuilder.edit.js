@@ -218,6 +218,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-text-range-input'    : 'addTextRangeInput',
 			'click .wx-form-builder-add-select'              : 'addSelect',
 			'click .wx-form-builder-add-info'                : 'addInfo',
+			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
@@ -623,6 +624,17 @@ wxApp = wxApp || {};
 			this.addInfoWithProperties( { 
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim() 
 			} );
+		},
+
+		addPagebreak: function( ev ) {
+			var pagebreak = new wxApp.FormBuilderControl( {
+				control: 'pagebreak',
+				controlTitle: 'Page Break'
+			} );
+			var pagebreakView = new wxApp.FormBuilderControlPagebreakView({
+				model: pagebreak
+			});
+			this.addControl( pagebreak, pagebreakView );
 		},
 
 		addInfoWithProperties: function( properties ) {
