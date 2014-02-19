@@ -161,7 +161,7 @@ wxApp = wxApp || {};
         },
 
         setTitleFromView: function( model ) {
-            if ( model.allowTitleEdit && this.$('.wx-edit-title') )
+            if ( model.allowTitleEdit && this.$('.wx-edit-title').val() )
                 model.set('title', this.$('.wx-edit-title').val() );
             return model;
         },
