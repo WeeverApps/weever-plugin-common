@@ -200,7 +200,7 @@ wxApp = wxApp || {};
 				    } );
 			    	me.$('#login_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.secondary').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );
+					me.$('.login.alert-box.success').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure  = function failure( data ) {

@@ -110,7 +110,7 @@
       var $tip = $(this.settings.tipTemplate(this.selector($target), $('<div></div>').html($target.attr('title')).html())),
           classes = this.inheritable_classes($target);
       if ( $('.reveal-modal.open').length ) {
-        this.settings.appendTo = '#wx-edit-area-FormBuilder';
+        this.settings.appendTo = '.reveal-modal.open';
       }
       $tip.addClass(classes).appendTo(this.settings.appendTo);
       if (Modernizr.touch) {
@@ -169,8 +169,8 @@
 
         if ( $('.reveal-modal.open').length ) {
           // This tip is on a modal. Let's adjust for that.
-          top = top - ($('#wx-edit-area-FormBuilder').offset().top + 2)
-          left = left - ($('#wx-edit-area-FormBuilder').offset().left + 5);
+          top = top - ($('.reveal-modal.open').offset().top + 2)
+          left = left - ($('.reveal-modal.open').offset().left + 5);
         }
 
         objPos(tip, top, 'auto', 'auto', left, width).removeClass('tip-override');
