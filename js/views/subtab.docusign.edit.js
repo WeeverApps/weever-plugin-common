@@ -15,8 +15,6 @@ wxApp = wxApp || {};
 
 		events: {
 			// "Step One" stuff (ie, DocuSign)
-			'blur .wx-form-builder-docusign-username'        : 'updateUsername',
-			'blur .wx-form-builder-docusign-password'        : 'updatePassword',
 			'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
 			'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
 			'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
@@ -90,31 +88,14 @@ wxApp = wxApp || {};
 		},
 
 		getDefaultFormActions: function() {
-
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			var post = new wxApp.FormBuilderAction();
-			post.set( { method: 'post' } );
-			var docusign = new wxApp.FormBuilderAction();
-			docusign.set( { method: 'docusign' } );
-
-			this.model.get( 'config' ).formActions.push( post );
-			this.model.get( 'config' ).formActions.push( docusign );
-
-			this.addPostAction( post );
-			this.docusign = this.addDocusignAction( docusign );
+			this.addPostAction( null );
+			this.docusign = this.addDocusignAction( null );
 		},
 
 		/********************************/
 		/* DocuSign Account Stuff Start */
 		/********************************/
-
-		updateUsername: function( ev ) {
-			this.docusign.set( 'username', $( ev.currentTarget ).val() );
-		},
-
-		updatePassword: function( ev ) {
-			this.docusign.set( 'password', $( ev.currentTarget ).val() );
-		},
 
 		// Login when 'enter' is pressed.
 		passwordKeyUp: function( ev ) {
@@ -184,6 +165,9 @@ wxApp = wxApp || {};
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
 			    success  = function success( data ) {
 				    console.log( me );
+				    // Update docusign username/password
+				    me.docusign.set( 'username', username );
+				    me.docusign.set( 'password', password );
 				    $.ajax( {
 					    url: ajaxurl + '?action=ajaxSaveDocusignCredentials',
 					    type: 'POST',
