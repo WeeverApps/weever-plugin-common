@@ -221,9 +221,9 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
+//			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
-//			'close'                                          : 'confirmClosePopup' // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 		},
 
 		updateButtonText: function( ev ) {
@@ -854,6 +854,7 @@ wxApp = wxApp || {};
 			var ok = confirm( 'Are you sure you want to cancel? Your form changes will be lost.' );
 			console.log( ok );
 			if ( ! ok ) {
+				e.stopImmediatePropagation();
 				return false;
 			}
 		},
