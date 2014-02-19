@@ -861,6 +861,7 @@ wxApp = wxApp || {};
 		confirmClosePopup: function( e ) {
 			e.preventDefault();
 			var ok = confirm( 'Are you sure you want to cancel? Your changes will not be saved.' );
+
 			console.log( ok );
 			if ( ! ok ) {
 				return false;
@@ -869,6 +870,7 @@ wxApp = wxApp || {};
 
 		closeConfirmation: function() {
 			var ok = confirm( "Are you sure you want to cancel? Your changes will not be saved." );
+
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}
