@@ -218,12 +218,13 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-text-range-input'    : 'addTextRangeInput',
 			'click .wx-form-builder-add-select'              : 'addSelect',
 			'click .wx-form-builder-add-info'                : 'addInfo',
+			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
+//			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
-//			'close'                                          : 'confirmClosePopup' // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 		},
 
 		updateButtonText: function( ev ) {
@@ -625,6 +626,17 @@ wxApp = wxApp || {};
 			} );
 		},
 
+		addPagebreak: function( ev ) {
+			var pagebreak = new wxApp.FormBuilderControl( {
+				control: 'pagebreak',
+				controlTitle: 'Page Break'
+			} );
+			var pagebreakView = new wxApp.FormBuilderControlPagebreakView({
+				model: pagebreak
+			});
+			this.addControl( pagebreak, pagebreakView );
+		},
+
 		addInfoWithProperties: function( properties ) {
 
 			var info = new wxApp.FormBuilderControlInfo( properties );
@@ -854,6 +866,7 @@ wxApp = wxApp || {};
 			var ok = confirm( 'Are you sure you want to cancel? Your form changes will be lost.' );
 			console.log( ok );
 			if ( ! ok ) {
+				e.stopImmediatePropagation();
 				return false;
 			}
 		},
