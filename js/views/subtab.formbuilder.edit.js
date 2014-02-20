@@ -220,11 +220,32 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-info'                : 'addInfo',
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
+			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
 			'keyup .button-text'                             : 'updateButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 //			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
+
+		},
+
+		/**
+		 * Sets the active preview element based on the index of the active accordion element
+		 * @param ev
+		 */
+		setActivePreviewElement: function( ev ) {
+			var $target = null;
+			if ( typeof ev.currentTarget != 'undefined' ) {
+				$target = $( ev.currentTarget );
+			}
+			else {
+				$target = ev;
+			}
+			var $precedingSiblings = $target.prevAll();
+			var oneBasedSiblingIndex = $precedingSiblings.length + 1;
+			console.log( oneBasedSiblingIndex );
+			$( '.wx-preview-form .wx-form-preview-row' ).removeClass( 'active' );
+			$( '.wx-preview-form .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
 
 		updateButtonText: function( ev ) {
@@ -893,6 +914,7 @@ wxApp = wxApp || {};
 		 */
 		scrollIntoView: function( view ) {
 			view.el.scrollIntoView( false );
+			this.setActivePreviewElement( view.$el );
 		}
 
 	});
