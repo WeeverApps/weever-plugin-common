@@ -7,7 +7,7 @@
     { "featureName": "WordpressPage",       "name": "WP Page",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
     { "featureName": "WordpressTag",        "name": "WP Tag",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
     { "featureName": "WordpressSearchterm", "name": "Search",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
-    { "featureName": "WordpressMap",        "name": "Map",        "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
+    { "featureName": "WordpressMap",        "name": "Map",         "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
     { "featureName": "WordpressProximity",  "name": "Nearby",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
     { "featureName": "WordpressDirectory",  "name": "Directory",   "cms": ["none"],                "filterBy": "weever_list_show_wordpress_content", "rel": "hide"         },
     { "featureName": "WordpressPage",       "name": "New Page",    "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "rel": "page"         },
