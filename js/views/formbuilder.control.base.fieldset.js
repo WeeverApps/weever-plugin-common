@@ -78,19 +78,28 @@ wxApp = wxApp || {};
 			var model = this.model.toJSON();
 			this.$el.html( this.fieldsetTpl( model ) );
 
-			console.log('=== model ===');
-			console.log( model );
-			for (var i = 0; i < model.config.checkboxGroup.length; i++) {
-				var checkbox = model.config.checkboxGroup[i]
-				console.log('checkbox');
-				console.log( checkbox );
+			if ( this.selector.indexOf('checkbox') > -1 ) {
+				for (var i = 0; i < model.checkboxGroup.length; i++) {
+					var checkbox = model.checkboxGroup.models[i]
 
-				var view = new wxApp.FormBuilderControlCheckboxView({
-					model: checkbox,
-					type: 'checkbox'
-				});
-				this.previewArea.$('fieldset').append( view.getPreview().render().el );
-			};
+					var view = new wxApp.FormBuilderControlCheckboxView({
+						model: checkbox,
+						type: 'checkbox'
+					});
+					this.$('fieldset').append( view.getPreview().render().el );
+				};
+			}
+			else {
+				for (var i = 0; i < model.radioGroup.length; i++) {
+					var radio = model.radioGroup.models[i]
+
+					var view = new wxApp.FormBuilderControlRadioView({
+						model: radio,
+						type: 'radio'
+					});
+					this.$('fieldset').append( view.getPreview().render().el );
+				};
+			}
 
 			return this;
 		}
