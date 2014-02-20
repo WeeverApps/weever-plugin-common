@@ -863,7 +863,7 @@ wxApp = wxApp || {};
 
 		confirmClosePopup: function( e ) {
 			e.preventDefault();
-			var ok = confirm( 'Are you sure you want to cancel? Your form changes will be lost.' );
+			var ok = confirm( 'Are you sure you want to cancel?  Your changes have not been saved.' );
 			console.log( ok );
 			if ( ! ok ) {
 				e.stopImmediatePropagation();
@@ -872,7 +872,7 @@ wxApp = wxApp || {};
 		},
 
 		closeConfirmation: function() {
-			var ok = confirm( "Are you sure you want to cancel?" );
+			var ok = confirm( "Are you sure you want to cancel?  Your changes have not been saved." );
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}
