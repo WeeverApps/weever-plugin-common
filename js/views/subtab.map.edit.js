@@ -22,7 +22,20 @@ wxApp = wxApp || {};
 			$('section.coupon').hide();
 			$('section.mapper').show();
 
-			var center      = new google.maps.LatLng(0.0, 0.0),
+			console.log('=== MAP INFO ===');
+			var config = JSON.parse( this.model.get('config') );
+			console.log( config );
+
+			var lat = 0.0, lng = 0.0;
+			if ( config.items ) {
+				for (var i = 0; i < config.items.length; i++) {
+					var item = config.items[i];
+					lat = item.lat;
+					lng = item.lng;
+				};
+			}
+			
+			var center      = new google.maps.LatLng( lat, lng ),
 			    options     = {
 					zoom: 16,
 					center: center,
@@ -35,6 +48,10 @@ wxApp = wxApp || {};
 					title:"Post Location"
 				});
 
+			console.log( lat );
+			console.log( lng );
+			console.log( center );
+
 		    this.map    = map;
 			this.marker = startMarker;
         },
@@ -43,14 +60,18 @@ wxApp = wxApp || {};
             
         	var title       = this.$('#wx-title-value').val(),
         	    content     = this.$('#wx-content-value').val(),
+        	    lat         = this.$('#geolocation-latitude').val(),
+        	    lng         = this.$('#geolocation-longitude').val(),
         	    data        = {
                     content_type: 'map',
-                    geolat      : this.$("#geolocation-latitude").val(),
-	                geolon      : this.$("#geolocation-longitude").val(),
+                    geolat      : lat,
+	                geolon      : lng,
         	    },
         	    url         = this.createPage( title, content, data );
         	
         	model.set('tabLayout',  'map');
+        	model.setConfig('lat', lat);
+        	model.setConfig('lng', lng);
             model.setConfig('name', title);
             model.setConfig('type', 'htmlContent');
             model.setConfig('url',  url);
