@@ -10,7 +10,7 @@ wxApp = wxApp || {};
 			control: 'checkboxfieldset',
 			title: 'Check all that apply',
 			allowAdditional: '',
-			allowAdditionalClass: '',
+			allowAdditionalClass: 'hide',
 			requiredClass: '',
 			name: ''
 		},
