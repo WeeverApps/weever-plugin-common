@@ -11,7 +11,7 @@ wxApp = wxApp || {};
         defaults: function() {
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
                 title   : 'Coupon',
-                // icon : 'e014',
+                icon : 'e212',
                 icon_id : 13,
                 // type : 'WordpressPage',
                 content : 'htmlPage',
