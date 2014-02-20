@@ -43,6 +43,7 @@ wxApp = wxApp || {};
 				icon_id: 30,
 				type: 'formbuilder',
 				content: 'formbuilder',
+                helpTitle:  'Support',
 				layout: 'panel',
         		buttonText: 'Review and Sign',
                 advancedMode: wx.formbuilderAdvanced,
@@ -51,8 +52,8 @@ wxApp = wxApp || {};
 					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
-					}, 
-					subtab_name: 'FormBuilderSubTab',
+					},
+                    subtab_name: 'FormBuilderSubTab',
 					isDocuSign: false
 				}
 			});

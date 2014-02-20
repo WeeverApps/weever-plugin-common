@@ -102,6 +102,16 @@ wxApp = wxApp || {};
 		render: function() {
 			var model = this.model.toJSON();
 			this.$el.html( this.inputTpl( model ) );
+
+			for (var i = 0; i < this.model.get('optionGroup').length; i++) {
+				var item = this.model.get('optionGroup').models[i];
+				var view = new wxApp.FormBuilderControlOptionView({
+					model: item
+				});
+
+				this.$('select').append( view.getPreview().render().el );
+			};
+
 			return this;
 		}
 	});
