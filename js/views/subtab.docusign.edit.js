@@ -349,8 +349,9 @@ wxApp = wxApp || {};
 			$('.form-builder-step-one').slideUp();
 			$('.form-builder-step-two').slideDown();
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
+			$( 'html, body' ).animate( { scrollTop: 0 }, 500 );
 
-		},
+		}
 
 		/********************************/
 		/* DocuSign Account Stuff End   */
