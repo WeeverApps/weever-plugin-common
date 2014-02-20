@@ -12,6 +12,9 @@ var wxApp = wxApp || {};
             console.log( tabData );
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
+                case 'blogger':
+                    retVal = 'BloggerSubTab';
+                    break;
                 case 'contact':
                     retVal = 'WordpressContactsSubTab';
                     break;
@@ -33,6 +36,9 @@ var wxApp = wxApp || {};
                 case 'twitter':
                 case 'twitterUser':
                     retVal = 'TwitterSubTab';
+                    break;
+                case 'vimeo':
+                    retVal = 'VimeoSubTab';
                     break;
                 case 'wufoo':
                     retVal = 'WufooSubTab';
@@ -67,6 +73,15 @@ var wxApp = wxApp || {};
                                     retVal = obj;
                                     break;
                                 }
+                            }
+                        }
+                    }
+
+                    if ( 'SubTab' == retVal ) {
+                        if ( tabData.content === 'html' ) {
+                            if ( tabData.config.url ) {
+                                // Probably RSS?
+                                retVal = 'RSSSubTab';
                             }
                         }
                     }

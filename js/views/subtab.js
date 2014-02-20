@@ -41,7 +41,6 @@ wxApp = wxApp || {};
         editSubTab: function(event) {
             event.preventDefault();
 
-console.log( 'editSubTab' );
             var editViewName = this.model.getModelName() + 'EditView';
             if ( 'SubTabEditView' != editViewName && undefined !== wxApp[editViewName] )
                 var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area-' + this.model.get('id') } );
