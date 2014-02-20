@@ -454,6 +454,8 @@ wxApp = wxApp || {};
 			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
 			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
 
+			this.scrollIntoView( inputView );
+
 			return input;
 		},
 
@@ -719,7 +721,8 @@ wxApp = wxApp || {};
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
 			}
-			
+
+			this.scrollIntoView( radioFieldsetView );
 			// radioFieldsetView.getPreview().render();
 			// this.model.get( 'config' ).formElements.push( radioFieldset );
 		},
@@ -760,6 +763,8 @@ wxApp = wxApp || {};
 					checkboxFieldset.get( 'checkboxGroup' ).add( option );
 				};
 			}
+
+			this.scrollIntoView( checkboxFieldsetView );
 
 			// this.model.get( 'config' ).formElements.push( checkboxFieldset );
 		},
@@ -811,6 +816,8 @@ wxApp = wxApp || {};
 					select.get('optionGroup').add( optionModel );
 				};
 			}
+
+			this.scrollIntoView( selectView );
 		},
 
 		addControl: function( input, view ) {
@@ -857,6 +864,8 @@ wxApp = wxApp || {};
 			this.previews.push( view.getPreview() );
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
 
+			this.scrollIntoView( view );
+
 			console.log( 'addControl' );
 			console.log( this.model.get( 'config' ) );
 		},
@@ -876,6 +885,14 @@ wxApp = wxApp || {};
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}
+		},
+
+		/**
+		 * @todo animate via https://github.com/Arwid/jQuery.scrollIntoView
+		 * @param view
+		 */
+		scrollIntoView: function( view ) {
+			view.el.scrollIntoView( false );
 		}
 
 	});
