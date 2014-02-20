@@ -244,8 +244,8 @@ wxApp = wxApp || {};
 			var $precedingSiblings = $target.prevAll();
 			var oneBasedSiblingIndex = $precedingSiblings.length + 1;
 			console.log( oneBasedSiblingIndex );
-			$( '.wx-preview-form .wx-form-preview-row' ).removeClass( 'active' );
-			$( '.wx-preview-form .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
+			$( '.wx-preview-form > .wx-form-preview-row' ).removeClass( 'active' );
+			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
 
 		updateButtonText: function( ev ) {
