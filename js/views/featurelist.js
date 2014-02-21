@@ -37,9 +37,17 @@ wxApp = wxApp || {};
 		    success: function(result) {},
 		    error: function() {
 			    wxApp.featureList.collection.fetch({
-				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
 				    success: function(result) {  },
-				    error: function() { console.log('Could not load feature list.') }
+				    error: function() {
+					    wxApp.featureList.collection.fetch({
+						    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+						    success: function(result) {  },
+						    error: function() {
+							    console.log('Could not load feature list.')
+						    }
+					    });
+				    }
 			    });
 		    }
 	    });

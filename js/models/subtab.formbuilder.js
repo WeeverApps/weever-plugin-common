@@ -39,7 +39,7 @@ wxApp = wxApp || {};
 	        var feature = wxApp.featureList.collection.findWhere( { featureName: 'FormBuilder' } );
 
 	        var allowAdvancedMode = 0;
-	        if ( typeof feature.get( 'options' ).allow_advanced_mode != 'undefined' ) {
+	        if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
 		        allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
 	        }
 
@@ -73,12 +73,12 @@ wxApp = wxApp || {};
 		    var feature = wxApp.featureList.collection.findWhere( { featureName: 'DocuSign' } );
 
 		    var allowAdvancedMode = 0;
-		    if ( typeof feature.get( 'options' ).allow_advanced_mode != 'undefined' ) {
+		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
 			    allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
 		    }
 
 		    var allowDemoMode = 0;
-		    if ( typeof feature.get( 'options' ).allow_demo_mode != 'undefined' ) {
+		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_demo_mode ) {
 			    allowDemoMode = parseInt( feature.get( 'options' ).allow_demo_mode.value );
 		    }
 
