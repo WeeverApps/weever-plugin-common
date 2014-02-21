@@ -38,7 +38,7 @@ wxApp = wxApp || {};
         defaults: function() {
 	        var feature = wxApp.featureList.collection.findWhere( { featureName: 'FormBuilder' } );
 
-	        var allowAdvancedMode = 0;
+	        var allowAdvancedMode = wx.formbuilderAdvanced || 0;
 	        if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
 		        allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
 	        }
@@ -50,6 +50,7 @@ wxApp = wxApp || {};
 				icon_id: 30,
 				type: 'formbuilder',
 				content: 'formbuilder',
+                helpTitle:  'Support',
 				layout: 'panel',
         		buttonText: 'Review and Sign',
 	            advancedMode: allowAdvancedMode,
@@ -72,7 +73,7 @@ wxApp = wxApp || {};
     	defaults: function() {
 		    var feature = wxApp.featureList.collection.findWhere( { featureName: 'DocuSign' } );
 
-		    var allowAdvancedMode = 0;
+		    var allowAdvancedMode = wx.formbuilderAdvanced || 0;
 		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
 			    allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
 		    }

@@ -184,6 +184,8 @@
 
                     <p><b>PDF Document details</b> (optional)</p>
 
+                    <p>The following details will be included as the &ldquo;header&rdquo; (top section) of a PDF document recording a user&#39;s form submission.</p>
+
                     <label>
                         Document Title
                         <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader.title %>" />
@@ -547,8 +549,9 @@
 								<div class="wx-button-label">Page Break</div>
 								<span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
 									  title="<p><b>Page Break</b><p>
-									  <p>Inserts a page break in the finished form.</p>">
-									?
+									  <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
+									  <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
+									   ?
 								</span>
 							</button>
 						</li>
@@ -580,7 +583,6 @@
 
             <div>
                 <!-- start: edit new and existing form fields -->
-                <!--<p class="wx-ui-title">Edit new and existing fields</p>-->
 
                 <div id="form-build-area" class="section-container accordion" data-section="accordion">
 
@@ -627,7 +629,7 @@
                     <div class="content" data-section-content>
                         <div class="wx-validate-feed panel">
                             <br/>
-                            <h3 class="subheader"><%- title %> &mdash; preview</h3>
+                            <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
                             <div class="wx-preview-form"></div>
                             <br/>
                             <button class="success radius"><%- buttonText %></button>
@@ -650,9 +652,10 @@
                         <!-- start - standard help text -->
                         <p><b>Support</b></p>
 
-                        <p>Our <a target="_blank" href="http://suppport.weeverapps.com">support forum</a> has answers to common questions.</p>
-                        <p>Would you like our team to build the app for you.  Do you require special features?</p>
-                        <p>Please enter a support ticket and our professional services department will contact you.</p>
+                        <p>Please email <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">support@weeverapps.com</a> for assistance.</p>
+                        <p><b>Professional Services</b></p>
+                        <p>Our professional services team can help you take your project from idea to launch.</p>
+                        <p>Please <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">contact us</a> to discuss custom feature availability or have our team create an app for you.</p>
                         <br>
                         <!-- endof - standard help text -->
 
