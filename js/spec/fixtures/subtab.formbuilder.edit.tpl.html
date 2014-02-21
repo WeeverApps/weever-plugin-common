@@ -184,6 +184,8 @@
 
                     <p><b>PDF Document details</b> (optional)</p>
 
+                    <p>The following details will be included as the &ldquo;header&rdquo; (top section) of a PDF document recording a user&#39;s form submission.</p>
+
                     <label>
                         Document Title
                         <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader.title %>" />
@@ -547,8 +549,8 @@
 								<div class="wx-button-label">Page Break</div>
 								<span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
 									  title="<p><b>Page Break</b><p>
-									  <p>Splits the form into multiple pages (form sections) and adds &ldquo;previous&rdquo; and &ldquo;next&rdquo; navigation buttons.</p>
-									  <p>Page Breaks are useful for simplifying longer forms or meeting special requirements.</p>">
+									  <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
+									  <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
 									   ?
 								</span>
 							</button>
