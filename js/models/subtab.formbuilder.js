@@ -36,6 +36,13 @@ wxApp = wxApp || {};
         },
 
         defaults: function() {
+	        var feature = wxApp.featureList.collection.findWhere( { featureName: 'FormBuilder' } );
+
+	        var allowAdvancedMode = 0;
+	        if ( typeof feature.get( 'options' ).allow_advanced_mode != 'undefined' ) {
+		        allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
+	        }
+
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
 				title: 'My Form Title',
                 icon: 'e074',
@@ -45,13 +52,13 @@ wxApp = wxApp || {};
 				content: 'formbuilder',
 				layout: 'panel',
         		buttonText: 'Review and Sign',
-                advancedMode: wx.formbuilderAdvanced,
+	            advancedMode: allowAdvancedMode,
 				config: {
-                    advanced: wx.formbuilderAdvanced,
+                    advanced: allowAdvancedMode,
 					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
-					}, 
+					},
 					subtab_name: 'FormBuilderSubTab',
 					isDocuSign: false
 				}
@@ -63,10 +70,23 @@ wxApp = wxApp || {};
     wxApp.DocuSignSubTab = wxApp.FormBuilderSubTab.extend({
 
     	defaults: function() {
-            return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
+		    var feature = wxApp.featureList.collection.findWhere( { featureName: 'DocuSign' } );
+
+		    var allowAdvancedMode = 0;
+		    if ( typeof feature.get( 'options' ).allow_advanced_mode != 'undefined' ) {
+			    allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
+		    }
+
+		    var allowDemoMode = 0;
+		    if ( typeof feature.get( 'options' ).allow_demo_mode != 'undefined' ) {
+			    allowDemoMode = parseInt( feature.get( 'options' ).allow_demo_mode.value );
+		    }
+
+		    return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
                     icon: 'e074',
-                    advanced: wx.formbuilderAdvanced,
+                    advanced: allowAdvancedMode,
+			        allowDemoMode: allowDemoMode,
 					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'

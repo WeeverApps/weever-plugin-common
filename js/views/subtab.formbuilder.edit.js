@@ -128,6 +128,8 @@ wxApp = wxApp || {};
 
 			// Call parent's initialize() function
 			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
+
+			console.log( 'formbuilder.edit', this.model );
 		},
 
 		validate: function() {
@@ -160,7 +162,9 @@ wxApp = wxApp || {};
 		getDefaultFormActions: function() {
 			
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			this.addPostAction( null );
+			if ( this.model.get( 'config' ).advanced ) {
+				this.addPostAction( null );
+			}
 			this.addEmailAction( null );
 			// this.docusign = this.addDocusignAction( docusign );
 
@@ -231,7 +235,7 @@ wxApp = wxApp || {};
 
 		/**
 		 * Sets the active preview element based on the index of the active accordion element
-		 * @param ev
+		 * @param ev Click event or accordion element
 		 */
 		setActivePreviewElement: function( ev ) {
 			var $target = null;
@@ -360,7 +364,10 @@ wxApp = wxApp || {};
 				action = this.addCustomAction( properties );
 			}
 			else {
-				action = this.addCustomAction( { method : 'docusign' } );
+				action = this.addCustomAction( {
+					method : 'docusign',
+					allowDemoMode: this.model.get( 'config' ).allowDemoMode
+				} );
 			}
 			return action;
 		},

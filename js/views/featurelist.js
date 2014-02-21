@@ -33,7 +33,7 @@ wxApp = wxApp || {};
 
 	    // Grab the data and kick things off
 	    wxApp.featureList.collection.fetch({
-		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
+		    url: wx.apiUrl + 'features/get_features_backbone?app_key=' + wx.siteKey,
 		    success: function(result) {},
 		    error: function() {
 			    wxApp.featureList.collection.fetch({

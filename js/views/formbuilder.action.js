@@ -44,6 +44,7 @@ wxApp = wxApp || {};
 			}
 			var $template = $( tplSelector );
 			this.tpl = _.template( $template.html() );
+			console.log( 'action init', this );
 		},
 
 		render: function() {
