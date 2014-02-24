@@ -14,7 +14,8 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-required': 'setRequired',
-			'focus .wx-form-builder-title-input': 'selectInputText'
+			'focus .wx-form-builder-title-input': 'selectInputText',
+			'sortable-drop': 'sortableDrop'
 		},
 
 		selectInputText: function( ev ) {
@@ -31,6 +32,11 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
+		},
+
+		sortableDrop: function( event, index ) {
+			console.log( 'sortableDrop' );
+			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
 		deleteControl: function() {
@@ -67,7 +73,7 @@ wxApp = wxApp || {};
 			this.$('.wx-form-builder-label').text( $me.val() );
 			this.getPreview().$('legend .title').text( $me.val() );
 			this.model.set( 'title', $me.val() );
-		},
+		}
 
 	});
 
