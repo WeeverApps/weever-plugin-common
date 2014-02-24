@@ -13,7 +13,14 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-add-option': 'addOption',
-			'click .wx-form-builder-required': 'setRequired'
+			'click .wx-form-builder-required': 'setRequired',
+			'focus .wx-form-builder-title-input': 'selectInputText'
+		},
+
+		selectInputText: function( ev ) {
+			setTimeout( function() {
+				ev.currentTarget.select();
+			}, 1 );
 		},
 
 		initialize: function() {

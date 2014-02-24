@@ -24,7 +24,14 @@ wxApp = wxApp || {};
 			// 'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-required': 'setRequired',
 			'click .wx-form-builder-delete': 'deleteControl',
+			'focus .wx-form-builder-label-input': 'selectInputText',
 			'sortable-drop': 'sortableDrop'
+		},
+
+		selectInputText: function( ev ) {
+			setTimeout( function() {
+				ev.currentTarget.select();
+			}, 1 );
 		},
 
 		sortableDrop: function( event, index ) {
