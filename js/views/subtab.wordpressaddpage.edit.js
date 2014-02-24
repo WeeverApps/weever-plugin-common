@@ -121,29 +121,44 @@ wxApp = wxApp || {};
         	if ( terms )       this.$('#wx_coupon_conditions_preview').text( terms );
         },
 
+        anotherStarted: false,
+
         updateBarcode: function() {
-        	var nonce = jQuery('input#nonce').val(),
-        	    text = this.$('.wx-coupon-barcode').val();
+        	var me = this,
+        	    nonce = jQuery('input#nonce').val(),
+        	    text = this.$('.wx-coupon-barcode').val(),
+        	    model = this.model;
 
-        	jQuery.ajax({
-	            type: "POST",
-	            url: ajaxurl,
-	            async: false,
-	            data: {
-	                action: 'ajaxGetBarcode',
-	                text: text,
-	                nonce: nonce
-	            },
-	            success: function(url){
-	                console.log(url);
+        	setTimeout( function() {
 
-	                // model.setConfig('url', url);
-	            },
-	            error: function(v,msg){
-	                console.log(v);
-	                console.log(msg);
-	            }
-	        });
+        		// Ensure the text hasn't chaged - We don't want to end up generating a billion friggin barcodes.
+        		if ( text == me.$('.wx-coupon-barcode').val() ) {
+		        	jQuery.ajax({
+			            type: "POST",
+			            url: ajaxurl,
+			            async: false,
+			            data: {
+			                action: 'ajaxGetBarcode',
+			                text: text,
+			                nonce: nonce
+			            },
+			            success: function( result ){
+			            	result = JSON.parse( result );
+			                console.log(result);
+
+			                if ( result.success ) {
+			                	var url = result.filename;
+			                	me.$('#wx_coupon_barcode_preview').html( '<img src="' + url + '" />' );
+			                	model.setConfig('url', url);
+			                }
+			            },
+			            error: function(v,msg){
+			                console.log(v);
+			                console.log(msg);
+			            }
+			        });
+		        }
+	        }, 500 );
         }
     });
 })(jQuery);
