@@ -6,8 +6,6 @@ wxApp = wxApp || {};
         subTabEditTplSelector: '#wordpressaddpage-subtab-edit-template',
 
 		events : {
-			'click .wx-add-sms'    : 'addSmsForm',
-			'click .wx-add-coupon' : 'showCouponForm',
 			// Coupon events
 			'keyup .wx-coupon-title'       : 'updatePreview',
 			'keyup .wx-coupon-description' : 'updatePreview',
@@ -112,45 +110,6 @@ wxApp = wxApp || {};
 	        return pageUrl;
 
         },
-
-        addSmsForm: function() {
-
-        	var hasSms = false,
-        		// url = 'http://weeverapp.com/index.php?app=ajax&m=sms_account_info&site_key=5XRns9Uci5cVjXijSXPHKG06raoPsrOn&key=frOndL22a9OsoQGLH3Xsa3oiDooxqOkqYFMhMWB2N2SqVfOHC2yE6a4xEIzwIhi';
-        	    url = 'http://weeverapp.com/index.php?app=ajax&m=sms_account_info&site_key=' + wx.siteKey + '&key=frOndL22a9OsoQGLH3Xsa3oiDooxqOkqYFMhMWB2N2SqVfOHC2yE6a4xEIzwIhi'
-
-        	$.ajax({
-			    async: false, // must be synchronous to guarantee that no tests are run before fixture is loaded
-			    cache: false,
-			    dataType: 'json',
-			    url: url,
-			    success: function(data) {
-			    	console.log( data );
-			    	if ( data ) {
-			    		hasSms = true;
-			    	}
-			    },
-			    fail: function(jqXHR, status, errorThrown) {
-			        console.log( 'Could not determine SMS status; assuming false' );
-			        hasSms = false;
-			    }
-			})
-
-
-        	if ( hasSms ) {
-	        	var content = nicEditors.findEditor('wx-content-value').nicInstances[0].getContent();
-	        	content += '<p>[SMS Signup Form]</p>';
-	        	nicEditors.findEditor('wx-content-value').nicInstances[0].setContent( content )
-	        }
-	        else {
-	        	this.$('#wx-smx-not-allowed').show();
-	        }
-        },
-
-        showCouponForm: function() {
-        	$('section.coupon').show();
-        },
-
 
         updatePreview: function() {
         	var title       = $('.wx-coupon-title').val(),

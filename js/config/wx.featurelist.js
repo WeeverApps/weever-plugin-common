@@ -26,5 +26,9 @@
     { "featureName": "GoogleCalendar",      "name": "Calendar"     },
     { "featureName": "Wufoo",               "name": "Wufoo",       "tierRequired": 2 },
     { "featureName": "r3s",                 "name": "R3S Code",    "cms": ["wordpress", "joomla"], "filterBy": "weever_list_r3s_dialog"},
-    { "featureName": "Blogger",             "name": "Blogger"      }
+    { "featureName": "Blogger",             "name": "Blogger"      },
+    { "featureName": "google_plus",         "name": "Google+",     "includeClass": "wx-unavailable disabled"   },
+    { "featureName": "tumblr",              "name": "Tumblr",      "includeClass": "wx-unavailable disabled"   },
+    { "featureName": "soundcloud",          "name": "SoundCloud",  "includeClass": "wx-unavailable disabled"   },
+    { "featureName": "bandcamp",            "name": "BandCamp",    "includeClass": "wx-unavailable disabled"   }
 ]

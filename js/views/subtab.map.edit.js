@@ -22,35 +22,18 @@ wxApp = wxApp || {};
 			$('section.coupon').hide();
 			$('section.mapper').show();
 
-			console.log('=== MAP INFO ===');
-			var config = JSON.parse( this.model.get('config') );
-			console.log( config );
-
-			var lat = 0.0, lng = 0.0;
-			if ( config.items ) {
-				for (var i = 0; i < config.items.length; i++) {
-					var item = config.items[i];
-					lat = item.lat;
-					lng = item.lng;
-				};
-			}
-			
-			var center      = new google.maps.LatLng( lat, lng ),
+			var center      = new google.maps.LatLng(0.0, 0.0),
 			    options     = {
 					zoom: 16,
 					center: center,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				},
-		        map         = new google.maps.Map( document.getElementById("map"), options),
+		        map         = new google.maps.Map( this.$("#map")[0], options ),
 		        startMarker = new google.maps.Marker({
 					position: center, 
 					map: map, 
 					title:"Post Location"
 				});
-
-			console.log( lat );
-			console.log( lng );
-			console.log( center );
 
 		    this.map    = map;
 			this.marker = startMarker;
@@ -60,18 +43,14 @@ wxApp = wxApp || {};
             
         	var title       = this.$('#wx-title-value').val(),
         	    content     = this.$('#wx-content-value').val(),
-        	    lat         = this.$('#geolocation-latitude').val(),
-        	    lng         = this.$('#geolocation-longitude').val(),
         	    data        = {
                     content_type: 'map',
-                    geolat      : lat,
-	                geolon      : lng,
+                    geolat      : this.$("#geolocation-latitude").val(),
+	                geolon      : this.$("#geolocation-longitude").val(),
         	    },
         	    url         = this.createPage( title, content, data );
         	
         	model.set('tabLayout',  'map');
-        	model.setConfig('lat', lat);
-        	model.setConfig('lng', lng);
             model.setConfig('name', title);
             model.setConfig('type', 'htmlContent');
             model.setConfig('url',  url);
