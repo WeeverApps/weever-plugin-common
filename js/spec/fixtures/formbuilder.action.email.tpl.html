@@ -9,7 +9,9 @@
 
             <label>Please specify the email recipient(s)</label>
 
-            <input class="wx-form-builder-action" type="email" value="<%- value %>" />
+            <input class="wx-form-builder-action" placeholder="Email address(es)" type="email" value="<%- value %>" />
+
+			<label><input class="wx-form-builder-send-current-user-email" type="checkbox" /> Use <span class="wx-current-user-email"><%- currentUserEmail %></span></label>
 
             <ul class="no-bullet" style="font-size: .875em;">
                 <li>Examples of valid entries:</li>
