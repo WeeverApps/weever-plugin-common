@@ -5,7 +5,7 @@ wxApp = wxApp || {};
     wxApp.WordpressProximitySubTab = wxApp.SubTab.extend({
         default_icon_id: 27,
         allowedLayouts: ['list'],
-        typeDescription: 'Near to me',
+        typeDescription: 'Nearby',
         validateFeed: false,
 
         defaults: function() {
@@ -17,13 +17,13 @@ wxApp = wxApp || {};
                 content: 'html',
                 layout: 'list',
                 config: { url: '', gps: '1', geotag: '1', subtab_name: 'WordpressProximitySubTab' },
-                helpTitle:  'About Near to me',
+                helpTitle:  'About Nearby',
                 helpBody:   '<p><b>Adding Wordpress content to your app</b></p>' +
                             '<p>Any Wordpress content you add to your app updates in real-time as you make changes.</p>' +
-                            '<p><b>Wordpress Near to me</b></p>' +
-                            '<p>&ldquo;Near to me&rdquo; shows app users location listings nearest to them and distances.</p>' +
-                            '<p>Create a &ldquo;Near to me &rdquo; feature with Wordpress content in exactly the same way you would create a Wordpress-based map.</p>' +
-                            '<p>The difference is how the posts display.  &ldquo;Near to me&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
+                            '<p><b>Wordpress Nearby</b></p>' +
+                            '<p>&ldquo;Nearby&rdquo; shows app users location listings nearest to them and distances.</p>' +
+                            '<p>Create a &ldquo;Nearby&rdquo; feature with Wordpress content in exactly the same way you would create a Wordpress-based map.</p>' +
+                            '<p>The difference is how the posts display.  &ldquo;Nearby&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
                             '<p><b>Wordpress Maps</b></p>' +
                             '<p>&rdquo;GeoTag&ldquo; individual Wordpress posts with a location/address and create a mobile, GPS-enabled map of those locations with appBuilder.</p>' +
                             '<p>We recommend using the Wordpress <a target="_blank" href="http://wordpress.org/plugins/geolocation/">Geolocation plugin</a> to add location information to posts.</p>' +

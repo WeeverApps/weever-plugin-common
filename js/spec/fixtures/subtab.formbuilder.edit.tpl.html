@@ -1,62 +1,345 @@
-<script type="text/template" id="form-builder-subtab-edit-template">
-    <div>
+<script type="text/template" id="formbuilder-subtab-edit-template">
+    <% if ( config.isDocuSign ) { %>
+        <!-- start: formbuilder step one - DocuSign Login / Account Info -->
+        <div class="form-builder-step-one">
+            <!-- start: left col -->
+            <div class="large-8 columns">
+                <h2><%- typeDescription %></h2>
 
-        <% if (allowAdvanced) { %>
-            <div class="row">
-                <div class="large-8 columns"><div style="float: right; padding-top: 10px">Advanced Mode:</div></div>
-                <div class="large-4 columns">
-                    <div class="switch">
-                        <input id="off" name="switch-advanced" class="switch-advanced" type="radio" <% if (!advancedMode) { %>checked<% } %>>
-                        <label for="off" onclick="">off</label>
-                        <input id="on" name="switch-advanced" class="switch-advanced" type="radio"  <% if ( advancedMode) { %>checked<% } %>>
-                        <label for="on" onclick="">on</label>
-                        <span></span>
+                <%
+                var docusign = docusign || { username: '', password: '' };
+                for (var i = 0; i < config.formActions.length; i++) {
+                    if ( config.formActions[i].method === 'docusign' ) {
+						var clone = _( config.formActions[i] ).clone();
+						if ( docusign.username == '' || docusign.password == '' ) {
+							docusign = clone;
+						}
+						else {
+							docusign = _.extend( clone, docusign );
+						}
+                        break;
+                    }
+                };
+                %>
+                <p><b>Create an eSignature-enabled form and add it to your app.</b></p>
+
+                <p>As a person completes the form a PDF of their form entry is displayed for review and eSignature. The signed PDF is then saved to your DocuSign account.</p>
+
+                <br>
+
+                <!-- start: docusign account management -->
+                <div id="docusignAccountInfo">
+
+                    <!-- docusign account management menu -->
+                    <div class="wx-list-subnav">
+                        <a class="wx-subnav-item active" href="#" id="docusignLogin">DocuSign login</a>
+                        <a class="wx-subnav-item" href="#" id="docusignCreate">Create account</a>
+                        <a class="wx-subnav-item" href="#" id="docusignChangePassword">Change password</a>
+                        <a target="_blank" class="wx-subnav-item" href="https://www.docusign.net/Member/MemberForgotPassword.aspx">Forgot password?</a>
                     </div>
+                    <br/>
+                    <br/>
+
+                    <!-- start: docusign login form -->
+                    <div id="docusignLoginForm" style="">
+
+                        <div data-alert class="login alert-box alert" style="display: none"></div>
+
+                        <!-- login prompt message -->
+                        <!-- <p>Please login or <a href="#" id="docusignCreate">create a new account</a>.</p> -->
+
+                        <div class="row collapse">
+                            <div class="large-8 columns">
+                                <label>
+                                    DocuSign account email address
+                                    <input type="email" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
+                                </label>
+
+                                <label>
+                                    DocuSign account password
+                                    <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <br>
+
+						<button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+
+                    </div>
+                    <!-- endof: docusign login form -->
+
+                    <!-- start: docusign create account form -->
+                    <div id="docusignCreateForm" style="display: none">
+
+                        <div data-alert class="account alert-box alert" style="display: none"></div>
+
+                        <p>Create a new DocuSign account and collecting eSignatures today.</p>
+
+                        <div class="row collapse">
+                            <div class="large-8 columns">
+
+                                <label>
+                                    Company name* (used to identify this account)
+                                    <input type="text" class="wx-form-builder-docusign-accountName" />
+                                </label>
+
+                                <label>
+                                    Email address*
+                                    <input type="text" class="wx-form-builder-docusign-email" />
+                                </label>
+
+                                <label>
+                                    Honorific*
+                                    <select class="wx-form-builder-docusign-title">
+                                        <option>Mr</option>
+                                        <option>Mrs</option>
+                                        <option>Miss</option>
+                                        <option>Ms</option>
+                                        <option>Dr</option>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    First name*
+                                    <input type="text" class="wx-form-builder-docusign-firstName" />
+                                </label>
+                                <label>
+                                    Last name*
+                                    <input type="text" class="wx-form-builder-docusign-lastName" />
+                                </label>
+                                <label>
+                                    Password*
+                                    <input type="password" class="wx-form-builder-docusign-password" />
+                                </label>
+                                <label>
+                                    Repeat Password*
+                                    <input type="password" class="wx-form-builder-docusign-password-again" />
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <button id="wx-docusign-create-account-button" class="success radius">Create account and start building a form &rarr;</button>
+						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                    </div>
+                    <!-- endof: docusign create account form -->
+
+                    <!-- start: docusign change password form -->
+                    <div id="docusignChangePassord" style="display: none">
+
+                        <div data-alert class="changePassword alert-box alert" style="display: none"></div>
+
+                        <p>Update your existing DocuSign account password and login.</p>
+
+                        <div class="row collapse">
+                            <div class="large-8 columns">
+
+                                <label>
+                                    DocuSign account email address*
+                                    <input type="text" class="wx-form-builder-docusign-username" value="<%- docusign.username %>" />
+                                </label>
+                                <label>
+                                    Current password*
+                                    <input type="password" class="wx-form-builder-docusign-old-password" value="<%- docusign.password %>" />
+                                </label>
+                                <label>
+                                    New password*
+                                    <input type="password" class="wx-form-builder-docusign-password" />
+                                </label>
+                                <label>
+                                    Repeat new password*
+                                    <input type="password" class="wx-form-builder-docusign-new-password-again" />
+                                </label>
+                                <label>
+                                    Set a new forgot password question*<br>For example: &ldquo;What is your mother&apos;s maiden name?&rdquo;
+                                    <input type="text" class="wx-form-builder-docusign-forgot-password-q1" />
+                                </label>
+                                <label>
+                                    Forgot password answer*
+                                    <input type="text" class="wx-form-builder-docusign-forgot-password-a1" />
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <button id="wx-docusign-change-password-button" class="success radius">Change password and start building a form &rarr;</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                    </div>
+                    <!-- endof: docusign change password form -->
+
                 </div>
+                <!-- start: docusign account management -->
+                <!-- start: enter docusign pdf attributes and return url -->
+                <div id="docusignOtherInfo" style="display: none">
+
+                    <div data-alert id="wx-login-message" class="login alert-box secondary"></div>
+
+                    <p><b>PDF Document details</b> (optional)</p>
+
+                    <p>The following details will be included as the &ldquo;header&rdquo; (top section) of a PDF document recording a user&#39;s form submission.</p>
+
+                    <label>
+                        Document Title
+                        <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader.title %>" />
+                    </label>
+                    <label>
+                        Business Name
+                        <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- docusign.pdfHeader.line1 %>" />
+                    </label>
+                    <label>
+                        Address line one
+                        <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- docusign.pdfHeader.line2 %>" />
+                    </label>
+                    <label>
+                        Address line two
+                        <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader.line3 %>" />
+                    </label>
+
+                    <br>
+
+                    <p><b>App Settings</b></p>
+
+                    <label>
+                        Optional &ndash; Specify a return url on signature completion (default is to return to the app)
+                        <input type="url" class="wx-form-builder-docusign-returnUrl" value="<%- docusign.returnUrl %>" />
+                    </label>
+
+                    <div>
+                        <label>Title for this tab inside your app (you can change this later)</label>
+                        <input type="text" value="<%- title %>" class="wx-edit-title" />
+                    </div>
+
+                    <br>
+
+                    <button class="wx-continue-button success radius">Save PDF details and start building a form &rarr;</button>
+					&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                </div>
+                <!-- endof: enter docusign pdf attributes and return url -->
             </div>
-        <% } %>
+            <!-- endof: left col -->
 
-    <!-- start: add-field buttons -->
+            <!-- start: right col -->
+            <div class="large-4 columns">
 
-        <p class="wx-ui-title">Add a form input field</p>
+                <!-- about your current subscription -->
+                <div class="row">
 
-        <div id="form-creation" class="content" data-section-content>
 
-            <div class="wx-form-builder-controls">
+                        <div class="panel">
+
+                            <p class=""><b>What is DocuSign?</b></p>
+
+                            <p>Completed forms are saved to your account at <a target="_blank" href="http://www.docusign.com/">DocuSign</a>, a Weever Apps partner and the world&apos;s most trusted eSignature standard.</p>
+
+                            <p><b>How do people sign?</b></p>
+
+                            <p>Signatures are made using a finger on the touch screen. Electronic signatures are <a target="_blank" href="http://www.docusign.com/electronic-signature-legality">legally binding</a> in the U.S. and many countries around the world.</p>
+
+                            <p>View the <a target="_blank" href="http://www.docusign.com/faq">DocuSign FAQ</a> for more information on eSignatures.</p>
+
+                        </div>
+
+                    <!-- endof: enter docusign pdf attributes and return url -->
+                </div>
+                <!-- endof: left col -->
+            </div>
+            <!-- endof: right col -->
+
+        </div>
+        <!-- endof: formbuilder step one -->
+    <% } %>
+
+    <!-- start: formbuilder step two -->
+    <div class="form-builder-step-two" <% if ( config.isDocuSign ) { %>style="display: none;" <% } %>>
+        <div class="large-12 columns">
+            <div>
+                <h2><%- typeDescription %></h2>
+            </div>
+
+            <!-- start: add-field buttons -->
+            <p class="wx-ui-title">Add new form fields</p>
+
+            <div id="form-creation" class="content" data-section-content>
+
+                <div class="wx-form-builder-controls row collapse">
+                <div class="large-12 columns">
                     <!-- form builder add-new-field buttons -->
-                    <ul class="large-block-grid-3" id="add-fields">
+                    <ul class="large-block-grid-6 small-block-grid-2" id="add-fields">
 
 
                         <!-- text fields and common elements -->
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-text-input">
-                                Single line text
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Single line text</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                title="<p><b>Single Line Text</b><p>
+                                       <p>Adds an input field for a single line of text.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>What is your favorite color?</label>
+                                       <input type='text' placeholder='Enter a color'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
 
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-textarea">
-                                Paragraph text
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Paragraph text</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Paragraph Text</b><p>
+                                       <p>Adds an input for a multiple lines of text.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>What are your favorite colors?</label>
+                                       <textarea>Blue, Magenta, Gray, Purple, Orange, Yellow, Mauve, Teal</textarea>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-info">
-                                Info box
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Info box</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Info Box</b><p>
+                                       <p>Add a block of instructional text or other content.  HTML is permitted.</p>
+                                       <p><b>Example:</b></p>
+                                       <p>&ldquo;Please fill out the form to learn more about our products and services.  If you need assistance please call us at 555-5555.&rdquo;</p>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-email-input">
-                                Email
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Email</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Email</b><p>
+                                       <p>Adds an input field for an email address.</p>
+                                       <p>On form submission the app will verify the entry has a valid name@address.com syntax.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please enter your email address</label>
+                                       <input type='email' placeholder='name@website.com'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-tel-input">
-                                Phone
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Phone</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Phone</b><p>
+                                       <p>Adds an input field for a phone number.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please enter your phone number</label>
+                                       <input type='tel' placeholder='555-5555555'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
 
@@ -64,101 +347,261 @@
                          <!-- radio buttons, checkboxes, etc. -->
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-select">
-                                Dropdown
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Dropdown</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-left"
+                                      title="<p><b>Dropdown</b><p>
+                                       <p>Adds a drop-down list of predefined options.  Only one option may be selected at any time.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please select a sport</label>
+                                       <select>
+                                        <option>Football</option>
+                                        <option>Basketball</option>
+                                        <option>Cricket</option>
+                                        <option>Volleyball</option>
+                                        <option>Other</option>
+                                        </select>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-radio-group">
-                                Multiple choice
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Multiple choice</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Multiple choice</b><p>
+                                       <p>Adds an input with a set of predefined options, aka &ldquo;radio buttons&rdquo;. Only one option may be selected at any time.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>How do you prefer to travel?</label>
+                                       <br>
+                                       <label>
+                                       <input type='radio'> Bicycle
+                                       </label>
+                                       <label>
+                                       <input type='radio' checked> Automobile
+                                       </label>
+                                       <label>
+                                       <input type='radio'> Spaceship
+                                       </label>">
+                                       ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-checkbox-group">
-                                Checkboxes
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Checkboxes</div>
+                                        <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                        title="<p><b>Checkboxes</b></p>
+                                        <p>Adds one or more check box options. Multiple check boxes may be selected at one time.</p>
+                                        <p><b>Example:</b></p>
+                                        <label>What do you like about mobile forms?</label>
+                                        <br>
+                                        <label>
+                                            <input type='checkbox'> They are easy to use
+                                        </label>
+                                        <label>
+                                            <input type='checkbox' checked> They standardize incoming data
+                                        </label>
+                                        <label>
+                                            <input type='checkbox' checked> They can be submitted from any location
+                                        </label>
+                                        <label>
+                                            <input type='checkbox'> They save paper and processing
+                                        </label>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-number-input">
-                                Number
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Number</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Number</b><p>
+                                       <p>Adds an input field for a number.  On activation of this input field a mobile device will display a number pad to the end-user.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Number of years since last service visit</label>
+                                       <input type='number' placeholder='12'>">
+                                       ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-range-input">
-                                Number Slider
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Number Slider</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Number Slider</b><p>
+                                       <p>Adds a slider element for selecting a number from a range of predefined values.</p>
+                                       <p>For a range above 10 values in total or using decimals or large numbers use the standard, non-slider number input field.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please rate our service (1-5, 5 being best)</label>
+                                       <br>
+                                       <input type='range' name='points' min='1' max='5'>
+                                       <table class='wx-tooltip-slider wx-tooltip-slider-5'><tr>
+                                           <td class='wx-tooltip-slider-label wx-label-1'>1</td>
+                                           <td class='wx-tooltip-slider-label wx-label-2'>2</td>
+                                           <td class='wx-tooltip-slider-label wx-label-3'>3</td>
+                                           <td class='wx-tooltip-slider-label wx-label-4'>4</td>
+                                           <td class='wx-tooltip-slider-label wx-label-5'>5</td>
+                                        </tr></table>">
+                                       ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-text-range-input">
-                                Text Slider
-                                <span data-tooltip class="has-tip tip-bottom" title="Like a number slider, but with text<br/><label class='wx-form-builder-label'>Preview</label><input class='wx-form-builder-range-input' min='1' max='3' type='range' style='width: 100%' /><ul class='large-block-grid-3'><li>Agree</li><li>Neutral</li><li>Disagree</li></ul>">?</span>
+                                <div class="wx-button-label">Text Slider</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Text Slider</b><p>
+                                       <p>Adds a slider element for selecting one option from a range of predefined text options.</p>
+                                       <p>A text slider input field should be used only with 10 or less options in total.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>In your opinion, how much supervision do our trainees require compared to the previous year?</label>
+                                       <br>
+                                       <input type='range' name='points' min='1' max='5'>
+                                       <table class='wx-tooltip-slider wx-tooltip-slider-5'><tr>
+                                           <td class='wx-tooltip-slider-label wx-label-1'>None</td>
+                                           <td class='wx-tooltip-slider-label wx-label-2'>Less</td>
+                                           <td class='wx-tooltip-slider-label wx-label-3'>NA</td>
+                                           <td class='wx-tooltip-slider-label wx-label-4'>More</td>
+                                           <td class='wx-tooltip-slider-label wx-label-5'>Full</td>
+                                        </tr></table>">
+                                       ?
+                                </span>
                             </button>
                         </li>
 
 
                         <!-- more rare elements, e.g, sliders -->
+
+                        <!-- file upload -->
+                        <!--
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-file-input">
-                                File Upload
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">File Upload</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>File Upload</b><p>
+                                       <p>Adds a button to upload a file.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please upload your brochure in PDF format.</label>
+                                       <input style='font-size: .875em' type='file'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
+                        -->
+
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-photo-input">
-                                Submit A Photo
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Submit a Photo</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-left"
+                                      title="<p><b>Submit A Photo</b><p>
+                                       <p>Adds a button to launch the camera application for the purpose of taking a new photo or uploading an existing one.</p>
+                                       <p>The photo will be included in the form submission.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please include a photo of the damaged area.</label>
+                                       <input style='font-size: .875em' type='file'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-url-input">
-                                Web site
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Web site</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Web site</b><p>
+                                       <p>Adds an input field for a web site address.</p>
+                                       <p>On form submission the app will verify the entry has a valid URL syntax.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please enter a web site address</label>
+                                       <input type='url' placeholder='http://google.com'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-date-input">
                                 Date
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Date</b><p>
+                                       <p>Adds an input field for a calendar date.</p>
+                                       <p>On selection the app will show a &ldquo;date picker&rdquo; with day, month and year options.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Request a date for your event</label>
+                                       <input type='date'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-password-input">
-                                Password
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
+                                <div class="wx-button-label">Password</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Password</b><p>
+                                       <p>Adds an input field for a user password.  The entry will be masked with asterixes or circles.</p>
+                                       <p><b>Example:</b></p>
+                                       <label>Please specify a password</label>
+                                       <input type='password' value='password'>">
+                                        ?
+                                </span>
                             </button>
                         </li>
-                        <li>
-                            <button class="tiny expand radius wx-form-builder-add-signature">
-                                DocuSign eSignature&trade
-                                <span data-tooltip class="has-tip tip-top" title="Placeholder Tooltip">?</span>
-                            </button>
-                        </li>
+						<li>
+							<button class="tiny expand radius wx-form-builder-add-pagebreak">
+								<div class="wx-button-label">Page Break</div>
+								<span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+									  title="<p><b>Page Break</b><p>
+									  <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
+									  <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
+									   ?
+								</span>
+							</button>
+						</li>
+                        <% if ( config.isDocuSign ) { %>
+                            <li>
+                                <button class="tiny expand radius wx-form-builder-add-docusign-signature">
+                                    <div class="wx-button-label">DocuSign eSignature</div>
+                                    <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                          title="<p><b>DocuSign eSignature (required)</b><p>
+                                           <p>Adds an electronic signature field to your form at the location you specify.</p>
+                                           <p>On completion of the form a PDF of the submission is presented to the user for review and signature.  The signed PDF is then saved to your DocuSign account.</b>
+                                           <p><b>Example:</b></p>
+                                           <label>I have read and understand the preface and terms of this agreement.</label>
+                                           <label class='wx-esignature-example'>x</label>">
+                                            ?
+                                    </span>
+                                </button>
+                            </li>
+                        <% } %>
                     </ul>
+                </div>
+                </div>
+
+            </div>
+        </div>
+    	<div class="large-6 columns">
+
+            <p class="wx-ui-title">Edit existing form fields</p>
+
+            <div>
+                <!-- start: edit new and existing form fields -->
+
+                <div id="form-build-area" class="section-container accordion" data-section="accordion">
+
+                </div>
             </div>
 
-        </div>
+            <div data-alert class="alert-box alert" style="display: none">
+                <span class="message"></span>
+                <a href="#" class="close">&times;</a>
+            </div>
 
-        <br>
-
-        <!-- start: edit new and existing form fields -->
-        <!--<p class="wx-ui-title">Edit new and existing fields</p>-->
-
-        <div id="form-build-area" class="section-container accordion" data-section="accordion">
-
-        </div>
-
-        <!-- start: form settings -->
-
-        <p class="wx-ui-title">Form submission settings</p>
+            <!-- start: form settings -->
+			<% if ( ! config.isDocuSign || config.advanced || config.allowDemoMode ) { %>
+            <p class="wx-ui-title">Form submission settings</p>
 
             <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
                 <!-- Button Text -->
                 <section class="active">
-                    <p class="title" data-section-title><a href="#panel1">Submit form button</a></p>
+                    <p class="title" data-section-title><a href="#panel1">Form submit button</a></p>
                     <div class="content" data-section-content>
 
                         <label>Change the label text used for your form&apos;s submit button</label>
@@ -167,15 +610,60 @@
                     </div>
                 </section>
             </div>
+			<% } %>
 
+            <br>
+
+            <div>
+                <button class="wx-finish-button success radius">Save and add this form to your app</button>
+                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            </div>
+        </div>
+
+        <div class="large-6 columns">
+            <div class="section-container tabs" data-section="tabs">
+                <section class="active">
+                    <p class="title" data-section-title><a href="#panel1">Form Preview</a></p>
+
+                    <div class="content" data-section-content>
+                        <div class="wx-validate-feed panel">
+                            <br/>
+                            <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
+                            <div class="wx-preview-form"></div>
+                            <br/>
+                            <button class="success radius"><%- buttonText %></button>
+                            <br/><br/>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
+                    <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
+                        <ul class="large-block-grid-7">
+                            <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                <p class="title" data-section-title><a href="#panel3"><%- helpTitle %></a></p>
+                    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
+                        <%= helpBody %>
+                        <!-- start - standard help text -->
+                        <p><b>Support</b></p>
+
+                        <p>Please email <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">support@weeverapps.com</a> for assistance.</p>
+                        <p><b>Professional Services</b></p>
+                        <p>Our professional services team can help you take your project from idea to launch.</p>
+                        <p>Please <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">contact us</a> to discuss custom feature availability or have our team create an app for you.</p>
+                        <br>
+                        <!-- endof - standard help text -->
+
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
+    <a class="wx-close-reveal-modal">&#215;</a>
 </script>
-
-<!-- start: removed for production -->
-<!--
-<a class="button success small expand wx-form-builder-add-datetime-local-input">Date/Time Field (No Time Zone)</a>
-<a class="wx-form-builder-add-month-input">Month/Year Field</a>
-<a class="wx-form-builder-add-time-input">Time Field</a>
--->
-<!-- endof: removed for production -->

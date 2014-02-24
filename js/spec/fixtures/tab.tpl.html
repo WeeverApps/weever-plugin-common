@@ -1,12 +1,14 @@
 <script type="text/template" id="tab-template">
     <button class="secondary radius">
     	<%
+            var title = ( typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title );
+
     		var i = tabIcon;
-    		if ( i === null || i === '\\e000' ) {
+    		if ( !i || i === '\\e000' ) {
     			i = tabIcon_id;
     			if ( !i ) {
     				i = icon;
-    				if ( i === null || i === '\\e000' ) {
+    				if ( !i || i === '\\e000' ) {
     					i = icon_id;
     				}
     			}
@@ -14,6 +16,6 @@
             if ( i !== null ) i = i.replace('\\', '');
     	%>
     	<div class="wxIcon wxIcon-<%- i %> wxFont-1"></div>
-        <div class="wx-nav-label" data-tab-id="ID #<%- id %>"><%- ( typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title ) %></div>
+        <div class="wx-nav-label" data-tab-id="ID #<%- id %>"><%- title %></div>
     </button>
 </script>

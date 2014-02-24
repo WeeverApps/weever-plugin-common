@@ -13,7 +13,8 @@ wxApp = wxApp || {};
 
             this.initializeEvents();
 
-            this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
+            if ( this.subTabEditTplSelector )
+                this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
             this.baseEditTpl = _.template( $(this.baseEditTplSelector).html() );
 			this.feedSampleTpl = _.template( $(this.feedSampleTplSelector).html() );
             this.render();
@@ -30,22 +31,24 @@ wxApp = wxApp || {};
         },
 
         genericEvents: {
-            'change .wx-dialog-input': 'next',
-			'change .wx-social-input': 'next',
-			'keydown .wx-dialog-input': 'hideValidateFeed',
-            'keyup .wx-edit-title': 'editTitle',
-			'click .wx-finish-button': 'finish',
-			'click .wx-next-button': 'next',
-            'change .wx-content-radio' : 'contentChange',
-            'click .close-reveal-modal': 'close',
-            'close': 'close'
+            'change .wx-dialog-input'       : 'next',
+			'change .wx-social-input'       : 'next',
+			'keydown .wx-dialog-input'      : 'hideValidateFeed',
+            'keyup .wx-edit-title'          : 'editTitle',
+			'click .wx-finish-button'       : 'finish',
+			'click .wx-next-button'         : 'next',
+            'change .wx-content-radio'      : 'contentChange',
+            'click .close-reveal-modal'     : 'close',
+	        'click .wx-close-reveal-modal'  : 'closeReveal',
+	        'click .wx-close-button'        : 'closeReveal',
+            'close'                         : 'close'
         },
 
         render: function() {
 
-            m = this.model;
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
-            this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
+            if ( this.subTabEditTpl )
+                this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
 
             this.$el.prepend('<form>');
             this.$el.append('</form>');
@@ -88,6 +91,10 @@ wxApp = wxApp || {};
             return this;
         },
 
+	    closeReveal: function() {
+		    this.$el.foundation('reveal', 'close');
+	    },
+
         close: function() {
             this.undelegateEvents();
         },
@@ -111,10 +118,10 @@ wxApp = wxApp || {};
                 this.setModelFromView(this.model);
                 this.setTitleFromView(this.model);
                 this.setIconFromView(this.model);
-    			this.saveModel();
-
+                this.saveModel();
+                
                 this.$el.foundation('reveal', 'close');
-
+                
                 wx.rebuildApp();
             }
 		},
@@ -154,7 +161,7 @@ wxApp = wxApp || {};
         },
 
         setTitleFromView: function( model ) {
-            if ( model.allowTitleEdit && this.$('.wx-edit-title') )
+            if ( model.allowTitleEdit && this.$('.wx-edit-title').val() )
                 model.set('title', this.$('.wx-edit-title').val() );
             return model;
         },
@@ -162,8 +169,10 @@ wxApp = wxApp || {};
         setIconFromView: function( model ) {
             var icon = this.$('input:radio[name="wx-icon"]:checked').val();
 
-            model.set( 'icon_id', null );
-            model.set( 'icon', icon );
+            if ( icon ) {
+                model.set( 'icon_id', null );
+                model.set( 'icon', icon );
+            }
             return model;
         },
 

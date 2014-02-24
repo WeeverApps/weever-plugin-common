@@ -2,11 +2,9 @@
 <script type="text/template" id="subtab-template">
     <li class="bullet-item wx-subtab-movehandle">
 
-        <span>&#8627;</span>
+        <span class="appbuilder-icon icon-move-all"></span>
 
-        <span class="wxIcon wxIcon-<%- (icon === '\\e000') ? icon_id : icon.replace('\\', '') %> wxFont-1 small"></span>
-
-        <span class="wx-subtab-link-text"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#"><%- title %> <span class="wx-edit-prompt">| Edit</span></a></span>
+        <span class="wx-subtab-link-text"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#"><%- title %> <span class="wx-edit-prompt">| Edit</span> <span class="wx-move-prompt"">or drag to move</span></span></a></span>
 
         <span class="delete"><a href="#" class="wx-subtab-delete" title="Delete">&times; <span class="wx-delete-label">delete</span></a></span>
     </li>

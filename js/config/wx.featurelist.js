@@ -1,5 +1,5 @@
 [
-    { "featureName": "FormBuilder",         "name": "FormBuilder", "cms": ["none"] },
+    { "featureName": "FormBuilder",         "name": "Form",        "cms": ["none"] },
     { "featureName": "DocuSign",            "name": "DocuSign",    "cms": ["none"] },
     { "featureName": "RSS",                 "name": "RSS feed"     },
     { "featureName": "WordpressBlog",       "name": "WP All",      "cms": ["none"],                "filterBy": "weever_list_show_wordpress_content" },
@@ -7,8 +7,8 @@
     { "featureName": "WordpressPage",       "name": "WP Page",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
     { "featureName": "WordpressTag",        "name": "WP Tag",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
     { "featureName": "WordpressSearchterm", "name": "Search",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
-    { "featureName": "WordpressMap",        "name": "GPS Map",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
-    { "featureName": "WordpressProximity",  "name": "Near Me",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
+    { "featureName": "WordpressMap",        "name": "Map",         "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
+    { "featureName": "WordpressProximity",  "name": "Nearby",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
     { "featureName": "WordpressDirectory",  "name": "Directory",   "cms": ["none"],                "filterBy": "weever_list_show_wordpress_content", "rel": "hide"         },
     { "featureName": "WordpressAddPage",    "name": "Add Pages",   "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "rel": "page"         },
     { "featureName": "Coupon",              "name": "Coupon",      "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "includeClass": "wx-add-new-coupon" },

@@ -7,7 +7,7 @@
         $i = 'e' . str_pad($i, 3, '0', STR_PAD_LEFT); ?>
         <li>
             <label>
-            	<span class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></span>
+            	<div class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></div>
             	<input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id.toString().replace('\\', '') == '<?php echo $i; ?>' ) ? 'checked' : '' ) %> />
             </label>
         </li>

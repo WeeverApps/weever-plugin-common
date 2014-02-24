@@ -2,12 +2,15 @@
 <script type="text/template" id="subtab-container-template">
     <ul class="wx-tablist-layout pricing-table">
         <li class="price">
-            <span>Editing tab: &nbsp;</span>
+            Editing tab:&nbsp;
             <a href="#" id="ContainerEditLink" data-reveal-id="ContainerEditModal"><%- typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title %> | Change title or icon</a>
             <span class="delete"><a href="#" class="wx-delete-container">&times; <span class="wx-delete-label">delete</span></a></span>
         </li>
 
         <li class="bullet-item wx-tablist-layout-controls" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
+
+            <p class="wx-tablist-edit-title">Set a layout for this tab:</p>
+
             <input type="hidden" id="tabLayout" />
 
             <div class="row">
@@ -26,7 +29,7 @@
 
     <ul class='adminlist pricing-table wx-tablist-features'>
         <li class="price" style="">
-            Features assigned to this tab:
+            Features (subtabs) assigned to this tab:
         </li>
     </ul>
 
@@ -53,7 +56,9 @@
                 <p class="title" data-section-title><a href="#panel1">Choose Icon</a></p>
                 <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
-                        <%= _.template( jQuery('#icon-selector').html(), tabIcon || tabIcon_id || icon || icon_id, {variable: 'icon_id'}) %>
+                        <% var i = tabIcon || tabIcon_id || icon || icon_id %>
+                        <% i = i || 'e001' %>
+                        <%= _.template( jQuery('#icon-selector').html(), i, {variable: 'icon_id'}) %>
                     </ul>
                 </div>
             </section>

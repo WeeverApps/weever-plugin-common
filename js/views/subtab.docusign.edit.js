@@ -2,118 +2,141 @@
 wxApp = wxApp || {};
 
 (function($){
-	wxApp.FormBuilderActionView = Backbone.View.extend({
-		tagName: 'section',
-		className: 'wx-form-builder-row',
-		tplPostSelector: '#form-builder-action-post',
-		tplEmailSelector: '#form-builder-action-email',
-		tplDocusignSelector: '#form-builder-action-docusign',
+
+	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
+
+		initializeEvents: function() {
+
+			var parentEvents = wxApp.FormBuilderSubTabEditView.prototype.events;
+			parentEvents = _.extend({}, this.genericEvents, parentEvents);
+			this.events = _.extend({}, parentEvents, this.events);
+		},
 
 		events: {
-			'blur .wx-form-builder-action'             : 'updateAction',
-			'click .wx-form-builder-delete'            : 'deleteControl',
-			'blur .wx-form-builder-docusign-username'  : 'updateUsername',
-			'blur .wx-form-builder-docusign-password'  : 'updatePassword',
-			'blur .wx-form-builder-docusign-returnUrl' : 'updateReturnUrl',
-			'blur .wx-form-builder-pdfheader-title'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line1'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
-			'click .radio-mode'                        : 'updateMode',
-			'change .wx-form-builder-docusign-demomode': 'toggleDemoMode'
-			// 'click #docusignLogin'                     : 'showLogin',
-			// 'click #docusignCreate'                    : 'showCreateAccount',
-			// 'click #docusignChangePassword'            : 'showChangePassword',
-			// 'click #wx-docusign-login-button'          : 'login',
-			// 'click #wx-docusign-create-account-button' : 'createAccount',
-			// 'click #wx-docusign-change-password-button': 'changePassword'
+			// "Step One" stuff (ie, DocuSign)
+			'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
+			'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
+			'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line1'          : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line2'          : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line3'          : 'updatePdfHeader',
+			'click #docusignLogin'                           : 'showLogin',
+			'click #docusignCreate'                          : 'showCreateAccount',
+			'click #docusignChangePassword'                  : 'showChangePassword',
+			'click #wx-docusign-login-button'                : 'login',
+			'click #wx-docusign-create-account-button'       : 'createAccount',
+			'click #wx-docusign-change-password-button'      : 'changePassword',
+			'click .wx-continue-button'                      : 'next'
 		},
 
 		initialize: function() {
-			var tplSelector = '';
-			switch( this.model.get( 'method' ) ) {
-				case 'post':
-					tplSelector = this.tplPostSelector;
-					break;
-				case 'email':
-					tplSelector = this.tplEmailSelector;
-					break;
-				case 'docusign':
-					tplSelector = this.tplDocusignSelector;
-					break;
-			}
-			var $template = $( tplSelector );
-			this.tpl = _.template( $template.html() );
-			console.log( 'action init', this );
-		},
+			var me = this,
+				args = arguments;
 
-		render: function() {
-			this.$el.html( this.tpl( this.model.toJSON() ) );
-			this.$el.addClass( this.model.get( 'method' ) );
-			return this;
-		},
-
-		toggleDemoMode: function( ev ) {
-
-			if ( $( ev.currentTarget ).is( ':checked' ) ) {
-				this.model.set( 'demomode', true );
-			}
-			else {
-				this.model.unset( 'demomode' );
+			if ( typeof me.model.get( 'docusign' ) == 'undefined' ) {
+				me.model.set( 'docusign', {
+					username: '',
+					password: ''
+				} );
 			}
 
+			$.ajax( {
+				url: ajaxurl + '?action=ajaxRetrieveDocusignCredentials',
+				type: 'GET',
+				dataType: 'json',
+				success: function( data ) {
+					console.log( 'success', data );
+					if ( !! data ) {
+						me.model.get( 'docusign' ).username = ( typeof data.username != 'undefined' ? data.username : '' );
+						me.model.get( 'docusign' ).password = ( typeof data.password != 'undefined' ? data.password : '' );
+//						me.render();
+
+						$( '.wx-form-builder-docusign-username' ).val( me.model.get( 'docusign' ).username );
+						$( '.wx-form-builder-docusign-password' ).val( me.model.get( 'docusign' ).password );
+
+					}
+				},
+				error: function( data ) {
+					console.log( 'error', data );
+				},
+				complete: function() {
+//					wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( me, args );
+				}
+			} );
+
+			wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( this, arguments );
 		},
 
-		updateUsername: function( ev ) {
-			this.model.set( 'username', $( ev.currentTarget ).val() );
+		validate: function() {
+			var signatureFound = false,
+			    errorMessage   = "Your form could not be saved! Please ensure you have added a DocuSign&trade; eSignature to your form.",
+			    formElements   = this.model.get( 'config' ).formElements;
+
+			formElements.each( function( model, index ) {
+				if ( model.get( 'control' ) === 'docusignSignature' ) {
+					signatureFound = true;
+				}
+			});
+
+			if ( !signatureFound ) {
+				var $alert = $('.alert-box.alert .message').html( errorMessage );
+				$alert.parent().slideDown();
+			}
+
+			return signatureFound;
 		},
 
-		updatePassword: function( ev ) {
-			this.model.set( 'password', $( ev.currentTarget ).val() );
+		getDefaultFormActions: function() {
+			this.model.get( 'config' ).formActions = new Backbone.Collection();
+
+			if ( this.model.get( 'config' ).advanced ) {
+				this.addPostAction( null );
+			}
+
+			this.docusign = this.addDocusignAction( null );
+		},
+
+		/********************************/
+		/* DocuSign Account Stuff Start */
+		/********************************/
+
+		// Login when 'enter' is pressed.
+		passwordKeyUp: function( ev ) {
+			if ( ev.keyCode == 13 ) {
+				// Login.
+				ev.preventDefault();
+				this.login();
+			}
 		},
 
 		updateReturnUrl: function( ev ) {
-			this.model.set( 'returnUrl', $( ev.currentTarget ).val() );
+			this.docusign.set( 'returnUrl', $( ev.currentTarget ).val() );
 		},
 
 		updatePdfHeader: function( ev ) {
 			var $me = $( ev.currentTarget );
 
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) )
-				this.model.get( 'pdfHeader' ).title = $me.val();
+				this.docusign.get( 'pdfHeader' ).title = $me.val();
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) )
-				this.model.get( 'pdfHeader' ).line1 = $me.val();
+				this.docusign.get( 'pdfHeader' ).line1 = $me.val();
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) )
-				this.model.get( 'pdfHeader' ).line2 = $me.val();
+				this.docusign.get( 'pdfHeader' ).line2 = $me.val();
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) )
-				this.model.get( 'pdfHeader' ).line3 = $me.val();
+				this.docusign.get( 'pdfHeader' ).line3 = $me.val();
 		},
 
-		updateAction: function( ev ) {
-			ev.preventDefault();
-			var $me = $( ev.currentTarget );
-			this.model.set( 'value', $me.val() );
-		},
-
-		deleteControl: function() {
-			this.remove();
-			this.model.destroy();
-		},
-
-		updateMode: function( ev ) {
-			var $me = $( ev.currentTarget );
-			this.model.set( 'mode', $me.val() );
-		}
-
-		 //,
-
-		// Commented out DocuSign Stuff Below.
-
-		/*showLogin: function( ev ) {
+		showLogin: function( ev ) {
 			ev.preventDefault();
 			this.$('#docusignLoginForm').slideDown();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideUp();
+
+			this.$('.wx-subnav-item').removeClass('active');
+       		this.$('#docusignLogin').addClass('active');
+
+			this.$('#docusignLoginForm .wx-form-builder-docusign-username').focus();
 		},
 
 		showCreateAccount: function( ev ) {
@@ -121,6 +144,11 @@ wxApp = wxApp || {};
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideDown();
 			this.$('#docusignChangePassord').slideUp();
+
+			this.$('.wx-subnav-item').removeClass('active');
+       		this.$('#docusignCreate').addClass('active');
+
+			this.$('#docusignCreateForm .wx-form-builder-docusign-accountName').focus();
 		},
 
 		showChangePassword: function( ev ) {
@@ -128,6 +156,11 @@ wxApp = wxApp || {};
 			this.$('#docusignLoginForm').slideUp();
 			this.$('#docusignCreateForm').slideUp();
 			this.$('#docusignChangePassord').slideDown();
+
+			this.$('.wx-subnav-item').removeClass('active');
+       		this.$('#docusignChangePassword').addClass('active');
+
+			this.$('#docusignChangePassord .wx-form-builder-docusign-username').focus();
 		},
 
 		login: function() {
@@ -135,9 +168,27 @@ wxApp = wxApp || {};
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
 			    success  = function success( data ) {
+				    console.log( me );
+				    // Update docusign username/password
+				    me.docusign.set( 'username', username );
+				    me.docusign.set( 'password', password );
+				    $.ajax( {
+					    url: ajaxurl + '?action=ajaxSaveDocusignCredentials',
+					    type: 'POST',
+					    data: {
+						    username: username,
+						    password: password
+					    },
+					    success: function( data ) {
+						    console.log( 'success', data );
+					    },
+					    error: function( data ) {
+						    console.log( 'error', data );
+					    }
+				    } );
 			    	me.$('#login_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Okay! You\'ve been logged in!' );
+					me.$('#wx-login-message').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure  = function failure( data ) {
@@ -151,7 +202,7 @@ wxApp = wxApp || {};
 			me.$('#login_loading').show();
 
 			var params = { username: username, password: password };
-			if ( true ) params.demo = 1;	// TODO - Remove this.
+			if ( true ) params.demomode = 1;	// TODO - Remove this.
 			wx.makeApiCall('_docusign/client_login', params, success, failure);
 		},
 
@@ -160,7 +211,7 @@ wxApp = wxApp || {};
 				account = me.validateAccount(),
 				success = function success( data ) {
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Okay! Your account has been created!' );
+					me.$('#wx-login-message').html( 'Success! DocuSign account created.  You are now logged in.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 				},
 				failure = function failure( data ) {
@@ -172,7 +223,7 @@ wxApp = wxApp || {};
 				// Remove values we don't need to send to the API.
 				delete account.valid;
 				delete account.errors;
-				if ( true ) account.demo = 1;	// TODO - Remove this.
+				if ( true ) account.demomode = 1;	// TODO - Remove this.
 
 				wx.makeApiCall( '_docusign/create_account', account, success, failure );
 			}
@@ -200,7 +251,7 @@ wxApp = wxApp || {};
 			    success          = function success( data ) {
 			    	me.$('#change_password_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').text( 'Okay! Your password has been changed, and you\'ve been logged in!' );
+					me.$('#wx-login-message').html( 'Success! DocuSign password updated.  You are now logged in.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure          = function failure( data ) {
@@ -220,7 +271,7 @@ wxApp = wxApp || {};
 			} else {
 
 				var params = { username: username, password: oldPassword, newPassword: newPassword, question1: question1, answer1: answer1 };
-				if ( true ) params.demo = 1;	// TODO - Remove this.
+				if ( true ) params.demomode = 1;	// TODO - Remove this.
 				wx.makeApiCall('_docusign/change_password', params, success, failure);
 			}
 		},
@@ -232,13 +283,14 @@ wxApp = wxApp || {};
             		valid       : true,
             		errors      : [],
 	                accountName : me.$('.wx-form-builder-docusign-accountName').val().trim(),
-				    username    : me.$('#docusignCreateForm .wx-form-builder-docusign-username').val().trim(),
+				    // username    : me.$('#docusignCreateForm .wx-form-builder-docusign-username').val().trim(),
+				    username    : me.$('.wx-form-builder-docusign-email').val().trim(),
 				    email       : me.$('.wx-form-builder-docusign-email').val().trim(),
 				    title       : me.$('.wx-form-builder-docusign-title').val().trim(),
 				    firstName   : me.$('.wx-form-builder-docusign-firstName').val().trim(),
-				    middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
+				    // middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
-				    suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
+				    // suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
 				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val()
 			    },
 			    passwordAgain = me.$('.wx-form-builder-docusign-password-again').val();
@@ -247,7 +299,7 @@ wxApp = wxApp || {};
             // 1. Account Name is required.
             if ( accountObject.accountName.length === 0 ) {
             	accountObject.valid = false;
-            	accountObject.errors[ accountObject.errors.length ] = "Account Name is required.";
+            	accountObject.errors[ accountObject.errors.length ] = "Company Name is required.";
             }
 
             // 2. User Name is required.
@@ -294,7 +346,22 @@ wxApp = wxApp || {};
 
             return accountObject;
 
-		}*/
+		},
 
+		next: function() {
+
+			$('.form-builder-step-one').slideUp();
+			$('.form-builder-step-two').slideDown();
+			$( this.buildPaneSelector ).foundation('section', 'reflow');
+			$( 'html, body' ).animate( { scrollTop: 0 }, 500 );
+
+		}
+
+		/********************************/
+		/* DocuSign Account Stuff End   */
+		/********************************/
+
+		
 	});
+
 })(jQuery);
