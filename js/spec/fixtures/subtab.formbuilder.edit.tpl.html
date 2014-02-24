@@ -605,7 +605,11 @@
                     <div class="content" data-section-content>
 
                         <label>Change the label text used for your form&apos;s submit button</label>
-                        <input type="text" class="button-text" value="<%- buttonText %>" />
+                        <input type="text"
+							   class="submit-button-text"
+							   value="<%- config.submitButtonText %>"
+							   <% if ( config.isDocuSign ) print( ' readonly ' ) %>
+						/>
                         <!-- fix for last-child bug in foundation -->
                     </div>
                 </section>
@@ -632,7 +636,7 @@
                             <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
                             <div class="wx-preview-form"></div>
                             <br/>
-                            <button class="success radius"><%- buttonText %></button>
+                            <button class="success radius"><%- config.submitButtonText %></button>
                             <br/><br/>
                         </div>
                     </div>

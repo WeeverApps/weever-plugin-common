@@ -52,9 +52,9 @@ wxApp = wxApp || {};
 				content: 'formbuilder',
                 helpTitle:  'Support',
 				layout: 'panel',
-        		buttonText: 'Review and Sign',
 	            advancedMode: allowAdvancedMode,
 				config: {
+					submitButtonText: 'Submit',
                     advanced: allowAdvancedMode,
 					uploadUrl: uploadUrl,
 					onUpload: {
@@ -85,6 +85,7 @@ wxApp = wxApp || {};
 
 		    return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
+			        submitButtonText: 'Tap to Review and Sign',
                     icon: 'e074',
                     advanced: allowAdvancedMode,
 			        allowDemoMode: allowDemoMode,

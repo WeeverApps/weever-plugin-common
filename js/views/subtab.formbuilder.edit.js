@@ -225,7 +225,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
-			'keyup .button-text'                             : 'updateButtonText',
+			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 //			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
@@ -252,9 +252,9 @@ wxApp = wxApp || {};
 			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
 
-		updateButtonText: function( ev ) {
+		updateSubmitButtonText: function( ev ) {
 			var $text = $( ev.currentTarget );
-			this.model.set( 'buttonText', $text.val() );
+			this.model.get( 'config' ).submitButtonText = $text.val();
 
 			// Update in the preview panel.
 			$('.wx-validate-feed.panel button.success').text( $text.val() );
