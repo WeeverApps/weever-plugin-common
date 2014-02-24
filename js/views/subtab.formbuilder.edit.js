@@ -128,6 +128,8 @@ wxApp = wxApp || {};
 
 			// Call parent's initialize() function
 			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
+
+			console.log( 'formbuilder.edit', this.model );
 		},
 
 		validate: function() {
@@ -160,7 +162,9 @@ wxApp = wxApp || {};
 		getDefaultFormActions: function() {
 			
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			this.addPostAction( null );
+			if ( this.model.get( 'config' ).advanced ) {
+				this.addPostAction( null );
+			}
 			this.addEmailAction( null );
 			// this.docusign = this.addDocusignAction( docusign );
 
@@ -221,7 +225,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
-			'keyup .button-text'                             : 'updateButtonText',
+			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 //			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
@@ -231,7 +235,7 @@ wxApp = wxApp || {};
 
 		/**
 		 * Sets the active preview element based on the index of the active accordion element
-		 * @param ev
+		 * @param ev Click event or accordion element
 		 */
 		setActivePreviewElement: function( ev ) {
 			var $target = null;
@@ -248,9 +252,9 @@ wxApp = wxApp || {};
 			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
 
-		updateButtonText: function( ev ) {
+		updateSubmitButtonText: function( ev ) {
 			var $text = $( ev.currentTarget );
-			this.model.set( 'buttonText', $text.val() );
+			this.model.get( 'config' ).submitButtonText = $text.val();
 
 			// Update in the preview panel.
 			$('.wx-validate-feed.panel button.success').text( $text.val() );
@@ -360,7 +364,10 @@ wxApp = wxApp || {};
 				action = this.addCustomAction( properties );
 			}
 			else {
-				action = this.addCustomAction( { method : 'docusign' } );
+				action = this.addCustomAction( {
+					method : 'docusign',
+					allowDemoMode: this.model.get( 'config' ).allowDemoMode
+				} );
 			}
 			return action;
 		},

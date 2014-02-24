@@ -36,6 +36,13 @@ wxApp = wxApp || {};
         },
 
         defaults: function() {
+	        var feature = wxApp.featureList.collection.findWhere( { featureName: 'FormBuilder' } );
+
+	        var allowAdvancedMode = wx.formbuilderAdvanced || 0;
+	        if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
+		        allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
+	        }
+
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
 				title: 'My Form Title',
                 icon: 'e074',
@@ -45,15 +52,15 @@ wxApp = wxApp || {};
 				content: 'formbuilder',
                 helpTitle:  'Support',
 				layout: 'panel',
-        		buttonText: 'Review and Sign',
-                advancedMode: wx.formbuilderAdvanced,
+	            advancedMode: allowAdvancedMode,
 				config: {
-                    advanced: wx.formbuilderAdvanced,
+					submitButtonText: 'Submit',
+                    advanced: allowAdvancedMode,
 					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
 					},
-                    subtab_name: 'FormBuilderSubTab',
+					subtab_name: 'FormBuilderSubTab',
 					isDocuSign: false
 				}
 			});
@@ -64,10 +71,24 @@ wxApp = wxApp || {};
     wxApp.DocuSignSubTab = wxApp.FormBuilderSubTab.extend({
 
     	defaults: function() {
-            return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
+		    var feature = wxApp.featureList.collection.findWhere( { featureName: 'DocuSign' } );
+
+		    var allowAdvancedMode = wx.formbuilderAdvanced || 0;
+		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
+			    allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
+		    }
+
+		    var allowDemoMode = 0;
+		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_demo_mode ) {
+			    allowDemoMode = parseInt( feature.get( 'options' ).allow_demo_mode.value );
+		    }
+
+		    return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
+			        submitButtonText: 'Tap to Review and Sign',
                     icon: 'e074',
-                    advanced: wx.formbuilderAdvanced,
+                    advanced: allowAdvancedMode,
+			        allowDemoMode: allowDemoMode,
 					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'

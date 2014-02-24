@@ -89,7 +89,11 @@ wxApp = wxApp || {};
 
 		getDefaultFormActions: function() {
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			this.addPostAction( null );
+
+			if ( this.model.get( 'config' ).advanced ) {
+				this.addPostAction( null );
+			}
+
 			this.docusign = this.addDocusignAction( null );
 		},
 

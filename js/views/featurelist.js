@@ -33,13 +33,21 @@ wxApp = wxApp || {};
 
 	    // Grab the data and kick things off
 	    wxApp.featureList.collection.fetch({
-		    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
+		    url: wx.apiUrl + 'features/get_features_backbone?app_key=' + wx.siteKey,
 		    success: function(result) {},
 		    error: function() {
 			    wxApp.featureList.collection.fetch({
-				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+				    url: wx.pluginUrl + 'static/js/config/wx.featurelist.dev.js',
 				    success: function(result) {  },
-				    error: function() { console.log('Could not load feature list.') }
+				    error: function() {
+					    wxApp.featureList.collection.fetch({
+						    url: wx.pluginUrl + 'static/js/config/wx.featurelist.js',
+						    success: function(result) {  },
+						    error: function() {
+							    console.log('Could not load feature list.')
+						    }
+					    });
+				    }
 			    });
 		    }
 	    });
