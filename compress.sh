@@ -43,7 +43,7 @@ final=("${vendorFiles[@]} ${modelsToBeMovedForwards[@]}" "${allModels[@]}" colle
 
 # 5. Repeat the above for views
 allViews=(views/*.js)
-viewsToBeMovedForward=(views/formbuilder.control.js views/tab.js views/subtab.edit.js views/subtab.formbuilder.edit.js views/style.js)
+viewsToBeMovedForward=(views/formbuilder.control.js views/tab.js views/subtab.edit.js views/subtab.formbuilder.edit.js views/style.js views/subtab.wordpressaddpage.edit.js)
 
 length=${#allViews[@]}
 for ((i=1; i<$length; i++))
