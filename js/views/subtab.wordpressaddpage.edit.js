@@ -4,6 +4,7 @@ wxApp = wxApp || {};
 (function($){
     wxApp.WordpressAddPageSubTabEditView = wxApp.SubTabEditView.extend({
         subTabEditTplSelector: '#wordpressaddpage-subtab-edit-template',
+        editorId: '',
 
 		events : {
 			// Coupon events
@@ -20,15 +21,19 @@ wxApp = wxApp || {};
         render: function() {
 			wxApp.SubTabEditView.prototype.render.apply( this );
 
-			$('section.editor').show();
-			$('section.coupon').hide();
-			$('section.mapper').hide();
+			this.$('section.editor').show();
+			this.$('section.coupon').hide();
+			this.$('section.mapper').hide();
+
+			// nicEdit works on IDs, not classes. Let's great a random ID.
+			this.editorId = 'wx-content-' + Math.floor((Math.random()*1000000)+1).toString();
+			this.$('.wx-content-editor').attr( 'id', this.editorId );
 
 			// We have to add this .2 second delay in because otherwise the 
 			// textarea reports it's width as 100px in Chrome, which causes
 			// the editor to display as 100px wide.
 			setTimeout( function() {
-				new nicEditor({fullPanel : true}).panelInstance('wx-content-value');
+				new nicEditor({fullPanel : true}).panelInstance( this.editorId );
 			}, 200);
         },
 
@@ -44,7 +49,7 @@ wxApp = wxApp || {};
 
             	// Add post info
             	name    = $( '#wx-title-value' ).val();
-				content = nicEditors.findEditor('wx-content-value').nicInstances[0].getContent();
+				content = nicEditors.findEditor( this.editorId ).nicInstances[0].getContent();
         	}
         	
         	if ( $('section.coupon').is(':visible') ) {
