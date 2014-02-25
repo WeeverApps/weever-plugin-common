@@ -46,15 +46,12 @@ var wxApp = wxApp || {};
 			data = queryStr.join('&');
 		}
 
-	    console.log( 'makeApiCall' );
-	    console.log( apiUrl );
         $.ajax({
             url: apiUrl,
             type: method,
 			data: data,
             datatype: datatype,
             success: function(v) {
-	            console.log( 'success' );
                 wx.apiSuccess( v, successCallback, failureCallback );
             },
             error: function(v, message) {
