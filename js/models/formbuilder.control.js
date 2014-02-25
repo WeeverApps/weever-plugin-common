@@ -3,7 +3,7 @@ wxApp = wxApp || {};
 
 (function($){
 
-	wxApp.FormBuilderControlAttributes = Backbone.Model.extend({
+	wxApp.FormBuilderControlHtmlAttributes = Backbone.Model.extend({
 		defaults: {}
 	});
 
@@ -15,18 +15,18 @@ wxApp = wxApp || {};
 				control: '',
 				type: '',
 				label: '',
-				hidePlaceholderClass: '',
+//				hidePlaceholderClass: '',
 				showPlaceholder: false,
 				innerText: '',
 				allowAdditional: '',
 				allowAdditionalClass: '',
 				valueType: 'number',
-				valueClass: 'hide',
-				minClass: 'hide',
-				maxClass: 'hide',
-				stepClass: 'hide',
+//				valueClass: 'hide',
+//				minClass: 'hide',
+//				maxClass: 'hide',
+//				stepClass: 'hide',
 				multiClass: 'hide',
-				requiredClass: '',
+//				requiredClass: '',
 				autocompleteClass: 'hide',
 				controlTitle: '',
 				advanced: wx.formbuilderAdvanced
@@ -35,10 +35,11 @@ wxApp = wxApp || {};
 
 		initialize: function() {
 
-			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
+			this.set( 'htmlAttributes', new wxApp.FormBuilderControlHtmlAttributes() );
+			this.set( 'attributes', new wxApp.FormBuilderControlHtmlAttributes() );
 
-			this.togglePlaceholder();
-			this.on( 'change:showPlaceholder', this.togglePlaceholder );
+//			this.togglePlaceholder();
+//			this.on( 'change:showPlaceholder', this.togglePlaceholder );
 		},
 
 		togglePlaceholder: function() {

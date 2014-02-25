@@ -12,8 +12,15 @@ wxApp = wxApp || {};
 		return replaced;
 	};
 
-	var toJSONrecursive = function() {
-		return JSON.parse(JSON.stringify(this.attributes, escapeJSON));
+	var toJSONrecursive = function( escape ) {
+		var jsonRecursive = null;
+		if( !! escape ) {
+			jsonRecursive = JSON.parse(JSON.stringify(this.attributes, escapeJSON));
+		}
+		else {
+			jsonRecursive = JSON.parse(JSON.stringify(this.attributes));
+		}
+		return jsonRecursive;
 	}
 
 	var collectionToJSONrecursive = function() {

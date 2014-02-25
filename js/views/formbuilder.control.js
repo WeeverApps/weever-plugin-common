@@ -175,10 +175,10 @@ wxApp = wxApp || {};
 		setRequired: function( ev ) {
 			var $me = $( ev.currentTarget );
 			if ( $me.is( ':checked' ) ) {
-				this.model.get( 'attributes' ).set( 'required', 'checked' );
+				this.model.get( 'htmlAttributes' ).set( 'required', true );
 			}
 			else {
-				this.model.get( 'attributes' ).unset( 'required' );
+				this.model.get( 'htmlAttributes' ).unset( 'required' );
 			}
 
 			// Backbone doesn't notice when attributes are changed, so we 

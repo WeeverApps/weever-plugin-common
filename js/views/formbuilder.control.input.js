@@ -2,6 +2,9 @@
 wxApp = wxApp || {};
 
 (function($){
+
+	var templateDataObject = {};
+
 	wxApp.FormBuilderControlInputView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-input',
 		preview: null,
@@ -21,7 +24,14 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+
+			templateDataObject = getTemplateDataObject( this.model );
+
+//			console.log( templateDataObject.toJSON() );
+//			console.log( this.model.toJSON() );
+
+			this.$el.html( this.inputTpl( templateDataObject ) );
+//			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 
 			if ( this.firstRender ) {
 				// Focus on the label the first time you render this control.
@@ -46,7 +56,9 @@ wxApp = wxApp || {};
 
 		render: function() {
 			console.log('render preview');
-			var model = this.model.toJSON();
+//			var model = this.model.toJSON();
+			templateDataObject = getTemplateDataObject( this.model );
+			var model = templateDataObject;
 			console.log( model );
 			this.$el.html( this.inputTpl( model ) );
 			if ( model.attributes.min )
@@ -60,5 +72,42 @@ wxApp = wxApp || {};
 			return this;
 		}
 	});
+
+	var getTemplateDataObject = function( model ) {
+		console.log( 'getTemplateDataObject' );
+
+		console.log( model.get( 'controlTitle' ) );
+
+		var min = model.get( 'htmlAttributes' ).get( 'min' );
+		var max = model.get( 'htmlAttributes' ).get( 'max' );
+		var step = model.get( 'htmlAttributes' ).get( 'step' );
+		var value = model.get( 'htmlAttributes' ).get( 'value' );
+		var showPlaceholder = model.get( 'showPlaceholder' );
+
+		var extensions = {
+			minClass: ( typeof min == 'undefined' ? 'hide' : '' ),
+			maxClass: ( typeof max == 'undefined' ? 'hide' : '' ),
+			stepClass: ( typeof step == 'undefined' ? 'hide' : '' ),
+			valueClass: ( typeof value == 'undefined' ? 'hide' : '' ),
+			hidePlaceholderClass: ( showPlaceholder ? '' : 'hide' ),
+			requiredClass: ''
+		};
+
+		var htmlAttributesExtensions = {
+//			placeholder: ''
+		};
+
+		var extendedHtmlAttributes = _.extend( {}, htmlAttributesExtensions, model.toJSONrecursive().htmlAttributes );
+
+		var extended = _.extend( {}, extensions, model.toJSONrecursive() );
+
+		extended.htmlAttributes = extendedHtmlAttributes;
+
+		console.log( model.toJSONrecursive() );
+		console.log( extended );
+
+		return extended;
+
+	};
 	
 })(jQuery);

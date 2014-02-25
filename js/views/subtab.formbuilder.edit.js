@@ -437,24 +437,22 @@ wxApp = wxApp || {};
 		addInput: function( properties ) {
 
 			var mainProperties = {};
-			var attributes = {};
+			var htmlAttributes = {};
 			for ( var propKey in properties ) {
-				if ( propKey != 'attributes' ) {
+				if ( propKey != 'htmlAttributes' ) {
 					mainProperties[propKey] = properties[propKey];
 				}
 				else {
 					for ( var attrKey in properties[propKey] ) {
-						attributes[attrKey] = properties[propKey][attrKey];
+						htmlAttributes[attrKey] = properties[propKey][attrKey];
 					}
 				}
 			}
 
 			var input = new wxApp.FormBuilderControlInput( mainProperties );
-			input.get( 'attributes' ).set( attributes );
-			for ( var attrKey in attributes ) {
-				input.get( 'attributes' )[attrKey] = attributes[attrKey];
-			};
-			
+			input.get( 'htmlAttributes' ).set( htmlAttributes );
+			input.get( 'attributes' ).set( htmlAttributes );
+
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
@@ -598,12 +596,16 @@ wxApp = wxApp || {};
 			this.addInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Range',
-				minClass: '',
-				maxClass: '',
-				stepClass: '',
-				valueClass: '',
-				attributes: {
-					type: 'range'
+//				minClass: '',
+//				maxClass: '',
+//				stepClass: '',
+//				valueClass: '',
+				htmlAttributes: {
+					type: 'range',
+					min: null,
+					max: null,
+					step: null,
+					value: null
 				}
 			});
 		},
