@@ -1,7 +1,7 @@
 <script type="text/template" id="form-builder-select">
 	<p class="title" data-section-title>
 		<a href="#panel<%- ordinal %>">
-			<%- controlTitle %>: <span class="wx-form-builder-edit-title"><%- title %></span>
+			<%- controlTitle %>: <span class="wx-form-builder-edit-title"><%- title %></span> <span class="appbuilder-icon icon-move-all"></span>
 		</a>
 	</p>
 	<div class="content" data-section-content>
@@ -20,6 +20,21 @@
 
         <br>
         <br>
+
+        <% if (advanced) { %>
+        <label>Field name (optional, advanced)
+                    <span data-tooltip data-options="disable-for-touch:true"
+                          class="has-tip tip-right"
+                          title="<p><b>Field name</b><p>
+                           <p>The HTML &ldquo;name&rdquo; attribute. For use with a custom POST action.</p>
+                           <p><b>Advanced mode</b></p>
+                           <p>This option is only displayed when &ldquo;advanced mode&rdquo; is enabled.
+                           ">
+                           ?
+                    </span>
+        </label>
+        <input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
+        <% } %>
 
         <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
         <label class="<%- allowAdditionalClass %>"><input type="checkbox" class="wx-form-builder-allow-additional" <%- allowAdditional %> /> Allow users to create and select new choices</label>

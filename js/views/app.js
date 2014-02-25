@@ -45,14 +45,12 @@ wxApp = wxApp || {};
             'click #preview-refresh': 'refreshAppPreview'
         },
 
-        createFeatureView: function(id, parentId, allowAdvanced) {
+        createFeatureView: function(id, parentId) {
             if ( undefined !== wxApp[id + 'SubTab'] && undefined !== wxApp[id + 'SubTabEditView'] ) {
                 var tab = new wxApp[id + 'SubTab']();
 
                 if ( undefined != parentId && parentId )
                     tab.set( 'parent_id', parseInt( parentId ) );
-                if ( undefined != allowAdvanced && allowAdvanced )
-                    tab.set( 'allowAdvanced', true );
                 
                 var view = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
             } else {

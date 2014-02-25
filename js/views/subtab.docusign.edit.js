@@ -4,7 +4,7 @@ wxApp = wxApp || {};
 (function($){
 
 	wxApp.DocuSignSubTabEditView = wxApp.FormBuilderSubTabEditView.extend({
-		baseEditTplSelector: '#form-builder-edit-template',
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
 
 		initializeEvents: function() {
 
@@ -15,8 +15,6 @@ wxApp = wxApp || {};
 
 		events: {
 			// "Step One" stuff (ie, DocuSign)
-			'blur .wx-form-builder-docusign-username'        : 'updateUsername',
-			'blur .wx-form-builder-docusign-password'        : 'updatePassword',
 			'keyup .wx-form-builder-docusign-password'       : 'passwordKeyUp',
 			'blur .wx-form-builder-docusign-returnUrl'       : 'updateReturnUrl',
 			'blur .wx-form-builder-pdfheader-title'          : 'updatePdfHeader',
@@ -29,52 +27,82 @@ wxApp = wxApp || {};
 			'click #wx-docusign-login-button'                : 'login',
 			'click #wx-docusign-create-account-button'       : 'createAccount',
 			'click #wx-docusign-change-password-button'      : 'changePassword',
-			'click .wx-continue-button'                      : 'next',
+			'click .wx-continue-button'                      : 'next'
+		},
+
+		initialize: function() {
+			var me = this,
+				args = arguments;
+
+			if ( typeof me.model.get( 'docusign' ) == 'undefined' ) {
+				me.model.set( 'docusign', {
+					username: '',
+					password: ''
+				} );
+			}
+
+			$.ajax( {
+				url: ajaxurl + '?action=ajaxDecryptDocusignCredentials',
+				type: 'POST',
+				data: {
+					wx_docusign: $.cookie( 'wx_docusign' )
+				},
+				dataType: 'json',
+				success: function( data ) {
+					console.log( 'success', data );
+					if ( !! data ) {
+						me.model.get( 'docusign' ).username = ( typeof data.username != 'undefined' ? data.username : '' );
+						me.model.get( 'docusign' ).password = ( typeof data.password != 'undefined' ? data.password : '' );
+//						me.render();
+
+						$( '.wx-form-builder-docusign-username' ).val( me.model.get( 'docusign' ).username );
+						$( '.wx-form-builder-docusign-password' ).val( me.model.get( 'docusign' ).password );
+
+					}
+				},
+				error: function( data ) {
+					console.log( 'error', data );
+				},
+				complete: function() {
+//					wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( me, args );
+				}
+			} );
+
+			wxApp.FormBuilderSubTabEditView.prototype.initialize.apply( this, arguments );
 		},
 
 		validate: function() {
-			var success = false;
-			if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
-				success = true;
-			}
+			var signatureFound = false,
+			    errorMessage   = "Your form could not be saved! Please ensure you have added a DocuSign&trade; eSignature to your form.",
+			    formElements   = this.model.get( 'config' ).formElements;
 
-			if (!success) {
-				// Display an error message.
-				var errorMessage = "Your form could not be saved! Please enter your DocuSign&trade; username and password under the <b>Form Settings</b> tab.";
+			formElements.each( function( model, index ) {
+				if ( model.get( 'control' ) === 'docusignSignature' ) {
+					signatureFound = true;
+				}
+			});
+
+			if ( !signatureFound ) {
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
 			}
 
-
-			return success;
+			return signatureFound;
 		},
 
 		getDefaultFormActions: function() {
-
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			var post = new wxApp.FormBuilderAction();
-			post.set( { method: 'post' } );
-			var docusign = new wxApp.FormBuilderAction();
-			docusign.set( { method: 'docusign' } );
 
-			this.model.get( 'config' ).formActions.push( post );
-			this.model.get( 'config' ).formActions.push( docusign );
+			if ( this.model.get( 'config' ).advanced ) {
+				this.addPostAction( null );
+			}
 
-			this.addPostAction( post );
-			this.docusign = this.addDocusignAction( docusign );
+			this.docusign = this.addDocusignAction( null );
 		},
 
 		/********************************/
 		/* DocuSign Account Stuff Start */
 		/********************************/
-
-		updateUsername: function( ev ) {
-			this.docusign.set( 'username', $( ev.currentTarget ).val() );
-		},
-
-		updatePassword: function( ev ) {
-			this.docusign.set( 'password', $( ev.currentTarget ).val() );
-		},
 
 		// Login when 'enter' is pressed.
 		passwordKeyUp: function( ev ) {
@@ -143,9 +171,28 @@ wxApp = wxApp || {};
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
 			    success  = function success( data ) {
+				    console.log( me );
+				    // Update docusign username/password
+				    me.docusign.set( 'username', username );
+				    me.docusign.set( 'password', password );
+				    $.ajax( {
+					    url: ajaxurl + '?action=ajaxEncryptDocusignCredentials',
+					    type: 'POST',
+					    data: {
+						    username: username,
+						    password: password
+					    },
+					    success: function( data ) {
+						    console.log( 'success', data );
+						    $.cookie( 'wx_docusign', data, { expires: 3650 } );
+					    },
+					    error: function( data ) {
+						    console.log( 'error', data );
+					    }
+				    } );
 			    	me.$('#login_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );
+					me.$('#wx-login-message').html( 'You have successfully logged in to your DocuSign account.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure  = function failure( data ) {
@@ -159,8 +206,8 @@ wxApp = wxApp || {};
 			me.$('#login_loading').show();
 
 			var params = { username: username, password: password };
-			if ( true ) params.demo = 1;	// TODO - Remove this.
-			wx.makeApiCall('_docusign/clientLogin', params, success, failure);
+			// if ( true ) params.demomode = 1;	// TODO - Remove this.
+			wx.makeApiCall('_docusign/client_login', params, success, failure);
 		},
 
 		createAccount: function() {
@@ -168,7 +215,7 @@ wxApp = wxApp || {};
 				account = me.validateAccount(),
 				success = function success( data ) {
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').html( 'Success! DocuSign account created.  You are now logged in.<a href="#" class="close">&times;</a>' );
+					me.$('#wx-login-message').html( 'Success! DocuSign account created.  You are now logged in.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 				},
 				failure = function failure( data ) {
@@ -180,9 +227,9 @@ wxApp = wxApp || {};
 				// Remove values we don't need to send to the API.
 				delete account.valid;
 				delete account.errors;
-				if ( true ) account.demo = 1;	// TODO - Remove this.
+				// if ( true ) account.demomode = 1;	// TODO - Remove this.
 
-				wx.makeApiCall( '_docusign/createAccount', account, success, failure );
+				wx.makeApiCall( '_docusign/create_account', account, success, failure );
 			}
 			else {
 
@@ -208,7 +255,7 @@ wxApp = wxApp || {};
 			    success          = function success( data ) {
 			    	me.$('#change_password_loading').hide();
 					me.$('#docusignAccountInfo').slideUp();
-					me.$('.login.alert-box.success').html( 'Success! DocuSign password updated.  You are now logged in.<a href="#" class="close">&times;</a>' );
+					me.$('#wx-login-message').html( 'Success! DocuSign password updated.  You are now logged in.<a href="#" class="close">&times;</a>' );
 					me.$('#docusignOtherInfo').slideDown();
 			    },
 			    failure          = function failure( data ) {
@@ -228,8 +275,8 @@ wxApp = wxApp || {};
 			} else {
 
 				var params = { username: username, password: oldPassword, newPassword: newPassword, question1: question1, answer1: answer1 };
-				if ( true ) params.demo = 1;	// TODO - Remove this.
-				wx.makeApiCall('_docusign/changePassword', params, success, failure);
+				// if ( true ) params.demomode = 1;	// TODO - Remove this.
+				wx.makeApiCall('_docusign/change_password', params, success, failure);
 			}
 		},
 
@@ -245,9 +292,9 @@ wxApp = wxApp || {};
 				    email       : me.$('.wx-form-builder-docusign-email').val().trim(),
 				    title       : me.$('.wx-form-builder-docusign-title').val().trim(),
 				    firstName   : me.$('.wx-form-builder-docusign-firstName').val().trim(),
-				    middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
+				    // middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
-				    suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
+				    // suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
 				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val()
 			    },
 			    passwordAgain = me.$('.wx-form-builder-docusign-password-again').val();
@@ -309,8 +356,10 @@ wxApp = wxApp || {};
 
 			$('.form-builder-step-one').slideUp();
 			$('.form-builder-step-two').slideDown();
+			$( this.buildPaneSelector ).foundation('section', 'reflow');
+			$( 'html, body' ).animate( { scrollTop: 0 }, 500 );
 
-		},
+		}
 
 		/********************************/
 		/* DocuSign Account Stuff End   */

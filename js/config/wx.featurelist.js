@@ -1,5 +1,5 @@
 [
-    { "featureName": "FormBuilder",         "name": "FormBuilder", "cms": ["none"] },
+    { "featureName": "FormBuilder",         "name": "Form",        "cms": ["none"] },
     { "featureName": "DocuSign",            "name": "DocuSign",    "cms": ["none"] },
     { "featureName": "RSS",                 "name": "RSS feed"     },
     { "featureName": "WordpressBlog",       "name": "WP All",      "cms": ["none"],                "filterBy": "weever_list_show_wordpress_content" },
@@ -7,15 +7,15 @@
     { "featureName": "WordpressPage",       "name": "WP Page",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
     { "featureName": "WordpressTag",        "name": "WP Tag",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
     { "featureName": "WordpressSearchterm", "name": "Search",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content" },
-    { "featureName": "WordpressMap",        "name": "GPS Map",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
-    { "featureName": "WordpressProximity",  "name": "Near Me",     "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
+    { "featureName": "WordpressMap",        "name": "Map",         "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
+    { "featureName": "WordpressProximity",  "name": "Nearby",      "cms": ["wordpress"],           "filterBy": "weever_list_show_wordpress_content", "tierRequired": 2     },
     { "featureName": "WordpressDirectory",  "name": "Directory",   "cms": ["none"],                "filterBy": "weever_list_show_wordpress_content", "rel": "hide"         },
-    { "featureName": "WordpressPage",       "name": "New Page",    "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "rel": "page"         },
+    { "featureName": "WordpressAddPage",    "name": "Add Page",    "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "rel": "page"         },
     { "featureName": "Coupon",              "name": "Coupon",      "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "includeClass": "wx-add-new-coupon" },
     { "featureName": "Twitter",             "name": "Twitter"      },
     { "featureName": "Youtube",             "name": "YouTube"      },
     { "featureName": "Vimeo",               "name": "Vimeo"        },
-    { "featureName": "Map",                 "name": "Map POI",     "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "rel": "map"  },
+    { "featureName": "Map",                 "name": "Map",         "cms": ["cloud"],               "filterBy": "weever_list_show_wordpress_content", "rel": "map"  },
     { "featureName": "FacebookWall",        "name": "FB Wall"      },
     { "featureName": "FacebookEvents",      "name": "FB Events"    },
     { "featureName": "FacebookAlbums",      "name": "FB Photos"    },
@@ -26,9 +26,5 @@
     { "featureName": "GoogleCalendar",      "name": "Calendar"     },
     { "featureName": "Wufoo",               "name": "Wufoo",       "tierRequired": 2 },
     { "featureName": "r3s",                 "name": "R3S Code",    "cms": ["wordpress", "joomla"], "filterBy": "weever_list_r3s_dialog"},
-    { "featureName": "Blogger",             "name": "Blogger"      },
-    { "featureName": "google_plus",         "name": "Google+",     "includeClass": "wx-unavailable disabled"   },
-    { "featureName": "tumblr",              "name": "Tumblr",      "includeClass": "wx-unavailable disabled"   },
-    { "featureName": "soundcloud",          "name": "SoundCloud",  "includeClass": "wx-unavailable disabled"   },
-    { "featureName": "bandcamp",            "name": "BandCamp",    "includeClass": "wx-unavailable disabled"   }
+    { "featureName": "Blogger",             "name": "Blogger"      }
 ]

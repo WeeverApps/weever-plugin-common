@@ -7,10 +7,10 @@
     <div class="row">
         <div class="large-6 columns">
             <label>
-                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image" <%- titlebar.type == 'image' ? 'checked=checked' : '' %>>Upload an image</input>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="image" <%- titlebar.type == 'image' ? 'checked=checked' : '' %>> Upload an image</input>
             </label>
             <label>
-                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text" <%- titlebar.type == 'text' ? 'checked=checked' : '' %>>Use a line of text</input>
+                <input type="radio" class="wx-content-radio" name="titlebarSource" value="text" <%- titlebar.type == 'text' ? 'checked=checked' : '' %>> Use a line of text</input>
             </label>
         </div>
         <div class="large-6 columns">
@@ -32,7 +32,7 @@
                 <a href="#" onclick="return false;" class="button success prefix">Save</a>
             </div>
             <div class="small-2 columns loading">
-                <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                <img id="titlebar_title_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                     <label class="left inline">Logo area background color</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                    <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                     <label class="left inline">&nbsp;Logo area text color (if applicable)</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                    <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
                     <label class="left inline">&nbsp;Subtab bar background color</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="subtab_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                    <img id="subtab_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@
                     <label class="left inline">&nbsp;Subtab bar text color</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="subtab_text_color_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                    <img id="subtab_text_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
                 </div>
             </div>
         </div>

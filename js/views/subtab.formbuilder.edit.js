@@ -6,7 +6,8 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '#form-build-area',
-		subTabEditTplSelector: '#form-builder-subtab-edit-template',
+		baseEditTplSelector: '#formbuilder-subtab-edit-template',
+		// subTabEditTplSelector: '#form-builder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
@@ -18,13 +19,15 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
+			var me = this,
+				elementsJson,
+				actionsJson;
 
 			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
 				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
 			}
 			else {
 				// Load currently existing form elements.
-				var elementsJson;
 				try {
 					elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
 				} catch(err) {
@@ -33,85 +36,90 @@ wxApp = wxApp || {};
 
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
-				for ( var i = 0; i < elementsJson.length; i++ ) {
+				setTimeout( function() { 
+					for ( var i = 0; i < elementsJson.length; i++ ) {
 
-					if ( elementsJson[i].control === 'div' ) {
+						if ( elementsJson[i].control === 'div' ) {
 
-						this.addInfoWithProperties( elementsJson[i] );
+							me.addInfoWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'textarea' ) {
+						} else if ( elementsJson[i].control === 'textarea' ) {
 
-						this.addTextareaWithProperties( elementsJson[i] );
+							me.addTextareaWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'radiofieldset' ) {
+						} else if ( elementsJson[i].control === 'radiofieldset' ) {
 
-						this.addRadioGroupWithProperties( elementsJson[i] );
+							me.addRadioGroupWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'checkboxfieldset' ) {
+						} else if ( elementsJson[i].control === 'checkboxfieldset' ) {
 
-						this.addCheckboxGroupWithProperties( elementsJson[i] );
+							me.addCheckboxGroupWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].control === 'select' ) {
+						} else if ( elementsJson[i].control === 'select' ) {
 
-						this.addSelectWithProperties( elementsJson[i] );
+							me.addSelectWithProperties( elementsJson[i] );
 
-					} else if ( elementsJson[i].type === 'textSlider' ) {
+						} else if ( elementsJson[i].type === 'textSlider' ) {
 
-						this.addTextSlider( elementsJson[i] );
+							me.addTextSlider( elementsJson[i] );
 
-					} else {
+						} else {
 
-						this.addInput( elementsJson[i] );
+							me.addInput( elementsJson[i] );
 
+						}
 					}
-				}
+				}, 100 );
 			}
 
 			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
-				this.getDefaultFormActions();
+				me.getDefaultFormActions();
 			}
 			else {
 				// Load currently existing form actions.
-				var actionsJson;
 				try {
 					actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
 				} catch(err) {
 					actionsJson = this.model.get( 'config' ).formActions.toJSON();
 				}
+				console.log('=== actionsJson ===');
+				console.log(actionsJson);
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
 
-				var hasDocusign	= false,
-					hasPost		= false,
-					hasEmail	= false;
-				for ( var i = 0; i < actionsJson.length; i++ ) {
-					var action = actionsJson[i];
-					if ( action.method == 'docusign' ) {
-						this.docusign = this.addDocusignAction( null, action );
-						hasDocusign = true;
+				// setTimeout( function() { 
+					var hasDocusign	= false,
+						hasPost		= false,
+						hasEmail	= false;
+					for ( var i = 0; i < actionsJson.length; i++ ) {
+						var action = actionsJson[i];
+						if ( action.method == 'docusign' ) {
+							me.docusign = me.addDocusignAction( null, action );
+							hasDocusign = true;
+						}
+						else if ( action.method == 'post' ) {
+							me.addPostAction( null, action );
+							hasPost = true;
+						}
+						else if ( action.method == 'email' ) {
+							me.addEmailAction( null, action );
+							hasEmail = true;
+						}
 					}
-					else if ( action.method == 'post' ) {
-						this.addPostAction( null, action );
-						hasPost = true;
+
+					// If we don't have some of the actions, we should add them.
+					// if ( !hasDocusign ) {
+					// 	me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
+					// }
+
+					if ( !hasPost ) {
+						me.addPostAction( null, { method: 'post' } );
 					}
-					else if ( action.method == 'email' ) {
-						this.addEmailAction( null, action );
-						hasEmail = true;
+
+					if ( !hasEmail ) {
+						me.addEmailAction( null, { method: 'email' } );
 					}
-				}
-
-				// If we don't have some of the actions, we should add them.
-				if ( !hasDocusign ) {
-					this.docusign = this.addDocusignAction( null, { method: 'docusign' } );
-				}
-
-				if ( !hasPost ) {
-					this.addPostAction( null, { method: 'post' } );
-				}
-
-				if ( !hasEmail ) {
-					this.addEmailAction( null, { method: 'email' } );
-				}
+				// }, 100);
 			}
 
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
@@ -121,6 +129,8 @@ wxApp = wxApp || {};
 
 			// Call parent's initialize() function
 			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
+
+			console.log( 'formbuilder.edit', this.model );
 		},
 
 		validate: function() {
@@ -153,19 +163,10 @@ wxApp = wxApp || {};
 		getDefaultFormActions: function() {
 			
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			var post = new wxApp.FormBuilderAction();
-			post.set( { method: 'post' } );
-			var email = new wxApp.FormBuilderAction();
-			email.set( { method: 'email' } );
-			// var docusign = new wxApp.FormBuilderAction();
-			// docusign.set( { method: 'docusign' } );
-
-			this.model.get( 'config' ).formActions.push( post );
-			this.model.get( 'config' ).formActions.push( email );
-			// this.model.get( 'config' ).formActions.push( docusign );
-
-			this.addPostAction( post );
-			this.addEmailAction( email );
+			if ( this.model.get( 'config' ).advanced ) {
+				this.addPostAction( null );
+			}
+			this.addEmailAction( null );
 			// this.docusign = this.addDocusignAction( docusign );
 
 		},
@@ -203,7 +204,6 @@ wxApp = wxApp || {};
 
 		events: {
 			
-			'change .switch-advanced'                        : 'toggleAdvancedMode',
 			'click .wx-form-builder-add-text-input'          : 'addTextInput',
 			'click .wx-form-builder-add-password-input'      : 'addPasswordInput',
 			'click .wx-form-builder-add-date-input'          : 'addDateInput',
@@ -223,56 +223,53 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-text-range-input'    : 'addTextRangeInput',
 			'click .wx-form-builder-add-select'              : 'addSelect',
 			'click .wx-form-builder-add-info'                : 'addInfo',
-			'click .wx-form-builder-add-signature'           : 'addSignature',
-			'keyup .button-text'                             : 'updateButtonText',
+			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
+			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
+			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
+			'change .wx-form-builder-send-current-user-email': 'toggleSendEmailAddress',
+			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
-			'click .wx-close-button'                         : 'closePopup'
+//			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
+			'click .wx-close-button'                         : 'closeConfirmation',
+			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
+
 		},
 
-		toggleAdvancedMode: function( ev ) {
-
-			var advanced = $( ev.currentTarget ).attr('id') === 'on',
-			    formElements = this.model.get( 'config' ).formElements;
-
-			// Set the 'advanced' flag on all the models.
-			for (var i = 0; i < formElements.length; i++) {
-				var model = formElements.models[i];
-				model.set('advanced', advanced);
-			};
-
-			// Re-render all of the controls
-			if ( this.controls ) {
-				for (var i = 0; i < this.controls.length; i++) {
-					this.controls[i].render();
-				};
-			}
-
-			// Add or show the Custom POST form action.
-			if ( advanced ) {
-
-				if ( this.$('.wx-form-builder-row.post').length ) {
-
-					// POST action already exists; Show it.
-					this.$('.wx-form-builder-row.post').show();
-					this.$('.wx-form-builder-row.email').show();
-				}
-				else {
-
-					// Custom form actions don't exist; Add them.
-					this.getDefaultFormActions();
-				}
+		toggleSendEmailAddress: function( ev ) {
+			console.log( $( ev.currentTarget ).is( ':checked' ) );
+			var $target = $( ev.currentTarget );
+			var $input = $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
+			if ( $target.is( ':checked' ) ) {
+				$input.val( wx.currentUserEmail );
 			}
 			else {
-
-				// Hide the POST action.
-				this.$('.wx-form-builder-row.post').hide();
-				this.$('.wx-form-builder-row.email').hide();
+				$input.val( '' );
 			}
+
 		},
 
-		updateButtonText: function( ev ) {
+		/**
+		 * Sets the active preview element based on the index of the active accordion element
+		 * @param ev Click event or accordion element
+		 */
+		setActivePreviewElement: function( ev ) {
+			var $target = null;
+			if ( typeof ev.currentTarget != 'undefined' ) {
+				$target = $( ev.currentTarget );
+			}
+			else {
+				$target = ev;
+			}
+			var $precedingSiblings = $target.prevAll();
+			var oneBasedSiblingIndex = $precedingSiblings.length + 1;
+			console.log( oneBasedSiblingIndex );
+			$( '.wx-preview-form > .wx-form-preview-row' ).removeClass( 'active' );
+			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
+		},
+
+		updateSubmitButtonText: function( ev ) {
 			var $text = $( ev.currentTarget );
-			this.model.set( 'buttonText', $text.val() );
+			this.model.get( 'config' ).submitButtonText = $text.val();
 
 			// Update in the preview panel.
 			$('.wx-validate-feed.panel button.success').text( $text.val() );
@@ -312,7 +309,6 @@ wxApp = wxApp || {};
 		 * Override __super__.finish()
 		 */
 		finish: function() {
-			console.log( 'subtab.formbuilder.edit finish' );
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
 				formActions = this.model.get( 'config' ).formActions,
@@ -350,6 +346,11 @@ wxApp = wxApp || {};
 				}
 			}
 
+			// Removal of the file index association prompt
+			// @TODO: Make the file index association prompt clearer or something
+			wxApp.SubTabEditView.prototype.finish.apply( this );
+			return;
+
 			// Call super and exit if an index has already been identified
 			if ( ! hasUpload || typeof this.model.get( 'config' ).idFieldIndex == 'number' ) {
 				wxApp.SubTabEditView.prototype.finish.apply( this );
@@ -378,7 +379,10 @@ wxApp = wxApp || {};
 				action = this.addCustomAction( properties );
 			}
 			else {
-				action = this.addCustomAction( { method : 'docusign' } );
+				action = this.addCustomAction( {
+					method : 'docusign',
+					allowDemoMode: this.model.get( 'config' ).allowDemoMode
+				} );
 			}
 			return action;
 		},
@@ -410,21 +414,29 @@ wxApp = wxApp || {};
 		},
 
 		addCustomAction: function( customAction ) {
-			var action = new wxApp.FormBuilderAction();
+			var action = new wxApp.FormBuilderAction(),
+			    me = this;
+
 			if ( typeof customAction == 'object' ) {
 				action.set( customAction );
 			}
 
-			var actionView = new wxApp.FormBuilderActionView({
-				model: action
-			});
-			this.$( '#form-settings-accordion' ).append( actionView.render().el );
+			if ( wx.formbuilderAdvanced ) {
+				var actionView = new wxApp.FormBuilderActionView({
+					model: action
+				});
+
+				setTimeout(function() {
+					me.$( '#form-settings-accordion' ).append( actionView.render().el );
+				}, 100);
+			}
 
 			this.model.get( 'config' ).formActions.push( action );
 			return action;
 		},
 
 		addInput: function( properties ) {
+
 			var mainProperties = {};
 			var attributes = {};
 			for ( var propKey in properties ) {
@@ -443,7 +455,7 @@ wxApp = wxApp || {};
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
-
+			
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
@@ -477,8 +489,6 @@ wxApp = wxApp || {};
 				model: input
 			});
 
-			console.log( input );
-
 			this.addControl( input, inputView );
 
 			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
@@ -487,12 +497,14 @@ wxApp = wxApp || {};
 			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
 			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
 
+			this.scrollIntoView( inputView );
+
 			return input;
 		},
 
 		addDateInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date',
 				attributes: {
 					type: 'date'
@@ -502,7 +514,7 @@ wxApp = wxApp || {};
 
 		addDateTimeLocalInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date / Time',
 				attributes: {
 					type: 'datetime-local'
@@ -512,7 +524,7 @@ wxApp = wxApp || {};
 
 		addEmailInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Email',
 				showPlaceholder: true,
 				multiClass: '',
@@ -524,7 +536,7 @@ wxApp = wxApp || {};
 
 		addFileInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'File upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -537,7 +549,7 @@ wxApp = wxApp || {};
 
 		addPhotoInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Photo upload',
 				multiClass: '',
 				autocompleteClass: 'hide',
@@ -550,7 +562,7 @@ wxApp = wxApp || {};
 
 		addMonthInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Month',
 				attributes: {
 					type: 'month'
@@ -560,7 +572,7 @@ wxApp = wxApp || {};
 
 		addNumberInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
 				minClass: '',
 				maxClass: '',
@@ -574,7 +586,7 @@ wxApp = wxApp || {};
 
 		addPasswordInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Password',
 				showPlaceholder: true,
 				attributes: {
@@ -585,7 +597,7 @@ wxApp = wxApp || {};
 
 		addRangeInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Range',
 				minClass: '',
 				maxClass: '',
@@ -599,7 +611,7 @@ wxApp = wxApp || {};
 
 		addTextRangeInput: function(ev) {
 			this.addTextSlider({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Select One',
 				type: 'textSlider',
 				attributes: {
@@ -610,7 +622,7 @@ wxApp = wxApp || {};
 
 		addTelInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Telephone',
 				type: 'tel',
 				showPlaceholder: true,
@@ -622,7 +634,7 @@ wxApp = wxApp || {};
 
 		addTextInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Untitled',
 				type: 'text',
 				showPlaceholder: true,
@@ -634,7 +646,7 @@ wxApp = wxApp || {};
 
 		addTimeInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Time',
 				attributes: {
 					type: 'time'
@@ -644,7 +656,7 @@ wxApp = wxApp || {};
 
 		addUrlInput: function(ev) {
 			this.addInput({
-				controlTitle: $(ev.currentTarget).text(),
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'URL',
 				showPlaceholder: true,
 				attributes: {
@@ -655,8 +667,19 @@ wxApp = wxApp || {};
 
 		addInfo: function( ev ) {
 			this.addInfoWithProperties( { 
-				controlTitle: $(ev.currentTarget).text() 
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim() 
 			} );
+		},
+
+		addPagebreak: function( ev ) {
+			var pagebreak = new wxApp.FormBuilderControl( {
+				control: 'pagebreak',
+				controlTitle: 'Page Break'
+			} );
+			var pagebreakView = new wxApp.FormBuilderControlPagebreakView({
+				model: pagebreak
+			});
+			this.addControl( pagebreak, pagebreakView );
 		},
 
 		addInfoWithProperties: function( properties ) {
@@ -669,23 +692,23 @@ wxApp = wxApp || {};
 			this.addControl( info, infoView );
 		},
 
-		addSignature: function( ev ) {
-			this.addSignatureWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+		addDocusignSignature: function( ev ) {
+			this.addDocusignSignatureWithProperties( {
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
-		addSignatureWithProperties: function( properties ) {
+		addDocusignSignatureWithProperties: function( properties ) {
 
-			var signature = new wxApp.FormBuilderControlSignature( properties ),
-			    sigView   = new wxApp.FormBuilderControlSignatureView({ model: signature });
+			var signature = new wxApp.FormBuilderControlDocusignSignature( properties ),
+			    sigView   = new wxApp.FormBuilderControlDocusignSignatureView({ model: signature });
 
 			this.addControl( signature, sigView );
 		},
 
 		addTextarea: function(ev) {
 			this.addTextareaWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -703,7 +726,7 @@ wxApp = wxApp || {};
 
 		addRadioGroup: function(ev) {
 			this.addRadioGroupWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -741,14 +764,15 @@ wxApp = wxApp || {};
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
 			}
-			
+
+			this.scrollIntoView( radioFieldsetView );
 			// radioFieldsetView.getPreview().render();
 			// this.model.get( 'config' ).formElements.push( radioFieldset );
 		},
 
 		addCheckboxGroup: function(ev) {
 			this.addCheckboxGroupWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -783,6 +807,8 @@ wxApp = wxApp || {};
 				};
 			}
 
+			this.scrollIntoView( checkboxFieldsetView );
+
 			// this.model.get( 'config' ).formElements.push( checkboxFieldset );
 		},
 
@@ -798,7 +824,7 @@ wxApp = wxApp || {};
 		 */
 		addSelect: function(ev) {
 			this.addSelectWithProperties( {
-				controlTitle: $(ev.currentTarget).text()
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 		},
 
@@ -833,13 +859,20 @@ wxApp = wxApp || {};
 					select.get('optionGroup').add( optionModel );
 				};
 			}
+
+			this.scrollIntoView( selectView );
 		},
 
 		addControl: function( input, view ) {
 
-			var count = this.model.get( 'config' ).formElements.length;
+			var config   = this.model.get( 'config' ),
+			    count    = config.formElements.length,
+			    advanced = config.advanced || false;
+			
 			count++;
 			input.set( 'ordinal', count );
+
+			input.set( 'advanced', advanced );
 
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
@@ -850,11 +883,16 @@ wxApp = wxApp || {};
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('section', 'reflow');
 
-			// Now scroll down to it, if possible
-			if ( $('.wx-form-builder-row.active').length ) {
-				var offset = $('.wx-form-builder-row.active').offset().top - 230;
-				$('body').animate({scrollTop: offset}, 250);
-			}
+			// Now show the edit tab.
+			$('#formbuilder-edit-tab').parent()
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500)
+				.animate({backgroundColor: '#ffffc0'}, 1500)
+				.animate({backgroundColor: '#efefef'}, 1500);
 
 			// Add the view to the Controls array.
 			if ( !this.controls ) {
@@ -868,13 +906,37 @@ wxApp = wxApp || {};
 			}
 			this.previews.push( view.getPreview() );
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
+
+			this.scrollIntoView( view );
+
+			console.log( 'addControl' );
+			console.log( this.model.get( 'config' ) );
 		},
 
-		closePopup: function() {
-			var ok = confirm( "Are you sure you want to cancel?" );
+		confirmClosePopup: function( e ) {
+			e.preventDefault();
+			var ok = confirm( 'Are you sure you want to cancel?  Your changes have not been saved.' );
+			console.log( ok );
+			if ( ! ok ) {
+				e.stopImmediatePropagation();
+				return false;
+			}
+		},
+
+		closeConfirmation: function() {
+			var ok = confirm( "Are you sure you want to cancel?  Your changes have not been saved." );
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}
+		},
+
+		/**
+		 * @todo animate via https://github.com/Arwid/jQuery.scrollIntoView
+		 * @param view
+		 */
+		scrollIntoView: function( view ) {
+			view.el.scrollIntoView( false );
+			this.setActivePreviewElement( view.$el );
 		}
 
 	});

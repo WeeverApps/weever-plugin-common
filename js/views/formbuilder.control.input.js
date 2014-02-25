@@ -25,7 +25,7 @@ wxApp = wxApp || {};
 
 			if ( this.firstRender ) {
 				// Focus on the label the first time you render this control.
-				setTimeout( function() { this.$('.wx-form-builder-label-input').focus(); console.log('focused'); }, 1);
+				setTimeout( function() { this.$('.wx-form-builder-label-input').focus(); }, 1);
 				this.firstRender = false;
 			}
 
@@ -45,16 +45,18 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
+			console.log('render preview');
 			var model = this.model.toJSON();
+			console.log( model );
 			this.$el.html( this.inputTpl( model ) );
-			if ( model.attributes.attributes.min )
-				this.$('input').attr('min', model.attributes.attributes.min );
-			if ( model.attributes.attributes.max )
-				this.$('input').attr('max', model.attributes.attributes.max );
-			if ( model.attributes.attributes.step )
-				this.$('input').attr('step', model.attributes.attributes.step );
-			if ( model.attributes.attributes.value )
-				this.$('input').attr('value', model.attributes.attributes.value );
+			if ( model.attributes.min )
+				this.$('input').attr('min', model.attributes.min );
+			if ( model.attributes.max )
+				this.$('input').attr('max', model.attributes.max );
+			if ( model.attributes.step )
+				this.$('input').attr('step', model.attributes.step );
+			if ( model.attributes.value )
+				this.$('input').attr('value', model.attributes.value );
 			return this;
 		}
 	});

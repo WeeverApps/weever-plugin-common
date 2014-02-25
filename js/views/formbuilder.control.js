@@ -24,7 +24,16 @@ wxApp = wxApp || {};
 			// 'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-required': 'setRequired',
 			'click .wx-form-builder-delete': 'deleteControl',
+			'focus .wx-form-builder-select-option-text': 'selectInputText',
+			'focus .wx-form-builder-label-input': 'selectInputText',
+			'focus .wx-form-builder-text-input': 'selectInputText',
 			'sortable-drop': 'sortableDrop'
+		},
+
+		selectInputText: function( ev ) {
+			setTimeout( function() {
+				ev.currentTarget.select();
+			}, 1 );
 		},
 
 		sortableDrop: function( event, index ) {
@@ -66,7 +75,7 @@ wxApp = wxApp || {};
 
 			// Backbone doesn't notice when attributes are changed, so we 
 			// have to trigger a change even manually.
-			this.model.get( 'attributes' ).set( 'placeholder', $me.val() );
+			this.model.get('attributes').set('placeholder', $me.val());
 			this.model.trigger('change');
 		},
 

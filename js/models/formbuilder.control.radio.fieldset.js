@@ -11,7 +11,7 @@ wxApp = wxApp || {};
 			control: 'radiofieldset',
 			title: 'Select a choice',
 			allowAdditional: '',
-			allowAdditionalClass: '',
+			allowAdditionalClass: 'hide',
 			requiredClass: '',
 			name: ''
 		},

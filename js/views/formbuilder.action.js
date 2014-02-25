@@ -20,6 +20,7 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
 			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
 			'click .radio-mode'                        : 'updateMode',
+			'change .wx-form-builder-docusign-demomode': 'toggleDemoMode'
 			// 'click #docusignLogin'                     : 'showLogin',
 			// 'click #docusignCreate'                    : 'showCreateAccount',
 			// 'click #docusignChangePassword'            : 'showChangePassword',
@@ -43,12 +44,24 @@ wxApp = wxApp || {};
 			}
 			var $template = $( tplSelector );
 			this.tpl = _.template( $template.html() );
+			console.log( 'action init', this );
 		},
 
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			this.$el.addClass( this.model.get( 'method' ) );
 			return this;
+		},
+
+		toggleDemoMode: function( ev ) {
+
+			if ( $( ev.currentTarget ).is( ':checked' ) ) {
+				this.model.set( 'demomode', true );
+			}
+			else {
+				this.model.unset( 'demomode' );
+			}
+
 		},
 
 		updateUsername: function( ev ) {
@@ -139,7 +152,7 @@ wxApp = wxApp || {};
 
 			var params = { username: username, password: password };
 			if ( true ) params.demo = 1;	// TODO - Remove this.
-			wx.makeApiCall('_docusign/clientLogin', params, success, failure);
+			wx.makeApiCall('_docusign/client_login', params, success, failure);
 		},
 
 		createAccount: function() {
@@ -161,7 +174,7 @@ wxApp = wxApp || {};
 				delete account.errors;
 				if ( true ) account.demo = 1;	// TODO - Remove this.
 
-				wx.makeApiCall( '_docusign/createAccount', account, success, failure );
+				wx.makeApiCall( '_docusign/create_account', account, success, failure );
 			}
 			else {
 
@@ -208,7 +221,7 @@ wxApp = wxApp || {};
 
 				var params = { username: username, password: oldPassword, newPassword: newPassword, question1: question1, answer1: answer1 };
 				if ( true ) params.demo = 1;	// TODO - Remove this.
-				wx.makeApiCall('_docusign/changePassword', params, success, failure);
+				wx.makeApiCall('_docusign/change_password', params, success, failure);
 			}
 		},
 

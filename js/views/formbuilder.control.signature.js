@@ -2,9 +2,44 @@
 wxApp = wxApp || {};
 
 (function($){
-	wxApp.FormBuilderControlSignatureView = wxApp.FormBuilderControlView.extend({
-		tplSelector: '#form-builder-signature',
+	wxApp.FormBuilderControlDocusignSignatureView = wxApp.FormBuilderControlView.extend({
+		tplSelector: '#form-builder-docusign-signature',
 		preview: null,
+
+		events: function() {
+			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'change [name="wx-form-builder-docusign-label-option"]': 'labelOption'
+			});
+		},
+
+		labelOption: function( ev ) {
+
+			var option = this.model.get( 'labelOption' ),
+				$ev = $( ev.currentTarget ),
+				val = $ev.val(),
+				valArray = val.split( '-' ),
+				verb = valArray.shift(),
+				field = valArray.shift(),
+				fieldIndex = option.fields.indexOf( field );
+
+			if ( $ev.is( ':checked' ) ) {
+				option.verb = verb;
+				if ( fieldIndex === -1 ) {
+					option.fields.push( field );
+				}
+			}
+			else {
+				if ( fieldIndex !== -1 ) {
+					option.fields.splice( fieldIndex, 1 );
+				}
+				if ( option.fields.length === 0 ) {
+					option.verb = '';
+				}
+			}
+
+			this.model.set( 'labelOption', option );
+
+		},
 
 		initialize: function() {
 			var $template = $( this.tplSelector );
@@ -27,19 +62,19 @@ wxApp = wxApp || {};
 
 		getPreview: function() {
 			if ( this.preview === null ) {
-				this.preview = new wxApp.FormBuilderControlSignaturePreview({ model: this.model });
+				this.preview = new wxApp.FormBuilderControlDocusignSignaturePreview({ model: this.model });
 			}
 			return this.preview;
 		}
 
 	});
 
-	wxApp.FormBuilderControlSignaturePreview = Backbone.View.extend({
+	wxApp.FormBuilderControlDocusignSignaturePreview = Backbone.View.extend({
 		tagName: 'div',
 		className: 'wx-form-preview-row',
 
 		initialize: function() {
-			var selector = '#form-builder-signature-preview';
+			var selector = '#form-builder-docusign-signature-preview';
 			var $template = $( selector );
 			this.inputTpl = _.template( $template.html() );
 			this.model.bind('change', this.render, this);

@@ -8,6 +8,7 @@ var wxApp = wxApp || {};
 
         getModelNameByTabData: function( tabData ) {
             var retVal = 'SubTab';
+            
             // TODO: Call a function in each model to see if the type/content matches
             switch ( tabData.content ) {
                 case 'contact':
@@ -20,10 +21,19 @@ var wxApp = wxApp || {};
                     retVal = 'FlickrSubTab';
                     break;
                 case 'formbuilder':
-                    retVal = 'FormBuilderSubTab';
+                    // Ugh... It's a string, not a bool.
+                    console.log( 'isDocuSign' );
+                    console.log( tabData.config.isDocuSign );
+                    if ( tabData.config.isDocuSign == 'true' )
+                        retVal = 'DocuSignSubTab';
+                    else
+                        retVal = 'FormBuilderSubTab';
                     break;
                 case 'htmlPage':
-                    retVal = 'WordpressPageSubTab';
+                    if ( tabData.config && tabData.config.subtab_name )
+                        retVal = tabData.config.subtab_name;
+                    else
+                        retVal = 'WordpressPageSubTab';
                     break;
                 case 'twitter':
                 case 'twitterUser':

@@ -1,0 +1,109 @@
+<script type="text/template" id="wordpressaddpage-subtab-edit-template">
+
+	<section class="editor">
+		<div class="row collapse">
+	    	<div class="large-12 columns">
+			    <p>Add new content to your app.</p>
+
+			    <label for='wx-title-value' id='wx-title-value-label'>Article Title:</label>
+			    <input type='text' value='<%- title %>' class='wx-edit-input' name='component_behaviour' placeholder='' id='wx-title-value' />
+
+			    <textarea class="wx-content-editor"></textarea>
+		    </div>
+	    </div>
+
+        <br>
+
+	    <div class="row">
+	    	<div class="large-12 columns">
+	    		<div data-alert id="wx-smx-not-allowed" class="alert-box alert" style="display: none">
+		            <p><strong>This feature requires an SMS messaging subscription</strong></p>
+	        		<p>You&apos;ll need to <a href="https://weeverapps.com/sms/?site_url=<%- wxApp.account.get('site').replace('http://', '').replace('https://', '') %>" target="_BLANK">upgrade your subscription</a> to add this feature.</p>
+		            <a href="#" class="close">&times;</a>
+		        </div>
+	    	</div>
+    	</div>
+
+    	<div class="row">&nbsp;</div>
+
+	    <!--<div class="row">
+	    	<div class="large-12 columns">
+			    <button class="wx-add-sms">
+			    	Add SMS Form
+			    </button>
+
+			    <button class="wx-add-coupon">
+			    	Add Coupon
+			    </button>
+			</div>
+	    </div>-->
+    </section>
+
+    <section class="coupon">
+		<div class="coupon-preview item-page">
+			<div>
+				<div class="wx-coupon-container"">
+					<div class="wx-coupon-preview">
+						<div class="wx_title_preview" style="font-size: 2em; line-height: 1; font-weight: bold; padding: .46875em; background: <%- config.titleBackgroundColor %>; color: <%- config.titleTextColor %>">
+							<span id="wx_coupon_title_preview"><%- title || 'Coupon Title' %></span></div>
+						<p style="margin: .9375em">
+							<span id="wx_coupon_content_preview" style="text-align:center">
+								<%- config.description || 'EXAMPLE: Shop anytime in the next 30 days and receive up to 25% off' %>
+							</span>
+						</p>
+						<div id="wx_coupon_barcode_preview"></div>
+						<div>
+							<p id="wx_coupon_conditions_preview" style="font-size: .875em; margin: 15px 0 0; border-style: solid; border-width: 1px 0 0 0; border-color: #ccc; padding-top: 15px;">
+								<%- config.terms || 'EXAMPLE: Limit One Coupon Per Customer' %>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <br>
+        <br>
+
+	    <label>Coupon title</label>
+	    <input type="text" placeholder="Coupon Title" class="wx-coupon-title" value="<%- title %>" />
+
+        <br>
+
+	    <label>Coupon description</label>
+	    <textarea placeholder="EXAMPLE: Shop anytime in the next 30 days and receive up to 25% off" class="wx-coupon-description"><%- config.description %></textarea>
+
+        <br>
+
+	    <label>Optional. Add a scannable bar code (rendered on save)</label>
+	    <input type="text" placeholder="2014-30DaySale" class="wx-coupon-barcode" value="<%- config.barcode %>" />
+
+        <br>
+
+	    <label>Optional. Terms and conditions</label>
+	    <input type="text" placeholder="EXAMPLE: Limit One Per Customer" class="wx-coupon-terms" value="<%- config.terms %>" />
+
+        <br>
+
+	    <!-- not working, removed for now -->
+        <!-- <label>Coupon Colour Options:</label> -->
+    </section>
+
+    <section class="mapper">
+        <label for='geolocation-address'>Street address or map coordinates</label>
+        <div class="row collapse">
+            <div class="large-8 columns">
+                <input type="text" id="geolocation-address" autocomplete="off" value="" />
+            </div>
+            <div class="large-4 columns">
+                <button id="geolocation-load" class="button expand small secondary geolocationadd">Set location</button>
+            </div>
+        </div>
+	    <input type="hidden" id="geolocation-latitude"  />
+	    <input type="hidden" id="geolocation-longitude" />
+        <div id="map" class="geolocation-map"></div>
+        <br>
+        <br>
+    </section>
+
+</script>

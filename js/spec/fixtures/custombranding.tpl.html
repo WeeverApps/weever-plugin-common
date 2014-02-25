@@ -15,7 +15,7 @@
 		// Here, we disgustingly load a PHP object in a view. Ugh. I'm sorry.
 		// Luckily, this is the only "backbone" file this monstrosity is in.
 		// May god have mercy on my soul. 
-		if (! $weeverapp ) {
+		if (! isset( $weeverapp )) {
 			$weeverapp = new WeeverApp();
 		}
 	?>
@@ -29,7 +29,7 @@
 			<p>Loading spinner text:</p>
 			<textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="Powered By..."><%- loadspinner.text %></textarea>
 			<button class="button success radius" id="save_load_spinner">Save</button>
-			<img id="save_load_spinner_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+			<img id="save_load_spinner_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
 		</div>
 	<?php endif; ?>
 
@@ -53,7 +53,7 @@
 				<a href="#" onclick="return false;" id="save_domain" class="button postfix success radius">Save</a>
 			</div>
 			<div class="small-2 columns loading">
-				<img id="wx-domain-map-input_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+				<img id="wx-domain-map-input_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
 			</div>
 		</div>
 

@@ -23,8 +23,19 @@ var wxApp = wxApp || {};
 
 (function($){
     wx.makeApiCall = function(endpoint, paramsObj, successCallback, failureCallback, datatype) {
+
+	    /**
+	     * API v3 exceptions
+	     */
+	    var apiUrl = '';
+	    if ( endpoint.indexOf( '_docusign' ) === 0 ) {
+		    apiUrl = wx.liveUrl + 'api/v3/' + endpoint + '?app_key=' + wx.siteKey;
+	    }
+	    else {
+		    apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
+	    }
+
 		var method = 'POST', data = '';
-        var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
         var queryStr = [];
         datatype = datatype || 'json';
 
@@ -44,6 +55,7 @@ var wxApp = wxApp || {};
                 wx.apiSuccess( v, successCallback, failureCallback );
             },
             error: function(v, message) {
+	            console.log( 'error' );
                 // Sometimes the call appears to be an error because we get PHP
                 // warnings prior to the JSON. Let's make sure that didn't happen.
                 if ( v.responseText[0] !== '{' ) {
