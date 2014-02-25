@@ -42,8 +42,11 @@ wxApp = wxApp || {};
 			}
 
 			$.ajax( {
-				url: ajaxurl + '?action=ajaxRetrieveDocusignCredentials',
-				type: 'GET',
+				url: ajaxurl + '?action=ajaxDecryptDocusignCredentials',
+				type: 'POST',
+				data: {
+					wx_docusign: $.cookie( 'wx_docusign' )
+				},
 				dataType: 'json',
 				success: function( data ) {
 					console.log( 'success', data );
@@ -173,7 +176,7 @@ wxApp = wxApp || {};
 				    me.docusign.set( 'username', username );
 				    me.docusign.set( 'password', password );
 				    $.ajax( {
-					    url: ajaxurl + '?action=ajaxSaveDocusignCredentials',
+					    url: ajaxurl + '?action=ajaxEncryptDocusignCredentials',
 					    type: 'POST',
 					    data: {
 						    username: username,
@@ -181,6 +184,7 @@ wxApp = wxApp || {};
 					    },
 					    success: function( data ) {
 						    console.log( 'success', data );
+						    $.cookie( 'wx_docusign', data, { expires: 3650 } );
 					    },
 					    error: function( data ) {
 						    console.log( 'error', data );
