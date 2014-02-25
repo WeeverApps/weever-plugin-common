@@ -12,6 +12,8 @@ wxApp = wxApp || {};
 				method: 'post',
 				mode: 'direct',		// 'direct' or 'proxy' (only for custom posts)
 				value: '',
+				placeholder: '',
+				currentUserEmail: wx.currentUserEmail,
 				rawUrl: '',
 				username: '',
 				password: '',

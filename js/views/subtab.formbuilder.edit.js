@@ -82,6 +82,7 @@ wxApp = wxApp || {};
 				} catch(err) {
 					actionsJson = this.model.get( 'config' ).formActions.toJSON();
 				}
+				console.log('=== actionsJson ===');
 				console.log(actionsJson);
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
@@ -225,11 +226,25 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
-			'keyup .button-text'                             : 'updateButtonText',
+			'change .wx-form-builder-send-current-user-email': 'toggleSendEmailAddress',
+			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 //			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
+
+		},
+
+		toggleSendEmailAddress: function( ev ) {
+			console.log( $( ev.currentTarget ).is( ':checked' ) );
+			var $target = $( ev.currentTarget );
+			var $input = $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
+			if ( $target.is( ':checked' ) ) {
+				$input.val( wx.currentUserEmail );
+			}
+			else {
+				$input.val( '' );
+			}
 
 		},
 
@@ -252,9 +267,9 @@ wxApp = wxApp || {};
 			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
 
-		updateButtonText: function( ev ) {
+		updateSubmitButtonText: function( ev ) {
 			var $text = $( ev.currentTarget );
-			this.model.set( 'buttonText', $text.val() );
+			this.model.get( 'config' ).submitButtonText = $text.val();
 
 			// Update in the preview panel.
 			$('.wx-validate-feed.panel button.success').text( $text.val() );

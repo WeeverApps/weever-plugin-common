@@ -1,5 +1,5 @@
 <script type="text/template" id="formbuilder-subtab-edit-template">
-    <% if ( config.isDocuSign ) { %>
+    <% if ( config.isDocuSign.toString() == 'true' ) { %>
         <!-- start: formbuilder step one - DocuSign Login / Account Info -->
         <div class="form-builder-step-one">
             <!-- start: left col -->
@@ -188,19 +188,19 @@
 
                     <label>
                         Document Title
-                        <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader.title %>" />
+                        <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader ? docusign.pdfHeader.title : '' %>" />
                     </label>
                     <label>
                         Business Name
-                        <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- docusign.pdfHeader.line1 %>" />
+                        <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- docusign.pdfHeader ? docusign.pdfHeader.line1 : '' %>" />
                     </label>
                     <label>
                         Address line one
-                        <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- docusign.pdfHeader.line2 %>" />
+                        <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- docusign.pdfHeader ? docusign.pdfHeader.line2 : '' %>" />
                     </label>
                     <label>
                         Address line two
-                        <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader.line3 %>" />
+                        <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader ? docusign.pdfHeader.line3 : '' %>" />
                     </label>
 
                     <br>
@@ -258,7 +258,7 @@
     <% } %>
 
     <!-- start: formbuilder step two -->
-    <div class="form-builder-step-two" <% if ( config.isDocuSign ) { %>style="display: none;" <% } %>>
+    <div class="form-builder-step-two" <% if ( config.isDocuSign.toString() == 'true' ) { %>style="display: none;" <% } %>>
         <div class="large-12 columns">
             <div>
                 <h2><%- typeDescription %></h2>
@@ -555,7 +555,7 @@
 								</span>
 							</button>
 						</li>
-                        <% if ( config.isDocuSign ) { %>
+                        <% if ( config.isDocuSign.toString() == 'true' ) { %>
                             <li>
                                 <button class="tiny expand radius wx-form-builder-add-docusign-signature">
                                     <div class="wx-button-label">DocuSign eSignature</div>
@@ -595,7 +595,7 @@
             </div>
 
             <!-- start: form settings -->
-			<% if ( ! config.isDocuSign || config.advanced || config.allowDemoMode ) { %>
+			<% if ( ! config.isDocuSign.toString() == 'true' || config.advanced || config.allowDemoMode ) { %>
             <p class="wx-ui-title">Form submission settings</p>
 
             <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
@@ -605,7 +605,11 @@
                     <div class="content" data-section-content>
 
                         <label>Change the label text used for your form&apos;s submit button</label>
-                        <input type="text" class="button-text" value="<%- buttonText %>" />
+                        <input type="text"
+							   class="submit-button-text"
+							   value="<%- config.submitButtonText %>"
+							   <% if ( config.isDocuSign.toString() == 'true' ) print( ' readonly ' ) %>
+						/>
                         <!-- fix for last-child bug in foundation -->
                     </div>
                 </section>
@@ -632,7 +636,7 @@
                             <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
                             <div class="wx-preview-form"></div>
                             <br/>
-                            <button class="success radius"><%- buttonText %></button>
+                            <button class="success radius"><%- config.submitButtonText %></button>
                             <br/><br/>
                         </div>
                     </div>
