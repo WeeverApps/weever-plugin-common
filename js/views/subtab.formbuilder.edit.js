@@ -82,6 +82,7 @@ wxApp = wxApp || {};
 				} catch(err) {
 					actionsJson = this.model.get( 'config' ).formActions.toJSON();
 				}
+				console.log('=== actionsJson ===');
 				console.log(actionsJson);
 
 				this.model.get( 'config' ).formActions = new Backbone.Collection();
