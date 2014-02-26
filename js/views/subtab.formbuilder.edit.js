@@ -161,12 +161,14 @@ wxApp = wxApp || {};
 		},
 
 		getDefaultFormActions: function() {
-			
 			this.model.get( 'config' ).formActions = new Backbone.Collection();
-			if ( this.model.get( 'config' ).advanced ) {
+			if ( this.model.get( 'advancedMode' ) ) {
 				this.addPostAction( null );
 			}
-			this.addEmailAction( null );
+			if ( ( ! this.model.get( 'config' ).isDocuSign ) ||
+				this.model.get( 'advancedMode' ) ) {
+				this.addEmailAction( null );
+			}
 			// this.docusign = this.addDocusignAction( docusign );
 
 		},
@@ -421,15 +423,13 @@ wxApp = wxApp || {};
 				action.set( customAction );
 			}
 
-			if ( wx.formbuilderAdvanced ) {
-				var actionView = new wxApp.FormBuilderActionView({
-					model: action
-				});
+			var actionView = new wxApp.FormBuilderActionView({
+				model: action
+			});
 
-				setTimeout(function() {
-					me.$( '#form-settings-accordion' ).append( actionView.render().el );
-				}, 100);
-			}
+			setTimeout(function() {
+				me.$( '#form-settings-accordion' ).append( actionView.render().el );
+			}, 100);
 
 			this.model.get( 'config' ).formActions.push( action );
 			return action;

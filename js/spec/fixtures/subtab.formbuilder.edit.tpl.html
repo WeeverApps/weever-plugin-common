@@ -591,7 +591,11 @@
             </div>
 
             <!-- start: form settings -->
-			<% if ( ! config.isDocuSign.toString() == 'true' || config.advanced || config.allowDemoMode ) { %>
+			<% if (
+				( config.isDocuSign.toString() != 'true' ) ||
+				( config.isDocuSign.toString() == 'true' && config.allowDemoMode ) ||
+				advancedMode
+				) { %>
             <p class="wx-ui-title">Form submission settings</p>
 
             <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
@@ -611,6 +615,11 @@
                 </section>
             </div>
 			<% } %>
+
+			<div>
+				<label>Title for this feature inside your app</label>
+				<input type="text" value="<%- title %>" class="wx-edit-title" />
+			</div>
 
             <br>
 
