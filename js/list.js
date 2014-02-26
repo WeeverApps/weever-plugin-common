@@ -94,7 +94,27 @@ var wxApp = wxApp || {};
         Backbone.Events.trigger( 'api:success' );
     };
 
-    wx.getText = function(endpoint, successCallback) {
+	wx.setCurrentBuildVersion = function( callback ) {
+		wx.getText( '_metadata/get_build_version', function( data ) {
+			console.log('currentBuildVersion', data);
+
+			var buildSplit = data.split( ':' );
+			var versionSplit = buildSplit[1].split( '.' );
+			var version = {
+				build: parseInt( buildSplit[0] ),
+				major: parseInt( versionSplit[0] ),
+				minor: parseInt( versionSplit[1] ),
+				patch: parseInt( versionSplit[2] )
+			};
+
+			wx.currentBuildVersion = version.build;
+			if ( typeof callback == 'function' ) {
+				callback( version );
+			}
+		} );
+	};
+
+	wx.getText = function(endpoint, successCallback) {
         var method = 'GET';
         var apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
 
@@ -111,7 +131,7 @@ var wxApp = wxApp || {};
                 console.log(message);
             }
         });
-};
+	};
 
     wx.refreshAppPreview = function() {
         console.log('Refreshing Preview');
@@ -128,10 +148,42 @@ var wxApp = wxApp || {};
     };
 
     wx.rebuildApp = function() {
+	    console.debug( 'rebuildApp' );
+
+	    var pollForNewBuild = function() {
+			// setTimeout
+		    if ( wx.currentBuildVersion < wx.expectedBuildVersion ) {
+			    wx.newBuildPollingHandle = setTimeout( function() {
+				    console.debug( 'pollForNewBuild' );
+				    console.debug( 'expected: ' + wx.expectedBuildVersion, 'current: ' + wx.currentBuildVersion );
+				    wx.setCurrentBuildVersion( pollForNewBuild );
+			    }, 1000 );
+		    }
+		    else {
+			    console.debug( 'clearing newBuildPollingHandle' );
+			    clearTimeout( wx.newBuildPollingHandle );
+			    wx.newBuildPollingHandle = null;
+
+			    if ( wx.refreshPreviewHandle != null ) {
+				    console.debug( 'clearing refreshPreviewHandle' );
+				    clearTimeout( wx.refreshPreviewHandle );
+				    wx.refreshPreviewHandle = null;
+			    }
+			    wx.refreshPreviewHandle = setTimeout( wx.refreshAppPreview, 2000 );
+		    }
+	    };
+
+	    if ( wx.expectedBuildVersion <= wx.currentBuildVersion ) {
+		    wx.expectedBuildVersion = wx.expectedBuildVersion + 1;
+	    }
+	    if ( wx.newBuildPollingHandle != null ) {
+		    clearTimeout( wx.newBuildPollingHandle );
+		    wx.newBuildPollingHandle = null;
+	    }
+	    pollForNewBuild();
+
         // Right now this method just hides the preview, and when the build is complete, it's reshown
-        // (See the doPoll method in layout.php)
         // This will be improved when we have build events in v3.0
-        wx.poll = true;
         $('#preview-app-dialog-frame').hide();
         $('#preview-app-dialog-no-webkit').hide();
         $('#iframe-loading').show();
