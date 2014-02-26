@@ -19,8 +19,14 @@ wxApp = wxApp || {};
 		},
 
         render: function() {
-        	var me = this;
+        	var me = this,
+        	    url = this.model.get('config').url;
 
+        	if ( url ) {
+        		// We're editing an existing article... Let's get the content.
+        		me.loadExistingArticle( url );
+        	}
+        	
 			wxApp.SubTabEditView.prototype.render.apply( me );
 
 			me.$('section.editor').show();
@@ -78,6 +84,28 @@ wxApp = wxApp || {};
 	        return model;
 
         },
+
+		loadExistingArticle: function( url ) {
+			var me = this;
+
+			$.getJSON( url, function( data ) {
+        		var content = data.results[0].html;
+        		content = $('<div/>').html( content ).contents();
+
+        		// The content contains a div.item-page, which contains the title, h1.wx-article-title, then the rest of the content.
+        		// We just want that 'rest of the content,' so we get rid of the h1, then the parent div.
+        		content.find('h1.wx-article-title').detach();
+        		content.unwrap();
+
+        		// Add it to the nicEdit div if it's there;
+        		// otherwise, add it to the textarea.
+        		if ( $('div.nicEdit-main') ) {
+        			$('div.nicEdit-main').html( content );
+        		} else {
+	        		me.$('.wx-content-editor').val( content );
+	        	}
+        	} );
+		},
 
         createPage: function(name, content, otherData) {
 
