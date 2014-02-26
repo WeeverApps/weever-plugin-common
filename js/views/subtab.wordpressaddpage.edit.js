@@ -19,21 +19,23 @@ wxApp = wxApp || {};
 		},
 
         render: function() {
-			wxApp.SubTabEditView.prototype.render.apply( this );
+        	var me = this;
 
-			this.$('section.editor').show();
-			this.$('section.coupon').hide();
-			this.$('section.mapper').hide();
+			wxApp.SubTabEditView.prototype.render.apply( me );
+
+			me.$('section.editor').show();
+			me.$('section.coupon').hide();
+			me.$('section.mapper').hide();
 
 			// nicEdit works on IDs, not classes. Let's great a random ID.
-			this.editorId = 'wx-content-' + Math.floor((Math.random()*1000000)+1).toString();
-			this.$('.wx-content-editor').attr( 'id', this.editorId );
+			me.editorId = 'wx-content-' + Math.floor((Math.random()*1000000)+1).toString();
+			me.$('.wx-content-editor').attr( 'id', me.editorId );
 
 			// We have to add this .2 second delay in because otherwise the 
 			// textarea reports it's width as 100px in Chrome, which causes
 			// the editor to display as 100px wide.
 			setTimeout( function() {
-				new nicEditor({fullPanel : true}).panelInstance( this.editorId );
+				new nicEditor({fullPanel : true}).panelInstance( me.editorId );
 			}, 200);
         },
 
