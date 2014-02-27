@@ -156,8 +156,6 @@ wxApp = wxApp || {};
         	if ( terms )       this.$('#wx_coupon_conditions_preview').text( terms );
         },
 
-        anotherStarted: false,
-
         updateBarcode: function() {
         	var me = this,
         	    nonce = jQuery('input#nonce').val(),

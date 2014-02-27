@@ -42,6 +42,31 @@ wxApp = wxApp || {};
                 //             '<p><b>Wordpress Search</b></p>' +
                 //             '<p>Display Wordpress posts matching a predefined search term.</p>'
             } );
+        },
+
+        save: function() {
+            var shouldSave = true;
+            for (var i = 0; i < wxApp.Tabs.length; i++) {
+                var m = wxApp.Tabs.models[i],
+                    config = m.get('config');
+
+                if ( !config ) continue;
+
+                if ( typeof config === 'string' ) {
+                    config = JSON.parse( config );
+                }
+                if ( !config.items ) continue;
+
+                var item = config.items[0];
+                if ( item.subtab_name === 'MapSubTab' && item.url.indexOf('category_name=map') > -1 ) {
+                    shouldSave = false;
+                    break;
+                }
+            };
+
+            if ( shouldSave ) {
+                wxApp.SubTab.prototype.save.apply(this, arguments);
+            }
         }
 
     });

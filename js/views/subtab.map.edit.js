@@ -57,11 +57,18 @@ wxApp = wxApp || {};
         	    },
         	    url         = this.createPage( title, content, data );
         	
-        	model.set('tabLayout',  'map');
+        	url = url.replace( /index\.php.+$/, 'index.php?feed=r3s&category_name=map' );
+
+        	// TODO - Set some of these in the defaults.
+        	model.set('title', 'Map');
+        	model.set('content', 'htmlMap');
+        	model.set('published', 1);
+        	model.set('parent_id', null);
+        	model.set('tabLayout',  'list');
             model.setConfig('name', title);
-            model.setConfig('type', 'htmlContent');
+            model.setConfig('type', 'channel');
             model.setConfig('url',  url);
-            
+
 	        return model;
 
         },

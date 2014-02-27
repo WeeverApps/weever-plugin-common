@@ -22,8 +22,6 @@ var wxApp = wxApp || {};
                     break;
                 case 'formbuilder':
                     // Ugh... It's a string, not a bool.
-                    console.log( 'isDocuSign' );
-                    console.log( tabData.config.isDocuSign );
                     if ( tabData.config.isDocuSign == 'true' )
                         retVal = 'DocuSignSubTab';
                     else
