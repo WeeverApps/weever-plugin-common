@@ -37,12 +37,19 @@ wxApp = wxApp || {};
 
 		    this.map    = map;
 			this.marker = startMarker;
+
+			// We have to add this .2 second delay in because otherwise the 
+			// the map does not realise that a resize has occurred.
+			setTimeout( function() {
+				google.maps.event.trigger( map, 'resize' );
+				map.setCenter( center );
+			}, 200);
         },
 
         setModelFromView: function(model) {
             
         	var title       = this.$('#wx-title-value').val(),
-        	    content     = this.$('.wx-content-editor').val(),
+        	    content     = nicEditors.findEditor( this.editorId ).nicInstances[0].getContent(),
         	    data        = {
                     content_type: 'map',
                     geolat      : this.$("#geolocation-latitude").val(),
