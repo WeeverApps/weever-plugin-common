@@ -55,18 +55,29 @@ wxApp = wxApp || {};
                 if ( typeof config === 'string' ) {
                     config = JSON.parse( config );
                 }
-                if ( !config.items ) continue;
 
-                var item = config.items[0];
-                if ( item.subtab_name === 'MapSubTab' && item.url.indexOf('category_name=map') > -1 ) {
-                    shouldSave = false;
-                    break;
+                if ( config.items ) {
+                    // This is the map tab that has been saved, and retrieved from the API
+                    var item = config.items[0];
+                    if ( item.subtab_name === 'MapSubTab' && item.url.indexOf('category_name=map') > -1 ) {
+                        shouldSave = false;
+                        break;
+                    }
+                }
+                else {
+                    // This is the map tab that has been recently created, and the user has not refreshed the page
+                    if ( config.subtab_name === 'MapSubTab' && config.url.indexOf('category_name=map') > -1 ) {
+                        shouldSave = false;
+                        break;
+                    }
                 }
             };
 
             if ( shouldSave ) {
                 wxApp.SubTab.prototype.save.apply(this, arguments);
             }
+
+            return shouldSave;
         }
 
     });
