@@ -39,7 +39,7 @@ wxApp = wxApp || {};
 	        var feature = wxApp.featureList.collection.findWhere( { featureName: 'FormBuilder' } );
 
 	        var allowAdvancedMode = wx.formbuilderAdvanced || 0;
-	        if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
+	        if ( feature && feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
 		        allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
 	        }
 
@@ -74,12 +74,12 @@ wxApp = wxApp || {};
 		    var feature = wxApp.featureList.collection.findWhere( { featureName: 'DocuSign' } );
 
 		    var allowAdvancedMode = wx.formbuilderAdvanced || 0;
-		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
+		    if ( feature && feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
 			    allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
 		    }
 
 		    var allowDemoMode = 0;
-		    if ( feature.get( 'options' ) && feature.get( 'options' ).allow_demo_mode ) {
+		    if ( feature && feature.get( 'options' ) && feature.get( 'options' ).allow_demo_mode ) {
 			    allowDemoMode = parseInt( feature.get( 'options' ).allow_demo_mode.value );
 		    }
 
