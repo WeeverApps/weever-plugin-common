@@ -37,6 +37,13 @@ wxApp = wxApp || {};
 
 		    this.map    = map;
 			this.marker = startMarker;
+
+			// We have to add this .2 second delay in because otherwise the 
+			// the map does not realise that a resize has occurred.
+			setTimeout( function() {
+				google.maps.event.trigger( map, 'resize' );
+				map.setCenter( center );
+			}, 200);
         },
 
         setModelFromView: function(model) {
