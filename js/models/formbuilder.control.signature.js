@@ -20,6 +20,7 @@ wxApp = wxApp || {};
 				password: '',
 				returnUrl: ''
 			} );
+
 			return newDefaults;
 		},
 
@@ -27,6 +28,8 @@ wxApp = wxApp || {};
 			// So is this
 			// http://documentcloud.github.com/backbone/#Model-extend
 			wxApp.FormBuilderControl.prototype.initialize.apply( this );
+
+			this.get( 'attributes' ).set( 'required', 'checked' );
 		}
 	});
 

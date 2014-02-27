@@ -48,7 +48,19 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+
+			var templateDataObject = this.model.toJSON();
+
+			templateDataObject.appendName = '';
+			templateDataObject.appendEmail = '';
+			if ( templateDataObject.labelOption.fields.indexOf( 'email' ) > -1 ) {
+				templateDataObject[ templateDataObject.labelOption.verb + 'Email' ] = 'checked';
+			}
+			if ( templateDataObject.labelOption.fields.indexOf( 'name' ) > -1 ) {
+				templateDataObject[ templateDataObject.labelOption.verb + 'Name' ] = 'checked';
+			}
+
+			this.$el.html( this.inputTpl( templateDataObject ) );
 						
 			if ( this.firstRender ) {
 				// Focus on the label the first time you render this control.

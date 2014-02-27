@@ -36,6 +36,8 @@ wxApp = wxApp || {};
 
 				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
 
+				console.log( elementsJson );
+
 				setTimeout( function() { 
 					for ( var i = 0; i < elementsJson.length; i++ ) {
 
@@ -62,6 +64,10 @@ wxApp = wxApp || {};
 						} else if ( elementsJson[i].type === 'textSlider' ) {
 
 							me.addTextSlider( elementsJson[i] );
+
+						} else if ( elementsJson[i].control == 'docusignSignature' ) {
+
+							me.addDocusignSignatureWithProperties( elementsJson[i] );
 
 						} else {
 
