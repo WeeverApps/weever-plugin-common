@@ -1198,7 +1198,7 @@ var nicLinkButton = nicEditorAdvancedButton.extend({
 			'' : {type : 'title', txt : 'Add/Edit Link'},
 			'href' : {type : 'text', txt : 'URL', value : 'http://', style : {width: '150px'}},
 			'title' : {type : 'text', txt : 'Title'},
-			'target' : {type : 'select', txt : 'Open In', options : {'' : 'Current Window', '_blank' : 'New Window'},style : {width : '100px'}}
+			'target' : {type : 'select', txt : 'Open In', options : {'' : 'Current Window', '_blank' : 'New Window'},style : {width : '100%'}}
 		},this.ln);
 	},
 
@@ -1311,7 +1311,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 		this.addForm({
 			'' : {type : 'title', txt : 'Add/Edit Image'},
 			'src' : {type : 'text', txt : 'URL', 'value' : 'http://', style : {width: '150px'}},
-			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '100px'}},
+			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '100%'}},
 			'align' : {type : 'select', txt : 'Align', options : {none : 'Default','left' : 'Left', 'right' : 'Right'}}
 		},this.im);
 	},

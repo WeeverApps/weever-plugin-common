@@ -1,8 +1,13 @@
 <script type="text/template" id="wordpressaddpage-subtab-edit-template">
 
+	<section class="post-list">
+		Please wait while we load your posts...
+	</section>
+
 	<section class="editor">
 		<div class="row collapse">
 	    	<div class="large-12 columns">
+	    		<input type='hidden' value='' class='wx-post-id' />
 			    <p>Add new content to your app.</p>
 
 			    <label for='wx-title-value' id='wx-title-value-label'>Article Title:</label>
@@ -42,7 +47,7 @@
     <section class="coupon">
 		<div class="coupon-preview item-page">
 			<div>
-				<div class="wx-coupon-container"">
+				<div class="wx-coupon-container">
 					<div class="wx-coupon-preview">
 						<div class="wx_title_preview" style="font-size: 2em; line-height: 1; font-weight: bold; padding: .46875em; background: <%- config.titleBackgroundColor %>; color: <%- config.titleTextColor %>">
 							<span id="wx_coupon_title_preview"><%- title || 'Coupon Title' %></span></div>

@@ -27,6 +27,9 @@ var wxApp = wxApp || {};
                     else
                         retVal = 'FormBuilderSubTab';
                     break;
+                case 'htmlMap':
+                    retVal = 'MapSubTab';
+                    break;
                 case 'htmlPage':
                     if ( tabData.config && tabData.config.subtab_name )
                         retVal = tabData.config.subtab_name;
