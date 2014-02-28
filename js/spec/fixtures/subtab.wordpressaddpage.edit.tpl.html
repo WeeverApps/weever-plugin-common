@@ -8,6 +8,7 @@
 		<div class="row collapse">
 	    	<div class="large-12 columns">
 	    		<input type='hidden' value='' class='wx-post-id' />
+	    		<a href="#" class="wx-back-to-list">Back to your posts...</a>
 			    <p>Add new content to your app.</p>
 
 			    <label for='wx-title-value' id='wx-title-value-label'>Article Title:</label>
@@ -98,7 +99,7 @@
         <label for='geolocation-address'>Street address or map coordinates</label>
         <div class="row collapse">
             <div class="large-8 columns">
-                <input type="text" id="geolocation-address" autocomplete="off" value="" />
+                <input type="text" class="geolocation-address" autocomplete="off" value="" />
             </div>
             <div class="large-4 columns">
                 <button id="geolocation-load" class="button expand small secondary geolocationadd">Set location</button>
@@ -111,4 +112,11 @@
         <br>
     </section>
 
+</script>
+
+<script type="text/template" id="wordpressaddpage-map-post">
+	<li>
+		<a href="#" rel="<%- ID %>" class="wx-edit-post"><%- post_title %></a>
+		<a href="#" rel="<%- ID %>" class="wx-delete-post" title="Delete" style="color: #c60f13">&times;</a>
+	</li>
 </script>

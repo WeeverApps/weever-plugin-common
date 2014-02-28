@@ -9,8 +9,10 @@ wxApp = wxApp || {};
         map: null,
         postsCache: null,
         events : {
-			'click #geolocation-load' : 'loadGeolocation',
-			'click .edit-post' : 'editPost'
+			'click .geolocationadd'  : 'loadGeolocation',
+			'click .wx-edit-post'    : 'editPost',
+			'click .wx-delete-post'  : 'deletePost',
+			'click .wx-back-to-list' : 'backToList'
 		},
 
 		initializeEvents: function() {
@@ -19,8 +21,42 @@ wxApp = wxApp || {};
 
 		editPost: function( ev ) {
 			ev.preventDefault();
-			var postId = $( ev.currentTarget ).attr('rel');
+			var postId = $( ev.currentTarget ).attr('rel'),
+			    post = this.getPost( postId );
 
+			this.showEditor( post.ID, post.post_title, post.post_content, post.lat, post.lng );
+		},
+
+		deletePost: function( ev ) {
+			ev.preventDefault();
+			var me = this,
+				$a = $( ev.currentTarget ),
+			    postId = $a.attr('rel');
+
+			$a.text( 'Deleting...' );
+
+			jQuery.ajax({
+	            type: "POST",
+	            url: ajaxurl,
+	            data: {
+	                action: 'ajaxDeletePost',
+	                id: postId,
+	                nonce: $('input#nonce').val()
+	            },
+	            success: function( response ){
+	     			if ( response == '1' ) {
+	     				// success!
+	     				me.$('a[rel="' + postId + '"]').parent().slideUp();
+	     			}
+	            },
+	            error: function(v,msg){
+	                alert('error');
+	                $a.html( '&times;' );
+	            }
+	        });
+		},
+
+		getPost: function( postId ) {
 			var posts = null;
 			if ( this.postsCache ) {
 				posts = this.postsCache;
@@ -36,7 +72,12 @@ wxApp = wxApp || {};
 				}
 			};
 
-			this.showEditor( post.ID, post.post_title, post.post_content, post.lat, post.lng );
+			return post;
+		},
+
+		backToList: function( ev ) {
+			ev.preventDefault();
+			this.showListOfPosts();
 		},
 
         render: function() {
@@ -49,7 +90,7 @@ wxApp = wxApp || {};
 			if ( config.items ) {
 
 				// We're editing; load the list of existing posts.
-				this.getListOfPosts();
+				this.showListOfPosts();
 			}
 			else {
 				
@@ -92,8 +133,8 @@ wxApp = wxApp || {};
 
         loadGeolocation: function() {
 
-        	if ( $('#geolocation-address').val() != '' ) {
-        		var currentAddress = $('#geolocation-address').val();
+        	if ( this.$('.geolocation-address').val() != '' ) {
+        		var currentAddress = this.$('.geolocation-address').val();
         		this.geocode( currentAddress );
         	}
         },
@@ -124,7 +165,7 @@ wxApp = wxApp || {};
 			}
         },
 
-        getListOfPosts: function() {
+        showListOfPosts: function() {
         	var me = this;
 
     		$('section.post-list').show();
@@ -145,14 +186,9 @@ wxApp = wxApp || {};
 
 	            	$('section.post-list').html('<ul></ul>')
 	                for (var i = 0; i < posts.length; i++) {
-	                	var post = posts[i];
-	                	// $('section.post-list ul').append( '<a href="#" class="edit-post" rel="' +  + '">' + post.post_title + '</p>' );
-						$li = $('<li></li>')
-							.append( $('<a></a>')
-								.attr( { href: '#', rel: post.ID } )
-								.addClass( 'edit-post' )
-								.text( post.post_title )
-						);
+	                	var post = posts[i],
+						    tpl = _.template( $( '#wordpressaddpage-map-post' ).html() ),
+						    $li = tpl( post );
 						$('section.post-list ul').append( $li );
 	                };
 	            },
@@ -205,6 +241,14 @@ wxApp = wxApp || {};
 			this.$('.nicEdit-panelContain').parent().width('509px');
 			this.$('.nicEdit-panelContain').parent().next().width('509px');
 			this.$('.nicEdit-main').width('501px');
+
+			// If we're editing, show the 'Back' link.
+			if ( id ) {
+				this.$('.wx-back-to-list').show();
+			}
+			else {
+				this.$('.wx-back-to-list').hide();
+			}
         }
     });
 })(jQuery);
