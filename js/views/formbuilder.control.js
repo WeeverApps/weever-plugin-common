@@ -27,6 +27,7 @@ wxApp = wxApp || {};
 			'focus .wx-form-builder-select-option-text': 'selectInputText',
 			'focus .wx-form-builder-label-input': 'selectInputText',
 			'focus .wx-form-builder-text-input': 'selectInputText',
+			'focus .wx-form-builder-input': 'selectInputText',
 			'sortable-drop': 'sortableDrop'
 		},
 

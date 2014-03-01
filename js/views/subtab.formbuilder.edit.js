@@ -140,30 +140,87 @@ wxApp = wxApp || {};
 		},
 
 		validate: function() {
-			var success = false;
-			$('.wx-form-builder-action').each(function(index, value) { 
-				var $text = $( value );
-				if ( $text.val() ) {
-					success = true;
-				}
-			});
 
-			// If DocuSign username or password is provided,
-			// both username and password must be provided.
-			if ( $('.wx-form-builder-docusign-username').val() || $('.wx-form-builder-docusign-password').val() ) {
-				if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
-					success = true;
-				}
-			}
+			var me = this,
+				errors = [],
+				errorMessage = 'Sorry! Your form could not be saved.';
 
-			if (!success) {
-				// Display an error message.
-				var errorMessage = "Sorry! Your form could not be saved.  Please add an email recipient, DocuSign account information, or a custom post action in &ldquo;Form submission settings&rdquo;.";
+			var checkFormActions = function() {
+				var success = false;
+
+				$('.wx-form-builder-action').each(function(index, value) {
+					var $text = $( value );
+					if ( $text.val() ) {
+						success = true;
+					}
+				});
+
+				// If DocuSign username or password is provided,
+				// both username and password must be provided.
+				if ( $('.wx-form-builder-docusign-username').val() || $('.wx-form-builder-docusign-password').val() ) {
+					if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
+						success = true;
+					}
+				}
+
+				if ( ! success ) {
+					// Display an error message.
+					errors.push( {
+						'type': 'formActions',
+						'message': me.model.get( 'config' ).isDocuSign
+							? 'Please add an email recipient, DocuSign account information, or a custom post action in &ldquo;Form submission settings&rdquo;.'
+							: 'Please add an email recipient or a custom post action in &ldquo;Form submission settings&rdquo;.'
+					} );
+				}
+			};
+
+			var checkRangeAttributes = function( model ) {
+				var errorType = 'rangeAttributes';
+				if ( isNaN( model.get( 'attributes' ).get( 'min' ) ) ) {
+					errors.push( {
+						'type': errorType,
+						'message': 'The Minimum value is empty on one or more of your Number Sliders.'
+					} );
+				}
+				if ( isNaN( model.get( 'attributes' ).get( 'max' ) ) ) {
+					errors.push( {
+						'type': errorType,
+						'message': 'The Maximum value is empty on one or more of your Number Sliders.'
+					} );
+				}
+				if ( isNaN( model.get( 'attributes' ).get( 'value' ) ) ) {
+					errors.push( {
+						'type': errorType,
+						'message': 'The Starting value is empty on one or more of your Number Sliders.'
+					} );
+				}
+				if ( isNaN( model.get( 'attributes' ).get( 'step' ) ) ) {
+					errors.push( {
+						'type': errorType,
+						'message': 'The Step value is empty on one or more of your Number Sliders.'
+					} );
+				}
+			};
+
+			this.model.get( 'config' ).formElements.forEach( function( formElement ) {
+				if ( formElement.get( 'control' ) == 'input' && formElement.get( 'attributes' ).get( 'type' ) == 'range' ) {
+					checkRangeAttributes( formElement );
+				}
+			} );
+
+			checkFormActions();
+
+			// display error messages
+			if ( errors.length ) {
+				errors.forEach( function( error ) {
+					errorMessage += '<br><br>' + error.message;
+				} )
 				var $alert = $('.alert-box.alert .message').html( errorMessage );
 				$alert.parent().slideDown();
+				return false;
 			}
 
-			return success;
+			return true;
 		},
 
 		getDefaultFormActions: function() {
@@ -610,7 +667,11 @@ wxApp = wxApp || {};
 				stepClass: '',
 				valueClass: '',
 				attributes: {
-					type: 'range'
+					type: 'range',
+					min: '1.00',
+					max: '5.00',
+					value: '3.00',
+					step: '1.00'
 				}
 			});
 		},
