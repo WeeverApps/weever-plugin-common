@@ -23,15 +23,15 @@ wxApp = wxApp || {};
                             '<p><b>Wordpress Tags</b></p>' +
                             '<p>Wordpress &lsquo;tags&rsquo; are a powerful feature for adding content to your app.</p>' +
                             '<p>Tag items with specific values like &lsquo;mobile&rsquo;, &lsquo;map&rsquo; or cross-category tags.</p>' +
-                            '<p>Select a tag in appBuilder and stream those specific posts into your app in real-time.</p>' +
+                            '<p>Select a tag in AppBuilder and stream those specific posts into your app in real-time.</p>' +
                             '<p><b>Wordpress Posts</b></p>' +
                             '<p>Add categories of Wordpress &lsquo;posts&rsquo; to share a blog or specific content in real-time with app visitors.</p>' +
                             '<p><b>Wordpress Pages</b></p>' +
                             '<p>Add specific individual Wordpress &lsquo;pages&rsquo; to your app and arrange them in the layout of your preference.</p>' +
                             '<p><b>Wordpress Maps</b></p>' +
-                            '<p>&rdquo;GeoTag&ldquo; individual Wordpress posts with a location/address and create a mobile, GPS-enabled map of those locations with appBuilder.</p>' +
+                            '<p>&rdquo;GeoTag&ldquo; individual Wordpress posts with a location/address and create a mobile, GPS-enabled map of those locations with AppBuilder.</p>' +
                             '<p>We recommend using the Wordpress <a target="_blank" href="http://wordpress.org/plugins/geolocation/">Geolocation plugin</a> to add location information to posts.</p>' +
-                            '<p>Once you have added locations to posts, use the appBuilder map making features to create a map using Wordpress post categories.</p>' +
+                            '<p>Once you have added locations to posts, use the AppBuilder map making features to create a map using Wordpress post categories.</p>' +
                             '<p>Note: posts which are not Geotagged with location info will not display on your map.</p>' +
                             '<p><b>Wordpress Near to me</b></p>' +
                             '<p>&ldquo;Near to me&rdquo; shows app users location listings nearest to them and distances.</p>' +
