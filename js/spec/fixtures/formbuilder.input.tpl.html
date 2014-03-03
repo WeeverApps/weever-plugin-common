@@ -17,15 +17,15 @@
 			Minimum value
 			<input type="number" class="wx-form-builder-input wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.min || attributes.attributes.min %>"/>
 		</label>
-		<label class="maxClass">
+		<label class="<%- maxClass %>">
 			Maximum value
 			<input type="number" class="wx-form-builder-input wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.max || attributes.attributes.max %>"/>
 		</label>
-		<label class="valueClass">
+		<label class="<%- valueClass %>">
 			Starting value
 			<input type="<%- valueType %>" class="wx-form-builder-input wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.value || attributes.attributes.value %>"/>
 		</label>
-		<label class="stepClass">
+		<label class="<%- stepClass %>">
 			Step (the amount that each tick of the slider should increase / decrease)
 			<input type="number" class="wx-form-builder-input wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.step || attributes.attributes.step %>"/>
 		</label>
