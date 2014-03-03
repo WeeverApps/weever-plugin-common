@@ -55,6 +55,9 @@
                                     DocuSign account password
                                     <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
                                 </label>
+								<% if ( config.allowDemoMode ) { %>
+									<label><input type="checkbox" class="wx-form-builder-docusign-demomode"/> Enable DocuSign &ldquo;Demo Mode&rdquo;</label>
+								<% } %>
                             </div>
                         </div>
 
