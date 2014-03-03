@@ -21,20 +21,21 @@ wxApp = wxApp || {};
 		initialize: function() {
 			var me = this,
 				elementsJson,
-				actionsJson;
+				actionsJson,
+				config = this.model.get( 'config' );
 
-			if ( typeof this.model.get( 'config' ).formElements == 'undefined' ) {
-				this.model.get( 'config' ).formElements = new wxApp.FormBuilderCollection();
+			if ( typeof config.formElements == 'undefined' ) {
+				config.formElements = new wxApp.FormBuilderCollection();
 			}
 			else {
 				// Load currently existing form elements.
 				try {
-					elementsJson = JSON.parse( this.model.get( 'config' ).formElements );
+					elementsJson = JSON.parse( config.formElements );
 				} catch(err) {
-					elementsJson = this.model.get( 'config' ).formElements.toJSON();
+					elementsJson = config.formElements.toJSON();
 				}
 
-				this.model.get('config').formElements = new wxApp.FormBuilderCollection();
+				config.formElements = new wxApp.FormBuilderCollection();
 
 				console.log( elementsJson );
 
@@ -78,20 +79,20 @@ wxApp = wxApp || {};
 				}, 100 );
 			}
 
-			if ( typeof this.model.get( 'config' ).formActions == 'undefined' ) {
+			if ( typeof config.formActions == 'undefined' ) {
 				me.getDefaultFormActions();
 			}
 			else {
 				// Load currently existing form actions.
 				try {
-					actionsJson = JSON.parse( this.model.get( 'config' ).formActions );
+					actionsJson = JSON.parse( config.formActions );
 				} catch(err) {
-					actionsJson = this.model.get( 'config' ).formActions.toJSON();
+					actionsJson = config.formActions.toJSON();
 				}
 				console.log('=== actionsJson ===');
 				console.log(actionsJson);
 
-				this.model.get( 'config' ).formActions = new Backbone.Collection();
+				config.formActions = new Backbone.Collection();
 
 				// setTimeout( function() { 
 					var hasDocusign	= false,
@@ -118,11 +119,13 @@ wxApp = wxApp || {};
 					// 	me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
 					// }
 
-					if ( !hasPost ) {
+					if ( ! hasPost && config.advanced ) {
 						me.addPostAction( null, { method: 'post' } );
 					}
 
-					if ( !hasEmail ) {
+					if ( ! hasEmail &&
+						( ( config.isDocuSign && config.advanced ) || ( ! config.isDocuSign ) )
+						) {
 						me.addEmailAction( null, { method: 'email' } );
 					}
 				// }, 100);
