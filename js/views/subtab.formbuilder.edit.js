@@ -18,11 +18,23 @@ wxApp = wxApp || {};
 			this.events = _.extend({}, this.genericEvents, this.events);
 		},
 
+		apiToBoolean: function( value ) {
+			if ( typeof value == 'undefined' || value === false || value === 'false' || value === '0' || value === 0 ) {
+				return false;
+			}
+			return true;
+		},
+
 		initialize: function() {
 			var me = this,
 				elementsJson,
 				actionsJson,
 				config = this.model.get( 'config' );
+
+			// Set up config object to have properly typed properties
+			// Fix because the get_tabs API is broken, and returns strings for everything in config.
+			config.advanced = this.apiToBoolean( config.advanced );
+			config.isDocuSign = this.apiToBoolean( config.isDocuSign );
 
 			if ( typeof config.formElements == 'undefined' ) {
 				config.formElements = new wxApp.FormBuilderCollection();
@@ -119,8 +131,6 @@ wxApp = wxApp || {};
 					// 	me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
 					// }
 
-					console.log( 'add post action', hasPost, config );
-					// @TODO config properties are all strings here. WHY?!?!  When are they getting converted?
 					if ( ! hasPost && config.advanced ) {
 						me.addPostAction( null, { method: 'post' } );
 					}
