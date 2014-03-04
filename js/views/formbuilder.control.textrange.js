@@ -5,6 +5,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlTextRangeView = wxApp.FormBuilderControlView.extend({
 		inputTplSelector: '#form-builder-text-range',
 		preview: null,
+		hasRendered: false,
 
 		initialize: function( options ) {
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
@@ -35,6 +36,7 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			this.hasRendered = true;
 						
 			if ( this.firstRender ) {
 				// Focus on the label the first time you render this control.
@@ -43,10 +45,22 @@ wxApp = wxApp || {};
 				this.firstRender = false;
 			}
 
+			if ( this.model.get( 'options' ).length >= 1 ) {
+				for (var i = 0; i < this.model.get('options').length; i++) {
+					var option = this.model.get('options').models[i];
+					this.addOne( option );
+				};
+			}
+
 			return this;
 		},
 
 		addOne: function(newOption) {
+			if ( !this.hasRendered ){
+				// The main control hasn't been rendered yet, so there's nothing to add the child control to.			
+				return;
+			}
+
 			console.log( 'addOne', newOption );
 			var view = new wxApp.FormBuilderControlTextSliderOptionView({
 				model: newOption
