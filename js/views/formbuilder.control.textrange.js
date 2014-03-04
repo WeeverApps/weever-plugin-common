@@ -11,9 +11,19 @@ wxApp = wxApp || {};
 			var $template = $( this[options.type + 'TplSelector'] );
 			this.inputTpl = _.template( $template.html() );
 
-			if ( !this.model.options ) 
-				this.model.set( 'options', new wxApp.FormBuilderControlTextSliderOptions() );
+			var sliderOptions = this.model.get( 'options' ) || [];
+
+			this.model.set( 'options', new wxApp.FormBuilderControlTextSliderOptions() );
+
 			this.model.get( 'options' ).bind('add', this.addOne, this);
+
+			if ( sliderOptions.length > 0 ) {
+				var me = this;
+				sliderOptions.forEach( function( sliderOption ) {
+					console.log( 'sliderOption', sliderOption );
+					me.model.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( sliderOption ) );
+				} );
+			}
 		},
 
 		getPreview: function() {
@@ -37,6 +47,7 @@ wxApp = wxApp || {};
 		},
 
 		addOne: function(newOption) {
+			console.log( 'addOne', newOption );
 			var view = new wxApp.FormBuilderControlTextSliderOptionView({
 				model: newOption
 			});

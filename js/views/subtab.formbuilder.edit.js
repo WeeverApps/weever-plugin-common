@@ -49,7 +49,7 @@ wxApp = wxApp || {};
 
 				config.formElements = new wxApp.FormBuilderCollection();
 
-				console.log( elementsJson );
+				console.log( 'elementsJson', elementsJson );
 
 				setTimeout( function() { 
 					for ( var i = 0; i < elementsJson.length; i++ ) {
@@ -542,6 +542,7 @@ wxApp = wxApp || {};
 		},
 
 		addTextSlider: function( properties ) {
+			console.log( 'addTextSlider', properties );
 			var mainProperties = {};
 			var attributes = {};
 			for ( var propKey in properties ) {
@@ -555,11 +556,16 @@ wxApp = wxApp || {};
 				}
 			}
 
+			console.log( 'mainProperties', mainProperties );
+			console.log( 'attributes', attributes );
+
 			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
 			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
+
+			console.log( input );
 
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
@@ -567,11 +573,17 @@ wxApp = wxApp || {};
 
 			this.addControl( input, inputView );
 
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
+			console.log( input );
+
+			if ( input.get( 'options' ).length < 1 ) {
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
+			}
+
+			console.log( input );
 
 			this.scrollIntoView( inputView );
 
