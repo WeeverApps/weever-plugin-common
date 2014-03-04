@@ -84,6 +84,8 @@ var wxApp = wxApp || {};
             var me = this;
             wx.makeApiCall('tabs/get_tabs', {}, function(data) {
                 if ( typeof data.tabs != 'undefined' ) {
+	                // @TODO Make sure that data.tabs config objects are properly typed; Weever API issue
+	                console.log( 'TABS!', data.tabs );
                     var tabs = [];
                     for ( var tabIndex = 0; tabIndex < data.tabs.length; tabIndex++ ) {
                         var tabData = data.tabs[tabIndex];
@@ -102,8 +104,9 @@ var wxApp = wxApp || {};
                         }
                     }
                     me.reset();
-                    for ( i = 0; i < tabs.length; i++ )
+                    for ( i = 0; i < tabs.length; i++ ) {
                         me.add( tabs[i] );
+                    }
                 }
             });
         }

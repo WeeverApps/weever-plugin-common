@@ -18,11 +18,23 @@ wxApp = wxApp || {};
 			this.events = _.extend({}, this.genericEvents, this.events);
 		},
 
+		apiToBoolean: function( value ) {
+			if ( typeof value == 'undefined' || value === false || value === 'false' || value === '0' || value === 0 ) {
+				return false;
+			}
+			return true;
+		},
+
 		initialize: function() {
 			var me = this,
 				elementsJson,
 				actionsJson,
 				config = this.model.get( 'config' );
+
+			// Set up config object to have properly typed properties
+			// Fix because the get_tabs API is broken, and returns strings for everything in config.
+			config.advanced = this.apiToBoolean( config.advanced );
+			config.isDocuSign = this.apiToBoolean( config.isDocuSign );
 
 			if ( typeof config.formElements == 'undefined' ) {
 				config.formElements = new wxApp.FormBuilderCollection();
@@ -178,7 +190,19 @@ wxApp = wxApp || {};
 			};
 
 			var checkRangeAttributes = function( model ) {
-				var errorType = 'rangeAttributes';
+				var errorType = 'rangeAttributes',
+					min = model.get( 'attributes' ).get( 'min' ),
+					max = model.get( 'attributes' ).get( 'max' ),
+					value = model.get( 'attributes' ).get( 'value' ),
+					step = model.get( 'attributes' ).get( 'step' );
+
+				if ( model.get( 'type' ) == 'textSlider' ) {
+					// @TODO this only works because a textSlider always has a minimum of 0. Be careful with it.
+					var numberOfPoints = ( max - min + step ) / step;
+					value = isNaN( value ) ? ( numberOfPoints / 2 ) - 0.5 : value;
+					model.get( 'attributes' ).set( 'value', value );
+				}
+
 				if ( isNaN( model.get( 'attributes' ).get( 'min' ) ) ) {
 					errors.push( {
 						'type': errorType,
@@ -294,25 +318,11 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
-			'change .wx-form-builder-send-current-user-email': 'toggleSendEmailAddress',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
 //			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
-
-		},
-
-		toggleSendEmailAddress: function( ev ) {
-			console.log( $( ev.currentTarget ).is( ':checked' ) );
-			var $target = $( ev.currentTarget );
-			var $input = $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
-			if ( $target.is( ':checked' ) ) {
-				$input.val( wx.currentUserEmail );
-			}
-			else {
-				$input.val( '' );
-			}
 
 		},
 
