@@ -559,6 +559,20 @@ wxApp = wxApp || {};
 			console.log( 'mainProperties', mainProperties );
 			console.log( 'attributes', attributes );
 
+			if ( typeof mainProperties['options'] === 'object' && mainProperties['options'].models ) {
+
+				// Something weird happens when a form is created, then immediately edited.
+				// The objects are a weird hybrid of Backbone models and JSON objects.
+				// The below converts them into pure JSON.
+
+				var options = [];
+				for (var i = 0; i < mainProperties['options'].length; i++) {
+					var option = mainProperties['options'].models[i];
+					options[i] = option.toJSON();
+				};
+				mainProperties['options'] = options;
+			}
+
 			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
 			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
