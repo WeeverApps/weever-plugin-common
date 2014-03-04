@@ -190,7 +190,19 @@ wxApp = wxApp || {};
 			};
 
 			var checkRangeAttributes = function( model ) {
-				var errorType = 'rangeAttributes';
+				var errorType = 'rangeAttributes',
+					min = model.get( 'attributes' ).get( 'min' ),
+					max = model.get( 'attributes' ).get( 'max' ),
+					value = model.get( 'attributes' ).get( 'value' ),
+					step = model.get( 'attributes' ).get( 'step' );
+
+				if ( model.get( 'type' ) == 'textSlider' ) {
+					// @TODO this only works because a textSlider always has a minimum of 0. Be careful with it.
+					var numberOfPoints = ( max - min + step ) / step;
+					value = isNaN( value ) ? ( numberOfPoints / 2 ) - 0.5 : value;
+					model.get( 'attributes' ).set( 'value', value );
+				}
+
 				if ( isNaN( model.get( 'attributes' ).get( 'min' ) ) ) {
 					errors.push( {
 						'type': errorType,
