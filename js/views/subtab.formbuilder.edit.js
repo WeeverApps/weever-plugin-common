@@ -49,8 +49,6 @@ wxApp = wxApp || {};
 
 				config.formElements = new wxApp.FormBuilderCollection();
 
-				console.log( 'elementsJson', elementsJson );
-
 				setTimeout( function() { 
 					for ( var i = 0; i < elementsJson.length; i++ ) {
 
@@ -101,8 +99,6 @@ wxApp = wxApp || {};
 				} catch(err) {
 					actionsJson = config.formActions.toJSON();
 				}
-				console.log('=== actionsJson ===');
-				console.log(actionsJson);
 
 				config.formActions = new Backbone.Collection();
 
@@ -150,8 +146,6 @@ wxApp = wxApp || {};
 
 			// Call parent's initialize() function
 			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
-
-			console.log( 'formbuilder.edit', this.model );
 		},
 
 		validate: function() {
@@ -340,7 +334,6 @@ wxApp = wxApp || {};
 			}
 			var $precedingSiblings = $target.prevAll();
 			var oneBasedSiblingIndex = $precedingSiblings.length + 1;
-			console.log( oneBasedSiblingIndex );
 			$( '.wx-preview-form > .wx-form-preview-row' ).removeClass( 'active' );
 			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
@@ -542,7 +535,6 @@ wxApp = wxApp || {};
 		},
 
 		addTextSlider: function( properties ) {
-			console.log( 'addTextSlider', properties );
 			var mainProperties = {};
 			var attributes = {};
 			for ( var propKey in properties ) {
@@ -555,9 +547,6 @@ wxApp = wxApp || {};
 					}
 				}
 			}
-
-			console.log( 'mainProperties', mainProperties );
-			console.log( 'attributes', attributes );
 
 			if ( typeof mainProperties['options'] === 'object' && mainProperties['options'].models ) {
 
@@ -579,15 +568,11 @@ wxApp = wxApp || {};
 				input.get( 'attributes' )[attrKey] = attributes[attrKey];
 			};
 
-			console.log( input );
-
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
 			});
 
 			this.addControl( input, inputView );
-
-			console.log( input );
 
 			if ( input.get( 'options' ).length < 1 ) {
 				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
@@ -596,8 +581,6 @@ wxApp = wxApp || {};
 				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
 				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
 			}
-
-			console.log( input );
 
 			this.scrollIntoView( inputView );
 
@@ -1014,15 +997,11 @@ wxApp = wxApp || {};
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
 
 			this.scrollIntoView( view );
-
-			console.log( 'addControl' );
-			console.log( this.model.get( 'config' ) );
 		},
 
 		confirmClosePopup: function( e ) {
 			e.preventDefault();
 			var ok = confirm( 'Are you sure you want to cancel?  Your changes have not been saved.' );
-			console.log( ok );
 			if ( ! ok ) {
 				e.stopImmediatePropagation();
 				return false;
