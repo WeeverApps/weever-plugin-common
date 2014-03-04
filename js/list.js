@@ -24,21 +24,15 @@ var wxApp = wxApp || {};
 (function($){
     wx.makeApiCall = function(endpoint, paramsObj, successCallback, failureCallback, datatype) {
 
-	    /**
-	     * API v3 exceptions
-	     */
-	    var apiUrl = '';
-	    if ( endpoint.indexOf( '_docusign' ) === 0 ) {
-		    apiUrl = wx.liveUrl + 'api/v3/' + endpoint + '?app_key=' + wx.siteKey;
-	    }
-	    else {
-		    apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
-	    }
-
 		var method = 'POST', data = '';
         var queryStr = [];
         datatype = datatype || 'json';
 
+	    /**
+	     * @TODO Remove this when possible
+	     * We shouldn't have to assemble a query string like this for a POST
+	     * Maybe legacy issue? Let's revisit when all Weever API calls are on v3
+	     */
         for ( var p in paramsObj ) {
             queryStr.push( encodeURIComponent(p) + '=' + encodeURIComponent(paramsObj[p]) );
         }
@@ -46,10 +40,22 @@ var wxApp = wxApp || {};
 			data = queryStr.join('&');
 		}
 
-        $.ajax({
+	    /**
+	     * API v3 exceptions
+	     */
+	    var apiUrl = '';
+	    if ( endpoint.indexOf( '_docusign' ) === 0 ) {
+		    apiUrl = wx.liveUrl + 'api/v3/' + endpoint + '?app_key=' + wx.siteKey;
+		    data = paramsObj;
+	    }
+	    else {
+		    apiUrl = wx.apiUrl + endpoint + '?app_key=' + wx.siteKey;
+	    }
+
+	    $.ajax({
             url: apiUrl,
             type: method,
-			data: data,
+	        data: data,
             datatype: datatype,
             success: function(v) {
                 wx.apiSuccess( v, successCallback, failureCallback );
