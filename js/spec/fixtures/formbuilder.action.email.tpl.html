@@ -5,21 +5,15 @@
         <!-- container for detailed help text -->
         <div class="wx-form-tips">
 
-            <p><b>Optional.</b> When a person completes the form email a PDF copy of their submission to the receipients you specify.</P>
+            <p>When a person completes the form, it will be converted to PDF and emailed to the recipients you specify.</P>
 
-            <label>Please specify the email recipient(s)</label>
+            <label>Recipient(s) &ndash; separate multiple emails with commas</label>
 
-            <input class="wx-form-builder-action" placeholder="Email address(es)" type="email" value="<%- value %>" />
+            <input class="wx-form-builder-action" placeholder="Email addresses" type="email" value="<%- value %>" />
 
-			<label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- useCurrentUserEmail %> /> Use <span class="wx-current-user-email"><%- currentUserEmail %></span></label>
+			<label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- currentUserEmail %></span></label>
 
-            <ul class="no-bullet" style="font-size: .875em;">
-                <li>Examples of valid entries:</li>
-                <li>user@example.com</li>
-                <li>user@example.com, anotheruser@example.com</li>
-                <li>User &lt;user@example.com&gt;</li>
-                <li>User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
-            </ul>
+            <br>
 
             <p><b>PDF Document details</b> (optional)</p>
 
