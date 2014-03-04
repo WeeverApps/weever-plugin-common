@@ -9,7 +9,7 @@ wxApp = wxApp || {};
 
 		initialize: function( options ) {
 			var $template = $( this.tplSelector );
-			this.inputTpl = _.template( $template.html() );;
+			this.inputTpl = _.template( $template.html() );
 		},
 
 		updateLabel: function( ev ) {

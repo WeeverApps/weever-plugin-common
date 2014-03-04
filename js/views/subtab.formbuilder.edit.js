@@ -49,8 +49,6 @@ wxApp = wxApp || {};
 
 				config.formElements = new wxApp.FormBuilderCollection();
 
-				console.log( elementsJson );
-
 				setTimeout( function() { 
 					for ( var i = 0; i < elementsJson.length; i++ ) {
 
@@ -101,8 +99,6 @@ wxApp = wxApp || {};
 				} catch(err) {
 					actionsJson = config.formActions.toJSON();
 				}
-				console.log('=== actionsJson ===');
-				console.log(actionsJson);
 
 				config.formActions = new Backbone.Collection();
 
@@ -150,8 +146,6 @@ wxApp = wxApp || {};
 
 			// Call parent's initialize() function
 			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
-
-			console.log( 'formbuilder.edit', this.model );
 		},
 
 		validate: function() {
@@ -340,7 +334,6 @@ wxApp = wxApp || {};
 			}
 			var $precedingSiblings = $target.prevAll();
 			var oneBasedSiblingIndex = $precedingSiblings.length + 1;
-			console.log( oneBasedSiblingIndex );
 			$( '.wx-preview-form > .wx-form-preview-row' ).removeClass( 'active' );
 			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
@@ -555,6 +548,20 @@ wxApp = wxApp || {};
 				}
 			}
 
+			if ( typeof mainProperties['options'] === 'object' && mainProperties['options'].models ) {
+
+				// Something weird happens when a form is created, then immediately edited.
+				// The objects are a weird hybrid of Backbone models and JSON objects.
+				// The below converts them into pure JSON.
+
+				var options = [];
+				for (var i = 0; i < mainProperties['options'].length; i++) {
+					var option = mainProperties['options'].models[i];
+					options[i] = option.toJSON();
+				};
+				mainProperties['options'] = options;
+			}
+
 			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
 			input.get( 'attributes' ).set( attributes );
 			for ( var attrKey in attributes ) {
@@ -567,11 +574,13 @@ wxApp = wxApp || {};
 
 			this.addControl( input, inputView );
 
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
-			input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
+			if ( input.get( 'options' ).length < 1 ) {
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
+				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
+			}
 
 			this.scrollIntoView( inputView );
 
@@ -988,15 +997,11 @@ wxApp = wxApp || {};
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
 
 			this.scrollIntoView( view );
-
-			console.log( 'addControl' );
-			console.log( this.model.get( 'config' ) );
 		},
 
 		confirmClosePopup: function( e ) {
 			e.preventDefault();
 			var ok = confirm( 'Are you sure you want to cancel?  Your changes have not been saved.' );
-			console.log( ok );
 			if ( ! ok ) {
 				e.stopImmediatePropagation();
 				return false;

@@ -28,6 +28,21 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlTextSliderOptionView = wxApp.FormBuilderControlBaseView.extend({
 		tplSelector: '#form-builder-text-slider-option',
 
+		render: function() {
+
+			var jsonModel = this.model.toJSON();
+			this.$el.html( this.inputTpl( jsonModel ) );
+
+			if ( this.firstRender ) {
+				// Focus on the label the first time you render this control.
+				// We need to add this 1ms delay for Chrome and Safari, as otherwise the focus doesn't really happen.
+				setTimeout( function() { this.$('.wx-form-builder-title-input').focus(); }, 1);
+				this.firstRender = false;
+			}
+
+			return this;
+		},
+
 		getPreview: function() {
 			if ( this.preview === null ) {
 				this.preview = new wxApp.FormBuilderControlTextSliderOptionPreview({ model: this.model });
