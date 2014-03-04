@@ -10,23 +10,38 @@ wxApp = wxApp || {};
 		tplDocusignSelector: '#form-builder-action-docusign',
 
 		events: {
-			'blur .wx-form-builder-action'             : 'updateAction',
-			'click .wx-form-builder-delete'            : 'deleteControl',
-			'blur .wx-form-builder-docusign-username'  : 'updateUsername',
-			'blur .wx-form-builder-docusign-password'  : 'updatePassword',
-			'blur .wx-form-builder-docusign-returnUrl' : 'updateReturnUrl',
-			'blur .wx-form-builder-pdfheader-title'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line1'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line2'    : 'updatePdfHeader',
-			'blur .wx-form-builder-pdfheader-line3'    : 'updatePdfHeader',
-			'click .radio-mode'                        : 'updateMode',
-			'change .wx-form-builder-docusign-demomode': 'toggleDemoMode'
+			'blur .wx-form-builder-action'                      : 'updateAction',
+			'click .wx-form-builder-delete'                     : 'deleteControl',
+			'blur .wx-form-builder-docusign-username'           : 'updateUsername',
+			'blur .wx-form-builder-docusign-password'           : 'updatePassword',
+			'blur .wx-form-builder-docusign-returnUrl'          : 'updateReturnUrl',
+			'blur .wx-form-builder-pdfheader-title'             : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line1'             : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line2'             : 'updatePdfHeader',
+			'blur .wx-form-builder-pdfheader-line3'             : 'updatePdfHeader',
+			'click .radio-mode'                                 : 'updateMode',
+			'change .wx-form-builder-send-current-user-email'   : 'toggleSendEmailAddress',
+			'change .wx-form-builder-docusign-demomode'         : 'toggleDemoMode'
 			// 'click #docusignLogin'                     : 'showLogin',
 			// 'click #docusignCreate'                    : 'showCreateAccount',
 			// 'click #docusignChangePassword'            : 'showChangePassword',
 			// 'click #wx-docusign-login-button'          : 'login',
 			// 'click #wx-docusign-create-account-button' : 'createAccount',
 			// 'click #wx-docusign-change-password-button': 'changePassword'
+		},
+
+		toggleSendEmailAddress: function( ev ) {
+			var $target = $( ev.currentTarget );
+			var $input = $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
+			if ( $target.is( ':checked' ) ) {
+				$input.val( wx.currentUserEmail );
+				this.model.set( 'value', wx.currentUserEmail );
+			}
+			else {
+				$input.val( '' );
+				this.model.set( 'value', '' );
+			}
+
 		},
 
 		initialize: function() {
@@ -48,7 +63,14 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			this.$el.html( this.tpl( this.model.toJSON() ) );
+			var templateDataObject = this.model.toJSON();
+
+			templateDataObject.useCurrentUserEmail = '';
+			if ( templateDataObject.value == wx.currentUserEmail ) {
+				templateDataObject.useCurrentUserEmail = 'checked';
+			}
+
+			this.$el.html( this.tpl( templateDataObject ) );
 			this.$el.addClass( this.model.get( 'method' ) );
 			return this;
 		},
