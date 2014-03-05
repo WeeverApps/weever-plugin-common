@@ -8,6 +8,7 @@ wxApp = wxApp || {};
         render: function() {
 			wxApp.WordpressAddPageSubTabEditView.prototype.render.apply( this );
 
+			$('section.post-list').hide();
 			$('section.editor').hide();
 			$('section.coupon').show();
 			$('section.mapper').hide();
