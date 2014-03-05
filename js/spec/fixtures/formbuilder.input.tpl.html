@@ -1,11 +1,17 @@
 <script type="text/template" id="form-builder-input">
 	<p class="title" data-section-title>
 		<a href="#panel<%- ordinal %>">
-            <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span> <span class="appbuilder-icon icon-move-all"></span>
+            <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span> <span class="appbuilder-icon icon-move-updown"></span>
 		</a>
 	</p>
-	<div class="content" data-section-content>
-		<label>
+
+    <div class="content" data-section-content>
+
+        <p class="wx-form-builder-featurenote">For a range greater than 10 values in total or using larger numbers or decimals we recommend using the standard &ldquo;number&rdquo; input field.</p>
+
+        <br>
+
+        <label>
 			Label
 			<input type='text' class="wx-form-builder-input wx-form-builder-label-input" value='<%- label %>' />
 		</label>
@@ -14,19 +20,19 @@
 			<input type='text' class="wx-form-builder-input wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" value='<%- attributes.placeholder || attributes.attributes.placeholder %>' placeholder="Placeholder" />
 		</label>
 		<label class="<%- minClass %>">
-			Minimum value
+			Minimum number
 			<input type="number" class="wx-form-builder-input wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.min || attributes.attributes.min %>"/>
 		</label>
 		<label class="<%- maxClass %>">
-			Maximum value
+			Maximum number
 			<input type="number" class="wx-form-builder-input wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.max || attributes.attributes.max %>"/>
 		</label>
 		<label class="<%- valueClass %>">
-			Starting value
+			Default number selected
 			<input type="<%- valueType %>" class="wx-form-builder-input wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.value || attributes.attributes.value %>"/>
 		</label>
 		<label class="<%- stepClass %>">
-			Step (the amount that each tick of the slider should increase / decrease)
+			Increment amount of each slider step (increase or decrease)
 			<input type="number" class="wx-form-builder-input wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.step || attributes.attributes.step %>"/>
 		</label>
 
