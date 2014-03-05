@@ -212,16 +212,17 @@ wxApp = wxApp || {};
 
 		createAccount: function() {
 			var me = this;
-				account = me.validateAccount(),
-				success = function success( data ) {
-					me.$('#docusignAccountInfo').slideUp();
-					me.$('#wx-login-message').html( 'Success! DocuSign account created.  You are now logged in.<a href="#" class="close">&times;</a>' );
-					me.$('#docusignOtherInfo').slideDown();
-				},
-				failure = function failure( data ) {
-					me.$('.account.alert-box.alert').text( data.message );
-					me.$('.account.alert-box.alert').slideDown();
-				};
+				var account = me.validateAccount(),
+					success = function success( data ) {
+						me.$('#docusignAccountInfo').slideUp();
+						me.$('#wx-login-message').html( 'Success! DocuSign account created.  You are now logged in.<a href="#" class="close">&times;</a>' );
+						me.$('#docusignOtherInfo').slideDown();
+					},
+					failure = function failure( data ) {
+						console.log( data );
+						me.$('.account.alert-box.alert').html( data.message );
+						me.$('.account.alert-box.alert').slideDown();
+					};
 
 			if ( account.valid ) {
 				// Remove values we don't need to send to the API.
@@ -234,7 +235,7 @@ wxApp = wxApp || {};
 			else {
 
 				// Display validation errors.
-				var msg = 'There were some validation errors. Please correct them and try again.<br/><ul>';
+				var msg = 'There were some validation errors. Please correct them and try again.<br/><br/><ul>';
 				for (var i = 0; i < account.errors.length; i++) {
 					msg += '<li>' + account.errors[i] + '</li>';
 				};
@@ -295,7 +296,11 @@ wxApp = wxApp || {};
 				    // middleName  : me.$('.wx-form-builder-docusign-middleName').val().trim(),
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
 				    // suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
-				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val()
+				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val(),
+	                docusignConfig : {
+		                payBefore: false,
+		                envelopes: 0
+	                }
 			    },
 			    passwordAgain = me.$('.wx-form-builder-docusign-password-again').val();
 
@@ -347,6 +352,21 @@ wxApp = wxApp || {};
             	accountObject.valid = false;
             	accountObject.errors[ accountObject.errors.length ] = "Passwords must match.";
             }
+
+			// 9. One of either "charge per envelope" or "pre-purchase 100+ envelopes" must be checked
+			if (
+				( ! $( '.wx-docusign-pay-after' ).is( ':checked' ) ) &&
+				( ! $( '.wx-docusign-pay-before' ).is( ':checked' ) )
+				) {
+				accountObject.valid = false;
+				accountObject.errors[ accountObject.errors.length ] = "You must select a payment option.";
+			}
+			else {
+				if ( $( '.wx-docusign-pay-before' ).is( ':checked' ) ) {
+					accountObject.docusignConfig.payBefore = true;
+				}
+				accountObject.docusignConfig = JSON.stringify( accountObject.docusignConfig );
+			}
 
             return accountObject;
 
