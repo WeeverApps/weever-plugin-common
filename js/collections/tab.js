@@ -34,7 +34,11 @@ var wxApp = wxApp || {};
                     if ( tabData.config && tabData.config.subtab_name )
                         retVal = tabData.config.subtab_name;
                     else
+                    {
                         retVal = 'WordpressPageSubTab';
+                        if ( wx.cms === 'cloud' )
+                            retVal = 'WordpressAddPageSubTab';
+                    }
                     break;
                 case 'twitter':
                 case 'twitterUser':
