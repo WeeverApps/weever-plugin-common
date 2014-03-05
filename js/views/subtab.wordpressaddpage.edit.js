@@ -29,6 +29,7 @@ wxApp = wxApp || {};
         	
 			wxApp.SubTabEditView.prototype.render.apply( me );
 
+			me.$('section.post-list').hide();
 			me.$('section.editor').show();
 			me.$('section.coupon').hide();
 			me.$('section.mapper').hide();

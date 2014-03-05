@@ -25,6 +25,7 @@ wxApp = wxApp || {};
 			    post = this.getPost( postId );
 
 			this.showEditor( post.ID, post.post_title, post.post_content, post.lat, post.lng );
+			this.$('.wx-back-to-list').show();
 		},
 
 		deletePost: function( ev ) {
@@ -84,8 +85,11 @@ wxApp = wxApp || {};
 			wxApp.WordpressAddPageSubTabEditView.prototype.render.apply( this );
 
 			var config = this.model.get('config');
+console.log('=== model ===', this.model);
 			if ( typeof config === 'string' )
 				config = JSON.parse( config );
+
+console.log('=== config 2 ===', config);
 
 			if ( config.items ) {
 
