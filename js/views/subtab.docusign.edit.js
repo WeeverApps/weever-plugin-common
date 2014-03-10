@@ -40,10 +40,6 @@ wxApp = wxApp || {};
 			}
 		},
 
-		render: function() {
-			wxApp.FormBuilderSubTabEditView.prototype.render.apply( this, arguments );
-		},
-
 		initialize: function() {
 			var me = this,
 				args = arguments;
