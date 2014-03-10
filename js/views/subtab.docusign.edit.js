@@ -27,7 +27,21 @@ wxApp = wxApp || {};
 			'click #wx-docusign-login-button'                : 'login',
 			'click #wx-docusign-create-account-button'       : 'createAccount',
 			'click #wx-docusign-change-password-button'      : 'changePassword',
-			'click .wx-continue-button'                      : 'next'
+			'click .wx-continue-button'                      : 'next',
+			'change .wx-form-builder-docusign-demomode'      : 'toggleDemoMode'
+		},
+
+		toggleDemoMode: function( ev ) {
+			if ( $( ev.currentTarget ).is( ':checked' ) ) {
+				this.model.get( 'config' ).demomode = true;
+			}
+			else {
+				delete this.model.get( 'config' ).demomode;
+			}
+		},
+
+		render: function() {
+			wxApp.FormBuilderSubTabEditView.prototype.render.apply( this, arguments );
 		},
 
 		initialize: function() {
@@ -170,6 +184,7 @@ wxApp = wxApp || {};
 			var me       = this,
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
+				demomode = this.model.get( 'config' ).demomode || false,
 			    success  = function success( data ) {
 				    console.log( me );
 				    // Update docusign username/password
@@ -206,6 +221,9 @@ wxApp = wxApp || {};
 			me.$('#login_loading').show();
 
 			var params = { username: username, password: password };
+			if ( demomode ) {
+				params.demomode = demomode;
+			}
 			// if ( true ) params.demomode = 1;	// TODO - Remove this.
 			wx.makeApiCall('_docusign/client_login', params, success, failure);
 		},
