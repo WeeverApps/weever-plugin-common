@@ -7,7 +7,12 @@
 
     <div class="content" data-section-content>
 
+		<%
+		// Only "Number Slider" uses this template and has type == 'range'
+		if ( attributes.attributes.type == 'range' ) {
+		%>
         <p class="wx-form-builder-featurenote">For a range greater than 10 values in total or using larger numbers or decimals we recommend using the standard &ldquo;number&rdquo; input field.</p>
+		<% } %>
 
         <br>
 
