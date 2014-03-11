@@ -256,6 +256,7 @@ wxApp = wxApp || {};
 				msg += '</ul>';
 				me.$('.account.alert-box.alert').html( msg );
 				me.$('.account.alert-box.alert').slideDown();
+				$( 'html, body' ).animate( { scrollTop: 0 }, 'slow' );
 			}
 		},
 
@@ -311,6 +312,7 @@ wxApp = wxApp || {};
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
 				    // suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
 				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val(),
+	                agreedToTerms : me.$( '.wx-docusign-terms-agreement' ).is( ':checked' ),
 	                docusignConfig : {
 		                payBefore: false,
 		                envelopes: 0
@@ -367,7 +369,13 @@ wxApp = wxApp || {};
             	accountObject.errors[ accountObject.errors.length ] = "Passwords must match.";
             }
 
-			// 9. One of either "charge per envelope" or "pre-purchase 100+ envelopes" must be checked
+			// 9. DocuSign Terms and Conditions
+			if ( ! accountObject.agreedToTerms ) {
+				accountObject.valid = false;
+				accountObject.errors[ accountObject.errors.length ] = "You must agree to the DocuSign terms and conditions.";
+			}
+
+			// 10. One of either "charge per envelope" or "pre-purchase 100+ envelopes" must be checked
 			if (
 				( ! $( '.wx-docusign-pay-after' ).is( ':checked' ) ) &&
 				( ! $( '.wx-docusign-pay-before' ).is( ':checked' ) )
