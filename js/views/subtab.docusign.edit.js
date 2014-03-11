@@ -256,7 +256,9 @@ wxApp = wxApp || {};
 				msg += '</ul>';
 				me.$('.account.alert-box.alert').html( msg );
 				me.$('.account.alert-box.alert').slideDown();
-				$( 'html, body' ).animate( { scrollTop: 0 }, 'slow' );
+				$( 'html, body' ).animate( {
+					scrollTop: $( '.account.alert-box.alert' ).offset().top
+				}, 'slow' );
 			}
 		},
 
