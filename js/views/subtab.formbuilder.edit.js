@@ -451,8 +451,7 @@ wxApp = wxApp || {};
 			}
 			else {
 				action = this.addCustomAction( {
-					method : 'docusign',
-					allowDemoMode: this.model.get( 'config' ).allowDemoMode
+					method : 'docusign'
 				} );
 			}
 			return action;
