@@ -56,7 +56,13 @@
                                     <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
                                 </label>
 								<% if ( config.allowDemoMode ) { %>
-									<label><input type="checkbox" class="wx-form-builder-docusign-demomode"/> Enable DocuSign &ldquo;Demo Mode&rdquo;</label>
+									<label>
+										<input
+												type="checkbox"
+												class="wx-form-builder-docusign-demomode"
+												<%= ( typeof config.demomode != 'undefined' && config.demomode ) ? 'checked' : '' %>
+												/> Enable DocuSign &ldquo;Demo Mode&rdquo;
+									</label>
 								<% } %>
                             </div>
                         </div>
@@ -116,6 +122,13 @@
                                     Repeat Password*
                                     <input type="password" class="wx-form-builder-docusign-password-again" />
                                 </label>
+
+								<p>
+									<label>
+										<input type="checkbox" class="wx-docusign-terms-agreement" />
+										I have read and agree to the <a href="https://www.docusign.com/company/terms-and-conditions/reseller" target="_blank">DocuSign Terms and Conditions</a>.
+									</label>
+								</p>
 
 								<p>
 									<label>
@@ -443,7 +456,7 @@
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Number Slider</b><p>
                                        <p>Adds a slider element for selecting a number from a range of predefined values.</p>
-                                       <p>For a range above 10 values in total or using decimals or large numbers use the standard, non-slider number input field.</p>
+                                       <p>For a range above 10 values in total or using decimals or large numbers we recommend using the standard &ldquo;number&rdquo; input field.</p>
                                        <p><b>Example:</b></p>
                                        <label>Please rate our service (1-5, 5 being best)</label>
                                        <br>
@@ -597,7 +610,7 @@
             <div>
                 <!-- start: edit new and existing form fields -->
 
-                <div id="form-build-area" class="section-container accordion" data-section="accordion">
+                <div id="form-build-area" class="form-build-area section-container accordion" data-section="accordion">
 
                 </div>
             </div>

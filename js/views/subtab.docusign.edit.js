@@ -27,7 +27,17 @@ wxApp = wxApp || {};
 			'click #wx-docusign-login-button'                : 'login',
 			'click #wx-docusign-create-account-button'       : 'createAccount',
 			'click #wx-docusign-change-password-button'      : 'changePassword',
-			'click .wx-continue-button'                      : 'next'
+			'click .wx-continue-button'                      : 'next',
+			'change .wx-form-builder-docusign-demomode'      : 'toggleDemoMode'
+		},
+
+		toggleDemoMode: function( ev ) {
+			if ( $( ev.currentTarget ).is( ':checked' ) ) {
+				this.model.get( 'config' ).demomode = true;
+			}
+			else {
+				delete this.model.get( 'config' ).demomode;
+			}
 		},
 
 		initialize: function() {
@@ -170,6 +180,7 @@ wxApp = wxApp || {};
 			var me       = this,
 			    username = me.$('#docusignLoginForm .wx-form-builder-docusign-username').val(),
 			    password = me.$('#docusignLoginForm .wx-form-builder-docusign-password').val(),
+				demomode = this.model.get( 'config' ).demomode || false,
 			    success  = function success( data ) {
 				    console.log( me );
 				    // Update docusign username/password
@@ -206,6 +217,9 @@ wxApp = wxApp || {};
 			me.$('#login_loading').show();
 
 			var params = { username: username, password: password };
+			if ( demomode ) {
+				params.demomode = demomode;
+			}
 			// if ( true ) params.demomode = 1;	// TODO - Remove this.
 			wx.makeApiCall('_docusign/client_login', params, success, failure);
 		},
@@ -242,6 +256,9 @@ wxApp = wxApp || {};
 				msg += '</ul>';
 				me.$('.account.alert-box.alert').html( msg );
 				me.$('.account.alert-box.alert').slideDown();
+				$( 'html, body' ).animate( {
+					scrollTop: $( '.account.alert-box.alert' ).offset().top
+				}, 'slow' );
 			}
 		},
 
@@ -297,6 +314,7 @@ wxApp = wxApp || {};
 				    lastName    : me.$('.wx-form-builder-docusign-lastName').val().trim(),
 				    // suffix      : me.$('.wx-form-builder-docusign-suffix').val().trim(),
 				    password    : me.$('#docusignCreateForm .wx-form-builder-docusign-password').val(),
+	                agreedToTerms : me.$( '.wx-docusign-terms-agreement' ).is( ':checked' ),
 	                docusignConfig : {
 		                payBefore: false,
 		                envelopes: 0
@@ -353,7 +371,13 @@ wxApp = wxApp || {};
             	accountObject.errors[ accountObject.errors.length ] = "Passwords must match.";
             }
 
-			// 9. One of either "charge per envelope" or "pre-purchase 100+ envelopes" must be checked
+			// 9. DocuSign Terms and Conditions
+			if ( ! accountObject.agreedToTerms ) {
+				accountObject.valid = false;
+				accountObject.errors[ accountObject.errors.length ] = "You must agree to the DocuSign terms and conditions.";
+			}
+
+			// 10. One of either "charge per envelope" or "pre-purchase 100+ envelopes" must be checked
 			if (
 				( ! $( '.wx-docusign-pay-after' ).is( ':checked' ) ) &&
 				( ! $( '.wx-docusign-pay-before' ).is( ':checked' ) )

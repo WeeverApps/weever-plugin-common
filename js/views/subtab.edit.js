@@ -69,7 +69,6 @@ wxApp = wxApp || {};
 
             // Once the reveal modal is open...
             var me = this.$el;
-            meeeee = me;
             this.$el.on('opened', function() {
                 me.foundation('section', 'reflow');
 
