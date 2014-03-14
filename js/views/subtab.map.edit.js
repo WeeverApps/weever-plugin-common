@@ -85,11 +85,8 @@ wxApp = wxApp || {};
 			wxApp.WordpressAddPageSubTabEditView.prototype.render.apply( this );
 
 			var config = this.model.get('config');
-console.log('=== model ===', this.model);
 			if ( typeof config === 'string' )
 				config = JSON.parse( config );
-
-console.log('=== config 2 ===', config);
 
 			if ( config.items ) {
 
@@ -105,7 +102,7 @@ console.log('=== config 2 ===', config);
 
         setModelFromView: function(model) {
             
-        	var title       = this.$('#wx-title-value').val(),
+        	var title       = this.$('.wx-edit-input').val(),
         	    content     = nicEditors.findEditor( this.editorId ).nicInstances[0].getContent(),
         	    data        = {
                     content_type: 'map',

@@ -57,7 +57,7 @@ wxApp = wxApp || {};
             if ( $('section.editor').is(':visible') ) {
 
             	// Add post info
-            	name    = $( '#wx-title-value' ).val();
+            	name    = this.$( '.wx-edit-input' ).val();
 				content = nicEditors.findEditor( this.editorId ).nicInstances[0].getContent();
         	}
         	
@@ -95,6 +95,7 @@ wxApp = wxApp || {};
 
         		// The content contains a div.item-page, which contains the title, h1.wx-article-title, then the rest of the content.
         		// We just want that 'rest of the content,' so we get rid of the h1, then the parent div.
+        		var title = content.find('h1.wx-article-title').html;
         		content.find('h1.wx-article-title').detach();
         		content.unwrap();
 
@@ -105,6 +106,7 @@ wxApp = wxApp || {};
         		} else {
 	        		me.$('.wx-content-editor').val( content );
 	        	}
+	        	me.$('')
         	} );
 		},
 
