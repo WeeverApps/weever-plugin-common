@@ -44,7 +44,6 @@ wxApp = wxApp || {};
 		initialize: function() {
 			var $template = $( this.tplSelector );
 			this.inputTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
 		},
 
 		render: function() {
