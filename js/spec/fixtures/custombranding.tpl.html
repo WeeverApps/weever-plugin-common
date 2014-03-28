@@ -19,7 +19,6 @@
 			$weeverapp = new WeeverApp();
 		}
 	?>
-	http://weeverapps.com/product/formbuilder/?app_url=<?php echo urlencode($weeverapp->domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>
     <?php if ( $weeverapp->tier != 4 ): ?>
 		<p>
             <a target="_blank" class="button radius success" href="http://weeverapps.com/product/formbuilder/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
