@@ -74,6 +74,11 @@ wxApp = wxApp || {};
                 // Alright, now let's set the height of the right-hand side to the height of the left-hand side
                 // var currentModal = $('.reveal-modal.open');
                 // Get the height of the current modal.
+                if ( me.selector.search(/[0-9]+/) == -1 )
+                	wx.modalTag = 'new';
+                else
+                	wx.modalTag = 'edit';
+                
                 var height = me.height();
                 height -= 115;   // Account for margins & padding.
                 if (height < 315)
@@ -107,6 +112,7 @@ wxApp = wxApp || {};
         },
 
 		finish: function() {
+			console.log('***');
             if ( this.validate() ) {
                 this.setModelFromView(this.model);
                 this.setTitleFromView(this.model);

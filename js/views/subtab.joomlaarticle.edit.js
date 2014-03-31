@@ -14,8 +14,20 @@ wxApp = wxApp || {};
         },
 
         setModelFromView: function(model) {	
-            if ( this.$('#wx-add-joomla-article-select') )
-                model.setConfig('url', wx.siteDomain + this.$('#wx-add-joomla-article-select').val());
+        
+        	console.log(wx.siteDomain);
+        	//console.log($('#wx-add-joomla-article-select'));
+        	//console.log($('#wx-add-joomla-article-select').val());
+        	
+            if ( this.$('#wx-add-joomla-article-select') && this.$('#wx-add-joomla-article-select').val() != '' )
+            	if ( this.$('#wx-add-joomla-article-select').val().search(wx.siteDomain) != -1 ) {
+            		console.log('you');
+            		model.setConfig('url', this.$('#wx-add-joomla-article-select').val());
+            	} else {
+            		console.log('meiyou');
+            		model.setConfig('url', wx.siteDomain + this.$('#wx-add-joomla-article-select').val());
+            	}
+                
             return model;
         }
     });
