@@ -53,7 +53,7 @@ wxApp = wxApp || {};
                 if ( undefined != allowAdvanced && allowAdvanced )
                     tab.set( 'allowAdvanced', true );
                 
-                var view = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
+                wxApp.currentActiveView = new wxApp[id + 'SubTabEditView']({ model: tab, el: '#wx-edit-area-' + id });
             } else {
                 throw new Error('Invalid type ' + id);
             }

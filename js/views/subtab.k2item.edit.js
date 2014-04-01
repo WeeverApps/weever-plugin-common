@@ -9,13 +9,13 @@ wxApp = wxApp || {};
 			wxApp.SubTabEditView.prototype.render.apply( this );
 
 			var url = this.model.get('config').url;
-			$('#wx-add-k2-item-select').val( url );
+			this.$('.wx-add-k2-item-select').val( url );
 			
         },
 
         setModelFromView: function(model) {
-            if ( this.$('#wx-add-k2-item-select') )
-                model.setConfig('url', wx.siteDomain + this.$('#wx-add-k2-item-select').val());
+            if ( this.$('.wx-add-k2-item-select') )
+                model.setConfig('url', wx.siteDomain + this.$('.wx-add-k2-item-select').val());
             return model;
         }
     });

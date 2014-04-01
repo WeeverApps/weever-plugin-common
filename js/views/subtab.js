@@ -43,7 +43,7 @@ wxApp = wxApp || {};
 
             var editViewName = this.model.getModelName() + 'EditView';
             if ( 'SubTabEditView' != editViewName && undefined !== wxApp[editViewName] )
-                var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area-' + this.model.get('id') } );
+                wxApp.currentActiveView = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area-' + this.model.get('id') } );
             else
                 throw new Error( 'Invalid edit type ' + this.model.get('content') + '--' + editViewName );
         },
