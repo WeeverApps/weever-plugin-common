@@ -33,3 +33,10 @@ body#minwidth-body {
 #header-box #menu li {
     border-color: transparent;
 }
+
+/* fix for file upload buttons */
+#appbuilder #interface input[type="file"] {
+
+height: 136px;
+
+}

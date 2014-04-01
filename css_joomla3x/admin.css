@@ -6,3 +6,9 @@
 .btn-subhead {
     display: none !important;
 }
+/* fix for file upload buttons */
+#appbuilder #interface input[type="file"] {
+
+height: 136px;
+
+}
