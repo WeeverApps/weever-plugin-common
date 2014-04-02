@@ -1,6 +1,6 @@
 /*	
 *	Weever Apps
-*	(c) 2010-2013 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2014 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Brian Hogg
 *	Version: 	1.0

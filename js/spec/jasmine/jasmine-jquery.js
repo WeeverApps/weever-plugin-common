@@ -5,7 +5,7 @@
  
  https://github.com/velesin/jasmine-jquery
 
- Copyright (c) 2010-2013 Wojciech Zawistowski, Travis Jeffery
+ Copyright (c) 2010-2014 Wojciech Zawistowski, Travis Jeffery
 
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
