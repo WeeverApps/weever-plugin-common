@@ -54,10 +54,20 @@ var wxApp = wxApp || {};
         },
 
         destroy: function() {
-            var me = this;
-            wx.makeApiCall('tabs/delete', { tab_id: this.get('id') }, function() {
-                me.trigger('destroy');
-            });
+            if ( this.get('subTabs') ) {
+                // Delete this tab and all of the subtabs from the API.
+                for (var i = 0; i < this.get('subTabs').length; i++) {
+                    var m = this.get('subTabs').models[i];
+                    wx.makeApiCall('tabs/delete', { tab_id: m.get('id') }, function() { });
+                }
+            }
+            else {
+                // No subtabs; just delete this one.
+                wx.makeApiCall('tabs/delete', { tab_id: this.get('id') }, function() { });
+            }
+
+            // Remove the tabs from the view.
+            this.trigger('destroy');
         }
     });
 })(jQuery);
