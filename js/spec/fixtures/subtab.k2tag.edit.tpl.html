@@ -1,0 +1,51 @@
+<script type="text/template" id="k2tag-subtab-edit-template">
+
+    <p>Add a tag of K2 items. Your app will display newly published items automatically.</p>
+    
+    <div id="wx-add-k2-tag-dialog" class="wx-add-k2-tag">
+            
+            <?php 
+            	
+            	if( comWeeverHelper::joomlaVersion() == '2.5' )  // ### 2.5 only
+            		$link = 'index.php?option=com_k2&amp;view=tags&amp;task=element&amp;tmpl=component&amp;object=k2tag';
+
+                if( comWeeverHelper::joomlaVersion() >= 3 )
+                    $link = 'index.php?option=com_k2&amp;view=tags&amp;task=element&amp;tmpl=component&amp;layout=modal&amp;function=jSelectTag';
+        
+        	?>
+            
+            <div id='wx-add-k2-tag-panel'>
+            
+            		<div class="select-k2-content">
+            		
+            			<a href="#" class="wx-load-k2-tag button secondary radius" data-reveal-id="select-k2-tag">Select K2 tag</a>
+            			
+            			<input type="hidden" id="wx-add-k2-tag-select" class="" value="" />
+            			
+            		</div>
+            		
+            </div>
+            <br>
+            
+            <div id="select-k2-tag" class="reveal-modal" data-reveal>
+                <div class="row">
+                    <div class="large-6 small-12 columns">
+                        <br>
+                        <h2>K2 tag</h2>
+                        <p>Please select a tag.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="wx-embed-container wx-content-selector">
+                            <iframe src="<?php echo $link; ?>" frameborder="0" seamless>
+                        </div>
+                    </div>
+                </div>
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
+            
+    
+    </div>
+
+</script>
