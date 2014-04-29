@@ -42,7 +42,11 @@ wxApp = wxApp || {};
 			// textarea reports it's width as 100px in Chrome, which causes
 			// the editor to display as 100px wide.
 			setTimeout( function() {
-				new nicEditor({fullPanel : true}).panelInstance( me.editorId );
+				var url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl;
+				new nicEditor({
+					fullPanel : true,
+					uploadURI : url
+				}).panelInstance( me.editorId );
 			}, 200);
         },
 
