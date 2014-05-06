@@ -68,6 +68,7 @@ wxApp = wxApp || {};
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
 
             wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: 0 }, function() {
+                wx.rebuildApp();
                 draggedItemView.model.trigger('tab:move');
                 wxApp.tabsView.addNewMainTab( draggedItemView.model );
 

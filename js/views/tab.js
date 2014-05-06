@@ -50,6 +50,7 @@ wxApp = wxApp || {};
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
             if ( draggedItemView.model.get('parent_id') != me.model.get('id') ) {
                 wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: me.model.get('id') }, function() {
+                    wx.rebuildApp();
                     draggedItemView.model.trigger('tab:move');
                     me.model.addSubTab( draggedItemView.model );
                     // Select the parent tab.
