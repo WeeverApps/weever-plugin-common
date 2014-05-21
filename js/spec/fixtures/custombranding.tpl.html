@@ -39,7 +39,7 @@
     <p class="wx-ui-title">Custom web address</p>
 	<p>Set a custom web address (domain name) for your app like "myappname.com" or "app.mywebsite.com".</p>
 
-	<?php if ( $weeverapp->tier == 1 or $weeverapp->tier == '2.1' ): ?>
+	<?php if ( $weeverapp->is_free() ): ?>
 		<p>
 			<a target="_blank" href="http://weeverapps.com/product/formbuilder/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
 		</p>

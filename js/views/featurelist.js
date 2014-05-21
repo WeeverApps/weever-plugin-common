@@ -46,7 +46,10 @@ wxApp = wxApp || {};
 		    error: function() {
 
                 var fileName = 'wx.featurelist.js';
-                if ( wxApp.account.get('tier_raw') >= 100 ) {
+                if ( wxApp.account.get('tier_raw') >= 200 ) {
+                    fileName = 'wx.featurelist.training.js';
+                }
+                else if ( wxApp.account.get('tier_raw') >= 100 ) {
                     fileName = 'wx.featurelist.docusign.js';
                 }
 

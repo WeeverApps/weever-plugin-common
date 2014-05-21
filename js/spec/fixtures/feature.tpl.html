@@ -6,7 +6,7 @@
         &nbsp;
 
         <!-- show "pro" label if tier is free trial or basic -->
-        <% if (tierRequired != undefined && tierRequired == 2) { %>
+        <% if (tierRequired != undefined && tierRequired >= 2) { %>
             <span class="label success wx-add-feature-tier">pro</span>
         <% } else { %>
             <span class="label secondary wx-add-feature-tier">+ add</span>
@@ -28,12 +28,4 @@
         Please wait...
     </div>
 
-
 </script>
-
-
-
-<!-- Display subscription tier info -->
-<!--
-
--->
