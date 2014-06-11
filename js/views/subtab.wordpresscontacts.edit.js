@@ -5,6 +5,16 @@ wxApp = wxApp || {};
     wxApp.WordpressContactsSubTabEditView = wxApp.SubTabEditView.extend({
         subTabEditTplSelector: '#wordpresscontacts-subtab-edit-template',
 
+	    initialize: function() {
+		    var config = this.model.get( 'config' );
+
+		    config.contacts = JSON.parse( config.contacts );
+		    this.model.set( 'config', config );
+
+		    // Call parent's initialize() function
+		    wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
+	    },
+
         setModelFromView: function(model) {
             var contact = {};
             if ( this.$('.wx-contact-input-title') )
