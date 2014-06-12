@@ -18,10 +18,14 @@
 		if (! isset( $weeverapp )) {
 			$weeverapp = new WeeverApp();
 		}
+		$sku = get_option( 'sku' );
+		if ( (!isset($sku) || trim($sku)==='') ) {
+			$sku = 'cms';
+		}
 	?>
     <?php if ( $weeverapp->tier != 4 ): ?>
 		<p>
-            <a target="_blank" class="button radius success" href="http://weeverapps.com/product/formbuilder/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
+            <a target="_blank" class="button radius success" href="http://weeverapps.com/product/<?php echo $sku; ?>/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
         </p>
 	<?php else: ?>
 		<p>Add custom text or HTML to appear as the app loads.  If this field is left blank, the load spinner will not appear.</p>
@@ -41,7 +45,7 @@
 
 	<?php if ( $weeverapp->is_free() ): ?>
 		<p>
-			<a target="_blank" class="button radius success" href="http://weeverapps.com/product/formbuilder/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
+			<a target="_blank" class="button radius success" href="http://weeverapps.com/product/<?php echo $sku; ?>/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
 		</p>
 	<?php else: ?>
 
