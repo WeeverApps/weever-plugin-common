@@ -7,9 +7,10 @@ wxApp = wxApp || {};
 
 	    initialize: function() {
 		    var config = this.model.get( 'config' );
-
+			if ( typeof config.contacts == 'string' ) {
 		    config.contacts = JSON.parse( config.contacts );
 		    this.model.set( 'config', config );
+}
 
 		    // Call parent's initialize() function
 		    wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
