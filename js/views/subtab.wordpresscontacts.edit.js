@@ -8,8 +8,10 @@ wxApp = wxApp || {};
 	    initialize: function() {
 		    var config = this.model.get( 'config' );
 
-		    config.contacts = JSON.parse( config.contacts );
-		    this.model.set( 'config', config );
+		    if ( typeof config.contacts == 'string' ) {
+			    config.contacts = JSON.parse( config.contacts );
+			    this.model.set( 'config', config );
+		    }
 
 		    // Call parent's initialize() function
 		    wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
@@ -39,12 +41,12 @@ wxApp = wxApp || {};
                 contact['image'] = this.$('.wx-contact-input-image').val();
                 contact['showimage'] = ( contact['image'].trim() ? 1 : 0 );
             }
-            var config_cache = {};
+            var config = {};
             var contacts = [];
             contacts.push( contact );
-            config_cache['contacts'] = contacts;
+            config['contacts'] = contacts;
             try {
-                model.set( 'config_cache', config_cache );
+                model.set( 'config', config );
             } catch ( e ) {
                 ;
             }
