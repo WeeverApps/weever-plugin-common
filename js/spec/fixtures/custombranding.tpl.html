@@ -19,7 +19,7 @@
 			$weeverapp = new WeeverApp();
 		}
 		$sku = get_option( 'sku' );
-		if ( (!isset($sku) || trim($sku)==='') ) {
+		if ( (is_null($sku) || trim($sku)==='') ) {
 			$sku = 'cms';
 		}
 	?>
