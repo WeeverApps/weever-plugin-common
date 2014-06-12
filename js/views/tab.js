@@ -104,7 +104,7 @@ wxApp = wxApp || {};
         },
 
         destroyView: function() {
-            wx.log('destroying tab view');
+            console.log('destroying tab view');
             if ( this.subTabsContainerView )
                 this.subTabsContainerView.remove();
             this.remove();
