@@ -4,6 +4,7 @@ wxApp = wxApp || {};
 (function($){
     wxApp.CouponSubTabEditView = wxApp.WordpressAddPageSubTabEditView.extend({
         // subTabEditTplSelector: '#coupon-subtab-edit-template',
+	    isCoupon: true,
         
         render: function() {
 			wxApp.WordpressAddPageSubTabEditView.prototype.render.apply( this );
