@@ -21,9 +21,9 @@
 
 
 	<% if ( featureName.toLowerCase() == 'formbuilder' || featureName.toLowerCase() == 'docusign' ) { %>
-	    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:false">
+	    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-reveal data-options="closeOnBackgroundClick:false">
 	<% } else { %>
-		<div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:true">
+		<div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-reveal data-options="closeOnBackgroundClick:true">
 	<% } %>
         Please wait...
     </div>

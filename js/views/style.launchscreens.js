@@ -19,7 +19,7 @@ wxApp = wxApp || {};
             jsonModel.launchscreen.tablet           = this.fixImageUrl( jsonModel.launchscreen.tablet );
             jsonModel.launchscreen.tablet_landscape = this.fixImageUrl( jsonModel.launchscreen.tablet_landscape );
 
-            this.$('.content').html( this.tpl( this.model.toJSON() ) );
+            this.$el.html( this.tpl( this.model.toJSON() ) );
         },
 
         saveImage: function( input ) {

@@ -16,7 +16,7 @@ wxApp = wxApp || {};
         },
 
         render: function() {
-            this.$('.content').html( this.tpl( this.model.toJSON() ) );
+            this.$el.html( this.tpl( this.model.toJSON() ) );
         },
 
         saveLoadSpinner: function() {
