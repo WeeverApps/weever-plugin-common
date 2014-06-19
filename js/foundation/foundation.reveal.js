@@ -256,10 +256,10 @@
 	    // Set width to 80% of screen size
 	    var windowSize = $( window ).width();
 	    var modalWidth = Math.round( windowSize * 0.8 );
+	    css.width = modalWidth + 'px';
 
 	    // Set left property to properly center the pop up
-	    css.width = modalWidth + 'px';
-	    css.left = ( ( ( windowSize - modalWidth ) / 2 ) - 38.5 ) + 'px';
+	    css.left = ( ( ( windowSize - modalWidth ) / 2 ) - 166 ) + 'px';
 	    css.margin = 0;
 
         if (el.parent(root_element).length === 0) {
