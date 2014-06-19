@@ -157,6 +157,7 @@
       if (!modal.hasClass('open')) {
         var open_modal = self.S('[' + self.attr_name() + '].open');
 
+	    modal.data('css-top', 10);
         if (typeof modal.data('css-top') === 'undefined') {
           modal.data('css-top', parseInt(modal.css('top'), 10))
             .data('offset', this.cache_offset(modal));
