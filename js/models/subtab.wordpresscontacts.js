@@ -16,18 +16,10 @@ var wxApp = wxApp || {};
                 icon_id: 34,
                 type: 'wordpress-contact',
                 content: 'contact',
-                layout: 'panel',
-                config: { subtab_name: 'WordpressContactsSubTab' },
-                config_cache: {}
-            }
-        );
-        },
-
-        filterAPIData: function( data ) {
-            data.config_cache = JSON.stringify( this.get( 'config_cache' ) );
-            delete data['config'];
-            return data;
+                layout: 'panel'
+            } );
         }
+
     });
 
 })(jQuery);

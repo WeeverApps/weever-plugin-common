@@ -5,6 +5,7 @@ wxApp = wxApp || {};
     wxApp.WordpressAddPageSubTabEditView = wxApp.SubTabEditView.extend({
         subTabEditTplSelector: '#wordpressaddpage-subtab-edit-template',
         editorId: '',
+	    isCoupon: false,
 
 		events : {
 			// Coupon events
@@ -56,6 +57,7 @@ wxApp = wxApp || {};
         		name = '',
         		description = '',
         		terms = '',
+		        barcodeText = '',
         		url;
 
             if ( $('section.editor').is(':visible') ) {
@@ -72,11 +74,13 @@ wxApp = wxApp || {};
 		        	name = this.$('.wx-coupon-title').val();
 		        }
 		        description =  this.$('.wx-coupon-description').val();
-        	    terms       =  this.$('.wx-coupon-terms').val();
+		        terms       =  this.$('.wx-coupon-terms').val();
+		        barcodeText =  this.$('.wx-coupon-barcode').val();
         	    content     += '<div class="item-page">' + this.$('.coupon-preview').html() + '</div>';
 
 	            model.setConfig('description', description);
 	            model.setConfig('terms',       terms);
+		        model.setConfig('barcodeText', barcodeText );
         	}
 
         	url = this.createPage( name, content );
@@ -94,6 +98,17 @@ wxApp = wxApp || {};
 			var me = this;
 
 			$.getJSON( url, function( data ) {
+				console.log( 'loadExistingArticle' );
+				console.log( data );
+
+				if ( me.isCoupon ) {
+					var config = me.model.get( 'config' );
+					if ( !! config.barcodeText ) {
+						me.$('.wx-coupon-barcode').val( me.model.get( 'config' ).barcodeText );
+						me.$('#wx_coupon_barcode_preview').html( '<img src="' + data.results[0].image + '" />' );
+					}
+				}
+
         		var content = data.results[0].html;
         		content = $('<div/>').html( content ).contents();
 
@@ -155,7 +170,7 @@ wxApp = wxApp || {};
 
         updatePreview: function() {
         	var title       = $('.wx-coupon-title').val(),
-        	    description = $('.wx-coupon-description').val()
+		        description = $('.wx-coupon-description').val(),
         	    terms       = $('.wx-coupon-terms').val();
 
         	if ( title )       this.$('#wx_coupon_title_preview').text( title );
@@ -164,6 +179,7 @@ wxApp = wxApp || {};
         },
 
         updateBarcode: function() {
+	        console.log( 'updateBarcode' );
         	var me = this,
         	    nonce = jQuery('input#nonce').val(),
         	    text = this.$('.wx-coupon-barcode').val(),
@@ -173,6 +189,7 @@ wxApp = wxApp || {};
 
         		// Ensure the text hasn't chaged - We don't want to end up generating a billion friggin barcodes.
         		if ( text == me.$('.wx-coupon-barcode').val() ) {
+			        console.log( text );
 		        	jQuery.ajax({
 			            type: "POST",
 			            url: ajaxurl,

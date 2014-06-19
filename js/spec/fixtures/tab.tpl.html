@@ -13,7 +13,7 @@
     				}
     			}
     		}
-            if ( i !== null ) i = i.replace('\\', '');
+            if ( i !== null && typeof i == 'string' ) i = i.replace('\\', '');
     	%>
     	<div class="wxIcon wxIcon-<%- i %> wxFont-1"></div>
         <div class="wx-nav-label" data-tab-id="ID #<%- id %>"><%- title %></div>
