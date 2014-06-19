@@ -253,6 +253,15 @@
         var settings = el.data(this.attr_name(true) + '-init') || this.settings,
             root_element = settings.root_element;
 
+	    // Set width to 80% of screen size
+	    var windowSize = $( window ).width();
+	    var modalWidth = Math.round( windowSize * 0.8 );
+
+	    // Set left property to properly center the pop up
+	    css.width = modalWidth + 'px';
+	    css.left = ( ( ( windowSize - modalWidth ) / 2 ) - 38.5 ) + 'px';
+	    css.margin = 0;
+
         if (el.parent(root_element).length === 0) {
           var placeholder = el.wrap('<div style="display: none;" />').parent();
 
