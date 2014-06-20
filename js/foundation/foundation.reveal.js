@@ -259,7 +259,9 @@
 	    css.width = modalWidth + 'px';
 
 	    // Set left property to properly center the pop up
-	    css.left = ( ( ( windowSize - modalWidth ) / 2 ) - 166 ) + 'px';
+      // We need to offset it by the same amount as #wpcontent
+      var sidebarWidth = parseInt( jQuery( '#wpcontent' ).css('marginLeft') );
+	    css.left = ( ( ( windowSize - modalWidth ) / 2 ) - sidebarWidth ) + 'px';
 	    css.margin = 0;
 
         if (el.parent(root_element).length === 0) {

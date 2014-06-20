@@ -44,7 +44,7 @@ wxApp = wxApp || {};
             this.containerEditView = new wxApp.ContainerEditView({ model: this.model });
             this.$('#ContainerEditModal').html( this.containerEditView.render().el );
 
-            this.$('.section-container').foundation('section', 'reflow');
+            this.$('.section-container').foundation('reflow');
         },
 
         selectLayout: function(e) {

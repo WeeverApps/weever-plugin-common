@@ -400,7 +400,7 @@ wxApp = wxApp || {};
 
 			$('.form-builder-step-one').slideUp();
 			$('.form-builder-step-two').slideDown();
-			$( this.buildPaneSelector ).foundation('section', 'reflow');
+			$( this.buildPaneSelector ).foundation('reflow');
 			$( 'html, body' ).animate( { scrollTop: 0 }, 500 );
 
 		}
