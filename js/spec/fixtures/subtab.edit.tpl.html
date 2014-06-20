@@ -40,26 +40,26 @@
         </ul>
         <div class="tabs-content">
             <% if ( validateFeed ) { %>
-            <div class="content active" id="tab-add-preview" style="height: 315px; overflow-y: auto;">
+                <div class="content active" id="tab-add-preview" style="height: 315px; overflow-y: auto;">
                     <div class="wx-validate-feed">
                         <div class="panel wx-preview-form">
                             <h3 class="wx-preview-msg">preview</h3>
                         </div>
                     </div>
-            </div>
+                </div>
             <% } %>
             <div class="content icon-selector <% if ( ! (validateFeed) ) { %>active<% } %>" id="tab-add-icon" style="height: 315px; overflow-y: auto;">
-                    <ul class="large-block-grid-7">
-                        <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
-                    </ul>
+                <ul class="large-block-grid-7">
+                    <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                </ul>
             </div>
             <div class="content" id="tab-add-help" style="height: 315px; overflow-y: auto;">
-                    <%= helpBody %>
-                    <!-- start - standard help text -->
-                    <p><b>Support</b></p>
-                    <p> Visit <a target="_blank" href="http://support.weeverapps.com">support.weeverapps.com</a>. Professional level subscriptions and above have access to ticket-based support and faster response times.</p>
-                    <br>
-                    <!-- endof - standard help text -->
+                <%= helpBody %>
+                <!-- start - standard help text -->
+                <p><b>Support</b></p>
+                <p> Visit <a target="_blank" href="http://support.weeverapps.com">support.weeverapps.com</a>. Professional level subscriptions and above have access to ticket-based support and faster response times.</p>
+                <br>
+                <!-- endof - standard help text -->
             </div>
         </div>
     </div>
