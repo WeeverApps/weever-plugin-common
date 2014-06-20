@@ -50,7 +50,6 @@ wxApp = wxApp || {};
 				icon_id: 30,
 				type: 'formbuilder',
 				content: 'formbuilder',
-                helpTitle:  'Support',
 				layout: 'panel',
 	            advancedMode: allowAdvancedMode,
 				config: {

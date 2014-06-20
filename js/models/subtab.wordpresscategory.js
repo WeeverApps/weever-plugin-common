@@ -17,7 +17,7 @@ wxApp = wxApp || {};
                 content: 'html',
                 layout: 'list',
                 config: { subtab_name: 'WordpressCategorySubTab' },
-                helpTitle:  'Adding Wordpress content',
+                // helpTitle:  'Adding Wordpress content',
                 helpBody:   '<p><b>Adding Wordpress content to your app</b></p>' +
                             '<p>Any Wordpress content you add to your app updates in real-time as you make changes.</p>' +
                             '<p><b>Wordpress Posts</b></p>' +

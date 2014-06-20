@@ -18,7 +18,7 @@ wxApp = wxApp || {};
                 layout: 'list',
                 tabLayout: 'map',
                 config: { url: '', gps: '1', subtab_name: 'WordpressMapSubTab' },
-                helpTitle:  'Creating a map',
+                // helpTitle:  'Creating a map',
                 helpBody:   '<p><b>Adding Wordpress content to your app</b></p>' +
                             '<p>Any Wordpress content you add to your app updates in real-time as you make changes.</p>' +
                             '<p><b>Wordpress Maps</b></p>' +

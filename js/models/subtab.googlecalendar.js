@@ -16,7 +16,7 @@ wxApp = wxApp || {};
                 content: 'googleCalendar',
                 layout: 'list',
                 config: { calendar_id: 'abc123@group.calendar.google.com', subtab_name: 'GoogleCalendarSubTab' },
-                helpTitle: 'Finding a calendar ID',
+                // helpTitle: 'Finding a calendar ID',
                 helpBody:  '<p><b>Primary Google calendars:</b></p>' +
                            '<p>A primary calendar is associated with your Google / Gmail account, for example:</p>' +
                            '<p>emailaddress@gmail.com</p>' +

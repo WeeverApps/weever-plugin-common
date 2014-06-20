@@ -16,7 +16,7 @@ var wxApp = wxApp || {};
                 content: 'wufoo',
                 layout: 'list',
                 config: { url: 'https://USERNAME.wufoo.com', apikey: 'XXXX-XXXX-XXXX-XXXX', subtab_name: 'WufooSubTab' },
-                helpTitle:  'Adding a Wufoo Form',
+                // helpTitle:  'Adding a Wufoo Form',
                 helpBody:   '<p><b>Adding a Wufoo Form</b></p>' +
                             '<p><b>Finding your Wufoo API Key</b></p>' +
                             '<p>1. Login to <a target="_blank" href="http://wufoo.com/">Wufoo.com</a> and navigate to a specific form.</p>' +

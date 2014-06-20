@@ -19,7 +19,7 @@ wxApp = wxApp || {};
                 config: {},
                 featureName: '',
                 validateFeed: true,
-                helpTitle: 'Help tips ',
+                helpTitle: 'Help ',
                 helpBody: ''
             };
         },

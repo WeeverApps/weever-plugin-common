@@ -17,7 +17,7 @@ wxApp = wxApp || {};
                 content: 'html',
                 layout: 'list',
                 config: { url: '', gps: '1', geotag: '1', subtab_name: 'WordpressProximitySubTab' },
-                helpTitle:  'About Nearby',
+                // helpTitle:  'About Nearby',
                 helpBody:   '<p><b>Adding Wordpress content to your app</b></p>' +
                             '<p>Any Wordpress content you add to your app updates in real-time as you make changes.</p>' +
                             '<p><b>Wordpress Nearby</b></p>' +
