@@ -70,7 +70,7 @@ wxApp = wxApp || {};
             // Once the reveal modal is open...
             var me = this.$el;
             this.$el.on('opened', function() {
-                me.foundation('section', 'reflow');
+                me.foundation('reflow');
 
                 // Alright, now let's set the height of the right-hand side to the height of the left-hand side
                 // var currentModal = $('.reveal-modal.open');

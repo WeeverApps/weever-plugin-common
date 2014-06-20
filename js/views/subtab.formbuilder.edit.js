@@ -968,7 +968,7 @@ wxApp = wxApp || {};
 			view.$el.addClass('active');
 
 			this.model.get( 'config' ).formElements.push( input );
-			$( this.buildPaneSelector ).foundation('section', 'reflow');
+			$( this.buildPaneSelector ).foundation('reflow');
 
 			// Now show the edit tab.
 			$('#formbuilder-edit-tab').parent()
