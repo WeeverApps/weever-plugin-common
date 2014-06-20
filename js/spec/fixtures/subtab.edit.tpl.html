@@ -31,39 +31,34 @@
     </div>
 
     <div class="large-6 small-12 columns">
-        <div class="section-container auto previewTabs" data-section>
+        <ul class="tabs" data-tab>
+            <li class="tab-title active"><a href="#tab-add-preview">Preview</a></li>
+            <li class="tab-title"><a href="#tab-add-icon">Choose Icon</a></li>
+            <li class="tab-title"><a href="#tab-add-help"><%- helpTitle %></a></li>
+        </ul>
+        <div class="tabs-content">
             <% if ( validateFeed ) { %>
-                <section class="active">
-                    <p class="title" data-section-title><a href="#panel1">Preview</a></p>
-                    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
-                        <div class="wx-validate-feed">
-                            <div class="panel wx-preview-form">
-                                <h3 class="wx-preview-msg">preview</h3>
-                            </div>
+            <div class="content active" id="tab-add-preview" style="height: 315px; overflow-y: auto;">
+                    <div class="wx-validate-feed">
+                        <div class="panel wx-preview-form">
+                            <h3 class="wx-preview-msg">preview</h3>
                         </div>
                     </div>
-                </section>
+            </div>
             <% } %>
-            <section <% if ( ! (validateFeed) ) { %>class="active"<% } %>>
-                <p class="title" data-section-title><a href="#panel2">Choose Icon</a></p>
-                <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
+            <div class="content icon-selector <% if ( ! (validateFeed) ) { %>active<% } %>" id="tab-add-icon" style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
                         <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
                     </ul>
-                </div>
-            </section>
-            <section>
-                <p class="title" data-section-title><a href="#panel3"><%- helpTitle %></a></p>
-                <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
+            </div>
+            <div class="content" id="tab-add-help" style="height: 315px; overflow-y: auto;">
                     <%= helpBody %>
                     <!-- start - standard help text -->
                     <p><b>Support</b></p>
                     <p> Visit <a target="_blank" href="http://support.weeverapps.com">support.weeverapps.com</a>. Professional level subscriptions and above have access to ticket-based support and faster response times.</p>
                     <br>
                     <!-- endof - standard help text -->
-
-                </div>
-            </section>
+            </div>
         </div>
     </div>
 

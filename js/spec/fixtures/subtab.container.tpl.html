@@ -34,7 +34,7 @@
     </ul>
 
     <div id="ContainerEditModal" class="reveal-modal" data-reveal>
-        
+
     </div>
 </script>
 
@@ -51,27 +51,25 @@
     </div>
 
     <div class="large-6 small-12 columns">
-        <div class="section-container auto" data-section>
-            <section>
-                <p class="title" data-section-title><a href="#panel1">Choose Icon</a></p>
-                <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
+        <ul class="tabs" data-tab>
+            <li class="tab-title active"><a href="#tab-editicon">Choose Icon</a></li>
+            <li class="tab-title"><a href="#tab-edithelp">What is a primary tab?</a></li>
+        </ul>
+        <div class="tabs-content">
+            <div class="content icon-selector active" id="tab-editicon" style="height: 315px; overflow-y: auto;">
                     <ul class="large-block-grid-7">
                         <% var i = tabIcon || tabIcon_id || icon || icon_id %>
                         <% i = i || 'e001' %>
                         <%= _.template( jQuery('#icon-selector').html(), i, {variable: 'icon_id'}) %>
                     </ul>
-                </div>
-            </section>
-            <section>
-                <p class="title" data-section-title><a href="#panel2">What is a primary tab?</a></p>
-                <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
-                    <p class="lead"><b>What is a primary tab?</b></p>
-                    <p>Every app is made of <b>primary tabs</b> and <b>features</b>.</p>
-                    <p><b>Primary tabs</b> have a layout and an icon.  Primary tabs give a features a place to be be viewed within your app.</p>
-                    <p><b>Features</b> (sometimes called &lsquo;subtabs&rsquo;) are things like a twitter feed, a blog post, or a map.  Features are assigned to primary tabs.</p>
-                    <p>You can move a feature from one primary tab to another and create new primary tabs, with a little practice.</p>
-                </div>
-            </section>
+            </div>
+            <div class="content" id="tab-edithelp" style="height: 315px; overflow-y: auto;">
+                <p class="lead"><b>What is a primary tab?</b></p>
+                <p>Every app is made of <b>primary tabs</b> and <b>features</b>.</p>
+                <p><b>Primary tabs</b> have a layout and an icon.  Primary tabs give a features a place to be be viewed within your app.</p>
+                <p><b>Features</b> (sometimes called &lsquo;subtabs&rsquo;) are things like a twitter feed, a blog post, or a map.  Features are assigned to primary tabs.</p>
+                <p>You can move a feature from one primary tab to another and create new primary tabs, with a little practice.</p>
+            </div>
         </div>
     </div>
 
