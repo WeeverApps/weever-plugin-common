@@ -9,7 +9,7 @@
     settings : {
       additional_inheritable_classes : [],
       tooltip_class : '.tooltip',
-      append_to: 'body',
+      append_to: '#interface',
       touch_close_text: 'Tap To Close',
       disable_for_touch: false,
       hover_delay: 200,
@@ -221,7 +221,16 @@
             .removeClass('tip-override');
           nub.removeClass('rtl');
         } else if (classes && classes.indexOf('tip-right') > -1) {
-          objPos(tip, (target.offset().top + (target.outerHeight() / 2) - (tip.outerHeight() / 2)), 'auto', 'auto', (target.offset().left + target.outerWidth() + nubHeight))
+          var top  = (target.offset().top + (target.outerHeight() / 2) - (tip.outerHeight() / 2)),
+              left = (target.offset().left + target.outerWidth() + nubHeight);
+
+          // Adjust for WP menu & topbar.
+          if ( $('#interface').offset() ) {
+            top  -= $('#interface').offset().top;
+            left -= $('#interface').offset().left;
+          }
+
+          objPos(tip, top, 'auto', 'auto', left)
             .removeClass('tip-override');
           nub.removeClass('rtl');
         }
