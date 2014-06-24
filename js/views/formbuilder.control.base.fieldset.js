@@ -14,8 +14,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-required': 'setRequired',
-			'focus .wx-form-builder-title-input': 'selectInputText',
-			'sortable-drop': 'sortableDrop'
+			'focus .wx-form-builder-title-input': 'selectInputText'
 		},
 
 		selectInputText: function( ev ) {
@@ -32,11 +31,6 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
-		},
-
-		sortableDrop: function( event, index ) {
-			console.log( 'sortableDrop' );
-			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
 		deleteControl: function() {

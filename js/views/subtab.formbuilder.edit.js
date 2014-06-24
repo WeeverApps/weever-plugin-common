@@ -331,32 +331,8 @@ wxApp = wxApp || {};
 
 		sortableUpdate: function( event, model, position ) {
 			var formElements = this.model.get( 'config' ).formElements;
-
 			formElements.remove( model );
-
-			formElements.each( function( model, index ) {
-				var ordinal = index;
-				if ( index >= position ) {
-					ordinal += 1;
-				}
-				model.set( 'ordinal', ordinal );
-			});
-
-			model.set( 'ordinal', position );
 			formElements.add( model, {at: position} );
-
-			// Re-render the previews.
-			var me = this;
-			$( '.' + this.previewPaneClass ).html( '' );
-			formElements.each( function( model, index ) {
-				for (var i = 0; i < me.previews.length; i++) {
-					var preview = me.previews[i];
-					if ( preview.model.cid === model.cid ) {
-						$( '.' + me.previewPaneClass ).append( preview.render().el );
-						break;
-					}
-				}
-			});
 		},
 
 		/**
@@ -933,13 +909,22 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
-			var config   = this.model.get( 'config' ),
-			    count    = config.formElements.length,
-			    advanced = config.advanced || false;
+			var config       = this.model.get( 'config' ),
+			    formElements = config.formElements,
+			    ordinal      = 0,
+			    advanced     = config.advanced || false;
 			
-			count++;
-			input.set( 'ordinal', count );
-			view.$el.attr('id', 'wx-form-control-' + count.toString());
+			// Get the current largest ordinal
+			// NOTE - The ordinal doesn't (necessarily) relate to the order of the form elements. It relates to the order in which elements were added.
+			for (var i = 0; i < formElements.length; i++) {
+				var model = formElements.at( i );
+				if ( model.get( 'ordinal' ) > ordinal )
+					ordinal = model.get( 'ordinal' );
+			};
+			++ordinal;
+
+			input.set( 'ordinal', ordinal );
+			view.$el.attr('id', 'wx-form-control-' + ordinal.toString());
 
 			input.set( 'advanced', advanced );
 
@@ -949,7 +934,7 @@ wxApp = wxApp || {};
 			$('.wx-form-builder-row').removeClass('wx-active');
 			view.$el.addClass('wx-active');
 
-			this.model.get( 'config' ).formElements.push( input );
+			formElements.push( input );
 			$( this.buildPaneSelector ).foundation('reflow');
 
 			// Now show the edit tab.

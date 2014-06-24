@@ -27,19 +27,13 @@ wxApp = wxApp || {};
 			'focus .wx-form-builder-select-option-text': 'selectInputText',
 			'focus .wx-form-builder-label-input': 'selectInputText',
 			'focus .wx-form-builder-text-input': 'selectInputText',
-			'focus .wx-form-builder-input': 'selectInputText',
-			'sortable-drop': 'sortableDrop'
+			'focus .wx-form-builder-input': 'selectInputText'
 		},
 
 		selectInputText: function( ev ) {
 			setTimeout( function() {
 				ev.currentTarget.select();
 			}, 1 );
-		},
-
-		sortableDrop: function( event, index ) {
-			console.log( 'sortableDrop' );
-			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
 		deleteControl: function() {
@@ -205,7 +199,8 @@ wxApp = wxApp || {};
 		className: 'wx-form-preview-row',
 		selector : '',
 		events   : {
-			"click":  "selectField"
+			'click'        : 'selectField',
+			'sortable-drop': 'sortableDrop'
 		},
 
 		initialize: function() {
@@ -218,6 +213,12 @@ wxApp = wxApp || {};
 			var model = this.model.toJSON();
 			this.$el.html( this.inputTpl( model ) );
 			return this;
+		},
+
+		sortableDrop: function( event, index ) {
+			console.log( 'sortableDrop', this.model );
+			console.log( index );
+			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
 		selectField: function() {
