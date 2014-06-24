@@ -893,13 +893,23 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
-			var config   = this.model.get( 'config' ),
-			    count    = config.formElements.length,
-			    advanced = config.advanced || false;
+			var config       = this.model.get( 'config' ),
+			    formElements = config.formElements,
+			    ordinal      = 0,
+			    advanced     = config.advanced || false;
 			
-			count++;
-			input.set( 'ordinal', count );
-			view.$el.attr('id', 'wx-form-control-' + count.toString());
+			// Get the current largest ordinal
+			// NOTE - The ordinal doesn't (necessarily) relate to the order of the form elements. It relates to the order in which elements were added.
+			for (var i = 0; i < formElements.length; i++) {
+				var model = formElements.at( i );
+				if ( model.get( 'ordinal' ) > ordinal )
+					ordinal = model.get( 'ordinal' );
+			};
+			++ordinal;
+			console.log( 'ordinal', ordinal );
+
+			input.set( 'ordinal', ordinal );
+			view.$el.attr('id', 'wx-form-control-' + ordinal.toString());
 
 			input.set( 'advanced', advanced );
 
@@ -909,7 +919,7 @@ wxApp = wxApp || {};
 			$('.wx-form-builder-row').removeClass('wx-active');
 			view.$el.addClass('wx-active');
 
-			this.model.get( 'config' ).formElements.push( input );
+			formElements.push( input );
 			$( this.buildPaneSelector ).foundation('reflow');
 
 			// Now show the edit tab.
