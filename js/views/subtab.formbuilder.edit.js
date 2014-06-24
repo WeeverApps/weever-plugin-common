@@ -329,32 +329,8 @@ wxApp = wxApp || {};
 
 		sortableUpdate: function( event, model, position ) {
 			var formElements = this.model.get( 'config' ).formElements;
-
 			formElements.remove( model );
-
-			formElements.each( function( model, index ) {
-				var ordinal = index;
-				if ( index >= position ) {
-					ordinal += 1;
-				}
-				model.set( 'ordinal', ordinal );
-			});
-
-			model.set( 'ordinal', position );
 			formElements.add( model, {at: position} );
-
-			// Re-render the previews.
-			var me = this;
-			$( '.' + this.previewPaneClass ).html( '' );
-			formElements.each( function( model, index ) {
-				for (var i = 0; i < me.previews.length; i++) {
-					var preview = me.previews[i];
-					if ( preview.model.cid === model.cid ) {
-						$( '.' + me.previewPaneClass ).append( preview.render().el );
-						break;
-					}
-				}
-			});
 		},
 
 		/**
