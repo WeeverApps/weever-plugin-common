@@ -807,8 +807,6 @@ wxApp = wxApp || {};
 			});
 
 			this.addControl( textArea, textAreaView );
-			// this.$( this.buildPaneSelector ).append( textAreaView.render().el );
-			// this.model.get( 'config' ).formElements.push( textArea );
 		},
 
 		addRadioGroup: function(ev) {
@@ -823,7 +821,6 @@ wxApp = wxApp || {};
 				model: radioFieldset
 			});
 
-			// this.$( this.buildPaneSelector ).append( radioFieldsetView.render().el );
 			this.addControl( radioFieldset, radioFieldsetView );
 
 			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
@@ -869,7 +866,6 @@ wxApp = wxApp || {};
 				model: checkboxFieldset
 			});
 
-			// this.$( this.buildPaneSelector ).append( checkboxFieldsetView.render().el );
 			this.addControl( checkboxFieldset, checkboxFieldsetView );
 
 			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({

@@ -333,21 +333,19 @@
     <!-- start: formbuilder step two -->
     <div class="form-builder-step-two" style="display: none;">
         <div class="large-12 columns">
-            <div>
-                <h2><%- typeDescription %></h2>
-            </div>
+            <h2><%- typeDescription %></h2>
+        </div>
 
-            <!-- start: add-field buttons -->
-            <p class="wx-ui-title">Add new form fields</p>
-
-            <div id="form-creation" class="content" data-section-content>
-
-                <div class="wx-form-builder-controls row collapse">
-                <div class="large-12 columns">
-                    <!-- form builder add-new-field buttons -->
-                    <ul class="large-block-grid-6 small-block-grid-2" id="add-fields">
-
-
+        <div class="large-6 columns">
+            <!-- start: left column -->
+            <ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel-new-form-fields">Add new form fields</a></li>
+                <li class="tab-title"><a href="#panel-field-settings">Field Settings</a></li>
+            </ul>
+            <div class="tabs-content">
+                <div class="content active" id="panel-new-form-fields">
+                    <!-- start: fields -->
+                    <ul class="large-block-grid-3 small-block-grid-2" id="add-fields">
                         <!-- text fields and common elements -->
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-text-input">
@@ -362,7 +360,6 @@
                                 </span>
                             </button>
                         </li>
-
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-textarea">
                                 <div class="wx-button-label">Paragraph text</div>
@@ -416,8 +413,7 @@
                             </button>
                         </li>
 
-
-                         <!-- radio buttons, checkboxes, etc. -->
+                        <!-- radio buttons, checkboxes, etc. -->
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-select">
                                 <div class="wx-button-label">Dropdown</div>
@@ -542,7 +538,6 @@
                             </button>
                         </li>
 
-
                         <!-- more rare elements, e.g, sliders -->
 
                         <!-- file upload -->
@@ -561,7 +556,6 @@
                             </button>
                         </li>
                         -->
-
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-photo-input">
                                 <div class="wx-button-label">Submit a Photo</div>
@@ -592,7 +586,7 @@
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-date-input">
-								<div class="wx-button-label">Date</div>
+                                <div class="wx-button-label">Date</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Date</b><p>
                                        <p>Adds an input field for a calendar date.</p>
@@ -617,17 +611,17 @@
                                 </span>
                             </button>
                         </li>
-						<li>
-							<button class="tiny expand radius wx-form-builder-add-pagebreak">
-								<div class="wx-button-label">Page Break</div>
-								<span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-									  title="<p><b>Page Break</b><p>
-									  <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
-									  <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
-									   ?
-								</span>
-							</button>
-						</li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-pagebreak">
+                                <div class="wx-button-label">Page Break</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Page Break</b><p>
+                                      <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
+                                      <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
+                                       ?
+                                </span>
+                            </button>
+                        </li>
                         <% if ( config.isDocuSign.toString() == 'true' ) { %>
                             <li>
                                 <button class="tiny expand radius wx-form-builder-add-docusign-signature">
@@ -645,77 +639,52 @@
                             </li>
                         <% } %>
                     </ul>
+                    <!-- endof: fields -->
                 </div>
-                </div>
-
-            </div>
-        </div>
-    	<div class="large-6 columns">
-
-            <p class="wx-ui-title">Edit existing form fields</p>
-
-            <div>
-                <!-- start: edit new and existing form fields -->
-
-                <div id="form-build-area" class="form-build-area section-container accordion" data-section="accordion">
-
+                <div class="content form-build-area" id="panel-field-settings">
                 </div>
             </div>
-
-            <div data-alert class="alert-box alert" style="display: none">
-                <span class="message"></span>
-                <a href="#" class="close">&times;</a>
-            </div>
-
-            <div>
-                <button class="wx-finish-button success radius">Save and add this form to your app</button>
-                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
-                <img id="dialog-loader" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
-            </div>
+            <!-- endof: left column -->
         </div>
 
         <div class="large-6 columns">
-            <div class="section-container tabs" data-section="tabs">
-                <section class="active">
-                    <p class="title" data-section-title><a href="#panel1">Form Preview</a></p>
-
-                    <div class="content" data-section-content>
-                        <div class="wx-validate-feed panel">
-                            <br/>
-                            <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
-                            <div class="wx-preview-form"></div>
-                            <br/>
-                            <button class="success radius"><%- config.submitButtonText %></button>
-                            <br/><br/>
-                        </div>
+            <!-- start: right column -->
+            <ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel-form-preview">Form Preview</a></li>
+                <li class="tab-title"><a href="#panel-choose-icon">Choose Icon</a></li>
+                <li class="tab-title"><a href="#panel-support">Support</a></li>
+            </ul>
+            <div class="tabs-content">
+                <div class="content active" id="panel-form-preview">
+                    <div class="wx-validate-feed panel">
+                        <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
+                        <div class="wx-preview-form"></div>
+                        <br/>
+                        <button class="success radius"><%- config.submitButtonText %></button>
+                        <br/><br/>
                     </div>
-                </section>
-                <section>
-                    <p class="title" data-section-title><a href="#panel2">Icon</a></p>
-                    <div class="content icon-selector" data-section-content style="height: 315px; overflow-y: auto;">
-                        <ul class="large-block-grid-7">
-                            <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
-                        </ul>
-                    </div>
-                </section>
-                <section>
-                <p class="title" data-section-title><a href="#panel3"><%- helpTitle %></a></p>
-                    <div class="content" data-section-content style="height: 315px; overflow-y: auto;">
-                        <%= helpBody %>
-                        <!-- start - standard help text -->
-                        <p><b>Support</b></p>
+                </div>
+                <div class="content icon-selector" id="panel-choose-icon" style="height: 315px; overflow-y: auto;">
+                    <ul class="large-block-grid-7">
+                        <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                    </ul>
+                </div>
+                <div class="content" id="panel-support">
+                    <%= helpBody %>
+                    <!-- start - standard help text -->
+                    <p><b>Support</b></p>
 
-                        <p>Please email <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">support@weeverapps.com</a> for assistance.</p>
-                        <p><b>Professional Services</b></p>
-                        <p>Our professional services team can help you take your project from idea to launch.</p>
-                        <p>Please <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">contact us</a> to discuss custom feature availability or have our team create an app for you.</p>
-                        <br>
-                        <!-- endof - standard help text -->
-
-                    </div>
-                </section>
+                    <p>Please email <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">support@weeverapps.com</a> for assistance.</p>
+                    <p><b>Professional Services</b></p>
+                    <p>Our professional services team can help you take your project from idea to launch.</p>
+                    <p>Please <a href="mailto:support@weeverapps.com?subject=AppBuilder Forms Support Inquiry&">contact us</a> to discuss custom feature availability or have our team create an app for you.</p>
+                    <br>
+                    <!-- endof - standard help text -->
+                </div>
             </div>
+            <!-- endof: right column -->
         </div>
+
     </div>
 
     <a class="wx-close-reveal-modal">&#215;</a>
