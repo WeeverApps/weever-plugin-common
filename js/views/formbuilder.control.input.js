@@ -36,6 +36,9 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlInputPreview = Backbone.View.extend({
 		tagName: 'div',
 		className: 'wx-form-preview-row',
+		events: {
+			"click":  "selectField"
+		},
 
 		initialize: function() {
 			var selector = '#form-builder-input-preview';
@@ -45,9 +48,7 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			console.log('render preview');
 			var model = this.model.toJSON();
-			console.log( model );
 			this.$el.html( this.inputTpl( model ) );
 			if ( model.attributes.min )
 				this.$('input').attr('min', model.attributes.min );
@@ -58,6 +59,21 @@ wxApp = wxApp || {};
 			if ( model.attributes.value )
 				this.$('input').attr('value', model.attributes.value );
 			return this;
+		},
+
+		selectField: function() {
+			var ordinal = this.model.get('ordinal');
+
+			// Highlight this control.
+			$('.wx-form-preview-row').removeClass('wx-active');
+			this.$el.addClass('wx-active');
+
+			// Show this control.
+			$('.wx-form-builder-row').removeClass('wx-active');
+			$('#wx-form-control-' + ordinal).addClass('wx-active');
+
+			// Make sure the settings tab is active.
+			$('a[href="#panel-field-settings"]').click();
 		}
 	});
 	

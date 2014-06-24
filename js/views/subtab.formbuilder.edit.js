@@ -311,31 +311,12 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-info'                : 'addInfo',
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
-			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
             'click .wx-continue-button'                      : 'next',
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
 
-		},
-
-		/**
-		 * Sets the active preview element based on the index of the active accordion element
-		 * @param ev Click event or accordion element
-		 */
-		setActivePreviewElement: function( ev ) {
-			var $target = null;
-			if ( typeof ev.currentTarget != 'undefined' ) {
-				$target = $( ev.currentTarget );
-			}
-			else {
-				$target = ev;
-			}
-			var $precedingSiblings = $target.prevAll();
-			var oneBasedSiblingIndex = $precedingSiblings.length + 1;
-			$( '.wx-preview-form > .wx-form-preview-row' ).removeClass( 'active' );
-			$( '.wx-preview-form > .wx-form-preview-row:nth-child(' + oneBasedSiblingIndex + ')' ).addClass( 'active' );
 		},
 
 		updateSubmitButtonText: function( ev ) {
@@ -579,8 +560,6 @@ wxApp = wxApp || {};
 				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
 				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
 			}
-
-			this.scrollIntoView( inputView );
 
 			return input;
 		},
@@ -848,10 +827,6 @@ wxApp = wxApp || {};
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
 			}
-
-			this.scrollIntoView( radioFieldsetView );
-			// radioFieldsetView.getPreview().render();
-			// this.model.get( 'config' ).formElements.push( radioFieldset );
 		},
 
 		addCheckboxGroup: function(ev) {
@@ -889,10 +864,6 @@ wxApp = wxApp || {};
 					checkboxFieldset.get( 'checkboxGroup' ).add( option );
 				};
 			}
-
-			this.scrollIntoView( checkboxFieldsetView );
-
-			// this.model.get( 'config' ).formElements.push( checkboxFieldset );
 		},
 
 		/**
@@ -942,8 +913,6 @@ wxApp = wxApp || {};
 					select.get('optionGroup').add( optionModel );
 				};
 			}
-
-			this.scrollIntoView( selectView );
 		},
 
 		addControl: function( input, view ) {
@@ -954,20 +923,22 @@ wxApp = wxApp || {};
 			
 			count++;
 			input.set( 'ordinal', count );
+			view.$el.attr('id', 'wx-form-control-' + count.toString());
 
 			input.set( 'advanced', advanced );
 
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
 			// Open the newly added tab.
-			$('.wx-form-builder-row').removeClass('active');
-			view.$el.addClass('active');
+			$('.wx-form-builder-row').removeClass('wx-active');
+			view.$el.addClass('wx-active');
 
 			this.model.get( 'config' ).formElements.push( input );
 			$( this.buildPaneSelector ).foundation('reflow');
 
 			// Now show the edit tab.
-			$('#formbuilder-edit-tab').parent()
+			$('a[href="#panel-field-settings"]').click();
+			$('a[href="#panel-field-settings"]').parent()
 				.animate({backgroundColor: '#ffffc0'}, 1500)
 				.animate({backgroundColor: '#efefef'}, 1500)
 				.animate({backgroundColor: '#ffffc0'}, 1500)
@@ -989,8 +960,6 @@ wxApp = wxApp || {};
 			}
 			this.previews.push( view.getPreview() );
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
-
-			this.scrollIntoView( view );
 		},
 
 		confirmClosePopup: function( e ) {
@@ -1007,15 +976,6 @@ wxApp = wxApp || {};
 			if ( ok ) {
 				this.$el.foundation('reveal', 'close');
 			}
-		},
-
-		/**
-		 * @todo animate via https://github.com/Arwid/jQuery.scrollIntoView
-		 * @param view
-		 */
-		scrollIntoView: function( view ) {
-			view.el.scrollIntoView( false );
-			this.setActivePreviewElement( view.$el );
 		},
 
         next: function() {

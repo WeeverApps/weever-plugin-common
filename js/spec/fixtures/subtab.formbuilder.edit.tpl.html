@@ -345,7 +345,7 @@
             <div class="tabs-content">
                 <div class="content active" id="panel-new-form-fields">
                     <!-- start: fields -->
-                    <ul class="large-block-grid-3 small-block-grid-2" id="add-fields">
+                    <ul class="small-block-grid-2 medium-block-grid-3" id="add-fields">
                         <!-- text fields and common elements -->
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-text-input">
@@ -651,7 +651,7 @@
             <!-- start: right column -->
             <ul class="tabs" data-tab>
                 <li class="tab-title active"><a href="#panel-form-preview">Form Preview</a></li>
-                <li class="tab-title"><a href="#panel-choose-icon">Choose Icon</a></li>
+                <li class="tab-title"><a href="#panel-choose-icon">Icon</a></li>
                 <li class="tab-title"><a href="#panel-support">Support</a></li>
             </ul>
             <div class="tabs-content">
@@ -665,7 +665,7 @@
                     </div>
                 </div>
                 <div class="content icon-selector" id="panel-choose-icon" style="height: 315px; overflow-y: auto;">
-                    <ul class="large-block-grid-7">
+                    <ul class="medium-block-grid-7">
                         <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
                     </ul>
                 </div>
