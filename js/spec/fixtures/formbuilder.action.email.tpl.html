@@ -1,6 +1,6 @@
 <script type="text/template" id="form-builder-action-email">
-	<p class="title" data-section-title><a href="#panel3">Send document to&hellip;</a></p>
-	<div class="content" data-section-content>
+	<p class="title">Send email to&hellip;</p>
+	<div class="content">
 
         <!-- container for detailed help text -->
         <div class="wx-form-tips">
@@ -12,28 +12,27 @@
             <input class="wx-form-builder-action" placeholder="Email addresses" type="email" value="<%- value %>" />
 
 			<label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- currentUserEmail %></span></label>
+        </div>
+    </div>
 
-            <br>
+    <p class="title">PDF Document details (optional)</p>
+    <div class="content">
+        <p>The following details will be included as the &ldquo;header&rdquo; (top section) of the PDF document recording a user&#39;s form submission.</p>
 
-            <p><b>PDF Document details</b> (optional)</p>
+        <div class="wx-form-builder-action-email-pdfheader">
 
-            <p>The following details will be included as the &ldquo;header&rdquo; (top section) of the PDF document recording a user&#39;s form submission.</p>
+            <label>PDF Document title</label>
+            <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfHeader.title %>" />
 
-            <div class="wx-form-builder-action-email-pdfheader">
+            <label>Business Name</label>
+            <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfHeader.line1 %>" />
 
-                <label>PDF Document title</label>
-                <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfHeader.title %>" />
+            <label>Address line one</label>
+            <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfHeader.line2 %>" />
 
-                <label>Business Name</label>
-                <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfHeader.line1 %>" />
+            <label>Address line two</label>
+            <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfHeader.line3 %>" />
 
-                <label>Address line one</label>
-                <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfHeader.line2 %>" />
-
-                <label>Address line two</label>
-                <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfHeader.line3 %>" />
-
-            </div>
         </div>
 	</div>
 </script>

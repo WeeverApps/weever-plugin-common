@@ -280,10 +280,46 @@
             <!-- endof: right col -->
             <!-- endof: DocuSign Login / Account Info -->
         <% } else { %>
-            <div class="large-8 columns">
-                <div class="row">This is the Formbuilder step one.</div>
+            <h2>AppBuilder Forms</h2>
 
-                <br>
+            <h3>Getting Started&hellip;</h3>
+
+            <div class="large-8 columns">
+                
+                <ul class="tabs" data-tab>
+                    <li class="tab-title active"><a href="#panel-getting-started">Getting Started</a></li>
+                    <li class="tab-title"><a href="#panel-email-details">Email and PDF Details</a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div class="content active" id="panel-getting-started">
+                        <!-- start: Getting Started -->
+                        <div>
+                            <label>Form title</label>
+                            <input type="text" value="<%- title %>" class="wx-edit-title" />
+                            <sup>You can change this later</sup>
+                        </div>
+
+                        <div>
+                            <label>When a person fills out this form&hellip;</label>
+                            <label>
+                                <input type="checkbox" name="on-complete-events" value="forms-account" />
+                                Save the form entry to my AppBuilder Forms account
+                            </label>
+                            <label>
+                                <input type="checkbox" name="on-complete-events" value="email-pdf" />
+                                Email PDF copy of the form entry to the specified recipients
+                            </label>
+                        </div>
+
+                        <p>
+                            All data is saved securely online. Fixie wayfarers chambray, hashtag mumblecore raw denim meh Wes Anderson Cosby sweater blog small batch aesthetic. Fixie tofu umami crucifix disrupt roof party fingerstache. Mumblecore mustache twee dreamcatcher, hashtag YOLO four loko ugh crucifix salvia. Salvia ugh lo-fi roof party bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.
+                        </p>
+                        <!-- endof: Getting Started -->
+                    </div>
+                    <div class="content" id="panel-email-details">
+                        <!-- Details: See formActions -->
+                    </div>
+                </div>
 
                 <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
                 &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
@@ -630,39 +666,6 @@
                 <span class="message"></span>
                 <a href="#" class="close">&times;</a>
             </div>
-
-            <!-- start: form settings -->
-			<% if (
-				( config.isDocuSign.toString() != 'true' ) ||
-				( config.isDocuSign.toString() == 'true' && config.allowDemoMode ) ||
-				advancedMode
-				) { %>
-            <p class="wx-ui-title">Form submission settings</p>
-
-            <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
-                <!-- Button Text -->
-                <section class="active">
-                    <p class="title" data-section-title><a href="#panel1">Form submit button</a></p>
-                    <div class="content" data-section-content>
-
-                        <label>Change the label text used for your form&apos;s submit button</label>
-                        <input type="text"
-							   class="submit-button-text"
-							   value="<%- config.submitButtonText %>"
-							   <% if ( config.isDocuSign.toString() == 'true' ) print( ' readonly ' ) %>
-						/>
-                        <!-- fix for last-child bug in foundation -->
-                    </div>
-                </section>
-            </div>
-			<% } %>
-
-			<div>
-				<label>Title for this feature inside your app</label>
-				<input type="text" value="<%- title %>" class="wx-edit-title" />
-			</div>
-
-            <br>
 
             <div>
                 <button class="wx-finish-button success radius">Save and add this form to your app</button>
