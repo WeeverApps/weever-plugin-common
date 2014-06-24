@@ -27,7 +27,6 @@ wxApp = wxApp || {};
 			'click #wx-docusign-login-button'                : 'login',
 			'click #wx-docusign-create-account-button'       : 'createAccount',
 			'click #wx-docusign-change-password-button'      : 'changePassword',
-			'click .wx-continue-button'                      : 'next',
 			'change .wx-form-builder-docusign-demomode'      : 'toggleDemoMode'
 		},
 
@@ -393,15 +392,6 @@ wxApp = wxApp || {};
 			}
 
             return accountObject;
-
-		},
-
-		next: function() {
-
-			$('.form-builder-step-one').slideUp();
-			$('.form-builder-step-two').slideDown();
-			$( this.buildPaneSelector ).foundation('reflow');
-			$( 'html, body' ).animate( { scrollTop: 0 }, 500 );
 
 		}
 

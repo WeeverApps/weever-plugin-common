@@ -314,7 +314,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
-//			'close'                                          : 'confirmClosePopup', // Should use this if we can figure out a way to prevent a Foundation Reveal from closing
+            'click .wx-continue-button'                      : 'next',
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
 
@@ -1020,7 +1020,16 @@ wxApp = wxApp || {};
 		scrollIntoView: function( view ) {
 			view.el.scrollIntoView( false );
 			this.setActivePreviewElement( view.$el );
-		}
+		},
+
+        next: function() {
+
+            $('.form-builder-step-one').slideUp();
+            $('.form-builder-step-two').slideDown();
+            $( this.buildPaneSelector ).foundation('reflow');
+            $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
+
+        }
 
 	});
 

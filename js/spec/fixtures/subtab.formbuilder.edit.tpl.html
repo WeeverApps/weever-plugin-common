@@ -1,7 +1,7 @@
 <script type="text/template" id="formbuilder-subtab-edit-template">
-    <% if ( config.isDocuSign.toString() == 'true' ) { %>
-        <!-- start: formbuilder step one - DocuSign Login / Account Info -->
-        <div class="form-builder-step-one">
+    <div class="form-builder-step-one">
+        <% if ( config.isDocuSign.toString() == 'true' ) { %>
+            <!-- start: DocuSign Login / Account Info -->
             <!-- start: left col -->
             <div class="large-8 columns">
                 <h2><%- typeDescription %></h2>
@@ -278,13 +278,24 @@
                 <!-- endof: left col -->
             </div>
             <!-- endof: right col -->
+            <!-- endof: DocuSign Login / Account Info -->
+        <% } else { %>
+            <div class="large-8 columns">
+                <div class="row">This is the Formbuilder step one.</div>
 
-        </div>
-        <!-- endof: formbuilder step one -->
-    <% } %>
+                <br>
+
+                <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
+                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+            </div>
+            <div class="large-4 columns">
+                Preview Area (TBC)
+            </div>
+        <% } %>
+    </div>
 
     <!-- start: formbuilder step two -->
-    <div class="form-builder-step-two" <% if ( config.isDocuSign.toString() == 'true' ) { %>style="display: none;" <% } %>>
+    <div class="form-builder-step-two" style="display: none;">
         <div class="large-12 columns">
             <div>
                 <h2><%- typeDescription %></h2>
