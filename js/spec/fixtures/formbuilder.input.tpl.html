@@ -1,11 +1,9 @@
 <script type="text/template" id="form-builder-input">
-	<p class="title" data-section-title>
-		<a href="#panel<%- ordinal %>">
-            <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span> <span class="appbuilder-icon icon-move-updown"></span>
-		</a>
+	<p class="title">
+        <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span>
 	</p>
 
-    <div class="content" data-section-content>
+    <div class="content">
 
 		<%
 		// Only "Number Slider" uses this template and has type == 'range'

@@ -1,10 +1,8 @@
 <script type="text/template" id="form-builder-text-range">
-	<p class="title" data-section-title>
-		<a href="#panel<%- ordinal %>">
-			<%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span> <span class="appbuilder-icon icon-move-updown"></span>
-		</a>
+	<p class="title">
+		<%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span>
 	</p>
-	<div class="content" data-section-content>
+	<div class="content">
 		<label>Label</label>
 		<input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
 
@@ -13,18 +11,18 @@
 		</div>
 
         <% if (advanced) { %>
-        <label>Field name (optional, advanced)
-                    <span data-tooltip data-options="disable-for-touch:true"
-                          class="has-tip tip-right"
-                          title="<p><b>Field name</b><p>
-                           <p>The HTML &ldquo;name&rdquo; attribute. For use with a custom POST action.</p>
-                           <p><b>Advanced mode</b></p>
-                           <p>This option is only displayed when &ldquo;advanced mode&rdquo; is enabled.
-                           ">
-                           ?
-                    </span>
-        </label>
-        <input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
+        	<label>Field name (optional, advanced)
+	            <span data-tooltip data-options="disable-for-touch:true"
+	                  class="has-tip tip-right"
+	                  title="<p><b>Field name</b><p>
+	                   <p>The HTML &ldquo;name&rdquo; attribute. For use with a custom POST action.</p>
+	                   <p><b>Advanced mode</b></p>
+	                   <p>This option is only displayed when &ldquo;advanced mode&rdquo; is enabled.
+	                   ">
+	                   ?
+	            </span>
+        	</label>
+        	<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
         <% } %>
 
         <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
@@ -38,7 +36,7 @@
 		<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
 	<input class="wx-form-builder-<%- attributes.attributes.type %>-input wx-form-builder-range-text" min="1" max="<%- options.length %>" type="range" />
-	<ul class="large-block-grid-<%- options.length %> wx-form-builder-range-text-options">
+	<ul class="small-block-grid-<%- options.length %> wx-form-builder-range-text-options">
 		<% for (var i = 0; i < options.length; i++) { %>
 			<li><%- options.models[i].get('text') %></li>
 		<% } %>
