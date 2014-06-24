@@ -33,10 +33,10 @@ wxApp = wxApp || {};
                             '<p>We recommend using the Wordpress <a target="_blank" href="http://wordpress.org/plugins/geolocation/">Geolocation plugin</a> to add location information to posts.</p>' +
                             '<p>Once you have added locations to posts, use the AppBuilder map making features to create a map using Wordpress post categories.</p>' +
                             '<p>Note: posts which are not Geotagged with location info will not display on your map.</p>' +
-                            '<p><b>Wordpress Near to me</b></p>' +
-                            '<p>&ldquo;Near to me&rdquo; shows app users location listings nearest to them and distances.</p>' +
-                            '<p>Create a &ldquo;Near to me &rdquo; feature with Wordpress content in exactly the same way you would create a Wordpress-based map.</p>' +
-                            '<p>The difference is how the posts display.  &ldquo;Near to me&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
+                            '<p><b>Wordpress Nearby</b></p>' +
+                            '<p>&ldquo;Nearby&rdquo; shows app users location listings nearest to them and distances.</p>' +
+                            '<p>Create a &ldquo;Nearby&rdquo; feature with Wordpress content in exactly the same way you would create a Wordpress-based map.</p>' +
+                            '<p>The difference is how the posts display.  &ldquo;Nearby&rdquo; lists posts in order of nearest-distance instead of creating a custom Google map.</p>' +
                             '<p><b>Wordpress Search</b></p>' +
                             '<p>Display Wordpress posts matching a predefined search term.</p>'
 

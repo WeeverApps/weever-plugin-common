@@ -1,5 +1,5 @@
 [
-    { "featureName": "FormBuilder",         "name": "Form",        "cms": ["none"]                },
+    { "featureName": "FormBuilder",         "name": "Form",        "cms": ["wordpress"]           },
     { "featureName": "DocuSign",            "name": "DocuSign",    "cms": ["none"]                },
     { "featureName": "RSS",                 "name": "RSS feed"     },
     { "featureName": "WordpressBlog",       "name": "WP All",      "cms": ["none"]                },

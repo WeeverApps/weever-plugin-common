@@ -39,7 +39,7 @@
 </script>
 
 <script type="text/template" id="ContainerEditContent">
-    <div class="large-6 small-12 columns">
+    <div class="medium-6 columns">
         <div>
             <p class="lead">Title for this primary tab:</p>
             <input type="text" value="<%- typeof tabTitle !== 'undefined' && tabTitle && tabTitle.length ? tabTitle : title %>" class="wx-edit-title" id="container-title" />
@@ -50,14 +50,14 @@
         </div>
     </div>
 
-    <div class="large-6 small-12 columns">
+    <div class="medium-6 columns">
         <ul class="tabs" data-tab>
             <li class="tab-title active"><a href="#tab-editicon">Icon</a></li>
             <li class="tab-title"><a href="#tab-edithelp">What is a primary tab?</a></li>
         </ul>
         <div class="tabs-content">
             <div class="content icon-selector active" id="tab-editicon" style="height: 315px; overflow-y: auto;">
-                    <ul class="large-block-grid-7">
+                    <ul class="medium-block-grid-7">
                         <% var i = tabIcon || tabIcon_id || icon || icon_id %>
                         <% i = i || 'e001' %>
                         <%= _.template( jQuery('#icon-selector').html(), i, {variable: 'icon_id'}) %>

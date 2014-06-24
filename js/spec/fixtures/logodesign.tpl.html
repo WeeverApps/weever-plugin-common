@@ -5,7 +5,7 @@
     <!-- logo type - text or image? -->
     <!-- -->
     <div class="row">
-        <div class="large-6 columns">
+        <div class="medium-6 columns">
             <label>
                 <input type="radio" class="wx-content-radio" name="titlebarSource" value="image" <%- titlebar.type == 'image' ? 'checked=checked' : '' %>> Upload an image</input>
             </label>
@@ -13,7 +13,7 @@
                 <input type="radio" class="wx-content-radio" name="titlebarSource" value="text" <%- titlebar.type == 'text' ? 'checked=checked' : '' %>> Use a line of text</input>
             </label>
         </div>
-        <div class="large-6 columns">
+        <div class="medium-6 columns">
             &nbsp;
         </div>
     </div>
@@ -41,7 +41,7 @@
     <div id="logoImage" style="display: <%- titlebar.type == 'image' ? "block":"none" %>">
         <p class="wx-ui-title">Logo image <span style="font-weight:normal; text-transform: lowercase">&ndash; 640 x 88px</span><p>
         <div class="row">
-            <div class="large-7 columns">
+            <div class="medium-7 columns">
                 <img id="wx-titlebar_logo_live" class="wx-launchscreen" src="<%- titlebar.image %>" />
                 <br>
                 <br>
@@ -55,7 +55,7 @@
                 <br>
                 <br>
             </div>
-            <div class="large-5 columns">
+            <div class="medium-5 columns">
                 <p>&nbsp;</p>
             </div>
         </div>
@@ -65,7 +65,7 @@
     <p class="wx-ui-title">Logo area colors</p>
 
     <div class="row collapse wx-colorpicker">
-        <div class="small-12 large-8 push-4 columns">
+        <div class="small-12 medium-8 medium-push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
                     <label class="left inline">Logo area background color</label>
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="small-12 large-4 pull-8 columns">
+        <div class="small-12 medium-4 medium-pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php echo get_option( 'weever_main_titlebar_color', '#ffffff'); ?>" />
@@ -89,7 +89,7 @@
 
     <!-- color picker: titlebar text -->
     <div class="row collapse wx-colorpicker">
-        <div class="small-12 large-8 push-4 columns">
+        <div class="small-12 medium-8 medium-push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
                     <label class="left inline">&nbsp;Logo area text color (if applicable)</label>
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="small-12 large-4 pull-8 columns">
+        <div class="small-12 medium-4 medium-pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php echo get_option( 'weever_main_titlebar_text_color', '#ffffff'); ?>" />
@@ -114,7 +114,7 @@
 
     <!-- color picker: subtab bgcolor -->
     <div class="row collapse wx-colorpicker">
-        <div class="small-12 large-8 push-4 columns">
+        <div class="small-12 medium-8 medium-push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
                     <label class="left inline">&nbsp;Subtab bar background color</label>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="small-12 large-4 pull-8 columns">
+        <div class="small-12 medium-4 medium-pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php echo get_option( 'weever_subtab_color', '#ffffff'); ?>" />
@@ -139,7 +139,7 @@
 
     <!-- color picker: subtab text color -->
     <div class="row collapse wx-colorpicker">
-        <div class="small-12 large-8 push-4 columns">
+        <div class="small-12 medium-8 medium-push-4 columns">
             <div class="row collapse">
                 <div class="small-10 columns">
                     <label class="left inline">&nbsp;Subtab bar text color</label>
@@ -149,7 +149,7 @@
                 </div>
             </div>
         </div>
-        <div class="small-12 large-4 pull-8 columns">
+        <div class="small-12 medium-4 medium-pull-8 columns">
             <div class="row collapse">
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php echo get_option( 'weever_subtab_text_color', '#ffffff'); ?>" />
