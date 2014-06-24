@@ -77,9 +77,7 @@ wxApp = wxApp || {};
 
 	});
 
-	wxApp.FormBuilderControlBaseFieldsetPreview = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-preview-row',
+	wxApp.FormBuilderControlBaseFieldsetPreview = wxApp.FormBuilderControlPreview.extend({
 
 		initialize: function() {
 			var selector = '#form-builder-radio-fieldset-preview';

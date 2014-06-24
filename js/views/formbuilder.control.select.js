@@ -103,9 +103,7 @@ wxApp = wxApp || {};
 
 	});
 
-	wxApp.FormBuilderControlSelectPreview = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-preview-row',
+	wxApp.FormBuilderControlSelectPreview = wxApp.FormBuilderControlPreview.extend({
 
 		initialize: function() {
 			var selector = '#form-builder-select-preview';

@@ -33,21 +33,11 @@ wxApp = wxApp || {};
 		}
 	});
 
-	wxApp.FormBuilderControlInputPreview = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-preview-row',
-
-		initialize: function() {
-			var selector = '#form-builder-input-preview';
-			var $template = $( selector );
-			this.inputTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
-		},
+	wxApp.FormBuilderControlInputPreview = wxApp.FormBuilderControlPreview.extend({
+		selector: '#form-builder-input-preview',
 
 		render: function() {
-			console.log('render preview');
 			var model = this.model.toJSON();
-			console.log( model );
 			this.$el.html( this.inputTpl( model ) );
 			if ( model.attributes.min )
 				this.$('input').attr('min', model.attributes.min );
