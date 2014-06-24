@@ -363,7 +363,7 @@ meta.foundation-data-attribute-namespace {
   Patrick Chong - pchong@weeverapps.com
   */
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 641px) {
   /* line 18, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/app.scss */
   #appbuilder {
     min-width: 1000px;
@@ -6675,7 +6675,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface .alert-box.alert a.close {
   text-decoration: none;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 641px) {
   /* line 67, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-typography.scss */
   #appbuilder #interface .alert-box {
     line-height: 1;
@@ -6685,7 +6685,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface .large-block-grid-3 a img + div {
   text-align: center;
 }
-@media only screen {
+@media only screen and (min-width: 641px) {
   /* line 81, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-typography.scss */
   #appbuilder #interface .wx-colorpicker label.left.inline {
     padding-left: .46875rem;
@@ -6701,7 +6701,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   margin-left: 0;
   margin-right: 0;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 641px) {
   /* line 15, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-columns.scss */
   #appbuilder #interface .row .columns.wx-column-inline:first-child {
     padding-left: 0;
@@ -6877,7 +6877,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface #ContainerEditLink {
   display: inline-block;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 641px) {
   /* line 120, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tablist.scss */
   #appbuilder #interface .wx-delete-label {
     display: inline;
@@ -7268,6 +7268,19 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   width: 100%;
   max-width: 100%;
 }
+/* line 237, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .wx-validate-feed .subheader {
+  font-size: 1.25rem;
+  margin: 0 0 1.1rem;
+}
+/* line 244, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .form-build-area .wx-form-builder-row {
+  display: none;
+}
+/* line 245, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .form-build-area .wx-form-builder-row.active {
+  display: block !important;
+}
 /* line 37, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-phone.scss */
 #appbuilder #interface #wx-phone-bg {
   width: auto;
@@ -7316,7 +7329,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface #preview-refresh {
   text-align: center;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 641px) {
   /* line 94, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-phone.scss */
   #appbuilder #interface h6.subheader.wx-switch-labelright {
     text-align: right;
@@ -7388,7 +7401,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface .wx-footer-logo {
   font-weight: bold;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 641px) {
   /* line 64, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-footer.scss */
   #appbuilder #interface .wx-footer .copyright {
     text-align: left;

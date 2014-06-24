@@ -6,7 +6,7 @@
 
 	<section class="editor">
 		<div class="row collapse">
-	    	<div class="large-12 columns">
+	    	<div class="small-12 columns">
 	    		<input type='hidden' value='' class='wx-post-id' />
 	    		<a href="#" class="wx-back-to-list" style="display: none;">Back to your content list...</a>
 			    <p>Add new content to your app.</p>
@@ -21,7 +21,7 @@
         <br>
 
 	    <div class="row">
-	    	<div class="large-12 columns">
+	    	<div class="small-12 columns">
 	    		<div data-alert id="wx-smx-not-allowed" class="alert-box alert" style="display: none">
 		            <p><strong>This feature requires an SMS messaging subscription</strong></p>
 	        		<p>You&apos;ll need to <a href="https://weeverapps.com/sms/?site_url=<%- wxApp.account.get('site').replace('http://', '').replace('https://', '') %>" target="_BLANK">upgrade your subscription</a> to add this feature.</p>
@@ -33,7 +33,7 @@
     	<div class="row">&nbsp;</div>
 
 	    <!--<div class="row">
-	    	<div class="large-12 columns">
+	    	<div class="small-12 columns">
 			    <button class="wx-add-sms">
 			    	Add SMS Form
 			    </button>
@@ -98,10 +98,10 @@
     <section class="mapper">
         <label for='geolocation-address'>Street address or map coordinates</label>
         <div class="row collapse">
-            <div class="large-8 columns">
+            <div class="medium-8 columns">
                 <input type="text" class="geolocation-address" autocomplete="off" value="" />
             </div>
-            <div class="large-4 columns">
+            <div class="medium-4 columns">
                 <button class="button expand small secondary geolocationadd">Set location</button>
             </div>
         </div>
