@@ -30,22 +30,8 @@ wxApp = wxApp || {};
 
 	});
 
-	wxApp.FormBuilderControlPagebreakPreview = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-preview-row',
-
-		initialize: function() {
-			var selector = '#form-builder-pagebreak-preview';
-			var $template = $( selector );
-			this.inputTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
-		},
-
-		render: function() {
-			var model = this.model.toJSON();
-			this.$el.html( this.inputTpl( model ) );
-			return this;
-		}
+	wxApp.FormBuilderControlPagebreakPreview = wxApp.FormBuilderControlPreview.extend({
+		selector: '#form-builder-pagebreak-preview'
 	});
 
 })(jQuery);

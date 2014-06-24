@@ -71,24 +71,8 @@ wxApp = wxApp || {};
 		}
 	});
 
-	wxApp.FormBuilderControlTextRangePreview = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-preview-row',
-
-		initialize: function() {
-			var selector = '#form-builder-text-range-preview';
-			var $template = $( selector );
-			this.inputTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
-		},
-
-		render: function() {
-			var model = this.model.toJSON();
-			moedel = model;
-
-			this.$el.html( this.inputTpl( model ) );
-			return this;
-		}
+	wxApp.FormBuilderControlTextRangePreview = wxApp.FormBuilderControlPreview.extend({
+		selector: '#form-builder-text-range-preview'
 	});
 	
 })(jQuery);

@@ -199,4 +199,40 @@ wxApp = wxApp || {};
 		}
 
 	});
+
+	wxApp.FormBuilderControlPreview = Backbone.View.extend({
+		tagName  : 'div',
+		className: 'wx-form-preview-row',
+		selector : '',
+		events   : {
+			"click":  "selectField"
+		},
+
+		initialize: function() {
+			var $template = $( this.selector );
+			this.inputTpl = _.template( $template.html() );
+			this.model.bind('change', this.render, this);
+		},
+
+		render: function() {
+			var model = this.model.toJSON();
+			this.$el.html( this.inputTpl( model ) );
+			return this;
+		},
+
+		selectField: function() {
+			var ordinal = this.model.get('ordinal');
+
+			// Highlight this control.
+			$('.wx-form-preview-row').removeClass('wx-active');
+			this.$el.addClass('wx-active');
+
+			// Show this control.
+			$('.wx-form-builder-row').removeClass('wx-active');
+			$('#wx-form-control-' + ordinal).addClass('wx-active');
+
+			// Make sure the settings tab is active.
+			$('a[href="#panel-field-settings"]').click();
+		}
+	});
 })(jQuery);

@@ -33,19 +33,8 @@ wxApp = wxApp || {};
 		}
 	});
 
-	wxApp.FormBuilderControlInputPreview = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-preview-row',
-		events: {
-			"click":  "selectField"
-		},
-
-		initialize: function() {
-			var selector = '#form-builder-input-preview';
-			var $template = $( selector );
-			this.inputTpl = _.template( $template.html() );
-			this.model.bind('change', this.render, this);
-		},
+	wxApp.FormBuilderControlInputPreview = wxApp.FormBuilderControlPreview.extend({
+		selector: '#form-builder-input-preview',
 
 		render: function() {
 			var model = this.model.toJSON();
@@ -59,21 +48,6 @@ wxApp = wxApp || {};
 			if ( model.attributes.value )
 				this.$('input').attr('value', model.attributes.value );
 			return this;
-		},
-
-		selectField: function() {
-			var ordinal = this.model.get('ordinal');
-
-			// Highlight this control.
-			$('.wx-form-preview-row').removeClass('wx-active');
-			this.$el.addClass('wx-active');
-
-			// Show this control.
-			$('.wx-form-builder-row').removeClass('wx-active');
-			$('#wx-form-control-' + ordinal).addClass('wx-active');
-
-			// Make sure the settings tab is active.
-			$('a[href="#panel-field-settings"]').click();
 		}
 	});
 	
