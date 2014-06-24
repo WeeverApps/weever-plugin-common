@@ -9,17 +9,18 @@ wxApp = wxApp || {};
 
 		initialize: function( options ) {
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
-			var $template = $( this[options.type + 'TplSelector'] );
-			this.inputTpl = _.template( $template.html() );
+			var me            = this,
+			    $template     = $( this[options.type + 'TplSelector'] ),
+			    sliderOptions = this.model.get( 'options' ) || [];
 
-			var sliderOptions = this.model.get( 'options' ) || [];
+			me.inputTpl = _.template( $template.html() );
 
-			this.model.set( 'options', new wxApp.FormBuilderControlTextSliderOptions() );
+			me.model.set( 'options', new wxApp.FormBuilderControlTextSliderOptions() );
 
-			this.model.get( 'options' ).bind('add', this.addOne, this);
+			me.model.get( 'options' ).bind('add', me.addOne, me);
+			me.model.get( 'options' ).bind('remove', function() { me.getPreview().render(); }, me);
 
 			if ( sliderOptions.length > 0 ) {
-				var me = this;
 				sliderOptions.forEach( function( sliderOption ) {
 					console.log( 'sliderOption', sliderOption );
 					me.model.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( sliderOption ) );
@@ -61,7 +62,6 @@ wxApp = wxApp || {};
 				return;
 			}
 
-			console.log( 'addOne', newOption );
 			var view = new wxApp.FormBuilderControlTextSliderOptionView({
 				model: newOption
 			});

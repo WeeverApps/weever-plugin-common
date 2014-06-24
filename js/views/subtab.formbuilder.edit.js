@@ -906,7 +906,6 @@ wxApp = wxApp || {};
 					ordinal = model.get( 'ordinal' );
 			};
 			++ordinal;
-			console.log( 'ordinal', ordinal );
 
 			input.set( 'ordinal', ordinal );
 			view.$el.attr('id', 'wx-form-control-' + ordinal.toString());
