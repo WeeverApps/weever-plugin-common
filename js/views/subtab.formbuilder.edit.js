@@ -312,7 +312,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-add-weever-signature'    : 'addWeeverSignature',
-			'click .wx-form-builder-row'                     : 'setActivePreviewElement',
+			'click .wx-form-builder-add-calculation'         : 'addCalculation',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
             'click .wx-continue-button'                      : 'next',
@@ -905,6 +905,39 @@ wxApp = wxApp || {};
 					select.get('optionGroup').add( optionModel );
 				};
 			}
+		},
+
+		addCalculation: function( ev ) {
+			
+			// Before we can add a calculator, we need to ensure there is at least one numeric 
+			// control in the form, with a name attribute assigned.
+			var found = false,
+			    formElements = this.model.get( 'config' ).formElements;
+			for (var i = 0; i < formElements.length; i++) {
+				var input = formElements.at(i);
+				if ( input.get('attributes') && 
+					 input.get('attributes').type === 'number' &&
+					 input.get('attributes').attributes.name ) {
+					found = true;
+					break;
+				}
+			};
+
+			if ( found )
+				this.addCalculationWithProperties({});
+			else
+				alert('Please add at list one Number control with the "name" attribute set.');
+		},
+
+		addCalculationWithProperties: function( properties ) {
+			var calculator = new wxApp.FormBuilderCalculator( properties );
+			console.log('Creating view with: ', this.model.get( 'config' ).formElements);
+			var calculatorView = new wxApp.FormBuilderCalculatorView({
+				model: calculator,
+				inputs: this.model.get( 'config' ).formElements
+			});
+
+			this.addControl( calculator, calculatorView );
 		},
 
 		addControl: function( input, view ) {
