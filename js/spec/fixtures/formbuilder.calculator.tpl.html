@@ -1,0 +1,36 @@
+<script type="text/template" id="form-builder-calculator">
+    <p class="title">
+        Calculation: <span class="wx-form-builder-label"><%- label %></span>
+    </p>
+
+    <div class="content">
+
+        <label>
+            Label
+            <input type='text' class="wx-form-builder-input wx-form-builder-label-input" value='<%- label %>' />
+        </label>
+        
+        <div class="row">
+            <div class="large-3 columns">&nbsp;</div>
+            <div class="large-9 columns"><select class="wx-calculation-field-1"></select></div>
+        </div>
+        <div class="row">
+            <div class="large-3 columns">
+                <select class="wx-calculation-operator">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="×">×</option>
+                    <option value="÷">÷</option>
+                </select>
+            </div>
+            <div class="large-9 columns"><select class="wx-calculation-field-2"></select></div>
+        </div>
+        
+        <button class="wx-form-builder-delete small alert">Delete Field</button>
+    </div>
+</script>
+
+<script type="text/template" id="form-builder-calculator-preview">
+    <label class="wx-form-builder-label"><%- label %></label>
+    <label class="wx-form-builder-input wx-form-builder-calculation-result" />
+</script>

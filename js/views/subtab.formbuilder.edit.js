@@ -311,6 +311,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-info'                : 'addInfo',
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
+			'click .wx-form-builder-add-calculation'         : 'addCalculation',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
             'click .wx-continue-button'                      : 'next',
@@ -889,6 +890,22 @@ wxApp = wxApp || {};
 					select.get('optionGroup').add( optionModel );
 				};
 			}
+		},
+
+		addCalculation: function( ev ) {
+			// TODO - Validate.
+			this.addCalculationWithProperties({});
+		},
+
+		addCalculationWithProperties: function( properties ) {
+			var calculator = new wxApp.FormBuilderCalculator( properties );
+			console.log('Creating view with: ', this.model.get( 'config' ).formElements);
+			var calculatorView = new wxApp.FormBuilderCalculatorView({
+				model: calculator,
+				inputs: this.model.get( 'config' ).formElements
+			});
+
+			this.addControl( calculator, calculatorView );
 		},
 
 		addControl: function( input, view ) {

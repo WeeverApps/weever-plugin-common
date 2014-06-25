@@ -123,6 +123,7 @@ wxApp = wxApp || {};
 				this.model.get( 'attributes' ).set( 'name', $me.val() );
 
 			this.getInput().attr( 'name', $me.val() );
+			this.model.trigger('change');
 		},
 
 		setAutocomplete: function( ev ) {
