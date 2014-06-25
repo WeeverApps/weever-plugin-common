@@ -311,6 +311,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-info'                : 'addInfo',
 			'click .wx-form-builder-add-pagebreak'           : 'addPagebreak',
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
+			'click .wx-form-builder-add-weever-signature'    : 'addWeeverSignature',
 			'click .wx-form-builder-add-calculation'         : 'addCalculation',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
@@ -745,7 +746,21 @@ wxApp = wxApp || {};
 		addDocusignSignatureWithProperties: function( properties ) {
 
 			var signature = new wxApp.FormBuilderControlDocusignSignature( properties ),
-			    sigView   = new wxApp.FormBuilderControlDocusignSignatureView({ model: signature });
+				sigView   = new wxApp.FormBuilderControlDocusignSignatureView({ model: signature });
+
+			this.addControl( signature, sigView );
+		},
+
+		addWeeverSignature: function( ev ) {
+			this.addWeeverSignatureWithProperties( {
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
+			} );
+		},
+
+		addWeeverSignatureWithProperties: function( properties ) {
+
+			var signature = new wxApp.FormBuilderControlWeeverSignature( properties ),
+				sigView   = new wxApp.FormBuilderControlWeeverSignatureView({ model: signature });
 
 			this.addControl( signature, sigView );
 		},
