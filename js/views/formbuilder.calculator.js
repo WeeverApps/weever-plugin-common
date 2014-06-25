@@ -7,6 +7,15 @@ wxApp = wxApp || {};
 		preview: null,
 		inputs: null,
 
+		// Extend the events from the parent
+		events: function() {
+			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'change .wx-calculation-field-1': 'changeField1',
+				'change .wx-calculation-field-2': 'changeField2',
+				'change .wx-calculation-operator': 'changeOperator'
+			});
+		},
+
 		initialize: function( options ) {
 			var $template = $( this.inputTplSelector );
 			this.inputTpl = _.template( $template.html() );
@@ -60,7 +69,26 @@ wxApp = wxApp || {};
 
 			// TODO - Select old values.
 			// TODO - Update preview.
-		}
+		},
+
+		/* Start event callbacks */
+
+		changeField1: function( e ) {
+			var value = $( e.currentTarget ).val();
+			this.model.set('control1', value);
+		},
+
+		changeField2: function( e ) {
+			var value = $( e.currentTarget ).val();
+			this.model.set('control2', value);
+		},
+
+		changeOperator: function( e ) {
+			var value = $( e.currentTarget ).val();
+			this.model.set('operation', value);
+		},
+
+		/* Endof event callbacks */
 	});
 
 
@@ -70,7 +98,65 @@ wxApp = wxApp || {};
 		render: function() {
 			var model = this.model.toJSON();
 			this.$el.html( this.inputTpl( model ) );
+			this.calculate();
 			return this;
+		},
+
+		calculate: function() {
+			console.log( 'calculating' );
+
+			var me        = this,
+			    model     = this.model.toJSON(),
+			    control1  = $( "input[name='" + model.control1 + "']" ),
+			    control2  = $( "input[name='" + model.control2 + "']" ),
+			    operation = model.operation;
+
+			if ( control1.length === 0 ) {
+				this.$('.wx-form-builder-calculation-result').html( '<strong>#REF1!</strong>' );
+				return;
+			}
+			if ( control2.length === 0 ) {
+				this.$('.wx-form-builder-calculation-result').html( '<strong>#REF2!</strong>' );
+				return;
+			}
+
+			control1.off('change');
+			control2.off('change');
+			control1.on('change', function() { me.calculate(); });
+			control2.on('change', function() { me.calculate(); });
+
+			var val1 = control1.val(),
+			    val2 = control2.val();
+
+			if (! $.isNumeric( val1 ) ) {
+				this.$('.wx-form-builder-calculation-result').html( '<strong>#VAL1!</strong>' );
+				return;
+			}
+			if (! $.isNumeric( val2 ) ) {
+				this.$('.wx-form-builder-calculation-result').html( '<strong>#VAL2!</strong>' );
+				return;
+			}
+
+			result = 0;
+			val1 = parseFloat( val1 );
+			val2 = parseFloat( val2 );
+
+			switch ( operation ) {
+				case '+':
+					result = val1 + val2;
+					break;
+				case '-':
+					result = val1 - val2;
+					break;
+				case '*':
+					result = val1 * val2;
+					break;
+				case '/':
+					result = val1 / val2;
+					break;
+			}
+
+			this.$('.wx-form-builder-calculation-result').html( '<strong>' + result + '</strong>' );
 		}
 	});
 
