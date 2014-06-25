@@ -232,7 +232,7 @@ wxApp = wxApp || {};
 			checkFormActions();
 
 			// display error messages
-			if ( errors.length ) {
+			if ( errors.length ) {				
 				errors.forEach( function( error ) {
 					errorMessage += '<br><br>' + error.message;
 				} )
@@ -315,6 +315,7 @@ wxApp = wxApp || {};
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
             'click .wx-continue-button'                      : 'next',
+            'click .wx-finish-button'                        : 'finish',
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
 
