@@ -893,8 +893,25 @@ wxApp = wxApp || {};
 		},
 
 		addCalculation: function( ev ) {
-			// TODO - Validate.
-			this.addCalculationWithProperties({});
+			
+			// Before we can add a calculator, we need to ensure there is at least one numeric 
+			// control in the form, with a name attribute assigned.
+			var found = false,
+			    formElements = this.model.get( 'config' ).formElements;
+			for (var i = 0; i < formElements.length; i++) {
+				var input = formElements.at(i);
+				if ( input.get('attributes') && 
+					 input.get('attributes').type === 'number' &&
+					 input.get('attributes').attributes.name ) {
+					found = true;
+					break;
+				}
+			};
+
+			if ( found )
+				this.addCalculationWithProperties({});
+			else
+				alert('Please add at list one Number control with the "name" attribute set.');
 		},
 
 		addCalculationWithProperties: function( properties ) {

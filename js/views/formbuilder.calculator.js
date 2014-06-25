@@ -59,6 +59,7 @@ wxApp = wxApp || {};
 			});
 
 			// TODO - Select old values.
+			// TODO - Update preview.
 		}
 	});
 
