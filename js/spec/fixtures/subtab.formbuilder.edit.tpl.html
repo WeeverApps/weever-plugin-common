@@ -302,7 +302,7 @@
                         <div>
                             <label>When a person fills out this form&hellip;</label>
                             <label>
-                                <input type="checkbox" name="on-complete-events" value="forms-account" />
+                                <input type="checkbox" name="on-complete-events" value="forms-account" checked />
                                 Save the form entry to my AppBuilder Forms account
                             </label>
                             <label>
@@ -334,6 +334,11 @@
     <div class="form-builder-step-two" style="display: none;">
         <div class="medium-12 columns">
             <h2><%- typeDescription %></h2>
+        </div>
+
+        <div data-alert class="alert-box alert" style="display: none">
+            <span class="message"></span>
+            <a href="#" class="close">&times;</a>
         </div>
 
         <div class="medium-6 columns">
@@ -671,7 +676,8 @@
 
             <div>
                 <button class="wx-finish-button success radius">Save and add this form to your app</button>
-                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                &nbsp; or <a class="wx-back-button radius">go back</a>
+                &nbsp; or <a class="wx-close-button radius">cancel</a>
                 <img id="dialog-loader" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
             </div>
             <!-- endof: left column -->

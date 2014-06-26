@@ -316,6 +316,7 @@ wxApp = wxApp || {};
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
             'click .wx-continue-button'                      : 'next',
+            'click .wx-back-button'                          : 'back',
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
 
@@ -1013,12 +1014,17 @@ wxApp = wxApp || {};
 		},
 
         next: function() {
-
             $('.form-builder-step-one').slideUp();
             $('.form-builder-step-two').slideDown();
-            $( this.buildPaneSelector ).foundation('reflow');
+            this.$el.foundation('reflow');
             $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
+        },
 
+        back: function() {
+            $('.form-builder-step-one').slideDown();
+            $('.form-builder-step-two').slideUp();
+            this.$el.foundation('reflow');
+            $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
         }
 
 	});
