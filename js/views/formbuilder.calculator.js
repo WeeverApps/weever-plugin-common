@@ -157,7 +157,14 @@ wxApp = wxApp || {};
 				return;
 			}
 
-			result = 0;
+
+
+			var result = 0,
+			    decimalPlaces = 0;
+
+			decimalPlaces = this.countDecimalPlaces( val1 );
+			decimalPlaces = Math.max( decimalPlaces, this.countDecimalPlaces( val2 ) );
+
 			val1 = parseFloat( val1 );
 			val2 = parseFloat( val2 );
 
@@ -176,7 +183,22 @@ wxApp = wxApp || {};
 					break;
 			}
 
+			console.log( 'Rounding ' + result + ' to ' + decimalPlaces + ' decimal places.' );
+			result = result.toFixed( decimalPlaces );
+
 			this.$('.wx-form-builder-calculation-result').html( '<strong>' + result + '</strong>' );
+		},
+
+		// http://stackoverflow.com/a/10454560
+		countDecimalPlaces: function( num ) {
+			var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+			if (!match) { return 0; }
+			return Math.max(
+				0,
+				// Number of digits right of decimal point.
+				(match[1] ? match[1].length : 0)
+				// Adjust for scientific notation.
+				- (match[2] ? +match[2] : 0));
 		}
 	});
 

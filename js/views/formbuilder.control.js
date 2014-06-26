@@ -8,7 +8,6 @@ wxApp = wxApp || {};
 		firstRender: true,
 
 		events: {
-			// 'click .wx-form-builder-edit-label': 'editLabel',
 			'keyup .wx-form-builder-label-input': 'updateLabel',
 			'keyup .wx-form-builder-text-input': 'updateText',
 			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
@@ -42,14 +41,6 @@ wxApp = wxApp || {};
 			this.remove();
 			this.model.destroy();
 		},
-
-		// editLabel: function( ev ) {
-		// 	console.log('editLabel');
-		// 	ev.preventDefault();
-		// 	this.$label = $( ev.currentTarget );
-		// 	this.$( '.wx-form-builder-label-input' ).val( this.$label.text() ).show().select();
-		// 	this.$label.hide();
-		// },
 
 		updateLabel: function( ev ) {
 			var value = $( ev.currentTarget ).val();
