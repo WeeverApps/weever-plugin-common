@@ -50,15 +50,6 @@ wxApp = wxApp || {};
 
 			var templateDataObject = this.model.toJSON();
 
-			templateDataObject.appendName = '';
-			templateDataObject.appendEmail = '';
-			if ( templateDataObject.labelOption.fields.indexOf( 'email' ) > -1 ) {
-				templateDataObject[ templateDataObject.labelOption.verb + 'Email' ] = 'checked';
-			}
-			if ( templateDataObject.labelOption.fields.indexOf( 'name' ) > -1 ) {
-				templateDataObject[ templateDataObject.labelOption.verb + 'Name' ] = 'checked';
-			}
-
 			this.$el.html( this.inputTpl( templateDataObject ) );
 
 			if ( this.firstRender ) {
