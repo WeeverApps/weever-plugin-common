@@ -10,12 +10,8 @@ wxApp = wxApp || {};
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'weeverSignature',
 				label: 'Sign here',
-				labelOption: {
-					verb: '',
-					fields: []
-				},
-				instructions: 'On completing this form your data will be presented back to you for review and signature.',
-				title: 'Name, email and signature',
+				instructions: 'Tap the text above, then sign with your finger.',
+				title: 'Weever Signature',
 				username: '',
 				password: '',
 				returnUrl: ''
