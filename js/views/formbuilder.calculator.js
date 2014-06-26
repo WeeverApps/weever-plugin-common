@@ -46,7 +46,11 @@ wxApp = wxApp || {};
 		},
 
 		updateDropDownLists: function( e ) {
-			var validInputs = [];
+			console.log('updateDropDownLists');
+			var validInputs     = [],
+			    dropDownListOne = $('.wx-calculation-field-1'),
+			    dropDownListTwo = $('.wx-calculation-field-2');
+
 			for (var i = 0; i < this.inputs.length; i++) {
 				var input = this.inputs.at(i);
 				if ( input.get('attributes') && input.get('attributes').type === 'number' ) {
@@ -54,36 +58,52 @@ wxApp = wxApp || {};
 				}
 			};
 
-			$('.wx-calculation-field-1').html('');
-			$('.wx-calculation-field-2').html('');
+			var oldControlOne = dropDownListOne.val();
+			var oldControlTwo = dropDownListTwo.val();
+
+			// Clear out the old.
+			dropDownListOne.html('');
+			dropDownListTwo.html('');
+
+			// Add a blank line in.
+			dropDownListOne.append($('<option>'));
+			dropDownListTwo.append($('<option>'));
+
 			$.each(validInputs, function (i, item) {
-			    $('.wx-calculation-field-1').append($('<option>', { 
+			    dropDownListOne.append($('<option>', { 
 			        value: item.get('attributes').attributes.name,
 			        text : item.get('label')
 			    }));
-			    $('.wx-calculation-field-2').append($('<option>', { 
+			    dropDownListTwo.append($('<option>', { 
 			        value: item.get('attributes').attributes.name,
 			        text : item.get('label')
 			    }));
 			});
 
-			// TODO - Select old values.
-			// TODO - Update preview.
+			// Select old values.
+			dropDownListOne.val( oldControlOne );
+			dropDownListTwo.val( oldControlTwo );
+			
+			// Re-render preview.
+			this.getPreview().render();
 		},
 
 		/* Start event callbacks */
 
 		changeField1: function( e ) {
+			console.log('changeField1');
 			var value = $( e.currentTarget ).val();
 			this.model.set('control1', value);
 		},
 
 		changeField2: function( e ) {
+			console.log('changeField2');
 			var value = $( e.currentTarget ).val();
 			this.model.set('control2', value);
 		},
 
 		changeOperator: function( e ) {
+			console.log('changeOperator');
 			var value = $( e.currentTarget ).val();
 			this.model.set('operation', value);
 		},
