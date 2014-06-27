@@ -175,19 +175,32 @@ wxApp = wxApp || {};
 			    result        = 0;
 			console.log('MODEL', model);
 
+			me.$el.removeClass('wx-error');
 			for (var i = 0; i < model.fields.length; i++) {
 				var fieldName = model.fields.models[i].attributes.name,
 				    control   = $("input[name='" + fieldName + "']");
+
+				if ( !fieldName ) {
+					me.$el.addClass('wx-error');
+					me.$('.wx-form-builder-calculation-result strong').html( 'Please select a field from the drop down list.' );
+					valid = false;
+					return;
+				}
 				
 				if ( fieldName == 'wxConstantValue' ) {
-					values.push( parseFloat( model.fields.models[i].attributes.constant ));
+					var value = parseFloat( model.fields.models[i].attributes.constant );
+					if ( isNaN( value ) ) {
+						me.$el.addClass('wx-error');
+					}
+					values.push( value );
 					continue;
 				}
 
 				if ( control.length === 0 ) {
+					me.$el.addClass('wx-error');
 					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find control with name <em>' + fieldName + '</em>.' );
 					valid = false;
-					break;
+					return;
 				}
 
 				// Update event listeners.
@@ -199,7 +212,7 @@ wxApp = wxApp || {};
 				if (! $.isNumeric( value ) ) {
 					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + fieldName + '</em> is not a number.' );
 					valid = false;
-					break;
+					continue;
 				}
 
 				decimalPlaces = Math.max( decimalPlaces, me.countDecimalPlaces( value ) );
