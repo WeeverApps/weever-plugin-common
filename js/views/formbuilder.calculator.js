@@ -10,9 +10,10 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'click .wx-add-calculation-field': 'addField',
-				'change .wx-calculation-field'   : 'changeField',
-				'change .wx-calculation-operator': 'changeOperator'
+				'click .wx-add-calculation-field'   : 'addField',
+				'click .wx-delete-calculation-field': 'deleteField',
+				'change .wx-calculation-field'      : 'changeField',
+				'change .wx-calculation-operator'   : 'changeOperator'
 			});
 		},
 
@@ -42,11 +43,13 @@ wxApp = wxApp || {};
 				this.inputs.on('change', this.updateDropDownLists, this);
 			}
 
+			this.updateDropDownLists();
 			return this;
 		},
 
 		updateDropDownLists: function( e ) {
-			var dropDownLists = this.$('.wx-calculation-field'),
+			var me            = this,
+			    dropDownLists = this.$('.wx-calculation-field'),
 			    validInputs   = [];
 
 			for (var i = 0; i < this.inputs.length; i++) {
@@ -59,11 +62,8 @@ wxApp = wxApp || {};
 
 			$.each(dropDownLists, function(i, ddl) {
 				ddl = $(ddl);
-				console.log('I', i);
-				console.log('DDL', ddl);
 
 				// Cache the current value & re-initialize the drop down list.
-				var oldValue = ddl.val();
 				ddl.html('<option></option>');
 
 				// Build the drop down lists.
@@ -83,7 +83,10 @@ wxApp = wxApp || {};
 				});
 
 				// Select old value.
-				ddl.val( oldValue );
+				ddl.val( me.model.get('fields')[i] );
+				if ( i > 0 ) {
+					$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( me.model.get('operations')[i-1] );
+				}
 			});
 			
 			// Re-render preview.
@@ -95,6 +98,15 @@ wxApp = wxApp || {};
 		addField: function( e ) {
 			this.model.get('fields').push('');
 			this.model.get('operations').push('+');
+			this.render();
+		},
+
+		deleteField: function( e ) {
+			var ctl = $( e.currentTarget ),
+			    i   = ctl.data('index');
+			this.model.get('fields').splice( i, 1 );
+			if ( i > 0 )
+				this.model.get('operations').splice( i-1, 1 );
 			this.render();
 		},
 
