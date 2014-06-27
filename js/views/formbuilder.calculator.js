@@ -83,9 +83,10 @@ wxApp = wxApp || {};
 				});
 
 				// Select old value.
-				ddl.val( me.model.get('fields')[i] );
+				var field = me.model.get('fields').at( i )
+				ddl.val( field.get('name') );
 				if ( i > 0 ) {
-					$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( me.model.get('operations')[i-1] );
+					$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( field.get('operation') );
 				}
 			});
 			
@@ -96,17 +97,14 @@ wxApp = wxApp || {};
 		/* Start event callbacks */
 
 		addField: function( e ) {
-			this.model.get('fields').push('');
-			this.model.get('operations').push('+');
+			this.model.get('fields').add( new wxApp.FormBuilderCalculatorField() );
 			this.render();
 		},
 
 		deleteField: function( e ) {
 			var ctl = $( e.currentTarget ),
 			    i   = ctl.data('index');
-			this.model.get('fields').splice( i, 1 );
-			if ( i > 0 )
-				this.model.get('operations').splice( i-1, 1 );
+			this.model.get('fields').remove( this.model.get('fields').at( i ) );
 			this.render();
 		},
 
@@ -114,7 +112,7 @@ wxApp = wxApp || {};
 			var ctl = $( e.currentTarget ),
 			    val = ctl.val(),
 			    i   = ctl.data('index');
-			this.model.get('fields')[i] = val;
+			this.model.get('fields').at(i).set('name', val);
 			this.model.trigger('change');
 		},
 
@@ -122,7 +120,7 @@ wxApp = wxApp || {};
 			var ctl = $( e.currentTarget ),
 			    val = ctl.val(),
 			    i   = ctl.data('index');
-			this.model.get('operations')[ i-1 ] = val;
+			this.model.get('fields').at(i).set('operation', val);
 			this.model.trigger('change');
 		},
 
@@ -150,7 +148,7 @@ wxApp = wxApp || {};
 			console.log('MODEL', model);
 
 			for (var i = 0; i < model.fields.length; i++) {
-				var fieldName = model.fields[i],
+				var fieldName = model.fields.models[i].attributes.name,
 				    control   = $("input[name='" + fieldName + "']");
 				if ( control.length === 0 ) {
 					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find control with name <em>' + fieldName + '</em>.' );
@@ -179,25 +177,22 @@ wxApp = wxApp || {};
 				return;
 			}
 
-			// n = operations.length
-			// m = values.length
-			// TODO: assert( n+1 === m )
 			result = values[0];
-			for (var i = 0; i < model.operations.length; i++) {
-				var operation = model.operations[i];
+			for (var i = 1; i < model.fields.length; i++) {
+				var operation = model.fields.models[i].attributes.operation;
 
 				switch ( operation ) {
 					case '+':
-						result = result + values[i+1];
+						result = result + values[i];
 						break;
 					case '-':
-						result = result - values[i+1];
+						result = result - values[i];
 						break;
 					case '*':
-						result = result * values[i+1];
+						result = result * values[i];
 						break;
 					case '/':
-						result = result / values[i+1];
+						result = result / values[i];
 						break;
 				}
 			};
