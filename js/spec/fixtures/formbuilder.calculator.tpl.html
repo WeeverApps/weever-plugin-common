@@ -10,27 +10,55 @@
             <input type='text' class="wx-form-builder-input wx-form-builder-label-input" value='<%- label %>' />
         </label>
         
-        <div class="row">
-            <div class="large-3 columns">&nbsp;</div>
-            <div class="large-9 columns"><select class="wx-calculation-field-1"></select></div>
-        </div>
-        <div class="row">
-            <div class="large-3 columns">
-                <select class="wx-calculation-operator">
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                    <option value="*">×</option>
-                    <option value="/">÷</option>
-                </select>
+        <fieldset>
+            <% for (var i = 0; i < fields.length; i++) { var field = fields[i]; %>
+                <div class="row">
+                    <div class="large-2 columns">
+                        <% if ( i == 0 ) { %>
+                            &nbsp;
+                        <% } else { %>
+                            <select class="wx-calculation-operator" data-index="<%- i %>">
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="*">×</option>
+                                <option value="/">÷</option>
+                            </select>
+                        <% } %>
+                    </div>
+                    <div class="large-9 columns"><select class="wx-calculation-field" data-index="<%- i %>"></select></div>
+                    <div class="large-1 columns">
+                        <a href="#" class="wx-delete-calculation-field wxui-btn red" title="Delete" data-index="<%- i %>">&times;</a>
+                    </div>
+                </div>
+                <div class="row hide wx-constant" data-index="<%- i %>">
+                    <div class="large-2 columns">&nbsp;</div>
+                    <div class="large-9 columns">
+                        <input type="number" class="wx-constant" />
+                    </div>
+                    <div class="large-1 columns">&nbsp;</div>
+                </div>
+            <% } %>
+            <div class="row">
+                <div class="large-2 columns">&nbsp;</div>
+                <div class="large-10 columns">
+                    <a href="#" class="wx-add-calculation-field">+ add number field</a>
+                </div>
             </div>
-            <div class="large-9 columns"><select class="wx-calculation-field-2"></select></div>
-        </div>
-        
+            <hr/>
+            <div class="row">
+                <div class="large-2 columns text-right">=</div>
+                <div class="large-10 columns wx-form-builder-label"><%- label %></div>
+            </div>
+        </fieldset>
+
         <button class="wx-form-builder-delete small alert">Delete Field</button>
     </div>
 </script>
 
 <script type="text/template" id="form-builder-calculator-preview">
     <label class="wx-form-builder-label"><%- label %></label>
-    <label class="wx-form-builder-input wx-form-builder-calculation-result" />
+    <label class="wx-form-builder-input wx-form-builder-calculation-result">
+        <strong></strong>
+    </label>
+    <input type="hidden" name="<%- label.toLowerCase().replace(' ', '-') %>" />
 </script>

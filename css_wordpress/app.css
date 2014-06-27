@@ -7741,3 +7741,7 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 body.wp-admin {
   min-width: 0 !important;
 }
+
+#appbuilder #interface .wx-form-preview-row.wx-error {
+	background-color: pink;
+}

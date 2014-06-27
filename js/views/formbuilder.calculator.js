@@ -10,9 +10,11 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'change .wx-calculation-field-1': 'changeField1',
-				'change .wx-calculation-field-2': 'changeField2',
-				'change .wx-calculation-operator': 'changeOperator'
+				'click .wx-add-calculation-field'   : 'addField',
+				'click .wx-delete-calculation-field': 'deleteField',
+				'change .wx-calculation-field'      : 'changeField',
+				'change .wx-calculation-operator'   : 'changeOperator',
+				'keyup input.wx-constant'           : 'changeConstant'
 			});
 		},
 
@@ -42,47 +44,62 @@ wxApp = wxApp || {};
 				this.inputs.on('change', this.updateDropDownLists, this);
 			}
 
+			this.updateDropDownLists();
 			return this;
 		},
 
 		updateDropDownLists: function( e ) {
-			console.log('updateDropDownLists');
-			var validInputs     = [],
-			    dropDownListOne = $('.wx-calculation-field-1'),
-			    dropDownListTwo = $('.wx-calculation-field-2');
+			var me            = this,
+			    dropDownLists = this.$('.wx-calculation-field'),
+			    validInputs   = [];
 
 			for (var i = 0; i < this.inputs.length; i++) {
 				var input = this.inputs.at(i);
-				if ( input.get('attributes') && input.get('attributes').type === 'number' ) {
+				if (( input.get('attributes') && input.get('attributes').type === 'number' ) ||
+					( input.get('control') === 'calculation' )) {
 					validInputs.push( input );
 				}
 			};
 
-			var oldControlOne = dropDownListOne.val();
-			var oldControlTwo = dropDownListTwo.val();
+			$.each(dropDownLists, function(i, ddl) {
+				ddl = $(ddl);
 
-			// Clear out the old.
-			dropDownListOne.html('');
-			dropDownListTwo.html('');
+				// Cache the current value & re-initialize the drop down list.
+				ddl.html('<option></option>');
 
-			// Add a blank line in.
-			dropDownListOne.append($('<option>'));
-			dropDownListTwo.append($('<option>'));
+				// Build the drop down lists.
+				$.each(validInputs, function (i, item) {
+					var label = item.get('label'),
+					    name  = '';
 
-			$.each(validInputs, function (i, item) {
-			    dropDownListOne.append($('<option>', { 
-			        value: item.get('attributes').attributes.name,
-			        text : item.get('label')
-			    }));
-			    dropDownListTwo.append($('<option>', { 
-			        value: item.get('attributes').attributes.name,
-			        text : item.get('label')
-			    }));
+					if ( item.get('attributes') )
+						name = item.get('attributes').attributes.name;
+					else
+						name = label.toLowerCase().replace(' ', '-');
+
+				    ddl.append($('<option>', { 
+				        value: name,
+				        text : label
+				    }));
+				});
+
+				// Add Constant Value option
+				ddl.append($('<option>', {
+					value: 'wxConstantValue',
+					text : '[Constant Value]'
+				}))
+
+				// Select old values.
+				var field = me.model.get('fields').at( i )
+				ddl.val( field.get('name') );
+				if ( i > 0 ) {
+					$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( field.get('operation') );
+				}
+				if ( field.get('name') == 'wxConstantValue' ) {
+					$('div.wx-constant[data-index="' + i.toString() + '"]').show();
+				}
+				$('div.wx-constant[data-index="' + i.toString() + '"] input').val( field.get('constant') );
 			});
-
-			// Select old values.
-			dropDownListOne.val( oldControlOne );
-			dropDownListTwo.val( oldControlTwo );
 			
 			// Re-render preview.
 			this.getPreview().render();
@@ -90,22 +107,49 @@ wxApp = wxApp || {};
 
 		/* Start event callbacks */
 
-		changeField1: function( e ) {
-			console.log('changeField1');
-			var value = $( e.currentTarget ).val();
-			this.model.set('control1', value);
+		addField: function( e ) {
+			this.model.get('fields').add( new wxApp.FormBuilderCalculatorField() );
+			this.render();
 		},
 
-		changeField2: function( e ) {
-			console.log('changeField2');
-			var value = $( e.currentTarget ).val();
-			this.model.set('control2', value);
+		deleteField: function( e ) {
+			var ctl = $( e.currentTarget ),
+			    i   = ctl.data('index');
+			this.model.get('fields').remove( this.model.get('fields').at( i ) );
+			this.render();
+		},
+
+		changeConstant: function( e ) {
+			console.log( 'CHANGE Constant' );
+			var ctl = $( e.currentTarget ),
+			    val = ctl.val(),
+			    i   = ctl.parent().parent().data('index');
+			this.model.get('fields').at(i).set('constant', parseFloat( val ));
+			this.model.trigger('change');
+		},
+
+		changeField: function( e ) {
+			var ctl = $( e.currentTarget ),
+			    val = ctl.val(),
+			    i   = ctl.data('index');
+
+			if ( val === 'wxConstantValue' ) {
+				this.$('div.wx-constant[data-index="' + i + '"]').slideDown();
+			}
+			else {
+				this.$('div.wx-constant[data-index="' + i + '"]').slideUp();
+			}
+
+			this.model.get('fields').at(i).set('name', val);
+			this.model.trigger('change');
 		},
 
 		changeOperator: function( e ) {
-			console.log('changeOperator');
-			var value = $( e.currentTarget ).val();
-			this.model.set('operation', value);
+			var ctl = $( e.currentTarget ),
+			    val = ctl.val(),
+			    i   = ctl.data('index');
+			this.model.get('fields').at(i).set('operation', val);
+			this.model.trigger('change');
 		},
 
 		/* Endof event callbacks */
@@ -123,60 +167,98 @@ wxApp = wxApp || {};
 		},
 
 		calculate: function() {
-			console.log( 'calculating' );
+			var me            = this,
+			    model         = this.model.toJSON(),
+			    valid         = true,
+			    values        = [],
+			    decimalPlaces = 0,
+			    result        = 0;
+			console.log('MODEL', model);
 
-			var me        = this,
-			    model     = this.model.toJSON(),
-			    control1  = $( "input[name='" + model.control1 + "']" ),
-			    control2  = $( "input[name='" + model.control2 + "']" ),
-			    operation = model.operation;
+			me.$el.removeClass('wx-error');
+			for (var i = 0; i < model.fields.length; i++) {
+				var fieldName = model.fields.models[i].attributes.name,
+				    control   = $("input[name='" + fieldName + "']");
 
-			if ( control1.length === 0 ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#REF1!</strong>' );
+				if ( !fieldName ) {
+					me.$el.addClass('wx-error');
+					me.$('.wx-form-builder-calculation-result strong').html( 'Please select a field from the drop down list.' );
+					valid = false;
+					return;
+				}
+				
+				if ( fieldName == 'wxConstantValue' ) {
+					var value = parseFloat( model.fields.models[i].attributes.constant );
+					if ( isNaN( value ) ) {
+						me.$el.addClass('wx-error');
+					}
+					values.push( value );
+					continue;
+				}
+
+				if ( control.length === 0 ) {
+					me.$el.addClass('wx-error');
+					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find control with name <em>' + fieldName + '</em>.' );
+					valid = false;
+					return;
+				}
+
+				// Update event listeners.
+				control.off( 'change' );
+				control.on( 'change', function() { me.calculate(); } );
+
+				var value = control.val();
+
+				if (! $.isNumeric( value ) ) {
+					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + fieldName + '</em> is not a number.' );
+					valid = false;
+					continue;
+				}
+
+				decimalPlaces = Math.max( decimalPlaces, me.countDecimalPlaces( value ) );
+				values.push( parseFloat( value ) );
+			};
+
+			if ( !valid ) {
+				this.$('input[type="hidden"]').val( 0 );
 				return;
 			}
-			if ( control2.length === 0 ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#REF2!</strong>' );
-				return;
-			}
 
-			control1.off('change');
-			control2.off('change');
-			control1.on('change', function() { me.calculate(); });
-			control2.on('change', function() { me.calculate(); });
+			result = values[0];
+			for (var i = 1; i < model.fields.length; i++) {
+				var operation = model.fields.models[i].attributes.operation;
 
-			var val1 = control1.val(),
-			    val2 = control2.val();
+				switch ( operation ) {
+					case '+':
+						result = result + values[i];
+						break;
+					case '-':
+						result = result - values[i];
+						break;
+					case '*':
+						result = result * values[i];
+						break;
+					case '/':
+						result = result / values[i];
+						break;
+				}
+			};
 
-			if (! $.isNumeric( val1 ) ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#VAL1!</strong>' );
-				return;
-			}
-			if (! $.isNumeric( val2 ) ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#VAL2!</strong>' );
-				return;
-			}
+			result = result.toFixed( decimalPlaces );
+			this.$('.wx-form-builder-calculation-result strong').html( result );
+			this.$('input[type="hidden"]').val( result );
+		},
 
-			result = 0;
-			val1 = parseFloat( val1 );
-			val2 = parseFloat( val2 );
-
-			switch ( operation ) {
-				case '+':
-					result = val1 + val2;
-					break;
-				case '-':
-					result = val1 - val2;
-					break;
-				case '*':
-					result = val1 * val2;
-					break;
-				case '/':
-					result = val1 / val2;
-					break;
-			}
-
-			this.$('.wx-form-builder-calculation-result').html( '<strong>' + result + '</strong>' );
+		// http://stackoverflow.com/a/10454560
+		countDecimalPlaces: function( num ) {
+			var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+			if (!match) { return 0; }
+			return Math.max(
+				0,
+				// Number of digits right of decimal point.
+				(match[1] ? match[1].length : 0)
+				// Adjust for scientific notation.
+				- (match[2] ? +match[2] : 0));
 		}
 	});
 

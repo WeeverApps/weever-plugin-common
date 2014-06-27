@@ -8,10 +8,10 @@ wxApp = wxApp || {};
 		firstRender: true,
 
 		events: {
-			// 'click .wx-form-builder-edit-label': 'editLabel',
 			'keyup .wx-form-builder-label-input': 'updateLabel',
 			'keyup .wx-form-builder-text-input': 'updateText',
 			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
+			'blur .wx-form-builder-label-input': 'setDefaultName',
 			'blur .wx-form-builder-min-input': 'setMin',
 			'blur .wx-form-builder-max-input': 'setMax',
 			'blur .wx-form-builder-value-input': 'setValue',
@@ -42,14 +42,6 @@ wxApp = wxApp || {};
 			this.remove();
 			this.model.destroy();
 		},
-
-		// editLabel: function( ev ) {
-		// 	console.log('editLabel');
-		// 	ev.preventDefault();
-		// 	this.$label = $( ev.currentTarget );
-		// 	this.$( '.wx-form-builder-label-input' ).val( this.$label.text() ).show().select();
-		// 	this.$label.hide();
-		// },
 
 		updateLabel: function( ev ) {
 			var value = $( ev.currentTarget ).val();
@@ -115,6 +107,22 @@ wxApp = wxApp || {};
 			$( ev.currentTarget ).val( fixedValue );
 			this.model.get( 'attributes' ).set( 'step', parseFloat( fixedValue ) );
 			this.model.trigger('change');
+		},
+
+		setDefaultName: function( ev ) {
+			if ( !this.model.get( 'attributes' ) ) return;
+
+			// If no name exists, set the default name to the label.
+			if ( !this.model.get( 'attributes' ).get( 'name' ) ||
+			      this.model.get( 'attributes' ).get( 'name' ).length === 0) {
+				var label = $( ev.currentTarget ).val(),
+				    name  = label.toLowerCase().replace(' ', '-');
+
+				this.$('.wx-form-builder-name-input').val( name );
+			    this.model.get( 'attributes' ).set( 'name', name );
+				this.getInput().attr( 'name', name );
+				this.model.trigger('change');
+			}
 		},
 
 		setName: function( ev ) {
