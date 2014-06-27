@@ -46,14 +46,14 @@ wxApp = wxApp || {};
 		},
 
 		updateDropDownLists: function( e ) {
-			console.log('updateDropDownLists');
 			var validInputs     = [],
-			    dropDownListOne = $('.wx-calculation-field-1'),
-			    dropDownListTwo = $('.wx-calculation-field-2');
+			    dropDownListOne = this.$('.wx-calculation-field-1'),
+			    dropDownListTwo = this.$('.wx-calculation-field-2');
 
 			for (var i = 0; i < this.inputs.length; i++) {
 				var input = this.inputs.at(i);
-				if ( input.get('attributes') && input.get('attributes').type === 'number' ) {
+				if (( input.get('attributes') && input.get('attributes').type === 'number' ) ||
+					( input.get('control') === 'calculation' )) {
 					validInputs.push( input );
 				}
 			};
@@ -70,13 +70,20 @@ wxApp = wxApp || {};
 			dropDownListTwo.append($('<option>'));
 
 			$.each(validInputs, function (i, item) {
+				var label = item.get('label'),
+				    name  = '';
+				if ( item.get('attributes') )
+					name = item.get('attributes').attributes.name;
+				else
+					name = label.toLowerCase().replace(' ', '-');
+
 			    dropDownListOne.append($('<option>', { 
-			        value: item.get('attributes').attributes.name,
-			        text : item.get('label')
+			        value: name,
+			        text : label
 			    }));
 			    dropDownListTwo.append($('<option>', { 
-			        value: item.get('attributes').attributes.name,
-			        text : item.get('label')
+			        value: name,
+			        text : label
 			    }));
 			});
 
@@ -91,19 +98,16 @@ wxApp = wxApp || {};
 		/* Start event callbacks */
 
 		changeField1: function( e ) {
-			console.log('changeField1');
 			var value = $( e.currentTarget ).val();
 			this.model.set('control1', value);
 		},
 
 		changeField2: function( e ) {
-			console.log('changeField2');
 			var value = $( e.currentTarget ).val();
 			this.model.set('control2', value);
 		},
 
 		changeOperator: function( e ) {
-			console.log('changeOperator');
 			var value = $( e.currentTarget ).val();
 			this.model.set('operation', value);
 		},
@@ -123,8 +127,6 @@ wxApp = wxApp || {};
 		},
 
 		calculate: function() {
-			console.log( 'calculating' );
-
 			var me        = this,
 			    model     = this.model.toJSON(),
 			    control1  = $( "input[name='" + model.control1 + "']" ),
@@ -132,11 +134,11 @@ wxApp = wxApp || {};
 			    operation = model.operation;
 
 			if ( control1.length === 0 ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#REF1!</strong>' );
+				this.$('.wx-form-builder-calculation-result strong').html( '#REF1!' );
 				return;
 			}
 			if ( control2.length === 0 ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#REF2!</strong>' );
+				this.$('.wx-form-builder-calculation-result strong').html( '#REF2!' );
 				return;
 			}
 
@@ -149,15 +151,13 @@ wxApp = wxApp || {};
 			    val2 = control2.val();
 
 			if (! $.isNumeric( val1 ) ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#VAL1!</strong>' );
+				this.$('.wx-form-builder-calculation-result strong').html( '#VAL1!' );
 				return;
 			}
 			if (! $.isNumeric( val2 ) ) {
-				this.$('.wx-form-builder-calculation-result').html( '<strong>#VAL2!</strong>' );
+				this.$('.wx-form-builder-calculation-result strong').html( '#VAL2!' );
 				return;
 			}
-
-
 
 			var result = 0,
 			    decimalPlaces = 0;
@@ -183,10 +183,10 @@ wxApp = wxApp || {};
 					break;
 			}
 
-			console.log( 'Rounding ' + result + ' to ' + decimalPlaces + ' decimal places.' );
 			result = result.toFixed( decimalPlaces );
 
-			this.$('.wx-form-builder-calculation-result').html( '<strong>' + result + '</strong>' );
+			this.$('.wx-form-builder-calculation-result strong').html( result );
+			this.$('input[type="hidden"]').val( result );
 		},
 
 		// http://stackoverflow.com/a/10454560
