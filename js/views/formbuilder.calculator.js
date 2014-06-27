@@ -10,6 +10,7 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'click .wx-add-calculation-field': 'addField',
 				'change .wx-calculation-field'   : 'changeField',
 				'change .wx-calculation-operator': 'changeOperator'
 			});
@@ -91,8 +92,13 @@ wxApp = wxApp || {};
 
 		/* Start event callbacks */
 
+		addField: function( e ) {
+			this.model.get('fields').push('');
+			this.model.get('operations').push('+');
+			this.render();
+		},
+
 		changeField: function( e ) {
-			alert('changeField');
 			var ctl = $( e.currentTarget ),
 			    val = ctl.val(),
 			    i   = ctl.data('index');
@@ -101,8 +107,11 @@ wxApp = wxApp || {};
 		},
 
 		changeOperator: function( e ) {
-			var value = $( e.currentTarget ).val();
-			this.model.set('operation', value);
+			var ctl = $( e.currentTarget ),
+			    val = ctl.val(),
+			    i   = ctl.data('index');
+			this.model.get('operations')[ i-1 ] = val;
+			this.model.trigger('change');
 		},
 
 		/* Endof event callbacks */
