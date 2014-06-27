@@ -110,6 +110,7 @@ wxApp = wxApp || {};
 		},
 
 		setDefaultName: function( ev ) {
+			if ( !this.model.get( 'attributes' ) ) return;
 
 			// If no name exists, set the default name to the label.
 			if ( !this.model.get( 'attributes' ).get( 'name' ) ||

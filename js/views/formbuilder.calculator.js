@@ -10,8 +10,7 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'change .wx-calculation-field-1': 'changeField1',
-				'change .wx-calculation-field-2': 'changeField2',
+				'change .wx-calculation-field'   : 'changeField',
 				'change .wx-calculation-operator': 'changeOperator'
 			});
 		},
@@ -46,9 +45,8 @@ wxApp = wxApp || {};
 		},
 
 		updateDropDownLists: function( e ) {
-			var validInputs     = [],
-			    dropDownListOne = this.$('.wx-calculation-field-1'),
-			    dropDownListTwo = this.$('.wx-calculation-field-2');
+			var dropDownLists = this.$('.wx-calculation-field'),
+			    validInputs   = [];
 
 			for (var i = 0; i < this.inputs.length; i++) {
 				var input = this.inputs.at(i);
@@ -58,38 +56,34 @@ wxApp = wxApp || {};
 				}
 			};
 
-			var oldControlOne = dropDownListOne.val();
-			var oldControlTwo = dropDownListTwo.val();
+			$.each(dropDownLists, function(i, ddl) {
+				ddl = $(ddl);
+				console.log('I', i);
+				console.log('DDL', ddl);
 
-			// Clear out the old.
-			dropDownListOne.html('');
-			dropDownListTwo.html('');
+				// Cache the current value & re-initialize the drop down list.
+				var oldValue = ddl.val();
+				ddl.html('<option></option>');
 
-			// Add a blank line in.
-			dropDownListOne.append($('<option>'));
-			dropDownListTwo.append($('<option>'));
+				// Build the drop down lists.
+				$.each(validInputs, function (i, item) {
+					var label = item.get('label'),
+					    name  = '';
 
-			$.each(validInputs, function (i, item) {
-				var label = item.get('label'),
-				    name  = '';
-				if ( item.get('attributes') )
-					name = item.get('attributes').attributes.name;
-				else
-					name = label.toLowerCase().replace(' ', '-');
+					if ( item.get('attributes') )
+						name = item.get('attributes').attributes.name;
+					else
+						name = label.toLowerCase().replace(' ', '-');
 
-			    dropDownListOne.append($('<option>', { 
-			        value: name,
-			        text : label
-			    }));
-			    dropDownListTwo.append($('<option>', { 
-			        value: name,
-			        text : label
-			    }));
+				    ddl.append($('<option>', { 
+				        value: name,
+				        text : label
+				    }));
+				});
+
+				// Select old value.
+				ddl.val( oldValue );
 			});
-
-			// Select old values.
-			dropDownListOne.val( oldControlOne );
-			dropDownListTwo.val( oldControlTwo );
 			
 			// Re-render preview.
 			this.getPreview().render();
@@ -97,14 +91,13 @@ wxApp = wxApp || {};
 
 		/* Start event callbacks */
 
-		changeField1: function( e ) {
-			var value = $( e.currentTarget ).val();
-			this.model.set('control1', value);
-		},
-
-		changeField2: function( e ) {
-			var value = $( e.currentTarget ).val();
-			this.model.set('control2', value);
+		changeField: function( e ) {
+			alert('changeField');
+			var ctl = $( e.currentTarget ),
+			    val = ctl.val(),
+			    i   = ctl.data('index');
+			this.model.get('fields')[i] = val;
+			this.model.trigger('change');
 		},
 
 		changeOperator: function( e ) {
@@ -127,64 +120,68 @@ wxApp = wxApp || {};
 		},
 
 		calculate: function() {
-			var me        = this,
-			    model     = this.model.toJSON(),
-			    control1  = $( "input[name='" + model.control1 + "']" ),
-			    control2  = $( "input[name='" + model.control2 + "']" ),
-			    operation = model.operation;
+			var me            = this,
+			    model         = this.model.toJSON(),
+			    valid         = true,
+			    values        = [],
+			    decimalPlaces = 0,
+			    result        = 0;
+			console.log('MODEL', model);
 
-			if ( control1.length === 0 ) {
-				this.$('.wx-form-builder-calculation-result strong').html( '#REF1!' );
+			for (var i = 0; i < model.fields.length; i++) {
+				var fieldName = model.fields[i],
+				    control   = $("input[name='" + fieldName + "']");
+				if ( control.length === 0 ) {
+					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find control with name <em>' + fieldName + '</em>.' );
+					valid = false;
+					break;
+				}
+
+				// Update event listeners.
+				control.off( 'change' );
+				control.on( 'change', function() { me.calculate(); } );
+
+				var value = control.val();
+
+				if (! $.isNumeric( value ) ) {
+					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + fieldName + '</em> is not a number.' );
+					valid = false;
+					break;
+				}
+
+				decimalPlaces = Math.max( decimalPlaces, me.countDecimalPlaces( value ) );
+				values.push( parseFloat( value ) );
+			};
+
+			if ( !valid ) {
+				this.$('input[type="hidden"]').val( 0 );
 				return;
 			}
-			if ( control2.length === 0 ) {
-				this.$('.wx-form-builder-calculation-result strong').html( '#REF2!' );
-				return;
-			}
 
-			control1.off('change');
-			control2.off('change');
-			control1.on('change', function() { me.calculate(); });
-			control2.on('change', function() { me.calculate(); });
+			// n = operations.length
+			// m = values.length
+			// TODO: assert( n+1 === m )
+			result = values[0];
+			for (var i = 0; i < model.operations.length; i++) {
+				var operation = model.operations[i];
 
-			var val1 = control1.val(),
-			    val2 = control2.val();
-
-			if (! $.isNumeric( val1 ) ) {
-				this.$('.wx-form-builder-calculation-result strong').html( '#VAL1!' );
-				return;
-			}
-			if (! $.isNumeric( val2 ) ) {
-				this.$('.wx-form-builder-calculation-result strong').html( '#VAL2!' );
-				return;
-			}
-
-			var result = 0,
-			    decimalPlaces = 0;
-
-			decimalPlaces = this.countDecimalPlaces( val1 );
-			decimalPlaces = Math.max( decimalPlaces, this.countDecimalPlaces( val2 ) );
-
-			val1 = parseFloat( val1 );
-			val2 = parseFloat( val2 );
-
-			switch ( operation ) {
-				case '+':
-					result = val1 + val2;
-					break;
-				case '-':
-					result = val1 - val2;
-					break;
-				case '*':
-					result = val1 * val2;
-					break;
-				case '/':
-					result = val1 / val2;
-					break;
-			}
+				switch ( operation ) {
+					case '+':
+						result = result + values[i+1];
+						break;
+					case '-':
+						result = result - values[i+1];
+						break;
+					case '*':
+						result = result * values[i+1];
+						break;
+					case '/':
+						result = result / values[i+1];
+						break;
+				}
+			};
 
 			result = result.toFixed( decimalPlaces );
-
 			this.$('.wx-form-builder-calculation-result strong').html( result );
 			this.$('input[type="hidden"]').val( result );
 		},

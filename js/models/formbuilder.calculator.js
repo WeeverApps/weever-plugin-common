@@ -7,11 +7,10 @@ wxApp = wxApp || {};
 
 		defaults: function() {
 			return {
-				control  : 'calculation',
-				control1 : '',
-				control2 : '',
-				operation: '+',
-				label    : 'Calculated Value'
+				control   : 'calculation',
+				fields    : ['', ''],
+				operations: ['+'],
+				label     : 'Calculated Value'
 			};
 		},
 
