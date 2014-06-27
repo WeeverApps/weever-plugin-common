@@ -13,7 +13,8 @@ wxApp = wxApp || {};
 				'click .wx-add-calculation-field'   : 'addField',
 				'click .wx-delete-calculation-field': 'deleteField',
 				'change .wx-calculation-field'      : 'changeField',
-				'change .wx-calculation-operator'   : 'changeOperator'
+				'change .wx-calculation-operator'   : 'changeOperator',
+				'keyup input.wx-constant'           : 'changeConstant'
 			});
 		},
 
@@ -82,12 +83,22 @@ wxApp = wxApp || {};
 				    }));
 				});
 
-				// Select old value.
+				// Add Constant Value option
+				ddl.append($('<option>', {
+					value: 'wxConstantValue',
+					text : '[Constant Value]'
+				}))
+
+				// Select old values.
 				var field = me.model.get('fields').at( i )
 				ddl.val( field.get('name') );
 				if ( i > 0 ) {
 					$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( field.get('operation') );
 				}
+				if ( field.get('name') == 'wxConstantValue' ) {
+					$('div.wx-constant[data-index="' + i.toString() + '"]').show();
+				}
+				$('div.wx-constant[data-index="' + i.toString() + '"] input').val( field.get('constant') );
 			});
 			
 			// Re-render preview.
@@ -108,10 +119,27 @@ wxApp = wxApp || {};
 			this.render();
 		},
 
+		changeConstant: function( e ) {
+			console.log( 'CHANGE Constant' );
+			var ctl = $( e.currentTarget ),
+			    val = ctl.val(),
+			    i   = ctl.parent().parent().data('index');
+			this.model.get('fields').at(i).set('constant', parseFloat( val ));
+			this.model.trigger('change');
+		},
+
 		changeField: function( e ) {
 			var ctl = $( e.currentTarget ),
 			    val = ctl.val(),
 			    i   = ctl.data('index');
+
+			if ( val === 'wxConstantValue' ) {
+				this.$('div.wx-constant[data-index="' + i + '"]').slideDown();
+			}
+			else {
+				this.$('div.wx-constant[data-index="' + i + '"]').slideUp();
+			}
+
 			this.model.get('fields').at(i).set('name', val);
 			this.model.trigger('change');
 		},
@@ -150,6 +178,12 @@ wxApp = wxApp || {};
 			for (var i = 0; i < model.fields.length; i++) {
 				var fieldName = model.fields.models[i].attributes.name,
 				    control   = $("input[name='" + fieldName + "']");
+				
+				if ( fieldName == 'wxConstantValue' ) {
+					values.push( parseFloat( model.fields.models[i].attributes.constant ));
+					continue;
+				}
+
 				if ( control.length === 0 ) {
 					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find control with name <em>' + fieldName + '</em>.' );
 					valid = false;
