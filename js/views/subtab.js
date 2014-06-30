@@ -26,7 +26,8 @@ wxApp = wxApp || {};
 
         events: {
             'click .wx-edit-link': 'editSubTab',
-            'click .wx-subtab-delete': 'confirmDeleteSubTab'
+            'click .wx-subtab-delete': 'confirmDeleteSubTab',
+	        'click .wx-subtab-copy': 'confirmCopySubTab'
         },
 
         render: function() {
@@ -41,13 +42,29 @@ wxApp = wxApp || {};
         editSubTab: function(event) {
             event.preventDefault();
 
-console.log( 'editSubTab' );
+			console.log( 'editSubTab' );
             var editViewName = this.model.getModelName() + 'EditView';
             if ( 'SubTabEditView' != editViewName && undefined !== wxApp[editViewName] )
                 var view = new wxApp[editViewName]( { model: this.model, el: '#wx-edit-area-' + this.model.get('id') } );
             else
                 throw new Error( 'Invalid edit type ' + this.model.get('content') + '--' + editViewName );
         },
+
+	    confirmCopySubTab: function( event ) {
+		    event.preventDefault();
+		    if ( confirm('Are you sure you want to copy this item?') ) {
+			    this.copySubTab();
+		    }
+	    },
+
+	    copySubTab: function() {
+		    var copy = this.model.toJSON();
+		    if ( typeof copy.id != 'undefined' ) {
+			    delete copy.id;
+		    }
+		    this.model.collection.add( copy );
+		    console.log( this.model.collection );
+	    },
 
         confirmDeleteSubTab: function(event) {
             event.preventDefault();
