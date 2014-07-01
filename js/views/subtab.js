@@ -70,6 +70,7 @@ wxApp = wxApp || {};
 
             newCopy.save( function onSaveCallback() {
                 me.model.collection.add( newCopy );
+	            wx.rebuildApp();
             });
 	    },
 
