@@ -247,6 +247,7 @@ wxApp = wxApp || {};
 			result = result.toFixed( decimalPlaces );
 			this.$('.wx-form-builder-calculation-result strong').html( result );
 			this.$('input[type="hidden"]').val( result );
+			this.$('input[type="hidden"]').trigger('change');
 		},
 
 		// http://stackoverflow.com/a/10454560

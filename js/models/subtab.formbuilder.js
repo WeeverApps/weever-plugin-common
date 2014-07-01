@@ -51,6 +51,7 @@ wxApp = wxApp || {};
 				type: 'formbuilder',
 				content: 'formbuilder',
 				layout: 'panel',
+				saveToAccount: true,
 	            advancedMode: allowAdvancedMode,
 				config: {
 					submitButtonText: 'Submit',

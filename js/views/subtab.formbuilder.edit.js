@@ -7,6 +7,7 @@ wxApp = wxApp || {};
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '.form-build-area',
 		baseEditTplSelector: '#formbuilder-subtab-edit-template',
+		// subTabEditTplSelector: '#form-builder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
@@ -156,29 +157,23 @@ wxApp = wxApp || {};
 			var checkFormActions = function() {
 				var success = false;
 
-				$('.wx-form-builder-action').each(function(index, value) {
-					var $text = $( value );
-					if ( $text.val() ) {
-						success = true;
-					}
-				});
+				// If the "email PDF to recipeints" checkbox is checked, make sure they've provided an email address.
+				if ( $('.email-pdf-to-recipients').is(':checked') && $('.wx-form-builder-action-email').val() == '' ) {
+					errors.push({
+						'type': 'formActions',
+						'message': 'You requested the form be emailed, however you did not specify an email address.'
+					});
+				}
 
 				// If DocuSign username or password is provided,
 				// both username and password must be provided.
 				if ( $('.wx-form-builder-docusign-username').val() || $('.wx-form-builder-docusign-password').val() ) {
-					if ( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() ) {
-						success = true;
+					if ( !( $('.wx-form-builder-docusign-username').val() && $('.wx-form-builder-docusign-password').val() )) {
+						errors.push({
+							'type'   : 'formActions',
+							'message': 'Please provide both a User Name and Password for DocuSign&trade;.'
+						})
 					}
-				}
-
-				if ( ! success ) {
-					// Display an error message.
-					errors.push( {
-						'type': 'formActions',
-						'message': me.model.get( 'config' ).isDocuSign
-							? 'Please add an email recipient, DocuSign account information, or a custom post action in &ldquo;Form submission settings&rdquo;.'
-							: 'Please add an email recipient or a custom post action in &ldquo;Form submission settings&rdquo;.'
-					} );
 				}
 			};
 

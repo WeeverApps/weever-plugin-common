@@ -302,11 +302,11 @@
                         <div>
                             <label>When a person fills out this form&hellip;</label>
                             <label>
-                                <input type="checkbox" name="on-complete-events" value="forms-account" checked />
+                                <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
                                 Save the form entry to my AppBuilder Forms account
                             </label>
                             <label>
-                                <input type="checkbox" name="on-complete-events" value="email-pdf" />
+                                <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
                                 Email PDF copy of the form entry to the specified recipients
                             </label>
                         </div>
@@ -336,9 +336,11 @@
             <h2><%- typeDescription %></h2>
         </div>
 
-        <div data-alert class="alert-box alert" style="display: none">
-            <span class="message"></span>
-            <a href="#" class="close">&times;</a>
+        <div class="medium-12 columns">
+            <div data-alert class="alert-box alert" style="display: none">
+                <span class="message"></span>
+                <a href="#" class="close">&times;</a>
+            </div>
         </div>
 
         <div class="medium-6 columns">
