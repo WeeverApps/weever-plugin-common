@@ -63,6 +63,7 @@ wxApp = wxApp || {};
 			    delete copy.id;
 		    }
 		    this.model.collection.add( copy );
+		    this.model.collection.models[ this.model.collection.models.length - 1 ].save();
 		    console.log( this.model.collection );
 	    },
 

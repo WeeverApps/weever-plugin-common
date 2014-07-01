@@ -58,6 +58,7 @@ wxApp = wxApp || {};
             var retVal = false;
             // Use reverse inspection of wxApp
             console.log( this.get('content') );
+	        console.log( this.constructor );
             for ( var name in wxApp ) {
                 // console.log(name);
                 if ( name !== 'SubTab' && wxApp[name] == this.constructor ) {
