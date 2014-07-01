@@ -324,8 +324,32 @@
                 <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
                 &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
             </div>
+
+            <%
+            var pdfDetails = null;
+            for (var i = 0; i < config.formActions.length; i++) {
+                if ( config.formActions[i].method === 'email' ) {
+                    pdfDetails = config.formActions[i];
+                    break;
+                }
+            };
+            %>
+
             <div class="medium-4 columns">
-                Preview Area (TBC)
+                <div class="content active" id="pdf-preview">
+                    <h2>PDF Preview</h2>
+                    <div class="wx-pdf-preview">
+                        <h3 class="title"><%- pdfDetails.pdfHeader.title %></h3>
+                        <p>
+                            <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
+                            <span class="line2"><%- pdfDetails.pdfHeader.line2 %></span><br/>
+                            <span class="line3"><%- pdfDetails.pdfHeader.line3 %></span>
+                        </p>
+                        <p>
+                            <em>(As people complete your form, their data will appear here)</em>
+                        </p>
+                    </div>
+                </div>
             </div>
         <% } %>
     </div>
