@@ -34,7 +34,24 @@ wxApp = wxApp || {};
 			};
 		},
 
-		initialize: function() {
+		initialize: function( properties ) {
+			console.log('arguments', arguments);
+			console.log('properties', properties);
+
+			// The 'fields' property just gets set to a basic array, rather than a Backbone.Array. Let's fix that.
+			var fields = properties.fields;
+			delete properties.fields;
+
+			// Call parent's initialize() function
+			Backbone.Model.prototype.initialize.apply( this, arguments );
+
+			var fields = new wxApp.FormBuilderCalculatorFields();
+			for (var i = 0; i < fields.length; i++) {
+				var field = new wxApp.FormBuilderCalculatorField( fields[i] );
+				fields.add( field );
+			};
+
+			this.set( 'fields', fields );
 		}
 	});
 

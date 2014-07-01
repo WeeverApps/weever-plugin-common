@@ -7,7 +7,6 @@ wxApp = wxApp || {};
 		previewPaneClass: 'wx-preview-form',
 		buildPaneSelector: '.form-build-area',
 		baseEditTplSelector: '#formbuilder-subtab-edit-template',
-		// subTabEditTplSelector: '#form-builder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
 		previews: null,
@@ -79,6 +78,10 @@ wxApp = wxApp || {};
 						} else if ( elementsJson[i].control == 'docusignSignature' ) {
 
 							me.addDocusignSignatureWithProperties( elementsJson[i] );
+
+						} else if ( elementsJson[i].control == 'calculation' ) {
+
+							me.addCalculationWithProperties( elementsJson[i] );
 
 						} else {
 
@@ -963,17 +966,12 @@ wxApp = wxApp || {};
 			formElements.push( input );
 			$( this.buildPaneSelector ).foundation('reflow');
 
-			// Now show the edit tab.
-			$('a[href="#panel-field-settings"]').click();
-			$('a[href="#panel-field-settings"]').parent()
-				.animate({backgroundColor: '#ffffc0'}, 1500)
-				.animate({backgroundColor: '#efefef'}, 1500)
-				.animate({backgroundColor: '#ffffc0'}, 1500)
-				.animate({backgroundColor: '#efefef'}, 1500)
-				.animate({backgroundColor: '#ffffc0'}, 1500)
-				.animate({backgroundColor: '#efefef'}, 1500)
-				.animate({backgroundColor: '#ffffc0'}, 1500)
-				.animate({backgroundColor: '#efefef'}, 1500);
+			// Now show the edit tab, if it exists.
+			try {
+				$('a[href="#panel-field-settings"]').click();
+			} catch(e) {
+				console.log(e);
+			}
 
 			// Add the view to the Controls array.
 			if ( !this.controls ) {
