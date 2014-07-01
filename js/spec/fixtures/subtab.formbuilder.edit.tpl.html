@@ -301,7 +301,7 @@
 
                         <div>
                             <label>When a person fills out this form&hellip;</label>
-                            <label>
+                            <label <% if (!advancedMode) { %>class="hide"<% } %>>
                                 <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
                                 Save the form entry to my AppBuilder Forms account
                             </label>

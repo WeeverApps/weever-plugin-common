@@ -247,8 +247,6 @@ wxApp = wxApp || {};
             if ( this.model.get( 'advancedMode' ) ) {
                 this.addPostAction( null );
             }
-			// this.docusign = this.addDocusignAction( docusign );
-
 		},
 
 		setModelFromView: function( model ) {
