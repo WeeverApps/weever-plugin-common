@@ -39,6 +39,11 @@ var wxApp = wxApp || {};
         addSubTab: function(subTab) {
             var me = this;
             subTab.set( 'parent_id', this.get('id') );
+	        if ( typeof this.get( 'subTabs' ) == 'undefined' ) {
+		        this.set( {
+			        subTabs: new wxApp.SubTabCollection()
+		        } );
+	        }
             this.get('subTabs').add( subTab );
             subTab.on('tab:move', function() {
                 me.getSubTabs().remove(this);

@@ -70,7 +70,12 @@ wxApp = wxApp || {};
 
             newCopy.save( function onSaveCallback() {
                 me.model.collection.add( newCopy );
-	            wx.rebuildApp();
+	            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: newCopy.get('id'), parent_id: me.model.get('parent_id') }, function() {
+		            wx.rebuildApp();
+		            me.model.addSubTab( newCopy );
+		            // Select the parent tab.
+		            $('#' + me.model.get('parent_id') + 'TabID').click();
+	            });
             });
 	    },
 
