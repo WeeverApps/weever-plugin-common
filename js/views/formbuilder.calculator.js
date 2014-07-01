@@ -91,15 +91,15 @@ wxApp = wxApp || {};
 				}))
 
 				// Select old values.
-				var field = me.model.get('fields').at( i )
+				var field = me.model.get('fields').at( i );
 				ddl.val( field.get('name') );
 				if ( i > 0 ) {
-					$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( field.get('operation') );
+					me.$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( field.get('operation') );
 				}
 				if ( field.get('name') == 'wxConstantValue' ) {
-					$('div.wx-constant[data-index="' + i.toString() + '"]').show();
+					me.$('div.wx-constant[data-index="' + i.toString() + '"]').show();
 				}
-				$('div.wx-constant[data-index="' + i.toString() + '"] input').val( field.get('constant') );
+				me.$('div.wx-constant[data-index="' + i.toString() + '"] input').val( field.get('constant') );
 			});
 			
 			// Re-render preview.
@@ -222,7 +222,8 @@ wxApp = wxApp || {};
 			};
 
 			if ( !valid ) {
-				this.$('input[type="hidden"]').val( 0 );
+				me.$('input[type="hidden"]').val( 0 );
+				me.$('input[type="hidden"]').trigger('change');
 				return;
 			}
 
@@ -247,8 +248,9 @@ wxApp = wxApp || {};
 			};
 
 			result = result.toFixed( decimalPlaces );
-			this.$('.wx-form-builder-calculation-result strong').html( result );
-			this.$('input[type="hidden"]').val( result );
+			me.$('.wx-form-builder-calculation-result strong').html( result );
+			me.$('input[type="hidden"]').val( result );
+			me.$('input[type="hidden"]').trigger('change');
 		},
 
 		// http://stackoverflow.com/a/10454560
