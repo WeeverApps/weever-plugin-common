@@ -14,7 +14,8 @@ wxApp = wxApp || {};
 				'click .wx-delete-calculation-field': 'deleteField',
 				'change .wx-calculation-field'      : 'changeField',
 				'change .wx-calculation-operator'   : 'changeOperator',
-				'keyup input.wx-constant'           : 'changeConstant'
+				'blur input.wx-constant'            : 'changeConstant',
+				'change input.wx-constant'          : 'changeConstant'
 			});
 		},
 
@@ -192,6 +193,7 @@ wxApp = wxApp || {};
 					if ( isNaN( value ) ) {
 						me.$el.addClass('wx-error');
 					}
+					decimalPlaces = Math.max( decimalPlaces, me.countDecimalPlaces( value ) );
 					values.push( value );
 					continue;
 				}
@@ -247,7 +249,6 @@ wxApp = wxApp || {};
 			result = result.toFixed( decimalPlaces );
 			this.$('.wx-form-builder-calculation-result strong').html( result );
 			this.$('input[type="hidden"]').val( result );
-			this.$('input[type="hidden"]').trigger('change');
 		},
 
 		// http://stackoverflow.com/a/10454560
