@@ -6,83 +6,83 @@ var wxApp = wxApp || {};
         model: wxApp.Tab,
         url: wx.apiUrl + 'tabs/get_tabs?site_key=' + wx.siteKey,
 
-        getModelNameByTabData: function( tabData ) {
-            var retVal = 'SubTab';
-            
-            // TODO: Call a function in each model to see if the type/content matches
-            switch ( tabData.content ) {
-                case 'contact':
-                    retVal = 'WordpressContactsSubTab';
-                    break;
-                case 'facebookAlbums':
-                    retVal = 'FacebookAlbumsSubTab';
-                    break;
-                case 'flickrPhotosets':
-                    retVal = 'FlickrSubTab';
-                    break;
-                case 'formbuilder':
-                    // Ugh... It's a string, not a bool.
-                    if ( tabData.config.isDocuSign == 'true' )
-                        retVal = 'DocuSignSubTab';
-                    else
-                        retVal = 'FormBuilderSubTab';
-                    break;
-                case 'htmlMap':
-                    retVal = 'MapSubTab';
-                    break;
-                case 'htmlPage':
-                    if ( tabData.config && tabData.config.subtab_name )
-                        retVal = tabData.config.subtab_name;
-                    else
-                    {
-                        retVal = 'WordpressPageSubTab';
-                        if ( wx.cms === 'cloud' )
-                            retVal = 'WordpressAddPageSubTab';
-                    }
-                    break;
-                case 'twitter':
-                case 'twitterUser':
-                    retVal = 'TwitterSubTab';
-                    break;
-                case 'wufoo':
-                    retVal = 'WufooSubTab';
-                    break;
-                case 'youtube':
-                case 'youtubePlaylist':
-                    retVal = 'YoutubeSubTab';
-                    break;
-                default:
-                    // Check against type first (more specific but only newer tabs), then content (more generic)
-                    if ( tabData.config != undefined && tabData.config.subtab_name != undefined ) {
-                        if ( tabData.config.subtab_name in wxApp ) {
-                            retVal = tabData.config.subtab_name;
-                        }
-                    }
-
-                    if ( 'SubTab' == retVal ) {
-                        for ( var obj in wxApp ) {
-                            if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.type ) {
-                                if ( wxApp[obj].prototype.defaults.type == tabData.type ) {
-                                    retVal = obj;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if ( 'SubTab' == retVal ) {
-                        for ( var obj in wxApp ) {
-                            if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.content ) {
-                                if ( wxApp[obj].prototype.defaults.content == tabData.content ) {
-                                    retVal = obj;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-            }
-            return retVal;
-        },
+//        getModelNameByTabData: function( tabData ) {
+//            var retVal = 'SubTab';
+//
+//            // TODO: Call a function in each model to see if the type/content matches
+//            switch ( tabData.content ) {
+//                case 'contact':
+//                    retVal = 'WordpressContactsSubTab';
+//                    break;
+//                case 'facebookAlbums':
+//                    retVal = 'FacebookAlbumsSubTab';
+//                    break;
+//                case 'flickrPhotosets':
+//                    retVal = 'FlickrSubTab';
+//                    break;
+//                case 'formbuilder':
+//                    // Ugh... It's a string, not a bool.
+//                    if ( tabData.config.isDocuSign == 'true' )
+//                        retVal = 'DocuSignSubTab';
+//                    else
+//                        retVal = 'FormBuilderSubTab';
+//                    break;
+//                case 'htmlMap':
+//                    retVal = 'MapSubTab';
+//                    break;
+//                case 'htmlPage':
+//                    if ( tabData.config && tabData.config.subtab_name )
+//                        retVal = tabData.config.subtab_name;
+//                    else
+//                    {
+//                        retVal = 'WordpressPageSubTab';
+//                        if ( wx.cms === 'cloud' )
+//                            retVal = 'WordpressAddPageSubTab';
+//                    }
+//                    break;
+//                case 'twitter':
+//                case 'twitterUser':
+//                    retVal = 'TwitterSubTab';
+//                    break;
+//                case 'wufoo':
+//                    retVal = 'WufooSubTab';
+//                    break;
+//                case 'youtube':
+//                case 'youtubePlaylist':
+//                    retVal = 'YoutubeSubTab';
+//                    break;
+//                default:
+//                    // Check against type first (more specific but only newer tabs), then content (more generic)
+//                    if ( tabData.config != undefined && tabData.config.subtab_name != undefined ) {
+//                        if ( tabData.config.subtab_name in wxApp ) {
+//                            retVal = tabData.config.subtab_name;
+//                        }
+//                    }
+//
+//                    if ( 'SubTab' == retVal ) {
+//                        for ( var obj in wxApp ) {
+//                            if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.type ) {
+//                                if ( wxApp[obj].prototype.defaults.type == tabData.type ) {
+//                                    retVal = obj;
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    if ( 'SubTab' == retVal ) {
+//                        for ( var obj in wxApp ) {
+//                            if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.content ) {
+//                                if ( wxApp[obj].prototype.defaults.content == tabData.content ) {
+//                                    retVal = obj;
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//            }
+//            return retVal;
+//        },
 
         fetch: function() {
             var me = this;
