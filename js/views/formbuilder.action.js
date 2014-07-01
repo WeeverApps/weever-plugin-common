@@ -20,6 +20,7 @@ wxApp = wxApp || {};
 			'keyup .wx-form-builder-pdfheader-line2'            : 'updatePdfHeader',
 			'keyup .wx-form-builder-pdfheader-line3'            : 'updatePdfHeader',
 			'click .radio-mode'                                 : 'updateMode',
+			'click .show-hide-custom-post'                      : 'showHideCustomPost',
 			'change .wx-form-builder-send-current-user-email'   : 'toggleSendEmailAddress',
 			'change .wx-form-builder-docusign-demomode'         : 'toggleDemoMode'
 		},
@@ -127,6 +128,16 @@ wxApp = wxApp || {};
 		updateMode: function( ev ) {
 			var $me = $( ev.currentTarget );
 			this.model.set( 'mode', $me.val() );
+		},
+
+		showHideCustomPost: function( ev ) {
+			ev.preventDefault();
+
+			var $action = $('.wx-custom-post');
+			if ( $action.is(":visible") )
+				$action.slideUp();
+			else
+				$action.slideDown();
 		}
 	});
 })(jQuery);
