@@ -111,7 +111,7 @@ wxApp = wxApp || {};
             return true;
         },
 
-        save: function() {
+        save: function( onSaveCallback ) {
             var me = this;
            
             wx.makeApiCall( 'tabs/add_tab', me.getAPIData(), function(data) {
@@ -121,6 +121,8 @@ wxApp = wxApp || {};
                 } else {
                     me.trigger('save', me);
                 }
+
+                if ( onSaveCallback ) onSaveCallback();
             });
             return true;
         }

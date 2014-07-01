@@ -14,7 +14,6 @@ wxApp = wxApp || {};
 
         initialize: function() {
             var me = this;
-            // this.subTabTpl = _.template( $('#subtab-template').html() );
             this.model.get('subTabs').bind( 'add', me.addSubTab, me );
             Backbone.Events.on( 'tab:dropped', this.cancelSort, this );
         },

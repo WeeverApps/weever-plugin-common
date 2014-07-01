@@ -58,19 +58,19 @@ wxApp = wxApp || {};
 	    },
 
 	    copySubTab: function() {
-		    var copy = this.model.toJSON();
+            var me   = this,
+		        copy = this.model.toJSON();
+
 		    if ( typeof copy.id != 'undefined' ) {
 			    delete copy.id;
 		    }
 
-		    var modelName = this.model.collection.getModelNameByTabData( copy );
-		    var newCopy = new wxApp[ modelName ]( copy );
+		    var modelName = this.model.collection.getModelNameByTabData( copy ),
+		        newCopy   = new wxApp[ modelName ]( copy );
 
-		    this.model.collection.add( newCopy );
-
-		    this.model.collection.models[ this.model.collection.models.length - 1 ].save();
-
-		    console.log( this.model.collection );
+            newCopy.save( function onSaveCallback() {
+                me.model.collection.add( newCopy );
+            });
 	    },
 
         confirmDeleteSubTab: function(event) {
