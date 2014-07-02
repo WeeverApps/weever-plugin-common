@@ -24,7 +24,7 @@ wxApp = wxApp || {};
 			l = l.replace(/"/g, '');
 			wxApp.config.set('localization', l);
 
-			this.$('.content').html( this.tpl( {config: wxApp.config.toJSON(), design: wxApp.design.toJSON()} ) );
+			this.$el.html( this.tpl( {config: wxApp.config.toJSON(), design: wxApp.design.toJSON()} ) );
 
 			if (this.collection.length) {
 				for (var i = 0; i < this.collection.length; i++) {

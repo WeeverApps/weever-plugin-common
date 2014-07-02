@@ -7,12 +7,9 @@ wxApp = wxApp || {};
 
         initialize: function() {
             this.collection.bind('add', this.addOne, this);
-            this.collection.bind('remove', this.removeOne, this);
             Backbone.Events.on('tab:new', this.addNewlyCreatedTab, this);
-            //this.startTabs();
             this.startSortable();
             this.startDroppable();
-            this.refreshUiTabs();
         },
 
         addOne: function(tab) {
@@ -30,37 +27,6 @@ wxApp = wxApp || {};
             tab.on('destroy', function(tab) {
                 me.removeTabFromCollection(tab);
             });
-            
-            
-            tab.on('change', this.refreshUiTabs, this);
-            // $('#listTabs').append( view.subTabsContainerView.render().el );
-            this.refreshUiTabs();
-            
-        },
-
-        startTabs: function() {
-            // if ( undefined != $('#listTabs').tabs ) {
-            //     $("#listTabs").tabs( {
-            //         select: function(e, ui) {
-            //             jQuery('#wxuia-header-parentMenu li').removeClass('wxuia-selected');
-
-            //             if ( ui.tab.href.indexOf('addTab') != -1 ) {
-            //                 jQuery('#addtabspan').show();
-            //                 jQuery('#addtabspan').css('display', 'block');
-            //                 jQuery('#edittabspan').hide();
-
-            //                 // Get the header selected correctly
-            //                 jQuery('#wxuia-header-parentMenu li:first').addClass('wxuia-selected');
-            //             } else {
-            //                 jQuery('#addtabspan').hide();
-            //                 jQuery('#edittabspan').show();
-            //                 jQuery('#edittabspan').css('display', 'block');
-            //                 // Get the header selected correctly
-            //                 jQuery('#wxuia-header-parentMenu li:nth-child(2)').addClass('wxuia-selected');
-            //             }
-            //         }
-            //     } );
-            // }
         },
 
         startSortable: function() {
@@ -112,7 +78,9 @@ wxApp = wxApp || {};
 
             // We're moving a subtab up into a new parent tab, update the db then move the subtab across
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
-            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: '0' }, function() {
+
+            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: 0 }, function() {
+                wx.rebuildApp();
                 draggedItemView.model.trigger('tab:move');
                 wxApp.tabsView.addNewMainTab( draggedItemView.model );
 
@@ -128,16 +96,6 @@ wxApp = wxApp || {};
                 lastStyleTag.remove();
         },
 
-        refreshUiTabs: function() {
-            // if ( undefined != $('#listTabs').tabs ) {
-            //     $('#listTabs').tabs( 'refresh' );
-            // }
-        },
-
-        removeOne: function(tab) {
-            // $('#listTabs').tabs( 'refresh' );
-        },
-
         addNewlyCreatedTab: function(model) {
             if ( model.get('parent_id') )
                 this.addNewSubTab(model);
@@ -148,7 +106,6 @@ wxApp = wxApp || {};
         addNewMainTab: function(model) {
             var tab = new wxApp.Tab( model.getAPIData() );
             tab.addSubTab( model );
-            // this.addTabToCollection( tab );
             wxApp.Tabs.add( tab );
 
             if ( wxApp.Tabs.length === 2 ) {
@@ -175,14 +132,7 @@ wxApp = wxApp || {};
         }
     });
 
-    // wxApp.EditTabsView = wxApp.TabsView.extend({
-    //     el: '#editListTabsSortable',
-
-    // });
-
     wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
-    // wxApp.buildTabsView = new wxApp.BuildTabsView({ collection: wxApp.Tabs });
-    // wxApp.editTabsView = new wxApp.EditTabsView({ collection: wxApp.Tabs });
 
     // Grab the data and kick things off
     wxApp.Tabs.fetch();

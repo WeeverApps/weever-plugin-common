@@ -21,11 +21,31 @@ var wxApp = wxApp || {};
                     retVal = 'FlickrSubTab';
                     break;
                 case 'formbuilder':
-                    retVal = 'FormBuilderSubTab';
+                    // Ugh... It's a string, not a bool.
+                    if ( tabData.config.isDocuSign == 'true' )
+                        retVal = 'DocuSignSubTab';
+                    else
+                        retVal = 'FormBuilderSubTab';
                     break;
+                case 'htmlMap':
+                    retVal = 'MapSubTab';
+                    break;
+<<<<<<< HEAD
                 //case 'htmlPage':
                     //retVal = 'WordpressPageSubTab';
                     //break;
+=======
+                case 'htmlPage':
+                    if ( tabData.config && tabData.config.subtab_name )
+                        retVal = tabData.config.subtab_name;
+                    else
+                    {
+                        retVal = 'WordpressPageSubTab';
+                        if ( wx.cms === 'cloud' )
+                            retVal = 'WordpressAddPageSubTab';
+                    }
+                    break;
+>>>>>>> master
                 case 'twitter':
                 case 'twitterUser':
                     retVal = 'TwitterSubTab';
@@ -75,7 +95,12 @@ var wxApp = wxApp || {};
             var me = this;
             wx.makeApiCall('tabs/get_tabs', {}, function(data) {
                 if ( typeof data.tabs != 'undefined' ) {
+<<<<<<< HEAD
                 
+=======
+	                // @TODO Make sure that data.tabs config objects are properly typed; Weever API issue
+	                console.log( 'TABS!', data.tabs );
+>>>>>>> master
                     var tabs = [];
                     for ( var tabIndex = 0; tabIndex < data.tabs.length; tabIndex++ ) {
                         var tabData = data.tabs[tabIndex];
@@ -99,8 +124,9 @@ var wxApp = wxApp || {};
                         }
                     }
                     me.reset();
-                    for ( i = 0; i < tabs.length; i++ )
+                    for ( i = 0; i < tabs.length; i++ ) {
                         me.add( tabs[i] );
+                    }
                 }
             });
         }

@@ -13,7 +13,8 @@ wxApp = wxApp || {};
 
             this.initializeEvents();
 
-            this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
+            if ( this.subTabEditTplSelector )
+                this.subTabEditTpl = _.template( $(this.subTabEditTplSelector).html() );
             this.baseEditTpl = _.template( $(this.baseEditTplSelector).html() );
 			this.feedSampleTpl = _.template( $(this.feedSampleTplSelector).html() );
             this.render();
@@ -30,22 +31,23 @@ wxApp = wxApp || {};
         },
 
         genericEvents: {
-            'change .wx-dialog-input': 'next',
-			'change .wx-social-input': 'next',
-			'keydown .wx-dialog-input': 'hideValidateFeed',
-            'keyup .wx-edit-title': 'editTitle',
-			'click .wx-finish-button': 'finish',
-			'click .wx-next-button': 'next',
-            'change .wx-content-radio' : 'contentChange',
-            'click .close-reveal-modal': 'close',
-            'close': 'close'
+            'change .wx-dialog-input'       : 'next',
+			'change .wx-social-input'       : 'next',
+			'keydown .wx-dialog-input'      : 'hideValidateFeed',
+            'keyup .wx-edit-title'          : 'editTitle',
+			'click .wx-finish-button'       : 'finish',
+			'click .wx-next-button'         : 'next',
+            'change .wx-content-radio'      : 'contentChange',
+            'click .close-reveal-modal'     : 'close',
+	        'click .wx-close-reveal-modal'  : 'closeReveal',
+	        'click .wx-close-button'        : 'closeReveal',
+            'close'                         : 'close'
         },
 
         render: function() {
-
-            m = this.model;
             this.$el.html( this.baseEditTpl( this.model.toJSON() ) );
-            this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
+            if ( this.subTabEditTpl )
+                this.$('.subtab').html( this.subTabEditTpl( this.model.toJSON() ) );
 
             this.$el.prepend('<form>');
             this.$el.append('</form>');
@@ -67,9 +69,8 @@ wxApp = wxApp || {};
 
             // Once the reveal modal is open...
             var me = this.$el;
-            meeeee = me;
             this.$el.on('opened', function() {
-                me.foundation('section', 'reflow');
+                me.foundation('reflow');
 
                 // Alright, now let's set the height of the right-hand side to the height of the left-hand side
                 // var currentModal = $('.reveal-modal.open');
@@ -92,6 +93,10 @@ wxApp = wxApp || {};
 
             return this;
         },
+
+	    closeReveal: function() {
+		    this.$el.foundation('reveal', 'close');
+	    },
 
         close: function() {
             this.undelegateEvents();
@@ -117,12 +122,20 @@ wxApp = wxApp || {};
                 this.setModelFromView(this.model);
                 this.setTitleFromView(this.model);
                 this.setIconFromView(this.model);
-    			this.saveModel();
-
+                var shouldRebuild = this.saveModel();
+                
                 this.$el.foundation('reveal', 'close');
-                jQuery('.reveal-modal-bg').hide();
 
-                wx.rebuildApp();
+                jQuery('.reveal-modal-bg').hide();
+                
+                // This if statement is currently for 'map' tabs. Because the 
+                // 'map' tab just adds to the same 'tab' (ie, there's only one
+                // actual tab in the app), we don't need to rebuild the app,
+                // just refresh it.
+                if ( shouldRebuild )
+                    wx.rebuildApp();
+                else
+                    wx.refreshAppPreview();
             }
 		},
 
@@ -150,7 +163,7 @@ wxApp = wxApp || {};
 		},
 
 		saveModel: function() {
-            this.model.save();
+            return this.model.save();
 		},
 
         editTitle: function( ev ) {
@@ -161,7 +174,7 @@ wxApp = wxApp || {};
         },
 
         setTitleFromView: function( model ) {
-            if ( model.allowTitleEdit && this.$('.wx-edit-title') )
+            if ( model.allowTitleEdit && this.$('.wx-edit-title').val() )
                 model.set('title', this.$('.wx-edit-title').val() );
             return model;
         },
@@ -169,8 +182,10 @@ wxApp = wxApp || {};
         setIconFromView: function( model ) {
             var icon = this.$('input:radio[name="wx-icon"]:checked').val();
 
-            model.set( 'icon_id', null );
-            model.set( 'icon', icon );
+            if ( icon ) {
+                model.set( 'icon_id', null );
+                model.set( 'icon', icon );
+            }
             return model;
         },
 

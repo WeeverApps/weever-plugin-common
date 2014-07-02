@@ -10,7 +10,7 @@ wxApp = wxApp || {};
 			control: 'select',
 			title: 'Select a choice',
 			allowAdditional: '',
-			allowAdditionalClass: '',
+			allowAdditionalClass: 'hide',
 			requiredClass: '',
 			name: ''
 		},

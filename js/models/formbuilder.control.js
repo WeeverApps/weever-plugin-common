@@ -29,13 +29,17 @@ wxApp = wxApp || {};
 				requiredClass: '',
 				autocompleteClass: 'hide',
 				controlTitle: '',
-				advanced: false
+				advanced: wx.formbuilderAdvanced
 			};
 		},
 
 		initialize: function() {
-
-			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
+			if ( this.get( 'attributes' ) ) {
+				this.set( 'attributes', new wxApp.FormBuilderControlAttributes( this.get( 'attributes' ) ) );
+			}
+			else {
+				this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
+			}
 
 			this.togglePlaceholder();
 			this.on( 'change:showPlaceholder', this.togglePlaceholder );

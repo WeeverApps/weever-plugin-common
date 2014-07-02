@@ -13,7 +13,8 @@ wxApp = wxApp || {};
 			return this.preview;
 		},
 
-		addOption: function() {
+		addOption: function( ev ) {
+			ev.preventDefault();
 			this.model.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
 		}
 

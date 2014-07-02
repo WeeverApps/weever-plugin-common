@@ -13,7 +13,15 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-add-option': 'addOption',
-			'click .wx-form-builder-required': 'setRequired'
+			'click .wx-form-builder-required': 'setRequired',
+			'focus .wx-form-builder-title-input': 'selectInputText',
+			'sortable-drop': 'sortableDrop'
+		},
+
+		selectInputText: function( ev ) {
+			setTimeout( function() {
+				ev.currentTarget.select();
+			}, 1 );
 		},
 
 		initialize: function() {
@@ -24,6 +32,11 @@ wxApp = wxApp || {};
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
 			return this;
+		},
+
+		sortableDrop: function( event, index ) {
+			console.log( 'sortableDrop' );
+			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
 		deleteControl: function() {
@@ -60,7 +73,7 @@ wxApp = wxApp || {};
 			this.$('.wx-form-builder-label').text( $me.val() );
 			this.getPreview().$('legend .title').text( $me.val() );
 			this.model.set( 'title', $me.val() );
-		},
+		}
 
 	});
 
@@ -77,6 +90,29 @@ wxApp = wxApp || {};
 		render: function() {
 			var model = this.model.toJSON();
 			this.$el.html( this.fieldsetTpl( model ) );
+
+			if ( this.selector.indexOf('checkbox') > -1 ) {
+				for (var i = 0; i < model.checkboxGroup.length; i++) {
+					var checkbox = model.checkboxGroup.models[i]
+
+					var view = new wxApp.FormBuilderControlCheckboxView({
+						model: checkbox,
+						type: 'checkbox'
+					});
+					this.$('fieldset').append( view.getPreview().render().el );
+				};
+			}
+			else {
+				for (var i = 0; i < model.radioGroup.length; i++) {
+					var radio = model.radioGroup.models[i]
+
+					var view = new wxApp.FormBuilderControlRadioView({
+						model: radio,
+						type: 'radio'
+					});
+					this.$('fieldset').append( view.getPreview().render().el );
+				};
+			}
 
 			return this;
 		}

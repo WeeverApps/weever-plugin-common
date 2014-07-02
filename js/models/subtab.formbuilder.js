@@ -2,10 +2,24 @@
 wxApp = wxApp || {};
 
 (function($){
+
+	var uploadUrl = '';
+	switch ( wx.cms ) {
+		case 'wordpress':
+			uploadUrl = window.location.origin + '/wp-admin/admin-ajax.php';
+			break;
+		case 'joomla':
+			uploadUrl = window.location.origin + '/administrator/components/com_weever/helpers/file-upload.php'; // + '?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl
+			break;
+		default:
+			uploadUrl = wx.apiUrl + '/_google_drive/upload';
+			break;
+	}
+	
     wxApp.FormBuilderSubTab = wxApp.SubTab.extend({
         default_icon_id: 30,
         validateFeed: false,
-        typeDescription: 'FormBuilder',
+        typeDescription: 'AppBuilder Forms',
 
         filterAPIData: function( data ) {
 
@@ -22,6 +36,13 @@ wxApp = wxApp || {};
         },
 
         defaults: function() {
+	        var feature = wxApp.featureList.collection.findWhere( { featureName: 'FormBuilder' } );
+
+	        var allowAdvancedMode = wx.formbuilderAdvanced || 0;
+	        if ( feature && feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
+		        allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
+	        }
+
             return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
 				title: 'My Form Title',
                 icon: 'e074',
@@ -29,15 +50,16 @@ wxApp = wxApp || {};
 				icon_id: 30,
 				type: 'formbuilder',
 				content: 'formbuilder',
+                helpTitle:  'Support',
 				layout: 'panel',
-        		buttonText: 'Tap to Review & Sign',
-                allowAdvanced: false,
-                advancedMode: false,
+	            advancedMode: allowAdvancedMode,
 				config: {
-					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+					submitButtonText: 'Submit',
+                    advanced: allowAdvancedMode,
+					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
-					}, 
+					},
 					subtab_name: 'FormBuilderSubTab',
 					isDocuSign: false
 				}
@@ -49,9 +71,25 @@ wxApp = wxApp || {};
     wxApp.DocuSignSubTab = wxApp.FormBuilderSubTab.extend({
 
     	defaults: function() {
-            return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
+		    var feature = wxApp.featureList.collection.findWhere( { featureName: 'DocuSign' } );
+
+		    var allowAdvancedMode = wx.formbuilderAdvanced || 0;
+		    if ( feature && feature.get( 'options' ) && feature.get( 'options' ).allow_advanced_mode ) {
+			    allowAdvancedMode = parseInt( feature.get( 'options' ).allow_advanced_mode.value );
+		    }
+
+		    var allowDemoMode = 0;
+		    if ( feature && feature.get( 'options' ) && feature.get( 'options' ).allow_demo_mode ) {
+			    allowDemoMode = parseInt( feature.get( 'options' ).allow_demo_mode.value );
+		    }
+
+		    return _.extend( {}, wxApp.FormBuilderSubTab.prototype.defaults(), {
         		config: {
-					uploadUrl: window.location.origin + '/wp-admin/admin-ajax.php',
+			        submitButtonText: 'Tap to Review and Sign',
+                    icon: 'e074',
+                    advanced: allowAdvancedMode,
+			        allowDemoMode: allowDemoMode,
+					uploadUrl: uploadUrl,
 					onUpload: {
 						message: 'Your upload has completed.'
 					}, 

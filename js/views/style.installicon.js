@@ -13,7 +13,7 @@ wxApp = wxApp || {};
 
         initialize: function() {
             this.tpl = _.template( $('#install-icon').html() );
-            this.$('.content').html( this.tpl( this.model.toJSON() ) );
+            this.$el.html( this.tpl( this.model.toJSON() ) );
         },
 
         clickSave: function() {

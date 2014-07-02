@@ -1,7 +1,7 @@
 <script type="text/template" id="appStatusToggle">
 	<div class="small-8 columns" style="padding-left: 0; padding-right: 0;">
         <h6 class="subheader wx-switch-labelright">
-            <img class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" alt="Loading" id="status-loading" />
+            <img class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" alt="Loading" id="status-loading" />
             &nbsp;app is <span id="appStatus"><b><%- online ? 'on' : 'off' %>line</b></span> for mobile visitors.
         </h6>
     </div>

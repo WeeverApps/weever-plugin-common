@@ -11,10 +11,10 @@ var wxApp = wxApp || {};
 		},
 
 		onAdd: function( e ) {
-			$( '#form-build-area' ).sortable({
+			$( '.form-build-area' ).sortable({
 				axis:  'y',
 				start: function( event, ui ) {
-					$( '#form-build-area section' ).removeClass('active');
+					$( '.form-build-area section' ).removeClass('active');
 				},
 				stop:  function( event, ui ) {
 					ui.item.trigger( 'sortable-drop', ui.item.index() );

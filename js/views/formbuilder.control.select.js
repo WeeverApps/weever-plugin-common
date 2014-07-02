@@ -15,7 +15,15 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
-			'click .wx-form-builder-required': 'setRequired'
+			'click .wx-form-builder-required': 'setRequired',
+			'focus .wx-form-builder-title-input': 'selectInputText',
+			'sortable-drop': 'sortableDrop'
+		},
+
+		selectInputText: function( ev ) {
+			setTimeout( function() {
+				ev.currentTarget.select();
+			}, 1 );
 		},
 
 		initialize: function() {
@@ -37,12 +45,18 @@ wxApp = wxApp || {};
 			return this;
 		},
 
+		sortableDrop: function( event, index ) {
+			console.log( 'sortableDrop' );
+			this.$el.trigger( 'sortable-update', [this.model, index] );
+		},
+
 		deleteControl: function() {
 			this.remove();
 			this.model.destroy();
 		},
 
-		addOption: function() {
+		addOption: function( ev ) {
+			ev.preventDefault();
 			this.model.get('optionGroup').add( new wxApp.FormBuilderControlOption() );
 		},
 
@@ -102,6 +116,16 @@ wxApp = wxApp || {};
 		render: function() {
 			var model = this.model.toJSON();
 			this.$el.html( this.inputTpl( model ) );
+
+			for (var i = 0; i < this.model.get('optionGroup').length; i++) {
+				var item = this.model.get('optionGroup').models[i];
+				var view = new wxApp.FormBuilderControlOptionView({
+					model: item
+				});
+
+				this.$('select').append( view.getPreview().render().el );
+			};
+
 			return this;
 		}
 	});

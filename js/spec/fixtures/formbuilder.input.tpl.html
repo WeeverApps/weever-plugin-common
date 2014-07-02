@@ -1,23 +1,63 @@
 <script type="text/template" id="form-builder-input">
 	<p class="title" data-section-title>
 		<a href="#panel<%- ordinal %>">
-			&#8597; <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span>
+            <%- controlTitle %>: <span class="wx-form-builder-label"><%- label %></span> <span class="appbuilder-icon icon-move-updown"></span>
 		</a>
 	</p>
-	<div class="content" data-section-content>
-		<label>Label</label>
-		<input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
-		<label class="<%- hidePlaceholderClass %>">Placeholder</label>
-		<input type='text' class="wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" value='<%- attributes.attributes.placeholder %>' placeholder="Placeholder" />
-		<input type="number" class="wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.attributes.min %>"/>
-		<input type="number" class="wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.attributes.max %>"/>
-		<input type="<%- valueType %>" class="wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.attributes.value %>"/>
-		<input type="number" class="wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.attributes.step %>"/>
-		<% if (advanced) { %>
-			<label>Name (for POST)</label>
-			<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.attributes.name %>" />
+
+    <div class="content" data-section-content>
+
+		<%
+		// Only "Number Slider" uses this template and has type == 'range'
+		if ( attributes.attributes.type == 'range' ) {
+		%>
+        <p class="wx-form-builder-featurenote">For a range greater than 10 values in total or using larger numbers, we recommend using the standard &ldquo;number&rdquo; input field.</p>
 		<% } %>
-        <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
+
+        <br>
+
+        <label>
+			Label
+			<input type='text' class="wx-form-builder-input wx-form-builder-label-input" value='<%- label %>' />
+		</label>
+		<label class="<%- hidePlaceholderClass %>">
+			Placeholder
+			<input type='text' class="wx-form-builder-input wx-form-builder-placeholder-input <%- hidePlaceholderClass %>" value='<%- attributes.placeholder || attributes.attributes.placeholder %>' placeholder="Placeholder" />
+		</label>
+		<label class="<%- minClass %>">
+			Minimum number
+			<input type="number" class="wx-form-builder-input wx-form-builder-min-input <%- minClass %>" placeholder="min" value="<%- attributes.attributes.min %>"/>
+		</label>
+		<label class="<%- maxClass %>">
+			Maximum number
+			<input type="number" class="wx-form-builder-input wx-form-builder-max-input <%- maxClass %>" placeholder="max" value="<%- attributes.attributes.max %>"/>
+		</label>
+		<label class="<%- valueClass %>">
+			Default number selected
+			<input type="<%- valueType %>" class="wx-form-builder-input wx-form-builder-value-input <%- valueClass %>" placeholder="starting value" value="<%- attributes.attributes.value %>"/>
+		</label>
+		<label class="<%- stepClass %>">
+			Increment amount of each slider step (increase or decrease)
+			<input type="number" class="wx-form-builder-input wx-form-builder-step-input <%- stepClass %>" placeholder="step" value="<%- attributes.attributes.step %>"/>
+		</label>
+
+        <% if (advanced) { %>
+        <label>
+			Field name (optional, advanced)
+			<span data-tooltip data-options="disable-for-touch:true"
+				  class="has-tip tip-right"
+				  title="<p><b>Field name</b><p>
+				   <p>The HTML &ldquo;name&rdquo; attribute. For use with a custom POST action.</p>
+				   <p><b>Advanced mode</b></p>
+				   <p>This option is only displayed when &ldquo;advanced mode&rdquo; is enabled.
+				   ">
+				   ?
+			</span>
+        	<input type="text" class="wx-form-builder-name-input" placeholder="Name" value="<%- attributes.name || attributes.attributes.name %>" />
+		</label>
+        <% } %>
+
+        <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.required || attributes.attributes.required %> /> Required</label>
 		<button class="wx-form-builder-delete small alert">Delete Field</button>
 	</div>
 </script>
@@ -25,7 +65,7 @@
 <script type="text/template" id="form-builder-input-preview">
 	<label class="wx-form-builder-label">
 		<%- label %>
-		<span class="required<%= attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
+		<span class="required<%= attributes.required || attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
-	<input class="wx-form-builder-<%- attributes.attributes.type %>-input" type="<%- attributes.attributes.type %>" placeholder="<%- attributes.attributes.placeholder %>" />
+	<input class="wx-form-builder-<%- attributes.type || attributes.attributes.type %>-input" type="<%- attributes.type || attributes.attributes.type %>" placeholder="<%- attributes.placeholder || attributes.attributes.placeholder %>" />
 </script>

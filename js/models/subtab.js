@@ -120,6 +120,7 @@ wxApp = wxApp || {};
                     me.trigger('save', me);
                 }
             });
+            return true;
         }
     });
 })(jQuery);

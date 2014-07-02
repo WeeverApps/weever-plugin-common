@@ -26,22 +26,14 @@ wxApp = wxApp || {};
             var me = this,
                 tabId = this.model.get('id'),
                 title = $('#container-title').val(),
-                iconId = $('input:radio[name="wx-icon"]:checked').val(),
-                numCompleted = 0;
+                iconId = $('input:radio[name="wx-icon"]:checked').val();
 
-            wx.makeApiCall( 'tabs/set_tabTitle', { tab_id: tabId, tabTitle: title }, function() {
-                me.model.set('tabTitle', title);
-                if (++numCompleted == 2) {
-                    wx.rebuildApp();
-                }
-            });
+            wx.makeApiCall( 'tabs/set_tabAttributes', { tab_id: tabId, tabTitle: title, tabIcon: iconId }, function() {
+                me.model.set( 'tabTitle', title );
+                me.model.set( 'tabIcon_id', null );
+                me.model.set( 'tabIcon', iconId );
 
-            wx.makeApiCall( 'tabs/set_tabIcon', { tab_id: tabId, tabIcon: iconId }, function() {
-                me.model.set('tabIcon_id', null);
-                me.model.set('tabIcon', iconId);
-                if (++numCompleted == 2) {
-                    wx.rebuildApp();
-                }
+                wx.rebuildApp();
             });
 
             //console.log('Closing...');

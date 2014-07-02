@@ -13,6 +13,7 @@
       additionalInheritableClasses : [],
       tooltipClass : '.tooltip',
       touchCloseText: 'tap to close',
+      // appendTo: 'body',
       appendTo: '#interface',
       'disable-for-touch': false,
       tipTemplate : function (selector, content) {
@@ -108,7 +109,9 @@
     create : function ($target) {
       var $tip = $(this.settings.tipTemplate(this.selector($target), $('<div></div>').html($target.attr('title')).html())),
           classes = this.inheritable_classes($target);
-
+      if ( $('.reveal-modal.open').length ) {
+        this.settings.appendTo = '.reveal-modal.open';
+      }
       $tip.addClass(classes).appendTo(this.settings.appendTo);
       if (Modernizr.touch) {
         $tip.append('<span class="tap-to-close">'+this.settings.touchCloseText+'</span>');
@@ -134,34 +137,45 @@
           'left' : (left) ? left : 'auto',
           'right' : (right) ? right : 'auto',
           'width' : (width) ? width : 'auto',
-          'position': 'fixed'
+          // 'position': 'fixed'
+          'position': 'absolute'
         }).end();
       };
 
-      objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', target.offset().left, width);
+      // objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', target.offset().left, width);
 
       if ($(window).width() < 767) {
         objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', 12.5, $(this.scope).width());
         tip.addClass('tip-override');
         objPos(nub, -nubHeight, 'auto', 'auto', target.offset().left);
       } else {
-        var left = target.offset().left;
+        var left, top;
+
+        left = target.offset().left;
         if (Foundation.rtl) {
           left = target.offset().left + target.offset().width - this.outerWidth(tip);
         }
-        var top = (target.offset().top + this.outerHeight(target) + 10) - $(document).scrollTop();
-        objPos(tip, top, 'auto', 'auto', left, width);
-        tip.removeClass('tip-override');
+        top = (target.offset().top + this.outerHeight(target) + 10) - $(document).scrollTop();
+
         if (classes && classes.indexOf('tip-top') > -1) {
-          objPos(tip, (target.offset().top - this.outerHeight(tip)), 'auto', 'auto', left, width)
-            .removeClass('tip-override');
+          top = (target.offset().top - this.outerHeight(tip));
         } else if (classes && classes.indexOf('tip-left') > -1) {
-          objPos(tip, (target.offset().top + (this.outerHeight(target) / 2) - nubHeight*2.5), 'auto', 'auto', (target.offset().left - this.outerWidth(tip) - nubHeight), width)
-            .removeClass('tip-override');
+          top = (target.offset().top + (this.outerHeight(target) / 2) - nubHeight*2.5);
+          left = (target.offset().left - this.outerWidth(tip) - nubHeight);
         } else if (classes && classes.indexOf('tip-right') > -1) {
-          objPos(tip, (target.offset().top + (this.outerHeight(target) / 2) - nubHeight*2.5), 'auto', 'auto', (target.offset().left + this.outerWidth(target) + nubHeight), width)
-            .removeClass('tip-override');
+          top = (target.offset().top + (this.outerHeight(target) / 2) - nubHeight*2.5);
+          left = (target.offset().left + this.outerWidth(target) + nubHeight);
         }
+
+        if ( $('.reveal-modal.open').length ) {
+          // This tip is on a modal. Let's adjust for that.
+          top = top - ($('.reveal-modal.open').offset().top + 2)
+          left = left - ($('.reveal-modal.open').offset().left + 5);
+        }
+
+        objPos(tip, top, 'auto', 'auto', left, width).removeClass('tip-override');
+        tip.removeClass('tip-override');
+
       }
 
       tip.css('visibility', 'visible').hide();

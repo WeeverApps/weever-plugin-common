@@ -1,7 +1,7 @@
 <script type="text/template" id="custom-branding">
 
     <p class="wx-ui-title">Custom branding</p>
-	<p>Fully remove Weever Apps branding and go &lsquo;white label&rsquo; by specifying your own branding details. Custom branding is available only to <a target="_blank" href="http://weeverapps.com">premium and reseller</a> level apps.</p>
+	<p>Fully remove Weever Apps branding and go &lsquo;white label&rsquo; by specifying your own branding details. Custom branding is only available to professional level apps and above.</p>
 
     <br>
 
@@ -14,15 +14,18 @@
 		// $weeverapp used to be available throughout all views, but that is no longer the case.
 		// Here, we disgustingly load a PHP object in a view. Ugh. I'm sorry.
 		// Luckily, this is the only "backbone" file this monstrosity is in.
-		// May god have mercy on my soul.
-		
-		//if (! $weeverapp ) {
-			//$weeverapp = new WeeverApp();
-		//}
+		// May god have mercy on my soul. 
+		if (! isset( $weeverapp )) {
+			$weeverapp = new WeeverApp();
+		}
+		$sku = get_option( 'sku' );
+		if ( (is_null($sku) || trim($sku)==='') ) {
+			$sku = 'cms';
+		}
 	?>
     <?php if ( $this->appTier != 4 ): ?>
 		<p>
-            <a target="_blank" class="button radius success" href="http://weeverapps.com/new-app/?site_url=<?php echo urlencode($this->siteDomain); ?>&subscription_type=premium">Upgrade Your App</a>
+            <a target="_blank" class="button radius success" href="http://weeverapps.com/product/<?php echo $sku; ?>/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
         </p>
 	<?php else: ?>
 		<p>Add custom text or HTML to appear as the app loads.  If this field is left blank, the load spinner will not appear.</p>
@@ -30,7 +33,7 @@
 			<p>Loading spinner text:</p>
 			<textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="Powered By..."><%- loadspinner.text %></textarea>
 			<button class="button success radius" id="save_load_spinner">Save</button>
-			<img id="save_load_spinner_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+			<img id="save_load_spinner_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
 		</div>
 	<?php endif; ?>
 
@@ -40,9 +43,9 @@
     <p class="wx-ui-title">Custom web address</p>
 	<p>Set a custom web address (domain name) for your app like "myappname.com" or "app.mywebsite.com".</p>
 
-	<?php if ( $this->appTier == 1 or $this->appTier == '2.1' ): ?>
+	<?php if ( $weeverapp->is_free() ): ?>
 		<p>
-			<a target="_blank" href="http://weeverapps.com/new-app/?site_url=<?php echo urlencode($this->siteDomain); ?>&subscription_type=pro">Upgrade Your App</a>
+			<a target="_blank" class="button radius success" href="http://weeverapps.com/product/<?php echo $sku; ?>/?app_url=<?php echo urlencode($weeverapp->primary_domain); ?>&app_key=<?php echo urlencode( get_option( 'weever_api_key' ) ); ?>">Upgrade Your App</a>
 		</p>
 	<?php else: ?>
 
@@ -54,7 +57,7 @@
 				<a href="#" onclick="return false;" id="save_domain" class="button postfix success radius">Save</a>
 			</div>
 			<div class="small-2 columns loading">
-				<img id="wx-domain-map-input_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+				<img id="wx-domain-map-input_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
 			</div>
 		</div>
 
