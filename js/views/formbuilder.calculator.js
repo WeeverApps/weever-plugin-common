@@ -247,10 +247,12 @@ wxApp = wxApp || {};
 				}
 			};
 
-			result = result.toFixed( decimalPlaces );
-			me.$('.wx-form-builder-calculation-result strong').html( result );
-			me.$('input[type="hidden"]').val( result );
-			me.$('input[type="hidden"]').trigger('change');
+			if ( result ) {
+				result = result.toFixed( decimalPlaces );
+				me.$('.wx-form-builder-calculation-result strong').html( result );
+				me.$('input[type="hidden"]').val( result );
+				me.$('input[type="hidden"]').trigger('change');
+			}
 		},
 
 		// http://stackoverflow.com/a/10454560

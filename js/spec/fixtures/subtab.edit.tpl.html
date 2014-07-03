@@ -1,5 +1,5 @@
 <script type="text/template" id="subtab-edit-template">
-	<div class="medium-6 columns">
+	<div class="large-6 small-12 columns">
 	    <div>
 	        <h2><%- typeDescription %></h2>
 	    </div>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="medium-6 columns">
+    <div class="large-6 small-12 columns">
         <ul class="tabs" data-tab>
             <% if ( validateFeed ) { %>
                 <li class="tab-title active"><a href="#tab-add-preview">Preview</a></li>
@@ -49,7 +49,7 @@
                 </div>
             <% } %>
             <div class="content icon-selector <% if ( ! (validateFeed) ) { %>active<% } %>" id="tab-add-icon" style="height: 315px; overflow-y: auto;">
-                <ul class="medium-block-grid-7">
+                <ul class="large-block-grid-7">
                     <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
                 </ul>
             </div>
