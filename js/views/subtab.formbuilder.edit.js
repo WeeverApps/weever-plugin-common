@@ -314,7 +314,14 @@ wxApp = wxApp || {};
             'click .wx-continue-button'                      : 'next',
             'click .wx-back-button'                          : 'back',
 			'click .wx-close-button'                         : 'closeConfirmation',
-			'click .wx-close-reveal-modal'                   : 'closeConfirmation'
+			'click .wx-close-reveal-modal'                   : 'closeConfirmation',
+			// Email action events
+			'blur .wx-form-builder-action'                   : 'updateAction',
+			'change .wx-form-builder-send-current-user-email': 'toggleSendEmailAddress',
+			'keyup .wx-form-builder-pdfheader-title'         : 'updatePdfHeader',
+			'keyup .wx-form-builder-pdfheader-line1'         : 'updatePdfHeader',
+			'keyup .wx-form-builder-pdfheader-line2'         : 'updatePdfHeader',
+			'keyup .wx-form-builder-pdfheader-line3'         : 'updatePdfHeader'
 
 		},
 
@@ -1037,8 +1044,63 @@ wxApp = wxApp || {};
 	        }
             this.$el.foundation('reflow');
             // $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
-        }
+        },
 
+        // Email action events
+		toggleSendEmailAddress: function( ev ) {
+			var action = this.getEmailAction(),
+			    $target = $( ev.currentTarget ),
+			    $input = this.$('.wx-email-action input[type="email"]'); //  $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
+			if ( $target.is( ':checked' ) ) {
+				$input.val( wx.currentUserEmail );
+				action.set( 'value', wx.currentUserEmail );
+			}
+			else {
+				$input.val( '' );
+				action.set( 'value', '' );
+			}
+		},
+
+		updatePdfHeader: function( ev ) {
+			var action = this.getEmailAction(),
+			    $me = $( ev.currentTarget );
+
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) ) {
+				action.get( 'pdfHeader' ).title = $me.val();
+				this.$('.wx-pdf-preview .title').html( $me.val() );
+			}
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) ) {
+				action.get( 'pdfHeader' ).line1 = $me.val();
+				this.$('.wx-pdf-preview .line1').html( $me.val() );
+			}
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) ) {
+				action.get( 'pdfHeader' ).line2 = $me.val();
+				this.$('.wx-pdf-preview .line2').html( $me.val() );
+			}
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) ) {
+				action.get( 'pdfHeader' ).line3 = $me.val();
+				this.$('.wx-pdf-preview .line3').html( $me.val() );
+			}
+		},
+
+		updateAction: function( ev ) {
+			ev.preventDefault();
+			var action = this.getEmailAction(),
+			    $me    = $( ev.currentTarget );
+			action.set( 'value', $me.val() );
+		},
+
+		getEmailAction: function() {
+			var actionToReturn = null;
+			for (var i = 0; i < this.model.get( 'config' ).formActions.length; i++) {
+				var action = this.model.get( 'config' ).formActions.models[i];
+				if ( action.get( 'method' ) === 'email' ) {
+					actionToReturn = action;
+					break;
+				}
+			}
+			return actionToReturn;
+		}
 	});
 
 })(jQuery);

@@ -1,4 +1,6 @@
 
+// NOTE - I think this class (and the related views) can be removed, since all of the actions are built into the formbuilder view now.
+
 wxApp = wxApp || {};
 
 (function($){
@@ -15,29 +17,29 @@ wxApp = wxApp || {};
 			'blur .wx-form-builder-docusign-username'           : 'updateUsername',
 			'blur .wx-form-builder-docusign-password'           : 'updatePassword',
 			'blur .wx-form-builder-docusign-returnUrl'          : 'updateReturnUrl',
-			'keyup .wx-form-builder-pdfheader-title'            : 'updatePdfHeader',
-			'keyup .wx-form-builder-pdfheader-line1'            : 'updatePdfHeader',
-			'keyup .wx-form-builder-pdfheader-line2'            : 'updatePdfHeader',
-			'keyup .wx-form-builder-pdfheader-line3'            : 'updatePdfHeader',
+			// 'keyup .wx-form-builder-pdfheader-title'            : 'updatePdfHeader',
+			// 'keyup .wx-form-builder-pdfheader-line1'            : 'updatePdfHeader',
+			// 'keyup .wx-form-builder-pdfheader-line2'            : 'updatePdfHeader',
+			// 'keyup .wx-form-builder-pdfheader-line3'            : 'updatePdfHeader',
 			'click .radio-mode'                                 : 'updateMode',
 			'click .show-hide-custom-post'                      : 'showHideCustomPost',
-			'change .wx-form-builder-send-current-user-email'   : 'toggleSendEmailAddress',
+			// 'change .wx-form-builder-send-current-user-email'   : 'toggleSendEmailAddress',
 			'change .wx-form-builder-docusign-demomode'         : 'toggleDemoMode'
 		},
 
-		toggleSendEmailAddress: function( ev ) {
-			var $target = $( ev.currentTarget );
-			var $input = $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
-			if ( $target.is( ':checked' ) ) {
-				$input.val( wx.currentUserEmail );
-				this.model.set( 'value', wx.currentUserEmail );
-			}
-			else {
-				$input.val( '' );
-				this.model.set( 'value', '' );
-			}
+		// toggleSendEmailAddress: function( ev ) {
+		// 	var $target = $( ev.currentTarget );
+		// 	var $input = $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
+		// 	if ( $target.is( ':checked' ) ) {
+		// 		$input.val( wx.currentUserEmail );
+		// 		this.model.set( 'value', wx.currentUserEmail );
+		// 	}
+		// 	else {
+		// 		$input.val( '' );
+		// 		this.model.set( 'value', '' );
+		// 	}
 
-		},
+		// },
 
 		initialize: function() {
 			var tplSelector = '';
@@ -93,26 +95,26 @@ wxApp = wxApp || {};
 			this.model.set( 'returnUrl', $( ev.currentTarget ).val() );
 		},
 
-		updatePdfHeader: function( ev ) {
-			var $me = $( ev.currentTarget );
+		// updatePdfHeader: function( ev ) {
+		// 	var $me = $( ev.currentTarget );
 
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) ) {
-				this.model.get( 'pdfHeader' ).title = $me.val();
-				$('.wx-pdf-preview .title').html( $me.val() );
-			}
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) ) {
-				this.model.get( 'pdfHeader' ).line1 = $me.val();
-				$('.wx-pdf-preview .line1').html( $me.val() );
-			}
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) ) {
-				this.model.get( 'pdfHeader' ).line2 = $me.val();
-				$('.wx-pdf-preview .line2').html( $me.val() );
-			}
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) ) {
-				this.model.get( 'pdfHeader' ).line3 = $me.val();
-				$('.wx-pdf-preview .line3').html( $me.val() );
-			}
-		},
+		// 	if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) ) {
+		// 		this.model.get( 'pdfHeader' ).title = $me.val();
+		// 		$('.wx-pdf-preview .title').html( $me.val() );
+		// 	}
+		// 	if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) ) {
+		// 		this.model.get( 'pdfHeader' ).line1 = $me.val();
+		// 		$('.wx-pdf-preview .line1').html( $me.val() );
+		// 	}
+		// 	if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) ) {
+		// 		this.model.get( 'pdfHeader' ).line2 = $me.val();
+		// 		$('.wx-pdf-preview .line2').html( $me.val() );
+		// 	}
+		// 	if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) ) {
+		// 		this.model.get( 'pdfHeader' ).line3 = $me.val();
+		// 		$('.wx-pdf-preview .line3').html( $me.val() );
+		// 	}
+		// },
 
 		updateAction: function( ev ) {
 			ev.preventDefault();
