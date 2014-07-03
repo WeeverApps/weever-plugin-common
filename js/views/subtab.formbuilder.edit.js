@@ -310,18 +310,20 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-calculation'         : 'addCalculation',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
-			'change .email-pdf-to-recipients'                : 'showHideEmailInfo',
             'click .wx-continue-button'                      : 'next',
             'click .wx-back-button'                          : 'back',
 			'click .wx-close-button'                         : 'closeConfirmation',
 			'click .wx-close-reveal-modal'                   : 'closeConfirmation',
-			// Email action events
+			// Form action events
+			'change .email-pdf-to-recipients'                : 'showHideEmailInfo',
+			'change .custom-post'                            : 'showHideCustomPostInfo',
 			'blur .wx-form-builder-action'                   : 'updateAction',
 			'change .wx-form-builder-send-current-user-email': 'toggleSendEmailAddress',
 			'keyup .wx-form-builder-pdfheader-title'         : 'updatePdfHeader',
 			'keyup .wx-form-builder-pdfheader-line1'         : 'updatePdfHeader',
 			'keyup .wx-form-builder-pdfheader-line2'         : 'updatePdfHeader',
-			'keyup .wx-form-builder-pdfheader-line3'         : 'updatePdfHeader'
+			'keyup .wx-form-builder-pdfheader-line3'         : 'updatePdfHeader',
+			'click .radio-mode'                              : 'updateMode'
 
 		},
 
@@ -453,14 +455,6 @@ wxApp = wxApp || {};
 			if ( typeof customAction == 'object' ) {
 				action.set( customAction );
 			}
-
-			var actionView = new wxApp.FormBuilderActionView({
-				model: action
-			});
-
-			setTimeout(function() {
-				me.$( '#panel-email-details' ).append( actionView.render().el );
-			}, 100);
 
 			this.model.get( 'config' ).formActions.push( action );
 			return action;
@@ -995,15 +989,6 @@ wxApp = wxApp || {};
 			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
 		},
 
-		showHideEmailInfo: function( e ) {
-			var checked = $( e.currentTarget ).is(':checked');
-
-			if ( checked )
-				$('.wx-email-action').slideDown();
-			else
-				$('.wx-email-action').slideUp();
-		},
-
 		confirmClosePopup: function( e ) {
 			e.preventDefault();
 			var ok = confirm( 'Are you sure you want to cancel?  Your changes have not been saved.' );
@@ -1030,7 +1015,6 @@ wxApp = wxApp || {};
             	$('.form-builder-step-three').slideDown();
             }
             this.$el.foundation('reflow');
-            // $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
         },
 
         back: function() {
@@ -1043,14 +1027,30 @@ wxApp = wxApp || {};
 	            $('.form-builder-step-three').slideUp();
 	        }
             this.$el.foundation('reflow');
-            // $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
         },
 
         // Email action events
+		showHideEmailInfo: function( e ) {
+			var checked = $( e.currentTarget ).is(':checked');
+			if ( checked )
+				$('.wx-email-action').slideDown();
+			else
+				$('.wx-email-action').slideUp();
+		},
+
+		showHideCustomPostInfo: function( e ) {
+			var checked = $( e.currentTarget ).is(':checked');
+			if ( checked )
+				$('.wx-custom-post').slideDown();
+			else
+				$('.wx-custom-post').slideUp();
+		},
+
+
 		toggleSendEmailAddress: function( ev ) {
-			var action = this.getEmailAction(),
+			var action  = this.__getActionByMethod( 'email' ),
 			    $target = $( ev.currentTarget ),
-			    $input = this.$('.wx-email-action input[type="email"]'); //  $target.closest( '.wx-form-builder-row.email' ).find( 'input.wx-form-builder-action[type="email"]' );
+			    $input  = this.$('.wx-email-action input[type="email"]');
 			if ( $target.is( ':checked' ) ) {
 				$input.val( wx.currentUserEmail );
 				action.set( 'value', wx.currentUserEmail );
@@ -1062,8 +1062,8 @@ wxApp = wxApp || {};
 		},
 
 		updatePdfHeader: function( ev ) {
-			var action = this.getEmailAction(),
-			    $me = $( ev.currentTarget );
+			var action = this.__getActionByMethod( 'email' ),
+			    $me    = $( ev.currentTarget );
 
 			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) ) {
 				action.get( 'pdfHeader' ).title = $me.val();
@@ -1085,16 +1085,28 @@ wxApp = wxApp || {};
 
 		updateAction: function( ev ) {
 			ev.preventDefault();
-			var action = this.getEmailAction(),
-			    $me    = $( ev.currentTarget );
+			var $me    = $( ev.currentTarget ),
+			    method = 'email';
+			if ( $me.hasClass( 'wx-form-builder-action-post' ) )
+				method = 'post';
+
+			var action = this.__getActionByMethod( method );
 			action.set( 'value', $me.val() );
+			console.log('Action:', action);
 		},
 
-		getEmailAction: function() {
+		updateMode: function( ev ) {
+			var action = this.__getActionByMethod( 'post' ),
+			    $me = $( ev.currentTarget );
+			action.set( 'mode', $me.val() );
+			console.log('Action:', action);
+		},
+
+		__getActionByMethod: function( method ) {
 			var actionToReturn = null;
 			for (var i = 0; i < this.model.get( 'config' ).formActions.length; i++) {
 				var action = this.model.get( 'config' ).formActions.models[i];
-				if ( action.get( 'method' ) === 'email' ) {
+				if ( action.get( 'method' ) === method ) {
 					actionToReturn = action;
 					break;
 				}

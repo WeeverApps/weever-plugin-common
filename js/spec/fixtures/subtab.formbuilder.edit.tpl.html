@@ -1,10 +1,13 @@
 <script type="text/template" id="formbuilder-subtab-edit-template">
     <%
-    var pdfDetails = null;
+    var pdfDetails = null,
+        postDetails = null;
     for (var i = 0; i < config.formActions.length; i++) {
         if ( config.formActions[i].method === 'email' ) {
             pdfDetails = config.formActions[i];
-            break;
+        }
+        else if ( config.formActions[i].method === 'post' ) {
+            postDetails = config.formActions[i];
         }
     };
     %>
@@ -314,16 +317,39 @@
                             <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
                             Email PDF copy of the form entry to the specified recipients
                         </label>
-                    </div>
 
-                    <div class="wx-email-action" style="display: none">
-                        <p>When a person completes the form, it will be converted to PDF and emailed to the recipients you specify.</P>
+                        <div class="wx-email-action" style="display: none">
+                            <p>When a person completes the form, it will be converted to PDF and emailed to the recipients you specify.</P>
 
-                        <label>Recipient(s) &ndash; separate multiple emails with commas</label>
+                            <label>Recipient(s) &ndash; separate multiple emails with commas</label>
 
-                        <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
+                            <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
 
-                        <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- pdfDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- pdfDetails.currentUserEmail %></span></label>
+                            <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- pdfDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- pdfDetails.currentUserEmail %></span></label>
+                        </div>
+
+                        <% if ( advancedMode ) { %>
+                            <label>
+                                <input type="checkbox" class="custom-post" />
+                                Add a custom POST action
+                            </label>
+
+                            <div class="wx-custom-post" style="display: none">
+                                <label>POST action web address (URL)</label>
+                                <input class="wx-form-builder-action wx-form-builder-action-post" type="text" value="<%- postDetails.value %>" />
+                                <label>POST mode</label>
+                                <br>
+                                <label for="direct">
+                                    <input id="direct" value="direct" name="radio-mode" type="radio" class="radio-mode" <% if (postDetails.mode === 'direct') { %>checked<% } %>>
+                                    Direct
+                                </label>
+                                <label for="proxy">
+                                    <input id="proxy"  value="proxy"  name="radio-mode"  type="radio" class="radio-mode" <% if (postDetails.mode !== 'direct') { %>checked<% } %>>
+                                    Proxy
+                                </label>
+                            </div>
+                        <% } %>
+
                     </div>
 
                     <p>All data is saved securely online.upt roof party finparty bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.</p>
@@ -379,7 +405,7 @@
 
             <!-- start right column -->
             <div class="medium-6 columns">
-                <div class="wx-pdf-preview">
+                <div class="wx-pdf-preview panel">
                     <h3 class="title"><%- pdfDetails.pdfHeader.title %></h3>
                     <p>
                         <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
