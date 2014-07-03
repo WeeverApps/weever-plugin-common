@@ -280,50 +280,49 @@
             <!-- endof: right col -->
             <!-- endof: DocuSign Login / Account Info -->
         <% } else { %>
-            <h2>AppBuilder Forms</h2>
+            <h2>AppBuilder Forms <small>Step 1 of 2</small></h2>
 
-            <h3>Getting Started&hellip;</h3>
+            <br>
 
-            <div class="medium-8 columns">
-                
-                <ul class="tabs" data-tab>
-                    <li class="tab-title active"><a href="#panel-getting-started">Getting Started</a></li>
-                    <li class="tab-title"><a href="#panel-email-details">Email and PDF Details</a></li>
-                </ul>
-                <div class="tabs-content">
-                    <div class="content active" id="panel-getting-started">
-                        <!-- start: Getting Started -->
-                        <div>
-                            <label>Form title</label>
-                            <input type="text" value="<%- title %>" class="wx-edit-title" />
-                            <sup>You can change this later</sup>
-                        </div>
+            <div class="row">
+                <div class="medium-6 columns">
+                    <ul class="tabs" data-tab>
+                        <li class="tab-title active"><a href="#panel-getting-started">Getting Started</a></li>
+                        <li class="tab-title"><a href="#panel-email-details">Email and PDF Details</a></li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div class="content active" id="panel-getting-started">
+                            <!-- start: Getting Started -->
+                            <div>
+                                <label>Form title (you can change this later)</label>
+                                <input type="text" value="<%- title %>" class="wx-edit-title" />
+                            </div>
 
-                        <div>
-                            <label>When a person fills out this form&hellip;</label>
-                            <label <% if (!advancedMode) { %>class="hide"<% } %>>
+                            <div>
+                                <p>When a person fills out this form:</p>
+                                <label <% if (!advancedMode) { %>class="hide"<% } %>>
                                 <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
                                 Save the form entry to my AppBuilder Forms account
-                            </label>
-                            <label>
-                                <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
-                                Email PDF copy of the form entry to the specified recipients
-                            </label>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
+                                    Email PDF copy of the form entry to the specified recipients
+                                </label>
+                            </div>
+
+                            <br>
+
+                            <p>All data is saved securely online.upt roof party finparty bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.</p>
+                            <!-- endof: Getting Started -->
                         </div>
+                        <div class="content" id="panel-email-details">
+                            <!-- Details: See formActions -->
+                        </div>
+                    </div>
 
-                        <p>
-                            All data is saved securely online. Fixie wayfarers chambray, hashtag mumblecore raw denim meh Wes Anderson Cosby sweater blog small batch aesthetic. Fixie tofu umami crucifix disrupt roof party fingerstache. Mumblecore mustache twee dreamcatcher, hashtag YOLO four loko ugh crucifix salvia. Salvia ugh lo-fi roof party bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.
-                        </p>
-                        <!-- endof: Getting Started -->
-                    </div>
-                    <div class="content" id="panel-email-details">
-                        <!-- Details: See formActions -->
-                    </div>
+                    <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
+                    &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
-
-                <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
-                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
-            </div>
 
             <%
             var pdfDetails = null;
@@ -335,10 +334,14 @@
             };
             %>
 
-            <div class="medium-4 columns">
-                <div class="content active" id="pdf-preview">
-                    <h2>PDF Preview</h2>
-                    <div class="wx-pdf-preview">
+            <!-- start right column -->
+            <div class="medium-6 columns">
+                <ul class="tabs" data-tab>
+                    <li class="tab-title active"><a href="#pdf-preview">PDF Preview</a></li>
+                    <li class="tab-title"><a href="#tab-add-help"><%- helpTitle %></a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div class="content active" id="pdf-preview" style="height: 315px; overflow-y: auto;">
                         <h3 class="title"><%- pdfDetails.pdfHeader.title %></h3>
                         <p>
                             <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
@@ -349,8 +352,17 @@
                             <em>(As people complete your form, their data will appear here)</em>
                         </p>
                     </div>
+                    <div class="content" id="tab-add-help" style="height: 315px; overflow-y: auto;">
+                        <%= helpBody %>
+                        <p><b>Support</b></p>
+                        <p> Visit <a target="_blank" href="http://support.weeverapps.com">support.weeverapps.com</a>. Professional level subscriptions and above have access to ticket-based support and faster response times.</p>
+                        <br>
+                    </div>
                 </div>
             </div>
+            <!-- endof right column -->
+        </div>
+
         <% } %>
     </div>
 
@@ -373,13 +385,13 @@
                 <li class="tab-title active"><a href="#panel-new-form-fields">Add new form fields</a></li>
                 <li class="tab-title"><a href="#panel-field-settings">Field Settings</a></li>
             </ul>
-            <div class="tabs-content">
+            <div class="tabs-content" id="wx-tabs-content-addfieldtabs">
                 <div class="content active" id="panel-new-form-fields">
                     <!-- start: fields -->
-                    <ul class="small-block-grid-2 medium-block-grid-3" id="add-fields">
+                    <ul class="small-block-grid-2" id="add-fields">
                         <!-- text fields and common elements -->
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-text-input">
+                            <button class="small expand radius wx-form-builder-add-text-input">
                                 <div class="wx-button-label">Single line text</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                 title="<p><b>Single Line Text</b><p>
@@ -392,8 +404,8 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-textarea">
-                                <div class="wx-button-label">Paragraph text</div>
+                            <button class="small expand radius wx-form-builder-add-textarea">
+                                <div class="wx-button-label">Paragraph Text</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Paragraph Text</b><p>
                                        <p>Adds an input for a multiple lines of text.</p>
@@ -405,8 +417,8 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-info">
-                                <div class="wx-button-label">Info box</div>
+                            <button class="small expand radius wx-form-builder-add-info">
+                                <div class="wx-button-label">Info Box</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Info Box</b><p>
                                        <p>Add a block of instructional text or other content.  HTML is permitted.</p>
@@ -417,7 +429,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-email-input">
+                            <button class="small expand radius wx-form-builder-add-email-input">
                                 <div class="wx-button-label">Email</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Email</b><p>
@@ -431,7 +443,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-tel-input">
+                            <button class="small expand radius wx-form-builder-add-tel-input">
                                 <div class="wx-button-label">Phone</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Phone</b><p>
@@ -446,7 +458,7 @@
 
                         <!-- radio buttons, checkboxes, etc. -->
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-select">
+                            <button class="small expand radius wx-form-builder-add-select">
                                 <div class="wx-button-label">Dropdown</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Dropdown</b><p>
@@ -465,8 +477,8 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-radio-group">
-                                <div class="wx-button-label">Multiple choice</div>
+                            <button class="small expand radius wx-form-builder-add-radio-group">
+                                <div class="wx-button-label">Multiple Choice</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Multiple choice</b><p>
                                        <p>Adds an input with a set of predefined options, aka &ldquo;radio buttons&rdquo;. Only one option may be selected at any time.</p>
@@ -487,7 +499,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-checkbox-group">
+                            <button class="small expand radius wx-form-builder-add-checkbox-group">
                                 <div class="wx-button-label">Checkboxes</div>
                                         <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                         title="<p><b>Checkboxes</b></p>
@@ -512,7 +524,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-number-input">
+                            <button class="small expand radius wx-form-builder-add-number-input">
                                 <div class="wx-button-label">Number</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Number</b><p>
@@ -525,7 +537,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-range-input">
+                            <button class="small expand radius wx-form-builder-add-range-input">
                                 <div class="wx-button-label">Number Slider</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Number Slider</b><p>
@@ -547,7 +559,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-text-range-input">
+                            <button class="small expand radius wx-form-builder-add-text-range-input">
                                 <div class="wx-button-label">Text Slider</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Text Slider</b><p>
@@ -574,7 +586,7 @@
                         <!-- file upload -->
                         <!--
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-file-input">
+                            <button class="small expand radius wx-form-builder-add-file-input">
                                 <div class="wx-button-label">File Upload</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>File Upload</b><p>
@@ -588,7 +600,7 @@
                         </li>
                         -->
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-photo-input">
+                            <button class="small expand radius wx-form-builder-add-photo-input">
                                 <div class="wx-button-label">Submit a Photo</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Submit A Photo</b><p>
@@ -602,8 +614,8 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-url-input">
-                                <div class="wx-button-label">Web site</div>
+                            <button class="small expand radius wx-form-builder-add-url-input">
+                                <div class="wx-button-label">Web Site</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Web site</b><p>
                                        <p>Adds an input field for a web site address.</p>
@@ -616,7 +628,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-date-input">
+                            <button class="small expand radius wx-form-builder-add-date-input">
                                 <div class="wx-button-label">Date</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Date</b><p>
@@ -630,7 +642,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-password-input">
+                            <button class="small expand radius wx-form-builder-add-password-input">
                                 <div class="wx-button-label">Password</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Password</b><p>
@@ -643,7 +655,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-pagebreak">
+                            <button class="small expand radius wx-form-builder-add-pagebreak">
                                 <div class="wx-button-label">Page Break</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Page Break</b><p>
@@ -654,9 +666,9 @@
                             </button>
                         </li>
                         <li>
-                            <button class="tiny expand radius wx-form-builder-add-calculation">
+                            <button class="small expand radius wx-form-builder-add-calculation">
                                 <div class="wx-button-label">Calculate Results</div>
-                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right" 
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                     title="<p><b>Calculate Results</b><p>
                                        <p>Help text coming soon!</p>">
                                         ?
@@ -665,7 +677,7 @@
                         </li>
                         <% if ( config.isDocuSign.toString() == 'true' ) { %>
                             <li>
-                                <button class="tiny expand radius wx-form-builder-add-docusign-signature">
+                                <button class="small expand radius wx-form-builder-add-docusign-signature">
                                     <div class="wx-button-label">DocuSign eSignature</div>
                                     <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                           title="<p><b>DocuSign eSignature (required)</b><p>
@@ -680,10 +692,10 @@
                             </li>
                         <% } else { %>
 							<li>
-								<button class="tiny expand radius wx-form-builder-add-weever-signature">
+								<button class="small expand radius wx-form-builder-add-weever-signature">
 									<div class="wx-button-label">Weever eSignature</div>
 										<span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-											  title="<p><b>Weever eSignature (required)</b><p>
+											  title="<p><b>Weever eSignature</b><p>
 											   <p>Adds an electronic signature field to your form at the location you specify.</p>
 											   <p><b>Example:</b></p>
 											   <label>I have read and understand the preface and terms of this agreement.</label>
@@ -701,6 +713,7 @@
             </div>
 
             <div>
+                <br>
                 <button class="wx-finish-button success radius">Save and add this form to your app</button>
                 &nbsp; or <a class="wx-back-button radius">go back</a>
                 &nbsp; or <a class="wx-close-button radius">cancel</a>
@@ -716,13 +729,13 @@
                 <li class="tab-title"><a href="#panel-choose-icon">Icon</a></li>
                 <li class="tab-title"><a href="#panel-support">Support</a></li>
             </ul>
-            <div class="tabs-content">
+            <div class="tabs-content" id="wx-tabs-content-previewtabs">
                 <div class="content active" id="panel-form-preview">
                     <div class="wx-validate-feed panel">
                         <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
                         <div class="wx-preview-form"></div>
                         <br/>
-                        <button class="success radius"><%- config.submitButtonText %></button>
+                        <button class="secondary radius"><%- config.submitButtonText %></button>
                         <br/><br/>
                     </div>
                 </div>
