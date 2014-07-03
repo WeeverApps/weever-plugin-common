@@ -30,11 +30,6 @@ var wxApp = wxApp || {};
                 case 'htmlMap':
                     retVal = 'MapSubTab';
                     break;
-<<<<<<< HEAD
-                //case 'htmlPage':
-                    //retVal = 'WordpressPageSubTab';
-                    //break;
-=======
                 case 'htmlPage':
                     if ( tabData.config && tabData.config.subtab_name )
                         retVal = tabData.config.subtab_name;
@@ -45,7 +40,6 @@ var wxApp = wxApp || {};
                             retVal = 'WordpressAddPageSubTab';
                     }
                     break;
->>>>>>> master
                 case 'twitter':
                 case 'twitterUser':
                     retVal = 'TwitterSubTab';
@@ -95,12 +89,8 @@ var wxApp = wxApp || {};
             var me = this;
             wx.makeApiCall('tabs/get_tabs', {}, function(data) {
                 if ( typeof data.tabs != 'undefined' ) {
-<<<<<<< HEAD
-                
-=======
 	                // @TODO Make sure that data.tabs config objects are properly typed; Weever API issue
 	                console.log( 'TABS!', data.tabs );
->>>>>>> master
                     var tabs = [];
                     for ( var tabIndex = 0; tabIndex < data.tabs.length; tabIndex++ ) {
                         var tabData = data.tabs[tabIndex];

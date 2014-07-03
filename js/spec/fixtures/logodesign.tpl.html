@@ -32,7 +32,7 @@
                 <a href="#" onclick="return false;" class="button success prefix">Save</a>
             </div>
             <div class="small-2 columns loading">
-                <img id="titlebar_title_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                     <label class="left inline">Logo area background color</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="main_titlebar_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                    <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
                 </div>
             </div>
         </div>
@@ -80,10 +80,10 @@
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_color" value="<?php 
                     
-                    	if( $this->weeverMainTitlebarColor != '' )
-                    		echo $this->weeverMainTitlebarColor;
-                    	else
-                    		echo '#ffffff';
+                        if( $this->weeverMainTitlebarColor != '' )
+                            echo $this->weeverMainTitlebarColor;
+                        else
+                            echo '#ffffff';
                     
                     ?>" />
                 </div>
@@ -102,7 +102,7 @@
                     <label class="left inline">&nbsp;Logo area text color (if applicable)</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="main_titlebar_text_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                    <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
                 </div>
             </div>
         </div>
@@ -111,10 +111,10 @@
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="main_titlebar_text_color" value="<?php 
                     
-                    	if( $this->weeverMainTitlebarTextColor != '' )
-                    		echo $this->weeverMainTitlebarTextColor;
-                    	else
-                    		echo '#ffffff';
+                        if( $this->weeverMainTitlebarTextColor != '' )
+                            echo $this->weeverMainTitlebarTextColor;
+                        else
+                            echo '#ffffff';
                     
                     ?>" />
                 </div>
@@ -134,7 +134,7 @@
                     <label class="left inline">&nbsp;Subtab bar background color</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="subtab_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                    <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
                 </div>
             </div>
         </div>
@@ -143,10 +143,10 @@
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_color" value="<?php 
                     
-                    	if( $this->weeverSubtabColor != '' )
-                    		echo $this->weeverSubtabColor;
-                    	else
-                    		echo '#ffffff';
+                        if( $this->weeverSubtabColor != '' )
+                            echo $this->weeverSubtabColor;
+                        else
+                            echo '#ffffff';
                     
                     ?>" />
                 </div>
@@ -166,7 +166,7 @@
                     <label class="left inline">&nbsp;Subtab bar text color</label>
                 </div>
                 <div class="small-2 columns">
-                    <img id="subtab_text_color_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                    <img id="titlebar_title_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
                 </div>
             </div>
         </div>
@@ -175,10 +175,10 @@
                 <div class="small-6 columns">
                     <input type="text" class="color {pickerClosable: true, pickerOnfocus: false, onClose:'Backbone.Events.trigger(\'color:change\', this);'}" id="subtab_text_color" value="<?php 
                     
-                    	if( $this->weeverSubtabTextColor != '' )
-                    		echo $this->weeverSubtabTextColor;
-                    	else
-                    		echo '#ffffff';
+                        if( $this->weeverSubtabTextColor != '' )
+                            echo $this->weeverSubtabTextColor;
+                        else
+                            echo '#ffffff';
                     
                     ?>" />
                 </div>

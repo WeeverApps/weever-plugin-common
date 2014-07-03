@@ -12,19 +12,19 @@
             <span class="label secondary wx-add-feature-tier">+ add</span>
         <% } %>
 
-	</a>
+    </a>
 
     <!-- add feature title -->
     <div class="wx-add-feature-name">
         <%- name %>
     </div>
 
-
-	<% if ( featureName.toLowerCase() == 'formbuilder' || featureName.toLowerCase() == 'docusign' ) { %>
-	    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:false">
-	<% } else { %>
-		<div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:true">
-	<% } %>
+    <div id="wx-edit-area-<%- featureName %>" class="reveal-modal">
+    <% if ( featureName.toLowerCase() == 'formbuilder' || featureName.toLowerCase() == 'docusign' ) { %>
+        <div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:false">
+    <% } else { %>
+        <div id="wx-edit-area-<%- featureName %>" class="reveal-modal" data-options="closeOnBackgroundClick:true">
+    <% } %>
         Please wait...
     </div>
 

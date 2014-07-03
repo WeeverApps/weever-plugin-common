@@ -2,7 +2,7 @@
     { "featureName": "FormBuilder",         "name": "Form",        "cms": ["none"]                },
     { "featureName": "DocuSign",            "name": "DocuSign",    "cms": ["none"]                },
     { "featureName": "RSS",                 "name": "RSS feed"     },
-    { "featureName": "Coupon",              "name": "Coupon",      "cms": ["cloud"]               },
+    //{ "featureName": "Coupon",              "name": "Coupon",      "cms": ["cloud"]               },
     { "featureName": "Twitter",             "name": "Twitter"      },
     { "featureName": "Youtube",             "name": "YouTube"      },
     { "featureName": "Vimeo",               "name": "Vimeo"        },
@@ -20,16 +20,16 @@
     { "featureName": "Blogger",             "name": "Blogger"      },
 
     { "featureName": "JoomlaCategory",      "name": "Category"          },
-    { "featureName": "JoomlaArticle",       "name": "Article"    		},
+    { "featureName": "JoomlaArticle",       "name": "Article"           },
     { "featureName": "JoomlaBlog",          "name": "Menu Item"         },
 
     { "featureName": "K2Category",          "name": "K2 Cat."           },
-    { "featureName": "K2Tag",          		"name": "K2 Tag"           	},
+    { "featureName": "K2Tag",               "name": "K2 Tag"            },
     { "featureName": "K2Item",              "name": "K2 Item"           },
     { "featureName": "K2Blog",              "name": "K2 Menu"           },
 
-    { "featureName": "JoomlaMap",           "name": "J! Map"           	},
-    { "featureName": "K2Map",           	"name": "K2 Map"        	},
-    { "featureName": "JoomlaProximity",  	"name": "J! Nearby" 	    },
+    { "featureName": "JoomlaMap",           "name": "J! Map"            },
+    { "featureName": "K2Map",               "name": "K2 Map"            },
+    { "featureName": "JoomlaProximity",     "name": "J! Nearby"         },
     { "featureName": "K2Proximity",         "name": "K2 Nearby"         }
 ]

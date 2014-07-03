@@ -10,13 +10,13 @@
                 var docusign = docusign || { username: '', password: '' };
                 for (var i = 0; i < config.formActions.length; i++) {
                     if ( config.formActions[i].method === 'docusign' ) {
-						var clone = _( config.formActions[i] ).clone();
-						if ( docusign.username == '' || docusign.password == '' ) {
-							docusign = clone;
-						}
-						else {
-							docusign = _.extend( clone, docusign );
-						}
+                        var clone = _( config.formActions[i] ).clone();
+                        if ( docusign.username == '' || docusign.password == '' ) {
+                            docusign = clone;
+                        }
+                        else {
+                            docusign = _.extend( clone, docusign );
+                        }
                         break;
                     }
                 };
@@ -55,22 +55,22 @@
                                     DocuSign account password
                                     <input type="password" class="wx-form-builder-docusign-password" value="<%- docusign.password %>" />
                                 </label>
-								<% if ( config.allowDemoMode ) { %>
-									<label>
-										<input
-												type="checkbox"
-												class="wx-form-builder-docusign-demomode"
-												<%= ( typeof config.demomode != 'undefined' && config.demomode ) ? 'checked' : '' %>
-												/> Enable DocuSign &ldquo;Demo Mode&rdquo;
-									</label>
-								<% } %>
+                                <% if ( config.allowDemoMode ) { %>
+                                    <label>
+                                        <input
+                                                type="checkbox"
+                                                class="wx-form-builder-docusign-demomode"
+                                                <%= ( typeof config.demomode != 'undefined' && config.demomode ) ? 'checked' : '' %>
+                                                /> Enable DocuSign &ldquo;Demo Mode&rdquo;
+                                    </label>
+                                <% } %>
                             </div>
                         </div>
 
                         <br>
 
-						<button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
-						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                        <button id="wx-docusign-login-button" class="success radius">Login and continue &rarr;</button> <img id="login_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                        &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
 
                     </div>
                     <!-- endof: docusign login form -->
@@ -123,26 +123,26 @@
                                     <input type="password" class="wx-form-builder-docusign-password-again" />
                                 </label>
 
-								<p>
-									<label>
-										<input type="checkbox" class="wx-docusign-terms-agreement" />
-										I have read and agree to the <a href="https://www.docusign.com/company/terms-and-conditions/reseller" target="_blank">DocuSign Terms and Conditions</a>.
-									</label>
-								</p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="wx-docusign-terms-agreement" />
+                                        I have read and agree to the <a href="https://www.docusign.com/company/terms-and-conditions/reseller" target="_blank">DocuSign Terms and Conditions</a>.
+                                    </label>
+                                </p>
 
-								<p>
-									<label>
-										<input type="checkbox" class="wx-docusign-pay-after" />
-										I agree to allow Weever Apps to charge my credit card $4 for each DocuSign form submitted.
-									</label>
-								</p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="wx-docusign-pay-after" />
+                                        I agree to allow Weever Apps to charge my credit card $4 for each DocuSign form submitted.
+                                    </label>
+                                </p>
 
-								<p>
-									<label>
-										<input type="checkbox" class="wx-docusign-pay-before" />
-										I would like to pre-purchase a minimum of 100 submissions for $3 each (you will be contacted by our sales team).
-									</label>
-								</p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="wx-docusign-pay-before" />
+                                        I would like to pre-purchase a minimum of 100 submissions for $3 each (you will be contacted by our sales team).
+                                    </label>
+                                </p>
 
                             </div>
 
@@ -151,7 +151,7 @@
                         <br>
 
                         <button id="wx-docusign-create-account-button" class="success radius">Create account and start building a form &rarr;</button>
-						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                        &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                     </div>
                     <!-- endof: docusign create account form -->
 
@@ -196,8 +196,8 @@
 
                         <br>
 
-                        <button id="wx-docusign-change-password-button" class="success radius">Change password and start building a form &rarr;</button> <img id="change_password_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
-						&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                        <button id="wx-docusign-change-password-button" class="success radius">Change password and start building a form &rarr;</button> <img id="change_password_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+                        &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                     </div>
                     <!-- endof: docusign change password form -->
 
@@ -246,7 +246,7 @@
                     <br>
 
                     <button class="wx-continue-button success radius">Save PDF details and start building a form &rarr;</button>
-					&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+                    &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
                 <!-- endof: enter docusign pdf attributes and return url -->
             </div>
@@ -545,7 +545,7 @@
                         </li>
                         <li>
                             <button class="tiny expand radius wx-form-builder-add-date-input">
-								<div class="wx-button-label">Date</div>
+                                <div class="wx-button-label">Date</div>
                                 <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
                                       title="<p><b>Date</b><p>
                                        <p>Adds an input field for a calendar date.</p>
@@ -570,17 +570,17 @@
                                 </span>
                             </button>
                         </li>
-						<li>
-							<button class="tiny expand radius wx-form-builder-add-pagebreak">
-								<div class="wx-button-label">Page Break</div>
-								<span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
-									  title="<p><b>Page Break</b><p>
-									  <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
-									  <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
-									   ?
-								</span>
-							</button>
-						</li>
+                        <li>
+                            <button class="tiny expand radius wx-form-builder-add-pagebreak">
+                                <div class="wx-button-label">Page Break</div>
+                                <span data-tooltip data-options="disable-for-touch:true" class="has-tip tip-right"
+                                      title="<p><b>Page Break</b><p>
+                                      <p>Splits the form into multiple pages navigable by &ldquo;previous&rdquo; and &ldquo;next&rdquo; buttons.</p>
+                                      <p>Page Breaks can be used to simplify complex forms or meet specific layout requirements.</p>">
+                                       ?
+                                </span>
+                            </button>
+                        </li>
                         <% if ( config.isDocuSign.toString() == 'true' ) { %>
                             <li>
                                 <button class="tiny expand radius wx-form-builder-add-docusign-signature">
@@ -603,7 +603,7 @@
 
             </div>
         </div>
-    	<div class="large-6 columns">
+        <div class="large-6 columns">
 
             <p class="wx-ui-title">Edit existing form fields</p>
 
@@ -621,11 +621,11 @@
             </div>
 
             <!-- start: form settings -->
-			<% if (
-				( config.isDocuSign.toString() != 'true' ) ||
-				( config.isDocuSign.toString() == 'true' && config.allowDemoMode ) ||
-				advancedMode
-				) { %>
+            <% if (
+                ( config.isDocuSign.toString() != 'true' ) ||
+                ( config.isDocuSign.toString() == 'true' && config.allowDemoMode ) ||
+                advancedMode
+                ) { %>
             <p class="wx-ui-title">Form submission settings</p>
 
             <div id="form-settings-accordion" class="section-container accordion" data-section="accordion">
@@ -636,27 +636,27 @@
 
                         <label>Change the label text used for your form&apos;s submit button</label>
                         <input type="text"
-							   class="submit-button-text"
-							   value="<%- config.submitButtonText %>"
-							   <% if ( config.isDocuSign.toString() == 'true' ) print( ' readonly ' ) %>
-						/>
+                               class="submit-button-text"
+                               value="<%- config.submitButtonText %>"
+                               <% if ( config.isDocuSign.toString() == 'true' ) print( ' readonly ' ) %>
+                        />
                         <!-- fix for last-child bug in foundation -->
                     </div>
                 </section>
             </div>
-			<% } %>
+            <% } %>
 
-			<div>
-				<label>Title for this feature inside your app</label>
-				<input type="text" value="<%- title %>" class="wx-edit-title" />
-			</div>
+            <div>
+                <label>Title for this feature inside your app</label>
+                <input type="text" value="<%- title %>" class="wx-edit-title" />
+            </div>
 
             <br>
 
             <div>
                 <button class="wx-finish-button success radius">Save and add this form to your app</button>
                 &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
-                <img id="dialog-loader" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                <img id="dialog-loader" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
             </div>
         </div>
 

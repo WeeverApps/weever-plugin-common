@@ -1,14 +1,14 @@
 <script type="text/template" id="icon-selector">
-	<?php 
-	// I hate that this is hardcoded, but there's no intelligent way of determining which icons are in use.
-	$icons = Array( 1, 2, 5, 9, 13, 14, 17, 18, 21, 22, 25, 30, 29, 33, 37, 41, 45, 46, 49, 53, 57, 61, 62, 65, 66, 69, 73, 74, 77, 78, 81, 82, 85, 89, 90, 93, 94, 97, 98, 101, 102, 200, 204, 208, 209, 212, 216, 220, 224, 228, 232, 236, 240, 244, 248, 249, 252, 253, 256, 260, 262, 276, 277, 600, 604, 608, 800, 804, 808, 812, 816, 820, 828, 832, 836, 840, 900 );
+    <?php 
+    // I hate that this is hardcoded, but there's no intelligent way of determining which icons are in use.
+    $icons = Array( 1, 2, 5, 9, 13, 14, 17, 18, 21, 22, 25, 30, 29, 33, 37, 41, 45, 46, 49, 53, 57, 61, 62, 65, 66, 69, 73, 74, 77, 78, 81, 82, 85, 89, 90, 93, 94, 97, 98, 101, 102, 200, 204, 208, 209, 212, 216, 220, 224, 228, 232, 236, 240, 244, 248, 249, 252, 253, 256, 260, 262, 276, 277, 600, 604, 608, 800, 804, 808, 812, 816, 820, 828, 832, 836, 840, 900 );
     
-	foreach ( $icons as $i ) { 
+    foreach ( $icons as $i ) { 
         $i = 'e' . str_pad($i, 3, '0', STR_PAD_LEFT); ?>
         <li>
             <label>
-            	<div class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></div>
-            	<input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id.toString().replace('\\', '') == '<?php echo $i; ?>' ) ? 'checked' : '' ) %> />
+                <div class="x-button-icon x-shown wxIcon-<?php echo $i; ?> wxFont-1"></div>
+                <input type="radio" name="wx-icon" value="<?php echo $i; ?>" id="wx-icon-<?php echo $i; ?>" <%- ( ( icon_id.toString().replace('\\', '') == '<?php echo $i; ?>' ) ? 'checked' : '' ) %> />
             </label>
         </li>
     <?php } ?>

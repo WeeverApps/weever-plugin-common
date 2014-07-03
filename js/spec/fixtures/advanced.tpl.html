@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="small-2 columns">
-                <img id="font_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                <img id="font_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
             </div>
         </div>
     </div>
@@ -29,9 +29,9 @@
 
     <p class="wx-ui-title">Custom CSS</p>
 
-	<p>Customize your mobile app design with valid CSS rules.</p>
-	<textarea style="min-height: 10em;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
-	<button class="success radius" id="save_advanced">Save CSS and apply to app</button>
+    <p>Customize your mobile app design with valid CSS rules.</p>
+    <textarea style="min-height: 10em;" name="css" id="css_styles"><%- design.css === undefined ? '' : design.css.styles %></textarea>
+    <button class="success radius" id="save_advanced">Save CSS and apply to app</button>
     <br>
 
     <div class="panel">
@@ -44,33 +44,33 @@
 
     <p class="wx-ui-title">Language options</p>
 
-	<div>
-		<p>Change the language used for generic user-interface elements in the app such as the &lsquo;back&rsquo; button.</p>
-		<%
+    <div>
+        <p>Change the language used for generic user-interface elements in the app such as the &lsquo;back&rsquo; button.</p>
+        <%
         // Available_locales is currently an object. Convert it into an array to make it sortable.
         var tuples = [];
         for (var key in config.available_locales) {
-	    tuples.push([key, config.available_locales[key]]);
+        tuples.push([key, config.available_locales[key]]);
         };
         tuples.sort(function(a,b) {
-	        a = a[1];
-	        b = b[1];
-	        return a < b ? -1 : (a > b ? 1 : 0);
+            a = a[1];
+            b = b[1];
+            return a < b ? -1 : (a > b ? 1 : 0);
         });
-		%>
-		
-		<div class="row collapse">
-			<div class="small-10 columns">
-				<select id="localizations">
-					<% for (var i = 0; i < tuples.length; i++) { %>
-						<option value="<%- tuples[i][0] %>" <%- config.localization === tuples[i][0] ? "selected='selected'" : "" %>><%- tuples[i][1] %></option>
-					<% }; %>
-				</select>
-			</div>
-			<div class="small-2 columns">
-				<img id="localizations_loading" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
-			</div>
-		</div>
-	</div>
+        %>
+        
+        <div class="row collapse">
+            <div class="small-10 columns">
+                <select id="localizations">
+                    <% for (var i = 0; i < tuples.length; i++) { %>
+                        <option value="<%- tuples[i][0] %>" <%- config.localization === tuples[i][0] ? "selected='selected'" : "" %>><%- tuples[i][1] %></option>
+                    <% }; %>
+                </select>
+            </div>
+            <div class="small-2 columns">
+                <img id="localizations_loading" class="wx-load-spinner" src="<?php echo WEEVER_PLUGIN_URL; ?>static/img/loading.gif" />
+            </div>
+        </div>
+    </div>
 
 </script>
