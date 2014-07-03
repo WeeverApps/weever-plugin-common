@@ -310,7 +310,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-calculation'         : 'addCalculation',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
-			'change email-pdf-to-recipients'                 : 'showHideEmailInfo',
+			'change .email-pdf-to-recipients'                : 'showHideEmailInfo',
             'click .wx-continue-button'                      : 'next',
             'click .wx-back-button'                          : 'back',
 			'click .wx-close-button'                         : 'closeConfirmation',
@@ -992,9 +992,9 @@ wxApp = wxApp || {};
 			var checked = $( e.currentTarget ).is(':checked');
 
 			if ( checked )
-				$('').slideDown();
+				$('.wx-email-action').slideDown();
 			else
-				$('').slideUp();
+				$('.wx-email-action').slideUp();
 		},
 
 		confirmClosePopup: function( e ) {
@@ -1027,8 +1027,14 @@ wxApp = wxApp || {};
         },
 
         back: function() {
-            $('.form-builder-step-one').slideDown();
-            $('.form-builder-step-two').slideUp();
+        	if ( $('.form-builder-step-two').is(':visible') ) {
+	            $('.form-builder-step-one').slideDown();
+	            $('.form-builder-step-two').slideUp();
+	        }
+	        else {
+	        	$('.form-builder-step-two').slideDown();
+	            $('.form-builder-step-three').slideUp();
+	        }
             this.$el.foundation('reflow');
             // $( 'html, body' ).animate( { scrollTop: 0 }, 500 );
         }

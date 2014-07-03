@@ -4,7 +4,7 @@
             <!-- start: DocuSign Login / Account Info -->
             <!-- start: left col -->
             <div class="medium-8 columns">
-                <h2><%- typeDescription %></h2>
+                <h2>Create a DocuSign form <small>Step 1 of 3</small></h2>
 
                 <%
                 var docusign = docusign || { username: '', password: '' };
@@ -282,95 +282,104 @@
         <% } else { %>
             <div class="row">
                 <div class="small-12 columns">
-                    <h2>AppBuilder Forms <small>Step 1 of 2</small></h2>
+                    <h2>Create a form <small>Step 1 of 3</small></h2>
                 </div>
             </div>
             <br>
 
             <div class="row">
-                <div class="medium-6 columns">
-                    <ul class="tabs" data-tab>
-                        <li class="tab-title active"><a href="#panel-getting-started">Getting Started</a></li>
-                        <li class="tab-title"><a href="#panel-email-details">Email and PDF Details</a></li>
-                    </ul>
-                    <div class="tabs-content">
-                        <div class="content active" id="panel-getting-started">
-                            <!-- start: Getting Started -->
-                            <div>
-                                <label>Form title (you can change this later)</label>
-                                <input type="text" value="<%- title %>" class="wx-edit-title" />
-                            </div>
-
-                            <div>
-                                <p>When a person fills out this form:</p>
-                                <label <% if (!advancedMode) { %>class="hide"<% } %>>
-                                <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
-                                Save the form entry to my AppBuilder Forms account
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
-                                    Email PDF copy of the form entry to the specified recipients
-                                </label>
-                            </div>
-
-                            <br>
-
-                            <p>All data is saved securely online.upt roof party finparty bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.</p>
-                            <!-- endof: Getting Started -->
-                        </div>
-                        <div class="content" id="panel-email-details">
-                            <!-- Details: See formActions -->
-                        </div>
+                <div class="medium-8 columns">
+                    <h3>Getting Started</h3>
+                    <!-- start: Getting Started -->
+                    <div>
+                        <label>Form title (you can change this later)</label>
+                        <input type="text" value="<%- title %>" class="wx-edit-title" />
+                    </div>
+                    <div>
+                        <p>When a person fills out this form:</p>
+                        <label <% if (!advancedMode) { %>class="hide"<% } %>>
+                        <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
+                        Save the form entry to my AppBuilder Forms account
+                        </label>
+                        <label>
+                            <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
+                            Email PDF copy of the form entry to the specified recipients
+                        </label>
                     </div>
 
-                    <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
+                    <div class="wx-email-action" style="display: none">
+                        TODO - Put Email action stuff here.
+                    </div>
+
+                    <p>All data is saved securely online.upt roof party finparty bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.</p>
+                    
+                    <!-- endof: Getting Started -->
+                        <!--</div>
+                        <div class="content" id="panel-email-details">
+                             Details: See formActions 
+                        </div>-->
+
+                    <button class="wx-continue-button success radius">Specify PDF details &rarr;</button>
                     &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
-
-            <%
-            var pdfDetails = null;
-            for (var i = 0; i < config.formActions.length; i++) {
-                if ( config.formActions[i].method === 'email' ) {
-                    pdfDetails = config.formActions[i];
-                    break;
-                }
-            };
-            %>
-
-            <!-- start right column -->
-            <div class="medium-6 columns">
-                <ul class="tabs" data-tab>
-                    <li class="tab-title active"><a href="#pdf-preview">PDF Preview</a></li>
-                    <li class="tab-title"><a href="#tab-add-help"><%- helpTitle %></a></li>
-                </ul>
-                <div class="tabs-content">
-                    <div class="content active" id="pdf-preview" style="height: 315px; overflow-y: auto;">
-                        <h3 class="title"><%- pdfDetails.pdfHeader.title %></h3>
-                        <p>
-                            <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
-                            <span class="line2"><%- pdfDetails.pdfHeader.line2 %></span><br/>
-                            <span class="line3"><%- pdfDetails.pdfHeader.line3 %></span>
-                        </p>
-                        <p>
-                            <em>(As people complete your form, their data will appear here)</em>
-                        </p>
-                    </div>
-                    <div class="content" id="tab-add-help" style="height: 315px; overflow-y: auto;">
-                        <%= helpBody %>
-                        <p><b>Support</b></p>
-                        <p> Visit <a target="_blank" href="http://support.weeverapps.com">support.weeverapps.com</a>. Professional level subscriptions and above have access to ticket-based support and faster response times.</p>
-                        <br>
-                    </div>
+                <div class="medium-4 columns">
+                    <p>Help text will go here. A woman is a lot like a refrigerator. Six feet tall, 300 pounds…it makes ice. He didn&apos;t give you gay, did he? Did he?! And now, in the spirit of the season: start shopping. And for every dollar of Krusty merchandise you buy, I will be nice to a sick kid. For legal purposes, sick kids may include hookers with a cold. Marge, just about everything&apos;s a sin. Y&apos;ever sat down and read this thing? Technically we&apos;re not supposed to go to the bathroom. I can&apos;t go to juvie. They use guys like me as currency.</p>
+                    <ul>
+                        <li>Hi. I&apos;m Troy McClure. You may remember me from such self-help tapes as "Smoke Yourself Thin" and "Get Some Confidence, Stupid!"</li>
+                        <li>I&apos;ll be back. You can&apos;t keep the Democrats out of the White House forever, and when they get in, I&apos;m back on the streets, with all my criminal buddies.</li>
+                    </ul>
                 </div>
             </div>
-            <!-- endof right column -->
-        </div>
-
         <% } %>
+
+        <%
+        var pdfDetails = null;
+        for (var i = 0; i < config.formActions.length; i++) {
+            if ( config.formActions[i].method === 'email' ) {
+                pdfDetails = config.formActions[i];
+                break;
+            }
+        };
+        %>
     </div>
 
     <!-- start: formbuilder step two -->
     <div class="form-builder-step-two" style="display: none;">
+        <div class="row">
+            <div class="small-12 columns">
+                <h2>Create a form <small>Step 2 of 3</small></h2>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="medium-6 columns">
+                TODO - PDF details go here.
+
+                <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
+                &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+            </div>
+
+            <!-- start right column -->
+            <div class="medium-6 columns">
+                <div class="wx-pdf-preview">
+                    <h3 class="title"><%- pdfDetails.pdfHeader.title %></h3>
+                    <p>
+                        <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
+                        <span class="line2"><%- pdfDetails.pdfHeader.line2 %></span><br/>
+                        <span class="line3"><%- pdfDetails.pdfHeader.line3 %></span>
+                    </p>
+                    <p>
+                        <em>(As people complete your form, their data will appear here)</em>
+                    </p>
+                </div>
+            </div>
+            <!-- endof right column -->
+        </div>
+    </div>
+
+    <!-- start: formbuilder step three -->
+    <div class="form-builder-step-three" style="display: none;">
         <div class="medium-12 columns">
             <h2><%- typeDescription %> <small>Step 2 of 2</small></h2>
             <br>
