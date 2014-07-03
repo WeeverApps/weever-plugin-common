@@ -715,11 +715,13 @@
             <div>
                 <br>
                 <button class="wx-finish-button success radius">Save and add this form to your app</button>
-                &nbsp; or <a class="wx-back-button radius">go back</a>
-                &nbsp; or <a class="wx-close-button radius">cancel</a>
-                <img id="dialog-loader" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+                <div class="wx-reveal-navigation">
+                    &nbsp; &larr; <a class="wx-back-button">go back</a> <a class="wx-close-button">or cancel</a>
+                </div>
             </div>
-            <!-- endof: left column -->
+            <img id="dialog-loader" class="wx-load-spinner" src="<%- wx.navIconDir %>loading.gif" />
+
+                <!-- endof: left column -->
         </div>
 
         <div class="medium-6 columns">
