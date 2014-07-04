@@ -37,6 +37,9 @@ wxApp = wxApp || {};
 			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
+
+			// Go back to the Add Field panel.
+			$('a[href="#panel-new-form-fields"]').click();
 		},
 
 		setAllowAdditional: function( ev ) {
