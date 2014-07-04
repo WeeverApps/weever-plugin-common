@@ -988,10 +988,10 @@ wxApp = wxApp || {};
 			}
 			this.previews.push( view.getPreview() );
 			var $preview = view.getPreview().render().$el;
-			$preview.css('display', 'none');
-			$preview.addClass('wx-active');
 			$( '.' + this.previewPaneClass ).append( $preview );
-			$preview.fadeIn();
+			setTimeout(function() {
+				$preview.addClass('wx-active');
+			}, 1);	// If we just add this class right away, we don't get the CSS transition, so we wait 1ms before applying it.
 		},
 
 		confirmClosePopup: function( e ) {
