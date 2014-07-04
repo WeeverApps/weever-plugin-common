@@ -961,8 +961,9 @@ wxApp = wxApp || {};
 
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
-			// Open the newly added tab.
-			$('.wx-form-builder-row').removeClass('wx-active');
+			// Hide the current control & show the new control.
+			$('.wx-form-builder-row.wx-active').removeClass('wx-active');
+			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
 			view.$el.addClass('wx-active');
 
 			formElements.push( input );
@@ -986,7 +987,11 @@ wxApp = wxApp || {};
 				this.previews = [];
 			}
 			this.previews.push( view.getPreview() );
-			$( '.' + this.previewPaneClass ).append( view.getPreview().render().el );
+			var $preview = view.getPreview().render().$el;
+			$preview.css('display', 'none');
+			$preview.addClass('wx-active');
+			$( '.' + this.previewPaneClass ).append( $preview );
+			$preview.fadeIn();
 		},
 
 		confirmClosePopup: function( e ) {

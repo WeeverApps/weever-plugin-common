@@ -238,8 +238,13 @@ wxApp = wxApp || {};
 			this.$el.addClass('wx-active');
 
 			// Show this control.
-			$('.wx-form-builder-row').removeClass('wx-active');
-			$('#wx-form-control-' + ordinal).addClass('wx-active');
+			$('.wx-form-builder-row.wx-active')
+				.css('display', 'block')
+				.removeClass('wx-active')
+				.slideUp(250);
+			$('#wx-form-control-' + ordinal).slideDown(250, function() {
+				$('#wx-form-control-' + ordinal).addClass('wx-active');
+			});
 
 			// Make sure the settings tab is active.
 			$('a[href="#panel-field-settings"]').click();
