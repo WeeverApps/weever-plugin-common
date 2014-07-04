@@ -11,6 +11,7 @@ wxApp = wxApp || {};
 			'keyup .wx-form-builder-label-input': 'updateLabel',
 			'keyup .wx-form-builder-text-input': 'updateText',
 			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
+			'keyup .wx-form-builder-title-input': 'updateTitle',
 			'blur .wx-form-builder-label-input': 'setDefaultName',
 			'blur .wx-form-builder-min-input': 'setMin',
 			'blur .wx-form-builder-max-input': 'setMax',
@@ -52,6 +53,14 @@ wxApp = wxApp || {};
 
 			// Update the title on the 'Add Fields' tab
 			this.$('.wx-form-builder-label').text( value );
+		},
+
+		updateTitle: function( ev ) {
+			var value = $( ev.currentTarget ).val();
+			this.model.set( 'title', value );
+
+			// Update the title on the 'Add Fields' tab
+			this.$('.wx-form-builder-title').text( value );
 		},
 
 		updateText: function( ev ) {
@@ -119,7 +128,7 @@ wxApp = wxApp || {};
 			if ( !this.model.get( 'attributes' ).get( 'name' ) ||
 			      this.model.get( 'attributes' ).get( 'name' ).length === 0) {
 				var label = $( ev.currentTarget ).val(),
-				    name  = label.toLowerCase().replace(' ', '-');
+				    name  = label.toLowerCase().replace(/\s/gi, '-');
 
 				this.$('.wx-form-builder-name-input').val( name );
 			    this.model.get( 'attributes' ).set( 'name', name );
