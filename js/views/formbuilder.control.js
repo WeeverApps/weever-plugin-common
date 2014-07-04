@@ -11,6 +11,7 @@ wxApp = wxApp || {};
 			'keyup .wx-form-builder-label-input': 'updateLabel',
 			'keyup .wx-form-builder-text-input': 'updateText',
 			'keyup .wx-form-builder-placeholder-input': 'updatePlaceholder',
+			'keyup .wx-form-builder-title-input': 'updateTitle',
 			'blur .wx-form-builder-min-input': 'setMin',
 			'blur .wx-form-builder-max-input': 'setMax',
 			'blur .wx-form-builder-value-input': 'setValue',
@@ -51,6 +52,14 @@ wxApp = wxApp || {};
 
 			// Update the title on the 'Add Fields' tab
 			this.$('.wx-form-builder-label').text( value );
+		},
+
+		updateTitle: function( ev ) {
+			var value = $( ev.currentTarget ).val();
+			this.model.set( 'title', value );
+
+			// Update the title on the 'Add Fields' tab
+			this.$('.wx-form-builder-title').text( value );
 		},
 
 		updateText: function( ev ) {
