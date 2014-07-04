@@ -8,7 +8,9 @@
 
         <span class="delete"><a href="#" class="wx-subtab-delete" title="Delete">&nbsp;&nbsp; &times; <span class="wx-delete-label">delete</span></a></span>
 
-		<span class="delete"><a href="#" class="wx-subtab-copy" title="Copy"><span class="wx-copy-label">copy</span></a></span>
+		<% if ( advanced && type.toLowerCase() != 'wordpresspage' && type.toLowerCase() != 'wordpresscategory' ) { %>
+		<span class="delete"><a href="#" class="wx-subtab-copy" title="Duplicate"><span class="wx-copy-label">duplicate</span></a></span>
+		<% } %>
 
 	</li>
 
