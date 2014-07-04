@@ -36,6 +36,6 @@
 		<%- title %>
 		<span class="required<%= attributes.required || attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
-	<button class="wx-form-builder-label"><%- label %></button>
+	<button class="wx-form-builder-label secondary radius"><%- label %></button>
 	<input class="wx-form-builder-<%- attributes.type || attributes.attributes.type %>-input" type="<%- attributes.type || attributes.attributes.type %>" placeholder="<%- attributes.placeholder || attributes.attributes.placeholder %>" name="<%- attributes.name || attributes.attributes.name %>" />
 </script>
