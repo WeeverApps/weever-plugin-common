@@ -7242,10 +7242,20 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 /* line 151, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form .wx-form-preview-row {
   overflow: hidden;
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
 }
 /* line 155, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form .wx-form-preview-row.wx-active {
   background: yellow !important;
+  -webkit-transition: background-color 250ms linear;
+  -moz-transition: background-color 250ms linear;
+  -o-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
 }
 /* line 159, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form input[type="radio"],
