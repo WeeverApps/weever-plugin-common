@@ -70,16 +70,11 @@ wxApp = wxApp || {};
 
 				// Build the drop down lists.
 				$.each(validInputs, function (i, item) {
-					var label = item.get('label'),
-					    name  = '';
-
-					if ( item.get('attributes') )
-						name = item.get('attributes').attributes.name;
-					else
-						name = label.toLowerCase().replace(' ', '-');
+					var label   = item.get('label'),
+					    ordinal = item.get('ordinal');
 
 				    ddl.append($('<option>', { 
-				        value: name,
+				        value: ordinal,
 				        text : label
 				    }));
 				});
@@ -92,11 +87,11 @@ wxApp = wxApp || {};
 
 				// Select old values.
 				var field = me.model.get('fields').at( i );
-				ddl.val( field.get('name') );
+				ddl.val( field.get('ordinal') );
 				if ( i > 0 ) {
 					me.$('.wx-calculation-operator[data-index="' + i.toString() + '"]').val( field.get('operation') );
 				}
-				if ( field.get('name') == 'wxConstantValue' ) {
+				if ( field.get('ordinal') == 'wxConstantValue' ) {
 					me.$('div.wx-constant[data-index="' + i.toString() + '"]').show();
 				}
 				me.$('div.wx-constant[data-index="' + i.toString() + '"] input').val( field.get('constant') );
@@ -109,6 +104,7 @@ wxApp = wxApp || {};
 		/* Start event callbacks */
 
 		addField: function( e ) {
+			e.preventDefault();
 			this.model.get('fields').add( new wxApp.FormBuilderCalculatorField() );
 			this.render();
 		},
@@ -121,7 +117,6 @@ wxApp = wxApp || {};
 		},
 
 		changeConstant: function( e ) {
-			console.log( 'CHANGE Constant' );
 			var ctl = $( e.currentTarget ),
 			    val = ctl.val(),
 			    i   = ctl.parent().parent().data('index');
@@ -141,7 +136,7 @@ wxApp = wxApp || {};
 				this.$('div.wx-constant[data-index="' + i + '"]').slideUp();
 			}
 
-			this.model.get('fields').at(i).set('name', val);
+			this.model.get('fields').at(i).set('ordinal', val);
 			this.model.trigger('change');
 		},
 
@@ -178,17 +173,18 @@ wxApp = wxApp || {};
 
 			me.$el.removeClass('wx-error');
 			for (var i = 0; i < model.fields.length; i++) {
-				var fieldName = model.fields.models[i].attributes.name,
-				    control   = $("input[name='" + fieldName + "']");
+				console.log( 'FIELD', model.fields.models[i].attributes.ordinal );
+				var field   = model.fields.models[i].attributes.ordinal,
+				    control = $("input[data-ordinal='" + field + "']");
 
-				if ( !fieldName ) {
+				if ( !field ) {
 					me.$el.addClass('wx-error');
 					me.$('.wx-form-builder-calculation-result strong').html( 'Please select a field from the drop down list.' );
 					valid = false;
 					return;
 				}
 				
-				if ( fieldName == 'wxConstantValue' ) {
+				if ( field == 'wxConstantValue' ) {
 					var value = parseFloat( model.fields.models[i].attributes.constant );
 					if ( isNaN( value ) ) {
 						me.$el.addClass('wx-error');
@@ -200,7 +196,7 @@ wxApp = wxApp || {};
 
 				if ( control.length === 0 ) {
 					me.$el.addClass('wx-error');
-					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find control with name <em>' + fieldName + '</em>.' );
+					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find a control in the calculation.' );
 					valid = false;
 					return;
 				}
@@ -212,7 +208,8 @@ wxApp = wxApp || {};
 				var value = control.val();
 
 				if (! $.isNumeric( value ) ) {
-					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + fieldName + '</em> is not a number.' );
+					var label = $('#wx-form-control-' + field + ' .wx-form-builder-label-input').val();
+					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + label + '</em> is not a number.' );
 					valid = false;
 					continue;
 				}

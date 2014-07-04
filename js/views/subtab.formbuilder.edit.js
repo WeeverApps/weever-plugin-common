@@ -914,8 +914,7 @@ wxApp = wxApp || {};
 			for (var i = 0; i < formElements.length; i++) {
 				var input = formElements.at(i);
 				if ( input.get('attributes') && 
-					 input.get('attributes').type === 'number' &&
-					 input.get('attributes').attributes.name ) {
+					 input.get('attributes').type === 'number' ) {
 					found = true;
 					break;
 				}
@@ -924,7 +923,7 @@ wxApp = wxApp || {};
 			if ( found )
 				this.addCalculationWithProperties({});
 			else
-				alert('Please add at list one Number control with the "name" attribute set.');
+				alert('Please add at list one Number control.');
 		},
 
 		addCalculationWithProperties: function( properties ) {
@@ -942,19 +941,23 @@ wxApp = wxApp || {};
 
 			var config       = this.model.get( 'config' ),
 			    formElements = config.formElements,
-			    ordinal      = 0,
+			    ordinal      = input.get('ordinal'),
 			    advanced     = config.advanced || false;
-			
-			// Get the current largest ordinal
-			// NOTE - The ordinal doesn't (necessarily) relate to the order of the form elements. It relates to the order in which elements were added.
-			for (var i = 0; i < formElements.length; i++) {
-				var model = formElements.at( i );
-				if ( model.get( 'ordinal' ) > ordinal )
-					ordinal = model.get( 'ordinal' );
-			};
-			++ordinal;
 
-			input.set( 'ordinal', ordinal );
+			if ( !ordinal ) {
+				ordinal = 0;	// Ensure it's a number.
+
+				// Get the current largest ordinal
+				// NOTE - The ordinal doesn't (necessarily) relate to the order of the form elements. It relates to the order in which elements were added.
+				for (var i = 0; i < formElements.length; i++) {
+					var model = formElements.at( i );
+					if ( model.get( 'ordinal' ) > ordinal )
+						ordinal = model.get( 'ordinal' );
+				};
+				++ordinal;
+
+				input.set( 'ordinal', ordinal );
+			}
 			view.$el.attr('id', 'wx-form-control-' + ordinal.toString());
 
 			input.set( 'advanced', advanced );

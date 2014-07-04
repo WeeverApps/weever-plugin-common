@@ -6,7 +6,7 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderCalculatorField = Backbone.Model.extend({
 		defaults: function() {
 			return {
-				name     : '',
+				ordinal  : '',
 				operation: '+',
 				constant : 0
 			};
@@ -45,13 +45,19 @@ wxApp = wxApp || {};
 			// Call parent's initialize() function
 			Backbone.Model.prototype.initialize.apply( this, arguments );
 
-			var fields = new wxApp.FormBuilderCalculatorFields();
-			for (var i = 0; i < fields.length; i++) {
-				var field = new wxApp.FormBuilderCalculatorField( fields[i] );
-				fields.add( field );
-			};
+			var fieldArray = new wxApp.FormBuilderCalculatorFields();
+			if ( fields && fields.length ) {
+				for (var i = 0; i < fields.length; i++) {
+					var field = new wxApp.FormBuilderCalculatorField( fields[i] );
+					fieldArray.add( field );
+				};
+			}
+			else {
+				fieldArray.add( new wxApp.FormBuilderCalculatorField() );
+				fieldArray.add( new wxApp.FormBuilderCalculatorField() );
+			}
 
-			this.set( 'fields', fields );
+			this.set( 'fields', fieldArray );
 		}
 	});
 
