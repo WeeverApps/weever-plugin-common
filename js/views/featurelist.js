@@ -46,7 +46,8 @@ wxApp = wxApp || {};
 
         wxApp.featureList = new wxApp.FeatureList();
 
-	    // Grab the data and kick things off
+        // Grab the data and kick things off
+        wxApp.Tabs.fetch();
 	    wxApp.featureList.collection.fetch({
 		    url: wx.apiUrl + 'features/get_features_backbone?app_key=' + wx.siteKey,
 		    success: function(result) {},

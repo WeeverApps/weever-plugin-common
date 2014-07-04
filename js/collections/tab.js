@@ -6,7 +6,7 @@ var wxApp = wxApp || {};
         model: wxApp.Tab,
         url: wx.apiUrl + 'tabs/get_tabs?site_key=' + wx.siteKey,
 
-        fetch: function() {
+        fetch: function( onCompleteCallback ) {
             var me = this;
             wx.makeApiCall('tabs/get_tabs', {}, function(data) {
                 if ( typeof data.tabs != 'undefined' ) {
@@ -33,6 +33,9 @@ var wxApp = wxApp || {};
                     for ( i = 0; i < tabs.length; i++ ) {
                         me.add( tabs[i] );
                     }
+
+                    if ( onCompleteCallback )
+                        onCompleteCallback();
                 }
             });
         }

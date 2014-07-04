@@ -57,6 +57,9 @@ wxApp = wxApp || {};
                         Backbone.Events.trigger( 'subtab:dragstop' );
                     },
                     update: function(event, ui) {
+                        if ( !$(ui.item).data('backbone-view') )
+                            return;
+
                         console.log('update');
                         var order = String( $(this).sortable('toArray').map( function(element) {
                             return element.replace('SubtabID', '');
@@ -72,8 +75,7 @@ wxApp = wxApp || {};
                     },
                     helper: 'clone',
                     cursor: 'move',
-                    handle: '.wx-subtab-movehandle'/*,
-                    cursorAt: { top: 0, left: 0 }*/
+                    handle: '.wx-subtab-movehandle'
                 });
             }
         },

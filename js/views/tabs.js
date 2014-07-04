@@ -61,7 +61,6 @@ wxApp = wxApp || {};
         },
 
         onDrop: function( event, ui ) {
-
             var draggedItemView = $(ui.draggable).data('backbone-view');
 
             // We're moving a subtab up into a new parent tab, update the db then move the subtab across
@@ -72,8 +71,15 @@ wxApp = wxApp || {};
                 draggedItemView.model.trigger('tab:move');
                 wxApp.tabsView.addNewMainTab( draggedItemView.model );
 
-                // Select the parent tab.
-                $('#' + draggedItemView.model.get('id') + 'TabID').click();
+                // Re-fetch the tabs.
+                $('#editListTabsSortable').html( '' );
+                wxApp.Tabs.fetch(function() {
+                    wxApp.tabsView.destroy();
+                    wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
+
+                    // Select the parent tab.
+                    $('#' + draggedItemView.model.get('id') + 'TabID').click();
+                });
             });
 
             Backbone.Events.trigger( 'subtab:dragstop' );
@@ -121,7 +127,4 @@ wxApp = wxApp || {};
     });
 
     wxApp.tabsView = new wxApp.TabsView({ collection: wxApp.Tabs });
-
-    // Grab the data and kick things off
-    wxApp.Tabs.fetch();
 })(jQuery);
