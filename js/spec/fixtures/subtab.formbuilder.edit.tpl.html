@@ -297,77 +297,72 @@
                     <h2>Create a form <small>Step 1 of 3</small></h2>
                 </div>
             </div>
+
             <br>
 
             <div class="row">
-                <div class="medium-8 columns">
-                    <div>
+                <div class="small-12 columns">
+                    <p>When a person fills out this form it will be saved to your secure online account.</p>
+                </div>
+            </div>
 
-                        <p>When a person fills out this form it will be saved to your secure online account.</p>
 
-
+            <div class="row">
+                <div class="medium-6 columns end">
+                    <div class="">
                         <div>
-                            <label>Form title (you can change this later)</label>
+                            <label>Form Title (you can change this later)</label>
                             <input type="text" value="<%- title %>" class="wx-edit-title" />
                         </div>
 
 
-                        <br>
+                        <label>
+                            <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
+                            Also email a PDF copy
+                        </label>
+                        <div class="wx-email-action" style="display: none">
+                            <label>Email recipients (separate multiple emails with commas)</label>
+
+                            <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
+
+                            <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- pdfDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- pdfDetails.currentUserEmail %></span></label>
+                        </div>
+
+                        <% if ( advancedMode ) { %>
+                        <label>
+                            <input type="checkbox" class="custom-post" />
+                            Add a custom POST action
+                        </label>
+
+                        <div class="wx-custom-post" style="display: none">
+                            <label>POST action web address (URL)</label>
+                            <input class="wx-form-builder-action wx-form-builder-action-post" type="text" value="<%- postDetails.value %>" />
+                            <label>POST mode</label>
+                            <br>
+                            <label for="direct">
+                                <input id="direct" value="direct" name="radio-mode" type="radio" class="radio-mode" <% if (postDetails.mode === 'direct') { %>checked<% } %>>
+                                Direct
+                            </label>
+                            <label for="proxy">
+                                <input id="proxy"  value="proxy"  name="radio-mode"  type="radio" class="radio-mode" <% if (postDetails.mode !== 'direct') { %>checked<% } %>>
+                                Proxy
+                            </label>
+                        </div>
+                        <% } %>
 
                         <label <% if (!advancedMode) { %>class="hide"<% } %>>
                         <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
                         Save the form entry to my AppBuilder account
                         </label>
 
-                        <div class="">
-                            <label>
-                                <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
-                                Also email a PDF copy to the people I specify
-                            </label>
-                            <div class="wx-email-action" style="display: none">
-                                <label>Recipient(s) &ndash; separate multiple emails with commas</label>
-
-                                <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
-
-                                <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- pdfDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- pdfDetails.currentUserEmail %></span></label>
-                            </div>
-
-                            <% if ( advancedMode ) { %>
-                            <label>
-                                <input type="checkbox" class="custom-post" />
-                                Add a custom POST action
-                            </label>
-
-                            <div class="wx-custom-post" style="display: none">
-                                <label>POST action web address (URL)</label>
-                                <input class="wx-form-builder-action wx-form-builder-action-post" type="text" value="<%- postDetails.value %>" />
-                                <label>POST mode</label>
-                                <br>
-                                <label for="direct">
-                                    <input id="direct" value="direct" name="radio-mode" type="radio" class="radio-mode" <% if (postDetails.mode === 'direct') { %>checked<% } %>>
-                                    Direct
-                                </label>
-                                <label for="proxy">
-                                    <input id="proxy"  value="proxy"  name="radio-mode"  type="radio" class="radio-mode" <% if (postDetails.mode !== 'direct') { %>checked<% } %>>
-                                    Proxy
-                                </label>
-                            </div>
-                            <% } %>
-                        </div>
-
-
                     </div>
 
                     <br>
 
-                    <button class="wx-continue-button success radius">Specify PDF details &rarr;</button>
+                    <button class="wx-continue-button success radius">Step 2: Specify PDF details &rarr;</button>
                     &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
-                <div class="medium-4 columns">
-                    <div class="panel">
-                        <p>All data is saved securely online.upt roof party finparty bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.</p>
-                    </div>
-                </div>
+
             </div>
         <% } %>
     </div>
@@ -418,7 +413,7 @@
                 <h3 class="subheader" style="color: #666;">PDF Preview</h3>
 
                 <div class="wx-pdf-preview panel">
-                    <p><b><%- pdfDetails.pdfHeader.title %></b></p>
+                    <p><b class="title"><%- pdfDetails.pdfHeader.title %></b></p>
                     <p style="font-size: .875rem;">
                         <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
                         <span class="line2"><%- pdfDetails.pdfHeader.line2 %></span><br/>

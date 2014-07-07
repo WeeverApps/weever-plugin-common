@@ -1035,6 +1035,15 @@ wxApp = wxApp || {};
         	if ( $('.form-builder-step-one').is(':visible') ) {
             	$('.form-builder-step-one').slideUp();
             	$('.form-builder-step-two').slideDown();
+
+            	// If a PDF title isn't set, default it to the form's title.
+            	var action = this.__getActionByMethod( 'email' );
+            	if ( !action.get( 'pdfHeader' ).title ) {
+            		var title = $('.wx-edit-title').val()
+            		action.get( 'pdfHeader' ).title = title;				// Set the model
+            		$( '.wx-form-builder-pdfheader-title' ).val( title );	// Set the input
+					this.$('.wx-pdf-preview .title').html( title );			// Set the preview
+            	}
             }
             else {
             	$('.form-builder-step-two').slideUp();
