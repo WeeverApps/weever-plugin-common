@@ -338,18 +338,10 @@ wxApp = wxApp || {};
 		},
 
 		showSubmitButtonInfo: function( ev ) {
-			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
-			    openControl = $('#' + id);
-			openControl.css('display', 'block');
-			openControl.removeClass( 'wx-active' );
-			openControl.slideUp( 200, function() {
-				$( '#wx-button-controls' ).slideDown(200, function() {
-					$( '#wx-button-controls' ).addClass( 'wx-active' );
-				});
-			});
-		},
+			// Highlight the preview div.
+			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
+			$('.wx-submit-button').parent().addClass('wx-active');
 
-		showSubmitButtonInfo: function( ev ) {
 			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
 			    openControl = $('#' + id);
 			openControl.css('display', 'block');
@@ -991,9 +983,9 @@ wxApp = wxApp || {};
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
 			// Hide the current control & show the new control.
-			$('.wx-form-builder-row.wx-active').removeClass('wx-active');
+			$('.wx-form-builder-row.wx-active').removeClass('wx-active').css('display', 'none');
 			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
-			view.$el.addClass('wx-active');
+			view.$el.addClass('wx-active').css('display', 'block');
 
 			formElements.push( input );
 			$( this.buildPaneSelector ).foundation('reflow');
@@ -1043,6 +1035,15 @@ wxApp = wxApp || {};
         	if ( $('.form-builder-step-one').is(':visible') ) {
             	$('.form-builder-step-one').slideUp();
             	$('.form-builder-step-two').slideDown();
+
+            	// If a PDF title isn't set, default it to the form's title.
+            	var action = this.__getActionByMethod( 'email' );
+            	if ( !action.get( 'pdfHeader' ).title ) {
+            		var title = $('.wx-edit-title').val()
+            		action.get( 'pdfHeader' ).title = title;				// Set the model
+            		$( '.wx-form-builder-pdfheader-title' ).val( title );	// Set the input
+					this.$('.wx-pdf-preview .title').html( title );			// Set the preview
+            	}
             }
             else {
             	$('.form-builder-step-two').slideUp();

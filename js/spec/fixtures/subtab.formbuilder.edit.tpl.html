@@ -222,7 +222,7 @@
 
                     <p><b>PDF Document details</b> (optional)</p>
 
-                    <p>The following details will be included as the &ldquo;header&rdquo; (top section) of the PDF document recording a user&#39;s form submission.</p>
+                    <p>Specify header details for the PDF saved to your account when a user fills out your form.</p>
 
                     <label>
                         Document Title
@@ -297,29 +297,31 @@
                     <h2>Create a form <small>Step 1 of 3</small></h2>
                 </div>
             </div>
+
             <br>
 
             <div class="row">
-                <div class="medium-8 columns">
-                    <h3>Getting Started</h3>
-                    <!-- start: Getting Started -->
-                    <div>
-                        <label>Form title (you can change this later)</label>
-                        <input type="text" value="<%- title %>" class="wx-edit-title" />
-                    </div>
-                    <div>
-                        <p>When a person fills out this form:</p>
-                        <label <% if (!advancedMode) { %>class="hide"<% } %>>
-                        <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
-                        Save the form entry to my AppBuilder Forms account
-                        </label>
+                <div class="small-12 columns">
+                    <p>When a person fills out this form it will be saved to your secure online account.</p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="medium-6 columns end">
+                    <div class="">
+                        <div>
+                            <label>Form Title (you can change this later)</label>
+                            <input type="text" value="<%- title %>" class="wx-edit-title" />
+                        </div>
+
+
                         <label>
                             <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
-                            Email PDF copy of the form entry to the specified recipients
+                            Also email a PDF copy
                         </label>
                         <div class="wx-email-action" style="display: none">
-                            <p>When a person completes the form, it will be converted to PDF and emailed to the recipients you specify.</p>
-                            <label>Recipient(s) &ndash; separate multiple emails with commas</label>
+                            <label>Email recipients (separate multiple emails with commas)</label>
 
                             <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
 
@@ -327,41 +329,40 @@
                         </div>
 
                         <% if ( advancedMode ) { %>
-                            <label>
-                                <input type="checkbox" class="custom-post" />
-                                Add a custom POST action
-                            </label>
+                        <label>
+                            <input type="checkbox" class="custom-post" />
+                            Add a custom POST action
+                        </label>
 
-                            <div class="wx-custom-post" style="display: none">
-                                <label>POST action web address (URL)</label>
-                                <input class="wx-form-builder-action wx-form-builder-action-post" type="text" value="<%- postDetails.value %>" />
-                                <label>POST mode</label>
-                                <br>
-                                <label for="direct">
-                                    <input id="direct" value="direct" name="radio-mode" type="radio" class="radio-mode" <% if (postDetails.mode === 'direct') { %>checked<% } %>>
-                                    Direct
-                                </label>
-                                <label for="proxy">
-                                    <input id="proxy"  value="proxy"  name="radio-mode"  type="radio" class="radio-mode" <% if (postDetails.mode !== 'direct') { %>checked<% } %>>
-                                    Proxy
-                                </label>
-                            </div>
+                        <div class="wx-custom-post" style="display: none">
+                            <label>POST action web address (URL)</label>
+                            <input class="wx-form-builder-action wx-form-builder-action-post" type="text" value="<%- postDetails.value %>" />
+                            <label>POST mode</label>
+                            <br>
+                            <label for="direct">
+                                <input id="direct" value="direct" name="radio-mode" type="radio" class="radio-mode" <% if (postDetails.mode === 'direct') { %>checked<% } %>>
+                                Direct
+                            </label>
+                            <label for="proxy">
+                                <input id="proxy"  value="proxy"  name="radio-mode"  type="radio" class="radio-mode" <% if (postDetails.mode !== 'direct') { %>checked<% } %>>
+                                Proxy
+                            </label>
+                        </div>
                         <% } %>
+
+                        <label <% if (!advancedMode) { %>class="hide"<% } %>>
+                        <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
+                        Save the form entry to my AppBuilder account
+                        </label>
 
                     </div>
 
-                    <p>All data is saved securely online.upt roof party finparty bespoke stumptown sartorial gentrify, vinyl YOLO Kickstarter whatever keffiyeh hella.</p>
-                    
-                    <button class="wx-continue-button success radius">Specify PDF details &rarr;</button>
+                    <br>
+
+                    <button class="wx-continue-button success radius">Step 2: Specify PDF details &rarr;</button>
                     &nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
                 </div>
-                <div class="medium-4 columns">
-                    <p>Help text will go here. A woman is a lot like a refrigerator. Six feet tall, 300 pounds…it makes ice. He didn&apos;t give you gay, did he? Did he?! And now, in the spirit of the season: start shopping. And for every dollar of Krusty merchandise you buy, I will be nice to a sick kid. For legal purposes, sick kids may include hookers with a cold. Marge, just about everything&apos;s a sin. Y&apos;ever sat down and read this thing? Technically we&apos;re not supposed to go to the bathroom. I can&apos;t go to juvie. They use guys like me as currency.</p>
-                    <ul>
-                        <li>Hi. I&apos;m Troy McClure. You may remember me from such self-help tapes as "Smoke Yourself Thin" and "Get Some Confidence, Stupid!"</li>
-                        <li>I&apos;ll be back. You can&apos;t keep the Democrats out of the White House forever, and when they get in, I&apos;m back on the streets, with all my criminal buddies.</li>
-                    </ul>
-                </div>
+
             </div>
         <% } %>
     </div>
@@ -376,24 +377,30 @@
         <br>
 
         <div class="row">
-            <div class="medium-6 columns">
-                    <p>The following details will be included as the &ldquo;header&rdquo; (top section) of the PDF document recording a user&#39;s form submission.</p>
+            <div class="medium-8 columns">
+                <p>Specify details for the PDF document saved to your account when a user fills out your form. To leave the header details blank simply <a href="#">skip this step &rarr;</a></p>
 
-                    <div class="wx-form-builder-action-email-pdfheader">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="wx-form-builder-action-email-pdfheader">
 
-                        <label>PDF Document title</label>
-                        <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfDetails.pdfHeader.title %>" />
+                            <label>PDF document title</label>
+                            <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfDetails.pdfHeader.title %>" />
 
-                        <label>Business Name</label>
-                        <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfDetails.pdfHeader.line1 %>" />
+                            <label>Business Name</label>
+                            <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfDetails.pdfHeader.line1 %>" />
 
-                        <label>Address line one</label>
-                        <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfDetails.pdfHeader.line2 %>" />
+                            <label>Address line one</label>
+                            <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfDetails.pdfHeader.line2 %>" />
 
-                        <label>Address line two</label>
-                        <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfDetails.pdfHeader.line3 %>" />
+                            <label>Address line two</label>
+                            <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfDetails.pdfHeader.line3 %>" />
 
+                        </div>
                     </div>
+                </div>
+
+
 
                     <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
                     <div class="wx-reveal-navigation">
@@ -402,18 +409,21 @@
                 </div>
 
             <!-- start right column -->
-            <div class="medium-6 columns">
+            <div class="medium-4 columns end">
+                <h3 class="subheader" style="color: #666;">PDF Preview</h3>
+
                 <div class="wx-pdf-preview panel">
-                    <h3 class="title"><%- pdfDetails.pdfHeader.title %></h3>
-                    <p>
+                    <p><b class="title"><%- pdfDetails.pdfHeader.title %></b></p>
+                    <p style="font-size: .875rem;">
                         <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
                         <span class="line2"><%- pdfDetails.pdfHeader.line2 %></span><br/>
                         <span class="line3"><%- pdfDetails.pdfHeader.line3 %></span>
                     </p>
-                    <p>
-                        <em>(As people complete your form, their data will appear here)</em>
-                    </p>
+                    <div class="panel">
+                        <p style="color: #999;">As users fill out your form, their entries will be saved to this area of the PDF.</p>
+                    </div>
                 </div>
+                <p>Form entries can be viewed online within your account and downloaded in PDF and CSV (Excel) formats.</p>
             </div>
             <!-- endof right column -->
         </div>
@@ -773,7 +783,7 @@
                         </p>
                         <div class="content">
                             <br>
-                            <label>Enter the text of the submit button.</label>
+                            <label>Submit button text</label>
                             <input class="submit-button-text"  type="text" value="<%- config.submitButtonText %>" />
                         </div>
                     </div>
@@ -803,9 +813,12 @@
                 <div class="content active" id="panel-form-preview">
                     <div class="wx-validate-feed panel">
                         <h3 class="subheader" style="font-size: 1.25rem; margin: 1.25rem;"><%- title %> &mdash; preview</h3>
-                        <div class="wx-preview-form"></div>
+                        <div class="wx-preview-form">
+                        </div>
                         <br/>
-                        <button class="wx-submit-button secondary radius margin-left-1p25rem"><%- config.submitButtonText %></button>
+                        <div class="wx-form-preview-row">
+                            <button class="wx-submit-button secondary radius margin-left-1p25rem"><%- config.submitButtonText %></button>
+                        </div>
                         <br/><br/>
                     </div>
                 </div>

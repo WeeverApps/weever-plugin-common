@@ -236,10 +236,11 @@ wxApp = wxApp || {};
 			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
 			    openControl = $('#' + id);
 			openControl.css('display', 'block');
-			openControl.removeClass( 'wx-active' );
 			openControl.slideUp( 200, function() {
+				openControl.removeClass( 'wx-active' );
+				$( '#wx-form-control-' + ordinal ).css('display', 'none');
+				$( '#wx-form-control-' + ordinal ).addClass( 'wx-active' );
 				$( '#wx-form-control-' + ordinal ).slideDown(200, function() {
-					$( '#wx-form-control-' + ordinal ).addClass( 'wx-active' );
 				});
 			});
 

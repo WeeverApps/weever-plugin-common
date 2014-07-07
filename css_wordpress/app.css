@@ -7345,20 +7345,16 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface .reveal-modal .form-build-area .wx-form-builder-row {
   display: none;
 }
-/* line 262, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
-#appbuilder #interface .reveal-modal .form-build-area .wx-form-builder-row.wx-active {
-  display: block !important;
-}
-/* line 266, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 268, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal a.wx-back-button {
   color: #666;
   text-decoration: underline;
 }
-/* line 269, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 271, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal a.wx-back-button:hover {
   text-decoration: none;
 }
-/* line 273, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 275, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal a.wx-close-button {
   color: #666;
 }
