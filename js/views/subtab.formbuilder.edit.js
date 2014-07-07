@@ -333,7 +333,19 @@ wxApp = wxApp || {};
 			this.model.get( 'config' ).submitButtonText = $text.val();
 
 			// Update in the preview panel.
-			$('.wx-validate-feed.panel button.success').text( $text.val() );
+			$('.wx-validate-feed.panel button.wx-submit-button').text( $text.val() );
+		},
+
+		showSubmitButtonInfo: function( ev ) {
+			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
+			    openControl = $('#' + id);
+			openControl.css('display', 'block');
+			openControl.removeClass( 'wx-active' );
+			openControl.slideUp( 200, function() {
+				$( '#wx-button-controls' ).slideDown(200, function() {
+					$( '#wx-button-controls' ).addClass( 'wx-active' );
+				});
+			});
 		},
 
 		showSubmitButtonInfo: function( ev ) {

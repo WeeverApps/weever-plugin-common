@@ -30,7 +30,7 @@ wxApp = wxApp || {};
 			return {
 				control: 'calculation',
 				fields : fields,
-				label  : 'Calculated Value'
+				label  : 'Calculator Result'
 			};
 		},
 

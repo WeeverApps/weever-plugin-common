@@ -317,10 +317,8 @@
                             <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
                             Email PDF copy of the form entry to the specified recipients
                         </label>
-
                         <div class="wx-email-action" style="display: none">
-                            <p>When a person completes the form, it will be converted to PDF and emailed to the recipients you specify.</P>
-
+                            <p>When a person completes the form, it will be converted to PDF and emailed to the recipients you specify.</p>
                             <label>Recipient(s) &ndash; separate multiple emails with commas</label>
 
                             <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
@@ -769,8 +767,14 @@
                     <!-- endof: fields -->
                 </div>
                 <div class="content form-build-area" id="panel-field-settings">
-                    <div class="wx-form-builder-row wx-active" id="wx-button-controls">
-                        Button editing goes here.
+                    <div class="wx-form-builder-row panel wx-active" id="wx-button-controls">
+                        <p class="title">
+                            Form Submission Button Text
+                        </p>
+                        <div class="content">
+                            <label>Enter the text of the submit button.</label>
+                            <input class="submit-button-text"  type="text" value="<%- config.submitButtonText %>" />
+                        </div>
                     </div>
                 </div>
             </div>

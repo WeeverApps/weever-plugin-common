@@ -4,8 +4,8 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlSelectView = Backbone.View.extend({
-		tagName: 'section',
-		className: 'wx-form-builder-row',
+		tagName: 'div',
+		className: 'wx-form-builder-row panel',
 		tplSelector: '#form-builder-select',
 		preview: null,
 		firstRender: true,

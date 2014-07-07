@@ -110,6 +110,7 @@ wxApp = wxApp || {};
 		},
 
 		deleteField: function( e ) {
+			e.preventDefault();
 			var ctl = $( e.currentTarget ),
 			    i   = ctl.data('index');
 			this.model.get('fields').remove( this.model.get('fields').at( i ) );
@@ -169,17 +170,15 @@ wxApp = wxApp || {};
 			    values        = [],
 			    decimalPlaces = 0,
 			    result        = 0;
-			console.log('MODEL', model);
 
 			me.$el.removeClass('wx-error');
 			for (var i = 0; i < model.fields.length; i++) {
-				console.log( 'FIELD', model.fields.models[i].attributes.ordinal );
 				var field   = model.fields.models[i].attributes.ordinal,
 				    control = $("input[data-ordinal='" + field + "']");
 
 				if ( !field ) {
 					me.$el.addClass('wx-error');
-					me.$('.wx-form-builder-calculation-result strong').html( 'Please select a field from the drop down list.' );
+					me.$('.wx-form-builder-calculation-result strong').html( 'Please update the settings for this field' );
 					valid = false;
 					return;
 				}
@@ -196,7 +195,7 @@ wxApp = wxApp || {};
 
 				if ( control.length === 0 ) {
 					me.$el.addClass('wx-error');
-					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find a control in the calculation.' );
+					me.$('.wx-form-builder-calculation-result strong').html( 'Could not find a field for the calculation.' );
 					valid = false;
 					return;
 				}
