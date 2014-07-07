@@ -3,8 +3,8 @@ wxApp = wxApp || {};
 
 (function($){
 	wxApp.FormBuilderControlView = Backbone.View.extend({
-		tagName: 'section',
-		className: 'wx-form-builder-row',
+		tagName: 'div',
+		className: 'wx-form-builder-row panel',
 		firstRender: true,
 
 		events: {
@@ -233,13 +233,15 @@ wxApp = wxApp || {};
 			this.$el.addClass('wx-active');
 
 			// Show this control.
-			$('.wx-form-builder-row.wx-active')
-				// .css('display', 'block')
-				.removeClass('wx-active')
-				// .slideUp(250);
-			// $('#wx-form-control-' + ordinal).slideDown(250, function() {
-				$('#wx-form-control-' + ordinal).addClass('wx-active');
-			// });
+			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
+			    openControl = $('#' + id);
+			openControl.css('display', 'block');
+			openControl.removeClass( 'wx-active' );
+			openControl.slideUp( 200, function() {
+				$( '#wx-form-control-' + ordinal ).slideDown(200, function() {
+					$( '#wx-form-control-' + ordinal ).addClass( 'wx-active' );
+				});
+			});
 
 			// Make sure the settings tab is active.
 			$('a[href="#panel-field-settings"]').click();

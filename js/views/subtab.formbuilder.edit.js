@@ -308,6 +308,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-add-weever-signature'    : 'addWeeverSignature',
 			'click .wx-form-builder-add-calculation'         : 'addCalculation',
+			'click .wx-submit-button'                        : 'showSubmitButtonInfo',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
             'click .wx-continue-button'                      : 'next',
@@ -333,6 +334,18 @@ wxApp = wxApp || {};
 
 			// Update in the preview panel.
 			$('.wx-validate-feed.panel button.success').text( $text.val() );
+		},
+
+		showSubmitButtonInfo: function( ev ) {
+			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
+			    openControl = $('#' + id);
+			openControl.css('display', 'block');
+			openControl.removeClass( 'wx-active' );
+			openControl.slideUp( 200, function() {
+				$( '#wx-button-controls' ).slideDown(200, function() {
+					$( '#wx-button-controls' ).addClass( 'wx-active' );
+				});
+			});
 		},
 
 		sortableUpdate: function( event, model, position ) {
@@ -923,7 +936,7 @@ wxApp = wxApp || {};
 			if ( found )
 				this.addCalculationWithProperties({});
 			else
-				alert('Please add at list one Number control.');
+				alert('Please add at least one number field.');
 		},
 
 		addCalculationWithProperties: function( properties ) {

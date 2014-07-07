@@ -769,6 +769,9 @@
                     <!-- endof: fields -->
                 </div>
                 <div class="content form-build-area" id="panel-field-settings">
+                    <div class="wx-form-builder-row wx-active" id="wx-button-controls">
+                        Button editing goes here.
+                    </div>
                 </div>
             </div>
 
@@ -787,17 +790,17 @@
         <div class="medium-6 columns">
             <!-- start: right column -->
             <ul class="tabs" data-tab>
-                <li class="tab-title active"><a href="#panel-form-preview">Form Preview</a></li>
+                <li class="tab-title active"><a href="#panel-form-preview">Preview</a></li>
                 <li class="tab-title"><a href="#panel-choose-icon">Icon</a></li>
-                <li class="tab-title"><a href="#panel-support">Support</a></li>
+                <li class="tab-title"><a href="#panel-support">Help</a></li>
             </ul>
             <div class="tabs-content" id="wx-tabs-content-previewtabs">
                 <div class="content active" id="panel-form-preview">
                     <div class="wx-validate-feed panel">
-                        <h3 class="subheader" style="font-size: 1.25em; margin: 0 0 1.1em;"><%- title %> &mdash; preview</h3>
+                        <h3 class="subheader" style="font-size: 1.25rem; margin: 1.25rem;"><%- title %> &mdash; preview</h3>
                         <div class="wx-preview-form"></div>
                         <br/>
-                        <button class="secondary radius"><%- config.submitButtonText %></button>
+                        <button class="wx-submit-button secondary radius margin-left-1p25rem"><%- config.submitButtonText %></button>
                         <br/><br/>
                     </div>
                 </div>
