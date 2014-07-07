@@ -333,7 +333,7 @@ wxApp = wxApp || {};
 			this.model.get( 'config' ).submitButtonText = $text.val();
 
 			// Update in the preview panel.
-			$('.wx-validate-feed.panel button.success').text( $text.val() );
+			$('.wx-validate-feed.panel button.wx-submit-button').text( $text.val() );
 		},
 
 		showSubmitButtonInfo: function( ev ) {
