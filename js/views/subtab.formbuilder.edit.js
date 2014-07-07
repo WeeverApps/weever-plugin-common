@@ -334,16 +334,18 @@ wxApp = wxApp || {};
 
 			// Update in the preview panel.
 			$('.wx-validate-feed.panel button.wx-submit-button').text( $text.val() );
+			this.$('span.submit-button-text').text( $text.val() );
 		},
 
 		showSubmitButtonInfo: function( ev ) {
 			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
 			    openControl = $('#' + id);
 			openControl.css('display', 'block');
-			openControl.removeClass( 'wx-active' );
 			openControl.slideUp( 200, function() {
+				openControl.removeClass( 'wx-active' );
+				$( '#wx-button-controls' ).css('display', 'none');
+				$( '#wx-button-controls' ).addClass( 'wx-active' );
 				$( '#wx-button-controls' ).slideDown(200, function() {
-					$( '#wx-button-controls' ).addClass( 'wx-active' );
 				});
 			});
 		},
@@ -990,9 +992,9 @@ wxApp = wxApp || {};
 			this.$( this.buildPaneSelector ).append( view.render().el );
 			
 			// Hide the current control & show the new control.
-			$('.wx-form-builder-row.wx-active').removeClass('wx-active');
+			$('.wx-form-builder-row.wx-active').removeClass('wx-active').css('display', 'none');
 			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
-			view.$el.addClass('wx-active');
+			view.$el.addClass('wx-active').css('display', 'block');
 
 			formElements.push( input );
 			$( this.buildPaneSelector ).foundation('reflow');
