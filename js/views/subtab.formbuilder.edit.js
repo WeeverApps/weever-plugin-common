@@ -338,19 +338,10 @@ wxApp = wxApp || {};
 		},
 
 		showSubmitButtonInfo: function( ev ) {
-			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
-			    openControl = $('#' + id);
-			openControl.css('display', 'block');
-			openControl.slideUp( 200, function() {
-				openControl.removeClass( 'wx-active' );
-				$( '#wx-button-controls' ).css('display', 'none');
-				$( '#wx-button-controls' ).addClass( 'wx-active' );
-				$( '#wx-button-controls' ).slideDown(200, function() {
-				});
-			});
-		},
+			// Highlight the preview div.
+			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
+			$('.wx-submit-button').parent().addClass('wx-active');
 
-		showSubmitButtonInfo: function( ev ) {
 			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
 			    openControl = $('#' + id);
 			openControl.css('display', 'block');
