@@ -345,11 +345,11 @@ wxApp = wxApp || {};
 			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
 			    openControl = $('#' + id);
 			openControl.css('display', 'block');
-			openControl.removeClass( 'wx-active' );
 			openControl.slideUp( 200, function() {
-				$( '#wx-button-controls' ).slideDown(200, function() {
-					$( '#wx-button-controls' ).addClass( 'wx-active' );
-				});
+				openControl.removeClass( 'wx-active' );
+				$( '#wx-button-controls' ).css('display', 'none');
+				$( '#wx-button-controls' ).addClass( 'wx-active' );
+				$( '#wx-button-controls' ).slideDown(200);
 			});
 		},
 
