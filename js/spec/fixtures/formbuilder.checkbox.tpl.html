@@ -1,11 +1,13 @@
 <script type="text/template" id="form-builder-checkbox">
-	<div class="small-1 columns">
-        <label class="inline"><input type="checkbox" class="wx-form-builder-control-checked" name="wx-form-builder-checkbox-checked-<%- collectionId %>" <%- attributes.attributes.checked %> /></label>
-	</div>
-	<div class="small-10 columns">
-		<input type="text" class="wx-form-builder-label-input" value="<%- label %>" />
-	</div>
-	<div class="small-1 columns">
-		<label class="inline"><a class="wx-form-builder-delete">&times;</a></label>
-	</div>
+        <div class="row collapse">
+            <div class="small-2 medium-2 large-1 columns">
+                <label class="inline"><input type="checkbox" class="wx-form-builder-control-checked" name="wx-form-builder-checkbox-checked-<%- collectionId %>" <%- attributes.attributes.checked %> /></label>
+            </div>
+            <div class="small-8 medium-8 large-10 columns">
+                <input type="text" class="wx-form-builder-label-input" value="<%- label %>" />
+            </div>
+            <div class="small-2 medium-2 large-1 columns text-right">
+                <label class="inline"><a class="wx-form-builder-delete">&times;</a></label>
+            </div>
+        </div>
 </script>
