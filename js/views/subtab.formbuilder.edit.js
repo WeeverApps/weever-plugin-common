@@ -1031,7 +1031,8 @@ wxApp = wxApp || {};
 			}
 		},
 
-        next: function() {
+        next: function( e ) {
+        	e.preventDefault();
         	if ( $('.form-builder-step-one').is(':visible') ) {
             	$('.form-builder-step-one').slideUp();
             	$('.form-builder-step-two').slideDown();

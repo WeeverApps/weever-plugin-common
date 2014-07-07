@@ -310,12 +310,10 @@
             <div class="row">
                 <div class="medium-8 columns end">
 
-                        <label>Form Title (you can change this later)</label>
-                        <input type="text" value="<%- title %>" class="wx-edit-title" />
 
                         <label>
                             <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
-                            Also email a PDF copy
+                            Also email a PDF copy of submitted form entries to the people I specify
                         </label>
 
                         <div class="wx-email-action" style="display: none">
@@ -351,6 +349,13 @@
                         Save the form entry to my AppBuilder account
                         </label>
 
+
+                        <br>
+
+                        <label>Give this form a title</label>
+                        <input type="text" value="<%- title %>" class="wx-edit-title" />
+
+
                     <br>
 
                     <button class="wx-continue-button success radius">Step 2: Specify PDF details &rarr;</button>
@@ -372,7 +377,7 @@
 
         <div class="row">
             <div class="medium-8 columns">
-                <p>Specify details for the PDF document saved to your account when a user fills out your form. To leave the header details blank simply <a href="#">skip this step &rarr;</a></p>
+                <p>Specify details for the PDF document saved to your account when a user fills out your form. To leave the header details blank simply <a href="#" class="wx-continue-button">skip this step &rarr;</a></p>
 
                 <div class="row">
                     <div class="small-12 columns">
@@ -396,7 +401,7 @@
 
 
 
-                    <button class="wx-continue-button success radius">Save details and start building a form &rarr;</button>
+                    <button class="wx-continue-button success radius">Step 3: Build your form &rarr;</button>
                     <div class="wx-reveal-navigation">
                         &nbsp; &larr; <a class="wx-back-button">go back</a> <a class="wx-close-button">or cancel</a>
                     </div>
