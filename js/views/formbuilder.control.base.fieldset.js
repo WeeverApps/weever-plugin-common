@@ -4,8 +4,8 @@ wxApp = wxApp || {};
 
 (function($) {
 	wxApp.FormBuilderControlBaseFieldsetView = Backbone.View.extend({
-		tagName: 'section',
-		className: 'wx-form-builder-row',
+		tagName: 'div',
+		className: 'wx-form-builder-row panel',
 		preview: null,
 
 		events: {

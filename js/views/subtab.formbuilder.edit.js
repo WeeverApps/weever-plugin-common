@@ -348,6 +348,18 @@ wxApp = wxApp || {};
 			});
 		},
 
+		showSubmitButtonInfo: function( ev ) {
+			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
+			    openControl = $('#' + id);
+			openControl.css('display', 'block');
+			openControl.removeClass( 'wx-active' );
+			openControl.slideUp( 200, function() {
+				$( '#wx-button-controls' ).slideDown(200, function() {
+					$( '#wx-button-controls' ).addClass( 'wx-active' );
+				});
+			});
+		},
+
 		sortableUpdate: function( event, model, position ) {
 			var formElements = this.model.get( 'config' ).formElements;
 			formElements.remove( model );

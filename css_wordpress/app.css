@@ -958,7 +958,11 @@ meta.foundation-data-attribute-namespace {
 #appbuilder #interface .margin-bottom-0 {
   margin-bottom: 0;
 }
-/* line 45, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-global.scss */
+/* line 41, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-global.scss */
+#appbuilder #interface .margin-left-1p25rem {
+  margin-left: 1.25rem;
+}
+/* line 46, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-global.scss */
 #appbuilder #interface .postfix.button,
 #appbuilder #interface .postfix.button.success,
 #appbuilder #interface .postfix.radius,
@@ -5337,11 +5341,6 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   padding: 1rem 2rem;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-size: 1rem;
-  -webkit-transition: background-color 250ms ease-in;
-  -moz-transition: background-color 250ms ease-in;
-  -o-transition: background-color 250ms ease-in;
-  -ms-transition: background-color 250ms ease-in;
-  transition: background-color 250ms ease-in;
 }
 /* line 47, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/foundation/components/_tabs.scss */
 #appbuilder #interface .tabs dd > a:hover, #appbuilder #interface .tabs .tab-title > a:hover {
@@ -5351,11 +5350,6 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface .tabs dd.active a, #appbuilder #interface .tabs .tab-title.active a {
   background: white;
   color: #222222;
-  -webkit-transition: background-color 250ms ease-in;
-  -moz-transition: background-color 250ms ease-in;
-  -o-transition: background-color 250ms ease-in;
-  -ms-transition: background-color 250ms ease-in;
-  transition: background-color 250ms ease-in;
 }
 /* line 53, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/foundation/components/_tabs.scss */
 #appbuilder #interface .tabs.radius dd:first-child a, #appbuilder #interface .tabs.radius .tab:first-child a {
@@ -6795,15 +6789,19 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   }
 }
 /* line 26, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
+#appbuilder #interface ul.tabs:not(.wx-subtabs) li.tab-title > a {
+  transition: background-color 150ms linear;
+}
+/* line 32, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
 #appbuilder #interface .tabs-content {
   background-color: #fff;
 }
-/* line 31, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
+/* line 37, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
 #appbuilder #interface ul.tabs.wx-subtabs {
   margin: 0 0 .9375rem;
   text-transform: capitalize;
 }
-/* line 35, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
+/* line 41, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
 #appbuilder #interface ul.tabs.wx-subtabs > li > a {
   font-size: .875rem;
   margin: 0;
@@ -6811,17 +6809,17 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   border: none;
   background-color: transparent;
 }
-/* line 42, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
+/* line 48, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
 #appbuilder #interface ul.tabs.wx-subtabs > li.active a {
   background-color: #0074a2;
   color: #fff;
 }
-/* line 47, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
+/* line 53, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
 #appbuilder #interface ul.tabs.wx-subtabs + .tabs-content {
   margin: 0;
   border: none;
 }
-/* line 50, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
+/* line 56, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-tabs.scss */
 #appbuilder #interface ul.tabs.wx-subtabs + .tabs-content > .content {
   padding-right: 0;
   padding-left: 0;
@@ -7131,44 +7129,44 @@ form.custom #appbuilder #interface div.switch .hidden-field {
 #appbuilder #interface .reveal-modal #form-creation {
   padding-bottom: .9375rem;
 }
-/* line 33, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 34, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-field-settings-title {
   margin-bottom: 0;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 40, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+  /* line 41, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
   #appbuilder #interface .reveal-modal #wx-tabs-content-previewtabs > .content {
     margin-bottom: 0;
     min-height: 545px;
   }
-  /* line 43, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+  /* line 44, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
   #appbuilder #interface .reveal-modal #wx-tabs-content-previewtabs > .content > .wx-validate-feed.panel {
     min-height: 515px;
     margin-bottom: 0;
   }
-  /* line 48, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+  /* line 49, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
   #appbuilder #interface .reveal-modal #wx-tabs-content-addfieldtabs > .content {
     margin-bottom: 0;
     margin-bottom: 0;
     min-height: 545px;
   }
 }
-/* line 60, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 61, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal #add-fields li {
   padding-bottom: .9375rem;
 }
-/* line 65, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 66, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal #add-fields li:last-child,
 #appbuilder #interface .reveal-modal #add-fields li:nth-last-child(2) {
   padding-bottom: 0;
 }
-/* line 69, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 70, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal #add-fields button {
   text-align: left;
   margin-bottom: 0;
   padding-left: .9375rem;
 }
-/* line 74, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 75, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal #add-fields button .has-tip {
   position: absolute;
   height: 100%;
@@ -7182,14 +7180,14 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   background: transparent;
   color: #fff;
 }
-/* line 92, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 93, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-button-label {
   padding-right: 1.9921875rem;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-/* line 100, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 101, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal input[type="range"] {
   width: 100%;
   max-width: 100%;
@@ -7197,86 +7195,132 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   padding: initial;
   border: initial;
 }
-/* line 109, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 110, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal input[type="range"]::-webkit-slider-thumb {
   color: #000;
 }
-/* line 111, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 112, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal input[type="range"].wx-form-builder-range-text {
   margin: 0;
 }
-/* line 115, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 116, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal ul.wx-form-builder-range-text-options {
   margin: 0;
 }
-/* line 119, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 120, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-form-builder-range-text-options > li {
   font-size: 0.875rem;
   padding-bottom: 1.145rem;
   text-align: center;
 }
-/* line 125, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 126, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-form-builder-range-text-options > li:first-child {
   text-align: left;
 }
-/* line 126, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 127, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-form-builder-range-text-options > li:last-child {
   text-align: right;
 }
-/* line 133, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 134, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-form-builder-radio-group label.inline,
 #appbuilder #interface .reveal-modal .wx-form-builder-option-group label.inline,
 #appbuilder #interface .reveal-modal .wx-form-builder-checkbox-group label.inline {
   margin-bottom: 0;
 }
-/* line 140, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 141, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal #wx-edit-area-FormBuilder .previewTabs section:first-child .content,
 #appbuilder #interface .reveal-modal #wx-edit-area-DocuSign .previewTabs section:first-child .content {
   height: 100% !important;
 }
-/* line 145, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 146, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal #wx-edit-area-FormBuilder .previewTabs section .content .wx-validate-feed,
 #appbuilder #interface .reveal-modal #wx-edit-area-DocuSign .previewTabs section .content .wx-validate-feed {
   min-height: 640px;
 }
-/* line 151, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
-#appbuilder #interface .reveal-modal .wx-preview-form .wx-form-preview-row {
-  overflow: hidden;
-  -webkit-transition: background-color 250ms ease-in;
-  -moz-transition: background-color 250ms ease-in;
-  -o-transition: background-color 250ms ease-in;
-  -ms-transition: background-color 250ms ease-in;
-  transition: background-color 250ms ease-in;
-}
-/* line 155, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
-#appbuilder #interface .reveal-modal .wx-preview-form .wx-form-preview-row.wx-active {
-  background: yellow !important;
-  -webkit-transition: background-color 250ms ease-in;
-  -moz-transition: background-color 250ms ease-in;
-  -o-transition: background-color 250ms ease-in;
-  -ms-transition: background-color 250ms ease-in;
-  transition: background-color 250ms ease-in;
+/* line 153, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal #panel-form-preview > .wx-validate-feed.panel {
+  padding: 0;
 }
 /* line 159, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal #panel-field-settings .wx-form-builder-row.panel.wx-active {
+  background-color: #fffff0;
+  border: 1px dashed #c1c1c1;
+}
+/* line 164, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal #panel-field-settings .wx-form-builder-row.panel p.title {
+  margin-bottom: 0;
+}
+/* line 173, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row:hover {
+  border-color: #c1c1c1;
+}
+/* line 176, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row {
+  overflow: hidden;
+  padding: .75rem 1.25rem 1.25rem;
+  border-width: 1px 0;
+  border-color: transparent;
+  border-style: dashed;
+}
+/* line 183, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form .wx-form-preview-row.wx-active {
+  border-color: #c1c1c1;
+  background-color: #fffff0;
+  transition: background-color 250ms linear;
+}
+/* line 207, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="text"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="password"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="date"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="datetime"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="datetime-local"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="month"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="week"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="email"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="number"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="search"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="tel"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="time"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="url"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="range"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row input[type="file"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row textarea,
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row select {
+  margin: 0;
+}
+/* line 210, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row p {
+  margin: 0 0 -.5rem 0;
+}
+/* line 213, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row fieldset {
+  margin: .5rem 0 0;
+}
+/* line 218, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row > fieldset > .wx-form-preview-row:last-child input[type="checkbox"],
+#appbuilder #interface .reveal-modal .wx-preview-form > .wx-form-preview-row > fieldset > .wx-form-preview-row:last-child input[type="radio"] {
+  margin-bottom: 0;
+}
+/* line 225, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form input[type="radio"],
 #appbuilder #interface .reveal-modal .wx-preview-form input[type="checkbox"] {
   margin-left: 1px;
 }
-/* line 162, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 228, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form select {
   font-size: .875rem;
   margin-bottom: 1.14285rem;
 }
-/* line 166, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 232, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form fieldset legend {
   font-weight: normal;
   background-color: transparent;
 }
-/* line 170, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 236, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form .wx-page-break-container {
   margin: 1.25em 0;
 }
-/* line 173, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 239, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form .wx-page-break {
   width: 100%;
   max-width: 100%;
@@ -7285,40 +7329,36 @@ form.custom #appbuilder #interface div.switch .hidden-field {
   color: #999;
   cursor: default;
 }
-/* line 182, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 248, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .wx-preview-form .wx-page-break.below {
   padding-top: 1rem;
   border-top: 1px dashed #999;
 }
-/* line 186, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
-#appbuilder #interface .reveal-modal .wx-preview-form .wx-page-break .wx-esignature-example {
-  border-bottom: 1px solid;
+/* line 253, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+#appbuilder #interface .reveal-modal .wx-preview-form .wx-esignature-example {
+  border-bottom: 1px dashed #999;
   width: 100%;
   max-width: 100%;
+  margin-bottom: .5rem;
 }
-/* line 196, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
-#appbuilder #interface .reveal-modal .wx-validate-feed .subheader {
-  font-size: 1.25rem;
-  margin: 0 0 1.1rem;
-}
-/* line 201, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 261, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .form-build-area .wx-form-builder-row {
   display: none;
 }
-/* line 202, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 262, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal .form-build-area .wx-form-builder-row.wx-active {
   display: block !important;
 }
-/* line 206, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 266, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal a.wx-back-button {
   color: #666;
   text-decoration: underline;
 }
-/* line 209, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 269, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal a.wx-back-button:hover {
   text-decoration: none;
 }
-/* line 213, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
+/* line 273, ../../../../../../../../../Users/HoldenCreative/Desktop/Storm/wx-sassy-ui/scss/weeverapps/components/_wx-layout-add-forms.scss */
 #appbuilder #interface .reveal-modal a.wx-close-button {
   color: #666;
 }
