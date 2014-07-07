@@ -36,7 +36,7 @@ wxApp = wxApp || {};
 
 	});
 
-	wxApp.FormBuilderControlWeeverSignaturePreview = Backbone.View.extend({
+	wxApp.FormBuilderControlWeeverSignaturePreview = wxApp.FormBuilderControlPreview.extend({
 		tagName: 'div',
 		className: 'wx-form-preview-row',
 

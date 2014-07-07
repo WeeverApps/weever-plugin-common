@@ -3,9 +3,12 @@
 		<%- controlTitle %>
 	</p>
 	<div class="content">
-		<label>Title</label>
+
+        <br>
+
+		<label>Label</label>
 		<input type="text" class="wx-form-builder-title-input" value="<%- title %>" />
-		<label>Button Text</label>
+		<label>Button text</label>
 		<input type="text" class="wx-form-builder-label-input" value="<%- label %>" />
 
 		<% if (advanced) { %>
@@ -38,6 +41,7 @@
 		<%- title %>
 		<span class="required<%= attributes.required || attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
-	<button class="wx-form-builder-label secondary radius"><%- label %></button>
+    <br>
+	<button class="wx-form-builder-label tiny secondary radius" style="margin-bottom: 0;"><%- label %></button>
 	<input class="wx-form-builder-<%- attributes.type || attributes.attributes.type %>-input" type="<%- attributes.type || attributes.attributes.type %>" placeholder="<%- attributes.placeholder || attributes.attributes.placeholder %>" name="<%- attributes.name || attributes.attributes.name %>" />
 </script>
