@@ -301,30 +301,26 @@
             <br>
 
             <div class="row">
-                <div class="small-12 columns">
+                <div class="small-8 columns end">
                     <p>When a person fills out this form it will be saved to your secure online account.</p>
                 </div>
             </div>
 
 
             <div class="row">
-                <div class="medium-6 columns end">
-                    <div class="">
-                        <div>
-                            <label>Form Title (you can change this later)</label>
-                            <input type="text" value="<%- title %>" class="wx-edit-title" />
-                        </div>
+                <div class="medium-8 columns end">
 
+                        <label>Form Title (you can change this later)</label>
+                        <input type="text" value="<%- title %>" class="wx-edit-title" />
 
                         <label>
                             <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
                             Also email a PDF copy
                         </label>
+
                         <div class="wx-email-action" style="display: none">
                             <label>Email recipients (separate multiple emails with commas)</label>
-
                             <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
-
                             <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- pdfDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- pdfDetails.currentUserEmail %></span></label>
                         </div>
 
@@ -354,8 +350,6 @@
                         <input type="checkbox" name="on-complete-events" value="forms-account" <% if (saveToAccount) {%>checked<% } %> />
                         Save the form entry to my AppBuilder account
                         </label>
-
-                    </div>
 
                     <br>
 
