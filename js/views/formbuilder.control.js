@@ -203,7 +203,7 @@ wxApp = wxApp || {};
 		className: 'wx-form-preview-row',
 		selector : '',
 		events   : {
-			'click'        : 'selectField',
+			'click'		: 'selectField',
 			'sortable-drop': 'sortableDrop'
 		},
 
@@ -232,17 +232,25 @@ wxApp = wxApp || {};
 			$('.wx-form-preview-row').removeClass('wx-active');
 			this.$el.addClass('wx-active');
 
-			// Show this control.
-			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
-			    openControl = $('#' + id);
-			openControl.css('display', 'block');
-			openControl.slideUp( 200, function() {
-				openControl.removeClass( 'wx-active' );
-				$( '#wx-form-control-' + ordinal ).css('display', 'none');
-				$( '#wx-form-control-' + ordinal ).addClass( 'wx-active' );
-				$( '#wx-form-control-' + ordinal ).slideDown(200, function() {
+			var openClickedControl = function() {
+					$( '#wx-form-control-' + ordinal ).css('display', 'none');
+					$( '#wx-form-control-' + ordinal ).addClass( 'wx-active' );
+					$( '#wx-form-control-' + ordinal ).slideDown(200);
+				},
+				id = $('.wx-form-builder-row.wx-active').attr('id');
+
+			// Close the existing this control, then open the one just clicked.
+			if ( id ) {
+				var currentlyOpenControl = $('#' + id);
+				currentlyOpenControl.css('display', 'block');
+				currentlyOpenControl.slideUp( 200, function() {
+					currentlyOpenControl.removeClass( 'wx-active' );
+					openClickedControl();
 				});
-			});
+			}
+			else {
+				openClickedControl();
+			}
 
 			// Make sure the settings tab is active.
 			$('a[href="#panel-field-settings"]').click();
