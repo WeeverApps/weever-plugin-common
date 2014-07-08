@@ -1,6 +1,7 @@
 <script type="text/template" id="formbuilder-subtab-edit-template">
     <%
-    var pdfDetails = null,
+    var appTitle = ( config.isDocuSign.toString() == 'true' ? 'Create a DocuSign form' : 'Create a form' ),
+        pdfDetails = null,
         postDetails = null;
     for (var i = 0; i < config.formActions.length; i++) {
         if ( config.formActions[i].method === 'email' ) {
@@ -16,7 +17,7 @@
             <!-- start: DocuSign Login / Account Info -->
             <!-- start: left col -->
             <div class="medium-8 columns">
-                <h2>Create a DocuSign form <small>Step 1 of 3</small></h2>
+                <h2><%- appTitle %> <small>Step 1 of 3</small></h2>
 
                 <%
                 var docusign = docusign || { username: '', password: '' };
@@ -294,7 +295,7 @@
         <% } else { %>
             <div class="row">
                 <div class="small-12 columns">
-                    <h2>Create a form <small>Step 1 of 3</small></h2>
+                    <h2><%- appTitle %> <small>Step 1 of 3</small></h2>
                 </div>
             </div>
 
@@ -370,7 +371,7 @@
     <div class="form-builder-step-two" style="display: none;">
         <div class="row">
             <div class="small-12 columns">
-                <h2>Create a form <small>Step 2 of 3</small></h2>
+                <h2><%- appTitle %> <small>Step 2 of 3</small></h2>
             </div>
         </div>
         <br>
@@ -431,7 +432,7 @@
     <!-- start: formbuilder step three -->
     <div class="form-builder-step-three" style="display: none;">
         <div class="medium-12 columns">
-            <h2>Create a form <small>Step 3 of 3</small></h2>
+            <h2><%- appTitle %> <small>Step 3 of 3</small></h2>
             <br>
         </div>
 
