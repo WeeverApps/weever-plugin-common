@@ -9,9 +9,9 @@ wxApp = wxApp || {};
 			// https://github.com/documentcloud/backbone/issues/476
 			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
 				control: 'weeverSignature',
-				label: 'Tap to sign',
+				label: 'Sign here',
 				instructions: 'Tap the text above, then sign with your finger.',
-				title: 'Weever Signature',
+				title: 'Please add your signature',
 				username: '',
 				password: '',
 				returnUrl: ''
