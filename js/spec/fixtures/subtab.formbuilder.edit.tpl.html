@@ -1,16 +1,18 @@
 <script type="text/template" id="formbuilder-subtab-edit-template">
     <%
     var appTitle = ( config.isDocuSign.toString() == 'true' ? 'Create a DocuSign form' : 'Create a form' ),
-        pdfDetails = null,
-        postDetails = null;
+        emailDetails = null,
+        postDetails = null,
+        pdfHeader = null;
     for (var i = 0; i < config.formActions.length; i++) {
         if ( config.formActions[i].method === 'email' ) {
-            pdfDetails = config.formActions[i];
+            emailDetails = config.formActions[i];
         }
         else if ( config.formActions[i].method === 'post' ) {
             postDetails = config.formActions[i];
         }
     };
+    if ( emailDetails ) { pdfHeader = emailDetails.pdfHeader; }
     %>
     <div class="form-builder-step-one">
         <% if ( config.isDocuSign.toString() == 'true' ) { %>
@@ -33,6 +35,7 @@
                         break;
                     }
                 };
+                pdfHeader = docusign.pdfHeader
                 %>
                 <p><b>Create an eSignature-enabled form and add it to your app.</b></p>
 
@@ -221,27 +224,6 @@
 
                     <div data-alert id="wx-login-message" class="login alert-box secondary"></div>
 
-                    <p><b>PDF Document details</b> (optional)</p>
-
-                    <p>Specify header details for the PDF saved to your account when a user fills out your form.</p>
-
-                    <label>
-                        Document Title
-                        <input type="text" class="wx-form-builder-pdfheader-title" placeholder="Title" value="<%- docusign.pdfHeader ? docusign.pdfHeader.title : '' %>" />
-                    </label>
-                    <label>
-                        Business Name
-                        <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Line 1" value="<%- docusign.pdfHeader ? docusign.pdfHeader.line1 : '' %>" />
-                    </label>
-                    <label>
-                        Address line one
-                        <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Line 2" value="<%- docusign.pdfHeader ? docusign.pdfHeader.line2 : '' %>" />
-                    </label>
-                    <label>
-                        Address line two
-                        <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Line 3" value="<%- docusign.pdfHeader ? docusign.pdfHeader.line3 : '' %>" />
-                    </label>
-
                     <br>
 
                     <p><b>App Settings</b></p>
@@ -319,8 +301,8 @@
 
                         <div class="wx-email-action" style="display: none">
                             <label>Email recipients (separate multiple emails with commas)</label>
-                            <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- pdfDetails.value %>" />
-                            <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- pdfDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- pdfDetails.currentUserEmail %></span></label>
+                            <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- emailDetails.value %>" />
+                            <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- emailDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- emailDetails.currentUserEmail %></span></label>
                         </div>
 
                         <% if ( advancedMode ) { %>
@@ -385,16 +367,16 @@
                         <div class="wx-form-builder-action-email-pdfheader">
 
                             <label>PDF document title</label>
-                            <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfDetails.pdfHeader.title %>" />
+                            <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfHeader ? pdfHeader.title : '' %>" />
 
                             <label>Business Name</label>
-                            <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfDetails.pdfHeader.line1 %>" />
+                            <input type="text" class="wx-form-builder-pdfheader-line1" placeholder="Text line 1" value="<%- pdfHeader ? pdfHeader.line1 : '' %>" />
 
                             <label>Address line one</label>
-                            <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfDetails.pdfHeader.line2 %>" />
+                            <input type="text" class="wx-form-builder-pdfheader-line2" placeholder="Text line 2" value="<%- pdfHeader ? pdfHeader.line2 : '' %>" />
 
                             <label>Address line two</label>
-                            <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfDetails.pdfHeader.line3 %>" />
+                            <input type="text" class="wx-form-builder-pdfheader-line3" placeholder="Text line 3" value="<%- pdfHeader ? pdfHeader.line3 : '' %>" />
 
                         </div>
                     </div>
@@ -413,11 +395,11 @@
                 <h3 class="subheader" style="color: #666;">PDF Preview</h3>
 
                 <div class="wx-pdf-preview panel">
-                    <p><b class="title"><%- pdfDetails.pdfHeader.title %></b></p>
+                    <p><b class="title"><%- pdfHeader ? pdfHeader.title : '' %></b></p>
                     <p style="font-size: .875rem;">
-                        <span class="line1"><%- pdfDetails.pdfHeader.line1 %></span><br/>
-                        <span class="line2"><%- pdfDetails.pdfHeader.line2 %></span><br/>
-                        <span class="line3"><%- pdfDetails.pdfHeader.line3 %></span>
+                        <span class="line1"><%- pdfHeader ? pdfHeader.line1 : '' %></span><br/>
+                        <span class="line2"><%- pdfHeader ? pdfHeader.line2 : '' %></span><br/>
+                        <span class="line3"><%- pdfHeader ? pdfHeader.line3 : '' %></span>
                     </p>
                     <div class="panel">
                         <p style="color: #999;">As users fill out your form, their entries will be saved to this area of the PDF.</p>

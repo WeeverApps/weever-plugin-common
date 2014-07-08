@@ -129,14 +129,22 @@ wxApp = wxApp || {};
 		updatePdfHeader: function( ev ) {
 			var $me = $( ev.currentTarget );
 
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) )
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-title' ) ) {
 				this.docusign.get( 'pdfHeader' ).title = $me.val();
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) )
+				this.$('.wx-pdf-preview .title').html( $me.val() );
+			}
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line1' ) ) {
 				this.docusign.get( 'pdfHeader' ).line1 = $me.val();
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) )
+				this.$('.wx-pdf-preview .line1').html( $me.val() );
+			}
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line2' ) ) {
 				this.docusign.get( 'pdfHeader' ).line2 = $me.val();
-			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) )
+				this.$('.wx-pdf-preview .line2').html( $me.val() );
+			}
+			if ( $me.hasClass( 'wx-form-builder-pdfheader-line3' ) ) {
 				this.docusign.get( 'pdfHeader' ).line3 = $me.val();
+				this.$('.wx-pdf-preview .line3').html( $me.val() );
+			}
 		},
 
 		showLogin: function( ev ) {
