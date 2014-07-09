@@ -158,11 +158,14 @@ wxApp = wxApp || {};
         },
 
         placeMarker: function( location ) {
+        	console.log('PLACING MARKER:', location);
+        	console.log('PLACING MARKER:', location.lat());
+        	console.log('PLACING MARKER:', location.lng());
 			this.marker.setPosition( location );
 			this.map.setCenter( location );
 			if((location.lat() != '') && (location.lng() != '')) {
-				$("#geolocation-latitude").val(  location.lat() );
-				$("#geolocation-longitude").val( location.lng() );
+				this.$("#geolocation-latitude").val(  location.lat() );
+				this.$("#geolocation-longitude").val( location.lng() );
 			}
         },
 
