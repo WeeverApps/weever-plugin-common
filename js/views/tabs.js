@@ -6,6 +6,14 @@ wxApp = wxApp || {};
         el: '#editListTabsSortable',
 
         initialize: function() {
+
+            // Add exiting tabs.
+            if ( this.collection.length ) {
+                for (var i=0; i<this.collection.length; i++) {
+                    this.addOne( this.collection.models[ i ] );
+                }
+            }
+
             this.collection.bind('add', this.addOne, this);
             Backbone.Events.on('tab:new', this.addNewlyCreatedTab, this);
             this.startSortable();
