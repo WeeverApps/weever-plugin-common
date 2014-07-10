@@ -24,7 +24,7 @@
 		save: function( onSaveCallback ) {
 			var me = this;
 
-			wx.makeApiCall( '_quiz/create', /* json */, function( data ) {
+			wx.makeApiCall( '_quiz/create', me.toJSON(), function( data ) {
 				me.set('_id', data.id);
 				if ( onSaveCallback ) onSaveCallback();
 			});

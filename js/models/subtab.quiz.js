@@ -2,7 +2,7 @@
 wxApp = wxApp || {};
 
 (function($) {
-    wxApp.QuizSubTab = wxApp.SubTab.extend({
+    wxApp.QuizBuilderSubTab = wxApp.SubTab.extend({
         defaults: function() {
             var newDefaults = _.extend( this.constructor.__super__.defaults(), {
                 quizId: '',
