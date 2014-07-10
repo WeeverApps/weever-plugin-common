@@ -1,5 +1,67 @@
 <script type="text/template" id="quizbuilder-subtab-edit-template">
     <div class="wx-quiz-builder">
-        This is the quiz builder pop up.
+        <div class="medium-12 columns">
+            <h2>Quiz Builder</h2><br>
+        </div>
+
+        <div class="medium-12 columns">
+            <div data-alert class="alert-box alert" style="display: none">
+                <span class="message"></span>
+                <a href="#" class="close">&times;</a>
+            </div>
+        </div>
+
+        <div class="medium-6 columns">
+            <button class="wx-add-question success radius">&plus; Add New Question</button>
+
+            <!--<ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel-question-fields">Tab One</a></li>
+                <li class="tab-title"><a href="#panel-another-tab">Tab Two</a></li>
+            </ul>
+            <div class="tabs-content">-->
+                <div class="content active" id="panel-question-fields">
+                    Tab One
+                </div>
+                <!--<div class="content" id="panel-another-tab">
+                    Tab Two
+                </div>
+            </div>-->
+        </div>
+
+        <div class="medium-6 columns">
+            <ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel-question-list">Questions</a></li>
+                <li class="tab-title"><a href="#panel-question-icons">Icon</a></li>
+                <li class="tab-title"><a href="#panel-question-support">Help</a></li>
+            </ul>
+            <div class="tabs-content">
+                <div class="content active" id="panel-question-list">
+                    <%- quiz.questions.length %>
+                    <dl class="accordion" data-accordion>
+                        <% for (var i = 0; i < quiz.questions.length; i++) {
+                            var q = quiz.questions[i]; %>
+                            <%= _.template( jQuery('#quiz-question').html(), {question: q, index: i}) %>
+                        <% }; %>
+                    </dl>
+                </div>
+                <div class="content" id="panel-question-icons">
+                    Icons will go here.
+                </div>
+                <div class="content" id="panel-question-support">
+                    Support text will go here.
+                </div>
+            </div>
+        </div>
     </div>
+
+    <a class="wx-close-reveal-modal">&#215;</a>
+</script>
+
+<script type="text/template" id="quiz-question">
+    <dd class="accordion-navigation">
+        <a href="#panel<%- index %>">Question <%- index %></a>
+        <div id ="panel<%- index %>" class="content">
+            This is the question.
+        </div>
+    </dd>
 </script>

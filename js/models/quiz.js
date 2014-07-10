@@ -6,10 +6,19 @@
 			return {
 				name:      '',
 				questions: new wxApp.QuizQuestions(),
-				tags:      [],
 				settings:  {},
 				_id:       null
 			}
+		},
+
+		// Add a question with the default four answers.
+		addQuestion: function() {
+			var question = new wxApp.QuizQuestion();
+			for (var i = 0; i < 4; i++) {
+				question.get('responses').push( '' );
+			};
+			this.get('questions').add( question );
+			return question;
 		},
 
 		fetch: function( onFetchedCallback ) {

@@ -10,6 +10,17 @@ wxApp = wxApp || {};
             } );
         },
 
+        initialize: function( properties ) {
+
+            // Call parent's initialize() function
+            Backbone.Model.prototype.initialize.apply( this, arguments );
+
+            console.log( 'PROPERTIES', properties );
+            if ( !properties ) {
+                this.set('quiz', new wxApp.Quiz());
+            }
+        },
+
         save: function( onSaveCallback ) {
             var me = this;
 
