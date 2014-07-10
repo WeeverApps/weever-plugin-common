@@ -17,6 +17,7 @@
 			for (var i = 0; i < 4; i++) {
 				question.get('responses').push( '' );
 			};
+			question.set('ordinal', this.get('questions').length);
 			this.get('questions').add( question );
 			return question;
 		},

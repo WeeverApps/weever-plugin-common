@@ -12,7 +12,6 @@
 
             this.model.bind('change', this.render, this);
             this.model.get('quiz').bind('change', this.render, this);
-            // this.model.get('quiz').get('questions').bind('add', this.render, this);
         },
 
         events: {
@@ -27,8 +26,12 @@
         addQuestion: function() {
             var index       = this.model.get('quiz').get('questions').length,
                 newQuestion = this.model.get('quiz').addQuestion(),
-                template    = _.template( $('#quiz-question').html(), { question: newQuestion, index: index } );
-            this.$('.accordion').append( template );
+                view        = new wxApp.QuizBuilderQuestionView( { model: newQuestion, index: index } );
+
+            console.log( "NEW QUESTION", newQuestion );
+
+            this.$('#panel-question-fields').append( view.render().el );
+            this.$('.accordion').append( view.getPreview().render().el );
         }
 
     });

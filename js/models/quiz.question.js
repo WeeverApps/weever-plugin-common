@@ -5,6 +5,7 @@
                 challenge: '',
                 responses: [],  // Just an array of strings for now.
                 answers  : [],  // Only one for now.
+                ordinal  : 0,
                 settings : {}
             }
         }
