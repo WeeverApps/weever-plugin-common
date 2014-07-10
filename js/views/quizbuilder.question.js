@@ -15,12 +15,12 @@
             Backbone.View.prototype.initialize.apply( this, arguments );
             var $template = $( this.selector );
             this.inputTpl = _.template( $template.html() );
-            // this.model.bind('change', this.render, this);
         },
 
         render: function() {
             var model = this.model.toJSON();
             this.$el.html( this.inputTpl( model ) );
+            this.$el.attr('data-index', model.ordinal);
             return this;
         },
 
@@ -66,7 +66,7 @@
                 isActive = this.$el.hasClass('active');
 
             this.$el.html( this.inputTpl( model ) );
-            this.$el.data('index', model.get('ordinal'));
+            this.$el.data('index', model.ordinal);
             if ( isActive ) {
                 this.$el.addClass('active');
                 this.$('div.content').addClass('active');
@@ -75,7 +75,13 @@
         },
 
         selectField: function() {
-            console.log('selectField');
+            var me = this,
+                index = me.$el.data('index');
+
+            $('div.wx-question.active').slideUp(400, function() {
+                $(this).removeClass('active');
+            });
+            $('div.wx-question[data-index="' + index +'"]').addClass('active').slideDown();
         }
     });
 })(jQuery);

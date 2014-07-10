@@ -15,7 +15,8 @@
         },
 
         events: {
-            'click .wx-add-question' : 'addQuestion'
+            'click .wx-add-question' : 'addQuestion',
+            'click .wx-finish'       : 'finish'
         },
 
         render: function() {
@@ -34,8 +35,7 @@
             this.$('.accordion').append( view.getPreview().render().el );
 
             // Open this preview.
-            view.getPreview().selectField();
+            view.getPreview().$('a').click();
         }
-
     });
 })(jQuery);
