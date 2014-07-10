@@ -24,14 +24,17 @@
         },
 
         addQuestion: function() {
-            var index       = this.model.get('quiz').get('questions').length,
-                newQuestion = this.model.get('quiz').addQuestion(),
+            var newQuestion = this.model.get('quiz').addQuestion(),
+                index       = this.model.get('quiz').get('questions').length,
                 view        = new wxApp.QuizBuilderQuestionView( { model: newQuestion, index: index } );
 
             console.log( "NEW QUESTION", newQuestion );
 
             this.$('#panel-question-fields').append( view.render().el );
             this.$('.accordion').append( view.getPreview().render().el );
+
+            // Open this preview.
+            view.getPreview().selectField();
         }
 
     });

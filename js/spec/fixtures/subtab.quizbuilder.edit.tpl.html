@@ -60,14 +60,30 @@
 </script>
 
 <script type="text/template" id="quiz-question">
-    Edit question <%- ordinal %> here.
-    <br>
+    <label>Challenge</label>
     <input type="text" class="wx-question-challenge" value="<%- challenge %>" />
+
+    <% for (var i = 0; i < responses.length; i++) { %>
+        <div class="row">
+            <div class="medium-1 columns"><%- String.fromCharCode(i + 97) %>)</div>
+            <div class="medium-10 columns">
+                <input type="text" class="wx-question-response" data-index="<%- i %>" value="<%- responses[i] %>" />
+            </div>
+            <div class="medium-1 columns">
+                <input type="radio" name="answer-<%- ordinal %>" value="<%- i %>" />
+            </div>
+        </div>
+    <% }; %>
 </script>
 
 <script type="text/template" id="quiz-question-preview">
-    <a href="#panel<%- ordinal %>">Question <%- ordinal %></a>
+    <a href="#panel<%- ordinal %>">. <%- challenge %></a>
     <div id ="panel<%- ordinal %>" class="content">
-        This is the question: <%- challenge %>
+        <strong><%- challenge %></strong>
+        <br>
+
+        <% for (var i = 0; i < responses.length; i++) { %>
+            <%- String.fromCharCode(i + 97) %>) <%- responses[i] %><br>
+        <% }; %>
     </div>
 </script>

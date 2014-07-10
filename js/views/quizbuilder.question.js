@@ -7,7 +7,8 @@
         preview  : null,
         index    : 0,
         events   : {
-            'keyup .wx-question-challenge': 'updateChallenge'
+            'keyup .wx-question-challenge': 'updateChallenge',
+            'keyup .wx-question-response' : 'updateResponse',
         },
 
         initialize: function() {
@@ -32,6 +33,14 @@
 
         updateChallenge: function( e ) {
             this.model.set('challenge', $( e.currentTarget ).val());
+        },
+
+        updateResponse: function( e ) {
+            var $ctl = $( e.currentTarget ),
+                i    = parseInt( $ctl.data('index') );
+
+            this.model.get('responses')[i] = $ctl.val();
+            this.model.trigger( 'change' );
         }
     });
 
@@ -55,8 +64,9 @@
         render: function() {
             var model    = this.model.toJSON(),
                 isActive = this.$el.hasClass('active');
-console.log('isActive:', isActive);
+
             this.$el.html( this.inputTpl( model ) );
+            this.$el.data('index', model.get('ordinal'));
             if ( isActive ) {
                 this.$el.addClass('active');
                 this.$('div.content').addClass('active');
