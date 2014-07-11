@@ -8,6 +8,7 @@
         events   : {
             'keyup .wx-question-challenge': 'updateChallenge',
             'keyup .wx-question-response' : 'updateResponse',
+            'click .wx-correct-answer'    : 'updateCorrectAnswer',
             'click .wx-delete-question'   : 'deleteThis'
         },
 
@@ -38,6 +39,20 @@
         updateChallenge: function( e ) {
             this.model.set('challenge', $( e.currentTarget ).val());
             $( e.currentTarget ).removeClass('wx-error');
+        },
+
+        /**
+         * This method's a little weird for two reasons:
+         * 1. We need to save the *text* of the correct answer, not the 
+         *    index / id / whatever, so we've gotta parse the DOM from the 
+         *    radio to the nearest text box.
+         * 2. Although we currently only support one correct answer, the 
+         *    expected datatype is an array.
+         */
+        updateCorrectAnswer: function( e ) {
+            var $radio = $( e.currentTarget ),
+                $textbox = $radio.parent().parent().find('input.wx-question-response');
+            this.model.set('answers', [ $textbox.val() ]);
         },
 
         updateResponse: function( e ) {

@@ -10,9 +10,6 @@
         initialize: function() {
             // Call parent's initialize() function
             wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
-
-            // this.model.bind('change', this.render, this);
-            // this.model.get('quiz').bind('change', this.render, this);
         },
 
         events: {
@@ -56,18 +53,23 @@
                 };
             }
 
-            if (errors.length == 0)
-                return true;
-            else {
-                alert( JSON.stringify( errors ) );
+            if ( errors.length ) {
+                var errorMessage = '',
+                    $alert = this.$('.alert-box.alert .message');
+                errors.forEach( function( error ) { errorMessage += '<br><br>' + error; });
+                $alert.html( errorMessage );
+                $alert.parent().slideDown();
+                return false;
             }
+
+            return true;
         },
 
         validateQuestion: function( i, errors ) {
 
             var questionCtl = this.questionViews[i].$('.wx-question-challenge');
             if ( questionCtl.val().trim().length === 0 ) {
-                errors.push( 'Enter a question for question ' + (i+1) );
+                errors.push( 'Enter a question for Question ' + (i+1) );
                 questionCtl.addClass( 'wx-error' );
             }
 
@@ -75,13 +77,13 @@
                 var response = this.model.get('quiz').get('questions').at(i).get('responses')[j],
                     responseCtl = this.questionViews[i].$('input[data-index="' + j + '"]');
                 if ( responseCtl.val().trim().length === 0 ) {
-                    errors.push( 'Enter an answer for question ' + (i+1) + ', answer ' + (j+1) );
+                    errors.push( 'Enter an answer for Question ' + (i+1) + ', Answer ' + (j+1) );
                     responseCtl.addClass( 'wx-error' );
                 }
             };
 
             if ( typeof this.$('[name="answer-' + i + '"]:checked').val() === 'undefined' ) {
-                errors.push( 'Please select the correct answer for question ' + (i+1) );
+                errors.push( 'Please select the correct answer for Question ' + (i+1) );
                 this.$('[name="answer-' + i + '"]').addClass( 'wx-error' );
             }
 
