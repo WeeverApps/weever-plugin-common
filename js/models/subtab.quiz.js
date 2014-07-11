@@ -5,9 +5,10 @@ wxApp = wxApp || {};
     wxApp.QuizBuilderSubTab = wxApp.SubTab.extend({
         defaults: function() {
             var newDefaults = _.extend( this.constructor.__super__.defaults(), {
-                quizId: '',
-                layout: 'panel',
-                quiz  : new wxApp.Quiz()
+                content: 'quiz',
+                layout : 'panel',
+                config : { quiz_id: '' },
+                quiz   : new wxApp.Quiz()
             } );
             return newDefaults;
         },
@@ -17,8 +18,11 @@ wxApp = wxApp || {};
             // Call parent's initialize() function
             Backbone.Model.prototype.initialize.apply( this, arguments );
 
-            console.log( 'PROPERTIES', properties );
             if ( properties ) {
+                // Get the quiz.
+                var quiz = new wxApp.Quiz({ _id: this.getConfig().quiz_id });
+                this.set( 'quiz', quiz );
+                quiz.fetch();
             }
         },
 
@@ -27,7 +31,7 @@ wxApp = wxApp || {};
 
             // Save the quiz
             me.get('quiz').save(function() {
-                me.set('quizId', me.get('quiz').get('_id'));
+                me.setConfig('quiz_id', me.get('quiz').get('_id'));
 
                 // Save the tab.
                 wxApp.SubTab.prototype.save.apply( me, [onSaveCallback] );

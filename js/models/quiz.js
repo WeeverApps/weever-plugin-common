@@ -25,8 +25,16 @@
 		fetch: function( onFetchedCallback ) {
 			var me = this;
 
-			wx.makeApiCall( '_quiz/get_all' /* or get by ID? */, { id: me._id }, function( data ) {
-				console.log( 'GO QUIZBUILDER DATA!', data );
+			wx.makeApiCall( '_quiz/get', { id: me.get('_id') }, function( data ) {
+				var questionsJson = data.quiz.questions;
+				delete data.quiz.questions;
+
+				me.set( data.quiz );
+				for (var i = 0; i < questionsJson.length; i++) {
+					var question = new wxApp.QuizQuestion( questionsJson[i] );
+					me.get('questions').add( question );
+				};
+
 				if ( onFetchedCallback ) onFetchedCallback();
 			} )
 		},
