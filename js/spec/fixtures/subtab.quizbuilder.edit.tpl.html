@@ -20,11 +20,7 @@
             </ul>
             <div class="tabs-content">-->
                 <div class="content active" id="panel-question-fields">
-                    <% for (var i = 0; i < quiz.questions.length; i++) {
-                        var q = quiz.questions[i];
-                        q.ordinal = i; %>
-                        <%= _.template( jQuery('#quiz-question').html(), q ) %>
-                    <% }; %>
+                    
                 </div>
                 <!--<div class="content" id="panel-another-tab">
                     Tab Two
@@ -41,10 +37,7 @@
             <div class="tabs-content">
                 <div class="content active" id="panel-question-list">
                     <dl class="accordion" data-accordion>
-                        <% for (var i = 0; i < quiz.questions.length; i++) {
-                            var q = quiz.questions[i]; %>
-                            <%= _.template( jQuery('#quiz-question-preview').html(), {question: q, index: i}) %>
-                        <% }; %>
+
                     </dl>
                 </div>
                 <div class="content" id="panel-question-icons">

@@ -5,7 +5,6 @@
         className: 'wx-question',
         selector : '#quiz-question',
         preview  : null,
-        index    : 0,
         events   : {
             'keyup .wx-question-challenge': 'updateChallenge',
             'keyup .wx-question-response' : 'updateResponse',
@@ -33,6 +32,7 @@
 
         updateChallenge: function( e ) {
             this.model.set('challenge', $( e.currentTarget ).val());
+            $( e.currentTarget ).removeClass('wx-error');
         },
 
         updateResponse: function( e ) {
@@ -40,6 +40,7 @@
                 i    = parseInt( $ctl.data('index') );
 
             this.model.get('responses')[i] = $ctl.val();
+            $( e.currentTarget ).removeClass('wx-error');
             this.model.trigger( 'change' );
         }
     });
@@ -48,7 +49,6 @@
         tagName  : 'dd',
         className: 'accordion-navigation',
         selector : '#quiz-question-preview',
-        index    : 0,
         events   : {
             'click'     : 'selectField' //,
             // 'sortable-drop': 'sortableDrop'

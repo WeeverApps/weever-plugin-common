@@ -22,3 +22,8 @@
 #appbuilder #interface .wx-question {
 	display: none;
 }
+
+#appbuilder #interface input.wx-error {
+	background-color: pink;
+	border: 2px red solid;
+}

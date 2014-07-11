@@ -1,6 +1,7 @@
 (function($){
     wxApp.QuizBuilderSubTabEditView = wxApp.SubTabEditView.extend({
         baseEditTplSelector: '#quizbuilder-subtab-edit-template',
+        questionViews      : [],
 
         initializeEvents: function() {
             this.events = _.extend({}, this.genericEvents, this.events);
@@ -11,30 +12,94 @@
             wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
 
             // this.model.bind('change', this.render, this);
-            this.model.get('quiz').bind('change', this.render, this);
+            // this.model.get('quiz').bind('change', this.render, this);
         },
 
         events: {
-            'click .wx-add-question' : 'addQuestion',
+            'click .wx-add-question' : 'addNewQuestion',
             'click .wx-finish'       : 'finish',
             'keyup .wx-edit-title'   : 'updateQuizName'
         },
 
         render: function() {
             wxApp.SubTabEditView.prototype.render.apply( this, arguments );
+
+            for (var i = 0; i < this.model.get('quiz').get('questions').length; i++) {
+                this.addQuestion( this.model.get('quiz').get('questions').at(i) );
+            };
+
             this.$el.foundation('reflow');
         },
 
-        addQuestion: function() {
+        validate: function() {
+            var quiz   = this.model.get('quiz'),
+                errors = [];
+
+            // Clear the old error warnings.
+            this.$('input').removeClass('wx-error');
+
+            if ( quiz.get( 'name' ).trim().length === 0 ) {
+                errors.push( 'Please provide a name for this quiz.' );
+                this.$('.wx-edit-title').addClass('wx-error');
+            }
+
+            if ( quiz.get('questions').length === 0 ) {
+                errors.push( 'Please add at last one question.' );
+            }
+            else {
+                for (var i = 0; i < quiz.get('questions').length; i++) {
+                    errors = this.validateQuestion( i, errors );
+                };
+            }
+
+            if (errors.length == 0)
+                return true;
+            else {
+                alert( JSON.stringify( errors ) );
+            }
+        },
+
+        validateQuestion: function( i, errors ) {
+
+            var questionCtl = this.questionViews[i].$('.wx-question-challenge');
+            if ( questionCtl.val().trim().length === 0 ) {
+                errors.push( 'Enter a question for question ' + (i+1) );
+                questionCtl.addClass( 'wx-error' );
+            }
+
+            for (var j = 0; j < this.model.get('quiz').get('questions').at(i).get('responses').length; j++) {
+                var response = this.model.get('quiz').get('questions').at(i).get('responses')[j],
+                    responseCtl = this.questionViews[i].$('input[data-index="' + j + '"]');
+                if ( responseCtl.val().trim().length === 0 ) {
+                    errors.push( 'Enter an answer for question ' + (i+1) + ', answer ' + (j+1) );
+                    responseCtl.addClass( 'wx-error' );
+                }
+            };
+
+            if ( typeof this.$('[name="answer-' + i + '"]:checked').val() === 'undefined' ) {
+                errors.push( 'Please select the correct answer for question ' + (i+1) );
+                this.$('[name="answer-' + i + '"]').addClass( 'wx-error' );
+            }
+
+            return errors;
+        },
+
+        addNewQuestion: function() {
             var newQuestion = this.model.get('quiz').addQuestion(),
-                index       = this.model.get('quiz').get('questions').length,
-                view        = new wxApp.QuizBuilderQuestionView( { model: newQuestion, index: index } );
+                view = this.addQuestion( newQuestion );
+
+            // Open this preview.
+            view.getPreview().$('a').click();
+        },
+
+        addQuestion: function( question ) {
+            var view = new wxApp.QuizBuilderQuestionView( { model: question } );
 
             this.$('#panel-question-fields').append( view.render().el );
             this.$('.accordion').append( view.getPreview().render().el );
 
-            // Open this preview.
-            view.getPreview().$('a').click();
+            this.questionViews.push( view );
+            return view;
         },
 
         updateQuizName: function( ev ) {
