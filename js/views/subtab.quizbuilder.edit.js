@@ -24,8 +24,12 @@
         render: function() {
             wxApp.SubTabEditView.prototype.render.apply( this, arguments );
 
+            this.questionViews = [];
+
             for (var i = 0; i < this.model.get('quiz').get('questions').length; i++) {
-                this.addQuestion( this.model.get('quiz').get('questions').at(i) );
+                var question = this.model.get('quiz').get('questions').at(i);
+                question.ordinal = i;
+                this.addQuestion( question );
             };
 
             this.$el.foundation('reflow');
@@ -98,8 +102,21 @@
             this.$('#panel-question-fields').append( view.render().el );
             this.$('.accordion').append( view.getPreview().render().el );
 
+            question.on('destroy', this.questionDeleted, this);
+
             this.questionViews.push( view );
             return view;
+        },
+
+        questionDeleted: function( q ) {
+            var me = this;
+            this.model.get('quiz').get('questions').once('remove', function( question, array, options ) {
+                // me.questionViews[ options.index ].getPreview().remove();
+                // me.questionViews[ options.index ].remove();
+                // me.questionViews.splice( options.index, 1 );
+                me.render();
+            })
+            this.model.get('quiz').get('questions').remove( q );
         },
 
         updateQuizName: function( ev ) {

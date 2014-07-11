@@ -8,6 +8,7 @@
         events   : {
             'keyup .wx-question-challenge': 'updateChallenge',
             'keyup .wx-question-response' : 'updateResponse',
+            'click .wx-delete-question'   : 'deleteThis'
         },
 
         initialize: function() {
@@ -28,6 +29,10 @@
                 this.preview = new wxApp.QuizBuilderQuestionPreview({ model: this.model });
             }
             return this.preview;
+        },
+
+        deleteThis: function( e ) {
+            this.model.destroy();
         },
 
         updateChallenge: function( e ) {
