@@ -6,8 +6,10 @@ wxApp = wxApp || {};
         defaults: function() {
             var newDefaults = _.extend( this.constructor.__super__.defaults(), {
                 quizId: '',
+                layout: 'panel',
                 quiz  : new wxApp.Quiz()
             } );
+            return newDefaults;
         },
 
         initialize: function( properties ) {
@@ -16,8 +18,7 @@ wxApp = wxApp || {};
             Backbone.Model.prototype.initialize.apply( this, arguments );
 
             console.log( 'PROPERTIES', properties );
-            if ( !properties ) {
-                this.set('quiz', new wxApp.Quiz());
+            if ( properties ) {
             }
         },
 

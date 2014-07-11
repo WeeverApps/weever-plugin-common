@@ -21,8 +21,9 @@
             <div class="tabs-content">-->
                 <div class="content active" id="panel-question-fields">
                     <% for (var i = 0; i < quiz.questions.length; i++) {
-                        var q = quiz.questions[i]; %>
-                        <%= _.template( jQuery('#quiz-question').html(), {question: q, index: i}) %>
+                        var q = quiz.questions[i];
+                        q.ordinal = i; %>
+                        <%= _.template( jQuery('#quiz-question').html(), q ) %>
                     <% }; %>
                 </div>
                 <!--<div class="content" id="panel-another-tab">
@@ -54,6 +55,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="medium-12 columns">
+        <label>Title for this quiz inside your app</label>
+        <input type="text" value="<%- quiz.name %>" class="wx-edit-title" />
     </div>
 
     <div class="medium-12 columns">

@@ -10,13 +10,14 @@
             // Call parent's initialize() function
             wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
 
-            this.model.bind('change', this.render, this);
+            // this.model.bind('change', this.render, this);
             this.model.get('quiz').bind('change', this.render, this);
         },
 
         events: {
             'click .wx-add-question' : 'addQuestion',
-            'click .wx-finish'       : 'finish'
+            'click .wx-finish'       : 'finish',
+            'keyup .wx-edit-title'   : 'updateQuizName'
         },
 
         render: function() {
@@ -29,13 +30,15 @@
                 index       = this.model.get('quiz').get('questions').length,
                 view        = new wxApp.QuizBuilderQuestionView( { model: newQuestion, index: index } );
 
-            console.log( "NEW QUESTION", newQuestion );
-
             this.$('#panel-question-fields').append( view.render().el );
             this.$('.accordion').append( view.getPreview().render().el );
 
             // Open this preview.
             view.getPreview().$('a').click();
+        },
+
+        updateQuizName: function( ev ) {
+            this.model.get('quiz').set('name', $( ev.currentTarget ).val());
         }
     });
 })(jQuery);
