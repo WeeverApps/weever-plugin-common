@@ -3,6 +3,7 @@
         defaults: function() {
             return {
                 challenge: '',
+                imageUrl:  '',
                 responses: [],  // Just an array of strings for now.
                 answers  : [],  // Only one for now.
                 ordinal  : 0,

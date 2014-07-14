@@ -66,6 +66,15 @@
     <label>Challenge</label>
     <input type="text" class="wx-question-challenge" value="<%- challenge %>" />
 
+    <label>Photo (optional)</label>
+    <div class="new_uploader">
+        <div class="button success expand radius">
+            <span>Upload image</span>
+            <!-- This input requires an ID for the upload -->
+            <input multiple="multiple" type="file" id="quiz-question-image-<%- ordinal %>" name="quiz-question-image-<%- ordinal %>" class="wx-challenge-photo" value="<%- imageUrl %>" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;" />
+        </div>
+    </div>
+
     <% for (var i = 0; i < responses.length; i++) { %>
         <div class="row">
             <div class="medium-1 columns"><%- String.fromCharCode(i + 97) %>)</div>
@@ -83,6 +92,9 @@
 
 <script type="text/template" id="quiz-question-preview">
     <a href="#panel<%- ordinal %>">. <%- challenge %></a>
+    <% if ( imageUrl ) { %>
+        <img src="<%- imageUrl %>" />
+    <% } %>
     <div id ="panel<%- ordinal %>" class="content">
         <strong><%- challenge %></strong>
         <br>

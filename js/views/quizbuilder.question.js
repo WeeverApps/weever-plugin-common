@@ -9,6 +9,7 @@
             'keyup .wx-question-challenge': 'updateChallenge',
             'keyup .wx-question-response' : 'updateResponse',
             'click .wx-correct-answer'    : 'updateCorrectAnswer',
+            'change .wx-challenge-photo'  : 'uploadFile',
             'click .wx-delete-question'   : 'deleteThis'
         },
 
@@ -62,6 +63,38 @@
             this.model.get('responses')[i] = $ctl.val();
             $( e.currentTarget ).removeClass('wx-error');
             this.model.trigger( 'change' );
+        },
+
+        uploadFile: function( e ) {
+            
+            console.log('uploadFile');
+            var me = this,
+                uploadUrl = wx.apiUrl + '/_google_drive/upload',
+                url = wx.pluginUrl + 'file-upload.php?upload_path=' + wx.uploadPath + '&upload_url=' + wx.uploadUrl,
+                $input = $( e.currentTarget ),
+                $span  = $input.siblings('span');
+
+            $span.html('Saving...');
+
+            $.ajax( url, {
+                processData: false,
+                iframe: true,
+                files: $input,
+                success: function( data ) {
+
+                    // The stupid data comes in HTML for some reason (WP only?)
+                    // Strip out the HTML, and convert to json object.
+                    data = data.replace(/(<([^>]+)>)/ig,"");
+                    data = JSON.parse( data );
+
+                    me.model.set( 'imageUrl',  data.file_name );
+                    $span.html( 'Saved!' );
+                    setTimeout( function() {
+                        $span.html('Upload image');
+                    }, 5000 );
+                }
+            } );
+
         }
     });
 
