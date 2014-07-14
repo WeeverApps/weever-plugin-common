@@ -6,7 +6,9 @@
 			return {
 				name:      '',
 				questions: new wxApp.QuizQuestions(),
-				settings:  {},
+				settings:  {
+					passphrase: ''
+				},
 				_id:       null
 			}
 		},

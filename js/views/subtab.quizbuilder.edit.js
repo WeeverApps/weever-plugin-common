@@ -8,9 +8,10 @@
         },
 
         events: {
-            'click .wx-add-question' : 'addNewQuestion',
-            'click .wx-finish'       : 'finish',
-            'keyup .wx-edit-title'   : 'updateQuizName'
+            'click .wx-add-question'   : 'addNewQuestion',
+            'click .wx-finish'         : 'finish',
+            'keyup .wx-edit-passphrase': 'updatePassphrase',
+            'keyup .wx-edit-title'     : 'updateQuizName'
         },
 
         render: function() {
@@ -42,6 +43,13 @@
             if ( quiz.get( 'name' ).trim().length === 0 ) {
                 errors.push( 'Please provide a name for this quiz.' );
                 this.$('.wx-edit-title').addClass('wx-error');
+            }
+
+            if ( true /* is live quiz */ ) {
+                if ( quiz.get('settings').passphrase.trim().length === 0 ) {
+                    errors.push( 'Please provide a passphrase for this quiz.' );
+                this.$('.wx-edit-passphrase').addClass('wx-error');
+                }
             }
 
             if ( quiz.get('questions').length === 0 ) {
@@ -119,6 +127,10 @@
                 me.render();
             })
             this.model.get('quiz').get('questions').remove( q );
+        },
+
+        updatePassphrase: function( ev ) {
+            this.model.get('quiz').get('settings').passphrase = $( ev.currentTarget ).val();
         },
 
         updateQuizName: function( ev ) {
