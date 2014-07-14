@@ -1,6 +1,9 @@
 
 wxApp = wxApp || {};
 
+// TODO - Move this (for both WP and Weever Server).
+wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
+
 (function($){
     wxApp.SubTabView = wxApp.TabView.extend({
         tagName: 'li',
@@ -25,18 +28,42 @@ wxApp = wxApp || {};
         },
 
         events: {
-            'click .wx-edit-link': 'editSubTab',
-            'click .wx-subtab-delete': 'confirmDeleteSubTab',
-	        'click .wx-subtab-copy': 'confirmCopySubTab'
+            'click .wx-edit-link'         : 'editSubTab',
+            'click .wx-subtab-delete'     : 'confirmDeleteSubTab',
+            'click .wx-subtab-copy'       : 'confirmCopySubTab',
+            'click .wx-subtab-start-quiz' : 'confirmStartQuiz'
         },
 
         render: function() {
-            this.$el.html( this.subTabTpl( this.model.toJSON() ) );
+            var me = this;
+
+            me.$el.html( me.subTabTpl( me.model.toJSON() ) );
             // Add a reference to the view, not seeing another way to grab it from within the drop event.
             // Doing _.bind( this.onDrop, this ) would give access to the view it was dropped on, but not the element
             // that was dropped.
-            this.$el.data( 'backbone-view', this );
-            return this;
+            me.$el.data( 'backbone-view', me );
+
+            if ( me.model.get('content') === 'quiz' ) {
+                if ( !!window.EventSource ) {
+                    me.$('.wx-quiz-info').html('&mdash; Loading event info.')
+
+                    var source = new EventSource('http://weeverdev.com:8081/api/v1/status?id=52f78198f6fca9d90146ee7ebd092959');
+                    source.addEventListener('message', function(e) {
+                        console.log( e.data );
+                        var data = JSON.parse( e.data );
+                        if ( data.clients == 1 ) {
+                            me.$('.wx-quiz-info').html('&mdash; One client connected.')
+                        } else {
+                            me.$('.wx-quiz-info').html('&mdash; ' + data.clients + ' clients connected.')
+                        }
+                    }, false);
+                }
+                else {
+                    console.log('TODO - Take it back to the oldschool.');
+                }
+            }
+
+            return me;
         },
 
         editSubTab: function(event) {
@@ -78,6 +105,32 @@ wxApp = wxApp || {};
 	            });
             });
 	    },
+
+        confirmStartQuiz: function( ev ) {
+            event.preventDefault();
+            if ( confirm('Are you sure you want to start this quiz?') ) {
+                this.startQuiz();
+            }
+        },
+
+        startQuiz: function() {
+            var me   = this,
+                quiz = me.model.get('quiz'),
+                url  = wx.quizApiUrl + 'start?id=' + quiz.get('_id') + '&app_key=' + wx.siteKey + '&passphrase=' + quiz.get('settings').passphrase;
+url = 'http://weeverdev.com:8081/api/v1/start?id=52f78198f6fca9d90146ee7ebd092959&app_key=mxc2MHsL0oTZxJ3QQGB2zTOJSnZPY6Ua&passphrase=test';
+            $.ajax({
+                url    : url,
+                type   : 'GET',
+                success: function(v) {
+                    console.log(v);
+                    alert( v.message );
+                },
+                error  : function(v, message) {
+                    console.log(v);
+                    alert( 'An error occurred while starting this quiz: ' + message );
+                }
+            })
+        },
 
         confirmDeleteSubTab: function(event) {
             event.preventDefault();
