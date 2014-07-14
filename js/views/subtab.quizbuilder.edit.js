@@ -7,11 +7,6 @@
             this.events = _.extend({}, this.genericEvents, this.events);
         },
 
-        initialize: function() {
-            // Call parent's initialize() function
-            wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
-        },
-
         events: {
             'click .wx-add-question' : 'addNewQuestion',
             'click .wx-finish'       : 'finish',
@@ -30,6 +25,11 @@
             };
 
             this.$el.foundation('reflow');
+
+            // If this is an edit window, open up the first question.
+            if ( this.model.id ) {
+                $( $('#panel-question-list .accordion-navigation a')[0] ).click();
+            }
         },
 
         validate: function() {
