@@ -976,7 +976,11 @@ wxApp = wxApp || {};
 
 				input.set( 'ordinal', ordinal );
 			}
-			view.$el.attr('id', 'wx-form-control-' + ordinal.toString());
+			// Remove any existing wx-form-control-[ordinal] classes
+			view.$el.removeClass(function(index, css) {
+				return (css.match (/\bwx-form-control-\S+/g) || []).join(' ');
+			});
+			view.$el.addClass( 'wx-form-control-' + ordinal.toString() );
 
 			input.set( 'advanced', advanced );
 

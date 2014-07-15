@@ -207,7 +207,7 @@ wxApp = wxApp || {};
 				var value = control.val();
 
 				if (! $.isNumeric( value ) ) {
-					var label = $('#wx-form-control-' + field + ' .wx-form-builder-label-input').val();
+					var label = $('.wx-form-control-' + field + ' .wx-form-builder-label-input').val();
 					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + label + '</em> is not a number.' );
 					valid = false;
 					continue;

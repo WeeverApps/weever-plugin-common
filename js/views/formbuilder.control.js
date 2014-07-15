@@ -233,15 +233,15 @@ wxApp = wxApp || {};
 			this.$el.addClass('wx-active');
 
 			var openClickedControl = function() {
-					$( '#wx-form-control-' + ordinal ).css('display', 'none');
-					$( '#wx-form-control-' + ordinal ).addClass( 'wx-active' );
-					$( '#wx-form-control-' + ordinal ).slideDown(200);
-				},
-				id = $('.wx-form-builder-row.wx-active').attr('id');
+					var revealId = $('.reveal-modal.open').attr('id');
+					$( '#' + revealId + ' .wx-form-control-' + ordinal ).css('display', 'none');
+					$( '#' + revealId + ' .wx-form-control-' + ordinal ).addClass( 'wx-active' );
+					$( '#' + revealId + ' .wx-form-control-' + ordinal ).slideDown(200);
+				};
 
-			// Close the existing this control, then open the one just clicked.
-			if ( id ) {
-				var currentlyOpenControl = $('#' + id);
+			// Close the existing this control (if there is one), then open the one just clicked.
+			if ( $('.wx-form-builder-row.wx-active').length ) {
+				var currentlyOpenControl = $('.wx-form-builder-row.wx-active');
 				currentlyOpenControl.css('display', 'block');
 				currentlyOpenControl.slideUp( 200, function() {
 					currentlyOpenControl.removeClass( 'wx-active' );
