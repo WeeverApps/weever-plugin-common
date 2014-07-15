@@ -34,7 +34,7 @@
                 <li class="tab-title"><a href="#panel-question-icons">Icon</a></li>
                 <li class="tab-title"><a href="#panel-question-support">Help</a></li>
             </ul>
-            <div class="tabs-content" style="min-height: 402px">
+            <div class="tabs-content" style="min-height: 437px">
                 <div class="content active" id="panel-question-list">
                     <dl class="accordion" data-accordion>
 
@@ -68,8 +68,8 @@
 </script>
 
 <script type="text/template" id="quiz-question">
-    <label>Challenge</label>
-    <input type="text" class="wx-question-challenge" value="<%- challenge %>" />
+    <label>Question</label>
+    <input type="text" class="wx-question-challenge" value="<%- challenge %>" placeholder="What is the air-speed velocity of an unladen swallow?" />
 
     <!--<label>Photo (optional)</label>
     <div class="new_uploader">
@@ -79,14 +79,34 @@
         </div>
     </div>-->
 
-    <% for (var i = 0; i < responses.length; i++) { %>
+    <div class="row" style="padding: 10px 0">
+        <div class="medium-10 columns">Answers</div>
+        <div class="medium-2 columns" style="text-align: center">Correct</div>
+    </div>
+    <% for (var i = 0; i < responses.length; i++) {
+        var placeholder = '';
+        switch(i) {
+            case 0:
+                placeholder = '30 km/h';
+                break;
+            case 1:
+                placeholder = '40 km/h';
+                break;
+            case 2:
+                placeholder = '65 km/h';
+                break;
+            case 3:
+                placeholder = 'An African or European swallow?'
+                break;
+        }
+    %>
         <div class="row">
-            <div class="medium-1 columns"><%- String.fromCharCode(i + 97) %>)</div>
             <div class="medium-10 columns">
-                <input type="text" class="wx-question-response" data-index="<%- i %>" value="<%- responses[i] %>" />
+                <input type="text" class="wx-question-response" data-index="<%- i %>" value="<%- responses[i] %>" placeholder="<%- placeholder %>" />
             </div>
-            <div class="medium-1 columns">
-                <input type="radio" name="answer-<%- ordinal %>" class="wx-correct-answer" value="<%- i %>" />
+            <div class="medium-2 columns" style="text-align: center">
+                <!-- TODO - Select correct answer when editing. -->
+                <input type="radio" name="answer-<%- ordinal %>" class="wx-correct-answer" value="<%- i %>" style="margin-top: 10px" />
             </div>
         </div>
     <% }; %>
@@ -104,7 +124,7 @@
         <br>
 
         <% for (var i = 0; i < responses.length; i++) { %>
-            <%- String.fromCharCode(i + 97) %>) <%- responses[i] %><br>
+            <%- responses[i] %><br>
         <% }; %>
     </div>
 </script>
