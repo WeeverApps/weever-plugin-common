@@ -109,6 +109,8 @@
         addQuestion: function( question ) {
             var view = new wxApp.QuizBuilderQuestionView( { model: question } );
 
+            this.$('.wx-please-add-msg').hide();
+
             this.$('#panel-question-fields').append( view.render().el );
             this.$('.accordion').append( view.getPreview().render().el );
 

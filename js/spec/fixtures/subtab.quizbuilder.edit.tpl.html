@@ -34,10 +34,14 @@
                 <li class="tab-title"><a href="#panel-question-icons">Icon</a></li>
                 <li class="tab-title"><a href="#panel-question-support">Help</a></li>
             </ul>
-            <div class="tabs-content" style="min-height: 437px">
+            <div class="tabs-content" style="min-height: 432px">
                 <div class="content active" id="panel-question-list">
                     <dl class="accordion" data-accordion>
-
+                        <div class="panel wx-preview-form wx-please-add-msg" style="height: 380px">
+                            <h3 class="wx-preview-msg" style="margin: 25% auto 0; text-align: center; color: #bcbcbc">
+                                Please add a question.
+                            </h3>
+                        </div>
                     </dl>
                 </div>
                 <div class="content" id="panel-question-icons">
@@ -51,7 +55,7 @@
     </div>
 
     <div class="medium-12 columns">
-        <label>Passphrase for this quiz</label>
+        <label>Password for this quiz</label>
         <input type="text" value="<%- quiz.settings.passphrase %>" class="wx-edit-passphrase" />
     </div>
 
@@ -111,7 +115,7 @@
         </div>
     <% }; %>
 
-    <button class="wx-delete-question alert radius">Delete</button>
+    <button class="wx-delete-question small alert">Delete field</button>
 </script>
 
 <script type="text/template" id="quiz-question-preview">
