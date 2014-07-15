@@ -1,9 +1,24 @@
 <script type="text/template" id="quizbuilder-subtab-edit-template">
-    <div class="wx-quiz-builder">
-        <div class="medium-12 columns">
-            <h2>Quiz Builder</h2><br>
-        </div>
+    <div class="medium-12 columns">
+        <h2>Quiz Builder</h2><br>
+    </div>
 
+    <div style="min-height: 576px">
+    <div class="wx-quiz-builder-step-one">
+        <div class="medium-12 columns">
+            <label>Title for this quiz inside your app</label>
+            <input type="text" value="<%- quiz.name %>" class="wx-edit-title" />
+        </div>
+        <div class="medium-12 columns">
+            <label>Password for this quiz</label>
+            <input type="text" value="<%- quiz.settings.passphrase %>" class="wx-edit-passphrase" />
+        </div>
+        <div class="medium-12 columns">
+            <button class="wx-next success radius">Continue &rarr;</button>
+        </div>
+    </div>
+
+    <div class="wx-quiz-builder-step-two" style="display: none;">
         <div class="medium-12 columns">
             <div data-alert class="alert-box alert" style="display: none">
                 <span class="message"></span>
@@ -52,20 +67,11 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="medium-12 columns">
-        <label>Password for this quiz</label>
-        <input type="text" value="<%- quiz.settings.passphrase %>" class="wx-edit-passphrase" />
+        <div class="medium-12 columns">
+            <button class="wx-finish success radius">Save and add to app</button> or <a class="wx-back-button">go back</a>
+        </div>
     </div>
-
-    <div class="medium-12 columns">
-        <label>Title for this quiz inside your app</label>
-        <input type="text" value="<%- quiz.name %>" class="wx-edit-title" />
-    </div>
-
-    <div class="medium-12 columns">
-        <button class="wx-finish success radius">Save and add to app</button>
     </div>
 
     <a class="wx-close-reveal-modal">&#215;</a>

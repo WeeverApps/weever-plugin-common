@@ -9,6 +9,8 @@
 
         events: {
             'click .wx-add-question'   : 'addNewQuestion',
+            'click .wx-next'           : 'next',
+            'click .wx-back-button'    : 'previous',
             'click .wx-finish'         : 'finish',
             'keyup .wx-edit-passphrase': 'updatePassphrase',
             'keyup .wx-edit-title'     : 'updateQuizName'
@@ -118,6 +120,18 @@
 
             this.questionViews.push( view );
             return view;
+        },
+
+        next: function() {
+            var me = this;
+            me.$('.wx-quiz-builder-step-one').slideUp();
+            me.$('.wx-quiz-builder-step-two').slideDown(); 
+        },
+
+        previous: function() {
+            var me = this;
+            me.$('.wx-quiz-builder-step-two').slideUp();
+            me.$('.wx-quiz-builder-step-one').slideDown();
         },
 
         questionDeleted: function( q ) {
