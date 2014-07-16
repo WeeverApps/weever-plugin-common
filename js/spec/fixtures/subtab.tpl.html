@@ -10,6 +10,8 @@
 
 		<% if ( typeof type != undefined && typeof type == 'string' && type.toLowerCase() == 'formbuilder' ) { %>
 		<span class="delete"><a href="#" class="wx-subtab-copy" title="Duplicate"><span class="wx-copy-label">duplicate</span></a></span>
+		<% } else if ( content === 'quiz' ) { %>
+            <span class="delete"><a href="#" class="wx-subtab-start-quiz" title="Start Quiz"><span class="wx-start-quiz-label">start quiz</span> <span class="wx-quiz-info"></span></a></span>
 		<% } %>
 
 	</li>

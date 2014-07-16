@@ -1,0 +1,140 @@
+<script type="text/template" id="quizbuilder-subtab-edit-template">
+    <div class="medium-12 columns">
+        <h2>Quiz Builder</h2><br>
+    </div>
+
+    <div style="min-height: 576px">
+    <div class="wx-quiz-builder-step-one">
+        <div class="medium-12 columns">
+            <label>Title for this quiz inside your app</label>
+            <input type="text" value="<%- quiz.name %>" class="wx-edit-title" />
+        </div>
+        <div class="medium-12 columns">
+            <label>Password for this quiz</label>
+            <input type="text" value="<%- quiz.settings.passphrase %>" class="wx-edit-passphrase" />
+        </div>
+        <div class="medium-12 columns">
+            <button class="wx-next success radius">Continue &rarr;</button>
+        </div>
+    </div>
+
+    <div class="wx-quiz-builder-step-two" style="display: none;">
+        <div class="medium-12 columns">
+            <div data-alert class="alert-box alert" style="display: none">
+                <span class="message"></span>
+                <a href="#" class="close">&times;</a>
+            </div>
+        </div>
+
+        <div class="medium-6 columns">
+            <button class="wx-add-question success radius">&plus; Add New Question</button>
+
+            <!--<ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel-question-fields">Tab One</a></li>
+                <li class="tab-title"><a href="#panel-another-tab">Tab Two</a></li>
+            </ul>
+            <div class="tabs-content">-->
+                <div class="content active" id="panel-question-fields">
+                    
+                </div>
+                <!--<div class="content" id="panel-another-tab">
+                    Tab Two
+                </div>
+            </div>-->
+        </div>
+
+        <div class="medium-6 columns">
+            <ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel-question-list">Questions</a></li>
+                <li class="tab-title"><a href="#panel-question-icons">Icon</a></li>
+                <li class="tab-title"><a href="#panel-question-support">Help</a></li>
+            </ul>
+            <div class="tabs-content" style="min-height: 432px">
+                <div class="content active" id="panel-question-list">
+                    <dl class="accordion" data-accordion>
+                        <div class="panel wx-preview-form wx-please-add-msg" style="height: 380px">
+                            <h3 class="wx-preview-msg" style="margin: 25% auto 0; text-align: center; color: #bcbcbc">
+                                Please add a question.
+                            </h3>
+                        </div>
+                    </dl>
+                </div>
+                <div class="content" id="panel-question-icons">
+                    <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                </div>
+                <div class="content" id="panel-question-support">
+                    Support text will go here.
+                </div>
+            </div>
+        </div>
+
+        <div class="medium-12 columns">
+            <button class="wx-finish success radius">Save and add to app</button> or <a class="wx-back-button">go back</a>
+        </div>
+    </div>
+    </div>
+
+    <a class="wx-close-reveal-modal">&#215;</a>
+</script>
+
+<script type="text/template" id="quiz-question">
+    <label>Question</label>
+    <input type="text" class="wx-question-challenge" value="<%- challenge %>" placeholder="What is the air-speed velocity of an unladen swallow?" />
+
+    <!--<label>Photo (optional)</label>
+    <div class="new_uploader">
+        <div class="button success expand radius">
+            <span>Upload image</span>
+            <input multiple="multiple" type="file" id="quiz-question-image-<%- ordinal %>" name="quiz-question-image-<%- ordinal %>" class="wx-challenge-photo" value="<%- imageUrl %>" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;" />
+        </div>
+    </div>-->
+
+    <div class="row" style="padding: 10px 0">
+        <div class="medium-10 columns">Answers</div>
+        <div class="medium-2 columns" style="text-align: center">Correct</div>
+    </div>
+    <% for (var i = 0; i < responses.length; i++) {
+        var placeholder = '';
+        switch(i) {
+            case 0:
+                placeholder = '30 km/h';
+                break;
+            case 1:
+                placeholder = '40 km/h';
+                break;
+            case 2:
+                placeholder = '65 km/h';
+                break;
+            case 3:
+                placeholder = 'An African or European swallow?'
+                break;
+        }
+    %>
+        <div class="row">
+            <div class="medium-10 columns">
+                <input type="text" class="wx-question-response" data-index="<%- i %>" value="<%- responses[i] %>" placeholder="<%- placeholder %>" />
+            </div>
+            <div class="medium-2 columns" style="text-align: center">
+                <!-- TODO - Select correct answer when editing. -->
+                <input type="radio" name="answer-<%- ordinal %>" class="wx-correct-answer" value="<%- i %>" style="margin-top: 10px" />
+            </div>
+        </div>
+    <% }; %>
+
+    <button class="wx-delete-question small alert">Delete field</button>
+</script>
+
+<script type="text/template" id="quiz-question-preview">
+    <a href="#panel<%- ordinal %>">. <%- challenge %></a>
+    <% if ( imageUrl ) { %>
+        <img src="<%- imageUrl %>" />
+    <% } %>
+    <div id ="panel<%- ordinal %>" class="content">
+        <strong><%- challenge %></strong>
+        <br>
+
+        <% for (var i = 0; i < responses.length; i++) { %>
+            <%- responses[i] %><br>
+        <% }; %>
+    </div>
+</script>

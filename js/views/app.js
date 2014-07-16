@@ -58,6 +58,9 @@ wxApp = wxApp || {};
 						retVal = 'WordpressAddPageSubTab';
 				}
 				break;
+			case 'quiz':
+				retVal = 'QuizBuilderSubTab';
+				break;
 			case 'twitter':
 			case 'twitterUser':
 				retVal = 'TwitterSubTab';

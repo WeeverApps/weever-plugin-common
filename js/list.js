@@ -44,7 +44,7 @@ var wxApp = wxApp || {};
 	     * API v3 exceptions
 	     */
 	    var apiUrl = '';
-	    if ( endpoint.indexOf( '_docusign' ) === 0 ) {
+	    if ( endpoint.indexOf( '_docusign' ) === 0 || endpoint.indexOf( '_quiz' ) === 0 ) {
 		    apiUrl = wx.liveUrl + 'api/v3/' + endpoint + '?app_key=' + wx.siteKey;
 		    data = paramsObj;
 	    }
