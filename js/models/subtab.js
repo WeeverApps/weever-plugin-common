@@ -117,9 +117,8 @@ wxApp = wxApp || {};
                     me.trigger('save', me);
                 }
 
-                if ( onSaveCallback ) onSaveCallback();
+                if ( onSaveCallback ) onSaveCallback( true );
             });
-            return true;
         }
     });
 })(jQuery);
