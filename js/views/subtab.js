@@ -47,7 +47,9 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
                 if ( !!window.EventSource ) {
                     me.$('.wx-quiz-info').html('&mdash; Loading event info.')
 
-                    var source = new EventSource('http://weeverdev.com:8081/api/v1/status?id=52f78198f6fca9d90146ee7ebd092959');
+                    var quizId = me.model.getConfig().quiz_id,
+                        url    = wx.quizApiUrl + 'status?id=' + quizId,
+                        source = new EventSource( url );
                     source.addEventListener('message', function(e) {
                         console.log( e.data );
                         var data = JSON.parse( e.data );
@@ -117,7 +119,7 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
             var me   = this,
                 quiz = me.model.get('quiz'),
                 url  = wx.quizApiUrl + 'start?id=' + quiz.get('_id') + '&app_key=' + wx.siteKey + '&passphrase=' + quiz.get('settings').passphrase;
-url = 'http://weeverdev.com:8081/api/v1/start?id=52f78198f6fca9d90146ee7ebd092959&app_key=mxc2MHsL0oTZxJ3QQGB2zTOJSnZPY6Ua&passphrase=test';
+
             $.ajax({
                 url    : url,
                 type   : 'GET',
