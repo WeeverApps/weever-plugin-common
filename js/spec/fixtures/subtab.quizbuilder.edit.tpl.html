@@ -59,8 +59,10 @@
                         </div>
                     </dl>
                 </div>
-                <div class="content" id="panel-question-icons">
-                    <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                <div class="content" id="panel-question-icons" style="height: 315px; overflow-y: auto">
+                    <ul class="medium-block-grid-7">
+                        <%= _.template( jQuery('#icon-selector').html(), icon || icon_id, {variable: 'icon_id'}) %>
+                    </ul>
                 </div>
                 <div class="content" id="panel-question-support">
                     Support text will go here.
