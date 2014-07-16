@@ -116,7 +116,8 @@
             </div>
             <div class="medium-2 columns" style="text-align: center">
                 <!-- TODO - Select correct answer when editing. -->
-                <input type="radio" name="answer-<%- ordinal %>" class="wx-correct-answer" value="<%- i %>" style="margin-top: 10px" />
+                <% var selected = (answers.indexOf( responses[i] ) > -1); %>
+                <input type="radio" name="answer-<%- ordinal %>" class="wx-correct-answer" value="<%- i %>" style="margin-top: 10px" <% if (selected) { %>checked<% }%> />
             </div>
         </div>
     <% }; %>
