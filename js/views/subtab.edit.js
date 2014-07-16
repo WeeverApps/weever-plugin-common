@@ -116,18 +116,9 @@ wxApp = wxApp || {};
                 this.setModelFromView(this.model);
                 this.setTitleFromView(this.model);
                 this.setIconFromView(this.model);
-                var shouldRebuild = this.saveModel();
+                this.saveModel();
                 
                 this.$el.foundation('reveal', 'close');
-                
-                // This if statement is currently for 'map' tabs. Because the 
-                // 'map' tab just adds to the same 'tab' (ie, there's only one
-                // actual tab in the app), we don't need to rebuild the app,
-                // just refresh it.
-                if ( shouldRebuild )
-                    wx.rebuildApp();
-                else
-                    wx.refreshAppPreview();
             }
 		},
 
@@ -155,7 +146,17 @@ wxApp = wxApp || {};
 		},
 
 		saveModel: function() {
-            return this.model.save();
+            var onSaveCallback = function( shouldRebuild ) {
+                // This if statement is currently for 'map' tabs. Because the 
+                // 'map' tab just adds to the same 'tab' (ie, there's only one
+                // actual tab in the app), we don't need to rebuild the app,
+                // just refresh it.
+                if ( shouldRebuild )
+                    wx.rebuildApp();
+                else
+                    wx.refreshAppPreview();
+            }
+            this.model.save( onSaveCallback );
 		},
 
         editTitle: function( ev ) {

@@ -21,7 +21,7 @@ wxApp = wxApp || {};
             } );
         },
 
-        save: function() {
+        save: function( onSaveCallback ) {
             var shouldSave = true;
             for (var i = 0; i < wxApp.Tabs.length; i++) {
                 var m = wxApp.Tabs.models[i],
@@ -53,8 +53,9 @@ wxApp = wxApp || {};
             if ( shouldSave ) {
                 wxApp.SubTab.prototype.save.apply(this, arguments);
             }
-
-            return shouldSave;
+            else {
+                onSaveCallback( false );
+            }
         }
 
     });
