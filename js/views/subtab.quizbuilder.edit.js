@@ -13,7 +13,8 @@
             'click .wx-back-button'    : 'previous',
             'click .wx-finish'         : 'finish',
             'keyup .wx-edit-passphrase': 'updatePassphrase',
-            'keyup .wx-edit-title'     : 'updateQuizName'
+            'keyup .wx-edit-title'     : 'updateQuizName',
+            'sortable-update'          : 'sortableUpdate',
         },
 
         render: function() {
@@ -106,6 +107,7 @@
 
             // Open this preview.
             view.getPreview().$('a').click();
+            // this.updateSortable();
         },
 
         addQuestion: function( question, showImmediately ) {
@@ -122,7 +124,31 @@
             question.on('destroy', this.questionDeleted, this);
 
             this.questionViews.push( view );
+
+            this.updateSortable();
+
             return view;
+        },
+
+        updateSortable: function() {
+            if ( this.questionViews.length >= 1 ) {
+                $( '.accordion' ).sortable({
+                    axis:  'y',
+                    start: function( event, ui ) {
+                        $( '.accordion-navigation' ).removeClass('active');
+                        $( '.accordion-navigation div.content' ).removeClass('active');
+                    },
+                    stop:  function( event, ui ) {
+                        ui.item.trigger( 'sortable-drop', ui.item.index() );
+                    }
+                });
+            }
+        },
+
+        sortableUpdate: function( event, model, position ) {
+            var questions = this.model.get( 'quiz' ).get('questions');
+            questions.remove( model );
+            questions.add( model, {at: position} );
         },
 
         next: function() {

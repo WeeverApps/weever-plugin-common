@@ -103,8 +103,8 @@
         className: 'accordion-navigation',
         selector : '#quiz-question-preview',
         events   : {
-            'click'     : 'selectField' //,
-            // 'sortable-drop': 'sortableDrop'
+            'click'        : 'selectField',
+            'sortable-drop': 'sortableDrop'
         },
 
         initialize: function() {
@@ -135,6 +135,10 @@
                 $(this).removeClass('active');
             });
             $('div.wx-question[data-index="' + index +'"]').addClass('active').slideDown();
+        },
+
+        sortableDrop: function( event, index ) {
+            this.$el.trigger( 'sortable-update', [this.model, index] );
         }
     });
 })(jQuery);
