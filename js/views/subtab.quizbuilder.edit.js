@@ -24,7 +24,7 @@
             for (var i = 0; i < this.model.get('quiz').get('questions').length; i++) {
                 var question = this.model.get('quiz').get('questions').at(i);
                 question.set('ordinal', i);
-                this.addQuestion( question );
+                this.addQuestion( question, false );
             };
 
             this.$el.foundation('reflow');
@@ -102,16 +102,19 @@
 
         addNewQuestion: function() {
             var newQuestion = this.model.get('quiz').addQuestion(),
-                view = this.addQuestion( newQuestion );
+                view = this.addQuestion( newQuestion, true );
 
             // Open this preview.
             view.getPreview().$('a').click();
         },
 
-        addQuestion: function( question ) {
+        addQuestion: function( question, showImmediately ) {
             var view = new wxApp.QuizBuilderQuestionView( { model: question } );
 
             this.$('.wx-please-add-msg').hide();
+
+            if ( !showImmediately )
+                view.$el.css('display', 'none');
 
             this.$('#panel-question-fields').append( view.render().el );
             this.$('.accordion').append( view.getPreview().render().el );
