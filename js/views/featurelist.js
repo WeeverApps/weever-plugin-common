@@ -54,7 +54,10 @@ wxApp = wxApp || {};
 		    error: function() {
 
                 var fileName = 'wx.featurelist.js';
-                if ( tier >= 200 ) {
+                if ( tier >= 300 ) {
+                    fileName = 'wx.featurelist.quiz.js';
+                }
+                else if ( tier >= 200 ) {
                     fileName = 'wx.featurelist.training.js';
                 }
                 else if ( tier >= 100 ) {
