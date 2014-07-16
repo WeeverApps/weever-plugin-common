@@ -23,7 +23,7 @@
 
             for (var i = 0; i < this.model.get('quiz').get('questions').length; i++) {
                 var question = this.model.get('quiz').get('questions').at(i);
-                question.ordinal = i;
+                question.set('ordinal', i);
                 this.addQuestion( question );
             };
 
