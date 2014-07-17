@@ -10,7 +10,7 @@
             <input type="text" value="<%- quiz.name %>" class="wx-edit-title" />
         </div>
         <div class="medium-12 columns">
-            <label>Password for this quiz</label>
+            <label>Set administrator password to start this quiz.</label>
             <input type="text" value="<%- quiz.settings.passphrase %>" class="wx-edit-passphrase" />
         </div>
         <div class="medium-12 columns">
@@ -124,7 +124,7 @@
         </div>
     <% }; %>
 
-    <button class="wx-delete-question small alert">Delete field</button>
+    <button class="wx-delete-question small alert">Delete question</button>
 </script>
 
 <script type="text/template" id="quiz-question-preview">
