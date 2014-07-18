@@ -5,5 +5,6 @@
     { "featureName": "WordpressAddPage",    "name": "Add Pages",                    "cms": ["cloud"] },
     { "featureName": "Twitter",             "name": "Twitter"      },
     { "featureName": "Youtube",             "name": "YouTube"      },
+    { "featureName": "FacebookAlbums",      "name": "FB Photos"    },
     { "featureName": "WordpressContacts",   "name": "Contact"      }
 ]
