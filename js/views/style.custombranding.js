@@ -41,7 +41,7 @@ wxApp = wxApp || {};
                 return;
 
             // Set domain to empty array if domain is null.
-            if (wxApp.design.get('domain') === null)
+            if (!wxApp.design.get('domain'))
                 wxApp.design.set('domain', []);
 
             var me = this;
