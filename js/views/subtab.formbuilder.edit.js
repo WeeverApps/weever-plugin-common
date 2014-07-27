@@ -505,6 +505,8 @@ wxApp = wxApp || {};
 			
 			this.addControl( input, inputView );
 
+			console.log( input );
+
 			return input;
 		},
 
@@ -627,12 +629,12 @@ wxApp = wxApp || {};
 		},
 
 		addNumberInput: function(ev) {
+			console.log( 'addNumberInput' );
 			this.addInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
 				minClass: '',
 				maxClass: '',
-				stepClass: '',
 				valueClass: '',
 				attributes: {
 					type: 'number'
