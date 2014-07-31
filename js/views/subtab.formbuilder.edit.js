@@ -505,8 +505,6 @@ wxApp = wxApp || {};
 			
 			this.addControl( input, inputView );
 
-			console.log( input );
-
 			return input;
 		},
 
@@ -629,7 +627,6 @@ wxApp = wxApp || {};
 		},
 
 		addNumberInput: function(ev) {
-			console.log( 'addNumberInput' );
 			this.addInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
@@ -948,7 +945,6 @@ wxApp = wxApp || {};
 
 		addCalculationWithProperties: function( properties ) {
 			var calculator = new wxApp.FormBuilderCalculator( properties );
-			console.log('Creating view with: ', this.model.get( 'config' ).formElements);
 			var calculatorView = new wxApp.FormBuilderCalculatorView({
 				model: calculator,
 				inputs: this.model.get( 'config' ).formElements
@@ -1134,14 +1130,12 @@ wxApp = wxApp || {};
 
 			var action = this.__getActionByMethod( method );
 			action.set( 'value', $me.val() );
-			console.log('Action:', action);
 		},
 
 		updateMode: function( ev ) {
 			var action = this.__getActionByMethod( 'post' ),
 			    $me = $( ev.currentTarget );
 			action.set( 'mode', $me.val() );
-			console.log('Action:', action);
 		},
 
 		__getActionByMethod: function( method ) {
