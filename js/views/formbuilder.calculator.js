@@ -156,25 +156,39 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderCalculatorPreview = wxApp.FormBuilderControlPreview.extend({
 		selector: '#form-builder-calculator-preview',
 
+		initialize: function (attrs, options) {
+	        wxApp.FormBuilderControlPreview.prototype.initialize.apply(this, arguments); // call super constructor
+	        Backbone.Events.on( 'recalculate', this.recalculate, this );
+	    },
+
+		recalculate: function( that ) {
+			if ( this.cid !== that.cid ) {
+				this.calculate();
+			}
+		},
+
 		render: function() {
-			var model = this.model.toJSON();
-			this.$el.html( this.inputTpl( model ) );
-			this.calculate();
-			return this;
+			var me    = this,
+			    model = me.model.toJSON();
+			me.$el.html( me.inputTpl( model ) );
+			me.calculate();
+			// Backbone.Events.on( 'recalculate', this.recalculate, this );
+			return me;
 		},
 
 		calculate: function() {
 			var me            = this,
-			    model         = this.model.toJSON(),
+			    model         = me.model.toJSON(),
 			    valid         = true,
 			    values        = [],
 			    decimalPlaces = 0,
-			    result        = 0;
+			    result        = 0,
+			    form          = me.$el.parents('.wx-validate-feed');
 
 			me.$el.removeClass('wx-error');
 			for (var i = 0; i < model.fields.length; i++) {
 				var field   = model.fields.models[i].attributes.ordinal,
-				    control = $("input[data-ordinal='" + field + "']");
+				    control = form.find("input[data-ordinal='" + field + "']");
 
 				if ( !field ) {
 					me.$el.addClass('wx-error');
@@ -205,7 +219,6 @@ wxApp = wxApp || {};
 				control.on( 'change', function() { me.calculate(); } );
 
 				var value = control.val();
-
 				if (! $.isNumeric( value ) ) {
 					var label = $('.wx-form-control-' + field + ' .wx-form-builder-label-input').val();
 					me.$('.wx-form-builder-calculation-result strong').html( 'The value in <em>' + label + '</em> is not a number.' );
@@ -246,8 +259,13 @@ wxApp = wxApp || {};
 			if ( result ) {
 				result = result.toFixed( decimalPlaces );
 				me.$('.wx-form-builder-calculation-result strong').html( result );
+				var oldResult = me.$('input[type="hidden"]').val();
 				me.$('input[type="hidden"]').val( result );
-				me.$('input[type="hidden"]').trigger('change');
+
+				// If the value has changed, notify the other controls.
+				if ( result != oldResult ) {
+					Backbone.Events.trigger( 'recalculate', me );
+				}
 			}
 		},
 
