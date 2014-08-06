@@ -116,7 +116,6 @@ wxApp = wxApp || {};
         		var title = content.find('h1.wx-article-title').html;
         		content.find('h1.wx-article-title').detach();
         		content = $(content.find('div')[0]).html().trim();
-console.log('CONTENT', content);
 
         		// Add it to the nicEdit div if it's there;
         		// otherwise, add it to the textarea.
