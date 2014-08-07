@@ -30,6 +30,9 @@ wxApp = wxApp || {};
 				actionsJson,
 				config = this.model.get( 'config' );
 
+			wx.isVisible = false;
+			wx.willFlow = false;
+
 			// Set up config object to have properly typed properties
 			// Fix because the get_tabs API is broken, and returns strings for everything in config.
 			config.advanced = this.apiToBoolean( config.advanced );
@@ -632,6 +635,7 @@ wxApp = wxApp || {};
 				label: 'Number',
 				minClass: '',
 				maxClass: '',
+				stepClass: '',
 				valueClass: '',
 				attributes: {
 					type: 'number'
@@ -786,7 +790,8 @@ wxApp = wxApp || {};
 		},
 
 		addTextareaWithProperties: function( properties ) {
-
+			// Textarea attributes are causing problems. They shouldn't even be there!
+			delete properties.attributes;
 			var textArea = new wxApp.FormBuilderControlTextarea( properties );
 			var textAreaView = new wxApp.FormBuilderControlTextareaView({
 				model: textArea
@@ -826,11 +831,13 @@ wxApp = wxApp || {};
 				radioFieldset.get( 'radioGroup' ).add( optionC );
 			} else {
 				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
-					var optionJson = properties.radioGroup[i];	// JSON object coming from the API
-					if ( !optionJson ) {
-						optionJson = properties.radioGroup.models[i].attributes;	// Backbone object coming from the app
+					var optionJson = properties.radioGroup[i],	// JSON object coming from the API
+					    option     = null;
+					if ( optionJson ) {
+						option = wxApp.FormBuilderControlRadio( optionJson );
+					} else {
+						option = properties.radioGroup.models[i];	// Backbone object coming from the app
 					}
-					var option = new wxApp.FormBuilderControlRadio( optionJson );
 					radioFieldset.get( 'radioGroup' ).add( option );
 				};
 			}
@@ -863,11 +870,13 @@ wxApp = wxApp || {};
 				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option C'}) );
 			} else {
 				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
-					var optionJson = properties.checkboxGroup[i];	// JSON object coming from the API
-					if ( !optionJson ) {
-						optionJson = properties.checkboxGroup.models[i].attributes;	// Backbone object coming from the app
+					var optionJson = properties.checkboxGroup[i],	// JSON object coming from the API
+					    option     = null;
+					if ( optionJson ) {
+						option = new wxApp.FormBuilderControlCheckbox( optionJson );
+					} else {
+						option = properties.checkboxGroup.models[i];	// Backbone object coming from the app
 					}
-					var option = new wxApp.FormBuilderControlCheckbox( optionJson );
 					checkboxFieldset.get( 'checkboxGroup' ).add( option );
 				};
 			}
@@ -912,11 +921,13 @@ wxApp = wxApp || {};
 				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option C' } ) );
 			} else {
 				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
-					var optionJson = properties.optionGroup[i];	// JSON object coming from the API
-					if ( !optionJson ) {
-						optionJson = properties.optionGroup.models[i].attributes;	// Backbone object coming from the app
+					var optionJson  = properties.optionGroup[i],	// JSON object coming from the API
+					    optionModel = null;
+					if ( optionJson ) {
+						optionModel = new wxApp.FormBuilderControlOption( optionJson );
+					} else {
+						optionModel = properties.optionGroup.models[i];	// Backbone object coming from the app
 					}
-					var optionModel = new wxApp.FormBuilderControlOption( optionJson );
 					select.get('optionGroup').add( optionModel );
 				};
 			}
@@ -955,10 +966,12 @@ wxApp = wxApp || {};
 
 		addControl: function( input, view ) {
 
-			var config       = this.model.get( 'config' ),
+			var me           = this,
+			    config       = this.model.get( 'config' ),
 			    formElements = config.formElements,
 			    ordinal      = input.get('ordinal'),
-			    advanced     = config.advanced || false;
+			    advanced     = config.advanced || false,
+			    flowed       = false;
 
 			if ( !ordinal ) {
 				ordinal = 0;	// Ensure it's a number.
@@ -990,13 +1003,20 @@ wxApp = wxApp || {};
 			view.$el.addClass('wx-active').css('display', 'block');
 
 			formElements.push( input );
-			$( this.buildPaneSelector ).foundation('reflow');
 
-			// Now show the edit tab, if it exists.
-			try {
+			// If the reveal is visible, we reflow everything immidately and open the 'Field Settings' panel.
+			// If it's not open yet, we create a callback to reflow everything once the modal has opened.
+			if ( wx.isVisible ) {
+				$( me.buildPaneSelector ).foundation('reflow');
 				$('a[href="#panel-field-settings"]').click();
-			} catch(e) {
-				console.log(e);
+			}
+			else if ( !wx.willFlow ) {
+				wx.willFlow = true;
+				$( document ).on('opened.fndtn.reveal', '[data-reveal]', function () {
+					$( document ).off('opened.fndtn.reveal', '[data-reveal]');
+					wx.isVisible = true;
+					$( me.buildPaneSelector ).foundation('reflow');
+				});
 			}
 
 			// Add the view to the Controls array.
