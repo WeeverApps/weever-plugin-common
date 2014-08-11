@@ -45,6 +45,7 @@ wxApp = wxApp || {};
 		},
 
 		deleteControl: function() {
+			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
 		},
