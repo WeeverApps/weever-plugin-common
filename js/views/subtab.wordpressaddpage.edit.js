@@ -76,7 +76,6 @@ wxApp = wxApp || {};
 		        description =  this.$('.wx-coupon-description').val();
 		        terms       =  this.$('.wx-coupon-terms').val();
 		        barcodeText =  this.$('.wx-coupon-barcode').val();
-        	    content     += '<div class="item-page">' + this.$('.coupon-preview').html() + '</div>';
 
 	            model.setConfig('description', description);
 	            model.setConfig('terms',       terms);
@@ -116,7 +115,7 @@ wxApp = wxApp || {};
         		// We just want that 'rest of the content,' so we get rid of the h1, then the parent div.
         		var title = content.find('h1.wx-article-title').html;
         		content.find('h1.wx-article-title').detach();
-        		content.unwrap();
+        		content = $(content.find('div')[0]).html().trim();
 
         		// Add it to the nicEdit div if it's there;
         		// otherwise, add it to the textarea.

@@ -42,7 +42,7 @@ wxApp = wxApp || {};
         // change the size of the icons.
         console.log('=== TIER ===', tier);
         if ( tier >= 100 )
-            $('#toptabs').removeClass('medium-block-grid-7').addClass('medium-block-grid-4');
+            $('#toptabs').removeClass('medium-block-grid-7').addClass('medium-block-grid-5');
 
         wxApp.featureList = new wxApp.FeatureList();
 
