@@ -50,7 +50,14 @@ wxApp = wxApp || {};
 	});
 
 	wxApp.FormBuilderControlInfoPreview = wxApp.FormBuilderControlPreview.extend({
-		selector: '#form-builder-info-preview'
+		selector: '#form-builder-info-preview',
+
+		render: function() {
+			var model = this.model.toJSON();
+			model.innerHTML = model.innerHTML.replace(/\n/g, '<br/>');
+			this.$el.html( this.inputTpl( model ) );
+			return this;
+		}
 	});
 
 })(jQuery);
