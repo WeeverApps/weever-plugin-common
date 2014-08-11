@@ -1,0 +1,51 @@
+<script type="text/template" id="launch-share">
+    <!-- Share App Online -->
+    <% var defaultDomain = domain || '<?php echo $weeverapp->primary_domain; ?>';
+       if (defaultDomain.indexOf('http') !== 0)
+           defaultDomain = 'http://' + defaultDomain;
+    %>
+    <p class="wx-ui-title"><?php echo __( 'Web Address', 'weever' ); ?></p>
+    <p>
+        <?php echo __( 'Your "web app" launches instantly for all popular phone and tablet browsers when online.  Share it with a simple web link.', 'weever' ); ?>
+        <br>
+        <br>
+        <input type="text" value="<%- defaultDomain %>" />
+    </p>
+    <br>
+    <p class="wx-ui-title"><?php echo __( 'Share your app on social media', 'weever' ); ?></p>
+    <p>
+        <?php echo __( 'Share a link to your web app.  You\'ll get the opportunity to preview your message before it goes out.', 'weever' ); ?>
+    </p>
+    <ul class="small-block-grid-3 medium-block-grid-5">
+        <li>
+            <a target="_blank" class="wx-launch-share" id="share-app-twitter" href="http://twitter.com/intent/tweet?url=<%- encodeURIComponent( defaultDomain ) %>&via=WeeverApps">
+                &nbsp;
+            </a>
+            <a target="blank" class="button success expand small radius" href="http://twitter.com/intent/tweet?url=<%- encodeURIComponent( defaultDomain ) %>&via=WeeverApps">Twitter</a>
+        </li>
+        <li>
+            <a target="_blank" class="wx-launch-share" id="share-app-facebook" href="http://www.facebook.com/sharer/sharer.php?u=<%- encodeURIComponent( defaultDomain ) %>">
+                &nbsp;
+            </a>
+            <a target="blank" class="button success expand small radius" href="http://www.facebook.com/sharer/sharer.php?u=<%- encodeURIComponent( defaultDomain ) %>">Facebook</a>
+        </li>
+        <li>
+            <a target="_blank" class="wx-launch-share" id="share-app-email" href="mailto:?subject=Share App&body=Link to App: <%- encodeURIComponent( defaultDomain ) %>%0A%0A++++++++++++QR Code Link: http%3A%2F%2Fchart.apis.google.com%2Fchart%3Fcht%3Dqr%2526chs%3D250x250%2526choe%3DUTF-8%2526chld%3DH%7C0%2526chl%3D<%- encodeURIComponent( defaultDomain ) %>%0A%0A++++++++++++via appBuilder&trade; - Build your app today at http://weeverapps.com/">
+                &nbsp;
+            </a>
+            <a target="blank" class="button success expand small radius" href="mailto:?subject=Share App&body=Link to App: <%- encodeURIComponent( defaultDomain ) %>%0A%0A++++++++++++QR Code Link: http%3A%2F%2Fchart.apis.google.com%2Fchart%3Fcht%3Dqr%2526chs%3D250x250%2526choe%3DUTF-8%2526chld%3DH%7C0%2526chl%3D<%- encodeURIComponent( defaultDomain ) %>%0A%0A++++++++++++via appBuilder&trade; - Build your app today at http://weeverapps.com/">Email</a>
+        </li>
+        <li>
+            <a target="_blank" class="wx-launch-share" id="share-app-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=<%- encodeURIComponent( defaultDomain ) %>&title={<%- encodeURIComponent( defaultDomain ) %>}source=Weever%20appBuilder">
+                &nbsp;
+            </a>
+            <a target="blank" class="button success expand small radius" href="http://www.linkedin.com/shareArticle?mini=true&url=<%- encodeURIComponent( defaultDomain ) %>&title={<%- encodeURIComponent( defaultDomain ) %>}source=Weever%20appBuilder">LinkedIn</a>
+        </li>
+        <li>
+            <a target="_blank" class="wx-launch-share" id="share-app-pinterest" href="http://pinterest.com/pin/create/button/?url=<%- encodeURIComponent( defaultDomain ) %>&media=http%3A%2F%2Fweeverapps.com%2Fwp-content%2Fplugins%2Fweever-apps-for-wordpress%2Fstatic%2Fimages%2Ftablet_load_default.png">
+                &nbsp;
+            </a>
+            <a target="blank" class="button success expand small radius" href="http://pinterest.com/pin/create/button/?url=<%- encodeURIComponent( defaultDomain ) %>&media=http%3A%2F%2Fweeverapps.com%2Fwp-content%2Fplugins%2Fweever-apps-for-wordpress%2Fstatic%2Fimages%2Ftablet_load_default.png">Pinterest</a>
+        </li>
+    </ul>
+</script>
