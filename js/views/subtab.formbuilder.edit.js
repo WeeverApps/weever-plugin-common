@@ -86,6 +86,10 @@ wxApp = wxApp || {};
 
 							me.addCalculationWithProperties( elementsJson[i] );
 
+						} else if ( elementsJson[i].control == 'pagebreak' ) {
+
+							me.addPagebreak();
+
 						} else {
 
 							me.addInput( elementsJson[i] );
