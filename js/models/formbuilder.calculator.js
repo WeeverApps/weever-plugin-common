@@ -35,8 +35,6 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function( properties ) {
-			console.log('arguments', arguments);
-			console.log('properties', properties);
 
 			// The 'fields' property just gets set to a basic array, rather than a Backbone.Array. Let's fix that.
 			var fields = properties.fields;
@@ -47,10 +45,18 @@ wxApp = wxApp || {};
 
 			var fieldArray = new wxApp.FormBuilderCalculatorFields();
 			if ( fields && fields.length ) {
-				for (var i = 0; i < fields.length; i++) {
-					var field = new wxApp.FormBuilderCalculatorField( fields[i] );
-					fieldArray.add( field );
-				};
+				if ( fields instanceof wxApp.FormBuilderCalculatorFields ) {
+					fieldArray = fields;
+				}
+				else {
+					for (var i = 0; i < fields.length; i++) {
+						var field = fields[i];
+						if ( ! field instanceof wxApp.FormBuilderCalculatorField ) {
+						    field = new wxApp.FormBuilderCalculatorField( field );
+						}
+						fieldArray.add( field );
+					};
+				}
 			}
 			else {
 				fieldArray.add( new wxApp.FormBuilderCalculatorField() );
