@@ -30,7 +30,6 @@ wxApp = wxApp || {};
 				config = this.model.get( 'config' );
 
 			wx.isVisible = false;
-			wx.willFlow = false;
 
 			// Set up config object to have properly typed properties
 			// Fix because the get_tabs API is broken, and returns strings for everything in config.
@@ -39,6 +38,12 @@ wxApp = wxApp || {};
 
 			// We use this collection to cache the Number controls for calculators.
 			me.numberControls = new wxApp.FormBuilderCollection();
+
+			$( document ).on('opened.fndtn.reveal', '[data-reveal]', function () {
+				$( document ).off('opened.fndtn.reveal', '[data-reveal]');
+				wx.isVisible = true;
+				$( me.buildPaneSelector ).foundation('reflow');
+			});
 
 			if ( typeof config.formElements == 'undefined' ) {
 				config.formElements = new wxApp.FormBuilderCollection();
@@ -154,7 +159,6 @@ wxApp = wxApp || {};
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
 				this.model.get( 'config' ).onUpload = JSON.parse( this.model.get( 'config' ).onUpload );
 			}
-
 
 			// Call parent's initialize() function
 			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
@@ -1010,15 +1014,7 @@ wxApp = wxApp || {};
 			// If it's not open yet, we create a callback to reflow everything once the modal has opened.
 			if ( wx.isVisible ) {
 				$( me.buildPaneSelector ).foundation('reflow');
-				$('a[href="#panel-field-settings"]').click();
-			}
-			else if ( !wx.willFlow ) {
-				wx.willFlow = true;
-				$( document ).on('opened.fndtn.reveal', '[data-reveal]', function () {
-					$( document ).off('opened.fndtn.reveal', '[data-reveal]');
-					wx.isVisible = true;
-					$( me.buildPaneSelector ).foundation('reflow');
-				});
+				me.$('a[href="#panel-field-settings"]').click();
 			}
 
 			// Add the preview to the Preview tab.
