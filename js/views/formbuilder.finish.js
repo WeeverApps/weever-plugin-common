@@ -39,7 +39,6 @@ wxApp = wxApp || {};
 			this.$el.html( this.template({
 				collection: this.model.get( 'config' ).formElements
 			}) );
-//			this.$el.foundation( 'reveal', 'open' );
 			return this;
 		},
 

@@ -203,7 +203,7 @@ wxApp = wxApp || {};
 		className: 'wx-form-preview-row',
 		selector : '',
 		events   : {
-			'click'		: 'selectField',
+			'click'        : 'selectField',
 			'sortable-drop': 'sortableDrop'
 		},
 

@@ -9,9 +9,8 @@ wxApp = wxApp || {};
 		baseEditTplSelector: '#formbuilder-subtab-edit-template',
 		hasCalledFinish: false,
 		finishView: null,
-		previews: null,
-		controls: null,
 		docusign: null,
+		numberControls: null,
 
 		initializeEvents: function() {
 			this.events = _.extend({}, this.genericEvents, this.events);
@@ -37,6 +36,9 @@ wxApp = wxApp || {};
 			// Fix because the get_tabs API is broken, and returns strings for everything in config.
 			config.advanced = this.apiToBoolean( config.advanced );
 			config.isDocuSign = this.apiToBoolean( config.isDocuSign );
+
+			// We use this collection to cache the Number controls for calculators.
+			me.numberControls = new wxApp.FormBuilderCollection();
 
 			if ( typeof config.formElements == 'undefined' ) {
 				config.formElements = new wxApp.FormBuilderCollection();
@@ -634,7 +636,7 @@ wxApp = wxApp || {};
 		},
 
 		addNumberInput: function(ev) {
-			this.addInput({
+			var input = this.addInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
 				minClass: '',
@@ -645,6 +647,7 @@ wxApp = wxApp || {};
 					type: 'number'
 				}
 			});
+
 		},
 
 		addPasswordInput: function(ev) {
@@ -939,20 +942,9 @@ wxApp = wxApp || {};
 
 		addCalculation: function( ev ) {
 			
-			// Before we can add a calculator, we need to ensure there is at least one numeric 
-			// control in the form, with a name attribute assigned.
-			var found = false,
-			    formElements = this.model.get( 'config' ).formElements;
-			for (var i = 0; i < formElements.length; i++) {
-				var input = formElements.at(i);
-				if ( input.get('attributes') && 
-					 input.get('attributes').type === 'number' ) {
-					found = true;
-					break;
-				}
-			};
-
-			if ( found )
+			// Before we can add a calculator, we need to ensure there is at 
+			// least one numeric control in the form.
+			if ( this.numberControls.length )
 				this.addCalculationWithProperties({});
 			else
 				alert('Please add at least one number field.');
@@ -962,7 +954,7 @@ wxApp = wxApp || {};
 			var calculator = new wxApp.FormBuilderCalculator( properties );
 			var calculatorView = new wxApp.FormBuilderCalculatorView({
 				model: calculator,
-				inputs: this.model.get( 'config' ).formElements
+				inputs: this.numberControls
 			});
 
 			this.addControl( calculator, calculatorView );
@@ -1008,6 +1000,12 @@ wxApp = wxApp || {};
 
 			formElements.push( input );
 
+			// Add number fields and calculations to the numberControls array.
+			if (( input.get( 'attributes' ) && input.get( 'attributes' ).type === 'number' ) ||
+				( input.get( 'control' ) === 'calculation' )) {
+				this.numberControls.push( input );
+			}
+
 			// If the reveal is visible, we reflow everything immidately and open the 'Field Settings' panel.
 			// If it's not open yet, we create a callback to reflow everything once the modal has opened.
 			if ( wx.isVisible ) {
@@ -1023,17 +1021,7 @@ wxApp = wxApp || {};
 				});
 			}
 
-			// Add the view to the Controls array.
-			if ( !this.controls ) {
-				this.controls = [];
-			}
-			this.controls.push( view );
-
 			// Add the preview to the Preview tab.
-			if ( !this.previews ) {
-				this.previews = [];
-			}
-			this.previews.push( view.getPreview() );
 			var $preview = view.getPreview().render().$el;
 			$( '.' + this.previewPaneClass ).append( $preview );
 			setTimeout(function() {
