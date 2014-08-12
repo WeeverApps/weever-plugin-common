@@ -355,14 +355,17 @@ wxApp = wxApp || {};
 			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
 			$('.wx-submit-button').parent().addClass('wx-active');
 
-			var id          = $('.wx-form-builder-row.wx-active').attr('id'),
-			    openControl = $('#' + id);
+			var me          = this,
+			    openControl = me.$('.wx-form-builder-row.wx-active');
+
+		    me.$('a[href="#panel-field-settings"]').click();
+
 			openControl.css('display', 'block');
 			openControl.slideUp( 200, function() {
 				openControl.removeClass( 'wx-active' );
-				$( '#wx-button-controls' ).css('display', 'none');
-				$( '#wx-button-controls' ).addClass( 'wx-active' );
-				$( '#wx-button-controls' ).slideDown(200);
+				me.$( '.wx-button-controls' ).css('display', 'none');
+				me.$( '.wx-button-controls' ).addClass( 'wx-active' );
+				me.$( '.wx-button-controls' ).slideDown(200);
 			});
 		},
 
