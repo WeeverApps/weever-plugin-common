@@ -97,15 +97,29 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
 		    var modelName = this.model.collection.getModelNameByTabData( copy ),
 		        newCopy   = new wxApp[ modelName ]( copy );
 
-            newCopy.save( function onSaveCallback() {
+            var onOrderUpdate = function onOrderUpdate() {
+                wx.rebuildApp();
+                // Select the parent tab.
+                $('#' + me.model.get('parent_id') + 'TabID').click();
+            };
+
+            var onSetParentId = function onSetParentId() {
+                me.model.addSubTab( newCopy );
+                // TODO - Ordering.
+                var order = String( $('#listItemsSortable' + me.model.get('parent_id')).sortable('toArray').map( function(element) {
+                    return element.replace('SubtabID', '');
+                }) );
+                wx.makeApiCall( 'tabs/sort_tabs', { order: order }, onOrderUpdate );
+            };
+
+            var onSaveCallback = function onSaveCallback() {
                 me.model.collection.add( newCopy );
-	            wx.makeApiCall( 'tabs/set_parent_id', { tab_id: newCopy.get('id'), parent_id: me.model.get('parent_id') }, function() {
-		            wx.rebuildApp();
-		            me.model.addSubTab( newCopy );
-		            // Select the parent tab.
-		            $('#' + me.model.get('parent_id') + 'TabID').click();
-	            });
-            });
+                wx.makeApiCall( 'tabs/set_parent_id', 
+                    { tab_id: newCopy.get('id'), parent_id: me.model.get('parent_id') }, 
+                    onSetParentId);
+            };
+
+            newCopy.save( onSaveCallback );
 	    },
 
         confirmStartQuiz: function( ev ) {
