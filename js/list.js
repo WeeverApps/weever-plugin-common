@@ -143,7 +143,10 @@ var wxApp = wxApp || {};
         console.log('Refreshing Preview');
         $('#iframe-loading').hide();
 
-        if ( $.browser.webkit ) {
+        // Get the major version number of the browser.
+        // eg, if the browser version is '36.0.1985.125', this converts it to 36.
+        var version = parseInt( $.browser.version.split('.')[0] );
+        if ( $.browser.webkit || ( $.browser.msie && version >= 10.0 )) {
             $('#preview-app-dialog-no-webkit').hide();
             $('#preview-app-dialog-frame').attr( 'src', $('#preview-app-dialog-frame').attr('rel') );
             $('#preview-app-dialog-frame').show();
