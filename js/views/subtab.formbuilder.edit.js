@@ -845,11 +845,9 @@ wxApp = wxApp || {};
 				radioFieldset.get( 'radioGroup' ).add( optionC );
 			} else {
 				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
-					var optionJson = properties.radioGroup[i],	// JSON object coming from the API
-					    option     = null;
-					if ( optionJson ) {
-						option = wxApp.FormBuilderControlRadio( optionJson );
-					} else {
+					var option = properties.radioGroup[i];	// JSON object coming from the API
+
+					if ( !option ) {
 						option = properties.radioGroup.models[i];	// Backbone object coming from the app
 					}
 					radioFieldset.get( 'radioGroup' ).add( option );
