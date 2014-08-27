@@ -80,6 +80,20 @@ wxApp = wxApp || {};
 					}
 				}
 
+                // Check to see if it's a legacy RSS feed.
+                if ( 'SubTab' == retVal && tabData.config != undefined && tabData.config.url != undefined ) {
+                    if ( tabData.config.url.indexOf( '_rss2r3s' ) >= 0 ) {
+                        retVal = 'RSSSubTab';
+
+                        // De-legacy the tab
+                        var rawUrl = tabData.config.url;
+                        rawUrl = rawUrl.replace('http://weeverapp.com/api/v2/_rss2r3s/byUrl?url=', '');
+                        rawUrl = decodeURIComponent( rawUrl );
+                        tabData.config.rawUrl = rawUrl;
+                        tabData.config.subtab_name = 'RSSSubTab';
+                    }
+                }
+
 				if ( 'SubTab' == retVal ) {
 					for ( var obj in wxApp ) {
 						if ( obj.indexOf('SubTab') != -1 &&  undefined != wxApp[obj].prototype.defaults && undefined != wxApp[obj].prototype.defaults.type ) {
