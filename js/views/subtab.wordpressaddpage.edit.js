@@ -124,7 +124,7 @@ wxApp = wxApp || {};
         		} else {
 	        		me.$('.wx-content-editor').val( content );
 	        	}
-	        	me.$('')
+                me.$('.wx-edit-input').val( title );
         	} );
 		},
 
