@@ -113,7 +113,7 @@ wxApp = wxApp || {};
 
         		// The content contains a div.item-page, which contains the title, h1.wx-article-title, then the rest of the content.
         		// We just want that 'rest of the content,' so we get rid of the h1, then the parent div.
-        		var title = content.find('h1.wx-article-title').html;
+                var title = content.find('h1.wx-article-title').html().trim();
         		content.find('h1.wx-article-title').detach();
         		content = $(content.find('div')[0]).html().trim();
 
