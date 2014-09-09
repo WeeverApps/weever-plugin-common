@@ -37,6 +37,11 @@ wxApp = wxApp || {};
             this.$el.data( 'backbone-view', this );
             this.$el.addClass( this.model.get('id') );
             this.$el.attr('id', this.model.get('id') + 'TabID');
+
+            if ( this.model.get('layout') == 'share' ) {
+                this.$el.addClass( 'wx-share' );
+            }
+
             return this;
         },
 

@@ -23,7 +23,16 @@ wxApp = wxApp || {};
         addOne: function(tab) {
             var me = this;
             var view = new wxApp.TabView({ model: tab });
-            this.$el.append( view.render().el );
+
+            // If the last tab is the share tab, we add the tab in the second-to-last position.
+            // Otherwise, we just shove it on the end.
+            if ( me.$('> div:last-child').hasClass('wx-share') ) {
+                me.$('> div:last-child').before( view.render().el );
+            }
+            else {
+                me.$el.append( view.render().el );
+            }
+
             view.subTabsContainerView = new wxApp.SubTabsContainerView({ model: tab });
             view.subTabsContainerView.tabView = view;
             tab.on('destroy', function(tab) {
