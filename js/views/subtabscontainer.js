@@ -62,7 +62,15 @@ wxApp = wxApp || {};
             var me = this;
             wx.makeApiCall( 'tabs/set_tabLayout', { tab_id: this.model.get('id'), tabLayout: tabLayout }, function() {
                 console.log('Layout Saved');
+
+                // Apply the new layout to the current tab & all child tabs.
                 me.model.set('tabLayout', tabLayout);
+                if ( me.model.get('subTabs') && me.model.get('subTabs').length ) {
+                    for (var i = 0; i < me.model.get('subTabs').length; i++) {
+                        var subtab = me.model.get('subTabs').at( i );
+                        subtab.set( 'tabLayout', tabLayout );
+                    };
+                }
                 wx.rebuildApp();
             });
         },
