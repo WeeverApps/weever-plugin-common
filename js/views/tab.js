@@ -54,12 +54,14 @@ wxApp = wxApp || {};
             // We're moving a subtab up into another tab, update the db then move the subtab across
             Backbone.Events.trigger( 'tab:dropped', draggedItemView.model.get('parent_id') );
             if ( draggedItemView.model.get('parent_id') != me.model.get('id') ) {
+                wx.setting_parent = true;
                 wx.makeApiCall( 'tabs/set_parent_id', { tab_id: draggedItemView.model.get('id'), parent_id: me.model.get('id') }, function() {
                     wx.rebuildApp();
                     draggedItemView.model.trigger('tab:move');
                     me.model.addSubTab( draggedItemView.model );
                     // Select the parent tab.
                     $('#' + me.model.get('id') + 'TabID').click();
+                    wx.setting_parent = false;
                 });
             }
 

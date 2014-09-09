@@ -97,19 +97,17 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
 		    var modelName = this.model.collection.getModelNameByTabData( copy ),
 		        newCopy   = new wxApp[ modelName ]( copy );
 
-            var onOrderUpdate = function onOrderUpdate() {
-                wx.rebuildApp();
-                // Select the parent tab.
-                $('#' + me.model.get('parent_id') + 'TabID').click();
-            };
+            // var onOrderUpdate = function onOrderUpdate() {
+            //     wx.rebuildApp();
+            //     // Select the parent tab.
+            //     $('#' + me.model.get('parent_id') + 'TabID').click();
+            // };
 
             var onSetParentId = function onSetParentId() {
                 me.model.addSubTab( newCopy );
-                // TODO - Ordering.
-                var order = String( $('#listItemsSortable' + me.model.get('parent_id')).sortable('toArray').map( function(element) {
-                    return element.replace('SubtabID', '');
-                }) );
-                wx.makeApiCall( 'tabs/sort_tabs', { order: order }, onOrderUpdate );
+                wx.rebuildApp();
+                // Select the parent tab.
+                $('#' + me.model.get('parent_id') + 'TabID').click();
             };
 
             var onSaveCallback = function onSaveCallback() {

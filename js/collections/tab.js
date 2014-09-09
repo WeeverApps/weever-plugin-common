@@ -34,6 +34,9 @@ var wxApp = wxApp || {};
                         me.add( tabs[i] );
                     }
 
+                    if ( wxApp.tabsView )
+                        wxApp.tabsView.loaded = true;
+
                     if ( onCompleteCallback )
                         onCompleteCallback();
                 }

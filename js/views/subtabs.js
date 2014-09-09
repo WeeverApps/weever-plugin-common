@@ -60,10 +60,19 @@ wxApp = wxApp || {};
                         if ( !$(ui.item).data('backbone-view') )
                             return;
 
+                        if ( wx.setting_parent ) {
+                            // If we are currently setting the parent ID (see views/tab.js:57), we
+                            // do not want to sort as well. It causes subtabs to become parents,
+                            // parents to be come children, Share Tabs all over the place, cats and
+                            // dogs living together, total hysteria.
+                            return;
+                        }
+
                         console.log('update');
                         var order = String( $(this).sortable('toArray').map( function(element) {
                             return element.replace('SubtabID', '');
                         }) );
+                        
                         wx.makeApiCall( 'tabs/sort_tabs', { order: order }, function() {
                             wx.rebuildApp();
                             me.setSubTabCollectionOrder( order.split(',') );
