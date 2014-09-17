@@ -90,7 +90,7 @@ wxApp = wxApp || {};
 							me.addDocusignSignatureWithProperties( elementsJson[i] );
 
 						} else if ( elementsJson[i].control == 'weeverSignature' ) {
-
+console.log( 'addWeeverSignatureWithProperties' )
 							me.addWeeverSignatureWithProperties( elementsJson[i] );
 
 						} else if ( elementsJson[i].control == 'calculation' ) {
