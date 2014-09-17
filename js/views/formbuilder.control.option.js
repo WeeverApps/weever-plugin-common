@@ -35,6 +35,13 @@ wxApp = wxApp || {};
 			return this;
 		},
 
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.getPreview().remove();
+			this.remove();
+			this.model.destroy();
+		},
+
 		setSelected: function( ev ) {
 			console.log('setSelected');
 			this.model.collection.models.forEach( function( control ) {

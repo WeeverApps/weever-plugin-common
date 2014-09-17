@@ -4,6 +4,13 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlRadioView = wxApp.FormBuilderControlBaseView.extend({
 		tplSelector: '#form-builder-radio',
 
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.getPreview().remove();
+			this.remove();
+			this.model.destroy();
+		},
+
 		getPreview: function() {
 			if ( this.preview === null ) {
 				this.preview = new wxApp.FormBuilderControlRadioPreview({ model: this.model });
@@ -41,6 +48,13 @@ wxApp = wxApp || {};
 			}
 
 			return this;
+		},
+
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.getPreview().remove();
+			this.remove();
+			this.model.destroy();
 		},
 
 		getPreview: function() {

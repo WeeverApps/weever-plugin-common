@@ -4,6 +4,13 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderControlCheckboxView = wxApp.FormBuilderControlBaseView.extend({
 		tplSelector: '#form-builder-checkbox',
 
+		deleteControl: function() {
+			console.log( 'deleteControl' );
+			this.getPreview().remove();
+			this.remove();
+			this.model.destroy();
+		},
+
 		getPreview: function() {
 			if ( this.preview === null ) {
 				this.preview = new wxApp.FormBuilderControlCheckboxPreview({ model: this.model });
