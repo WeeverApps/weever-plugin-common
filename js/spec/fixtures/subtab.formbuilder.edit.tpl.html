@@ -843,3 +843,16 @@
 
     <a class="wx-close-reveal-modal">&#215;</a>
 </script>
+
+<script type="text/template" id="formbuilder-subtab-edit-warning-template">
+	<h1>Danger Will Robinson!</h1>
+	<p>Some warning text</p>
+	<a href="<%- wx.apiUrl %>_formbuilder/get_csv?tab_id=<%- tab_id %>" class="wx-form-builder-warning-export">Export data to a CSV</a>
+	<p></p>
+	<label><input type="checkbox" class="wx-form-builder-warning-acknowledged" value="1" /> I understand the warning and wish to proceed.</label>
+	<p></p>
+	<div>
+		<a href="#" class="wx-form-builder-warning-proceed button radius disabled">Proceed</a>
+		&nbsp; <a class="wx-close-button wx-cancel-link radius">or cancel</a>
+	</div>
+</script>

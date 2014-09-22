@@ -23,7 +23,33 @@ wxApp = wxApp || {};
 			return true;
 		},
 
+		dataCleanupOnFormEdit: function( callback, callbackScope, callbackArgs ) {
+			console.log( 'dataCleanupOnFormEdit' );
+			console.log( this.model.get( 'id' ) );
+			console.log( this.model );
+			var warningView = new wxApp.FormBuilderSubTabEditWarningView({
+				model: new Backbone.Model({
+					tab_id: this.model.get( 'id' ),
+					callback: callback,
+					callbackScope: callbackScope,
+					callbackArgs: callbackArgs
+				}),
+				el: '#wx-edit-area-' + this.model.get( 'id' )
+			});
+		},
+
 		initialize: function() {
+			var me = this;
+
+			if ( typeof me.model.get( 'config' ).formElements != 'undefined' ) {
+				me.dataCleanupOnFormEdit( me.populateForm, me, arguments );
+			}
+			else {
+				me.populateForm( arguments );
+			}
+		},
+
+		populateForm: function( arguments ) {
 			var me = this,
 				elementsJson,
 				actionsJson,
@@ -1163,6 +1189,53 @@ console.log( 'addWeeverSignatureWithProperties' )
 				}
 			}
 			return actionToReturn;
+		}
+	});
+
+	wxApp.FormBuilderSubTabEditWarningView = wxApp.SubTabEditView.extend({
+		baseEditTplSelector: '#formbuilder-subtab-edit-warning-template',
+		events: {
+			'click .wx-back-button':                        'closeReveal',
+			'click .wx-form-builder-warning-acknowledged': 'acknowledgementReceived',
+			'click .wx-form-builder-warning-proceed':       'proceed'
+		},
+		initializeEvents: function() {
+			this.events = _.extend({}, this.genericEvents, this.events);
+		},
+		initialize: function() {
+			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
+		},
+		closeReveal: function( e ) {
+			e.preventDefault();
+			this.$el.foundation( 'reveal', 'close' );
+		},
+		acknowledgementReceived: function( e ) {
+			if ( $( e.currentTarget ).is( ':checked' ) ) {
+				$( '.wx-form-builder-warning-proceed' ).removeClass( 'disabled' );
+			}
+			else {
+				$( '.wx-form-builder-warning-proceed' ).addClass( 'disabled' );
+			}
+		},
+		proceed: function( e ) {
+			var me = this;
+			e.preventDefault();
+
+			var confirmed = window.confirm( 'Are you SURE you want to proceed? All of your existing form submissions will be erased!' );
+			if ( ! confirmed ) {
+				return;
+			}
+
+			// Delete data
+			$.ajax({
+				url: wx.apiUrl + '_formbuilder/delete_form_data?tab_id=' + this.model.get( 'tab_id' ),
+				success: function( data ) {
+					me.model.get( 'callback' ).apply( me.model.get( 'callbackScope' ), me.model.get( 'callbackArgs' ) );
+				},
+				error: function( jqXHR, textStatus, errorThrown ) {
+					alert( 'An unknown error has occurred deleting the data. Please contact support@weeverapps.com.' );
+				}
+			});
 		}
 	});
 
