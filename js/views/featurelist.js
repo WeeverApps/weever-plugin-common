@@ -54,6 +54,16 @@ wxApp = wxApp || {};
 		    error: function() {
 
                 var fileName = 'wx.featurelist.js';
+
+			    /**
+			     * Check for a dev system and load the dev config instead
+			     */
+			    var hostname = window.location.hostname;
+			    if ( hostname.lastIndexOf( '.dev' ) == ( hostname.length - 4 )
+				    || hostname.lastIndexOf( 'weeverdev.com' ) == ( hostname.length - 13 ) ) {
+				    fileName = 'wx.featurelist.dev.js';
+			    }
+
                 if ( tier >= 300 ) {
                     fileName = 'wx.featurelist.quiz.js';
                 }
