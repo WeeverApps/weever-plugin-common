@@ -116,7 +116,7 @@ wxApp = wxApp || {};
 							me.addDocusignSignatureWithProperties( elementsJson[i] );
 
 						} else if ( elementsJson[i].control == 'weeverSignature' ) {
-console.log( 'addWeeverSignatureWithProperties' )
+
 							me.addWeeverSignatureWithProperties( elementsJson[i] );
 
 						} else if ( elementsJson[i].control == 'calculation' ) {
@@ -878,7 +878,7 @@ console.log( 'addWeeverSignatureWithProperties' )
 					var optionJson = properties.radioGroup[i],	// JSON object coming from the API
 					    option     = null;
 					if ( optionJson ) {
-						option = wxApp.FormBuilderControlRadio( optionJson );
+						option = new wxApp.FormBuilderControlRadio( optionJson );
 					} else {
 						option = properties.radioGroup.models[i];	// Backbone object coming from the app
 					}
