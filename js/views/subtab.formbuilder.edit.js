@@ -1199,6 +1199,10 @@ wxApp = wxApp || {};
 			var me = this;
 			e.preventDefault();
 
+			if ( $( e.currentTarget ).hasClass( 'disabled' ) ) {
+				return;
+			}
+
 			var confirmed = window.confirm( 'Are you SURE you want to proceed? All of your existing form submissions will be erased!' );
 			if ( ! confirmed ) {
 				return;
