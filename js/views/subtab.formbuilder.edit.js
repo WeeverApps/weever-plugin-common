@@ -32,10 +32,9 @@ wxApp = wxApp || {};
 		},
 
 		initialize: function() {
-			var me = this;
-
-			var isEditing = false;
-			var elementsJson = [];
+			var me           = this,
+			    isEditing    = false,
+			    elementsJson = [];
 			try {
 				elementsJson = JSON.parse( me.model.get( 'config' ).formElements );
 			} catch(err) {
