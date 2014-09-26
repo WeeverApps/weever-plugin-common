@@ -23,29 +23,21 @@ wxApp = wxApp || {};
 			return true;
 		},
 
+		/**
+		 * Show the "We're going to delete all your data" warning panel.
+		 */
 		dataCleanupOnFormEdit: function( callback, callbackScope, callbackArgs ) {
-			console.log( 'dataCleanupOnFormEdit' );
-			console.log( this.model.get( 'id' ) );
-			console.log( this.model );
-			var warningView = new wxApp.FormBuilderSubTabEditWarningView({
-				model: new Backbone.Model({
-					tab_id: this.model.get( 'id' ),
-					callback: callback,
-					callbackScope: callbackScope,
-					callbackArgs: callbackArgs
-				}),
-				el: '#wx-edit-area-' + this.model.get( 'id' )
-			});
+			this.$('.form-builder-delete-data').show();
+			this.$('.form-builder-step-one').hide();
 		},
 
 		initialize: function() {
 			var me = this;
+			me.populateForm( arguments );
 
-			if ( typeof me.model.get( 'config' ).formElements != 'undefined' ) {
+			// If they're editing an existing form, warn them that their data may (will) be deleted.
+			if (( typeof me.model.get( 'config' ).formElements != 'undefined' ) && me.model.get( 'config' ).formElements.length > 0) {
 				me.dataCleanupOnFormEdit( me.populateForm, me, arguments );
-			}
-			else {
-				me.populateForm( arguments );
 			}
 		},
 
@@ -367,8 +359,12 @@ wxApp = wxApp || {};
 			'keyup .wx-form-builder-pdfheader-line1'         : 'updatePdfHeader',
 			'keyup .wx-form-builder-pdfheader-line2'         : 'updatePdfHeader',
 			'keyup .wx-form-builder-pdfheader-line3'         : 'updatePdfHeader',
-			'click .radio-mode'                              : 'updateMode'
+			'click .radio-mode'                              : 'updateMode',
 
+			// Data deletion warning.
+			'click .wx-back-button':                        'closeReveal',
+			'click .wx-form-builder-warning-acknowledged': 'acknowledgementReceived',
+			'click .wx-form-builder-warning-proceed':       'proceed'
 		},
 
 		updateSubmitButtonText: function( ev ) {
@@ -1189,26 +1185,8 @@ wxApp = wxApp || {};
 				}
 			}
 			return actionToReturn;
-		}
-	});
+		},
 
-	wxApp.FormBuilderSubTabEditWarningView = wxApp.SubTabEditView.extend({
-		baseEditTplSelector: '#formbuilder-subtab-edit-warning-template',
-		events: {
-			'click .wx-back-button':                        'closeReveal',
-			'click .wx-form-builder-warning-acknowledged': 'acknowledgementReceived',
-			'click .wx-form-builder-warning-proceed':       'proceed'
-		},
-		initializeEvents: function() {
-			this.events = _.extend({}, this.genericEvents, this.events);
-		},
-		initialize: function() {
-			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
-		},
-		closeReveal: function( e ) {
-			e.preventDefault();
-			this.$el.foundation( 'reveal', 'close' );
-		},
 		acknowledgementReceived: function( e ) {
 			if ( $( e.currentTarget ).is( ':checked' ) ) {
 				$( '.wx-form-builder-warning-proceed' ).removeClass( 'disabled' );
@@ -1228,9 +1206,10 @@ wxApp = wxApp || {};
 
 			// Delete data
 			$.ajax({
-				url: wx.apiUrl + '_formbuilder/delete_form_data?tab_id=' + this.model.get( 'tab_id' ),
+				url: wx.apiUrl + '_formbuilder/delete_form_data?tab_id=' + this.model.get( 'id' ),
 				success: function( data ) {
-					me.model.get( 'callback' ).apply( me.model.get( 'callbackScope' ), me.model.get( 'callbackArgs' ) );
+					me.$('.form-builder-delete-data').slideUp();
+					me.$('.form-builder-step-one').slideDown();
 				},
 				error: function( jqXHR, textStatus, errorThrown ) {
 					alert( 'An unknown error has occurred deleting the data. Please contact support@weeverapps.com.' );
