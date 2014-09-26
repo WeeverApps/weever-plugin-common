@@ -1196,7 +1196,7 @@ console.log( 'addWeeverSignatureWithProperties' )
 		baseEditTplSelector: '#formbuilder-subtab-edit-warning-template',
 		events: {
 			'click .wx-back-button':                        'closeReveal',
-			'click .wx-form-builder-warning-acknowledged': 'acknowledgementReceived',
+			'click .wx-form-builder-warning-acknowledged':  'acknowledgementReceived',
 			'click .wx-form-builder-warning-proceed':       'proceed'
 		},
 		initializeEvents: function() {
@@ -1220,6 +1220,10 @@ console.log( 'addWeeverSignatureWithProperties' )
 		proceed: function( e ) {
 			var me = this;
 			e.preventDefault();
+
+			if ( $( e.currentTarget ).hasClass( 'disabled' ) ) {
+				return;
+			}
 
 			var confirmed = window.confirm( 'Are you SURE you want to proceed? All of your existing form submissions will be erased!' );
 			if ( ! confirmed ) {
