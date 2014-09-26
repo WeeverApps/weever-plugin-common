@@ -33,10 +33,21 @@ wxApp = wxApp || {};
 
 		initialize: function() {
 			var me = this;
+
+			var isEditing = false;
+			var elementsJson = [];
+			try {
+				elementsJson = JSON.parse( me.model.get( 'config' ).formElements );
+			} catch(err) {
+				if ( me.model.get( 'config' ).formElements )
+					elementsJson = me.model.get( 'config' ).formElements.toJSON();
+			}
+			isEditing = ( elementsJson.length > 0 );
+
 			me.populateForm( arguments );
 
 			// If they're editing an existing form, warn them that their data may (will) be deleted.
-			if (( typeof me.model.get( 'config' ).formElements != 'undefined' ) && me.model.get( 'config' ).formElements.length > 0) {
+			if ( isEditing ) {
 				me.dataCleanupOnFormEdit( me.populateForm, me, arguments );
 			}
 		},
