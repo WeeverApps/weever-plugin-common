@@ -58,6 +58,7 @@
         <% } %>
 
         <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.required || attributes.attributes.required %> /> Required</label>
+        <label class="<%- emailOptionClass %>"><input type="checkbox" class="wx-form-builder-send-copy" <%- optionSendPDF %> /> Allow users to receive a copy of this form</label>
 
         <br>
 
@@ -71,4 +72,7 @@
 		<span class="required<%= attributes.required || attributes.attributes.required == 'checked' ? '' : ' hide' %>">*</span>
 	</label>
 	<input data-ordinal="<%- ordinal %>" class="wx-form-builder-<%- attributes.type || attributes.attributes.type %>-input" type="<%- attributes.type || attributes.attributes.type %>" placeholder="<%- attributes.placeholder || attributes.attributes.placeholder %>" name="<%- attributes.name || attributes.attributes.name %>" />
+    <% if ( optionSendPDF ) { %>
+        <label><input type="checkbox" checked> Send me a copy of the form</input></label>
+    <% } %>
 </script>

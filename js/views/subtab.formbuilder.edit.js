@@ -636,6 +636,7 @@ wxApp = wxApp || {};
 				label: 'Email',
 				showPlaceholder: true,
 				multiClass: '',
+				emailOptionClass: '',
 				attributes: {
 					type: 'email'
 				}

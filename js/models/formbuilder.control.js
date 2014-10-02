@@ -29,7 +29,11 @@ wxApp = wxApp || {};
 				requiredClass: '',
 				autocompleteClass: 'hide',
 				controlTitle: '',
-				advanced: wx.formbuilderAdvanced
+				advanced: wx.formbuilderAdvanced,
+
+				// Defaults for email field only
+				emailOptionClass: 'hide',
+				optionSendPDF: false
 			};
 		},
 

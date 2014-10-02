@@ -13,6 +13,13 @@ wxApp = wxApp || {};
 			this.inputTpl = _.template( $template.html() );
 		},
 
+		// Extend the events from the parent
+		events: function() {
+			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+				'click .wx-form-builder-send-copy'   : 'setOptionalSendPdf'
+			});
+		},
+
 		getPreview: function() {
 			if ( this.preview === null ) {
 				this.preview = new wxApp.FormBuilderControlInputPreview({ model: this.model });
@@ -30,7 +37,13 @@ wxApp = wxApp || {};
 			}
 
 			return this;
-		}
+		},
+
+		setOptionalSendPdf: function( ev ) {
+			var $me = $( ev.currentTarget );
+			this.model.set( 'optionSendPDF', $me.is(':checked') );
+		},
+
 	});
 
 	wxApp.FormBuilderControlInputPreview = wxApp.FormBuilderControlPreview.extend({
