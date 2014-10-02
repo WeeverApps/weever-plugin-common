@@ -9,7 +9,7 @@ wxApp = wxApp || {};
 		// Extend the events from the parent
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
-				'keyup .wx-form-builder-info': 'setInfo'
+				'input .wx-form-builder-info': 'setInfo'
 			});
 		},
 
