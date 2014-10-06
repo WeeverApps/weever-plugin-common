@@ -4,7 +4,6 @@ wxApp = wxApp || {};
 (function($){
     wxApp.TabsView = Backbone.View.extend({
         el: '#editListTabsSortable',
-        loaded: false,
 
         initialize: function() {
 
@@ -27,7 +26,7 @@ wxApp = wxApp || {};
 
             // If the last tab is the share tab (or if we're just loading the tabs for the first time),
             // we add the tab in the second-to-last position. Otherwise, we just shove it on the end.
-            if ( me.$('> div:last-child').hasClass('wx-share') && me.loaded ) {
+            if ( me.$('> div:last-child').hasClass('wx-share') && wxApp.Tabs.loaded ) {
                 me.$('> div:last-child').before( view.render().el );
             }
             else {

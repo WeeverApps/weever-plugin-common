@@ -5,6 +5,7 @@ var wxApp = wxApp || {};
     wxApp.TabsCollection = Backbone.Collection.extend({
         model: wxApp.Tab,
         url: wx.apiUrl + 'tabs/get_tabs?site_key=' + wx.siteKey,
+        loaded: false,
 
         fetch: function( onCompleteCallback ) {
             var me = this;
@@ -34,8 +35,7 @@ var wxApp = wxApp || {};
                         me.add( tabs[i] );
                     }
 
-                    if ( wxApp.tabsView )
-                        wxApp.tabsView.loaded = true;
+                    me.loaded = true;
 
                     if ( onCompleteCallback )
                         onCompleteCallback();
