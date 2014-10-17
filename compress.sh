@@ -25,7 +25,7 @@ vendorFiles=(weever.js vendor/modernizr.js jscolor/jscolor.js foundation/foundat
 # 1. Get an array of all of the model javascripts.
 allModels=(models/*.js)
 # 2. Create a new array of just the items that need to be moved to the front.
-modelsToBeMovedForwards=(models/tab.js models/subtab.js models/formbuilder.control.js models/formbuilder.control.input.js)
+modelsToBeMovedForwards=(models/tab.js models/subtab.js models/subtab.v3.js models/formbuilder.control.js models/formbuilder.control.input.js)
 
 # 3. Loop through the first array. Remove the items that need to be moved to the front.
 length=${#allModels[@]}
