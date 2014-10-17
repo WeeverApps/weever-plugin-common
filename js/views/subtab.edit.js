@@ -191,7 +191,7 @@ wxApp = wxApp || {};
 			// copy the model to validate with the server, without updating the existing model
             var modelCopy = this.getModelCopy();
             this.setModelFromView(modelCopy);
-			this.getFeedSample(modelCopy, function(response) { me.checkFeedSample(response); });
+			modelCopy.getFeedSample( function(response) { me.checkFeedSample(response); } );
 		},
 
         getModelCopy: function() {
@@ -231,20 +231,6 @@ wxApp = wxApp || {};
 			this.$('.wx-next-button').show();
 			this.$('.wx-finish-button').hide();
             this.$('.wx-edit-title-div').hide();
-		},
-
-		getFeedSample: function(model, callback) {
-			var data = model.getAPIData();
-			data.api_check = 1;
-			data.confirm_feed = 1;
-            $.ajax({
-				url: wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey,
-				datatype: 'JSON',
-				data: data,
-				success: function(response) {
-                    callback(response);
-				}
-			});
 		},
 
         destroyView: function() {

@@ -106,6 +106,23 @@ wxApp = wxApp || {};
             return true;
         },
 
+        getFeedSample: function( callback, apiUrl ) {
+            var data = this.getAPIData();
+            data.api_check = 1;
+            data.confirm_feed = 1;
+
+            apiUrl = apiUrl || wx.apiUrl;
+
+            $.ajax({
+                url: apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey,
+                datatype: 'JSON',
+                data: data,
+                success: function(response) {
+                    callback(response);
+                }
+            });
+        },
+
         save: function( onSaveCallback ) {
             var me = this;
            

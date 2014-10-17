@@ -2,13 +2,13 @@
 var wxApp = wxApp || {};
 
 (function($){
-    wxApp.YoutubeSubTab = wxApp.SubTab.extend({
+    wxApp.YoutubeSubTab = wxApp.SubTabV3.extend({
         default_icon_id: 18,
         allowedLayouts: ['list'],
         typeDescription: 'Youtube Videos',
 
         defaults: function() {
-                return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
+                return _.extend( {}, wxApp.SubTabV3.prototype.defaults(), {
                     title: 'YouTube',
                     icon: 'e037',
                     icon_id: 18,

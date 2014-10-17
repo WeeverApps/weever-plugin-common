@@ -2,13 +2,13 @@
 wxApp = wxApp || {};
 
 (function($){
-    wxApp.GoogleCalendarSubTab = wxApp.SubTab.extend({
+    wxApp.GoogleCalendarSubTab = wxApp.SubTabV3.extend({
         default_icon_id: 7,
         allowedLayouts: ['list'],
         typeDescription: 'Google Calendar',
 
         defaults: function() {
-            return _.extend( {}, wxApp.SubTab.prototype.defaults(), {
+            return _.extend( {}, wxApp.SubTabV3.prototype.defaults(), {
                 title: 'Calendar',
                 icon: 'e061',
                 icon_id: 7,
