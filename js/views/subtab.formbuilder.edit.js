@@ -353,6 +353,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-docusign-signature'  : 'addDocusignSignature',
 			'click .wx-form-builder-add-weever-signature'    : 'addWeeverSignature',
 			'click .wx-form-builder-add-calculation'         : 'addCalculation',
+			'click .wx-form-builder-add-hierarchical-drop-down-list': 'addHierarchicalDropDownList',
 			'click .wx-submit-button'                        : 'showSubmitButtonInfo',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
@@ -1002,6 +1003,19 @@ wxApp = wxApp || {};
 			});
 
 			this.addControl( calculator, calculatorView );
+		},
+
+		addHierarchicalDropDownList: function( ev ) {
+			this.addHierarchicalDropDownListWithProperties( {} );
+		},
+
+		addHierarchicalDropDownListWithProperties: function( properties ) {
+			var model = new wxApp.FormBuilderHierarchicalDropDownList( properties ),
+			    view  = new wxApp.FormBuilderHierarchicalDropDownListView({
+			    	model: model
+			    });
+
+		    this.addControl( model, view );
 		},
 
 		addControl: function( input, view ) {

@@ -1,0 +1,56 @@
+<script type="text/template" id="form-builder-hierarchical-drop-down-list">
+    <p class="title">
+        Hierarchical Drop Down List: <span class="wx-form-builder-label">TODO</span>
+    </p>
+
+    <div class="content">
+
+        <br>
+
+        <label>How many levels do you want to have?</label>
+        <select class="wx-hdd-levels">
+            <option value="2" <% if ( levels == 2 ) { %>selected<% } %>>2</option>
+            <option value="3" <% if ( levels == 3 ) { %>selected<% } %>>3</option>
+            <option value="4" <% if ( levels == 4 ) { %>selected<% } %>>4</option>
+            <option value="5" <% if ( levels == 5 ) { %>selected<% } %>>5</option>
+        </select>
+
+        <% for (var i = 0; i < levels; i++) { %>
+            <label>
+                Level <%- (i+1).toString() %>:
+                <input type='text' class="wx-form-builder-title" data-level-title="<%- i %>" value='<%- titles[i] %>' />
+            </label>
+        <% }; %>
+
+        <div class="wx-form-builder-children"></div>
+
+        <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- 0 %>">Add <%- titles[ 0 ] || 'Option' %></a>
+        <br/>
+
+        <button class="wx-form-builder-delete small alert">Delete field</button>
+    </div>
+</script>
+
+<script type="text/template" id="form-builder-hierarchical-drop-down-list-preview">
+    <label class="wx-form-builder-label"><%- label %></label>
+</script>
+
+<script type="text/template" id="form-builder-hdd-options">
+    <legend><%- titles[ level ] %></legend>
+
+    <div class="wx-hdd-options"></div>
+    
+</script>
+
+
+<script type="text/template" id="form-builder-hdd-option">
+
+    <label>Text</label>
+    <input type="text" class="wx-form-builder-option-text" value="<%- text %>" placeholder="<%- titles[ level ] %>" />
+
+    <div class="wx-form-builder-children"></div>
+
+    <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- level+1 %>">Add <%- titles[ level+1 ] || 'Option' %></a>
+
+</script>
+
