@@ -30,10 +30,10 @@ wxApp = wxApp || {};
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 
             var hddOptionsView = new wxApp.FormBuilderHierarchicalDropDownListOptionsView({
-                collection: this.model.get('options') ,
-                level     : 0,
-                titles    : this.model.get('titles')
-                // previewArea: this.getPreview()
+                collection : this.model.get('options'),
+                level      : 0,
+                titles     : this.model.get('titles'),
+                previewArea: this.getPreview()
             });
 
             // Add Option Group to Select
@@ -77,16 +77,18 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderHierarchicalDropDownListPreview = wxApp.FormBuilderControlPreview.extend({
 		selector: '#form-builder-hierarchical-drop-down-list-preview',
 
-		// initialize: function (attrs, options) {
-	 //        wxApp.FormBuilderControlPreview.prototype.initialize.apply(this, arguments); // call super constructor
-	 //    },
+		initialize: function (attrs, options) {
+	        wxApp.FormBuilderControlPreview.prototype.initialize.apply(this, arguments); // call super constructor
+            this.model.get('options').bind('change', this.render, this);
+	    },
 
-		// render: function() {
-		// 	var me    = this,
-		// 	    model = me.model.toJSON();
-		// 	me.$el.html( me.inputTpl( model ) );
-		// 	return me;
-		// }
+		render: function() {
+console.log('preview render');
+			var me    = this,
+			    model = me.model.toJSON();
+			me.$el.html( me.inputTpl( model ) );
+			return me;
+		}
 	});
 
     wxApp.FormBuilderHierarchicalDropDownListOptionsView = Backbone.View.extend({
@@ -137,7 +139,6 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
 
             // this.previewArea.$('select').append( view.getPreview().render().el );
         }
-
     });
 
     wxApp.FormBuilderHierarchicalDropDownListOptionView = Backbone.View.extend({
@@ -165,7 +166,7 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
 
             if ( this.titles.length > (this.level+1) ) {
                 var hddOptionsView = new wxApp.FormBuilderHierarchicalDropDownListOptionsView({
-                    collection: this.model.get('children') ,
+                    collection: this.model.get('children'),
                     level     : this.level+1,
                     titles    : this.titles
                 });

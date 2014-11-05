@@ -31,7 +31,18 @@
 </script>
 
 <script type="text/template" id="form-builder-hierarchical-drop-down-list-preview">
-    <label class="wx-form-builder-label"><%- label %></label>
+    <% for (var i = 0; i < titles.length; i++) { %>
+        <label class="wx-form-builder-label"><%- titles[i] %></label>
+        <select>
+            <% if ( i == 0 ) { %>
+                <% for (var i = 0; i < options.length; i++) { %>
+                    <option><%- options.at(i).get('text') %></option>
+                <% }; %>
+            <% } else { %>
+                <option>Select One</option>
+            <% }; %>
+        </select>
+    <% }; %>
 </script>
 
 <script type="text/template" id="form-builder-hdd-options">

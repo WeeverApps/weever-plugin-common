@@ -10,6 +10,15 @@ wxApp = wxApp || {};
                 value   : '',
                 children: new wxApp.FormBuilderHierarchicalDropDownListOptions()
             }
+        },
+
+        initialize: function() {
+            this.get( 'children' ).bind('change', this.onChildChange, this);
+            return this;
+        },
+
+        onChildChange: function() {
+            this.trigger('change');
         }
     });
 
@@ -29,10 +38,16 @@ wxApp = wxApp || {};
             };
         },
 
-        // initialize: function() {
-        //     this.set( 'options', new wxApp.FormBuilderHierarchicalDropDownListOptions() );
-        //     return this;
-        // }
+        initialize: function() {
+            this.set( 'options', new wxApp.FormBuilderHierarchicalDropDownListOptions() );
+            this.get( 'options' ).bind('change', this.onChildChange, this);
+
+            return this;
+        },
+
+        onChildChange: function() {
+            this.trigger('change');
+        }
     });
 
 })(jQuery);
