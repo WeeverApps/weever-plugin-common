@@ -10,7 +10,6 @@ wxApp = wxApp || {};
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
 				'change .wx-hdd-levels'       : 'changeLevels',
-                'click .wx-hdd-add-option'    : 'addOption',
                 'input .wx-form-builder-title': 'changeTitle',
 			});
 		},
@@ -28,7 +27,6 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-console.log( 'render', this.model.toJSON() );
 			this.$el.html( this.inputTpl( this.model.toJSON() ) );
 
             var hddOptionsView = new wxApp.FormBuilderHierarchicalDropDownListOptionsView({
@@ -52,13 +50,6 @@ console.log( 'render', this.model.toJSON() );
 
 		/* Start event callbacks */
 
-        addOption: function( ev ) {
-console.log('addOption (top level)');
-            ev.preventDefault();
-            this.model.get( 'options' ).add( new wxApp.FormBuilderHierarchicalDropDownListOption() );
-            this.render();
-        },
-
         changeLevels: function( ev ) {
             var value = $( ev.currentTarget ).val();
             value = parseInt( value );
@@ -73,7 +64,10 @@ console.log('addOption (top level)');
             level = parseInt( level );
             this.model.get( 'titles' )[ level ] = title;
             this.model.trigger('change');
+
+            // Change link and fieldset legend
             this.$('.wx-hdd-add-option-' + level).text( 'Add ' + title );
+            this.$('.wx-hdd-legend-' + level).text( title );    // TODO -> Pluralize?
         }
 
 		/* Endof event callbacks */
@@ -99,8 +93,13 @@ console.log('addOption (top level)');
         tagName: 'fieldset',
         className: 'wx-hdd-option-group',
 
+        events: function() {
+            return {
+                'click .wx-hdd-add-option'          : 'addOption'
+            };
+        },
+
         initialize: function( options ) {
-console.log( 'options', options );
             this.titles = options.titles;
             this.level = options.level;
 
@@ -110,28 +109,31 @@ console.log( 'options', options );
         },
 
         render: function() {
-console.log( 'titles', this.titles );
             this.$el.html( this.template( { level: this.level, titles: this.titles } ) );
 
             for (var i = 0; i < this.collection.length; i++) {
                 var model = this.collection.at( i );
                 this.addOne( model )
             };
-            this.collection.bind('add', this.addOne, this);
 
             return this;
         },
 
-        addOne: function( option ) {
-console.log('addOne', option);
+        addOption: function( ev ) {
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+            this.collection.add( new wxApp.FormBuilderHierarchicalDropDownListOption() );
+        },
 
+        addOne: function( option ) {
+console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
             var view = new wxApp.FormBuilderHierarchicalDropDownListOptionView({
                 model : option,
                 level : this.level,
                 titles: this.titles
             });
 
-            this.$('.wx-hdd-options').append( view.render().el );
+            this.$('.wx-hdd-options-' + this.level).append( view.render().el );
 
             // this.previewArea.$('select').append( view.getPreview().render().el );
         }
@@ -143,7 +145,7 @@ console.log('addOne', option);
 
         events: function() {
             return {
-                'click .wx-hdd-add-option': 'addOption'
+                'input .wx-form-builder-option-text': 'updateText'
             };
         },
 
@@ -161,27 +163,27 @@ console.log('addOne', option);
 
             this.$el.html( this.template( modelJson ) );
 
-            var hddOptionsView = new wxApp.FormBuilderHierarchicalDropDownListOptionsView({
-                collection: this.model.get('children') ,
-                level     : this.level+1,
-                titles    : this.titles //,
-                // previewArea: this.getPreview()
-            });
+            if ( this.titles.length > (this.level+1) ) {
+                var hddOptionsView = new wxApp.FormBuilderHierarchicalDropDownListOptionsView({
+                    collection: this.model.get('children') ,
+                    level     : this.level+1,
+                    titles    : this.titles
+                });
 
-            // Add Option Group to Select
-            this.$( '.wx-form-builder-children' ).append( hddOptionsView.render().el );
-
+                // Add Option Group to Select
+                this.$( '.wx-form-builder-children' ).append( hddOptionsView.render().el );
+            }
 
             return this;
         },
 
-        addOption: function( ev ) {
-console.log('addOption (lower)');
-            ev.preventDefault();
+        updateText: function( ev ) {
             ev.stopImmediatePropagation();
 
-            this.model.get('children').add( new wxApp.FormBuilderHierarchicalDropDownListOption() );
-            this.render();
+            var text = $( ev.currentTarget ).val();
+
+            this.model.set('text', text);
+            this.model.set('value', text);   // For now, only allow text.
         }
     });
 

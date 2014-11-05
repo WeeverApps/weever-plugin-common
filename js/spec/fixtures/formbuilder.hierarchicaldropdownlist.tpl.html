@@ -24,7 +24,6 @@
 
         <div class="wx-form-builder-children"></div>
 
-        <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- 0 %>">Add <%- titles[ 0 ] || 'Option' %></a>
         <br/>
 
         <button class="wx-form-builder-delete small alert">Delete field</button>
@@ -36,9 +35,11 @@
 </script>
 
 <script type="text/template" id="form-builder-hdd-options">
-    <legend><%- titles[ level ] %></legend>
+    <legend class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></legend>
 
-    <div class="wx-hdd-options"></div>
+    <div class="wx-hdd-options wx-hdd-options-<%- level %>"></div>
+
+    <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- level %>">Add <%- titles[ level ] || 'Option' %></a>
     
 </script>
 
@@ -49,8 +50,5 @@
     <input type="text" class="wx-form-builder-option-text" value="<%- text %>" placeholder="<%- titles[ level ] %>" />
 
     <div class="wx-form-builder-children"></div>
-
-    <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- level+1 %>">Add <%- titles[ level+1 ] || 'Option' %></a>
-
 </script>
 
