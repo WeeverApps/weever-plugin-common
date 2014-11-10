@@ -46,9 +46,9 @@ wxApp = wxApp || {};
 			me.populateForm( arguments );
 
 			// If they're editing an existing form, warn them that their data may (will) be deleted.
-			if ( isEditing ) {
-				me.dataCleanupOnFormEdit( me.populateForm, me, arguments );
-			}
+			//if ( isEditing ) {
+			//	me.dataCleanupOnFormEdit( me.populateForm, me, arguments );
+			//}
 		},
 
 		populateForm: function( arguments ) {
