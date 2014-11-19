@@ -22,6 +22,7 @@
             </label>
         <% }; %>
 
+        <hr/>
         <div class="wx-form-builder-children"></div>
 
         <br/>
@@ -31,22 +32,23 @@
 </script>
 
 <script type="text/template" id="form-builder-hierarchical-drop-down-list-preview">
+    <% console.log(titles.length, titles); %>
     <% for (var i = 0; i < titles.length; i++) { %>
         <label class="wx-form-builder-label"><%- titles[i] %></label>
-        <select>
+        <select class="wx-hdd-dropdown-preview wx-hdd-dropdown-preview-<%- i %>" data-level="<%- i %>">
+            <option>Select One</option>
             <% if ( i == 0 ) { %>
-                <% for (var i = 0; i < options.length; i++) { %>
-                    <option><%- options.at(i).get('text') %></option>
+                <% for (var j = 0; j < options.length; j++) { %>
+                    <% window.opt = options; %>
+                    <option><%- options.at(j).get('text') %></option>
                 <% }; %>
-            <% } else { %>
-                <option>Select One</option>
             <% }; %>
         </select>
     <% }; %>
 </script>
 
 <script type="text/template" id="form-builder-hdd-options">
-    <legend class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></legend>
+    <h3 class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></h3>
 
     <div class="wx-hdd-options wx-hdd-options-<%- level %>"></div>
 

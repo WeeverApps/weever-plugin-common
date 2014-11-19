@@ -10,7 +10,7 @@ wxApp = wxApp || {};
 		events: function() {
 			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
 				'change .wx-hdd-levels'       : 'changeLevels',
-                'input .wx-form-builder-title': 'changeTitle',
+                'input .wx-form-builder-title': 'changeTitle'
 			});
 		},
 
@@ -77,22 +77,59 @@ wxApp = wxApp || {};
 	wxApp.FormBuilderHierarchicalDropDownListPreview = wxApp.FormBuilderControlPreview.extend({
 		selector: '#form-builder-hierarchical-drop-down-list-preview',
 
+        events: function() {
+            return {
+                'change .wx-hdd-dropdown-preview' : 'changeDropDown'
+            }
+        },
+
 		initialize: function (attrs, options) {
 	        wxApp.FormBuilderControlPreview.prototype.initialize.apply(this, arguments); // call super constructor
             this.model.get('options').bind('change', this.render, this);
 	    },
 
 		render: function() {
-console.log('preview render');
-			var me    = this,
-			    model = me.model.toJSON();
+            var me    = this,
+                model = me.model.toJSON();
+
 			me.$el.html( me.inputTpl( model ) );
 			return me;
-		}
+        },
+
+        changeDropDown: function( ev ) {
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+
+            var ddl          = $( ev.currentTarget ),
+                level        = parseInt( ddl.data('level') ),
+                value        = ddl.val(),
+                selectedOpt  = null;
+
+            if ( level === 0 ) {
+                for (var i = 0; i < this.model.get('options').length; i++) {
+                    var option = this.model.get('options').at(i);
+                    if ( option.get('value') === value ) {
+                        selectedOpt = option;
+                        break;
+                    }
+                };
+
+                if ( selectedOpt ) {
+                    console.log('selectedOpt', selectedOpt);
+                    var nextDdl = this.$( '.wx-hdd-dropdown-preview-'+(level+1).toString() );
+                    for (var i = 0; i < selectedOpt.get('children').length; i++) {
+                        var child = selectedOpt.get('children').at( i );
+                        nextDdl.append(new Option( child.get('text'), child.get('value') ));
+                    }
+                }
+            }
+            else {
+                alert('TODO');
+            }
+        }
 	});
 
     wxApp.FormBuilderHierarchicalDropDownListOptionsView = Backbone.View.extend({
-        tagName: 'fieldset',
         className: 'wx-hdd-option-group',
 
         events: function() {
@@ -112,11 +149,12 @@ console.log('preview render');
 
         render: function() {
             this.$el.html( this.template( { level: this.level, titles: this.titles } ) );
+            this.$el.css( {'padding-left': this.level.toString() + 'em' } );
 
             for (var i = 0; i < this.collection.length; i++) {
                 var model = this.collection.at( i );
                 this.addOne( model )
-            };
+            }
 
             return this;
         },
