@@ -100,31 +100,35 @@ wxApp = wxApp || {};
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
-            var ddl          = $( ev.currentTarget ),
-                level        = parseInt( ddl.data('level') ),
-                value        = ddl.val(),
-                selectedOpt  = null;
+            var ddlChanged   = $( ev.currentTarget ),
+                list         = this.model.get('options'),
+                levelChanged = parseInt( ddlChanged.data('level') ),
+                currentLevel = 0;
 
-            if ( level === 0 ) {
-                for (var i = 0; i < this.model.get('options').length; i++) {
-                    var option = this.model.get('options').at(i);
-                    if ( option.get('value') === value ) {
+            while ( currentLevel <= levelChanged ) {
+                var ddl         = this.$( '.wx-hdd-dropdown-preview-' + currentLevel.toString() ),
+                    selectedOpt = null;
+
+                for (var i = 0; i < list.length; i++) {
+                    var option = list.at(i);
+                    if ( option.get('value') === ddl.val() ) {
                         selectedOpt = option;
                         break;
                     }
                 };
 
                 if ( selectedOpt ) {
-                    console.log('selectedOpt', selectedOpt);
-                    var nextDdl = this.$( '.wx-hdd-dropdown-preview-'+(level+1).toString() );
-                    for (var i = 0; i < selectedOpt.get('children').length; i++) {
-                        var child = selectedOpt.get('children').at( i );
-                        nextDdl.append(new Option( child.get('text'), child.get('value') ));
-                    }
+                    list = selectedOpt.get('children');
                 }
+
+                currentLevel++;
             }
-            else {
-                alert('TODO');
+
+            var nextDdl = this.$( '.wx-hdd-dropdown-preview-' + currentLevel.toString() );
+            nextDdl.html('<option>Select One</option>');   // Remove existing children
+            for (var i = 0; i < list.length; i++) {
+                var child = list.at( i );
+                nextDdl.append(new Option( child.get('text'), child.get('value') ));
             }
         }
 	});
