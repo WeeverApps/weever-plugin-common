@@ -51,14 +51,15 @@
     <div class="wx-hdd-options wx-hdd-options-<%- level %>"></div>
 
     <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- level %>">Add <%- titles[ level ] || 'Option' %></a>
-    
 </script>
 
 
 <script type="text/template" id="form-builder-hdd-option">
-
     <label>Text</label>
     <input type="text" class="wx-form-builder-option-text" value="<%- text %>" placeholder="<%- titles[ level ] %>" />
+
+    <label>Value</label>
+    <input type="text" class="wx-form-builder-option-value" value="<%- value %>" placeholder="<%- titles[ level ] %>" />
 
     <div class="wx-form-builder-children"></div>
 </script>

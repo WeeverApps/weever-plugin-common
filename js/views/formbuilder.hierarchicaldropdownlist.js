@@ -136,8 +136,6 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
             });
 
             this.$('.wx-hdd-options-' + this.level).append( view.render().el );
-
-            // this.previewArea.$('select').append( view.getPreview().render().el );
         }
     });
 
@@ -146,7 +144,8 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
 
         events: function() {
             return {
-                'input .wx-form-builder-option-text': 'updateText'
+                'input .wx-form-builder-option-text' : 'updateText',
+                'input .wx-form-builder-option-value': 'updateValue'
             };
         },
 
@@ -182,9 +181,14 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
             ev.stopImmediatePropagation();
 
             var text = $( ev.currentTarget ).val();
-
             this.model.set('text', text);
-            this.model.set('value', text);   // For now, only allow text.
+        },
+
+        updateValue: function( ev ) {
+            ev.stopImmediatePropagation();
+
+            var text = $( ev.currentTarget ).val();
+            this.model.set('value', text);
         }
     });
 
