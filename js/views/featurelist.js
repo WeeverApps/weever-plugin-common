@@ -36,6 +36,7 @@ wxApp = wxApp || {};
         domain = domain.replace('http://', '').replace('https://', '');
         domain = $('#preview-app-dialog-frame').attr('rel') + domain + '?simphone=1&cache_manifest=false';
         $('#preview-app-dialog-frame').attr('rel', domain);
+        wx.refreshAppPreview();
         wx.poll = true;
 
         // Since form builder & training builder require considerably fewer features,
