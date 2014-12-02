@@ -125,6 +125,10 @@ wxApp = wxApp || {};
 
 							me.addCalculationWithProperties( elementsJson[i] );
 
+						} else if ( elementsJson[i].control == 'hierarchical-drop-down' ) {
+
+							me.addHierarchicalDropDownListWithProperties( elementsJson[i] );
+
 						} else if ( elementsJson[i].control == 'pagebreak' ) {
 
 							me.addPagebreak();
