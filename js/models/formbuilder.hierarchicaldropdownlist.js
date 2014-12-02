@@ -13,7 +13,8 @@ wxApp = wxApp || {};
         },
 
         initialize: function( properties ) {
-console.log( 'CHILD PROPERTIES', properties );
+
+            properties = properties || {};
 
             // The 'children' property just gets set to a basic array, rather than a Backbone.Array. Let's fix that.
             var children = properties.children;

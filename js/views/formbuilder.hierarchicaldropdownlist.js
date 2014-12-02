@@ -154,7 +154,7 @@ wxApp = wxApp || {};
 
         render: function() {
             this.$el.html( this.template( { level: this.level, titles: this.titles } ) );
-            this.$el.css( {'padding-left': this.level.toString() + 'em' } );
+            this.$el.css( {'padding-left': (this.level*2).toString() + 'em' } );
 
             for (var i = 0; i < this.collection.length; i++) {
                 var model = this.collection.at( i );
