@@ -148,6 +148,7 @@ wxApp = wxApp || {};
 
             this.template = _.template( $('#form-builder-hdd-options').html() );
             this.collection.bind('add', this.addOne, this);
+            this.collection.bind('remove', this.render, this);
             this.previewArea = options.previewArea;
         },
 
@@ -170,7 +171,6 @@ wxApp = wxApp || {};
         },
 
         addOne: function( option ) {
-console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
             var view = new wxApp.FormBuilderHierarchicalDropDownListOptionView({
                 model : option,
                 level : this.level,
@@ -187,7 +187,8 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
         events: function() {
             return {
                 'input .wx-form-builder-option-text' : 'updateText',
-                'input .wx-form-builder-option-value': 'updateValue'
+                'input .wx-form-builder-option-value': 'updateValue',
+                'click .wx-hdd-delete-option'        : 'deleteOption'
             };
         },
 
@@ -217,6 +218,12 @@ console.log('addOne -> ' + this.titles[ this.level ], option.toJSON());
             }
 
             return this;
+        },
+
+        deleteOption: function( ev ) {
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+            this.model.destroy();
         },
 
         updateText: function( ev ) {
