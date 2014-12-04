@@ -167,7 +167,13 @@ wxApp = wxApp || {};
         addOption: function( ev ) {
             ev.preventDefault();
             ev.stopImmediatePropagation();
-            this.collection.add( new wxApp.FormBuilderHierarchicalDropDownListOption() );
+            var option = new wxApp.FormBuilderHierarchicalDropDownListOption();
+            if ( this.level !== (this.titles.length-1) ) {
+                option.get('children').add( new wxApp.FormBuilderHierarchicalDropDownListOption({ text: 'Option A' }) );
+                option.get('children').add( new wxApp.FormBuilderHierarchicalDropDownListOption({ text: 'Option B' }) );
+                option.get('children').add( new wxApp.FormBuilderHierarchicalDropDownListOption({ text: 'Option C' }) );
+            }
+            this.collection.add( option );
         },
 
         addOne: function( option ) {
@@ -224,8 +230,8 @@ wxApp = wxApp || {};
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
-            var deleteMsg = 'This will delete this ' + this.titles[ this.level ];
-            if ( this.level === this.titles.length-1 )
+            var deleteMsg = 'This will delete this ' + this.titles[ this.level ].toLowerCase();
+            if ( this.level < (this.titles.length-1) )
                 deleteMsg += ' and all of its children';
             deleteMsg += '. Are you sure you wish to continue?';
             if ( confirm( deleteMsg ) )
