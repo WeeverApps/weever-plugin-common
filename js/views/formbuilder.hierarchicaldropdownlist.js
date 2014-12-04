@@ -223,7 +223,13 @@ wxApp = wxApp || {};
         deleteOption: function( ev ) {
             ev.preventDefault();
             ev.stopImmediatePropagation();
-            this.model.destroy();
+
+            var deleteMsg = 'This will delete this ' + this.titles[ this.level ];
+            if ( this.level === this.titles.length-1 )
+                deleteMsg += ' and all of its children';
+            deleteMsg += '. Are you sure you wish to continue?';
+            if ( confirm( deleteMsg ) )
+                this.model.destroy();
         },
 
         updateText: function( ev ) {
