@@ -1010,7 +1010,8 @@ wxApp = wxApp || {};
 		},
 
 		addHierarchicalDropDownList: function( ev ) {
-			var defaults = {
+            var defaults = {};
+			/*var defaults = {
                 control: 'hierarchical-drop-down',
                 label  : 'What is your favourite movie?',
                 levels : 2,
@@ -1029,11 +1030,6 @@ wxApp = wxApp || {};
                                 text    : 'Army of Darkness',
                                 value   : '',
                                 children: []
-                            },
-                            {
-                                text    : 'Nosferatu',
-                                value   : '',
-                                children: []
                             }
                         ]
                     },
@@ -1050,38 +1046,11 @@ wxApp = wxApp || {};
                                 text    : 'Star Trek',
                                 value   : '',
                                 children: []
-                            },
-                            {
-                                text    : '2001: A Space Odyssey',
-                                value   : '',
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        text    : 'Comedy',
-                        value   : 'Comedy',
-                        children: [
-                            {
-                                text    : 'Airplane!',
-                                value   : '',
-                                children: []
-                            },
-                            {
-                                text    : 'Anchorman',
-                                value   : '',
-                                children: []
-                            },
-                            {
-                                text    : 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
-                                value   : '',
-                                children: []
                             }
                         ]
                     }
                 ]
-            };
-
+            };*/
 			this.addHierarchicalDropDownListWithProperties( defaults );
 		},
 
