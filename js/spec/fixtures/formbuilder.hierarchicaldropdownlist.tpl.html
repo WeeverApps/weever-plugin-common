@@ -1,9 +1,16 @@
 <script type="text/template" id="form-builder-hierarchical-drop-down-list">
     <p class="title">
-        Hierarchical Drop Down List<!--: <span class="wx-form-builder-label">TODO</span>-->
+        Hierarchical Drop Down List: <span class="wx-form-builder-label"><%- label %></span>
     </p>
 
     <div class="content">
+
+        <br>
+
+        <label>
+            Label:
+            <input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
+        </label>
 
         <br>
 
@@ -32,6 +39,8 @@
 </script>
 
 <script type="text/template" id="form-builder-hierarchical-drop-down-list-preview">
+    <label class="wx-form-builder-label"><strong><%- label %></strong></label>
+    <br/><br/>
     <% for (var i = 0; i < titles.length; i++) { %>
         <label class="wx-form-builder-label"><%- titles[i] %></label>
         <select class="wx-hdd-dropdown-preview wx-hdd-dropdown-preview-<%- i %>" data-level="<%- i %>">
@@ -43,6 +52,7 @@
                 <% }; %>
             <% }; %>
         </select>
+        <br/><br/>
     <% }; %>
 </script>
 
