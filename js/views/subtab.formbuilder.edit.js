@@ -1010,7 +1010,79 @@ wxApp = wxApp || {};
 		},
 
 		addHierarchicalDropDownList: function( ev ) {
-			this.addHierarchicalDropDownListWithProperties( {} );
+			var defaults = {
+                control: 'hierarchical-drop-down',
+                label  : 'What is your favourite movie?',
+                levels : 2,
+                titles : ['Genre', 'Movie'],
+                options: [
+                    {
+                        text    : 'Horror',
+                        value   : 'Horror',
+                        children: [
+                            {
+                                text    : 'Evil Dead',
+                                value   : '',
+                                children: []
+                            },
+                            {
+                                text    : 'Army of Darkness',
+                                value   : '',
+                                children: []
+                            },
+                            {
+                                text    : 'Nosferatu',
+                                value   : '',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        text    : 'Sci-Fi',
+                        value   : 'Sci-Fi',
+                        children: [
+                            {
+                                text    : 'Star Wars',
+                                value   : '',
+                                children: []
+                            },
+                            {
+                                text    : 'Star Trek',
+                                value   : '',
+                                children: []
+                            },
+                            {
+                                text    : '2001: A Space Odyssey',
+                                value   : '',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        text    : 'Comedy',
+                        value   : 'Comedy',
+                        children: [
+                            {
+                                text    : 'Airplane!',
+                                value   : '',
+                                children: []
+                            },
+                            {
+                                text    : 'Anchorman',
+                                value   : '',
+                                children: []
+                            },
+                            {
+                                text    : 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+                                value   : '',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            };
+
+			this.addHierarchicalDropDownListWithProperties( defaults );
 		},
 
 		addHierarchicalDropDownListWithProperties: function( properties ) {

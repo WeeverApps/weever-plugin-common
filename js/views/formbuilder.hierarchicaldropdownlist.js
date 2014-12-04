@@ -67,7 +67,7 @@ wxApp = wxApp || {};
 
             // Change link and fieldset legend
             this.$('.wx-hdd-add-option-' + level).html( '&plus; add new ' + title.toLowerCase() );
-            this.$('.wx-hdd-legend-' + level).html( '&#8627; ' + title );    // TODO -> Pluralize?
+            this.$('.wx-hdd-legend-' + level).html( title );    // TODO -> Pluralize?
         }
 
 		/* Endof event callbacks */
