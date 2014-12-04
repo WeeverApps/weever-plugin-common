@@ -61,14 +61,18 @@
 
 
 <script type="text/template" id="form-builder-hdd-option">
-    <label>Text</label>
-    <input type="text" class="wx-form-builder-option-text" value="<%- text %>" placeholder="<%- titles[ level ] %>" />
-
-    <label>Value</label>
-    <input type="text" class="wx-form-builder-option-value" value="<%- value %>" placeholder="<%- titles[ level ] %>" />
+    <div class="row">
+        <div class="small-6 columns">
+            <input type="text" class="wx-form-builder-option-text" value="<%- text %>" placeholder="Label" />
+        </div>
+        <div class="small-5 columns">
+            <input type="text" class="wx-form-builder-option-value" value="<%- value %>" placeholder="Value" />
+        </div>
+        <div class="small-1 columns">
+            <a href="#" class="wx-hdd-delete-option">&times;</a>
+        </div>
+    </div>
 
     <div class="wx-form-builder-children"></div>
-
-    <a href="#" class="wx-hdd-delete-option">Delete this <%- titles[ level ] %> and all of its children</a>
 </script>
 

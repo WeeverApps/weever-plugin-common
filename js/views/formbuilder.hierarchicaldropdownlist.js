@@ -66,8 +66,8 @@ wxApp = wxApp || {};
             this.model.trigger('change');
 
             // Change link and fieldset legend
-            this.$('.wx-hdd-add-option-' + level).text( 'Add ' + title );
-            this.$('.wx-hdd-legend-' + level).text( title );    // TODO -> Pluralize?
+            this.$('.wx-hdd-add-option-' + level).html( '&plus; add new ' + title.toLowerCase() );
+            this.$('.wx-hdd-legend-' + level).html( '&#8627; ' + title );    // TODO -> Pluralize?
         }
 
 		/* Endof event callbacks */
@@ -154,7 +154,7 @@ wxApp = wxApp || {};
 
         render: function() {
             this.$el.html( this.template( { level: this.level, titles: this.titles } ) );
-            this.$el.css( {'padding-left': (this.level*2).toString() + 'em' } );
+            this.$el.css( {'padding-left': this.level.toString() + 'em' } );
 
             for (var i = 0; i < this.collection.length; i++) {
                 var model = this.collection.at( i );
