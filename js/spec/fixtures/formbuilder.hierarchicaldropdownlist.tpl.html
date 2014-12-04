@@ -47,7 +47,12 @@
 </script>
 
 <script type="text/template" id="form-builder-hdd-options">
-    <h3 class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></h3>
+    <%
+        var tagLevel = 3+level;
+        if ( tagLevel > 6 ) tagLevel = 6;
+        var tagName = 'h' + tagLevel.toString();
+    %>
+    <<%- tagName %> class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></<%- tagName %>>
 
     <div class="wx-hdd-options wx-hdd-options-<%- level %>"></div>
 
