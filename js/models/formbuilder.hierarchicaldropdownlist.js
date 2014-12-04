@@ -1,4 +1,4 @@
-
+''
 wxApp = wxApp || {};
 
 (function($) {
@@ -48,11 +48,12 @@ wxApp = wxApp || {};
         defaults: function() {
             return {
                 control: 'hierarchical-drop-down',
+                label: '',
                 levels:  2,
                 titles:  ['', ''],
                 ordinal: 0,
                 options: new wxApp.FormBuilderHierarchicalDropDownListOptions(),
-                label: ''
+                requiredClass: ''
             };
         },
 
@@ -77,6 +78,8 @@ wxApp = wxApp || {};
 
             this.set( 'options', optionsArray );
             this.get( 'options' ).bind('change', this.onChildChange, this);
+
+            this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
 
             return this;
         },
