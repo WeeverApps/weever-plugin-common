@@ -78,9 +78,9 @@ wxApp = wxApp || {};
 		selector: '#form-builder-hierarchical-drop-down-list-preview',
 
         events: function() {
-            return {
+            return _.extend( {}, wxApp.FormBuilderControlPreview.prototype.events, {
                 'change .wx-hdd-dropdown-preview' : 'changeDropDown'
-            }
+            });
         },
 
 		initialize: function (attrs, options) {
