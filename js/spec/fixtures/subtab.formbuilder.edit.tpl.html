@@ -13,6 +13,9 @@
         }
     };
     if ( emailDetails ) { pdfHeader = emailDetails.pdfHeader; }
+    if ( !postDetails ) {
+        postDetails = {};
+    }
     %>
     <div class="form-builder-delete-data" style="display: none;">
         <h1>Warning!</h1>
