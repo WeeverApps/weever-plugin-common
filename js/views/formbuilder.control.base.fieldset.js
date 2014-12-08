@@ -14,6 +14,7 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-required': 'setRequired',
+			'input .wx-form-builder-name-input': 'setName',
 			'focus .wx-form-builder-title-input': 'selectInputText'
 		},
 
@@ -50,6 +51,16 @@ wxApp = wxApp || {};
 			else {
 				this.model.set( 'allowAdditional', '' );
 			}
+		},
+
+		setName: function( ev ) {
+			var $me = $( ev.currentTarget );
+			if ( $me.val() !== '' ) {
+				this.model.set( 'name', $me.val() );
+				this.model.get( 'attributes' ).set( 'name', $me.val() );
+			}
+
+			this.model.trigger('change');
 		},
 
 		setRequired: function( ev ) {
