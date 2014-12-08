@@ -63,6 +63,7 @@ wxApp = wxApp || {};
             var params = { localization: localization };
             
             wx.makeApiCall('config/set_localization', params, function(data) {
+                wx.rebuildApp();
                 me.hideLoadingGif( id, loading_id );
             });
 		},
