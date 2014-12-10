@@ -68,12 +68,16 @@ wxApp = wxApp || {};
 
             var optionsArray = new wxApp.FormBuilderHierarchicalDropDownListOptions();
             if ( options && options.length ) {
-
-                // Add the properties from the DB.
-                for (var i = 0; i < options.length; i++) {
-                    var option = options[i];
-                    optionsArray.add( new wxApp.FormBuilderHierarchicalDropDownListOption( option ) );
-                };
+                if ( options instanceof wxApp.FormBuilderHierarchicalDropDownListOptions ) {
+                    optionsArray = options;
+                }
+                else {
+                    // Add the properties from the DB.
+                    for (var i = 0; i < options.length; i++) {
+                        var option = options[i];
+                        optionsArray.add( new wxApp.FormBuilderHierarchicalDropDownListOption( option ) );
+                    };
+                }
             }
 
             this.set( 'options', optionsArray );
