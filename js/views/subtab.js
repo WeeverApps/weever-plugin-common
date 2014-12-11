@@ -45,7 +45,7 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
 
             if ( me.model.get('content') === 'quiz' ) {
                 if ( !!window.EventSource ) {
-                    me.$('.wx-quiz-info').html('&mdash; Loading event info.')
+                    me.$('.wx-quiz-info').html('&mdash; Loading event info.');
 
                     var quizId = me.model.getConfig().quiz_id,
                         url    = wx.quizApiUrl + 'status?id=' + quizId,

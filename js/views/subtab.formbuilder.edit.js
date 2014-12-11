@@ -34,13 +34,8 @@ wxApp = wxApp || {};
 		initialize: function() {
 			var me           = this,
 			    isEditing    = false,
-			    elementsJson = [];
-			try {
-				elementsJson = JSON.parse( me.model.get( 'config' ).formElements );
-			} catch(err) {
-				if ( me.model.get( 'config' ).formElements )
-					elementsJson = me.model.get( 'config' ).formElements.toJSON();
-			}
+			    elementsJson = me._getFormElementsJson();
+
 			isEditing = ( elementsJson.length > 0 );
 
 			me.populateForm( arguments );
@@ -52,10 +47,10 @@ wxApp = wxApp || {};
 		},
 
 		populateForm: function( arguments ) {
-			var me = this,
-				elementsJson,
-				actionsJson,
-				config = this.model.get( 'config' );
+			var me           = this,
+				elementsJson = me._getFormElementsJson(),
+				config       = this.model.get( 'config' ),
+                actionsJson;
 
 			wx.isVisible = false;
 
@@ -78,12 +73,6 @@ wxApp = wxApp || {};
 			}
 			else {
 				// Load currently existing form elements.
-				try {
-					elementsJson = JSON.parse( config.formElements );
-				} catch(err) {
-					elementsJson = config.formElements.toJSON();
-				}
-
 				config.formElements = new wxApp.FormBuilderCollection();
 
 				setTimeout( function() { 
@@ -141,7 +130,7 @@ wxApp = wxApp || {};
 					}
 				}, 100 );
 			}
-
+window.configgg = config;
 			if ( typeof config.formActions == 'undefined' ) {
 				me.getDefaultFormActions();
 			}
@@ -150,7 +139,10 @@ wxApp = wxApp || {};
 				try {
 					actionsJson = JSON.parse( config.formActions );
 				} catch(err) {
-					actionsJson = config.formActions.toJSON();
+                    if ( config.formActions.toJSON )
+                        actionsJson = config.formActions.toJSON();
+                    else
+                        actionsJson = config.formActions;
 				}
 
 				config.formActions = new Backbone.Collection();
@@ -1289,7 +1281,26 @@ wxApp = wxApp || {};
 					alert( 'An unknown error has occurred deleting the data. Please contact support@weeverapps.com.' );
 				}
 			});
-		}
+        },
+
+        _getFormElementsJson: function() {
+            var formElements = this.model.get( 'config' ).formElements,
+                elementsJson = [];
+
+            if ( formElements ) {
+                if ( typeof formElements === 'string' ) {
+                    elementsJson = JSON.parse( formElements );  // Fresh from the server; a JSON string.
+                }
+                else if ( formElements.toJSON ) {
+                    elementsJson = formElements.toJSON();       // Previously edited; a Backbone object.
+                }
+                else {
+                    elementsJson = formElements;                // Freshly duplicated; a JSON object.
+                }
+            }
+
+            return elementsJson;
+        }
 	});
 
 })(jQuery);
