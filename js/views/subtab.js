@@ -94,6 +94,8 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
 			    delete copy.id;
 		    }
 
+            copy.title = copy.title + ' (copy)';
+
 		    var modelName = this.model.collection.getModelNameByTabData( copy ),
 		        newCopy   = new wxApp[ modelName ]( copy );
 
@@ -106,6 +108,7 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
             var onSetParentId = function onSetParentId() {
                 me.model.addSubTab( newCopy );
                 wx.rebuildApp();
+
                 // Select the parent tab.
                 $('#' + me.model.get('parent_id') + 'TabID').click();
             };
