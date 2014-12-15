@@ -2,25 +2,26 @@
 wxApp = wxApp || {};
 
 (function($){
-	wxApp.FormBuilderControlInfoView = wxApp.FormBuilderControlView.extend({
+	wxApp.FormBuilderControlInfoView = Backbone.View.extend({
+		tagName: 'div',
+		className: 'wx-form-builder-row panel',
+		firstRender: true,
 		tplSelector: '#form-builder-info',
 		preview: null,
 
 		// Extend the events from the parent
 		events: function() {
-			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
+			return {
 				'input .wx-form-builder-info': 'setInfo'
-			});
+			};
 		},
 
 		initialize: function() {
-			console.log('formbuildercontrolinfoview init');
 			var $template = $( this.tplSelector );
 			this.inputTpl = _.template( $template.html() );
 		},
 
 		render: function() {
-			console.log('formbuildercontrolinfoview render');
 			var modelJSON = this.model.toJSON();
 			var inputTpl = this.inputTpl( modelJSON );
 			this.$el.html( inputTpl );
