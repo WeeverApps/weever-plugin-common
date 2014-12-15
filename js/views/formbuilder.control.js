@@ -207,8 +207,8 @@ wxApp = wxApp || {};
 			'sortable-drop': 'sortableDrop'
 		},
 
-		initialize: function() {
-			var $template = $( this.selector );
+		initialize: function( config ) {
+			var $template = $( config.selector || this.selector );
 			this.inputTpl = _.template( $template.html() );
 			this.model.bind('change', this.render, this);
 		},

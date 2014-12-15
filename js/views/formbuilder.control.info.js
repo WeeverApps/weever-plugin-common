@@ -2,18 +2,15 @@
 wxApp = wxApp || {};
 
 (function($){
-	wxApp.FormBuilderControlInfoView = Backbone.View.extend({
-		tagName: 'div',
-		className: 'wx-form-builder-row panel',
-		firstRender: true,
+	wxApp.FormBuilderControlInfoView = wxApp.FormBuilderControlView.extend({
 		tplSelector: '#form-builder-info',
 		preview: null,
 
 		// Extend the events from the parent
 		events: function() {
-			return {
+			return _.extend( {}, wxApp.FormBuilderControlView.prototype.events, {
 				'input .wx-form-builder-info': 'setInfo'
-			};
+			});
 		},
 
 		initialize: function() {

@@ -783,10 +783,7 @@ window.configgg = config;
 		},
 
 		addPagebreak: function( ev ) {
-			var pagebreak = new wxApp.FormBuilderControl( {
-				control: 'pagebreak',
-				controlTitle: 'Page Break'
-			} );
+			var pagebreak = new wxApp.FormBuilderControlPagebreak();
 			var pagebreakView = new wxApp.FormBuilderControlPagebreakView({
 				model: pagebreak
 			});
