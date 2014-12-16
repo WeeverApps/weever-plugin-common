@@ -11,5 +11,6 @@
     { "featureName": "FacebookWall",        "name": "FB Wall"      },
     { "featureName": "FacebookEvents",      "name": "FB Events"    },
     { "featureName": "FacebookAlbums",      "name": "FB Photos"    },
+    { "featureName": "GoogleCalendar",      "name": "Calendar"     },
     { "featureName": "WordpressContacts",   "name": "Contact"      }
 ]
