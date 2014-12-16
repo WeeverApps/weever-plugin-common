@@ -792,6 +792,26 @@ window.configgg = config;
 
 		addInfoWithProperties: function( properties ) {
 
+			// Delete old, unneeded options.
+			delete properties.type;
+			delete properties.hidePlaceholderClass;
+			delete properties.showPlaceholder;
+			delete properties.innerText;
+			delete properties.allowAdditional;
+			delete properties.allowAdditionalClass;
+			delete properties.valueType;
+			delete properties.valueClass;
+			delete properties.minClass;
+			delete properties.maxClass;
+			delete properties.stepClass;
+			delete properties.multiClass;
+			delete properties.requiredClass;
+			delete properties.autocompleteClass;
+			delete properties.emailOptionClass;
+			delete properties.optionSendPDF;
+			delete properties.attributes;
+			console.log('=== properties ===', properties);
+
 			var info = new wxApp.FormBuilderControlInfo( properties );
 			var infoView = new wxApp.FormBuilderControlInfoView({
 				model: info

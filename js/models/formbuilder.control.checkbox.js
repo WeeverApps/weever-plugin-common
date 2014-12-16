@@ -2,24 +2,30 @@
 wxApp = wxApp || {};
 
 (function($){
-
-	wxApp.FormBuilderControlCheckbox = wxApp.FormBuilderControlInput.extend({
+ 
+	wxApp.FormBuilderChildInput = Backbone.Model.extend({
 		defaults: function() {
-			// This is annoying
-			// https://github.com/documentcloud/backbone/issues/476
-			var newDefaults = _.extend( this.constructor.__super__.defaults(), {
-				label: 'Checkbox',
-				autocompleteClass: 'hide'
-			} );
+			return { control: 'input' };
+		},
+
+		initialize: function() {
+			if ( this.get( 'attributes' ) ) {
+				this.set( 'attributes', new wxApp.FormBuilderControlAttributes( this.get( 'attributes' ) ) );
+			}
+			else {
+				this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
+			}
+		}
+	});
+
+	wxApp.FormBuilderControlCheckbox = wxApp.FormBuilderChildInput.extend({
+		defaults: function() {
+			var newDefaults = _.extend( this.constructor.__super__.defaults(), { label: 'Checkbox' } );
 			return newDefaults;
 		},
 
 		initialize: function() {
-			
-			// So is this
-			// http://documentcloud.github.com/backbone/#Model-extend
-			wxApp.FormBuilderControl.prototype.initialize.apply( this );
-
+			wxApp.FormBuilderChildInput.prototype.initialize.apply( this );
 			this.get( 'attributes' ).set( 'type', 'checkbox' );
 		}
 	});
