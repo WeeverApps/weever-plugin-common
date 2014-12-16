@@ -792,25 +792,26 @@ window.configgg = config;
 
 		addInfoWithProperties: function( properties ) {
 
-			// Delete old, unneeded options.
-			delete properties.type;
-			delete properties.hidePlaceholderClass;
-			delete properties.showPlaceholder;
-			delete properties.innerText;
-			delete properties.allowAdditional;
-			delete properties.allowAdditionalClass;
-			delete properties.valueType;
-			delete properties.valueClass;
-			delete properties.minClass;
-			delete properties.maxClass;
-			delete properties.stepClass;
-			delete properties.multiClass;
-			delete properties.requiredClass;
-			delete properties.autocompleteClass;
-			delete properties.emailOptionClass;
-			delete properties.optionSendPDF;
-			delete properties.attributes;
-			console.log('=== properties ===', properties);
+			// Delete old, unneeded properties.
+			if ( typeof properties.valueType === 'string' ) {
+				delete properties.type;
+				delete properties.hidePlaceholderClass;
+				delete properties.showPlaceholder;
+				delete properties.innerText;
+				delete properties.allowAdditional;
+				delete properties.allowAdditionalClass;
+				delete properties.valueType;
+				delete properties.valueClass;
+				delete properties.minClass;
+				delete properties.maxClass;
+				delete properties.stepClass;
+				delete properties.multiClass;
+				delete properties.requiredClass;
+				delete properties.autocompleteClass;
+				delete properties.emailOptionClass;
+				delete properties.optionSendPDF;
+				delete properties.attributes;
+			}
 
 			var info = new wxApp.FormBuilderControlInfo( properties );
 			var infoView = new wxApp.FormBuilderControlInfoView({
@@ -899,6 +900,27 @@ window.configgg = config;
 					var optionJson = properties.radioGroup[i],	// JSON object coming from the API
 					    option     = null;
 					if ( optionJson ) {
+
+						// Delete old, unneeded properties.
+						if ( typeof optionJson.valueType === 'string' ) {
+							delete optionJson.type;
+							delete optionJson.hidePlaceholderClass;
+							delete optionJson.showPlaceholder;
+							delete optionJson.innerText;
+							delete optionJson.allowAdditional;
+							delete optionJson.allowAdditionalClass;
+							delete optionJson.valueType;
+							delete optionJson.valueClass;
+							delete optionJson.minClass;
+							delete optionJson.maxClass;
+							delete optionJson.stepClass;
+							delete optionJson.multiClass;
+							delete optionJson.requiredClass;
+							delete optionJson.autocompleteClass;
+							delete optionJson.emailOptionClass;
+							delete optionJson.optionSendPDF;
+						}
+
 						option = new wxApp.FormBuilderControlRadio( optionJson );
 					} else {
 						option = properties.radioGroup.models[i];	// Backbone object coming from the app
@@ -938,6 +960,27 @@ window.configgg = config;
 					var optionJson = properties.checkboxGroup[i],	// JSON object coming from the API
 					    option     = null;
 					if ( optionJson ) {
+
+						// Delete old, unneeded properties.
+						if ( typeof optionJson.valueType === 'string' ) {
+							delete optionJson.type;
+							delete optionJson.hidePlaceholderClass;
+							delete optionJson.showPlaceholder;
+							delete optionJson.innerText;
+							delete optionJson.allowAdditional;
+							delete optionJson.allowAdditionalClass;
+							delete optionJson.valueType;
+							delete optionJson.valueClass;
+							delete optionJson.minClass;
+							delete optionJson.maxClass;
+							delete optionJson.stepClass;
+							delete optionJson.multiClass;
+							delete optionJson.requiredClass;
+							delete optionJson.autocompleteClass;
+							delete optionJson.emailOptionClass;
+							delete optionJson.optionSendPDF;
+						}
+
 						option = new wxApp.FormBuilderControlCheckbox( optionJson );
 					} else {
 						option = properties.checkboxGroup.models[i];	// Backbone object coming from the app
