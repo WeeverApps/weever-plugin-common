@@ -1,0 +1,25 @@
+<script type="text/template" id="form-builder-repeatable-form">
+    <p class="title">
+        Repeatable Form: <span class="wx-form-builder-label"><%- label %></span>
+    </p>
+
+    <div class="content">
+
+        <br>
+
+        <label>
+            Label:
+            <input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
+        </label>
+
+        <button class="wx-form-builder-delete small alert">Delete field</button>
+    </div>
+</script>
+
+<script type="text/template" id="form-builder-repeatable-form-preview">
+    <fieldset>
+        <legend class="wx-form-builder-label"><%- label %></legend>
+        <div class="wx-preview-form subform-<%- ordinal %>-preview-form"></div>
+        <a href="#">&plus; Add Another</a>
+    </fieldset>
+</script>

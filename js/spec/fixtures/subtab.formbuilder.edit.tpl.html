@@ -449,10 +449,12 @@
             <div class="tabs-content" id="wx-tabs-content-addfieldtabs">
                 <div class="content active" id="panel-new-form-fields">
 
-                    Add elements to:
-                    <select class="add-element-to-form">
-                        <option value="">Main Form</option>
-                    </select> 
+                    <div class="add-element-ddl-container" style="display: none">
+                        Add elements to:<br/>
+                        <select class="add-element-to-form">
+                            <option value="">Main Form</option>
+                        </select>
+                    </div>
 
                     <!-- start: fields -->
                     <ul class="small-block-grid-2" id="add-fields">
@@ -852,7 +854,7 @@
                 <div class="content active" id="panel-form-preview">
                     <div class="wx-validate-feed panel">
                         <h3 class="subheader" style="font-size: 1.25rem; margin: 1.25rem;"><%- title %> &mdash; preview</h3>
-                        <div class="wx-preview-form">
+                        <div class="wx-preview-form wx-main-preview-form">
                         </div>
                         <br/>
                         <div class="wx-form-preview-row">

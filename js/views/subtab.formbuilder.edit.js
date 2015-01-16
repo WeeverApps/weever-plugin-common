@@ -4,7 +4,7 @@ wxApp = wxApp || {};
 (function($){
 
 	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
-		previewPaneClass: 'wx-preview-form',
+		previewPaneClass: 'wx-main-preview-form',
 		buildPaneSelector: '.form-build-area',
 		baseEditTplSelector: '#formbuilder-subtab-edit-template',
 		hasCalledFinish: false,
@@ -370,9 +370,9 @@ wxApp = wxApp || {};
 			'click .radio-mode'                              : 'updateMode',
 
 			// Data deletion warning.
-			'click .wx-back-button':                        'closeReveal',
-			'click .wx-form-builder-warning-acknowledged': 'acknowledgementReceived',
-			'click .wx-form-builder-warning-proceed':       'proceed'
+			'click .wx-back-button'                          : 'closeReveal',
+			'click .wx-form-builder-warning-acknowledged'    : 'acknowledgementReceived',
+			'click .wx-form-builder-warning-proceed'         : 'proceed'
 		},
 
 		updateSubmitButtonText: function( ev ) {
@@ -1123,11 +1123,14 @@ console.log('addRepeatableForm');
 		},
 
 		addRepeatableFormProperties: function( properties ) {
-			var model = new wxApp.FormBuilderRepeatableForm( properties );
-			var view  = new wxApp.FormBuilderRepeatableFormView( { model: model } );
+			var model = new wxApp.FormBuilderRepeatableForm( properties ),
+			    view  = new wxApp.FormBuilderRepeatableFormView( { model: model } );
 			this.addControl( model, view );
 
-			this.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">Sub Form</option>');
+			this.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">&mdash; ' + model.get('label') + '</option>');
+			this.$('.add-element-to-form').val( model.get('ordinal') );
+
+			$('.add-element-ddl-container').show();
 		},
 
 		addControl: function( input, view ) {
@@ -1138,32 +1141,26 @@ console.log('addRepeatableForm');
 			    ordinal      = input.get('ordinal'),
 			    advanced     = config.advanced || false,
 			    flowed       = false,
-			    subformId    = parseInt( me.$('.add-element-to-form').val() );
+			    subformId    = parseInt( me.$('.add-element-to-form').val() ),
+			    previewPane  = '.' + this.previewPaneClass;
 
 			if ( subformId ) {
 				for (var i = 0; i < formElements.length; i++) {
 					var model = formElements.at( i );
 					if ( model.get( 'ordinal' ) === subformId ) {
 						formElements = model.get( 'formElements' );
+						previewPane  = '.subform-' + model.get( 'ordinal' ) + '-preview-form';
 						break;
 					}
 				};
 			}
 
 			if ( !ordinal ) {
-				ordinal = 0;	// Ensure it's a number.
-
-				// Get the current largest ordinal
-				// NOTE - The ordinal doesn't (necessarily) relate to the order of the form elements. It relates to the order in which elements were added.
-				for (var i = 0; i < formElements.length; i++) {
-					var model = formElements.at( i );
-					if ( model.get( 'ordinal' ) > ordinal )
-						ordinal = model.get( 'ordinal' );
-				};
-				++ordinal;
-
-				input.set( 'ordinal', ordinal );
+				ordinal = me._getLargestOrdinal( config.formElements );
+console.log('LARGEST ORDINAL', ordinal);
+				input.set( 'ordinal', ++ordinal );
 			}
+
 			// Remove any existing wx-form-control-[ordinal] classes
 			view.$el.removeClass(function(index, css) {
 				return (css.match (/\bwx-form-control-\S+/g) || []).join(' ');
@@ -1196,7 +1193,7 @@ console.log('addRepeatableForm');
 
 			// Add the preview to the Preview tab.
 			var $preview = view.getPreview().render().$el;
-			$( '.' + this.previewPaneClass ).append( $preview );
+			$( previewPane ).append( $preview );
 			setTimeout(function() {
 				$preview.addClass('wx-active');
 			}, 1);	// If we just add this class right away, we don't get the CSS transition, so we wait 1ms before applying it.
@@ -1386,6 +1383,23 @@ console.log('addRepeatableForm');
             }
 
             return elementsJson;
+        },
+
+        /**
+         * NOTE - The ordinal doesn't (necessarily) relate to the order of the form elements.
+         * It relates to the order in which elements were added.
+         */
+        _getLargestOrdinal: function( formElements, ordinal ) {
+        	if (!ordinal)
+        		ordinal = 0;
+			for (var i = 0; i < formElements.length; i++) {
+				var model = formElements.at( i );
+				if ( model.get( 'ordinal' ) > ordinal )
+					ordinal = model.get( 'ordinal' );
+				if ( model.get('formElements') )
+					ordinal = this._getLargestOrdinal( model.get('formElements'), ordinal );
+			};
+			return ordinal;
         }
 	});
 

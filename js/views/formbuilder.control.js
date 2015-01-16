@@ -225,8 +225,10 @@ wxApp = wxApp || {};
 			this.$el.trigger( 'sortable-update', [this.model, index] );
 		},
 
-		selectField: function() {
+		selectField: function( e ) {
 			var ordinal = this.model.get('ordinal');
+console.log('Why\'s ' + ordinal + ' cryin?', 'CUZ HE JUST GOT CLICKED ON');
+			e.stopImmediatePropagation();
 
 			// Highlight this control.
 			$('.wx-form-preview-row').removeClass('wx-active');
