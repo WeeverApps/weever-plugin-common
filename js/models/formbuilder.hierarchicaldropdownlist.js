@@ -1,4 +1,4 @@
-''
+
 wxApp = wxApp || {};
 
 (function($) {

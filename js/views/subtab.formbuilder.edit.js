@@ -130,7 +130,7 @@ wxApp = wxApp || {};
 					}
 				}, 100 );
 			}
-window.configgg = config;
+
 			if ( typeof config.formActions == 'undefined' ) {
 				me.getDefaultFormActions();
 			}
@@ -350,6 +350,7 @@ window.configgg = config;
 			'click .wx-form-builder-add-weever-signature'    : 'addWeeverSignature',
 			'click .wx-form-builder-add-calculation'         : 'addCalculation',
 			'click .wx-form-builder-add-hierarchical-drop-down-list': 'addHierarchicalDropDownList',
+			'click .wx-form-builder-add-repeatable-form'     : 'addRepeatableForm',
 			'click .wx-submit-button'                        : 'showSubmitButtonInfo',
 			'keyup .submit-button-text'                      : 'updateSubmitButtonText',
 			'sortable-update'                                : 'sortableUpdate',
@@ -1115,6 +1116,20 @@ window.configgg = config;
 		    this.addControl( model, view );
 		},
 
+		addRepeatableForm: function( ev ) {
+console.log('addRepeatableForm');
+			var defaults = {};
+			this.addRepeatableFormProperties( defaults );
+		},
+
+		addRepeatableFormProperties: function( properties ) {
+			var model = new wxApp.FormBuilderRepeatableForm( properties );
+			var view  = new wxApp.FormBuilderRepeatableFormView( { model: model } );
+			this.addControl( model, view );
+
+			this.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">Sub Form</option>');
+		},
+
 		addControl: function( input, view ) {
 
 			var me           = this,
@@ -1122,7 +1137,18 @@ window.configgg = config;
 			    formElements = config.formElements,
 			    ordinal      = input.get('ordinal'),
 			    advanced     = config.advanced || false,
-			    flowed       = false;
+			    flowed       = false,
+			    subformId    = parseInt( me.$('.add-element-to-form').val() );
+
+			if ( subformId ) {
+				for (var i = 0; i < formElements.length; i++) {
+					var model = formElements.at( i );
+					if ( model.get( 'ordinal' ) === subformId ) {
+						formElements = model.get( 'formElements' );
+						break;
+					}
+				};
+			}
 
 			if ( !ordinal ) {
 				ordinal = 0;	// Ensure it's a number.
