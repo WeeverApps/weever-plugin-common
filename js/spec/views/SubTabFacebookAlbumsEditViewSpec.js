@@ -1,7 +1,7 @@
 describe('SubTabFacebookAlbumsEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.facebookalbums.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.facebookalbums.edit.tpl.html', 'feedsample.tpl.html');
         this.facebookAlbumsModel = new wxApp.FacebookAlbumsSubTab();
         this.facebookAlbumsView = new wxApp.FacebookAlbumsSubTabEditView({
             model: this.facebookAlbumsModel
@@ -35,7 +35,7 @@ describe('SubTabFacebookAlbumsEditView', function() {
         this.facebookAlbumsView.delegateEvents();
         this.facebookAlbumsView.$el.find('.wx-social-input').val('http://facebook.com/UnitedWay');
         this.facebookAlbumsView.$el.find('.wx-next-button').click();
-        expect( this.facebookAlbumsView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual('http://facebook.com/UnitedWay');
+        expect( this.facebookAlbumsView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual('http://facebook.com/UnitedWay');
     });
 
     it('should call getFeedSample with proper url', function() {
@@ -43,7 +43,7 @@ describe('SubTabFacebookAlbumsEditView', function() {
         spyOn( $, 'ajax' );
         this.facebookAlbumsView.$el.find('.wx-social-input').val('http://facebook.com/UnitedWay');
         this.facebookAlbumsView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+        expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
     });
 
     it('should have validate area', function() {

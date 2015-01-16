@@ -1,7 +1,7 @@
 describe('SubTabWordpressContactEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.wordpresscontacts.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.wordpresscontacts.edit.tpl.html', 'feedsample.tpl.html');
         this.wordpressContactModel = new wxApp.WordpressContactsSubTab();
         this.wordpressContactView = new wxApp.WordpressContactsSubTabEditView({
             model: this.wordpressContactModel

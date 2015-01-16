@@ -1,7 +1,7 @@
 describe('SubTabWordpressDirectoryEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.wordpressdirectory.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.wordpressdirectory.edit.tpl.html', 'feedsample.tpl.html');
         console.log('wordpressDirectoryview');
         this.wordpressDirectoryModel = new wxApp.WordpressDirectorySubTab();
         this.wordpressDirectoryView = new wxApp.WordpressDirectorySubTabEditView({
@@ -29,7 +29,7 @@ describe('SubTabWordpressDirectoryEditView', function() {
         this.wordpressDirectoryView.delegateEvents();
         this.wordpressDirectoryView.$('.wx-add-wordpress-directory-select').val( this.wordpressDirectoryView.$('.wx-add-wordpress-directory-select option:first').val() );
         this.wordpressDirectoryView.$el.find('.wx-next-button').click();
-        expect( this.wordpressDirectoryView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual( this.wordpressDirectoryView.$('.wx-add-wordpress-directory-select option:first').val() );
+        expect( this.wordpressDirectoryView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual( this.wordpressDirectoryView.$('.wx-add-wordpress-directory-select option:first').val() );
     });
 
     it('should not have validate area', function() {

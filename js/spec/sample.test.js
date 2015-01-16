@@ -3,7 +3,7 @@
 
 describe('TabView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/spec/fixtures/';
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
         loadFixtures('tab.tpl.html');
     });
 

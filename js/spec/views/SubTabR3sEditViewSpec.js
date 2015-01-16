@@ -1,7 +1,7 @@
 describe('SubTabr3sEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.r3s.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.r3s.edit.tpl.html', 'feedsample.tpl.html');
         this.r3sModel = new wxApp.r3sSubTab();
         this.r3sView = new wxApp.r3sSubTabEditView({
             model: this.r3sModel
@@ -35,7 +35,7 @@ describe('SubTabr3sEditView', function() {
         this.r3sView.delegateEvents();
         this.r3sView.$el.find('.wx-edit-input').val('http://weeverapps.com/five-reasons-html5-mobile/?template=weever_cartographer&callback=callback345');
         this.r3sView.$el.find('.wx-next-button').click();
-        expect( this.r3sView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual('http://weeverapps.com/five-reasons-html5-mobile/?template=weever_cartographer&callback=callback345');
+        expect( this.r3sView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual('http://weeverapps.com/five-reasons-html5-mobile/?template=weever_cartographer&callback=callback345');
     });
 
     it('should call getFeedSample with proper url', function() {
@@ -43,7 +43,7 @@ describe('SubTabr3sEditView', function() {
         spyOn( $, 'ajax' );
         this.r3sView.$el.find('.wx-edit-input').val('http://weeverapps.com/five-reasons-html5-mobile/?template=weever_cartographer&callback=callback345');
         this.r3sView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+        expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
     });
 
     it('should have validate area', function() {

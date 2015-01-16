@@ -1,7 +1,7 @@
 describe('SubTabbloggerEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.blogger.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.blogger.edit.tpl.html', 'feedsample.tpl.html');
         this.bloggerModel = new wxApp.BloggerSubTab();
         this.bloggerView = new wxApp.BloggerSubTabEditView({
             model: this.bloggerModel
@@ -35,7 +35,7 @@ describe('SubTabbloggerEditView', function() {
         this.bloggerView.delegateEvents();
         this.bloggerView.$el.find('.wx-edit-input').val('http://dcheartly.blogspot.com');
         this.bloggerView.$el.find('.wx-next-button').click();
-        expect( this.bloggerView.getFeedSample.mostRecentCall.args[0].getConfig().blog_url ).toEqual('http://dcheartly.blogspot.com');
+        expect( this.bloggerView.getFeedSample.calls.mostRecent().args[0].getConfig().blog_url ).toEqual('http://dcheartly.blogspot.com');
     });
 
     it('should call getFeedSample with proper url', function() {
@@ -43,7 +43,7 @@ describe('SubTabbloggerEditView', function() {
         spyOn( $, 'ajax' );
         this.bloggerView.$el.find('.wx-edit-input').val('http://dcheartly.blogspot.com');
         this.bloggerView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+        expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
     });
 
     it('should call getFeedSample with api check / confirm feed set to 1', function() {
@@ -51,8 +51,8 @@ describe('SubTabbloggerEditView', function() {
         spyOn( $, 'ajax' );
         this.bloggerView.$el.find('.wx-social-input').val('http://dcheartly.blogspot.com');
         this.bloggerView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].data.api_check ).toBe(1);
-        expect( $.ajax.mostRecentCall.args[0].data.confirm_feed ).toBe(1);
+        expect( $.ajax.calls.mostRecent().args[0].data.api_check ).toBe(1);
+        expect( $.ajax.calls.mostRecent().args[0].data.confirm_feed ).toBe(1);
     });
 
     it('should have validate area', function() {

@@ -1,7 +1,7 @@
 describe('SubTabWordpressBlogEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.wordpressblog.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.wordpressblog.edit.tpl.html', 'feedsample.tpl.html');
         console.log('wordpressBlogview');
         this.wordpressBlogModel = new wxApp.WordpressBlogSubTab();
         this.wordpressBlogView = new wxApp.WordpressBlogSubTabEditView({
@@ -29,7 +29,7 @@ describe('SubTabWordpressBlogEditView', function() {
         this.wordpressBlogView.delegateEvents();
         this.wordpressBlogView.$('.wx-add-wordpress-blog-select').val( this.wordpressBlogView.$('.wx-add-wordpress-blog-select option:first').val() );
         this.wordpressBlogView.$('.wx-next-button').click();
-        expect( this.wordpressBlogView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual( this.wordpressBlogView.$('.wx-add-wordpress-blog-select option:first').val() );
+        expect( this.wordpressBlogView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual( this.wordpressBlogView.$('.wx-add-wordpress-blog-select option:first').val() );
     });
 
     it('should not have validate area', function() {

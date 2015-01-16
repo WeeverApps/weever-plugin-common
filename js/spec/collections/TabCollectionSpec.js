@@ -29,6 +29,6 @@ describe('TabCollection', function() {
 
     it('should handle type of WordpressCategory', function() {
         var tabData = { id: 1234, content: 'WordpressCategory', type: 'WordpressCategory' };
-        expect( this.tabCollection.getModelNameByTabData( tabData ) ).toEqual('WordpressCategorySubTab');
+        expect( this.tabCollection.getModelNameByTabData( tabData ) ).toEqual('SubTab');
     });
 });

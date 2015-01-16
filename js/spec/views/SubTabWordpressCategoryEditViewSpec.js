@@ -1,7 +1,7 @@
 describe('SubTabWordpressCategoryEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.wordpresscategory.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.wordpresscategory.edit.tpl.html', 'feedsample.tpl.html');
         console.log('wordpressCategoryview');
         this.wordpressCategoryModel = new wxApp.WordpressCategorySubTab();
         this.wordpressCategoryView = new wxApp.WordpressCategorySubTabEditView({
@@ -29,7 +29,7 @@ describe('SubTabWordpressCategoryEditView', function() {
         this.wordpressCategoryView.delegateEvents();
         this.wordpressCategoryView.$('.wx-add-wordpress-category-select').val( this.wordpressCategoryView.$('.wx-add-wordpress-category-select option:first').val() );
         this.wordpressCategoryView.$el.find('.wx-next-button').click();
-        expect( this.wordpressCategoryView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual( this.wordpressCategoryView.$('.wx-add-wordpress-blog-select option:first').val() );
+        expect( this.wordpressCategoryView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual( this.wordpressCategoryView.$('.wx-add-wordpress-blog-select option:first').val() );
     });
 
     it('should not have validate area', function() {

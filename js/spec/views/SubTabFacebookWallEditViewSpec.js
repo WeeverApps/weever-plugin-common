@@ -1,7 +1,7 @@
 describe('SubTabFacebookWallEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.facebookwall.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.facebookwall.edit.tpl.html', 'feedsample.tpl.html');
         this.facebookWallModel = new wxApp.FacebookWallSubTab();
         this.facebookWallView = new wxApp.FacebookWallSubTabEditView({
             model: this.facebookWallModel
@@ -74,7 +74,7 @@ describe('SubTabFacebookWallEditView', function() {
 		this.facebookWallView.delegateEvents();
 		this.facebookWallView.$el.find('.wx-social-input').val('http://www.facebook.com/pages/Brian-Hogg-Consulting/129044753852112');
 		this.facebookWallView.$el.find('.wx-next-button').click();
-		expect( this.facebookWallView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual('http://www.facebook.com/pages/Brian-Hogg-Consulting/129044753852112');
+		expect( this.facebookWallView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual('http://www.facebook.com/pages/Brian-Hogg-Consulting/129044753852112');
 	});
 
 	it('should call getFeedSample with proper url', function() {
@@ -82,7 +82,7 @@ describe('SubTabFacebookWallEditView', function() {
 		spyOn( $, 'ajax' );
 		this.facebookWallView.$el.find('.wx-social-input').val('http://www.facebook.com/pages/Brian-Hogg-Consulting/129044753852112');
 		this.facebookWallView.$el.find('.wx-next-button').click();
-		expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+		expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
 	});
 
 	it('should call getFeedSample with api check / confirm feed set to 1', function() {
@@ -90,8 +90,8 @@ describe('SubTabFacebookWallEditView', function() {
 		spyOn( $, 'ajax' );
 		this.facebookWallView.$el.find('.wx-social-input').val('http://www.facebook.com/pages/Brian-Hogg-Consulting/129044753852112');
 		this.facebookWallView.$el.find('.wx-next-button').click();
-		expect( $.ajax.mostRecentCall.args[0].data.api_check ).toBe(1);
-		expect( $.ajax.mostRecentCall.args[0].data.confirm_feed ).toBe(1);
+		expect( $.ajax.calls.mostRecent().args[0].data.api_check ).toBe(1);
+		expect( $.ajax.calls.mostRecent().args[0].data.confirm_feed ).toBe(1);
 	});
 
 	it('should show sample feed results if there are any and show finish button', function() {

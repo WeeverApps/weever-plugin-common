@@ -1,7 +1,7 @@
 describe('SubTabFacebookEventsEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.facebookevents.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.facebookevents.edit.tpl.html', 'feedsample.tpl.html');
         this.facebookEventsModel = new wxApp.FacebookEventsSubTab();
         this.facebookEventsView = new wxApp.FacebookEventsSubTabEditView({
             model: this.facebookEventsModel
@@ -35,7 +35,7 @@ describe('SubTabFacebookEventsEditView', function() {
         this.facebookEventsView.delegateEvents();
         this.facebookEventsView.$el.find('.wx-social-input').val('http://facebook.com/UnitedWay');
         this.facebookEventsView.$el.find('.wx-next-button').click();
-        expect( this.facebookEventsView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual('http://facebook.com/UnitedWay');
+        expect( this.facebookEventsView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual('http://facebook.com/UnitedWay');
     });
 
     it('should call getFeedSample with proper url', function() {
@@ -43,7 +43,7 @@ describe('SubTabFacebookEventsEditView', function() {
         spyOn( $, 'ajax' );
         this.facebookEventsView.$el.find('.wx-social-input').val('http://facebook.com/UnitedWay');
         this.facebookEventsView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+        expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
     });
 
     it('should have validate area', function() {

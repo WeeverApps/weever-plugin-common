@@ -1,7 +1,7 @@
 describe('TabView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('tab.tpl.html', 'subtab.tpl.html', 'subtab.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('tab.tpl.html', 'subtab.tpl.html', 'subtab.edit.tpl.html');
         this.tabModel = new wxApp.Tab({ id: 1234, title: 'test' });
         this.tabView = new wxApp.TabView({ model: this.tabModel });
         spyOn( this.tabView, 'loadIcon' );
@@ -11,8 +11,8 @@ describe('TabView', function() {
         this.tabView.remove();
     });
 
-    it('should render with class li', function() {
-        expect( this.tabView.render().el.tagName.toLowerCase() ).toBe('li');
+    it('should render with class div', function() {
+        expect( this.tabView.render().el.tagName.toLowerCase() ).toBe('div');
     });
 
     it('should render tab title', function() {

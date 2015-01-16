@@ -1,7 +1,7 @@
 describe('SubTabVimeoEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.vimeo.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.vimeo.edit.tpl.html', 'feedsample.tpl.html');
         console.log('vimeoview');
         this.vimeoModel = new wxApp.VimeoSubTab();
         this.vimeoView = new wxApp.VimeoSubTabEditView({
@@ -37,7 +37,7 @@ describe('SubTabVimeoEditView', function() {
         this.vimeoView.delegateEvents();
         this.vimeoView.$el.find('.wx-edit-input').val('http://dcheartly.blogspot.com');
         this.vimeoView.$el.find('.wx-next-button').click();
-        expect( this.vimeoView.getFeedSample.mostRecentCall.args[0].getConfig().url ).toEqual('http://dcheartly.blogspot.com');
+        expect( this.vimeoView.getFeedSample.calls.mostRecent().args[0].getConfig().url ).toEqual('http://dcheartly.blogspot.com');
     });
 
     it('should call getFeedSample with proper url', function() {
@@ -45,7 +45,7 @@ describe('SubTabVimeoEditView', function() {
         spyOn( $, 'ajax' );
         this.vimeoView.$el.find('.wx-edit-input').val('http://dcheartly.blogspot.com');
         this.vimeoView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+        expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
     });
 
     it('should call getFeedSample with api check / confirm feed set to 1', function() {
@@ -53,8 +53,8 @@ describe('SubTabVimeoEditView', function() {
         spyOn( $, 'ajax' );
         this.vimeoView.$el.find('.wx-social-input').val('http://dcheartly.blogspot.com');
         this.vimeoView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].data.api_check ).toBe(1);
-        expect( $.ajax.mostRecentCall.args[0].data.confirm_feed ).toBe(1);
+        expect( $.ajax.calls.mostRecent().args[0].data.api_check ).toBe(1);
+        expect( $.ajax.calls.mostRecent().args[0].data.confirm_feed ).toBe(1);
     });
 
     it('should have validate area', function() {

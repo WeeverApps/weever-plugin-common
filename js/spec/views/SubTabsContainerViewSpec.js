@@ -1,7 +1,7 @@
 describe('Subtabs container view', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.container.tpl.html', 'subtab.tpl.html', 'subtab.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.container.tpl.html', 'subtab.tpl.html', 'subtab.edit.tpl.html');
         this.tabModel = new wxApp.Tab();
         this.subTabsContainerView = new wxApp.SubTabsContainerView({ model: this.tabModel });
     });

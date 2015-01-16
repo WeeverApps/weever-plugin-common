@@ -1,11 +1,9 @@
 describe( 'FormBuilderControlInputViewSpec', function() {
 
 	beforeEach(function() {
-		jasmine.getFixtures().fixturesPath = '/test/fixtures/';
+		jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
 		loadFixtures(
 			'subtab.formbuilder.edit.tpl.html',
-			'subtab.edit.header.tpl.html',
-			'subtab.edit.footer.tpl.html',
 			'formbuilder.input.tpl.html',
 			'subtab.container.tpl.html',
 			'subtab.tpl.html',
@@ -18,9 +16,9 @@ describe( 'FormBuilderControlInputViewSpec', function() {
 		});
 	});
 
-	afterEach(function() {
-		this.formBuilderView.destroyView();
-	});
+	// afterEach(function() {
+	// 	this.formBuilderView.destroyView();
+	// });
 
 	var inputTypes = ['text', 'password', 'color', 'date', 'datetime', 'datetime-local', 'month', 'number', 'tel', 'time', 'url', 'week'];
 	var type;

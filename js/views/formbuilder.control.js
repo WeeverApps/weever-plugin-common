@@ -226,9 +226,9 @@ wxApp = wxApp || {};
 		},
 
 		selectField: function( e ) {
-			var ordinal = this.model.get('ordinal');
-console.log('Why\'s ' + ordinal + ' cryin?', 'CUZ HE JUST GOT CLICKED ON');
 			e.stopImmediatePropagation();
+
+			var ordinal = this.model.get('ordinal');
 
 			// Highlight this control.
 			$('.wx-form-preview-row').removeClass('wx-active');

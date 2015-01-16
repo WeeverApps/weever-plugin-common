@@ -1,7 +1,7 @@
 describe('SubTabFoursquarePhotosEditView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.foursquarephotos.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html', 'feedsample.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.foursquarephotos.edit.tpl.html', 'feedsample.tpl.html');
         this.foursquarePhotosModel = new wxApp.FoursquarePhotosSubTab();
         this.foursquarePhotosView = new wxApp.FoursquarePhotosSubTabEditView({
             model: this.foursquarePhotosModel
@@ -35,7 +35,7 @@ describe('SubTabFoursquarePhotosEditView', function() {
         this.foursquarePhotosView.delegateEvents();
         this.foursquarePhotosView.$el.find('.wx-edit-input').val('https://foursquare.com/v/good-life/40b28c80f964a520c9f71ee3');
         this.foursquarePhotosView.$el.find('.wx-next-button').click();
-        expect( this.foursquarePhotosView.getFeedSample.mostRecentCall.args[0].getConfig().venue_id ).toEqual('https://foursquare.com/v/good-life/40b28c80f964a520c9f71ee3');
+        expect( this.foursquarePhotosView.getFeedSample.calls.mostRecent().args[0].getConfig().venue_id ).toEqual('https://foursquare.com/v/good-life/40b28c80f964a520c9f71ee3');
     });
 
     it('should call getFeedSample with proper url', function() {
@@ -43,7 +43,7 @@ describe('SubTabFoursquarePhotosEditView', function() {
         spyOn( $, 'ajax' );
         this.foursquarePhotosView.$el.find('.wx-edit-input').val('https://foursquare.com/v/good-life/40b28c80f964a520c9f71ee3');
         this.foursquarePhotosView.$el.find('.wx-next-button').click();
-        expect( $.ajax.mostRecentCall.args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
+        expect( $.ajax.calls.mostRecent().args[0].url ).toEqual(wx.apiUrl + 'validator/validate_feed?site_key=' + wx.siteKey);
     });
 
     it('should have validate area', function() {

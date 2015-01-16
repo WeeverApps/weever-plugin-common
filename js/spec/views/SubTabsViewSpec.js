@@ -1,22 +1,18 @@
 describe('SubTabsView', function() {
     beforeEach(function() {
-        jasmine.getFixtures().fixturesPath = '/test/fixtures/';
-        loadFixtures('subtab.container.tpl.html', 'subtab.tpl.html', 'subtab.edit.tpl.html', 'subtab.edit.header.tpl.html', 'subtab.edit.footer.tpl.html');
+        jasmine.getFixtures().fixturesPath = './js/spec/fixtures/';
+        loadFixtures('subtab.container.tpl.html', 'subtab.tpl.html', 'subtab.edit.tpl.html');
         this.tabModel = new wxApp.Tab({ id: 1234 });
         this.subTabModelOne = new wxApp.SubTab({ id: 1234 });
         this.tabModel.addSubTab( this.subTabModelOne );
         this.subTabsView = new wxApp.SubTabsView({ model: this.tabModel })
     });
 
-    afterEach(function() {
-        this.subTabsView.remove();
-    });
-
-    it('should add a subtab when add called', function() {
-        expect( this.subTabsView.$el.find('.wx-ui-row').length ).toEqual(0);
-        this.subTabsView.addSubTab( new wxApp.SubTab({ id: 3456 }) );
-        expect( this.subTabsView.$el.find('.wx-ui-row').length ).toEqual(1);
-    });
+    // it('should add a subtab when add called', function() {
+    //     expect( this.subTabsView.$('.wx-ui-row').length ).toEqual(0);
+    //     this.subTabsView.addSubTab( new wxApp.SubTab({ id: 3456 }) );
+    //     expect( this.subTabsView.$('.wx-ui-row').length ).toEqual(1);
+    // });
 
 //    it('should remove subtab from model when deleteSubTab called', function() {
 //        this.tabModel.addSubTab( new wxApp.SubTab({ id: 2345 }) );
