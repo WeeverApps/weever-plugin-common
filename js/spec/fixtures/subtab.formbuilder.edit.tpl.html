@@ -308,13 +308,20 @@
             <div class="row">
                 <div class="medium-8 columns end">
 
-
+                    <% var emailPDF = false %>
+                    <% if ( emailDetails.value.length > 0 ) emailPDF = true; %>
                         <label>
-                            <input type="checkbox" name="on-complete-events" value="email-pdf" class="email-pdf-to-recipients" />
+                            <input
+                                    type="checkbox"
+                                    name="on-complete-events"
+                                    value="email-pdf"
+                                    class="email-pdf-to-recipients"
+                                    <% if ( emailPDF > 0 ) { %>checked="checked"<% } %>
+                                    />
                             Also email a PDF copy of submitted form entries to the people I specify
                         </label>
 
-                        <div class="wx-email-action" style="display: none">
+                        <div class="wx-email-action" style="display: <%= emailPDF ? 'block' : 'none' %>">
                             <label>Email recipients (separate multiple emails with commas)</label>
                             <input class="wx-form-builder-action wx-form-builder-action-email" placeholder="Email addresses" type="email" value="<%- emailDetails.value %>" />
                             <label><input class="wx-form-builder-send-current-user-email" type="checkbox" <%- emailDetails.useCurrentUserEmail %> /> Email <span class="wx-current-user-email"><%- emailDetails.currentUserEmail %></span></label>
