@@ -316,7 +316,7 @@
                                     name="on-complete-events"
                                     value="email-pdf"
                                     class="email-pdf-to-recipients"
-                                    <% if ( emailPDF > 0 ) { %>checked="checked"<% } %>
+                                    <%= emailPDF ? 'checked="checked"' : '' %>
                                     />
                             Also email a PDF copy of submitted form entries to the people I specify
                         </label>
