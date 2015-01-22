@@ -164,6 +164,10 @@ wxApp = wxApp || {};
 						else if ( action.method == 'email' ) {
 							me.addEmailAction( null, action );
 							hasEmail = true;
+
+							// Equivalent to calling updateAction on the email address field
+							var newAction = this.__getActionByMethod( action.method );
+							newAction.set( 'value', action.value );
 						}
 					}
 
