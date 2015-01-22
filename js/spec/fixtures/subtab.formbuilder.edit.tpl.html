@@ -309,7 +309,9 @@
                 <div class="medium-8 columns end">
 
                     <% var emailPDF = false %>
-                    <% if ( emailDetails.value.length > 0 ) emailPDF = true; %>
+                    <% if ( emailDetails.value.length > 0 ) {
+                        emailPDF = true;
+                    } %>
                         <label>
                             <input
                                     type="checkbox"
@@ -358,7 +360,7 @@
                         <br>
 
                         <label>Give this form a title</label>
-                        <input type="text" value="<%- title %>" class="wx-edit-title" />
+                        <input type="text" value="<%- title %>" class="wx-edit-title wx-edit-form-title" />
 
 
                     <br>
@@ -388,6 +390,7 @@
                     <div class="small-12 columns">
                         <div class="wx-form-builder-action-email-pdfheader">
 
+                            <% // console.log( 'pdfHeader', pdfHeader ) %>
                             <label>PDF document title</label>
                             <input type="text" class="wx-form-builder-pdfheader-title" placeholder="PDF Document title" value="<%- pdfHeader ? pdfHeader.title : '' %>" />
 

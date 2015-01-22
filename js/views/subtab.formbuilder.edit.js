@@ -1221,12 +1221,12 @@ console.log('LARGEST ORDINAL', ordinal);
             	$('.form-builder-step-one').slideUp();
             	$('.form-builder-step-two').slideDown();
 
-            	// If a PDF title isn't set, default it to the form's title.
+            	// If the form is being *created* (not edited), default it to the form's title.
             	var action = this.__getActionByMethod( 'email' );
-            	if ( !action.get( 'pdfHeader' ).title ) {
-            		var title = $('.wx-edit-title').val()
+            	if ( ! this.model.get('id') ) {
+            		var title = $('.wx-edit-form-title').val();
             		action.get( 'pdfHeader' ).title = title;				// Set the model
-            		$( '.wx-form-builder-pdfheader-title' ).val( title );	// Set the input
+					$( '.wx-form-builder-pdfheader-title' ).val( title );	// Set the input
 					this.$('.wx-pdf-preview .title').html( title );			// Set the preview
             	}
             }
@@ -1304,6 +1304,7 @@ console.log('LARGEST ORDINAL', ordinal);
 		},
 
 		updateAction: function( ev ) {
+			console.log( 'updateAction!' );
 			ev.preventDefault();
 			var $me    = $( ev.currentTarget ),
 			    method = 'email';
