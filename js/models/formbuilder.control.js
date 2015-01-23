@@ -37,12 +37,12 @@ wxApp = wxApp || {};
 			};
 		},
 
-		initialize: function() {
-			if ( this.get( 'attributes' ) ) {
-				this.set( 'attributes', new wxApp.FormBuilderControlAttributes( this.get( 'attributes' ) ) );
-			}
-			else {
-				this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
+		initialize: function( properties ) {
+			this.set( 'attributes', new wxApp.FormBuilderControlAttributes() );
+			if ( properties && properties.attributes ) {
+				for ( var attrKey in properties.attributes ) {
+					 this.get( 'attributes' ).set(attrKey, properties.attributes[attrKey]);
+				}
 			}
 
 			this.togglePlaceholder();

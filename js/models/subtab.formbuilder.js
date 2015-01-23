@@ -36,9 +36,6 @@ wxApp = wxApp || {};
         },
 
         initialize: function( properties ) {
-            // alert('wxApp.FormBuilderSubTab');
-            // wxApp.SubTab.prototype.initialize.apply( this, arguments );
-            // properties = arguments[0];
             if ( properties && properties.config ) {
 
                 // Convert JSON strings from the API into Backbone Models
@@ -46,11 +43,17 @@ wxApp = wxApp || {};
                     var formElements = this.translateFormElements( properties.config.formElements );
                     this.get('config').formElements = formElements;
                 }
+
                 if ( properties.config.formActions ) {
-
+                    var formActions = this.translateFormActions( properties.config.formActions );
+                    this.get('config').formActions = formActions;
                 }
-                if ( properties.config.onUpload ) {
 
+                if ( properties.config.onUpload ) {
+                    if ( typeof properties.config.onUpload === 'string' )
+                        this.get( 'config' ).onUpload = JSON.parse( properties.config.onUpload );
+                    else
+                        this.get( 'config' ).onUpload = properties.config.onUpload;
                 }
             }
         },
@@ -87,6 +90,8 @@ wxApp = wxApp || {};
 				}
 			});
         },
+
+        /** START FORM ELEMENTS **/
 
         translateFormElements: function( json ) {
             var me = this,
@@ -198,24 +203,7 @@ wxApp = wxApp || {};
         },
 
         createInput: function( properties ) {
-            // var mainProperties = {};
-            // var attributes = {};
-            // for ( var propKey in properties ) {
-            //     if ( propKey != 'attributes' ) {
-            //         mainProperties[propKey] = properties[propKey];
-            //     }
-            //     else {
-            //         for ( var attrKey in properties[propKey] ) {
-            //             attributes[attrKey] = properties[propKey][attrKey];
-            //         }
-            //     }
-            // }
-
             var input = new wxApp.FormBuilderControlInput( properties );
-            // input.get( 'attributes' ).set( attributes );
-            // for ( var attrKey in attributes ) {
-            //     input.get( 'attributes' )[attrKey] = attributes[attrKey];
-            // };
             return input;
         },
 
@@ -260,6 +248,69 @@ wxApp = wxApp || {};
         createWeeverSignature: function( properties ) {
             var control = new wxApp.FormBuilderControlWeeverSignature( properties );
             return control;
+        },
+
+        /** END FORM ELEMENTS **/
+        /** START FORM ACTIONS **/
+
+        translateFormActions: function( json ) {
+            var me = this,
+                config      = this.get('config'),
+                formActions = ( typeof json === 'string' ) ? JSON.parse( json ) : json,
+                formActionsCollection = new Backbone.Collection(),
+                hasDocusign = false,
+                hasPost     = false,
+                hasEmail    = false,
+                i, actionJson, actionObject;
+
+            config.advanced   = me.apiToBoolean( config.advanced );
+            config.isDocuSign = me.apiToBoolean( config.isDocuSign );
+
+            for (i = 0; i < formActions.length; i++) {
+                actionJson   = formActions[i];
+                actionObject = null;
+
+                switch ( actionJson.method ) {
+                    case 'docusign':
+                        hasDocusign = true;
+                        actionObject = new wxApp.FormBuilderAction( actionJson );
+                        break;
+                    case 'post':
+                        hasPost = true;
+                        actionObject = new wxApp.FormBuilderAction( actionJson );
+                        break;
+                    case 'email':
+                        hasEmail = true;
+                        actionObject = new wxApp.FormBuilderAction( actionJson );
+                        break;
+                }
+
+                if ( actionObject ) {
+                    formActionsCollection.push( actionObject );
+                }
+            }
+
+            if ( !hasPost && config.advanced ) {
+                actionObject = new wxApp.FormBuilderAction( { method: 'post' } );
+                formActionsCollection.push( actionObject );
+            }
+
+            if ( !hasEmail && (( config.isDocuSign && config.advanced ) || ( !config.isDocuSign ) ) ) {
+                actionObject = new wxApp.FormBuilderAction( { method: 'email' } );
+                formActionsCollection.push( actionObject );
+            }
+
+            return formActionsCollection;
+        },
+
+
+        /** END FORM ACTIONS **/
+
+        apiToBoolean: function( value ) {
+            if ( typeof value == 'undefined' || value === false || value === 'false' || value === '0' || value === 0 ) {
+                return false;
+            }
+            return true;
         }
 
     });

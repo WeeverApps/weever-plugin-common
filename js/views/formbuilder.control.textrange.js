@@ -9,23 +9,13 @@ wxApp = wxApp || {};
 
 		initialize: function( options ) {
 			options.type = (typeof options.type == 'undefined' ? 'input' : options.type );
-			var me            = this,
-			    $template     = $( this[options.type + 'TplSelector'] ),
-			    sliderOptions = this.model.get( 'options' ) || [];
+			var me        = this,
+			    $template = $( this[options.type + 'TplSelector'] );
 
 			me.inputTpl = _.template( $template.html() );
 
-			me.model.set( 'options', new wxApp.FormBuilderControlTextSliderOptions() );
-
 			me.model.get( 'options' ).bind('add', me.addOne, me);
 			me.model.get( 'options' ).bind('remove', function() { me.getPreview().render(); }, me);
-
-			if ( sliderOptions.length > 0 ) {
-				sliderOptions.forEach( function( sliderOption ) {
-					console.log( 'sliderOption', sliderOption );
-					me.model.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( sliderOption ) );
-				} );
-			}
 		},
 
 		getPreview: function() {

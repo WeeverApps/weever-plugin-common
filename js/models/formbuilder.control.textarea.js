@@ -15,10 +15,10 @@ wxApp = wxApp || {};
 			return newDefaults;
 		},
 
-		initialize: function() {
+		initialize: function( properties ) {
 			// So is this
 			// http://documentcloud.github.com/backbone/#Model-extend
-			wxApp.FormBuilderControl.prototype.initialize.apply( this );
+			wxApp.FormBuilderControl.prototype.initialize.apply( this, arguments );
 		}
 	});
 

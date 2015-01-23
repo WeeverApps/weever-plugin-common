@@ -26,6 +26,7 @@ wxApp = wxApp || {};
 			});
 
 			this.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );
+			return this;
 		}
 
 	});

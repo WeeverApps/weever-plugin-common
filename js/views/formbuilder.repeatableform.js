@@ -47,23 +47,18 @@ wxApp = wxApp || {};
 
     wxApp.FormBuilderRepeatableFormPreview = wxApp.FormBuilderControlPreview.extend({
         selector: '#form-builder-repeatable-form-preview',
-
-        events: function() {
-            return _.extend( {}, wxApp.FormBuilderControlPreview.prototype.events, {
-                // 'change .wx-hdd-dropdown-preview' : 'changeDropDown'
-            });
-        },
+        firstRender: true,
 
         initialize: function (attrs, options) {
             wxApp.FormBuilderControlPreview.prototype.initialize.apply(this, arguments); // call super constructor
-            // this.model.get('options').bind('change', this.render, this);
         },
 
         render: function() {
             var me    = this,
                 model = me.model.toJSON();
 
-            if ( model.formElements.length === 0 ) {
+            if ( me.firstRender || model.formElements.length === 0 ) {
+                me.firstRender = false;
                 me.$el.html( me.inputTpl( model ) );
             }
             else {

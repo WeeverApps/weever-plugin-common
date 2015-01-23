@@ -2,6 +2,7 @@
 wxApp = wxApp || {};
 
 (function($){
+	'use strict';
 
 	wxApp.FormBuilderSubTabEditView = wxApp.SubTabEditView.extend({
 		previewPaneClass: 'wx-main-preview-form',
@@ -16,29 +17,19 @@ wxApp = wxApp || {};
 			this.events = _.extend({}, this.genericEvents, this.events);
 		},
 
-		apiToBoolean: function( value ) {
-			if ( typeof value == 'undefined' || value === false || value === 'false' || value === '0' || value === 0 ) {
-				return false;
-			}
-			return true;
-		},
-
 		/**
 		 * Show the "We're going to delete all your data" warning panel.
 		 */
-		dataCleanupOnFormEdit: function( callback, callbackScope, callbackArgs ) {
+		dataCleanupOnFormEdit: function() {
 			this.$('.form-builder-delete-data').show();
 			this.$('.form-builder-step-one').hide();
 		},
 
 		initialize: function() {
-			var me           = this,
-			    isEditing    = false,
-			    elementsJson = me._getFormElementsJson();
+			// var me           = this,
+			//     isEditing    = false;
 
-			isEditing = ( elementsJson.length > 0 );
-
-			me.populateForm();
+			this.populateForm();
 
 			// If they're editing an existing form, warn them that their data may (will) be deleted.
 			//if ( isEditing ) {
@@ -49,9 +40,7 @@ wxApp = wxApp || {};
 		},
 
 		populateForm: function() {
-console.log('populateForm');
 			var me           = this,
-				elementsJson = me._getFormElementsJson(),
 				config       = this.model.get( 'config' ),
                 actionsJson;
 
@@ -59,8 +48,6 @@ console.log('populateForm');
 
 			// Set up config object to have properly typed properties
 			// Fix because the get_tabs API is broken, and returns strings for everything in config.
-			config.advanced = this.apiToBoolean( config.advanced );
-			config.isDocuSign = this.apiToBoolean( config.isDocuSign );
 
 			// We use this collection to cache the Number controls for calculators.
 			me.numberControls = new wxApp.FormBuilderCollection();
@@ -78,107 +65,69 @@ console.log('populateForm');
 
 				// Load currently existing form elements.
 				setTimeout( function() {
-					for ( var i = 0; i < config.formElements.length; i++ ) {
-						var element = config.formElements.at( i );
-						switch ( element.get('control') ) {
-							case 'div':
-								me.addInfoWithProperties( element );
-								break;
-							case 'textarea':
-								me.addTextareaWithProperties( element );
-								break;
-							case 'radiofieldset':
-								me.addRadioGroupWithProperties( element );
-								break;
-							case 'checkboxfieldset':
-								me.addCheckboxGroupWithProperties( element );
-								break;
-							case 'select':
-								me.addSelectWithProperties( element );
-								break;
-							case 'docusignSignature':
-								me.addDocusignSignatureWithProperties( element );
-								break;
-							case 'weeverSignature':
-								me.addWeeverSignatureWithProperties( element );
-								break;
-							case 'calculation':
-								me.addCalculationWithProperties( element );
-								break;
-							case 'hierarchical-drop-down':
-								me.addHierarchicalDropDownListWithProperties( element );
-								break;
-							case 'repeatableform':
-								me.addRepeatableFormWithProperties( element );
-								break;
-							case 'pagebreak':
-								me.addPagebreak();
-								break;
-							default:
-								if ( element.get('type') === 'textSlider' )
-									me.addTextSlider( element );
-								else
-									me.addInput( element );
-						}
-					}
+					me.drawAllElements( config.formElements );
 				}, 100 );
 			}
 
-			if ( typeof config.formActions == 'undefined' ) {
+			if ( config.formActions === undefined || config.formActions.length === 0 ) {
 				me.getDefaultFormActions();
 			}
 			else {
 				// Load currently existing form actions.
-				try {
-					actionsJson = JSON.parse( config.formActions );
-				} catch(err) {
-                    if ( config.formActions.toJSON )
-                        actionsJson = config.formActions.toJSON();
-                    else
-                        actionsJson = config.formActions;
+				for ( var i = 0; i < config.formActions.length; i++ ) {
+					var action = config.formActions.at(i);
+					if ( action.get('method') == 'docusign' ) {
+						me.docusign = action;
+					}
 				}
-
-				config.formActions = new Backbone.Collection();
-
-				// setTimeout( function() { 
-					var hasDocusign	= false,
-						hasPost		= false,
-						hasEmail	= false;
-					for ( var i = 0; i < actionsJson.length; i++ ) {
-						var action = actionsJson[i];
-						if ( action.method == 'docusign' ) {
-							me.docusign = me.addDocusignAction( null, action );
-							hasDocusign = true;
-						}
-						else if ( action.method == 'post' ) {
-							me.addPostAction( null, action );
-							hasPost = true;
-						}
-						else if ( action.method == 'email' ) {
-							me.addEmailAction( null, action );
-							hasEmail = true;
-						}
-					}
-
-					// If we don't have some of the actions, we should add them.
-					// if ( !hasDocusign ) {
-					// 	me.docusign = me.addDocusignAction( null, { method: 'docusign' } );
-					// }
-
-					if ( ! hasPost && config.advanced ) {
-						me.addPostAction( null, { method: 'post' } );
-					}
-
-					if ( ! hasEmail &&
-						( ( config.isDocuSign && config.advanced ) || ( ! config.isDocuSign ) )
-						) {
-						me.addEmailAction( null, { method: 'email' } );
-					}
-				// }, 100);
 			}
+		},
 
-			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
-				this.model.get( 'config' ).onUpload = JSON.parse( this.model.get( 'config' ).onUpload );
+		drawAllElements: function( formElements ) {
+			var me = this;
+			for ( var i = 0; i < formElements.length; i++ ) {
+				var element = formElements.at( i );
+console.log('Element'+i, element);
+				switch ( element.get('control') ) {
+					case 'div':
+						me.addInfoWithProperties( element );
+						break;
+					case 'textarea':
+						me.addTextareaWithProperties( element );
+						break;
+					case 'radiofieldset':
+						me.addRadioGroupWithProperties( element );
+						break;
+					case 'checkboxfieldset':
+						me.addCheckboxGroupWithProperties( element );
+						break;
+					case 'select':
+						me.addSelectWithProperties( element );
+						break;
+					case 'docusignSignature':
+						me.addDocusignSignatureWithProperties( element );
+						break;
+					case 'weeverSignature':
+						me.addWeeverSignatureWithProperties( element );
+						break;
+					case 'calculation':
+						me.addCalculationWithProperties( element );
+						break;
+					case 'hierarchical-drop-down':
+						me.addHierarchicalDropDownListWithProperties( element );
+						break;
+					case 'repeatableform':
+						me.addRepeatableFormWithProperties( element );
+						break;
+					case 'pagebreak':
+						me.addPagebreak();
+						break;
+					default:
+						if ( element.get('type') === 'textSlider' )
+							me.addTextRangeInputWithProperties( element );
+						else
+							me.addInput( element );
+				}
 			}
 		},
 
@@ -206,7 +155,7 @@ console.log('populateForm');
 						errors.push({
 							'type'   : 'formActions',
 							'message': 'Please provide both a User Name and Password for DocuSign&trade;.'
-						})
+						});
 					}
 				}
 			};
@@ -286,7 +235,7 @@ console.log('populateForm');
 		setModelFromView: function( model ) {
 
 			for (var i = 0; i < model.get( 'config' ).formActions.length; i++) {
-				var action = model.get( 'config' ).formActions.models[i],
+				var action = model.get( 'config' ).formActions.at(i),
 				    kept = true;
 				if ( action.get( 'method' ) === 'post' || action.get( 'method' ) === 'email' ) {
 
@@ -360,7 +309,7 @@ console.log('populateForm');
 			'click .radio-mode'                              : 'updateMode',
 
 			// Data deletion warning.
-			'click .wx-back-button'                          : 'closeReveal',
+			'click .wx-dd-close-button'                      : 'closeReveal',
 			'click .wx-form-builder-warning-acknowledged'    : 'acknowledgementReceived',
 			'click .wx-form-builder-warning-proceed'         : 'proceed'
 		},
@@ -405,7 +354,6 @@ console.log('populateForm');
 		finish: function() {
 			var hasUpload = false,
 				formElements = this.model.get( 'config' ).formElements,
-				formActions = this.model.get( 'config' ).formActions,
 
 				/**
 				 * Should be called using .call( this ) or .apply( this ) so that the scope remains the same
@@ -466,54 +414,34 @@ console.log('populateForm');
 
 		},
 
-		addDocusignAction: function( event, properties ) {
-
-			var action;
-			if ( typeof properties != 'undefined' ) {
-				action = this.addCustomAction( properties );
+		addDocusignAction: function( event, action ) {
+			if ( action === undefined ) {
+				action = new wxApp.FormBuilderAction( { method : 'docusign' } );
 			}
-			else {
-				action = this.addCustomAction( {
-					method : 'docusign'
-				} );
-			}
-			return action;
-		},
-
-		addEmailAction: function( event, properties ) {
-			
-			var action;
-			if ( typeof properties != 'undefined' ) {
-				action = this.addCustomAction( properties );
-			}
-			else {
-				action = this.addCustomAction( { method : 'email' } );
-			}
+			this.addCustomAction( action );
 
 			return action;
 		},
 
-		addPostAction: function( event, properties ) {
-			
-			var action;
-			if ( typeof properties != 'undefined' ) {
-				action = this.addCustomAction( properties );
+		addEmailAction: function( event, action ) {
+			if ( action === undefined ) {
+				action = new wxApp.FormBuilderAction( { method : 'email' } );
 			}
-			else {
-				action = this.addCustomAction( { method : 'post' } );
-			}
+			this.addCustomAction( action );
 
 			return action;
 		},
 
-		addCustomAction: function( customAction ) {
-			var action = new wxApp.FormBuilderAction(),
-			    me = this;
-
-			if ( typeof customAction == 'object' ) {
-				action.set( customAction );
+		addPostAction: function( event, action ) {
+			if ( action === undefined ) {
+				action = new wxApp.FormBuilderAction( { method : 'post' } );
 			}
+			this.addCustomAction( action );
 
+			return action;
+		},
+
+		addCustomAction: function( action ) {
 			this.model.get( 'config' ).formActions.push( action );
 			return action;
 		},
@@ -528,79 +456,30 @@ console.log('populateForm');
 			return input;
 		},
 
-		addTextSlider: function( properties ) {
-			// var mainProperties = {};
-			// var attributes = {};
-			// for ( var propKey in properties ) {
-			// 	if ( propKey != 'attributes' ) {
-			// 		mainProperties[propKey] = properties[propKey];
-			// 	}
-			// 	else {
-			// 		for ( var attrKey in properties[propKey] ) {
-			// 			attributes[attrKey] = properties[propKey][attrKey];
-			// 		}
-			// 	}
-			// }
-
-			// if ( typeof mainProperties['options'] === 'object' && mainProperties['options'].models ) {
-
-			// 	// Something weird happens when a form is created, then immediately edited.
-			// 	// The objects are a weird hybrid of Backbone models and JSON objects.
-			// 	// The below converts them into pure JSON.
-			// 	var options = [];
-			// 	for (var i = 0; i < mainProperties['options'].length; i++) {
-			// 		var option = mainProperties['options'].models[i];
-			// 		options[i] = option.toJSON();
-			// 	};
-			// 	mainProperties['options'] = options;
-			// }
-
-			var input = new wxApp.FormBuilderControlTextRange( properties );
-			// input.get( 'attributes' ).set( attributes );
-			// for ( var attrKey in attributes ) {
-			// 	input.get( 'attributes' )[attrKey] = attributes[attrKey];
-			// };
-
-			var inputView = new wxApp.FormBuilderControlTextRangeView({
-				model: input
-			});
-
-			this.addControl( input, inputView );
-
-			if ( input.get( 'options' ).length < 1 ) {
-				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'NA' } ) );
-				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SA' } ) );
-				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'A' } ) );
-				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'D' } ) );
-				input.get( 'options' ).add( new wxApp.FormBuilderControlTextSliderOption( { text: 'SD' } ) );
-			}
-
-			return input;
-		},
-
 		addDateInput: function(ev) {
-			var dateInput = new wxApp.FormBuilderControlInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date',
 				attributes: {
 					type: 'date'
 				}
 			});
-			this.addInput( dateInput );
+			this.addInput( input );
 		},
 
 		addDateTimeLocalInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date / Time',
 				attributes: {
 					type: 'datetime-local'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addEmailInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Email',
 				showPlaceholder: true,
@@ -610,10 +489,11 @@ console.log('populateForm');
 					type: 'email'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addFileInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'File upload',
 				multiClass: '',
@@ -623,10 +503,11 @@ console.log('populateForm');
 					accept: 'image/*'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addPhotoInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Photo upload',
 				multiClass: '',
@@ -636,20 +517,22 @@ console.log('populateForm');
 					accept: 'image/*'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addMonthInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Month',
 				attributes: {
 					type: 'month'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addNumberInput: function(ev) {
-			var input = this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Number',
 				minClass: '',
@@ -660,11 +543,11 @@ console.log('populateForm');
 					type: 'number'
 				}
 			});
-
+			this.addInput( input );
 		},
 
 		addPasswordInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Password',
 				showPlaceholder: true,
@@ -672,10 +555,11 @@ console.log('populateForm');
 					type: 'password'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addRangeInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Range',
 				minClass: '',
@@ -690,10 +574,11 @@ console.log('populateForm');
 					step: '1.00'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addTextRangeInput: function(ev) {
-			this.addTextSlider({
+			var input = new wxApp.FormBuilderControlTextRange({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Select One',
 				type: 'textSlider',
@@ -701,10 +586,21 @@ console.log('populateForm');
 					type: 'range'
 				}
 			});
+			this.addTextRangeInputWithProperties( input );
+		},
+
+		addTextRangeInputWithProperties: function( input ) {
+			var inputView = new wxApp.FormBuilderControlTextRangeView({
+				model: input
+			});
+
+			this.addControl( input, inputView );
+
+			return input;
 		},
 
 		addTelInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Telephone',
 				type: 'tel',
@@ -713,10 +609,11 @@ console.log('populateForm');
 					type: 'tel'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addTextInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Untitled',
 				type: 'text',
@@ -725,20 +622,22 @@ console.log('populateForm');
 					type: 'text'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addTimeInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Time',
 				attributes: {
 					type: 'time'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addUrlInput: function(ev) {
-			this.addInput({
+			var input = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'URL',
 				showPlaceholder: true,
@@ -746,6 +645,7 @@ console.log('populateForm');
 					type: 'url'
 				}
 			});
+			this.addInput( input );
 		},
 
 		addPagebreak: function( ev ) {
@@ -905,11 +805,24 @@ console.log('populateForm');
 		},
 
 		addRepeatableFormWithProperties: function( model ) {
-			var view  = new wxApp.FormBuilderRepeatableFormView( { model: model } );
-			this.addControl( model, view );
+			var me = this,
+			    view = new wxApp.FormBuilderRepeatableFormView( { model: model } );
+			me.addControl( model, view );
 
-			this.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">&mdash; ' + model.get('label') + '</option>');
-			this.$('.add-element-to-form').val( model.get('ordinal') );
+			me.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">&mdash; ' + model.get('label') + '</option>');
+
+console.log('REPEATABLE', model);
+			if ( model.get('formElements') ) {
+				// setTimeout(function() {
+					console.log('drawAllElements', model.get('formElements'));
+					me.$('.add-element-to-form').val( model.get('ordinal') );
+					me.drawAllElements( model.get('formElements') );
+					me.$('.add-element-to-form').val('');
+				// }, 1000);
+			}
+			else {
+				me.$('.add-element-to-form').val( model.get('ordinal') );
+			}
 
 			$('.add-element-ddl-container').show();
 		},
@@ -1145,25 +1058,6 @@ console.log('populateForm');
 					alert( 'An unknown error has occurred deleting the data. Please contact support@weeverapps.com.' );
 				}
 			});
-        },
-
-        _getFormElementsJson: function() {
-            var formElements = this.model.get( 'config' ).formElements,
-                elementsJson = [];
-
-            if ( formElements ) {
-                if ( typeof formElements === 'string' ) {
-                    elementsJson = JSON.parse( formElements );  // Fresh from the server; a JSON string.
-                }
-                else if ( formElements.toJSON ) {
-                    elementsJson = formElements.toJSON();       // Previously edited; a Backbone object.
-                }
-                else {
-                    elementsJson = formElements;                // Freshly duplicated; a JSON object.
-                }
-            }
-
-            return elementsJson;
         },
 
         /**
