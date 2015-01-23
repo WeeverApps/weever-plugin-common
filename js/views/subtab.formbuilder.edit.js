@@ -76,8 +76,13 @@ wxApp = wxApp || {};
 				// Load currently existing form actions.
 				for ( var i = 0; i < config.formActions.length; i++ ) {
 					var action = config.formActions.at(i);
-					if ( action.get('method') == 'docusign' ) {
+					if ( action.get('method') === 'docusign' ) {
 						me.docusign = action;
+					}
+					else if ( action.get('method') === 'email' ) {
+						// Equivalent to calling updateAction on the email address field
+						var newAction = this.__getActionByMethod( action.get('method') );
+						newAction.set( 'value', action.get('value') );
 					}
 				}
 			}
