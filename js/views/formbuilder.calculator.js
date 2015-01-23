@@ -33,20 +33,21 @@ wxApp = wxApp || {};
 		},
 
 		render: function() {
-			this.$el.html( this.inputTpl( this.model.toJSON() ) );
+			var me = this;
+			me.$el.html( me.inputTpl( me.model.toJSON() ) );
 
-			if ( this.firstRender ) {
+			if ( me.firstRender ) {
 				// Focus on the label the first time you render this control.
-				setTimeout( function() { this.$('.wx-form-builder-label-input').focus(); }, 1);
-				this.firstRender = false;
+				setTimeout( function() { me.$('.wx-form-builder-label-input').focus(); }, 1);
+				me.firstRender = false;
 
-				this.inputs.on('add',    this.updateDropDownLists, this);
-				this.inputs.on('remove', this.updateDropDownLists, this);
-				this.inputs.on('change', this.updateDropDownLists, this);
+				me.inputs.on('add',    me.updateDropDownLists, me);
+				me.inputs.on('remove', me.updateDropDownLists, me);
+				me.inputs.on('change', me.updateDropDownLists, me);
 			}
 
-			this.updateDropDownLists();
-			return this;
+			me.updateDropDownLists();
+			return me;
 		},
 
 		updateDropDownLists: function( e ) {
@@ -56,10 +57,7 @@ wxApp = wxApp || {};
 
 			for (var i = 0; i < this.inputs.length; i++) {
 				var input = this.inputs.at(i);
-				if (( input.get('attributes') && input.get('attributes').type === 'number' ) ||
-					( input.get('control') === 'calculation' )) {
-					validInputs.push( input );
-				}
+				validInputs.push( input );
 			};
 
 			$.each(dropDownLists, function(i, ddl) {
@@ -97,8 +95,10 @@ wxApp = wxApp || {};
 				me.$('div.wx-constant[data-index="' + i.toString() + '"] input').val( field.get('constant') );
 			});
 			
-			// Re-render preview.
-			this.getPreview().render();
+			// Re-render preview (timeout is to ensure the number controls are completely rendered).
+			setTimeout(function() {
+				me.getPreview().render();
+			}, 100);
 		},
 
 		/* Start event callbacks */
@@ -172,7 +172,6 @@ wxApp = wxApp || {};
 			    model = me.model.toJSON();
 			me.$el.html( me.inputTpl( model ) );
 			me.calculate();
-			// Backbone.Events.on( 'recalculate', this.recalculate, this );
 			return me;
 		},
 

@@ -34,6 +34,14 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.tpl( this.model.toJSON() ) );
+
+			var optionGroupView = new wxApp.FormBuilderControlOptionGroupView({
+				collection: this.model.get('optionGroup'),
+				previewArea: this.getPreview()
+			});
+
+			// Add Option Group to Select
+			this.$( '.wx-form-builder-select' ).append( optionGroupView.render().el );
 			
 			if ( this.firstRender ) {
 				// Focus on the label the first time you render this control.

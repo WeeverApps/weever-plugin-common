@@ -16,6 +16,17 @@ wxApp = wxApp || {};
 		addOption: function( ev ) {
 			ev.preventDefault();
 			this.model.get( 'radioGroup' ).add( new wxApp.FormBuilderControlRadio() );
+		},
+
+		render: function() {
+			wxApp.FormBuilderControlBaseFieldsetView.prototype.render.apply( this );
+			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
+				collection: this.model.get( 'radioGroup' ),
+				previewArea: this.getPreview()
+			});
+
+			this.$( '.wx-form-builder-radio-fieldset' ).append( radioGroupView.render().el );
+			return this;
 		}
 
 	});

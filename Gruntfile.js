@@ -59,9 +59,7 @@ module.exports = function(grunt) {
         ],
         options: {
           specs: [
-            'js/spec/collections/*.js',
-            'js/spec/models/*.js' //,
-            // 'js/spec/collections/*.js',
+            'js/spec/'
           ],
           vendor: [
             'js/vendor/jquery.js',
@@ -69,8 +67,8 @@ module.exports = function(grunt) {
             'js/vendor/*.js'
           ],
           helpers: 'js/spec/config.js',
-          summary: true //,
-          // display: 'short'
+          summary: true,
+          display: 'short'
           // junit: {
           //   path: 'junit'
           // }

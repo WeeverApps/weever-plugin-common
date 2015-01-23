@@ -3,29 +3,16 @@
 wxApp = wxApp || {};
 
 (function($){
-	wxApp.FormBuilderControlOptionGroupView = Backbone.View.extend({
+	wxApp.FormBuilderControlOptionGroupView = wxApp.FormBuilderControlBaseGroupView.extend({
+		tplSelector: '#form-builder-option-group',
 		className: 'wx-form-builder-option-group',
-
-		initialize: function( options ) {
-			this.template = _.template( $('#form-builder-option-group').html() );
-			this.collection.bind('add', this.addOne, this);
-			this.previewArea = options.previewArea;
-		},
-
-		render: function() {
-			this.$el.html( this.template() );
-			return this;
-		},
+		firstRender: true,
 
 		addOne: function( option ) {
 			var view = new wxApp.FormBuilderControlOptionView({
 				model: option
 			});
-
-			this.$el.append( view.render().el );
-			
-			this.previewArea.$('select').append( view.getPreview().render().el );
+			this.addToView( view, 'select' );
 		}
-
 	});
 })(jQuery);

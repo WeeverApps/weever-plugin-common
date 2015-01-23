@@ -4,6 +4,7 @@ wxApp = wxApp || {};
 
 (function($) {
 	wxApp.FormBuilderControlBaseGroupView = Backbone.View.extend({
+		firstRender: true,
 
 		initialize: function(options) {
 			this.template = _.template( $( this.tplSelector ).html() );
@@ -13,13 +14,23 @@ wxApp = wxApp || {};
 
 		render: function() {
 			this.$el.html( this.template() );
+
+			if ( this.firstRender ) {
+				this.firstRender = false;
+				for (var i = 0; i < this.collection.length; i++) {
+					var model = this.collection.at(i);
+					this.addOne( model );
+				};
+			}
+
 			return this;
 		},
 
-		addToView: function( view ) {
+		addToView: function( view, controlName ) {
+			if ( !controlName )
+				controlName = 'fieldset';
 			this.$el.append( view.render().el );
-
-			this.previewArea.$('fieldset').append( view.getPreview().render().el );
+			this.previewArea.$( controlName ).append( view.getPreview().render().el );
 		}
 
 	});

@@ -16,6 +16,16 @@ wxApp = wxApp || {};
 		addOption: function( ev ) {
 			ev.preventDefault();
 			this.model.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox() );
+		},
+
+		render: function() {
+			wxApp.FormBuilderControlBaseFieldsetView.prototype.render.apply( this );
+			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({
+				collection: this.model.get( 'checkboxGroup' ),
+				previewArea: this.getPreview()
+			});
+
+			this.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );
 		}
 
 	});

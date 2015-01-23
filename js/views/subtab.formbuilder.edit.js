@@ -38,15 +38,18 @@ wxApp = wxApp || {};
 
 			isEditing = ( elementsJson.length > 0 );
 
-			me.populateForm( arguments );
+			me.populateForm();
 
 			// If they're editing an existing form, warn them that their data may (will) be deleted.
 			//if ( isEditing ) {
 			//	me.dataCleanupOnFormEdit( me.populateForm, me, arguments );
 			//}
+			// Call parent's initialize() function
+			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
 		},
 
-		populateForm: function( arguments ) {
+		populateForm: function() {
+console.log('populateForm');
 			var me           = this,
 				elementsJson = me._getFormElementsJson(),
 				config       = this.model.get( 'config' ),
@@ -68,64 +71,54 @@ wxApp = wxApp || {};
 				$( me.buildPaneSelector ).foundation('reflow');
 			});
 
-			if ( typeof config.formElements == 'undefined' ) {
+			if ( config.formElements === undefined ) {
 				config.formElements = new wxApp.FormBuilderCollection();
 			}
 			else {
+
 				// Load currently existing form elements.
-				config.formElements = new wxApp.FormBuilderCollection();
-
-				setTimeout( function() { 
-					for ( var i = 0; i < elementsJson.length; i++ ) {
-
-						if ( elementsJson[i].control === 'div' ) {
-
-							me.addInfoWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control === 'textarea' ) {
-
-							me.addTextareaWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control === 'radiofieldset' ) {
-
-							me.addRadioGroupWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control === 'checkboxfieldset' ) {
-
-							me.addCheckboxGroupWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control === 'select' ) {
-
-							me.addSelectWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].type === 'textSlider' ) {
-
-							me.addTextSlider( elementsJson[i] );
-
-						} else if ( elementsJson[i].control == 'docusignSignature' ) {
-
-							me.addDocusignSignatureWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control == 'weeverSignature' ) {
-
-							me.addWeeverSignatureWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control == 'calculation' ) {
-
-							me.addCalculationWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control == 'hierarchical-drop-down' ) {
-
-							me.addHierarchicalDropDownListWithProperties( elementsJson[i] );
-
-						} else if ( elementsJson[i].control == 'pagebreak' ) {
-
-							me.addPagebreak();
-
-						} else {
-
-							me.addInput( elementsJson[i] );
-
+				setTimeout( function() {
+					for ( var i = 0; i < config.formElements.length; i++ ) {
+						var element = config.formElements.at( i );
+						switch ( element.get('control') ) {
+							case 'div':
+								me.addInfoWithProperties( element );
+								break;
+							case 'textarea':
+								me.addTextareaWithProperties( element );
+								break;
+							case 'radiofieldset':
+								me.addRadioGroupWithProperties( element );
+								break;
+							case 'checkboxfieldset':
+								me.addCheckboxGroupWithProperties( element );
+								break;
+							case 'select':
+								me.addSelectWithProperties( element );
+								break;
+							case 'docusignSignature':
+								me.addDocusignSignatureWithProperties( element );
+								break;
+							case 'weeverSignature':
+								me.addWeeverSignatureWithProperties( element );
+								break;
+							case 'calculation':
+								me.addCalculationWithProperties( element );
+								break;
+							case 'hierarchical-drop-down':
+								me.addHierarchicalDropDownListWithProperties( element );
+								break;
+							case 'repeatableform':
+								me.addRepeatableFormWithProperties( element );
+								break;
+							case 'pagebreak':
+								me.addPagebreak();
+								break;
+							default:
+								if ( element.get('type') === 'textSlider' )
+									me.addTextSlider( element );
+								else
+									me.addInput( element );
 						}
 					}
 				}, 100 );
@@ -187,9 +180,6 @@ wxApp = wxApp || {};
 			if ( typeof this.model.get( 'config' ).onUpload == 'string' ) {
 				this.model.get( 'config' ).onUpload = JSON.parse( this.model.get( 'config' ).onUpload );
 			}
-
-			// Call parent's initialize() function
-			wxApp.SubTabEditView.prototype.initialize.apply( this, arguments );
 		},
 
 		validate: function() {
@@ -528,27 +518,7 @@ wxApp = wxApp || {};
 			return action;
 		},
 
-		addInput: function( properties ) {
-
-			var mainProperties = {};
-			var attributes = {};
-			for ( var propKey in properties ) {
-				if ( propKey != 'attributes' ) {
-					mainProperties[propKey] = properties[propKey];
-				}
-				else {
-					for ( var attrKey in properties[propKey] ) {
-						attributes[attrKey] = properties[propKey][attrKey];
-					}
-				}
-			}
-
-			var input = new wxApp.FormBuilderControlInput( mainProperties );
-			input.get( 'attributes' ).set( attributes );
-			for ( var attrKey in attributes ) {
-				input.get( 'attributes' )[attrKey] = attributes[attrKey];
-			};
-			
+		addInput: function( input ) {
 			var inputView = new wxApp.FormBuilderControlInputView({
 				model: input
 			});
@@ -559,37 +529,37 @@ wxApp = wxApp || {};
 		},
 
 		addTextSlider: function( properties ) {
-			var mainProperties = {};
-			var attributes = {};
-			for ( var propKey in properties ) {
-				if ( propKey != 'attributes' ) {
-					mainProperties[propKey] = properties[propKey];
-				}
-				else {
-					for ( var attrKey in properties[propKey] ) {
-						attributes[attrKey] = properties[propKey][attrKey];
-					}
-				}
-			}
+			// var mainProperties = {};
+			// var attributes = {};
+			// for ( var propKey in properties ) {
+			// 	if ( propKey != 'attributes' ) {
+			// 		mainProperties[propKey] = properties[propKey];
+			// 	}
+			// 	else {
+			// 		for ( var attrKey in properties[propKey] ) {
+			// 			attributes[attrKey] = properties[propKey][attrKey];
+			// 		}
+			// 	}
+			// }
 
-			if ( typeof mainProperties['options'] === 'object' && mainProperties['options'].models ) {
+			// if ( typeof mainProperties['options'] === 'object' && mainProperties['options'].models ) {
 
-				// Something weird happens when a form is created, then immediately edited.
-				// The objects are a weird hybrid of Backbone models and JSON objects.
-				// The below converts them into pure JSON.
-				var options = [];
-				for (var i = 0; i < mainProperties['options'].length; i++) {
-					var option = mainProperties['options'].models[i];
-					options[i] = option.toJSON();
-				};
-				mainProperties['options'] = options;
-			}
+			// 	// Something weird happens when a form is created, then immediately edited.
+			// 	// The objects are a weird hybrid of Backbone models and JSON objects.
+			// 	// The below converts them into pure JSON.
+			// 	var options = [];
+			// 	for (var i = 0; i < mainProperties['options'].length; i++) {
+			// 		var option = mainProperties['options'].models[i];
+			// 		options[i] = option.toJSON();
+			// 	};
+			// 	mainProperties['options'] = options;
+			// }
 
-			var input = new wxApp.FormBuilderControlTextRange( mainProperties );
-			input.get( 'attributes' ).set( attributes );
-			for ( var attrKey in attributes ) {
-				input.get( 'attributes' )[attrKey] = attributes[attrKey];
-			};
+			var input = new wxApp.FormBuilderControlTextRange( properties );
+			// input.get( 'attributes' ).set( attributes );
+			// for ( var attrKey in attributes ) {
+			// 	input.get( 'attributes' )[attrKey] = attributes[attrKey];
+			// };
 
 			var inputView = new wxApp.FormBuilderControlTextRangeView({
 				model: input
@@ -609,13 +579,14 @@ wxApp = wxApp || {};
 		},
 
 		addDateInput: function(ev) {
-			this.addInput({
+			var dateInput = new wxApp.FormBuilderControlInput({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim(),
 				label: 'Date',
 				attributes: {
 					type: 'date'
 				}
 			});
+			this.addInput( dateInput );
 		},
 
 		addDateTimeLocalInput: function(ev) {
@@ -777,12 +748,6 @@ wxApp = wxApp || {};
 			});
 		},
 
-		addInfo: function( ev ) {
-			this.addInfoWithProperties( { 
-				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim() 
-			} );
-		},
-
 		addPagebreak: function( ev ) {
 			var pagebreak = new wxApp.FormBuilderControlPagebreak();
 			var pagebreakView = new wxApp.FormBuilderControlPagebreakView({
@@ -791,30 +756,14 @@ wxApp = wxApp || {};
 			this.addControl( pagebreak, pagebreakView );
 		},
 
-		addInfoWithProperties: function( properties ) {
+		addInfo: function( ev ) {
+			var infobox = new wxApp.FormBuilderControlInfo({ 
+				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim() 
+			});
+			this.addInfoWithProperties( infobox );
+		},
 
-			// Delete old, unneeded properties.
-			if ( typeof properties.valueType === 'string' ) {
-				delete properties.type;
-				delete properties.hidePlaceholderClass;
-				delete properties.showPlaceholder;
-				delete properties.innerText;
-				delete properties.allowAdditional;
-				delete properties.allowAdditionalClass;
-				delete properties.valueType;
-				delete properties.valueClass;
-				delete properties.minClass;
-				delete properties.maxClass;
-				delete properties.stepClass;
-				delete properties.multiClass;
-				delete properties.requiredClass;
-				delete properties.autocompleteClass;
-				delete properties.emailOptionClass;
-				delete properties.optionSendPDF;
-				delete properties.attributes;
-			}
-
-			var info = new wxApp.FormBuilderControlInfo( properties );
+		addInfoWithProperties: function( info ) {
 			var infoView = new wxApp.FormBuilderControlInfoView({
 				model: info
 			});
@@ -823,43 +772,37 @@ wxApp = wxApp || {};
 		},
 
 		addDocusignSignature: function( ev ) {
-			this.addDocusignSignatureWithProperties( {
+			var signature = wxApp.FormBuilderControlDocusignSignature ( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
+			this.addDocusignSignatureWithProperties( signature );
 		},
 
-		addDocusignSignatureWithProperties: function( properties ) {
-
-			var signature = new wxApp.FormBuilderControlDocusignSignature( properties ),
-				sigView   = new wxApp.FormBuilderControlDocusignSignatureView({ model: signature });
-
+		addDocusignSignatureWithProperties: function( signature ) {
+			var sigView   = new wxApp.FormBuilderControlDocusignSignatureView({ model: signature });
 			this.addControl( signature, sigView );
 		},
 
 		addWeeverSignature: function( ev ) {
-			this.addWeeverSignatureWithProperties( {
+			var signature = new wxApp.FormBuilderControlWeeverSignature( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
+			this.addWeeverSignatureWithProperties( signature );
 		},
 
-		addWeeverSignatureWithProperties: function( properties ) {
-
-			var signature = new wxApp.FormBuilderControlWeeverSignature( properties ),
-				sigView   = new wxApp.FormBuilderControlWeeverSignatureView({ model: signature });
-
+		addWeeverSignatureWithProperties: function( signature ) {
+			var sigView = new wxApp.FormBuilderControlWeeverSignatureView({ model: signature });
 			this.addControl( signature, sigView );
 		},
 
 		addTextarea: function(ev) {
-			this.addTextareaWithProperties( {
+			var textArea = new wxApp.FormBuilderControlTextarea( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
+			this.addTextareaWithProperties( textArea );
 		},
 
-		addTextareaWithProperties: function( properties ) {
-			// Textarea attributes are causing problems. They shouldn't even be there!
-			delete properties.attributes;
-			var textArea = new wxApp.FormBuilderControlTextarea( properties );
+		addTextareaWithProperties: function( textArea ) {
 			var textAreaView = new wxApp.FormBuilderControlTextareaView({
 				model: textArea
 			});
@@ -868,127 +811,31 @@ wxApp = wxApp || {};
 		},
 
 		addRadioGroup: function(ev) {
-			this.addRadioGroupWithProperties( {
+			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset({
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
+			this.addRadioGroupWithProperties( radioFieldset );
 		},
 
-		addRadioGroupWithProperties: function( properties ) {
-			var radioFieldset = new wxApp.FormBuilderControlRadioFieldset( properties );
+		addRadioGroupWithProperties: function( radioFieldset ) {
 			var radioFieldsetView = new wxApp.FormBuilderControlRadioFieldsetView({
 				model: radioFieldset
 			});
-
 			this.addControl( radioFieldset, radioFieldsetView );
-
-			var radioGroupView = new wxApp.FormBuilderControlRadioGroupView({
-				collection: radioFieldset.get( 'radioGroup' ),
-				previewArea: radioFieldsetView.getPreview()
-			});
-
-			radioFieldsetView.$( '.wx-form-builder-radio-fieldset' ).append( radioGroupView.render().el );
-
-			if ( properties.radioGroup == undefined || properties.radioGroup.length == 0 ) {
-				var optionA = new wxApp.FormBuilderControlRadio( { label: 'Option A' } );
-				var optionB = new wxApp.FormBuilderControlRadio( { label: 'Option B' } );
-				var optionC = new wxApp.FormBuilderControlRadio( { label: 'Option C' } );
-
-				radioFieldset.get( 'radioGroup' ).add( optionA );
-				radioFieldset.get( 'radioGroup' ).add( optionB );
-				radioFieldset.get( 'radioGroup' ).add( optionC );
-			} else {
-				for ( var i = 0; i < properties.radioGroup.length; i++ ) {
-					var optionJson = properties.radioGroup[i],	// JSON object coming from the API
-					    option     = null;
-					if ( optionJson ) {
-
-						// Delete old, unneeded properties.
-						if ( typeof optionJson.valueType === 'string' ) {
-							delete optionJson.type;
-							delete optionJson.hidePlaceholderClass;
-							delete optionJson.showPlaceholder;
-							delete optionJson.innerText;
-							delete optionJson.allowAdditional;
-							delete optionJson.allowAdditionalClass;
-							delete optionJson.valueType;
-							delete optionJson.valueClass;
-							delete optionJson.minClass;
-							delete optionJson.maxClass;
-							delete optionJson.stepClass;
-							delete optionJson.multiClass;
-							delete optionJson.requiredClass;
-							delete optionJson.autocompleteClass;
-							delete optionJson.emailOptionClass;
-							delete optionJson.optionSendPDF;
-						}
-
-						option = new wxApp.FormBuilderControlRadio( optionJson );
-					} else {
-						option = properties.radioGroup.models[i];	// Backbone object coming from the app
-					}
-					radioFieldset.get( 'radioGroup' ).add( option );
-				};
-			}
 		},
 
 		addCheckboxGroup: function(ev) {
-			this.addCheckboxGroupWithProperties( {
+			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
+			this.addCheckboxGroupWithProperties( checkboxFieldset );
 		},
 
-		addCheckboxGroupWithProperties: function( properties ) {
-			var checkboxFieldset = new wxApp.FormBuilderControlCheckboxFieldset( properties );
+		addCheckboxGroupWithProperties: function( checkboxFieldset ) {
 			var checkboxFieldsetView = new wxApp.FormBuilderControlCheckboxFieldsetView({
 				model: checkboxFieldset
 			});
-
 			this.addControl( checkboxFieldset, checkboxFieldsetView );
-
-			var checkboxGroupView = new wxApp.FormBuilderControlCheckboxGroupView({
-				collection: checkboxFieldset.get( 'checkboxGroup' ),
-				previewArea: checkboxFieldsetView.getPreview()
-			});
-
-			checkboxFieldsetView.$( '.wx-form-builder-checkbox-fieldset' ).append( checkboxGroupView.render().el );
-
-			if ( properties.checkboxGroup == undefined || properties.checkboxGroup.length == 0 ) {
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option A'}) );
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option B'}) );
-				checkboxFieldset.get( 'checkboxGroup' ).add( new wxApp.FormBuilderControlCheckbox({label: 'Option C'}) );
-			} else {
-				for ( var i = 0; i < properties.checkboxGroup.length; i++ ) {
-					var optionJson = properties.checkboxGroup[i],	// JSON object coming from the API
-					    option     = null;
-					if ( optionJson ) {
-
-						// Delete old, unneeded properties.
-						if ( typeof optionJson.valueType === 'string' ) {
-							delete optionJson.type;
-							delete optionJson.hidePlaceholderClass;
-							delete optionJson.showPlaceholder;
-							delete optionJson.innerText;
-							delete optionJson.allowAdditional;
-							delete optionJson.allowAdditionalClass;
-							delete optionJson.valueType;
-							delete optionJson.valueClass;
-							delete optionJson.minClass;
-							delete optionJson.maxClass;
-							delete optionJson.stepClass;
-							delete optionJson.multiClass;
-							delete optionJson.requiredClass;
-							delete optionJson.autocompleteClass;
-							delete optionJson.emailOptionClass;
-							delete optionJson.optionSendPDF;
-						}
-
-						option = new wxApp.FormBuilderControlCheckbox( optionJson );
-					} else {
-						option = properties.checkboxGroup.models[i];	// Backbone object coming from the app
-					}
-					checkboxFieldset.get( 'checkboxGroup' ).add( option );
-				};
-			}
 		},
 
 		/**
@@ -1002,129 +849,63 @@ wxApp = wxApp || {};
 		 *			 (current Select Model)
 		 */
 		addSelect: function(ev) {
-			this.addSelectWithProperties( {
+			var select = new wxApp.FormBuilderControlSelect( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
+			this.addSelectWithProperties( select );
 		},
 
-		addSelectWithProperties: function( properties ) {
-			var select = new wxApp.FormBuilderControlSelect( properties );
+		addSelectWithProperties: function( select ) {
 			var selectView = new wxApp.FormBuilderControlSelectView({
 				model: select
 			});
 
 			this.addControl( select, selectView );
 
-			var optionGroupView = new wxApp.FormBuilderControlOptionGroupView({
-				collection: select.get('optionGroup'),
-				previewArea: selectView.getPreview()
-			});
-
-			// Add Option Group to Select
-			selectView.$( '.wx-form-builder-select' ).append( optionGroupView.render().el );
-
-			// Add an Option to the Option Group
-			if ( properties.optionGroup == undefined || properties.optionGroup.length == 0 ) {
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option A' } ) );
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option B' } ) );
-				select.get('optionGroup').add( new wxApp.FormBuilderControlOption( { innerText: 'Option C' } ) );
-			} else {
-				for ( var i = 0; i < properties.optionGroup.length; i++ ) {
-					var optionJson  = properties.optionGroup[i],	// JSON object coming from the API
-					    optionModel = null;
-					if ( optionJson ) {
-						optionModel = new wxApp.FormBuilderControlOption( optionJson );
-					} else {
-						optionModel = properties.optionGroup.models[i];	// Backbone object coming from the app
-					}
-					select.get('optionGroup').add( optionModel );
-				};
-			}
+			
 		},
 
 		addCalculation: function( ev ) {
 			
 			// Before we can add a calculator, we need to ensure there is at 
 			// least one numeric control in the form.
-			if ( this.numberControls.length )
-				this.addCalculationWithProperties({});
-			else
+			if ( this.numberControls.length ) {
+				var calculator = new wxApp.FormBuilderCalculator();
+				this.addCalculationWithProperties( calculator );
+			}
+			else {
 				alert('Please add at least one number field.');
+			}
 		},
 
-		addCalculationWithProperties: function( properties ) {
-			var calculator = new wxApp.FormBuilderCalculator( properties );
+		addCalculationWithProperties: function( calculator ) {
 			var calculatorView = new wxApp.FormBuilderCalculatorView({
 				model: calculator,
 				inputs: this.numberControls
 			});
-
 			this.addControl( calculator, calculatorView );
 		},
 
 		addHierarchicalDropDownList: function( ev ) {
-            var defaults = {};
-			/*var defaults = {
-                control: 'hierarchical-drop-down',
-                label  : 'What is your favourite movie?',
-                levels : 2,
-                titles : ['Genre', 'Movie'],
-                options: [
-                    {
-                        text    : 'Horror',
-                        value   : 'Horror',
-                        children: [
-                            {
-                                text    : 'Evil Dead',
-                                value   : '',
-                                children: []
-                            },
-                            {
-                                text    : 'Army of Darkness',
-                                value   : '',
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        text    : 'Sci-Fi',
-                        value   : 'Sci-Fi',
-                        children: [
-                            {
-                                text    : 'Star Wars',
-                                value   : '',
-                                children: []
-                            },
-                            {
-                                text    : 'Star Trek',
-                                value   : '',
-                                children: []
-                            }
-                        ]
-                    }
-                ]
-            };*/
-			this.addHierarchicalDropDownListWithProperties( defaults );
+            var defaults = {},
+                model    = new wxApp.FormBuilderHierarchicalDropDownList( defaults );
+			this.addHierarchicalDropDownListWithProperties( model );
 		},
 
-		addHierarchicalDropDownListWithProperties: function( properties ) {
-			var model = new wxApp.FormBuilderHierarchicalDropDownList( properties ),
-			    view  = new wxApp.FormBuilderHierarchicalDropDownListView({
-			    	model: model
-			    });
-
+		addHierarchicalDropDownListWithProperties: function( model ) {
+			var view  = new wxApp.FormBuilderHierarchicalDropDownListView({
+		    	model: model
+			});
 		    this.addControl( model, view );
 		},
 
 		addRepeatableForm: function( ev ) {
-console.log('addRepeatableForm');
-			var defaults = {};
-			this.addRepeatableFormProperties( defaults );
+			var model = new wxApp.FormBuilderRepeatableForm( {} );
+			this.addRepeatableFormWithProperties( model );
 		},
 
-		addRepeatableFormProperties: function( properties ) {
-			var model = new wxApp.FormBuilderRepeatableForm( properties ),
-			    view  = new wxApp.FormBuilderRepeatableFormView( { model: model } );
+		addRepeatableFormWithProperties: function( model ) {
+			var view  = new wxApp.FormBuilderRepeatableFormView( { model: model } );
 			this.addControl( model, view );
 
 			this.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">&mdash; ' + model.get('label') + '</option>');
@@ -1157,7 +938,6 @@ console.log('addRepeatableForm');
 
 			if ( !ordinal ) {
 				ordinal = me._getLargestOrdinal( config.formElements );
-console.log('LARGEST ORDINAL', ordinal);
 				input.set( 'ordinal', ++ordinal );
 			}
 
@@ -1176,16 +956,16 @@ console.log('LARGEST ORDINAL', ordinal);
 			$('.wx-form-preview-row.wx-active').removeClass('wx-active');
 			view.$el.addClass('wx-active').css('display', 'block');
 
-			formElements.push( input );
+			if ( wx.isVisible )
+				formElements.push( input );
 
 			// Add number fields and calculations to the numberControls array.
-			if (( input.get( 'attributes' ) && input.get( 'attributes' ).type === 'number' ) ||
+			if (( input.get( 'attributes' ) && input.get( 'attributes' ).get('type') === 'number' ) ||
 				( input.get( 'control' ) === 'calculation' )) {
 				this.numberControls.push( input );
 			}
 
-			// If the reveal is visible, we reflow everything immidately and open the 'Field Settings' panel.
-			// If it's not open yet, we create a callback to reflow everything once the modal has opened.
+			// If the reveal is visible, we reflow everything and open the 'Field Settings' panel.
 			if ( wx.isVisible ) {
 				$( me.buildPaneSelector ).foundation('reflow');
 				me.$('a[href="#panel-field-settings"]').click();
