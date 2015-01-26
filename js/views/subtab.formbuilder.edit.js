@@ -92,7 +92,6 @@ wxApp = wxApp || {};
 			var me = this;
 			for ( var i = 0; i < formElements.length; i++ ) {
 				var element = formElements.at( i );
-console.log('Element'+i, element);
 				switch ( element.get('control') ) {
 					case 'div':
 						me.addInfoWithProperties( element );

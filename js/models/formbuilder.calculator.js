@@ -37,8 +37,11 @@ wxApp = wxApp || {};
 		initialize: function( properties ) {
 
 			// The 'fields' property just gets set to a basic array, rather than a Backbone.Array. Let's fix that.
-			var fields = properties.fields;
-			delete properties.fields;
+			var fields = [];
+			if ( properties ) {
+				properties.fields;
+				delete properties.fields;
+			}
 
 			// Call parent's initialize() function
 			Backbone.Model.prototype.initialize.apply( this, arguments );
