@@ -6,6 +6,7 @@
 .settings
 .DS_Store
 .sass-cache
+autounit
 combined.css
 combined.js
 wx.featurelist.dev.js
