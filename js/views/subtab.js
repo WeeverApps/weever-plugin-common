@@ -106,7 +106,12 @@ wx.quizApiUrl = 'http://weeverdev.com:8081/api/v1/';
             // };
 
             var onSetParentId = function onSetParentId() {
-                me.model.addSubTab( newCopy );
+                // Now that the parent ID has been set in the DB, add the new copy to the collection
+                var parent = wxApp.Tabs._byId[ me.model.get('parent_id') ];
+                if ( !parent ) {
+                    parent = me.model;
+                }
+                parent.addSubTab( newCopy );
                 wx.rebuildApp();
 
                 // Select the parent tab.
