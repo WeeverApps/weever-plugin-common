@@ -16,8 +16,9 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-allow-additional': 'setAllowAdditional',
 			'click .wx-form-builder-delete': 'deleteControl',
 			'click .wx-form-builder-required': 'setRequired',
-			'focus .wx-form-builder-title-input': 'selectInputText'
-		},
+			'focus .wx-form-builder-title-input': 'selectInputText',
+            'click .wx-form-builder-done': 'backToMain'
+        },
 
 		selectInputText: function( ev ) {
 			setTimeout( function() {
@@ -48,7 +49,14 @@ wxApp = wxApp || {};
 			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
+            this.backToMain();
 		},
+
+        backToMain: function() {
+            console.log ( 'backToMain' );
+            $('a[href="#panel-new-form-fields"]').click();
+
+        },
 
 		addOption: function( ev ) {
 			ev.preventDefault();
