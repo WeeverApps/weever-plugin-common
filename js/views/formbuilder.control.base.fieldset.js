@@ -15,8 +15,9 @@ wxApp = wxApp || {};
 			'click .wx-form-builder-add-option': 'addOption',
 			'click .wx-form-builder-required': 'setRequired',
 			'input .wx-form-builder-name-input': 'setName',
-			'focus .wx-form-builder-title-input': 'selectInputText'
-		},
+			'focus .wx-form-builder-title-input': 'selectInputText',
+            'click .wx-form-builder-done': 'backToMain'
+        },
 
 		selectInputText: function( ev ) {
 			setTimeout( function() {
@@ -38,10 +39,14 @@ wxApp = wxApp || {};
 			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
+            this.backToMain();
+        },
 
-			// Go back to the Add Field panel.
-			$('a[href="#panel-new-form-fields"]').click();
-		},
+        backToMain: function() {
+            console.log ( 'backToMain' );
+            $('a[href="#panel-new-form-fields"]').click();
+
+        },
 
 		setAllowAdditional: function( ev ) {
 			var $me = $( ev.currentTarget );
