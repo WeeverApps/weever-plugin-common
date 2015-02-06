@@ -27,7 +27,8 @@ wxApp = wxApp || {};
 			'focus .wx-form-builder-select-option-text': 'selectInputText',
 			'focus .wx-form-builder-label-input': 'selectInputText',
 			'focus .wx-form-builder-text-input': 'selectInputText',
-			'focus .wx-form-builder-input': 'selectInputText'
+			'focus .wx-form-builder-input': 'selectInputText',
+            'click .wx-form-builder-done': 'backToMain'
 		},
 
 		selectInputText: function( ev ) {
@@ -41,10 +42,14 @@ wxApp = wxApp || {};
 			this.getPreview().remove();
 			this.remove();
 			this.model.destroy();
-
-			// Go back to the Add Field panel.
-			$('a[href="#panel-new-form-fields"]').click();
+			this.backToMain();
 		},
+
+        backToMain: function() {
+            console.log ( 'backToMain' );
+            $('a[href="#panel-new-form-fields"]').click();
+
+        },
 
 		updateLabel: function( ev ) {
 			var value = $( ev.currentTarget ).val();
