@@ -7,12 +7,16 @@
 
         <br>
 
+        <p class="wx-form-builder-featurenote">
+            Selecting one option from a hierarchal drop down list influences the options available in any drop downs below it.  Use this feature when you want to define choices available to a user based on their selection(s).
+        </p>
+
+        <br>
+
         <label>
             Label:
             <input type='text' class="wx-form-builder-label-input" value='<%- label %>' />
         </label>
-
-        <br>
 
         <label>How many levels do you want to have?</label>
         <select class="wx-hdd-levels">
@@ -29,20 +33,22 @@
             </label>
         <% }; %>
 
-        <hr/>
+        <br>
         <div class="wx-form-builder-children"></div>
 
-        <br/>
+        <br>
         <label class="<%- requiredClass %>"><input type="checkbox" class="wx-form-builder-required" <%- attributes.attributes.required %> /> Required</label>
-        <br/>
+        <br>
 
         <button class="wx-form-builder-done success">Continue</button> &nbsp;<a class="wx-form-builder-delete">or delete field</a>
     </div>
 </script>
 
 <script type="text/template" id="form-builder-hierarchical-drop-down-list-preview">
-    <label class="wx-form-builder-label"><strong><%- label %></strong></label>
-    <br/><br/>
+    <br>
+    <label class="wx-form-builder-label"><%- label %>
+    <br>
+    <br>
     <% for (var i = 0; i < titles.length; i++) { %>
         <label class="wx-form-builder-label"><%- titles[i] %></label>
         <select class="wx-hdd-dropdown-preview wx-hdd-dropdown-preview-<%- i %>" data-level="<%- i %>">
@@ -54,17 +60,18 @@
                 <% }; %>
             <% }; %>
         </select>
-        <br/><br/>
+        <br><br>
     <% }; %>
 </script>
 
 <script type="text/template" id="form-builder-hdd-options">
-    <h3 class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></h3>
+    <div class="wx-hdd-legend-<%- level %>"><%- titles[ level ] %></div>
+    <br>
 
     <div class="wx-hdd-options wx-hdd-options-<%- level %>"></div>
 
-    <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- level %>">&plus; add new <%- titles[ level ].toLowerCase() || 'option' %></a>
-    <br/>
+    <a href="#" class="wx-hdd-add-option wx-hdd-add-option-<%- level %> columns">&plus; add new <%- titles[ level ].toLowerCase() || 'option' %></a>
+    <br><br>
 </script>
 
 
