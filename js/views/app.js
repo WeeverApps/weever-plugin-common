@@ -181,7 +181,6 @@ wxApp = wxApp || {};
             var css = "@font-face { " +
             "    font-family: 'wxFont-1'; " +
             "    src: " +
-            "        url('data:image/svg+xml;base64," + font.get('svg') + "') format('svg'), " +
             "        url('data:application/font-woff;charset=utf-8;base64," + font.get('woff') + "') format('woff'), " +
             "        url('data:application/x-font-ttf;charset=utf-8;base64," + font.get('ttf') + "') format('truetype'); " +
             "} " +
