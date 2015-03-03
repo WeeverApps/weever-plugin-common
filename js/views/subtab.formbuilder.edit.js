@@ -124,7 +124,7 @@ wxApp = wxApp || {};
 						me.addRepeatableFormWithProperties( element );
 						break;
 					case 'pagebreak':
-						me.addPagebreak();
+						me.addPagebreakWithProperties( element );
 						break;
 					default:
 						if ( element.get('type') === 'textSlider' )
@@ -654,6 +654,10 @@ wxApp = wxApp || {};
 
 		addPagebreak: function( ev ) {
 			var pagebreak = new wxApp.FormBuilderControlPagebreak();
+			this.addPagebreakWithProperties( pagebreak );
+		},
+
+		addPagebreakWithProperties: function( pagebreak ) {
 			var pagebreakView = new wxApp.FormBuilderControlPagebreakView({
 				model: pagebreak
 			});
@@ -815,7 +819,6 @@ wxApp = wxApp || {};
 
 			me.$('.add-element-to-form').append('<option value="' + model.get('ordinal') + '">&mdash; ' + model.get('label') + '</option>');
 
-console.log('REPEATABLE', model);
 			if ( model.get('formElements') ) {
 				// setTimeout(function() {
 					console.log('drawAllElements', model.get('formElements'));
