@@ -17,7 +17,7 @@ wxApp = wxApp || {};
 		initialize: function ( properties ) {
 			// So is this
 			// http://documentcloud.github.com/backbone/#Model-extend
-			wxApp.FormBuilderControl.prototype.initialize.apply( this );
+			wxApp.FormBuilderControl.prototype.initialize.apply( this, arguments );
 			this.set( 'options', new wxApp.FormBuilderControlTextSliderOptions() );
 
 			if ( properties && properties.options && properties.options.length > 0 ) {
