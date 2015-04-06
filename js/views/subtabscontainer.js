@@ -126,7 +126,7 @@ wxApp = wxApp || {};
                     for (var i = 0; i < me.model.get('subTabs').length; i++) {
                         var subtab = me.model.get('subTabs').at( i );
                         subtab.set( 'tabLayout', tabLayout );
-                    };
+                    }
                 }
                 wx.rebuildApp();
             });

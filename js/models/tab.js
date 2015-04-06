@@ -24,12 +24,10 @@ var wxApp = wxApp || {};
             this.on('invalid', function(model, error) {
                 console.log(error);
             });
-            this.get('subTabs').on('remove', function(subTab) {
+            this.get('subTabs').on('remove', function() {
                 if ( ! me.getSubTabs().length )
                     me.trigger('destroy');
             });
-            // @TODO: See if better to bind than to use addSubTab function?
-            //this.subTabs.bind('add', this.addSubTab, this);
         },
 
         setTitle: function(newTitle) {

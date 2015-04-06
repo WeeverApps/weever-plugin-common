@@ -65,10 +65,6 @@ wxApp = wxApp || {};
             return retVal;
         },
 
-        getValidateFeed: function() {
-            return true;
-        },
-
         getFeedSample: function( callback, apiUrl ) {
             var data = this.getAPIData();
             data.api_check = 1;
