@@ -25,7 +25,8 @@ wxApp = wxApp || {};
 
         events: {
             'click #ContainerEditLink'      : 'openEditModal',
-            'click .button-apply'           : 'groupApplyChanges',
+            'click .button-delete'          : 'bulkDelete',
+            'click .button-move'            : 'bulkMove',
             'click .tab-select-all-checkbox': 'selectAll',
             'click .tab-select-checkbox'    : 'selectOne',
             'click .wx-delete-container'    : 'confirmDelete',
@@ -38,36 +39,42 @@ wxApp = wxApp || {};
             this.$('.adminlist').append( this.subTabsView.render().el );
             this.$el.attr('id', this.model.get('id') + 'Tab');
 
-            var $optgroup = this.$('.optgroup-tabs');
+            var $moveTo = this.$('.select-move-to');
 
-            $optgroup.html('<option value="0">Create new tab</option>');
+            $moveTo.html('<option value="-1">Move To…</option>');
+            $moveTo.append('<option value="0">Create new tab</option>');
             for (var i = 0; i < wxApp.Tabs.length; i++) {
                 var tab = wxApp.Tabs.models[i];
                 if ( tab.get('id') !== this.model.get('id') ) {
-                    $optgroup.append('<option value="' + tab.get('id') + '">' + tab.get('tabTitle') + '</option');
+                    $moveTo.append('<option value="' + tab.get('id') + '">' + tab.get('tabTitle') + '</option');
                 }
             }
 
             return this;
         },
 
-        groupApplyChanges: function() {
+        bulkDelete: function() {
+            event.preventDefault();
+            var ids = this._getSelectedSubtabs();
 
-            var ids = [];
-            for (var i = 0; i < this.$('input.tab-select-checkbox:checked').length; i++) {
-                ids.push( this.$('input.tab-select-checkbox:checked')[i].id );
+            if ( ids.length > 0 && confirm('Are you sure you want to delete this item, including all of the sub-tabs?') ) {
+                this.$('.button-move').addClass('disabled');
+                this._delete(ids);
             }
-            console.log('ids', ids);
+        },
+
+        bulkMove: function() {
+            var ids = this._getSelectedSubtabs();
 
             if ( ids.length === 0 ) return;
 
-            this.$('.button-apply').addClass( 'disabled' );
+            this.$('.button-move').addClass( 'disabled' );
 
-            if ( this.$('.select-action').val() === 'delete' ) {
-                this._delete( ids );
+            if ( this.$('.select-move-to').val() === '-1' ) {
+                alert('Please select a tab to move the selected subtabs to.');
             }
             else {
-                this._move( ids, this.$('.select-action').val() );
+                this._move( ids, this.$('.select-move-to').val() );
             }
         },
 
@@ -101,6 +108,13 @@ wxApp = wxApp || {};
             }
             else {
                 this.$('input.tab-select-all-checkbox').prop('checked', false);
+            }
+
+            if ( this.$('input.tab-select-checkbox:checked').length === 0 ) {
+                this.$('.button-move').addClass( 'disabled' );
+            }
+            else {
+                this.$('.button-move').removeClass( 'disabled' );
             }
         },
 
@@ -146,21 +160,29 @@ wxApp = wxApp || {};
         _delete: function( ids ) {
             var me = this,
                 complete = 0;
-            me.$('.button-apply').html(complete.toString() + '/' + ids.length);
+            me.$('.button-move').html(complete.toString() + '/' + ids.length);
 
             for (var i = 0; i < ids.length; i++) {
                 var tab = me._getTab( ids[i] );
 
                 tab.destroy(function() {
                     complete++;
-                    me.$('.button-apply').html(complete.toString() + '/' + ids.length);
+                    me.$('.button-move').html(complete.toString() + '/' + ids.length);
                     if ( complete === ids.length ) {
-                        me.$('.button-apply').html('Apply');
-                        me.$('.button-apply').removeClass('disabled');
+                        me.$('.button-move').html('Apply');
+                        me.$('.button-move').removeClass('disabled');
                         wx.rebuildApp();
                     }
                 });
             }
+        },
+
+        _getSelectedSubtabs: function() {
+            var ids = [];
+            for (var i = 0; i < this.$('input.tab-select-checkbox:checked').length; i++) {
+                ids.push( this.$('input.tab-select-checkbox:checked')[i].id );
+            }
+            return ids;
         },
 
         _getTab: function( tabId ) {
@@ -190,13 +212,13 @@ wxApp = wxApp || {};
         _move: function(tabIdsToMove, newParentTabId) {
             var me = this,
                 movesCompleted = 0;
-            me.$('.button-apply').html(movesCompleted.toString() + '/' + tabIdsToMove.length);
+            me.$('.button-move').html(movesCompleted.toString() + '/' + tabIdsToMove.length);
 
             for (var i = 0; i < tabIdsToMove.length; i++) {
                 var tabId = tabIdsToMove[i];
                 me._moveClosure(tabId, newParentTabId, function() {
                     movesCompleted++;
-                    me.$('.button-apply').html(movesCompleted.toString() + '/' + tabIdsToMove.length);
+                    me.$('.button-move').html(movesCompleted.toString() + '/' + tabIdsToMove.length);
                     if ( movesCompleted === tabIdsToMove.length ) {
                         me._moveComplete( newParentTabId );
                     }
@@ -217,8 +239,8 @@ wxApp = wxApp || {};
 
         _moveComplete: function( newParentTabId ) {
             wx.rebuildApp();
-            this.$('.button-apply').html('Apply');
-            this.$('.button-apply').removeClass('disabled');
+            this.$('.button-move').html('Apply');
+            this.$('.button-move').removeClass('disabled');
 
             // Re-fetch the tabs.
             $('#editListTabsSortable').html( '' );

@@ -32,20 +32,27 @@
             Features (subtabs) assigned to this tab:
         </li>
         <li class="price">
+            <hr/>
+        </li>
+        <li class="price">
+            <div class="row">
+                <div class="small-12 columns">
+                    <label>Bulk Edit</label>
+                </div>
+            </div>
             <div class="row">
                 <div class="small-1 columns">
                     <input type="checkbox" class="tab-select-all-checkbox" />
                 </div>
-                <div class="small-8 columns">
-                    <select class="select-action">
-                        <option>Select an option…</option>
-                        <optgroup label="Move To…" class="optgroup-tabs">
-                        </optgroup>
-                        <option value="delete">Delete</option>
+                <div class="small-6 columns">
+                    <select class="select-move-to">
                     </select>
                 </div>
                 <div class="small-3 columns">
-                    <button class="small button-apply">Apply</button>
+                    <button class="small button-move disabled">Move</button>
+                </div>
+                <div class="small-2 columns">
+                    <a href="#" class="button-delete">Delete</a>
                 </div>
             </div>
         </li>
