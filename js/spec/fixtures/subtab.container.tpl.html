@@ -9,50 +9,51 @@
 
         <li class="bullet-item wx-tablist-layout-controls" style="display: <%- subTabs.length > 1 ? 'block' : 'none' %>">
 
+            <br>
+
             <p class="wx-tablist-edit-title">Set a layout for this tab:</p>
 
             <input type="hidden" id="tabLayout" />
 
             <div class="row">
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === null ? '' : ' secondary' %> expand radius"   id="layout-classic"><span class="appbuilder-icon icon-layout-classic"></span> Classic</button>
+                    <button style="margin-bottom: .5rem;" class="wx-layout-selector<%- tabLayout === null ? '' : ' secondary' %> expand radius"   id="layout-classic"><span class="appbuilder-icon icon-layout-classic"></span> Classic</button>
                 </div>
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === 'grid' ? '' : ' secondary' %> expand radius" id="layout-grid"><span class="appbuilder-icon icon-layout-grid"></span> Grid</button>
+                    <button style="margin-bottom: .5rem;" class="wx-layout-selector<%- tabLayout === 'grid' ? '' : ' secondary' %> expand radius" id="layout-grid"><span class="appbuilder-icon icon-layout-grid"></span> Grid</button>
                 </div>
                 <div class="small-4 columns">
-                    <button class="wx-layout-selector<%- tabLayout === 'list' ? '' : ' secondary' %> expand radius" id="layout-list"><span class="appbuilder-icon icon-layout-list"></span> List</button>
+                    <button style="margin-bottom: .5rem;" class="wx-layout-selector<%- tabLayout === 'list' ? '' : ' secondary' %> expand radius" id="layout-list"><span class="appbuilder-icon icon-layout-list"></span> List</button>
                 </div>
             </div>
         </li>
     </ul>
 
+    <br>
+
     <ul class='adminlist pricing-table wx-tablist-features'>
-        <li class="price">
+        <li class="price price-title" style="padding-bottom: 0;">
             Features (subtabs) assigned to this tab:
         </li>
+
         <li class="price">
-            <hr/>
-        </li>
-        <li class="price">
-            <div class="row">
-                <div class="small-12 columns">
-                    <label>Bulk Edit</label>
-                </div>
-            </div>
             <div class="row">
                 <div class="small-1 columns">
+                    <label>All</label>
                     <input type="checkbox" class="tab-select-all-checkbox" />
                 </div>
                 <div class="small-6 columns">
-                    <select class="select-move-to">
+                    <label>Bulk Edit</label>
+                    <select class="select-move-to" style="margin-bottom: 0;">
                     </select>
                 </div>
-                <div class="small-3 columns">
-                    <button class="small button-move disabled">Move</button>
+                <div class="small-3 columns" style="padding-left: 0;">
+                    <label>&nbsp;</label>
+                    <button class="button-move postfix disabled" style="margin-bottom: 0;">Move</button>
                 </div>
-                <div class="small-2 columns">
-                    <a href="#" class="button-delete">Delete</a>
+                <div class="small-2 columns" style="text-align: right;">
+                    <label>&nbsp;</label>
+                    <a href="#" class="button-delete" style="font-size: 0.875rem;height: 2.3125rem;line-height: 2.3125rem;">Delete</a>
                 </div>
             </div>
         </li>
