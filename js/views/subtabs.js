@@ -15,7 +15,6 @@ wxApp = wxApp || {};
         initialize: function() {
             var me = this;
             this.model.get('subTabs').bind( 'add', me.addSubTab, me );
-            Backbone.Events.on( 'tab:dropped', this.cancelSort, this );
         },
 
         events: {
@@ -104,13 +103,6 @@ wxApp = wxApp || {};
             catch (e) {
                 // Do nothing. This occurs when you're dragging the last item out.
             }
-        },
-
-        cancelSort: function( tabId ) {
-            // var me = this;
-            // if ( undefined != this.$el.sortable && tabId == this.model.get('id') ) {
-            //     me.$el.sortable( 'cancel' );
-            // }
         },
 
         deleteSubTab: function(subTab) {

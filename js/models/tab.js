@@ -1,7 +1,7 @@
 
 var wxApp = wxApp || {};
 
-(function($){
+(function(){
     wxApp.Tab = Backbone.Model.extend({
         defaults: {
             id: '',
@@ -58,21 +58,68 @@ var wxApp = wxApp || {};
             return this.get('subTabs');
         },
 
-        destroy: function() {
-            if ( this.get('subTabs') ) {
+        getAPIData: function() {
+            var data = this.toJSON();
+            data.config = JSON.stringify(data.config);
+            if ( data.id == data.parent_id )
+                delete data['parent_id'];
+            if ( data.id )
+                data.tab_id = data.id;
+            return this.filterAPIData( data );
+        },
+
+        filterAPIData: function( data ) {
+
+            /* The 'geo' attribute is being sent erroneously in get_tabs, and
+             * its presence causes issues when provided to add_tabs (Undefined
+             * property: 'latitude'). So, until Rob gets a chance to fix the
+             * API, we have to remove the geo attribute here.
+             *
+             * More Info: The problem comes from attempting to send 'false'
+             * because the API is looking for _any_ value. If it's false,
+             * we delete it here.
+             */
+            if ( typeof data.geo !== 'undefined' ) {
+                if ( ! data.geo ) {
+                    delete data.geo;
+                }
+            }
+
+            return data;
+        },
+
+        toJSON: function() {
+            var retVal = JSON.parse(JSON.stringify(this.attributes));
+            retVal.validateFeed = this.validateFeed;
+            retVal.typeDescription = this.typeDescription;
+            return retVal;
+        },
+
+        destroy: function( callback ) {
+            var me = this,
+                deletedCount = 0;
+
+            if ( me.get('subTabs') ) {
                 // Delete this tab and all of the subtabs from the API.
-                for (var i = 0; i < this.get('subTabs').length; i++) {
-                    var m = this.get('subTabs').models[i];
-                    wx.makeApiCall('tabs/delete', { tab_id: m.get('id') }, function() { });
+                for (var i = 0; i < me.get('subTabs').length; i++) {
+                    var m = me.get('subTabs').models[i];
+                    wx.makeApiCall('tabs/delete', { tab_id: m.get('id') }, function() {
+                        deletedCount++;
+                        if ( deletedCount === me.get('subTabs').length ) {
+                            if (callback) callback();
+                        }
+                    });
                 }
             }
             else {
                 // No subtabs; just delete this one.
-                wx.makeApiCall('tabs/delete', { tab_id: this.get('id') }, function() { });
+                wx.makeApiCall('tabs/delete', { tab_id: me.get('id') }, function() {
+                    if (callback) callback();
+                });
             }
 
             // Remove the tabs from the view.
-            this.trigger('destroy');
+            me.trigger('destroy');
         }
     });
-})(jQuery);
+})();
