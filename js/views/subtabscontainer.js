@@ -99,6 +99,8 @@ wxApp = wxApp || {};
                 this.$('input.tab-select-checkbox').prop('checked', true);
                 this.$('input.tab-select-all-checkbox').prop('checked', true);
             }
+
+            this._setMoveButtonStatus();
         },
 
         selectOne: function() {
@@ -110,12 +112,7 @@ wxApp = wxApp || {};
                 this.$('input.tab-select-all-checkbox').prop('checked', false);
             }
 
-            if ( this.$('input.tab-select-checkbox:checked').length === 0 ) {
-                this.$('.button-move').addClass( 'disabled' );
-            }
-            else {
-                this.$('.button-move').removeClass( 'disabled' );
-            }
+            this._setMoveButtonStatus();
         },
 
         selectLayout: function(e) {
@@ -251,6 +248,15 @@ wxApp = wxApp || {};
                 // Select the parent tab.
                 $('#' + newParentTabId + 'TabID').click();
             });
+        },
+
+        _setMoveButtonStatus: function() {
+            if ( this.$('input.tab-select-checkbox:checked').length === 0 ) {
+                this.$('.button-move').addClass( 'disabled' );
+            }
+            else {
+                this.$('.button-move').removeClass( 'disabled' );
+            }
         }
     });
 })(jQuery); 
