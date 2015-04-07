@@ -1,4 +1,20 @@
 
+<style>
+    input[type="checkbox"].tab-select-checkbox,
+    input[type="radio"].tab-select-checkbox {
+        vertical-align: initial;
+    }
+
+    .wx-subtab-movehandle .wx-move-prompt {
+        color: #999;
+        display: none;
+    }
+
+    .wx-subtab-movehandle:hover .wx-move-prompt {
+        display: inline
+    }
+</style>
+
 <script type="text/template" id="subtab-container-template">
     <ul class="wx-tablist-layout pricing-table">
         <li class="price">
@@ -49,7 +65,7 @@
                 </div>
                 <div class="small-3 columns" style="padding-left: 0;">
                     <label>&nbsp;</label>
-                    <button class="button-move postfix disabled" style="margin-bottom: 0;">Move</button>
+                    <button class="button-move postfix secondary disabled" style="margin-bottom: 0;">Move</button>
                 </div>
                 <div class="small-2 columns" style="text-align: right;">
                     <label>&nbsp;</label>

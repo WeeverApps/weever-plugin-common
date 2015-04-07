@@ -5,7 +5,7 @@
             <span class="tab-select-check"><input type="checkbox" class="tab-select-checkbox" id="<%- id %>" /></span>
         </div>
         <div class="small-9 columns">
-            <span class="wx-subtab-link-text"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#"><%- title %> <span class="wx-edit-prompt">| Edit</span> <span class="wx-move-prompt">or drag to move</span></a></span>
+            <span class="wx-subtab-link-text"><a class="wx-edit-link" data-reveal-id="wx-edit-area-<%- id %>" href="#"><span class="wx-edit-prompt">Edit&nbsp;&nbsp;|&nbsp;&nbsp;</span><%- title %> <span class="wx-move-prompt">Drag to move</span></a></span>
 
             <% if ( typeof type != undefined && typeof type == 'string' && type.toLowerCase() == 'formbuilder' ) { %>
             <span class="delete"><a href="#" class="wx-subtab-copy" title="Duplicate"><span class="wx-copy-label">duplicate</span></a></span>
