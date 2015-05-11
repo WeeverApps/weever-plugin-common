@@ -680,7 +680,7 @@ wxApp = wxApp || {};
 		},
 
 		addDocusignSignature: function( ev ) {
-			var signature = wxApp.FormBuilderControlDocusignSignature ( {
+			var signature = new wxApp.FormBuilderControlDocusignSignature ( {
 				controlTitle: $(ev.currentTarget).children('.wx-button-label').text().trim()
 			} );
 			this.addDocusignSignatureWithProperties( signature );
@@ -925,7 +925,8 @@ wxApp = wxApp || {};
             	var action = this.__getActionByMethod( 'email' );
             	if ( ! this.model.get('id') ) {
             		var title = $('.wx-edit-form-title').val();
-            		action.get( 'pdfHeader' ).title = title;				// Set the model
+					if ( action )
+						action.get( 'pdfHeader' ).title = title;			// Set the model
 					$( '.wx-form-builder-pdfheader-title' ).val( title );	// Set the input
 					this.$('.wx-pdf-preview .title').html( title );			// Set the preview
             	}
