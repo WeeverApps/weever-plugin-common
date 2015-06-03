@@ -41,8 +41,7 @@ wxApp = wxApp || {};
 
 		populateForm: function() {
 			var me           = this,
-				config       = this.model.get( 'config' ),
-                actionsJson;
+				config       = this.model.get( 'config' );
 
 			wx.isVisible = false;
 
@@ -56,6 +55,17 @@ wxApp = wxApp || {};
 				$( document ).off('opened.fndtn.reveal', '[data-reveal]');
 				wx.isVisible = true;
 				$( me.buildPaneSelector ).foundation('reflow');
+
+                // Make the form preview sortable.
+                $( '.wx-preview-form' ).sortable({
+                    axis:  'y',
+                    start: function() {
+                        $( '.wx-preview-form .wx-form-preview-row' ).removeClass('wx-active');
+                    },
+                    stop:  function( event, ui ) {
+                        ui.item.trigger( 'sortable-drop', ui.item.index() );
+                    }
+                });
 			});
 
 			if ( config.formElements === undefined ) {
@@ -1081,7 +1091,7 @@ wxApp = wxApp || {};
 					ordinal = model.get( 'ordinal' );
 				if ( model.get('formElements') )
 					ordinal = this._getLargestOrdinal( model.get('formElements'), ordinal );
-			};
+			}
 			return ordinal;
         }
 	});
